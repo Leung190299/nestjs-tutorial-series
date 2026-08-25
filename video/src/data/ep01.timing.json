@@ -19,9 +19,14 @@
           "file": "audio/ep01/scene-01-1-a6d11eea.wav",
           "startFrame": 131,
           "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep01/scene-01-2-76d6ba1b.wav",
+          "startFrame": 324,
+          "durationInFrames": 166
         }
       ],
-      "durationInFrames": 334
+      "durationInFrames": 508
     },
     {
       "id": "scene-02",
@@ -37,12 +42,12 @@
           {
             "icon": "🔷",
             "text": "Viết bằng TypeScript — code rõ ràng, ít lỗi hơn",
-            "sentence": 1
+            "sentence": 2
           },
           {
             "icon": "📐",
             "text": "Có cấu trúc sẵn — như một bản thiết kế nhà",
-            "sentence": 2
+            "sentence": 3
           }
         ]
       },
@@ -53,17 +58,27 @@
           "durationInFrames": 185
         },
         {
-          "file": "audio/ep01/scene-02-1-9dcbe379.wav",
+          "file": "audio/ep01/scene-02-1-a609b4ad.wav",
           "startFrame": 193,
-          "durationInFrames": 171
+          "durationInFrames": 180
         },
         {
-          "file": "audio/ep01/scene-02-2-aacaee29.wav",
-          "startFrame": 372,
-          "durationInFrames": 176
+          "file": "audio/ep01/scene-02-2-9dcbe379.wav",
+          "startFrame": 381,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep01/scene-02-3-aacaee29.wav",
+          "startFrame": 550,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep01/scene-02-4-6f7fd957.wav",
+          "startFrame": 731,
+          "durationInFrames": 152
         }
       ],
-      "durationInFrames": 566
+      "durationInFrames": 901
     },
     {
       "id": "scene-03",
@@ -79,17 +94,17 @@
           {
             "icon": "🗂️",
             "text": "NestJS: mọi thứ có chỗ của nó",
-            "sentence": 1
+            "sentence": 2
           },
           {
             "icon": "🔌",
             "text": "Tích hợp sẵn: microservices, WebSocket, validation...",
-            "sentence": 2
+            "sentence": 4
           },
           {
             "icon": "🏢",
             "text": "Được nhiều công ty lớn tin dùng",
-            "sentence": 3
+            "sentence": 5
           }
         ]
       },
@@ -100,22 +115,32 @@
           "durationInFrames": 216
         },
         {
-          "file": "audio/ep01/scene-03-1-59028ca4.wav",
+          "file": "audio/ep01/scene-03-1-6523ecac.wav",
           "startFrame": 224,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep01/scene-03-2-59028ca4.wav",
+          "startFrame": 400,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep01/scene-03-3-ededc605.wav",
+          "startFrame": 569,
           "durationInFrames": 152
         },
         {
-          "file": "audio/ep01/scene-03-2-860f09b6.wav",
-          "startFrame": 384,
-          "durationInFrames": 228
+          "file": "audio/ep01/scene-03-4-860f09b6.wav",
+          "startFrame": 729,
+          "durationInFrames": 221
         },
         {
-          "file": "audio/ep01/scene-03-3-7eda77ff.wav",
-          "startFrame": 620,
-          "durationInFrames": 106
+          "file": "audio/ep01/scene-03-5-7eda77ff.wav",
+          "startFrame": 958,
+          "durationInFrames": 111
         }
       ],
-      "durationInFrames": 744
+      "durationInFrames": 1087
     },
     {
       "id": "scene-04",
@@ -160,9 +185,19 @@
           "file": "audio/ep01/scene-04-3-859587b0.wav",
           "startFrame": 320,
           "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep01/scene-04-4-b480bd06.wav",
+          "startFrame": 456,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep01/scene-04-5-5d1f2a58.wav",
+          "startFrame": 623,
+          "durationInFrames": 159
         }
       ],
-      "durationInFrames": 466
+      "durationInFrames": 800
     },
     {
       "id": "scene-05",
@@ -227,9 +262,19 @@
           "file": "audio/ep01/scene-05-3-6f2ce85b.wav",
           "startFrame": 440,
           "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep01/scene-05-4-923e8607.wav",
+          "startFrame": 583,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep01/scene-05-5-ebfab652.wav",
+          "startFrame": 764,
+          "durationInFrames": 183
         }
       ],
-      "durationInFrames": 593
+      "durationInFrames": 965
     },
     {
       "id": "scene-06",
@@ -274,9 +319,19 @@
           "file": "audio/ep01/scene-06-3-7a7225a7.wav",
           "startFrame": 507,
           "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep01/scene-06-4-0d0c9757.wav",
+          "startFrame": 679,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep01/scene-06-5-b8b51cc3.wav",
+          "startFrame": 872,
+          "durationInFrames": 168
         }
       ],
-      "durationInFrames": 689
+      "durationInFrames": 1058
     },
     {
       "id": "scene-07",
@@ -302,9 +357,19 @@
             "sentence": 2
           },
           {
+            "from": 5,
+            "to": 9,
+            "sentence": 3
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 4
+          },
+          {
             "from": 10,
             "to": 10,
-            "sentence": 3
+            "sentence": 5
           }
         ]
       },
@@ -320,17 +385,27 @@
           "durationInFrames": 104
         },
         {
-          "file": "audio/ep01/scene-07-2-3380b558.wav",
+          "file": "audio/ep01/scene-07-2-5aa7bb2f.wav",
           "startFrame": 281,
-          "durationInFrames": 204
+          "durationInFrames": 216
         },
         {
-          "file": "audio/ep01/scene-07-3-6486b1d7.wav",
-          "startFrame": 493,
+          "file": "audio/ep01/scene-07-3-3380b558.wav",
+          "startFrame": 505,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep01/scene-07-4-120c06e7.wav",
+          "startFrame": 732,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep01/scene-07-5-6486b1d7.wav",
+          "startFrame": 904,
           "durationInFrames": 108
         }
       ],
-      "durationInFrames": 619
+      "durationInFrames": 1030
     },
     {
       "id": "scene-08",
@@ -356,9 +431,19 @@
             "sentence": 2
           },
           {
+            "from": 6,
+            "to": 6,
+            "sentence": 3
+          },
+          {
             "from": 8,
             "to": 11,
-            "sentence": 3
+            "sentence": 4
+          },
+          {
+            "from": 4,
+            "to": 8,
+            "sentence": 5
           }
         ]
       },
@@ -379,12 +464,22 @@
           "durationInFrames": 192
         },
         {
-          "file": "audio/ep01/scene-08-3-d38261d7.wav",
+          "file": "audio/ep01/scene-08-3-04723fe0.wav",
           "startFrame": 555,
-          "durationInFrames": 207
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep01/scene-08-4-d38261d7.wav",
+          "startFrame": 784,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep01/scene-08-5-d80f91ad.wav",
+          "startFrame": 982,
+          "durationInFrames": 238
         }
       ],
-      "durationInFrames": 780
+      "durationInFrames": 1238
     },
     {
       "id": "scene-09",
@@ -413,6 +508,16 @@
             "from": 10,
             "to": 12,
             "sentence": 3
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 4
+          },
+          {
+            "from": 5,
+            "to": 8,
+            "sentence": 5
           }
         ]
       },
@@ -436,9 +541,73 @@
           "file": "audio/ep01/scene-09-3-b5074dfd.wav",
           "startFrame": 385,
           "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep01/scene-09-4-44c01986.wav",
+          "startFrame": 516,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep01/scene-09-5-05d398f1.wav",
+          "startFrame": 724,
+          "durationInFrames": 204
         }
       ],
-      "durationInFrames": 526
+      "durationInFrames": 946
+    },
+    {
+      "id": "scene-09b",
+      "type": "code",
+      "visual": {
+        "filename": "src/users/users.module.ts",
+        "language": "tsx",
+        "code": "import { Module } from '@nestjs/common';\nimport { UsersController } from './users.controller';\nimport { UsersService } from './users.service';\n\n@Module({\n  controllers: [UsersController],\n  providers: [UsersService]\n})\nexport class UsersModule {}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep01/scene-09b-0-32ebc655.wav",
+          "startFrame": 0,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep01/scene-09b-1-b22fddba.wav",
+          "startFrame": 179,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep01/scene-09b-2-ed6842a8.wav",
+          "startFrame": 437,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep01/scene-09b-3-40351622.wav",
+          "startFrame": 635,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 805
     },
     {
       "id": "scene-10",
@@ -473,9 +642,14 @@
           "file": "audio/ep01/scene-10-3-f38e8a2e.wav",
           "startFrame": 457,
           "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep01/scene-10-4-dfc1022e.wav",
+          "startFrame": 559,
+          "durationInFrames": 190
         }
       ],
-      "durationInFrames": 569
+      "durationInFrames": 767
     },
     {
       "id": "scene-11",
@@ -515,12 +689,17 @@
           "durationInFrames": 104
         },
         {
-          "file": "audio/ep01/scene-11-3-dba50936.wav",
+          "file": "audio/ep01/scene-11-3-67b5ac0f.wav",
           "startFrame": 453,
-          "durationInFrames": 195
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep01/scene-11-4-dba50936.wav",
+          "startFrame": 627,
+          "durationInFrames": 190
         }
       ],
-      "durationInFrames": 666
+      "durationInFrames": 835
     }
   ]
 }
