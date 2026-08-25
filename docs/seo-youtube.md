@@ -101,7 +101,7 @@ microservices, microservices là gì, microservices tiếng việt, nestjs micro
 
 ---
 
-## Tập 3 — WebSocket & Realtime (4:48)
+## Tập 3 — WebSocket & Realtime (4:47)
 
 **Tiêu đề (chính):**
 WebSocket là gì? Xây server chat realtime với NestJS | NestJS cho người mới #3

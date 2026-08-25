@@ -18,9 +18,13 @@ export const CodeScene: React.FC<SceneProps> = ({visual, sentences}) => {
   const active = v.steps.filter((s) => s.sentence <= idx);
   const current = active[active.length - 1];
   const visibleUpTo = active.length > 0 ? Math.max(...active.map((s) => s.to)) : 0;
-  // Code dài thì thu nhỏ chữ và lề để trọn khung 1080p
-  const lineCount = v.code.split('\n').length;
-  const fontSize = lineCount > 16 ? 24 : lineCount > 13 ? 27 : 30;
+  // Code dài (nhiều dòng hoặc dòng quá rộng) thì thu nhỏ chữ để trọn khung 1080p
+  const lines = v.code.split('\n');
+  const lineCount = lines.length;
+  const longestLine = Math.max(...lines.map((l) => l.length));
+  let fontSize = lineCount > 16 ? 24 : lineCount > 13 ? 27 : 30;
+  if (longestLine > 84) fontSize = Math.min(fontSize, 24);
+  else if (longestLine > 72) fontSize = Math.min(fontSize, 27);
   return (
     <AbsoluteFill
       style={{

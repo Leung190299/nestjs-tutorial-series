@@ -136,7 +136,7 @@
       "Khi có tin mới, việc đầu tiên là gửi save_message cho Chat Service lưu lại, chờ lưu xong đàng hoàng.",
       "Sau đó mới broadcast cho tất cả client đang kết nối, đúng công thức tập ba.",
       "Lưu trước, phát sau: người vào muộn sẽ không bao giờ mất tin nhắn.",
-      "Toàn bộ app chat microservices nằm trong chưa đầy năm mươi dòng code."
+      "Toàn bộ app chat microservices nằm gọn trong khoảng năm mươi dòng code."
     ],
     "visual": {
       "filename": "gateway/src/chat.gateway.ts (phần 2)",
