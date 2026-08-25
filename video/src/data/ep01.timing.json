@@ -1,0 +1,16 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "placeholder",
+      "type": "title",
+      "visual": {
+        "title": "NestJS cho người mới bắt đầu",
+        "subtitle": "Placeholder — sẽ được generate.py ghi đè",
+        "badge": "Tập 1"
+      },
+      "sentences": [],
+      "durationInFrames": 90
+    }
+  ]
+}

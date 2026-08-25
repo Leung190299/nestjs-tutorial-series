@@ -1,0 +1,19 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "fx-title",
+      "type": "title",
+      "visual": {
+        "title": "NestJS cho người mới bắt đầu",
+        "subtitle": "Tập 1 · NestJS là gì?",
+        "badge": "Series Backend"
+      },
+      "sentences": [
+        {"file": "", "startFrame": 0, "durationInFrames": 90},
+        {"file": "", "startFrame": 98, "durationInFrames": 90}
+      ],
+      "durationInFrames": 206
+    }
+  ]
+}
