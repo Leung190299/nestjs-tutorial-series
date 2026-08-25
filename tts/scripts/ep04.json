@@ -1,0 +1,215 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng đến với tập cuối của series NestJS cho người mới bắt đầu!",
+      "Hôm nay chúng ta ghép tất cả những gì đã học thành một sản phẩm hoàn chỉnh: app chat realtime chạy trên kiến trúc microservices.",
+      "Nghe to tát vậy thôi, nhưng bạn sẽ thấy: chỉ là ba mảnh ghép quen thuộc xếp lại với nhau."
+    ],
+    "visual": {
+      "title": "Chat Realtime + Microservices",
+      "subtitle": "Tập 4 · Ghép tất cả thành sản phẩm hoàn chỉnh",
+      "badge": "Series Backend Realtime · Tập cuối"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Cùng nhìn lại hành trang sau ba tập nhé.",
+      "Tập một: Controller, Service, Module — bộ khung của mọi ứng dụng NestJS.",
+      "Tập hai: microservices — tách app thành các service nhỏ nói chuyện qua TCP.",
+      "Tập ba: WebSocket — kết nối hai chiều cho realtime.",
+      "Hôm nay: gateway nhận tin chat qua WebSocket, còn việc lưu trữ giao cho một service riêng.",
+      "Tách như vậy để sau này đổi cách lưu, thêm kiểm duyệt tin, hay scale phòng chat đều không phải đụng vào gateway."
+    ],
+    "visual": {
+      "title": "Hành trang sau 3 tập",
+      "bullets": [
+        {"icon": "🧱", "text": "Tập 1: Controller · Service · Module", "sentence": 1},
+        {"icon": "🏪", "text": "Tập 2: Microservices qua TCP", "sentence": 2},
+        {"icon": "📡", "text": "Tập 3: WebSocket realtime", "sentence": 3},
+        {"icon": "🧩", "text": "Tập 4: Ghép tất cả lại thành app chat", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "diagram",
+    "narration": [
+      "Đây là kiến trúc hoàn chỉnh của chúng ta.",
+      "Người dùng kết nối WebSocket tới Gateway và gửi tin nhắn chat, y như tập ba.",
+      "Nhưng Gateway không giữ tin nhắn: nó gửi save_message qua TCP cho Chat Service cất giữ, đúng bài tập hai.",
+      "Lưu xong, Gateway broadcast tin nhắn cho tất cả mọi người đang online.",
+      "Và khi một người mới vào phòng, Gateway hỏi Chat Service bằng get_history, gửi lại toàn bộ lịch sử cho họ.",
+      "Mỗi mảnh một nhiệm vụ: Gateway lo realtime, Chat Service lo dữ liệu. Đó là tinh thần microservices."
+    ],
+    "visual": {
+      "title": "Kiến trúc app chat hoàn chỉnh",
+      "boxes": [
+        {"id": "clients", "label": "Clients", "emoji": "👥"},
+        {"id": "gateway", "label": "Gateway", "emoji": "💬"},
+        {"id": "chatsvc", "label": "Chat Service", "emoji": "🗄️"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "WS: chat", "sentence": 1},
+        {"from": 1, "to": 2, "label": "TCP: save_message", "sentence": 2},
+        {"from": 1, "to": 0, "label": "broadcast", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "Bắt đầu từ service lưu trữ: ChatController trong chat-service, chạy TCP cổng ba nghìn không trăm lẻ một như tập hai.",
+      "Mảng messages là kho tin nhắn, nằm gọn trong bộ nhớ, đủ dùng cho demo.",
+      "Mẫu tin save_message: nhận tin nhắn mới, đẩy vào kho, trả về danh sách.",
+      "Mẫu tin get_history: đơn giản trả về mọi tin đã lưu.",
+      "Hai nghiệp vụ, hai mẫu tin, thế là xong một microservice."
+    ],
+    "visual": {
+      "filename": "chat-service/src/chat.controller.ts",
+      "language": "tsx",
+      "code": "import { Controller } from '@nestjs/common';\nimport { MessagePattern } from '@nestjs/microservices';\n\n@Controller()\nexport class ChatController {\n  private messages: string[] = [];\n\n  @MessagePattern({ cmd: 'save_message' })\n  save(message: string) {\n    this.messages.push(message);\n    return this.messages;\n  }\n\n  @MessagePattern({ cmd: 'get_history' })\n  history() {\n    return this.messages;\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 18, "sentence": 0},
+        {"from": 6, "to": 6, "sentence": 1},
+        {"from": 8, "to": 12, "sentence": 2},
+        {"from": 14, "to": 17, "sentence": 3},
+        {"from": 1, "to": 18, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Sang gateway. App.module là chỗ khai báo hai thứ nó cần.",
+      "ClientsModule.register mở đường dây TCP tới CHAT_SERVICE ở cổng ba nghìn không trăm lẻ một.",
+      "Và ChatGateway đứng trong providers, như tập ba.",
+      "Một module, gói đủ cả hai thế giới: microservices và WebSocket."
+    ],
+    "visual": {
+      "filename": "gateway/src/app.module.ts",
+      "language": "tsx",
+      "code": "import { Module } from '@nestjs/common';\nimport { ClientsModule, Transport } from '@nestjs/microservices';\nimport { ChatGateway } from './chat.gateway';\n\n@Module({\n  imports: [\n    ClientsModule.register([\n      {\n        name: 'CHAT_SERVICE',\n        transport: Transport.TCP,\n        options: { port: 3001 },\n      },\n    ]),\n  ],\n  providers: [ChatGateway],\n})\nexport class AppModule {}",
+      "steps": [
+        {"from": 1, "to": 17, "sentence": 0},
+        {"from": 7, "to": 13, "sentence": 1},
+        {"from": 15, "to": 15, "sentence": 2},
+        {"from": 1, "to": 17, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Giờ đến trái tim của app: ChatGateway. Mình xem nửa đầu trước.",
+      "Class này vừa là trạm WebSocket, vừa cầm ClientProxy để gọi sang Chat Service: hai tập trước gặp nhau ở dòng constructor này.",
+      "handleConnection chạy mỗi khi có người mới kết nối vào.",
+      "Nó gọi get_history sang Chat Service. firstValueFrom chuyển Observable thành Promise để await được.",
+      "Rồi gửi sự kiện history kèm toàn bộ tin cũ cho riêng người mới vào.",
+      "Vậy là ai vào phòng cũng thấy ngay cuộc trò chuyện trước đó."
+    ],
+    "visual": {
+      "filename": "gateway/src/chat.gateway.ts (phần 1)",
+      "language": "tsx",
+      "code": "@WebSocketGateway()\nexport class ChatGateway implements OnGatewayConnection {\n  @WebSocketServer()\n  server: Server;\n\n  constructor(@Inject('CHAT_SERVICE') private client: ClientProxy) {}\n\n  async handleConnection(client: any) {\n    const history = await firstValueFrom(\n      this.client.send({ cmd: 'get_history' }, {}),\n    );\n    client.send(JSON.stringify({ event: 'history', data: history }));\n  }",
+      "steps": [
+        {"from": 1, "to": 13, "sentence": 0},
+        {"from": 6, "to": 6, "sentence": 1},
+        {"from": 8, "to": 8, "sentence": 2},
+        {"from": 9, "to": 11, "sentence": 3},
+        {"from": 12, "to": 12, "sentence": 4},
+        {"from": 1, "to": 13, "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Và nửa sau: xử lý tin nhắn chat.",
+      "Khi có tin mới, việc đầu tiên là gửi save_message cho Chat Service lưu lại, chờ lưu xong đàng hoàng.",
+      "Sau đó mới broadcast cho tất cả client đang kết nối, đúng công thức tập ba.",
+      "Lưu trước, phát sau: người vào muộn sẽ không bao giờ mất tin nhắn.",
+      "Toàn bộ app chat microservices nằm trong chưa đầy năm mươi dòng code."
+    ],
+    "visual": {
+      "filename": "gateway/src/chat.gateway.ts (phần 2)",
+      "language": "tsx",
+      "code": "  @SubscribeMessage('chat')\n  async handleChat(client: any, message: string) {\n    await firstValueFrom(this.client.send({ cmd: 'save_message' }, message));\n    this.server.clients.forEach((c) => {\n      c.send(JSON.stringify({ event: 'chat', data: message }));\n    });\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 8, "sentence": 0},
+        {"from": 3, "to": 3, "sentence": 1},
+        {"from": 4, "to": 6, "sentence": 2},
+        {"from": 3, "to": 6, "sentence": 3},
+        {"from": 1, "to": 8, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "terminal",
+    "narration": [
+      "Chạy thử sản phẩm cuối cùng nào: mở chat-service trước, rồi gateway.",
+      "Chat Service lên sóng ở chế độ microservice.",
+      "Gateway lên sóng ở cổng ba nghìn, sẵn sàng nhận WebSocket.",
+      "Bạn A kết nối và nhắn: chào cả nhà. Tin được lưu và phát đi.",
+      "Giờ bạn B mới vào phòng: lập tức nhận được sự kiện history kèm tin nhắn cũ của A!",
+      "Chat realtime, có lịch sử, chạy trên hai service độc lập. Bạn đã làm được rồi đấy!"
+    ],
+    "visual": {
+      "title": "Demo sản phẩm cuối! 🎉",
+      "commands": [
+        {"cmd": "cd chat-service && npm run start", "output": "[Nest] LOG [NestMicroservice] Nest microservice successfully started", "sentence": 1},
+        {"cmd": "cd gateway && npm run start", "output": "[Nest] LOG [NestApplication] Nest application successfully started", "sentence": 2},
+        {"cmd": "wscat -c ws://localhost:3000   # bạn A nhắn tin", "output": "< {\"event\":\"chat\",\"data\":\"chào cả nhà\"}", "sentence": 3},
+        {"cmd": "wscat -c ws://localhost:3000   # bạn B vào sau", "output": "< {\"event\":\"history\",\"data\":[\"chào cả nhà\"]}   ← thấy ngay tin cũ!", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "concept",
+    "narration": [
+      "Từ bộ khung này, bạn có thể đi tiếp rất xa.",
+      "Thay mảng trong bộ nhớ bằng database thật: chỉ cần sửa Chat Service, gateway không đổi một dòng.",
+      "Thêm auth-service để đăng nhập, hay users-service từ tập hai để quản lý người dùng.",
+      "Khi đông người, đổi TCP sang Redis hay RabbitMQ: NestJS chỉ cần đổi transport trong cấu hình.",
+      "Đó là phần thưởng của kiến trúc tốt: mỗi nâng cấp chỉ chạm một chỗ."
+    ],
+    "visual": {
+      "title": "Đi tiếp từ đây",
+      "bullets": [
+        {"icon": "🗄️", "text": "Thay bộ nhớ bằng database — chỉ sửa Chat Service", "sentence": 1},
+        {"icon": "🔐", "text": "Thêm auth-service, users-service", "sentence": 2},
+        {"icon": "🚄", "text": "Đổi TCP → Redis/RabbitMQ chỉ ở config", "sentence": 3},
+        {"icon": "🏆", "text": "Kiến trúc tốt: nâng cấp chỉ chạm một chỗ", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "outro",
+    "narration": [
+      "Vậy là khép lại series NestJS cho người mới bắt đầu.",
+      "Bạn đã đi từ con số không đến một app chat realtime chạy trên kiến trúc microservices: điều mà nhiều lập trình viên đi làm còn chưa từng tự tay ghép.",
+      "Toàn bộ code của bốn tập đều có trong phần mô tả để bạn tải về vọc tiếp.",
+      "Nếu series hữu ích, đừng quên thích video và đăng ký kênh để ủng hộ mình làm những series tiếp theo nhé.",
+      "Cảm ơn các bạn đã đồng hành, chúc các bạn code vui, và hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Cảm ơn & hẹn gặp lại! 🧡",
+      "summary": [
+        {"text": "App chat realtime + microservices hoàn chỉnh", "sentence": 1},
+        {"text": "Code cả 4 tập ở phần mô tả video", "sentence": 2},
+        {"text": "Like & Subscribe để ủng hộ kênh 🧡", "sentence": 3}
+      ],
+      "next": "Cảm ơn bạn đã theo dõi trọn bộ series! 🎉"
+    }
+  }
+]
