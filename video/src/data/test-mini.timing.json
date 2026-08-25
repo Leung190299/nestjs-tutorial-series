@@ -1,0 +1,27 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Kiểm tra pipeline",
+        "subtitle": "TTS + Remotion",
+        "badge": "Test"
+      },
+      "sentences": [
+        {
+          "file": "audio/test-mini/scene-01-0-66a40bb8.wav",
+          "startFrame": 0,
+          "durationInFrames": 65
+        },
+        {
+          "file": "audio/test-mini/scene-01-1-9cc315da.wav",
+          "startFrame": 73,
+          "durationInFrames": 108
+        }
+      ],
+      "durationInFrames": 199
+    }
+  ]
+}

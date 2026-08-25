@@ -1,0 +1,15 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Xin chào, đây là bài kiểm tra pipeline.",
+      "Nếu bạn nghe được hai câu này với hình khớp tiếng, pipeline đã hoạt động."
+    ],
+    "visual": {
+      "title": "Kiểm tra pipeline",
+      "subtitle": "TTS + Remotion",
+      "badge": "Test"
+    }
+  }
+]
