@@ -1,0 +1,247 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng đến với tập ba của series NestJS cho người mới bắt đầu!",
+      "Hôm nay chúng ta bước vào thế giới realtime: WebSocket.",
+      "Cuối tập, bạn sẽ có một server chat mà hai người nhắn tin cho nhau ngay tức thì, chỉ với vài chục dòng code."
+    ],
+    "visual": {
+      "title": "WebSocket & Realtime",
+      "subtitle": "Tập 3 · Xây server chat với NestJS",
+      "badge": "Series Backend Realtime"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Hai tập vừa rồi, mọi giao tiếp đều theo kiểu HTTP: client hỏi, server trả lời, xong là cúp máy.",
+      "Giống như gửi thư bưu điện: mỗi lần muốn biết tin mới, bạn phải gửi một lá thư hỏi thăm.",
+      "Giờ tưởng tượng làm app chat kiểu đó: cứ mỗi giây client phải hỏi có tin mới chưa một lần.",
+      "Cách này gọi là polling: tốn tài nguyên khủng khiếp mà tin nhắn vẫn tới chậm.",
+      "Chúng ta cần một cách để server chủ động báo ngay khi có tin mới: đó là lý do WebSocket ra đời."
+    ],
+    "visual": {
+      "title": "Giới hạn của HTTP",
+      "bullets": [
+        {"icon": "✉️", "text": "HTTP: hỏi mới đáp, xong là ngắt", "sentence": 0},
+        {"icon": "🔁", "text": "Muốn tin mới phải hỏi đi hỏi lại (polling)", "sentence": 2},
+        {"icon": "🐌", "text": "Tốn tài nguyên, tin vẫn đến chậm", "sentence": 3},
+        {"icon": "💡", "text": "Cần server chủ động báo tin → WebSocket", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "WebSocket là một kết nối hai chiều, mở một lần và giữ nguyên suốt phiên làm việc.",
+      "Nếu HTTP là gửi thư, thì WebSocket là một cuộc gọi điện thoại: kết nối xong, hai bên nói chuyện thoải mái.",
+      "Server có thể chủ động gửi dữ liệu cho client bất cứ lúc nào, không cần chờ được hỏi.",
+      "Kết nối bắt đầu bằng một cái bắt tay qua HTTP, rồi nâng cấp lên đường ống hai chiều.",
+      "Và tin vui: NestJS hỗ trợ WebSocket sẵn luôn, viết chỉ vài chục dòng code."
+    ],
+    "visual": {
+      "title": "WebSocket là gì? 📞",
+      "bullets": [
+        {"icon": "🔌", "text": "Kết nối mở một lần, giữ suốt phiên", "sentence": 0},
+        {"icon": "📞", "text": "Như cuộc gọi điện: hai chiều, tức thì", "sentence": 1},
+        {"icon": "📤", "text": "Server chủ động đẩy dữ liệu cho client", "sentence": 2},
+        {"icon": "🐈", "text": "NestJS hỗ trợ sẵn — vài chục dòng code", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "concept",
+    "narration": [
+      "Vậy khi nào nên dùng WebSocket?",
+      "Ứng dụng chat và nhắn tin là ví dụ kinh điển nhất.",
+      "Thông báo realtime: có đơn hàng mới, có người thích bài viết của bạn.",
+      "Bảng giá chứng khoán, tiền số, tỷ số bóng đá: dữ liệu đổi liên tục từng giây.",
+      "Và game nhiều người chơi, nơi từng mili giây đều quan trọng. Còn dữ liệu ít thay đổi thì HTTP vẫn là lựa chọn đúng."
+    ],
+    "visual": {
+      "title": "Khi nào dùng WebSocket?",
+      "bullets": [
+        {"icon": "💬", "text": "Chat, nhắn tin", "sentence": 1},
+        {"icon": "🔔", "text": "Thông báo realtime", "sentence": 2},
+        {"icon": "📈", "text": "Giá cả, tỷ số cập nhật từng giây", "sentence": 3},
+        {"icon": "🎮", "text": "Game online nhiều người chơi", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "diagram",
+    "narration": [
+      "Mô hình chat của chúng ta hôm nay sẽ như thế này.",
+      "Hai người dùng, A và B, cùng mở kết nối WebSocket đến Chat Gateway và giữ kết nối đó suốt phiên.",
+      "Khi A gửi tin nhắn xin chào, tin đi thẳng qua đường ống đang mở, không cần tạo request mới.",
+      "Gateway nhận tin và lập tức phát cho tất cả mọi người đang kết nối: đó gọi là broadcast.",
+      "B nhận được tin ngay tức thì, không cần bấm tải lại hay hỏi server liên tục.",
+      "Đó chính là realtime: server chủ động đẩy dữ liệu đến client ngay khi có chuyện xảy ra."
+    ],
+    "visual": {
+      "title": "Chat realtime qua WebSocket",
+      "boxes": [
+        {"id": "clientA", "label": "Client A", "emoji": "👩"},
+        {"id": "gateway", "label": "Chat Gateway", "emoji": "💬"},
+        {"id": "clientB", "label": "Client B", "emoji": "👨"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "chat: xin chào", "sentence": 2},
+        {"from": 1, "to": 2, "label": "phát tin", "sentence": 3},
+        {"from": 1, "to": 0, "label": "phát tin", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "terminal",
+    "narration": [
+      "Bắt tay vào code nhé: tạo project demo-chat quen thuộc.",
+      "Cài ba gói: @nestjs/websockets là phần lõi, @nestjs/platform-ws là bộ chuyển đổi, và ws là thư viện WebSocket.",
+      "Mình dùng chuẩn ws thuần để bạn thấy rõ bản chất, không cần thư viện client riêng.",
+      "Xong, mở code lên thôi!"
+    ],
+    "visual": {
+      "title": "Chuẩn bị project",
+      "commands": [
+        {"cmd": "nest new demo-chat", "output": "🚀 Successfully created project demo-chat", "sentence": 0},
+        {"cmd": "npm i @nestjs/websockets @nestjs/platform-ws ws", "output": "added 9 packages in 4s", "sentence": 1}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Nhân vật chính của tập này: ChatGateway. Trong thế giới WebSocket, gateway đóng vai như controller vậy.",
+      "@WebSocketGateway biến class này thành trạm tiếp nhận kết nối WebSocket.",
+      "@WebSocketServer tiêm cho mình đối tượng server, nơi giữ danh sách tất cả client đang kết nối.",
+      "@SubscribeMessage chat nghĩa là: khi có tin nhắn với tên sự kiện là chat gửi lên, hàm handleChat sẽ chạy.",
+      "Bên trong, mình duyệt qua tất cả client đang kết nối và gửi tin nhắn cho từng người: đó là broadcast.",
+      "Để ý sự giống nhau nhé: @Get bắt HTTP, @MessagePattern bắt tin microservice, @SubscribeMessage bắt tin WebSocket. NestJS rất nhất quán."
+    ],
+    "visual": {
+      "filename": "src/chat.gateway.ts",
+      "language": "tsx",
+      "code": "import {\n  SubscribeMessage,\n  WebSocketGateway,\n  WebSocketServer,\n} from '@nestjs/websockets';\nimport { Server } from 'ws';\n\n@WebSocketGateway()\nexport class ChatGateway {\n  @WebSocketServer()\n  server: Server;\n\n  @SubscribeMessage('chat')\n  handleChat(client: any, message: string) {\n    this.server.clients.forEach((c) => {\n      c.send(JSON.stringify({ event: 'chat', data: message }));\n    });\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 19, "sentence": 0},
+        {"from": 8, "to": 8, "sentence": 1},
+        {"from": 10, "to": 11, "sentence": 2},
+        {"from": 13, "to": 13, "sentence": 3},
+        {"from": 15, "to": 17, "sentence": 4},
+        {"from": 1, "to": 19, "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Sang file main.ts, gần giống tập một, chỉ thêm đúng một dòng.",
+      "NestFactory.create tạo app như bình thường, vẫn có web server HTTP.",
+      "Dòng mới: useWebSocketAdapter với WsAdapter, bảo NestJS dùng chuẩn WebSocket thuần cho các gateway.",
+      "Rồi app.listen cổng ba nghìn: cả HTTP lẫn WebSocket cùng chạy chung một cổng.",
+      "Chỉ vậy thôi, server chat đã sẵn sàng nhận kết nối."
+    ],
+    "visual": {
+      "filename": "src/main.ts",
+      "language": "tsx",
+      "code": "import { NestFactory } from '@nestjs/core';\nimport { WsAdapter } from '@nestjs/platform-ws';\nimport { AppModule } from './app.module';\n\nasync function bootstrap() {\n  const app = await NestFactory.create(AppModule);\n  app.useWebSocketAdapter(new WsAdapter(app));\n  await app.listen(3000);\n}\nbootstrap();",
+      "steps": [
+        {"from": 1, "to": 10, "sentence": 0},
+        {"from": 6, "to": 6, "sentence": 1},
+        {"from": 7, "to": 7, "sentence": 2},
+        {"from": 8, "to": 8, "sentence": 3},
+        {"from": 1, "to": 10, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "code",
+    "narration": [
+      "Cuối cùng, khai báo gateway vào module.",
+      "Gateway không phải controller: nó đứng ở mục providers, cùng chỗ với các Service.",
+      "Vì bản chất gateway là một provider có khả năng nhận sự kiện, không gắn với đường dẫn HTTP nào.",
+      "Vậy là đủ: ba file, một server chat hoàn chỉnh."
+    ],
+    "visual": {
+      "filename": "src/app.module.ts",
+      "language": "tsx",
+      "code": "import { Module } from '@nestjs/common';\nimport { ChatGateway } from './chat.gateway';\n\n@Module({\n  imports: [],\n  controllers: [],\n  providers: [ChatGateway],\n})\nexport class AppModule {}",
+      "steps": [
+        {"from": 1, "to": 9, "sentence": 0},
+        {"from": 7, "to": 7, "sentence": 1},
+        {"from": 7, "to": 7, "sentence": 2},
+        {"from": 1, "to": 9, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "terminal",
+    "narration": [
+      "Chạy thử nào: npm run start, server lên ở cổng ba nghìn.",
+      "Để giả làm hai người dùng, mình mở hai cửa sổ terminal và dùng wscat kết nối vào server.",
+      "Cửa sổ thứ nhất là bạn A, cửa sổ thứ hai là bạn B, cả hai cùng nối vào ws://localhost:3000.",
+      "A gửi một tin nhắn theo dạng sự kiện chat kèm nội dung xin chào.",
+      "Và nhìn kìa: B nhận được tin ngay lập tức, không tải lại trang, không hỏi han gì thêm!",
+      "Chat realtime bằng NestJS: xong trong chưa đầy hai mươi dòng code."
+    ],
+    "visual": {
+      "title": "Hai người chat thử! 🎉",
+      "commands": [
+        {"cmd": "npm run start", "output": "[Nest] LOG [NestApplication] Nest application successfully started", "sentence": 0},
+        {"cmd": "wscat -c ws://localhost:3000", "output": "Connected (press CTRL+C to quit)   ← cả A và B cùng kết nối", "sentence": 2},
+        {"cmd": "> {\"event\":\"chat\",\"data\":\"xin chào từ A\"}", "output": "< {\"event\":\"chat\",\"data\":\"xin chào từ A\"}   ← B nhận được NGAY LẬP TỨC", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "concept",
+    "narration": [
+      "Trước khi chia tay, mình đặt ba anh em nhà decorator cạnh nhau cho dễ nhớ.",
+      "@Get: khách bấm chuông, hỏi một lần, đáp một lần.",
+      "@MessagePattern: các service gọi điện nội bộ cho nhau.",
+      "@SubscribeMessage: đường dây mở liên tục, ai nói mọi người đều nghe được.",
+      "Nắm được ba cách giao tiếp này, bạn đã đủ đồ nghề xây gần như mọi loại backend."
+    ],
+    "visual": {
+      "title": "Ba anh em nhà decorator",
+      "bullets": [
+        {"icon": "🛎️", "text": "@Get — HTTP: hỏi một lần, đáp một lần", "sentence": 1},
+        {"icon": "☎️", "text": "@MessagePattern — nội bộ giữa các service", "sentence": 2},
+        {"icon": "📡", "text": "@SubscribeMessage — realtime hai chiều", "sentence": 3},
+        {"icon": "🧰", "text": "Đủ bộ đồ nghề cho mọi loại backend", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: WebSocket là kết nối hai chiều luôn mở, giúp server chủ động đẩy dữ liệu đến client.",
+      "Trong NestJS: @WebSocketGateway tạo trạm, @SubscribeMessage nhận sự kiện, còn server.clients cho phép broadcast.",
+      "Và WsAdapter trong main.ts để dùng chuẩn WebSocket thuần.",
+      "Bài tập nhỏ: thử thêm sự kiện typing để báo ai đó đang gõ cho mọi người nhé.",
+      "Tập sau là tập cuối và hoành tráng nhất: ghép microservices với WebSocket thành một app chat hoàn chỉnh. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "WebSocket = kết nối 2 chiều luôn mở", "sentence": 0},
+        {"text": "@SubscribeMessage nhận, server.clients broadcast", "sentence": 1},
+        {"text": "WsAdapter kích hoạt chuẩn ws thuần", "sentence": 2}
+      ],
+      "next": "Tập 4: Chat realtime + Microservices — ghép tất cả"
+    }
+  }
+]
