@@ -194,6 +194,10 @@ nestjs, app chat, xây app chat, chat realtime, websocket, microservices, nestjs
 
 ---
 
+## Thumbnail
+
+Đã render sẵn tại `video/out/thumbs/ep0X-thumb.png` (1280×720, <2MB, chuẩn YouTube). Muốn sửa chữ/bố cục: sửa mảng `thumbnails` trong `video/src/Root.tsx` hoặc component `video/src/Thumbnail.tsx`, rồi chạy `npx remotion still Thumb0X out/thumbs/ep0X-thumb.png`.
+
 ## Checklist khi đăng
 
 1. Đăng theo thứ tự 1 → 4, mỗi video cách nhau 2–3 ngày (thuật toán thích đều đặn hơn dồn một lúc).
