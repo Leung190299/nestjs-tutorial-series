@@ -1,0 +1,118 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "fx-title",
+      "type": "title",
+      "visual": {
+        "title": "NestJS cho người mới bắt đầu",
+        "subtitle": "Tập 1 · NestJS là gì?",
+        "badge": "Series Backend"
+      },
+      "sentences": [
+        {"file": "", "startFrame": 0, "durationInFrames": 90},
+        {"file": "", "startFrame": 98, "durationInFrames": 90}
+      ],
+      "durationInFrames": 206
+    },
+    {
+      "id": "fx-concept",
+      "type": "concept",
+      "visual": {
+        "title": "NestJS giống một nhà hàng",
+        "bullets": [
+          {"icon": "🛎️", "text": "Controller = người phục vụ: nhận yêu cầu, trả món", "sentence": 1},
+          {"icon": "👨‍🍳", "text": "Service = đầu bếp: xử lý công việc thật sự", "sentence": 2},
+          {"icon": "🏠", "text": "Module = khu bếp: gom nhóm lại một chỗ", "sentence": 3}
+        ]
+      },
+      "sentences": [
+        {"file": "", "startFrame": 0, "durationInFrames": 80},
+        {"file": "", "startFrame": 88, "durationInFrames": 80},
+        {"file": "", "startFrame": 176, "durationInFrames": 80},
+        {"file": "", "startFrame": 264, "durationInFrames": 80}
+      ],
+      "durationInFrames": 362
+    },
+    {
+      "id": "fx-outro",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại!",
+        "summary": [
+          {"text": "NestJS = framework backend có cấu trúc", "sentence": 0},
+          {"text": "Controller nhận, Service xử lý, Module gom nhóm", "sentence": 1}
+        ],
+        "next": "Tập 2: Microservices"
+      },
+      "sentences": [
+        {"file": "", "startFrame": 0, "durationInFrames": 80},
+        {"file": "", "startFrame": 88, "durationInFrames": 80},
+        {"file": "", "startFrame": 176, "durationInFrames": 80}
+      ],
+      "durationInFrames": 274
+    },
+    {
+      "id": "fx-code",
+      "type": "code",
+      "visual": {
+        "filename": "src/users/users.controller.ts",
+        "language": "tsx",
+        "code": "import { Controller, Get } from '@nestjs/common';\nimport { UsersService } from './users.service';\n\n@Controller('users')\nexport class UsersController {\n  constructor(private usersService: UsersService) {}\n\n  @Get()\n  findAll() {\n    return this.usersService.findAll();\n  }\n}",
+        "steps": [
+          {"from": 1, "to": 12, "sentence": 0},
+          {"from": 4, "to": 4, "sentence": 1},
+          {"from": 8, "to": 11, "sentence": 2}
+        ]
+      },
+      "sentences": [
+        {"file": "", "startFrame": 0, "durationInFrames": 80},
+        {"file": "", "startFrame": 88, "durationInFrames": 80},
+        {"file": "", "startFrame": 176, "durationInFrames": 80}
+      ],
+      "durationInFrames": 274
+    },
+    {
+      "id": "fx-terminal",
+      "type": "terminal",
+      "visual": {
+        "title": "Cài đặt và tạo project",
+        "commands": [
+          {"cmd": "npm i -g @nestjs/cli", "output": "added 249 packages in 12s", "sentence": 0},
+          {"cmd": "nest new demo-app", "output": "🚀  Successfully created project demo-app", "sentence": 1},
+          {"cmd": "npm run start:dev", "output": "[Nest] LOG Nest application successfully started", "sentence": 2}
+        ]
+      },
+      "sentences": [
+        {"file": "", "startFrame": 0, "durationInFrames": 80},
+        {"file": "", "startFrame": 88, "durationInFrames": 80},
+        {"file": "", "startFrame": 176, "durationInFrames": 80}
+      ],
+      "durationInFrames": 274
+    },
+    {
+      "id": "fx-diagram",
+      "type": "diagram",
+      "visual": {
+        "title": "Một request đi qua NestJS như thế nào?",
+        "boxes": [
+          {"id": "client", "label": "Client", "emoji": "📱"},
+          {"id": "controller", "label": "Controller", "emoji": "🛎️"},
+          {"id": "service", "label": "Service", "emoji": "👨‍🍳"}
+        ],
+        "flows": [
+          {"from": 0, "to": 1, "label": "GET /users", "sentence": 1},
+          {"from": 1, "to": 2, "label": "gọi hàm", "sentence": 2},
+          {"from": 2, "to": 0, "label": "JSON", "sentence": 3}
+        ]
+      },
+      "sentences": [
+        {"file": "", "startFrame": 0, "durationInFrames": 80},
+        {"file": "", "startFrame": 88, "durationInFrames": 80},
+        {"file": "", "startFrame": 176, "durationInFrames": 80},
+        {"file": "", "startFrame": 264, "durationInFrames": 80}
+      ],
+      "durationInFrames": 362
+    }
+  ]
+}
