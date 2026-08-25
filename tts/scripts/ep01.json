@@ -1,0 +1,208 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Xin chào các bạn, chào mừng đến với series NestJS cho người mới bắt đầu.",
+      "Trong tập đầu tiên, chúng ta sẽ tìm hiểu NestJS là gì, và cùng nhau tạo API đầu tiên chỉ trong vài phút."
+    ],
+    "visual": {
+      "title": "NestJS cho người mới bắt đầu",
+      "subtitle": "Tập 1 · NestJS là gì? Tạo project đầu tiên",
+      "badge": "Series Backend Realtime"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "NestJS là một framework giúp bạn xây dựng phần backend, tức là phần máy chủ, cho ứng dụng Node.js.",
+      "Nó dùng TypeScript, một phiên bản JavaScript có kiểm tra kiểu dữ liệu, giúp code rõ ràng và ít lỗi hơn.",
+      "Điểm đặc biệt nhất: NestJS cho bạn một cấu trúc sẵn, giống như một bản thiết kế nhà, bạn chỉ việc xây theo."
+    ],
+    "visual": {
+      "title": "NestJS là gì?",
+      "bullets": [
+        {"icon": "🧱", "text": "Framework xây dựng backend cho Node.js", "sentence": 0},
+        {"icon": "🔷", "text": "Viết bằng TypeScript — code rõ ràng, ít lỗi hơn", "sentence": 1},
+        {"icon": "📐", "text": "Có cấu trúc sẵn — như một bản thiết kế nhà", "sentence": 2}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "Bạn có thể đã nghe tới Express, một thư viện rất phổ biến. Express tự do, nhưng khi dự án lớn dần, code rất dễ lộn xộn.",
+      "NestJS thì ngược lại: mọi thứ đều có chỗ của nó, ai vào dự án cũng biết code nằm ở đâu.",
+      "NestJS còn tích hợp sẵn rất nhiều thứ: microservices, WebSocket, kiểm tra dữ liệu... mà chúng ta sẽ dùng trong các tập sau.",
+      "Vì vậy rất nhiều công ty lớn chọn NestJS cho sản phẩm của họ."
+    ],
+    "visual": {
+      "title": "Vì sao chọn NestJS?",
+      "bullets": [
+        {"icon": "🌀", "text": "Express: tự do nhưng dễ lộn xộn khi dự án lớn", "sentence": 0},
+        {"icon": "🗂️", "text": "NestJS: mọi thứ có chỗ của nó", "sentence": 1},
+        {"icon": "🔌", "text": "Tích hợp sẵn: microservices, WebSocket, validation...", "sentence": 2},
+        {"icon": "🏢", "text": "Được nhiều công ty lớn tin dùng", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "concept",
+    "narration": [
+      "Hãy tưởng tượng ứng dụng của bạn là một nhà hàng.",
+      "Controller giống người phục vụ: nhận yêu cầu từ khách, và mang món ăn ra.",
+      "Service giống đầu bếp: nơi thực sự chế biến, xử lý công việc.",
+      "Còn Module là một khu bếp: gom người phục vụ và đầu bếp cùng nhóm lại một chỗ."
+    ],
+    "visual": {
+      "title": "NestJS giống một nhà hàng 🍜",
+      "bullets": [
+        {"icon": "🛎️", "text": "Controller = người phục vụ: nhận yêu cầu, trả món", "sentence": 1},
+        {"icon": "👨‍🍳", "text": "Service = đầu bếp: xử lý công việc thật sự", "sentence": 2},
+        {"icon": "🏠", "text": "Module = khu bếp: gom nhóm lại một chỗ", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "diagram",
+    "narration": [
+      "Giờ hãy xem một yêu cầu đi qua NestJS như thế nào nhé.",
+      "Đầu tiên, client, ví dụ trình duyệt hay app điện thoại, gửi yêu cầu GET /users đến Controller.",
+      "Controller không tự xử lý, nó chuyển việc cho Service, giống người phục vụ đưa order vào bếp.",
+      "Service xử lý xong, dữ liệu được trả ngược về client dưới dạng JSON. Đơn giản vậy thôi!"
+    ],
+    "visual": {
+      "title": "Một request đi qua NestJS như thế nào?",
+      "boxes": [
+        {"id": "client", "label": "Client", "emoji": "📱"},
+        {"id": "controller", "label": "Controller", "emoji": "🛎️"},
+        {"id": "service", "label": "Service", "emoji": "👨‍🍳"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "GET /users", "sentence": 1},
+        {"from": 1, "to": 2, "label": "gọi hàm", "sentence": 2},
+        {"from": 2, "to": 0, "label": "JSON", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "terminal",
+    "narration": [
+      "Lý thuyết đủ rồi, giờ mình bắt tay vào làm nhé. Bạn chỉ cần cài sẵn Node.js trên máy.",
+      "Đầu tiên, cài công cụ dòng lệnh của NestJS bằng lệnh npm i -g @nestjs/cli.",
+      "Sau đó chạy nest new demo-app để tạo project mới. NestJS sẽ tự tạo toàn bộ khung sẵn cho bạn.",
+      "Vào thư mục demo-app và chạy npm run start:dev. Vậy là server đã chạy ở cổng ba nghìn!"
+    ],
+    "visual": {
+      "title": "Cài đặt và tạo project",
+      "commands": [
+        {"cmd": "npm i -g @nestjs/cli", "output": "added 249 packages in 12s", "sentence": 1},
+        {"cmd": "nest new demo-app", "output": "⚡ Installation in progress...\n🚀 Successfully created project demo-app", "sentence": 2},
+        {"cmd": "cd demo-app && npm run start:dev", "output": "[Nest] LOG [NestApplication] Nest application successfully started\n[Nest] LOG Listening on http://localhost:3000", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Mở project ra, file quan trọng nhất là app.module.ts, chính là khu bếp trung tâm của nhà hàng.",
+      "Trên cùng là các dòng import, đưa những thứ cần dùng vào file.",
+      "Decorator @Module khai báo khu bếp này có gì: controllers là danh sách người phục vụ, providers là danh sách đầu bếp.",
+      "Mỗi ứng dụng NestJS đều bắt đầu từ một module gốc như thế này."
+    ],
+    "visual": {
+      "filename": "src/app.module.ts",
+      "language": "tsx",
+      "code": "import { Module } from '@nestjs/common';\nimport { AppController } from './app.controller';\nimport { AppService } from './app.service';\n\n@Module({\n  imports: [],\n  controllers: [AppController],\n  providers: [AppService],\n})\nexport class AppModule {}",
+      "steps": [
+        {"from": 1, "to": 10, "sentence": 0},
+        {"from": 1, "to": 3, "sentence": 1},
+        {"from": 5, "to": 9, "sentence": 2},
+        {"from": 10, "to": 10, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Giờ mình tạo người phục vụ đầu tiên: UsersController, phụ trách đường dẫn /users.",
+      "Decorator @Controller users nghĩa là: mọi yêu cầu bắt đầu bằng /users sẽ do class này tiếp nhận.",
+      "Trong constructor, mình xin một đầu bếp UsersService. NestJS tự động đưa vào, gọi là dependency injection.",
+      "@Get đánh dấu hàm findAll: khi có yêu cầu GET /users, hàm này chạy và nhờ Service trả về danh sách."
+    ],
+    "visual": {
+      "filename": "src/users/users.controller.ts",
+      "language": "tsx",
+      "code": "import { Controller, Get } from '@nestjs/common';\nimport { UsersService } from './users.service';\n\n@Controller('users')\nexport class UsersController {\n  constructor(private usersService: UsersService) {}\n\n  @Get()\n  findAll() {\n    return this.usersService.findAll();\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 12, "sentence": 0},
+        {"from": 4, "to": 4, "sentence": 1},
+        {"from": 6, "to": 6, "sentence": 2},
+        {"from": 8, "to": 11, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "code",
+    "narration": [
+      "Tiếp theo là đầu bếp: UsersService.",
+      "Decorator @Injectable đánh dấu class này có thể được tiêm vào nơi khác, như vào Controller lúc nãy.",
+      "Ở đây mình để sẵn một danh sách người dùng đơn giản, chưa cần tới database.",
+      "Hàm findAll chỉ việc trả về danh sách đó. Người phục vụ hỏi, đầu bếp đưa món."
+    ],
+    "visual": {
+      "filename": "src/users/users.service.ts",
+      "language": "tsx",
+      "code": "import { Injectable } from '@nestjs/common';\n\n@Injectable()\nexport class UsersService {\n  private users = [\n    { id: 1, name: 'Minh' },\n    { id: 2, name: 'Lan' },\n  ];\n\n  findAll() {\n    return this.users;\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 13, "sentence": 0},
+        {"from": 3, "to": 3, "sentence": 1},
+        {"from": 5, "to": 8, "sentence": 2},
+        {"from": 10, "to": 12, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "terminal",
+    "narration": [
+      "Khoảnh khắc sự thật: gọi thử API xem sao.",
+      "Mình dùng curl gọi GET /users... và đây rồi: danh sách người dùng trả về dưới dạng JSON.",
+      "Nhìn lại nhà hàng của mình: khách gọi món, người phục vụ Controller nhận, đầu bếp Service chuẩn bị, và món ăn JSON được mang ra.",
+      "Bạn vừa xây xong API NestJS đầu tiên rồi đấy!"
+    ],
+    "visual": {
+      "title": "Chạy thử! 🎉",
+      "commands": [
+        {"cmd": "curl http://localhost:3000/users", "output": "[{\"id\":1,\"name\":\"Minh\"},{\"id\":2,\"name\":\"Lan\"}]", "sentence": 1}
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "outro",
+    "narration": [
+      "Tóm lại, hôm nay bạn đã biết NestJS là framework backend có cấu trúc, viết bằng TypeScript.",
+      "Kiến trúc của nó xoay quanh ba nhân vật: Controller nhận yêu cầu, Service xử lý, Module gom chúng thành nhóm.",
+      "Và bạn đã tự tay tạo project cùng API đầu tiên của mình.",
+      "Ở tập sau, chúng ta sẽ chia nhà hàng này thành cả một chuỗi cửa hàng: đó chính là microservices. Hẹn gặp lại các bạn!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "NestJS = framework backend có cấu trúc, dùng TypeScript", "sentence": 0},
+        {"text": "Controller nhận request, Service xử lý, Module gom nhóm", "sentence": 1},
+        {"text": "Tạo project với nest new, API đầu tiên với @Controller và @Get", "sentence": 2}
+      ],
+      "next": "Tập 2: Microservices — chia nhà hàng thành chuỗi cửa hàng"
+    }
+  }
+]
