@@ -1,0 +1,596 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Chat Realtime + Microservices",
+        "subtitle": "Tập 4 · Ghép tất cả thành sản phẩm hoàn chỉnh",
+        "badge": "Series Backend Realtime · Tập cuối"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep04/scene-01-0-e69db850.wav",
+          "startFrame": 0,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep04/scene-01-1-5b55cbe4.wav",
+          "startFrame": 121,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep04/scene-01-2-f3983819.wav",
+          "startFrame": 333,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 486
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Hành trang sau 3 tập",
+        "bullets": [
+          {
+            "icon": "🧱",
+            "text": "Tập 1: Controller · Service · Module",
+            "sentence": 1
+          },
+          {
+            "icon": "🏪",
+            "text": "Tập 2: Microservices qua TCP",
+            "sentence": 2
+          },
+          {
+            "icon": "📡",
+            "text": "Tập 3: WebSocket realtime",
+            "sentence": 3
+          },
+          {
+            "icon": "🧩",
+            "text": "Tập 4: Ghép tất cả lại thành app chat",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep04/scene-02-0-6dca3538.wav",
+          "startFrame": 0,
+          "durationInFrames": 63
+        },
+        {
+          "file": "audio/ep04/scene-02-1-3094bc13.wav",
+          "startFrame": 71,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep04/scene-02-2-dfce1754.wav",
+          "startFrame": 197,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep04/scene-02-3-df53dcdb.wav",
+          "startFrame": 337,
+          "durationInFrames": 89
+        },
+        {
+          "file": "audio/ep04/scene-02-4-8884a082.wav",
+          "startFrame": 434,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep04/scene-02-5-22b84acf.wav",
+          "startFrame": 591,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 773
+    },
+    {
+      "id": "scene-03",
+      "type": "diagram",
+      "visual": {
+        "title": "Kiến trúc app chat hoàn chỉnh",
+        "boxes": [
+          {
+            "id": "clients",
+            "label": "Clients",
+            "emoji": "👥"
+          },
+          {
+            "id": "gateway",
+            "label": "Gateway",
+            "emoji": "💬"
+          },
+          {
+            "id": "chatsvc",
+            "label": "Chat Service",
+            "emoji": "🗄️"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "WS: chat",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "TCP: save_message",
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 0,
+            "label": "broadcast",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep04/scene-03-0-194edf9d.wav",
+          "startFrame": 0,
+          "durationInFrames": 65
+        },
+        {
+          "file": "audio/ep04/scene-03-1-e819bae3.wav",
+          "startFrame": 73,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep04/scene-03-2-f79d5e26.wav",
+          "startFrame": 201,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep04/scene-03-3-7a299e38.wav",
+          "startFrame": 392,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep04/scene-03-4-c9ae6b7a.wav",
+          "startFrame": 516,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep04/scene-03-5-ea97c719.wav",
+          "startFrame": 690,
+          "durationInFrames": 176
+        }
+      ],
+      "durationInFrames": 884
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "chat-service/src/chat.controller.ts",
+        "language": "tsx",
+        "code": "import { Controller } from '@nestjs/common';\nimport { MessagePattern } from '@nestjs/microservices';\n\n@Controller()\nexport class ChatController {\n  private messages: string[] = [];\n\n  @MessagePattern({ cmd: 'save_message' })\n  save(message: string) {\n    this.messages.push(message);\n    return this.messages;\n  }\n\n  @MessagePattern({ cmd: 'get_history' })\n  history() {\n    return this.messages;\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 18,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 12,
+            "sentence": 2
+          },
+          {
+            "from": 14,
+            "to": 17,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 18,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep04/scene-04-0-de7c44c4.wav",
+          "startFrame": 0,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep04/scene-04-1-a8f61adb.wav",
+          "startFrame": 205,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep04/scene-04-2-f0748102.wav",
+          "startFrame": 345,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep04/scene-04-3-037b30ad.wav",
+          "startFrame": 469,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep04/scene-04-4-d13ec54b.wav",
+          "startFrame": 569,
+          "durationInFrames": 101
+        }
+      ],
+      "durationInFrames": 688
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "gateway/src/app.module.ts",
+        "language": "tsx",
+        "code": "import { Module } from '@nestjs/common';\nimport { ClientsModule, Transport } from '@nestjs/microservices';\nimport { ChatGateway } from './chat.gateway';\n\n@Module({\n  imports: [\n    ClientsModule.register([\n      {\n        name: 'CHAT_SERVICE',\n        transport: Transport.TCP,\n        options: { port: 3001 },\n      },\n    ]),\n  ],\n  providers: [ChatGateway],\n})\nexport class AppModule {}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 13,
+            "sentence": 1
+          },
+          {
+            "from": 15,
+            "to": 15,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep04/scene-05-0-6f4f53f4.wav",
+          "startFrame": 0,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep04/scene-05-1-0385c652.wav",
+          "startFrame": 102,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep04/scene-05-2-2f05e622.wav",
+          "startFrame": 281,
+          "durationInFrames": 89
+        },
+        {
+          "file": "audio/ep04/scene-05-3-a6b976a6.wav",
+          "startFrame": 378,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 531
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "gateway/src/chat.gateway.ts (phần 1)",
+        "language": "tsx",
+        "code": "@WebSocketGateway()\nexport class ChatGateway implements OnGatewayConnection {\n  @WebSocketServer()\n  server: Server;\n\n  constructor(@Inject('CHAT_SERVICE') private client: ClientProxy) {}\n\n  async handleConnection(client: any) {\n    const history = await firstValueFrom(\n      this.client.send({ cmd: 'get_history' }, {}),\n    );\n    client.send(JSON.stringify({ event: 'history', data: history }));\n  }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 9,
+            "to": 11,
+            "sentence": 3
+          },
+          {
+            "from": 12,
+            "to": 12,
+            "sentence": 4
+          },
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep04/scene-06-0-e30d40bb.wav",
+          "startFrame": 0,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep04/scene-06-1-f836922e.wav",
+          "startFrame": 104,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep04/scene-06-2-2184d9cb.wav",
+          "startFrame": 326,
+          "durationInFrames": 89
+        },
+        {
+          "file": "audio/ep04/scene-06-3-702686d4.wav",
+          "startFrame": 423,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep04/scene-06-4-de11c1db.wav",
+          "startFrame": 609,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep04/scene-06-5-7747e86a.wav",
+          "startFrame": 723,
+          "durationInFrames": 87
+        }
+      ],
+      "durationInFrames": 828
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "gateway/src/chat.gateway.ts (phần 2)",
+        "language": "tsx",
+        "code": "  @SubscribeMessage('chat')\n  async handleChat(client: any, message: string) {\n    await firstValueFrom(this.client.send({ cmd: 'save_message' }, message));\n    this.server.clients.forEach((c) => {\n      c.send(JSON.stringify({ event: 'chat', data: message }));\n    });\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 3,
+            "to": 6,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep04/scene-07-0-2fe95c75.wav",
+          "startFrame": 0,
+          "durationInFrames": 58
+        },
+        {
+          "file": "audio/ep04/scene-07-1-de8e111a.wav",
+          "startFrame": 66,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep04/scene-07-2-04c22852.wav",
+          "startFrame": 226,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep04/scene-07-3-7edb20dd.wav",
+          "startFrame": 362,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep04/scene-07-4-93fa18a5.wav",
+          "startFrame": 474,
+          "durationInFrames": 118
+        }
+      ],
+      "durationInFrames": 610
+    },
+    {
+      "id": "scene-08",
+      "type": "terminal",
+      "visual": {
+        "title": "Demo sản phẩm cuối! 🎉",
+        "commands": [
+          {
+            "cmd": "cd chat-service && npm run start",
+            "output": "[Nest] LOG [NestMicroservice] Nest microservice successfully started",
+            "sentence": 1
+          },
+          {
+            "cmd": "cd gateway && npm run start",
+            "output": "[Nest] LOG [NestApplication] Nest application successfully started",
+            "sentence": 2
+          },
+          {
+            "cmd": "wscat -c ws://localhost:3000   # bạn A nhắn tin",
+            "output": "< {\"event\":\"chat\",\"data\":\"chào cả nhà\"}",
+            "sentence": 3
+          },
+          {
+            "cmd": "wscat -c ws://localhost:3000   # bạn B vào sau",
+            "output": "< {\"event\":\"history\",\"data\":[\"chào cả nhà\"]}   ← thấy ngay tin cũ!",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep04/scene-08-0-d8c58ef4.wav",
+          "startFrame": 0,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep04/scene-08-1-3afba9f7.wav",
+          "startFrame": 112,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep04/scene-08-2-a6e3bd1b.wav",
+          "startFrame": 216,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep04/scene-08-3-20d1d11b.wav",
+          "startFrame": 330,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep04/scene-08-4-7135dc03.wav",
+          "startFrame": 442,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep04/scene-08-5-4c4f99d1.wav",
+          "startFrame": 592,
+          "durationInFrames": 140
+        }
+      ],
+      "durationInFrames": 750
+    },
+    {
+      "id": "scene-09",
+      "type": "concept",
+      "visual": {
+        "title": "Đi tiếp từ đây",
+        "bullets": [
+          {
+            "icon": "🗄️",
+            "text": "Thay bộ nhớ bằng database — chỉ sửa Chat Service",
+            "sentence": 1
+          },
+          {
+            "icon": "🔐",
+            "text": "Thêm auth-service, users-service",
+            "sentence": 2
+          },
+          {
+            "icon": "🚄",
+            "text": "Đổi TCP → Redis/RabbitMQ chỉ ở config",
+            "sentence": 3
+          },
+          {
+            "icon": "🏆",
+            "text": "Kiến trúc tốt: nâng cấp chỉ chạm một chỗ",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep04/scene-09-0-86d76e14.wav",
+          "startFrame": 0,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep04/scene-09-1-677d727c.wav",
+          "startFrame": 85,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep04/scene-09-2-06c4d1a2.wav",
+          "startFrame": 247,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep04/scene-09-3-fccdbd45.wav",
+          "startFrame": 383,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep04/scene-09-4-af4a3667.wav",
+          "startFrame": 567,
+          "durationInFrames": 108
+        }
+      ],
+      "durationInFrames": 693
+    },
+    {
+      "id": "scene-10",
+      "type": "outro",
+      "visual": {
+        "title": "Cảm ơn & hẹn gặp lại! 🧡",
+        "summary": [
+          {
+            "text": "App chat realtime + microservices hoàn chỉnh",
+            "sentence": 1
+          },
+          {
+            "text": "Code cả 4 tập ở phần mô tả video",
+            "sentence": 2
+          },
+          {
+            "text": "Like & Subscribe để ủng hộ kênh 🧡",
+            "sentence": 3
+          }
+        ],
+        "next": "Cảm ơn bạn đã theo dõi trọn bộ series! 🎉"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep04/scene-10-0-357f533d.wav",
+          "startFrame": 0,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep04/scene-10-1-9454acd7.wav",
+          "startFrame": 109,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep04/scene-10-2-261aeab3.wav",
+          "startFrame": 357,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep04/scene-10-3-0ce41159.wav",
+          "startFrame": 481,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep04/scene-10-4-138832f8.wav",
+          "startFrame": 648,
+          "durationInFrames": 108
+        }
+      ],
+      "durationInFrames": 774
+    }
+  ]
+}

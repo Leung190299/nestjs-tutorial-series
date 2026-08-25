@@ -8,9 +8,10 @@ type Props = {
   filename?: string;
   visibleUpTo: number;          // dòng 1-index cuối cùng đang hiển thị
   highlight?: [number, number]; // vùng dòng đang nhấn mạnh
+  fontSize?: number;            // co nhỏ khi code dài để không tràn khung 1080p
 };
 
-export const CodeBlock: React.FC<Props> = ({code, language, filename, visibleUpTo, highlight}) => (
+export const CodeBlock: React.FC<Props> = ({code, language, filename, visibleUpTo, highlight, fontSize = 30}) => (
   <div
     style={{
       backgroundColor: theme.panel,
@@ -38,7 +39,7 @@ export const CodeBlock: React.FC<Props> = ({code, language, filename, visibleUpT
           style={{
             margin: 0,
             padding: '24px 28px',
-            fontSize: 30,
+            fontSize,
             lineHeight: 1.65,
             backgroundColor: 'transparent',
           }}

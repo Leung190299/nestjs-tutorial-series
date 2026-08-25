@@ -1,0 +1,252 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại với series NestJS cho người mới bắt đầu, mình rất vui gặp lại các bạn!",
+      "Hôm nay là chủ đề mà rất nhiều bạn tò mò: microservices, kiến trúc mà các công ty lớn đều dùng.",
+      "Và bạn sẽ tự tay tách ứng dụng tập trước thành hai service nói chuyện với nhau, ngay trong tập này."
+    ],
+    "visual": {
+      "title": "Microservices với NestJS",
+      "subtitle": "Tập 2 · Tách app thành các service nhỏ",
+      "badge": "Series Backend Realtime"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Tập trước, chúng ta đã xây một nhà hàng NestJS hoàn chỉnh: Controller, Service, Module.",
+      "Cả ứng dụng nằm trong một project duy nhất: kiểu này gọi là monolith, tức là một khối.",
+      "Monolith rất tốt lúc bắt đầu, nhưng khi nhà hàng đông khách, vấn đề xuất hiện: một món hỏng, cả bếp nghẽn.",
+      "Muốn nâng cấp khu nướng thì phải đóng cửa cả nhà hàng để sửa.",
+      "Team càng lớn, càng nhiều người sửa chung một chỗ, càng dễ giẫm chân nhau."
+    ],
+    "visual": {
+      "title": "Vấn đề của một khối — Monolith",
+      "bullets": [
+        {"icon": "🏢", "text": "Monolith = tất cả nằm trong một project", "sentence": 1},
+        {"icon": "🔥", "text": "Một chỗ nghẽn, cả app chậm theo", "sentence": 2},
+        {"icon": "🔧", "text": "Sửa một phần phải deploy lại tất cả", "sentence": 3},
+        {"icon": "👥", "text": "Team lớn dễ giẫm chân nhau", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "Microservices giải quyết chuyện đó bằng một ý tưởng đơn giản: tách nhà hàng lớn thành chuỗi cửa hàng nhỏ.",
+      "Mỗi cửa hàng chỉ làm một chuyên môn: tiệm phở lo phở, tiệm trà sữa lo trà sữa.",
+      "Trong phần mềm cũng vậy: service người dùng lo người dùng, service đơn hàng lo đơn hàng.",
+      "Các service là những chương trình chạy độc lập, nói chuyện với nhau qua mạng bằng tin nhắn.",
+      "Một cửa hàng tạm đóng cửa, cả chuỗi vẫn hoạt động: đó là sức mạnh của microservices."
+    ],
+    "visual": {
+      "title": "Microservices = chuỗi cửa hàng 🏪",
+      "bullets": [
+        {"icon": "🏪", "text": "Tách app lớn thành nhiều service nhỏ", "sentence": 0},
+        {"icon": "🎯", "text": "Mỗi service một chuyên môn", "sentence": 2},
+        {"icon": "✉️", "text": "Nói chuyện với nhau bằng tin nhắn qua mạng", "sentence": 3},
+        {"icon": "🛡️", "text": "Một service lỗi, cả hệ thống vẫn sống", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "concept",
+    "narration": [
+      "Nghe hấp dẫn vậy nhưng microservices không phải cây đũa thần, mình điểm nhanh hai mặt nhé.",
+      "Ưu điểm: mỗi service nhỏ nên dễ hiểu, dễ sửa, và scale riêng được phần đang đông khách.",
+      "Mỗi team làm chủ service của mình, deploy độc lập, không phải chờ nhau.",
+      "Nhược điểm: nhiều thứ để vận hành hơn, và gọi qua mạng thì chậm hơn, có thể thất bại giữa chừng.",
+      "Lời khuyên thực tế: dự án nhỏ cứ bắt đầu bằng monolith, khi đủ lớn hãy tách dần.",
+      "Còn hôm nay, mình tách thử một service để hiểu cách NestJS làm việc này dễ thế nào."
+    ],
+    "visual": {
+      "title": "Ưu và nhược điểm",
+      "bullets": [
+        {"icon": "✅", "text": "Dễ scale riêng phần đang quá tải", "sentence": 1},
+        {"icon": "🚀", "text": "Deploy độc lập, team không chờ nhau", "sentence": 2},
+        {"icon": "⚠️", "text": "Vận hành phức tạp hơn, gọi mạng chậm hơn", "sentence": 3},
+        {"icon": "💡", "text": "Nhỏ dùng monolith, lớn mới tách dần", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "diagram",
+    "narration": [
+      "Đây là hệ thống mình sắp xây: hai chương trình riêng biệt.",
+      "Khách vẫn gọi GET /users như cũ, nhưng giờ gọi vào gateway, cánh cửa duy nhất ra bên ngoài.",
+      "Gateway không giữ dữ liệu: nó gửi tin nhắn get_users qua TCP sang users-service.",
+      "Users-service trả danh sách về, gateway chuyển tiếp cho khách dưới dạng JSON.",
+      "Với khách hàng, mọi thứ y như tập một: họ không hề biết phía sau đã thành hai service.",
+      "Kiến trúc gateway này rất phổ biến trong thực tế: một cổng vào, nhiều service phía sau."
+    ],
+    "visual": {
+      "title": "Kiến trúc: Gateway + Microservice",
+      "boxes": [
+        {"id": "client", "label": "Client", "emoji": "📱"},
+        {"id": "gateway", "label": "Gateway", "emoji": "🚪"},
+        {"id": "users", "label": "Users Service", "emoji": "👥"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "GET /users", "sentence": 1},
+        {"from": 1, "to": 2, "label": "TCP: get_users", "sentence": 2},
+        {"from": 2, "to": 0, "label": "JSON", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "terminal",
+    "narration": [
+      "Vào việc thôi! Mình tạo hai project NestJS nằm cạnh nhau trong cùng một thư mục.",
+      "Project thứ nhất: users-service, cửa hàng chuyên về người dùng.",
+      "Project thứ hai: gateway, cánh cửa đón khách.",
+      "Rồi cài thêm gói @nestjs/microservices vào cả hai project: đây là bộ đồ nghề giao tiếp giữa các service.",
+      "Xong phần chuẩn bị, giờ vào code chính."
+    ],
+    "visual": {
+      "title": "Tạo hai project",
+      "commands": [
+        {"cmd": "nest new users-service", "output": "🚀 Successfully created project users-service", "sentence": 1},
+        {"cmd": "nest new gateway", "output": "🚀 Successfully created project gateway", "sentence": 2},
+        {"cmd": "npm i @nestjs/microservices", "output": "added 5 packages — cài vào CẢ HAI project", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Bây giờ mở users-service ra. Điểm khác biệt đầu tiên nằm ngay ở file main.ts.",
+      "Thay vì tạo web server như tập trước, mình gọi NestFactory.createMicroservice: app này không nhận HTTP nữa.",
+      "Transport.TCP nghĩa là service sẽ lắng nghe qua giao thức TCP, ở cổng ba nghìn không trăm lẻ một.",
+      "Cuối cùng app.listen để service bắt đầu chờ yêu cầu từ các service khác.",
+      "Vậy là xong phần khởi động: một nhân viên tổng đài chỉ nhận cuộc gọi nội bộ, không tiếp khách bên ngoài."
+    ],
+    "visual": {
+      "filename": "users-service/src/main.ts",
+      "language": "tsx",
+      "code": "import { NestFactory } from '@nestjs/core';\nimport { Transport } from '@nestjs/microservices';\nimport { AppModule } from './app.module';\n\nasync function bootstrap() {\n  const app = await NestFactory.createMicroservice(AppModule, {\n    transport: Transport.TCP,\n    options: { port: 3001 },\n  });\n  await app.listen();\n}\nbootstrap();",
+      "steps": [
+        {"from": 1, "to": 12, "sentence": 0},
+        {"from": 6, "to": 6, "sentence": 1},
+        {"from": 7, "to": 8, "sentence": 2},
+        {"from": 10, "to": 10, "sentence": 3},
+        {"from": 1, "to": 12, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Tiếp theo là người trả lời yêu cầu: UsersController, nhưng phiên bản microservice.",
+      "Danh sách users vẫn như tập một: Minh và Lan, hai khách quen của chúng ta.",
+      "Điểm mới là @MessagePattern: thay vì @Get bắt đường dẫn, nó bắt một mẫu tin nhắn có tên cmd get_users.",
+      "Bất cứ service nào gửi tin nhắn đúng mẫu này, hàm findAll sẽ chạy và trả danh sách về.",
+      "Bạn cứ hình dung: @Get là chuông cửa cho khách, còn @MessagePattern là số máy nội bộ giữa các nhân viên."
+    ],
+    "visual": {
+      "filename": "users-service/src/users.controller.ts",
+      "language": "tsx",
+      "code": "import { Controller } from '@nestjs/common';\nimport { MessagePattern } from '@nestjs/microservices';\n\n@Controller()\nexport class UsersController {\n  private users = [\n    { id: 1, name: 'Minh' },\n    { id: 2, name: 'Lan' },\n  ];\n\n  @MessagePattern({ cmd: 'get_users' })\n  findAll() {\n    return this.users;\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 15, "sentence": 0},
+        {"from": 6, "to": 9, "sentence": 1},
+        {"from": 11, "to": 11, "sentence": 2},
+        {"from": 11, "to": 14, "sentence": 3},
+        {"from": 1, "to": 15, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "code",
+    "narration": [
+      "Giờ sang app thứ hai: gateway, cánh cửa duy nhất mà khách hàng nhìn thấy.",
+      "Trong app.module, mình dùng ClientsModule.register để khai báo: tôi muốn nói chuyện với một service tên USERS_SERVICE.",
+      "Transport TCP, cổng ba nghìn không trăm lẻ một: đúng địa chỉ mà users-service đang lắng nghe.",
+      "Khai báo xong, NestJS chuẩn bị sẵn một đường dây nóng để gateway gọi sang users-service bất cứ lúc nào.",
+      "Đây chính là điểm hay của NestJS: kết nối microservice chỉ là vài dòng cấu hình."
+    ],
+    "visual": {
+      "filename": "gateway/src/app.module.ts",
+      "language": "tsx",
+      "code": "import { Module } from '@nestjs/common';\nimport { ClientsModule, Transport } from '@nestjs/microservices';\nimport { UsersController } from './users.controller';\n\n@Module({\n  imports: [\n    ClientsModule.register([\n      {\n        name: 'USERS_SERVICE',\n        transport: Transport.TCP,\n        options: { port: 3001 },\n      },\n    ]),\n  ],\n  controllers: [UsersController],\n})\nexport class AppModule {}",
+      "steps": [
+        {"from": 1, "to": 17, "sentence": 0},
+        {"from": 7, "to": 13, "sentence": 1},
+        {"from": 10, "to": 11, "sentence": 2},
+        {"from": 7, "to": 13, "sentence": 3},
+        {"from": 1, "to": 17, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "code",
+    "narration": [
+      "Cuối cùng, controller của gateway: nhìn từ ngoài thì giống hệt tập một, vẫn là GET /users.",
+      "Trong constructor, mình tiêm đường dây nóng vào bằng @Inject USERS_SERVICE, kiểu ClientProxy.",
+      "Và trong findAll, thay vì tự xử lý, gateway gửi tin nhắn cmd get_users sang users-service rồi trả kết quả cho khách.",
+      "client.send trả về một Observable: NestJS tự chờ kết quả và trả JSON giúp bạn, không cần làm gì thêm.",
+      "Khách hàng hoàn toàn không biết phía sau có bao nhiêu service đang phục vụ mình."
+    ],
+    "visual": {
+      "filename": "gateway/src/users.controller.ts",
+      "language": "tsx",
+      "code": "import { Controller, Get, Inject } from '@nestjs/common';\nimport { ClientProxy } from '@nestjs/microservices';\n\n@Controller('users')\nexport class UsersController {\n  constructor(@Inject('USERS_SERVICE') private client: ClientProxy) {}\n\n  @Get()\n  findAll() {\n    return this.client.send({ cmd: 'get_users' }, {});\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 12, "sentence": 0},
+        {"from": 6, "to": 6, "sentence": 1},
+        {"from": 8, "to": 11, "sentence": 2},
+        {"from": 10, "to": 10, "sentence": 3},
+        {"from": 1, "to": 12, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "terminal",
+    "narration": [
+      "Giờ là lúc hồi hộp nhất: chạy cả hai service cùng lúc, mỗi cái một cửa sổ terminal.",
+      "Chạy users-service trước: nó báo microservice đã lắng nghe thành công.",
+      "Rồi đến gateway: web server quen thuộc ở cổng ba nghìn.",
+      "Gọi thử curl vào gateway... và đây: danh sách Minh và Lan, đi từ users-service, xuyên qua gateway, về tới khách hàng!",
+      "Bạn vừa chạy hệ thống microservices đầu tiên của mình, chúc mừng nhé!"
+    ],
+    "visual": {
+      "title": "Chạy cả hai service! 🎉",
+      "commands": [
+        {"cmd": "cd users-service && npm run start", "output": "[Nest] LOG [NestMicroservice] Nest microservice successfully started", "sentence": 1},
+        {"cmd": "cd gateway && npm run start", "output": "[Nest] LOG [NestApplication] Nest application successfully started\n[Nest] LOG Listening on http://localhost:3000", "sentence": 2},
+        {"cmd": "curl http://localhost:3000/users", "output": "[{\"id\":1,\"name\":\"Minh\"},{\"id\":2,\"name\":\"Lan\"}]", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: microservices là tách app lớn thành nhiều service nhỏ độc lập, nói chuyện qua tin nhắn.",
+      "Trong NestJS: createMicroservice tạo service TCP, @MessagePattern nhận tin, ClientsModule và client.send để gọi sang.",
+      "Và kiến trúc gateway: một cổng vào duy nhất, các service làm việc phía sau.",
+      "Bài tập nhỏ: thử tạo thêm một products-service với mẫu tin get_products, rồi cho gateway gọi sang nhé.",
+      "Tập sau, chúng ta rời thế giới hỏi đáp để đến với realtime: WebSocket, nơi server chủ động nói chuyện với bạn. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "Microservices = nhiều service nhỏ, chạy độc lập", "sentence": 0},
+        {"text": "@MessagePattern nhận tin, client.send gửi tin", "sentence": 1},
+        {"text": "Gateway: một cổng vào, nhiều service phía sau", "sentence": 2}
+      ],
+      "next": "Tập 3: WebSocket — chat realtime với NestJS"
+    }
+  }
+]

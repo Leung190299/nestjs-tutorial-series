@@ -1,0 +1,695 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Microservices với NestJS",
+        "subtitle": "Tập 2 · Tách app thành các service nhỏ",
+        "badge": "Series Backend Realtime"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep02/scene-01-0-b5ada977.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep02/scene-01-1-0a9e8960.wav",
+          "startFrame": 148,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep02/scene-01-2-928dd484.wav",
+          "startFrame": 315,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 485
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Vấn đề của một khối — Monolith",
+        "bullets": [
+          {
+            "icon": "🏢",
+            "text": "Monolith = tất cả nằm trong một project",
+            "sentence": 1
+          },
+          {
+            "icon": "🔥",
+            "text": "Một chỗ nghẽn, cả app chậm theo",
+            "sentence": 2
+          },
+          {
+            "icon": "🔧",
+            "text": "Sửa một phần phải deploy lại tất cả",
+            "sentence": 3
+          },
+          {
+            "icon": "👥",
+            "text": "Team lớn dễ giẫm chân nhau",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep02/scene-02-0-2aa5f839.wav",
+          "startFrame": 0,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep02/scene-02-1-c07383a9.wav",
+          "startFrame": 160,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep02/scene-02-2-773a31e7.wav",
+          "startFrame": 293,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep02/scene-02-3-a65958e1.wav",
+          "startFrame": 460,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep02/scene-02-4-a17f2481.wav",
+          "startFrame": 564,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 688
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "Microservices = chuỗi cửa hàng 🏪",
+        "bullets": [
+          {
+            "icon": "🏪",
+            "text": "Tách app lớn thành nhiều service nhỏ",
+            "sentence": 0
+          },
+          {
+            "icon": "🎯",
+            "text": "Mỗi service một chuyên môn",
+            "sentence": 2
+          },
+          {
+            "icon": "✉️",
+            "text": "Nói chuyện với nhau bằng tin nhắn qua mạng",
+            "sentence": 3
+          },
+          {
+            "icon": "🛡️",
+            "text": "Một service lỗi, cả hệ thống vẫn sống",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep02/scene-03-0-8a13a629.wav",
+          "startFrame": 0,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep02/scene-03-1-6a3ac5f1.wav",
+          "startFrame": 162,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep02/scene-03-2-e85ea690.wav",
+          "startFrame": 293,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep02/scene-03-3-0923da31.wav",
+          "startFrame": 433,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep02/scene-03-4-5fcfe217.wav",
+          "startFrame": 566,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 728
+    },
+    {
+      "id": "scene-04",
+      "type": "concept",
+      "visual": {
+        "title": "Ưu và nhược điểm",
+        "bullets": [
+          {
+            "icon": "✅",
+            "text": "Dễ scale riêng phần đang quá tải",
+            "sentence": 1
+          },
+          {
+            "icon": "🚀",
+            "text": "Deploy độc lập, team không chờ nhau",
+            "sentence": 2
+          },
+          {
+            "icon": "⚠️",
+            "text": "Vận hành phức tạp hơn, gọi mạng chậm hơn",
+            "sentence": 3
+          },
+          {
+            "icon": "💡",
+            "text": "Nhỏ dùng monolith, lớn mới tách dần",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep02/scene-04-0-56196503.wav",
+          "startFrame": 0,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep02/scene-04-1-fa333d3a.wav",
+          "startFrame": 143,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep02/scene-04-2-526239b9.wav",
+          "startFrame": 276,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep02/scene-04-3-7764324f.wav",
+          "startFrame": 397,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep02/scene-04-4-3f16b00e.wav",
+          "startFrame": 545,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep02/scene-04-5-f465f4d7.wav",
+          "startFrame": 673,
+          "durationInFrames": 140
+        }
+      ],
+      "durationInFrames": 831
+    },
+    {
+      "id": "scene-05",
+      "type": "diagram",
+      "visual": {
+        "title": "Kiến trúc: Gateway + Microservice",
+        "boxes": [
+          {
+            "id": "client",
+            "label": "Client",
+            "emoji": "📱"
+          },
+          {
+            "id": "gateway",
+            "label": "Gateway",
+            "emoji": "🚪"
+          },
+          {
+            "id": "users",
+            "label": "Users Service",
+            "emoji": "👥"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "GET /users",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "TCP: get_users",
+            "sentence": 2
+          },
+          {
+            "from": 2,
+            "to": 0,
+            "label": "JSON",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep02/scene-05-0-a9a0dc1c.wav",
+          "startFrame": 0,
+          "durationInFrames": 84
+        },
+        {
+          "file": "audio/ep02/scene-05-1-55ffcead.wav",
+          "startFrame": 92,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep02/scene-05-2-021a3bea.wav",
+          "startFrame": 271,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep02/scene-05-3-c698120c.wav",
+          "startFrame": 423,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep02/scene-05-4-ab65da6e.wav",
+          "startFrame": 571,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep02/scene-05-5-c4a0d601.wav",
+          "startFrame": 707,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 869
+    },
+    {
+      "id": "scene-06",
+      "type": "terminal",
+      "visual": {
+        "title": "Tạo hai project",
+        "commands": [
+          {
+            "cmd": "nest new users-service",
+            "output": "🚀 Successfully created project users-service",
+            "sentence": 1
+          },
+          {
+            "cmd": "nest new gateway",
+            "output": "🚀 Successfully created project gateway",
+            "sentence": 2
+          },
+          {
+            "cmd": "npm i @nestjs/microservices",
+            "output": "added 5 packages — cài vào CẢ HAI project",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep02/scene-06-0-6e627b62.wav",
+          "startFrame": 0,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep02/scene-06-1-f4953a04.wav",
+          "startFrame": 133,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep02/scene-06-2-a25954c9.wav",
+          "startFrame": 245,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep02/scene-06-3-6f6e6a41.wav",
+          "startFrame": 330,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep02/scene-06-4-6ddc9f98.wav",
+          "startFrame": 530,
+          "durationInFrames": 63
+        }
+      ],
+      "durationInFrames": 611
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "users-service/src/main.ts",
+        "language": "tsx",
+        "code": "import { NestFactory } from '@nestjs/core';\nimport { Transport } from '@nestjs/microservices';\nimport { AppModule } from './app.module';\n\nasync function bootstrap() {\n  const app = await NestFactory.createMicroservice(AppModule, {\n    transport: Transport.TCP,\n    options: { port: 3001 },\n  });\n  await app.listen();\n}\nbootstrap();",
+        "steps": [
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep02/scene-07-0-52eb2e3e.wav",
+          "startFrame": 0,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep02/scene-07-1-3722b5c5.wav",
+          "startFrame": 160,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep02/scene-07-2-defa05f1.wav",
+          "startFrame": 380,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep02/scene-07-3-32cdc5ee.wav",
+          "startFrame": 561,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep02/scene-07-4-6ce0603f.wav",
+          "startFrame": 685,
+          "durationInFrames": 156
+        }
+      ],
+      "durationInFrames": 859
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "users-service/src/users.controller.ts",
+        "language": "tsx",
+        "code": "import { Controller } from '@nestjs/common';\nimport { MessagePattern } from '@nestjs/microservices';\n\n@Controller()\nexport class UsersController {\n  private users = [\n    { id: 1, name: 'Minh' },\n    { id: 2, name: 'Lan' },\n  ];\n\n  @MessagePattern({ cmd: 'get_users' })\n  findAll() {\n    return this.users;\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 15,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 9,
+            "sentence": 1
+          },
+          {
+            "from": 11,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 11,
+            "to": 14,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 15,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep02/scene-08-0-9fa7537e.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep02/scene-08-1-11849cb6.wav",
+          "startFrame": 145,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep02/scene-08-2-d12f6b4e.wav",
+          "startFrame": 273,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep02/scene-08-3-2c26a8f3.wav",
+          "startFrame": 478,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep02/scene-08-4-7da7e8a6.wav",
+          "startFrame": 628,
+          "durationInFrames": 178
+        }
+      ],
+      "durationInFrames": 824
+    },
+    {
+      "id": "scene-09",
+      "type": "code",
+      "visual": {
+        "filename": "gateway/src/app.module.ts",
+        "language": "tsx",
+        "code": "import { Module } from '@nestjs/common';\nimport { ClientsModule, Transport } from '@nestjs/microservices';\nimport { UsersController } from './users.controller';\n\n@Module({\n  imports: [\n    ClientsModule.register([\n      {\n        name: 'USERS_SERVICE',\n        transport: Transport.TCP,\n        options: { port: 3001 },\n      },\n    ]),\n  ],\n  controllers: [UsersController],\n})\nexport class AppModule {}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 13,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 13,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep02/scene-09-0-a6fd0f2e.wav",
+          "startFrame": 0,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep02/scene-09-1-7a316841.wav",
+          "startFrame": 121,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep02/scene-09-2-3e0a0770.wav",
+          "startFrame": 309,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep02/scene-09-3-79181297.wav",
+          "startFrame": 476,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep02/scene-09-4-5a53583d.wav",
+          "startFrame": 655,
+          "durationInFrames": 140
+        }
+      ],
+      "durationInFrames": 813
+    },
+    {
+      "id": "scene-10",
+      "type": "code",
+      "visual": {
+        "filename": "gateway/src/users.controller.ts",
+        "language": "tsx",
+        "code": "import { Controller, Get, Inject } from '@nestjs/common';\nimport { ClientProxy } from '@nestjs/microservices';\n\n@Controller('users')\nexport class UsersController {\n  constructor(@Inject('USERS_SERVICE') private client: ClientProxy) {}\n\n  @Get()\n  findAll() {\n    return this.client.send({ cmd: 'get_users' }, {});\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep02/scene-10-0-87ac8415.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep02/scene-10-1-81aee8d7.wav",
+          "startFrame": 172,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep02/scene-10-2-304a26e3.wav",
+          "startFrame": 344,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep02/scene-10-3-f5978b4a.wav",
+          "startFrame": 556,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep02/scene-10-4-883eeb63.wav",
+          "startFrame": 756,
+          "durationInFrames": 118
+        }
+      ],
+      "durationInFrames": 892
+    },
+    {
+      "id": "scene-11",
+      "type": "terminal",
+      "visual": {
+        "title": "Chạy cả hai service! 🎉",
+        "commands": [
+          {
+            "cmd": "cd users-service && npm run start",
+            "output": "[Nest] LOG [NestMicroservice] Nest microservice successfully started",
+            "sentence": 1
+          },
+          {
+            "cmd": "cd gateway && npm run start",
+            "output": "[Nest] LOG [NestApplication] Nest application successfully started\n[Nest] LOG Listening on http://localhost:3000",
+            "sentence": 2
+          },
+          {
+            "cmd": "curl http://localhost:3000/users",
+            "output": "[{\"id\":1,\"name\":\"Minh\"},{\"id\":2,\"name\":\"Lan\"}]",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep02/scene-11-0-be351e2c.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep02/scene-11-1-8c57933b.wav",
+          "startFrame": 148,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep02/scene-11-2-5b09910b.wav",
+          "startFrame": 269,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep02/scene-11-3-d8f5852d.wav",
+          "startFrame": 376,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep02/scene-11-4-88f623d3.wav",
+          "startFrame": 579,
+          "durationInFrames": 108
+        }
+      ],
+      "durationInFrames": 705
+    },
+    {
+      "id": "scene-12",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "Microservices = nhiều service nhỏ, chạy độc lập",
+            "sentence": 0
+          },
+          {
+            "text": "@MessagePattern nhận tin, client.send gửi tin",
+            "sentence": 1
+          },
+          {
+            "text": "Gateway: một cổng vào, nhiều service phía sau",
+            "sentence": 2
+          }
+        ],
+        "next": "Tập 3: WebSocket — chat realtime với NestJS"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep02/scene-12-0-42bbfdf8.wav",
+          "startFrame": 0,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep02/scene-12-1-878b4f12.wav",
+          "startFrame": 167,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep02/scene-12-2-a64b6304.wav",
+          "startFrame": 413,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep02/scene-12-3-b41d489f.wav",
+          "startFrame": 532,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep02/scene-12-4-668a16b5.wav",
+          "startFrame": 706,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 914
+    }
+  ]
+}

@@ -1,0 +1,678 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "WebSocket & Realtime",
+        "subtitle": "Tập 3 · Xây server chat với NestJS",
+        "badge": "Series Backend Realtime"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep03/scene-01-0-7484da10.wav",
+          "startFrame": 0,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep03/scene-01-1-de0fee94.wav",
+          "startFrame": 121,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep03/scene-01-2-3f5ac2e7.wav",
+          "startFrame": 221,
+          "durationInFrames": 171
+        }
+      ],
+      "durationInFrames": 410
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Giới hạn của HTTP",
+        "bullets": [
+          {
+            "icon": "✉️",
+            "text": "HTTP: hỏi mới đáp, xong là ngắt",
+            "sentence": 0
+          },
+          {
+            "icon": "🔁",
+            "text": "Muốn tin mới phải hỏi đi hỏi lại (polling)",
+            "sentence": 2
+          },
+          {
+            "icon": "🐌",
+            "text": "Tốn tài nguyên, tin vẫn đến chậm",
+            "sentence": 3
+          },
+          {
+            "icon": "💡",
+            "text": "Cần server chủ động báo tin → WebSocket",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep03/scene-02-0-b3aa6d45.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep03/scene-02-1-e3b1f715.wav",
+          "startFrame": 172,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep03/scene-02-2-dbab66a0.wav",
+          "startFrame": 315,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep03/scene-02-3-07345f8a.wav",
+          "startFrame": 458,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep03/scene-02-4-91f47ce8.wav",
+          "startFrame": 582,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 764
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "WebSocket là gì? 📞",
+        "bullets": [
+          {
+            "icon": "🔌",
+            "text": "Kết nối mở một lần, giữ suốt phiên",
+            "sentence": 0
+          },
+          {
+            "icon": "📞",
+            "text": "Như cuộc gọi điện: hai chiều, tức thì",
+            "sentence": 1
+          },
+          {
+            "icon": "📤",
+            "text": "Server chủ động đẩy dữ liệu cho client",
+            "sentence": 2
+          },
+          {
+            "icon": "🐈",
+            "text": "NestJS hỗ trợ sẵn — vài chục dòng code",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep03/scene-03-0-fd97d5e4.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep03/scene-03-1-e1c789e5.wav",
+          "startFrame": 145,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep03/scene-03-2-3151e02b.wav",
+          "startFrame": 319,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep03/scene-03-3-ef59277e.wav",
+          "startFrame": 474,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep03/scene-03-4-fc4d20e0.wav",
+          "startFrame": 622,
+          "durationInFrames": 142
+        }
+      ],
+      "durationInFrames": 782
+    },
+    {
+      "id": "scene-04",
+      "type": "concept",
+      "visual": {
+        "title": "Khi nào dùng WebSocket?",
+        "bullets": [
+          {
+            "icon": "💬",
+            "text": "Chat, nhắn tin",
+            "sentence": 1
+          },
+          {
+            "icon": "🔔",
+            "text": "Thông báo realtime",
+            "sentence": 2
+          },
+          {
+            "icon": "📈",
+            "text": "Giá cả, tỷ số cập nhật từng giây",
+            "sentence": 3
+          },
+          {
+            "icon": "🎮",
+            "text": "Game online nhiều người chơi",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep03/scene-04-0-efda4f96.wav",
+          "startFrame": 0,
+          "durationInFrames": 58
+        },
+        {
+          "file": "audio/ep03/scene-04-1-378d6a36.wav",
+          "startFrame": 66,
+          "durationInFrames": 75
+        },
+        {
+          "file": "audio/ep03/scene-04-2-35aeb316.wav",
+          "startFrame": 149,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep03/scene-04-3-12268148.wav",
+          "startFrame": 258,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep03/scene-04-4-d7a6fed3.wav",
+          "startFrame": 389,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 595
+    },
+    {
+      "id": "scene-05",
+      "type": "diagram",
+      "visual": {
+        "title": "Chat realtime qua WebSocket",
+        "boxes": [
+          {
+            "id": "clientA",
+            "label": "Client A",
+            "emoji": "👩"
+          },
+          {
+            "id": "gateway",
+            "label": "Chat Gateway",
+            "emoji": "💬"
+          },
+          {
+            "id": "clientB",
+            "label": "Client B",
+            "emoji": "👨"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "chat: xin chào",
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "phát tin",
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 0,
+            "label": "phát tin",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep03/scene-05-0-85ae85b6.wav",
+          "startFrame": 0,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep03/scene-05-1-1599dcb8.wav",
+          "startFrame": 85,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep03/scene-05-2-de4da130.wav",
+          "startFrame": 249,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep03/scene-05-3-50b648f4.wav",
+          "startFrame": 397,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep03/scene-05-4-bf70acfa.wav",
+          "startFrame": 547,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep03/scene-05-5-3fe819f3.wav",
+          "startFrame": 673,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 826
+    },
+    {
+      "id": "scene-06",
+      "type": "terminal",
+      "visual": {
+        "title": "Chuẩn bị project",
+        "commands": [
+          {
+            "cmd": "nest new demo-chat",
+            "output": "🚀 Successfully created project demo-chat",
+            "sentence": 0
+          },
+          {
+            "cmd": "npm i @nestjs/websockets @nestjs/platform-ws ws",
+            "output": "added 9 packages in 4s",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep03/scene-06-0-2baec346.wav",
+          "startFrame": 0,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep03/scene-06-1-5e411ed0.wav",
+          "startFrame": 100,
+          "durationInFrames": 269
+        },
+        {
+          "file": "audio/ep03/scene-06-2-19d9fa8b.wav",
+          "startFrame": 377,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep03/scene-06-3-b39ee466.wav",
+          "startFrame": 513,
+          "durationInFrames": 46
+        }
+      ],
+      "durationInFrames": 577
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "src/chat.gateway.ts",
+        "language": "tsx",
+        "code": "import {\n  SubscribeMessage,\n  WebSocketGateway,\n  WebSocketServer,\n} from '@nestjs/websockets';\nimport { Server } from 'ws';\n\n@WebSocketGateway()\nexport class ChatGateway {\n  @WebSocketServer()\n  server: Server;\n\n  @SubscribeMessage('chat')\n  handleChat(client: any, message: string) {\n    this.server.clients.forEach((c) => {\n      c.send(JSON.stringify({ event: 'chat', data: message }));\n    });\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 19,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 13,
+            "to": 13,
+            "sentence": 3
+          },
+          {
+            "from": 15,
+            "to": 17,
+            "sentence": 4
+          },
+          {
+            "from": 1,
+            "to": 19,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep03/scene-07-0-ed714d77.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep03/scene-07-1-213c725e.wav",
+          "startFrame": 172,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep03/scene-07-2-c5a713e6.wav",
+          "startFrame": 305,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep03/scene-07-3-2d62f865.wav",
+          "startFrame": 469,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep03/scene-07-4-76ced9f2.wav",
+          "startFrame": 653,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep03/scene-07-5-34dde62a.wav",
+          "startFrame": 810,
+          "durationInFrames": 281
+        }
+      ],
+      "durationInFrames": 1109
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "src/main.ts",
+        "language": "tsx",
+        "code": "import { NestFactory } from '@nestjs/core';\nimport { WsAdapter } from '@nestjs/platform-ws';\nimport { AppModule } from './app.module';\n\nasync function bootstrap() {\n  const app = await NestFactory.create(AppModule);\n  app.useWebSocketAdapter(new WsAdapter(app));\n  await app.listen(3000);\n}\nbootstrap();",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 2
+          },
+          {
+            "from": 8,
+            "to": 8,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep03/scene-08-0-f560b37f.wav",
+          "startFrame": 0,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep03/scene-08-1-8a384c8e.wav",
+          "startFrame": 104,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep03/scene-08-2-d0dbe643.wav",
+          "startFrame": 247,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep03/scene-08-3-947acb48.wav",
+          "startFrame": 462,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep03/scene-08-4-b48fb26a.wav",
+          "startFrame": 610,
+          "durationInFrames": 92
+        }
+      ],
+      "durationInFrames": 720
+    },
+    {
+      "id": "scene-09",
+      "type": "code",
+      "visual": {
+        "filename": "src/app.module.ts",
+        "language": "tsx",
+        "code": "import { Module } from '@nestjs/common';\nimport { ChatGateway } from './chat.gateway';\n\n@Module({\n  imports: [],\n  controllers: [],\n  providers: [ChatGateway],\n})\nexport class AppModule {}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep03/scene-09-0-4c12fd34.wav",
+          "startFrame": 0,
+          "durationInFrames": 65
+        },
+        {
+          "file": "audio/ep03/scene-09-1-79e7586f.wav",
+          "startFrame": 73,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep03/scene-09-2-f814b370.wav",
+          "startFrame": 218,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep03/scene-09-3-d64fdcbf.wav",
+          "startFrame": 397,
+          "durationInFrames": 77
+        }
+      ],
+      "durationInFrames": 492
+    },
+    {
+      "id": "scene-10",
+      "type": "terminal",
+      "visual": {
+        "title": "Hai người chat thử! 🎉",
+        "commands": [
+          {
+            "cmd": "npm run start",
+            "output": "[Nest] LOG [NestApplication] Nest application successfully started",
+            "sentence": 0
+          },
+          {
+            "cmd": "wscat -c ws://localhost:3000",
+            "output": "Connected (press CTRL+C to quit)   ← cả A và B cùng kết nối",
+            "sentence": 2
+          },
+          {
+            "cmd": "> {\"event\":\"chat\",\"data\":\"xin chào từ A\"}",
+            "output": "< {\"event\":\"chat\",\"data\":\"xin chào từ A\"}   ← B nhận được NGAY LẬP TỨC",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep03/scene-10-0-7f781686.wav",
+          "startFrame": 0,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep03/scene-10-1-263585cf.wav",
+          "startFrame": 114,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep03/scene-10-2-4ce3e716.wav",
+          "startFrame": 276,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep03/scene-10-3-9b5e356b.wav",
+          "startFrame": 491,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep03/scene-10-4-f2f18561.wav",
+          "startFrame": 598,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep03/scene-10-5-0270266c.wav",
+          "startFrame": 736,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 877
+    },
+    {
+      "id": "scene-11",
+      "type": "concept",
+      "visual": {
+        "title": "Ba anh em nhà decorator",
+        "bullets": [
+          {
+            "icon": "🛎️",
+            "text": "@Get — HTTP: hỏi một lần, đáp một lần",
+            "sentence": 1
+          },
+          {
+            "icon": "☎️",
+            "text": "@MessagePattern — nội bộ giữa các service",
+            "sentence": 2
+          },
+          {
+            "icon": "📡",
+            "text": "@SubscribeMessage — realtime hai chiều",
+            "sentence": 3
+          },
+          {
+            "icon": "🧰",
+            "text": "Đủ bộ đồ nghề cho mọi loại backend",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep03/scene-11-0-18a8be0e.wav",
+          "startFrame": 0,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep03/scene-11-1-30d323ab.wav",
+          "startFrame": 116,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep03/scene-11-2-c42d4987.wav",
+          "startFrame": 216,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep03/scene-11-3-27c2e7cd.wav",
+          "startFrame": 323,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep03/scene-11-4-3068541e.wav",
+          "startFrame": 456,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 597
+    },
+    {
+      "id": "scene-12",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "WebSocket = kết nối 2 chiều luôn mở",
+            "sentence": 0
+          },
+          {
+            "text": "@SubscribeMessage nhận, server.clients broadcast",
+            "sentence": 1
+          },
+          {
+            "text": "WsAdapter kích hoạt chuẩn ws thuần",
+            "sentence": 2
+          }
+        ],
+        "next": "Tập 4: Chat realtime + Microservices — ghép tất cả"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep03/scene-12-0-3cd3e0bd.wav",
+          "startFrame": 0,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep03/scene-12-1-a8ef36ea.wav",
+          "startFrame": 152,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep03/scene-12-2-792bca2e.wav",
+          "startFrame": 405,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep03/scene-12-3-6c6433de.wav",
+          "startFrame": 538,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep03/scene-12-4-72b3bd35.wav",
+          "startFrame": 662,
+          "durationInFrames": 195
+        }
+      ],
+      "durationInFrames": 875
+    }
+  ]
+}
