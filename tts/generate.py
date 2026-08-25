@@ -41,7 +41,11 @@ def seconds_to_frames(seconds: float) -> int:
 
 def validate_script(script: list[dict]) -> list[str]:
     errors = []
+    seen_ids = set()
     for scene in script:
+        if scene["id"] in seen_ids:
+            errors.append(f"{scene['id']}: id trùng lặp")
+        seen_ids.add(scene["id"])
         sentences = normalize_narration(scene["narration"])
         if not sentences:
             errors.append(f"{scene['id']}: narration rỗng")
@@ -55,6 +59,17 @@ def validate_script(script: list[dict]) -> list[str]:
         for r in refs:
             if r is not None and r >= len(sentences):
                 errors.append(f"{scene['id']}: sentence index {r} >= số câu {len(sentences)}")
+        if "code" in visual and "steps" in visual:
+            code_lines = len(visual["code"].split("\n"))
+            for step in visual["steps"]:
+                lo, hi = step.get("from"), step.get("to")
+                if lo is None or hi is None:
+                    continue
+                if not (1 <= lo <= code_lines) or not (1 <= hi <= code_lines) or lo > hi:
+                    errors.append(
+                        f"{scene['id']}: step from={lo} to={hi} không hợp lệ "
+                        f"(code có {code_lines} dòng)"
+                    )
     return errors
 
 
@@ -67,6 +82,8 @@ def build_timing(scenes: list[dict]) -> dict:
             dur = seconds_to_frames(s["seconds"])
             sentences.append({"file": s["file"], "startFrame": cursor, "durationInFrames": dur})
             cursor += dur + seconds_to_frames(GAP_SECONDS)
+        if not sentences:
+            raise ValueError(f"scene {scene['id']}: không có câu nào")
         last = sentences[-1]
         total = last["startFrame"] + last["durationInFrames"] + seconds_to_frames(PAD_SECONDS)
         out_scenes.append({

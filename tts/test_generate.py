@@ -40,6 +40,42 @@ def test_validate_script_catches_errors():
     assert "s1" in errors[0] and "s2" in errors[1] and "s3" in errors[2]
 
 
+def test_validate_script_catches_code_step_out_of_range():
+    bad = [
+        {"id": "s1", "type": "concept", "narration": ["một câu"],
+         "visual": {"code": "a\nb\nc", "steps": [{"from": 1, "to": 5, "sentence": 0}]}},
+    ]
+    errors = g.validate_script(bad)
+    assert len(errors) == 1
+    assert "s1" in errors[0]
+
+
+def test_validate_script_catches_code_step_from_greater_than_to():
+    bad = [
+        {"id": "s1", "type": "concept", "narration": ["một câu"],
+         "visual": {"code": "a\nb\nc", "steps": [{"from": 3, "to": 1, "sentence": 0}]}},
+    ]
+    errors = g.validate_script(bad)
+    assert len(errors) == 1
+    assert "s1" in errors[0]
+
+
+def test_validate_script_catches_duplicate_ids():
+    bad = [
+        {"id": "s1", "type": "concept", "narration": ["a"], "visual": {}},
+        {"id": "s1", "type": "concept", "narration": ["b"], "visual": {}},
+    ]
+    errors = g.validate_script(bad)
+    assert len(errors) == 1
+    assert "s1" in errors[0]
+
+
+def test_build_timing_raises_on_empty_sentences():
+    import pytest
+    with pytest.raises(ValueError, match="s1"):
+        g.build_timing([{"id": "s1", "type": "concept", "visual": {}, "sentences": []}])
+
+
 def test_build_timing_offsets_and_padding():
     timing = g.build_timing([{
         "id": "s1", "type": "concept", "visual": {"title": "t"},
