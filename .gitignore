@@ -1,0 +1,10 @@
+node_modules/
+tts/.venv/
+tts/voice_previews/
+tts/smoke.wav
+video/public/audio/
+video/out/
+out/
+dist/
+__pycache__/
+.DS_Store
