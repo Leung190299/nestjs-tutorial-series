@@ -2,15 +2,525 @@
   "fps": 30,
   "scenes": [
     {
-      "id": "placeholder",
+      "id": "scene-01",
       "type": "title",
       "visual": {
         "title": "NestJS cho người mới bắt đầu",
-        "subtitle": "Placeholder — sẽ được generate.py ghi đè",
-        "badge": "Tập 1"
+        "subtitle": "Tập 1 · NestJS là gì? Tạo project đầu tiên",
+        "badge": "Series Backend Realtime"
       },
-      "sentences": [],
-      "durationInFrames": 90
+      "sentences": [
+        {
+          "file": "audio/ep01/scene-01-0-fb9fc34a.wav",
+          "startFrame": 0,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep01/scene-01-1-a6d11eea.wav",
+          "startFrame": 131,
+          "durationInFrames": 185
+        }
+      ],
+      "durationInFrames": 334
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "NestJS là gì?",
+        "bullets": [
+          {
+            "icon": "🧱",
+            "text": "Framework xây dựng backend cho Node.js",
+            "sentence": 0
+          },
+          {
+            "icon": "🔷",
+            "text": "Viết bằng TypeScript — code rõ ràng, ít lỗi hơn",
+            "sentence": 1
+          },
+          {
+            "icon": "📐",
+            "text": "Có cấu trúc sẵn — như một bản thiết kế nhà",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep01/scene-02-0-036d088f.wav",
+          "startFrame": 0,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep01/scene-02-1-9dcbe379.wav",
+          "startFrame": 193,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep01/scene-02-2-aacaee29.wav",
+          "startFrame": 372,
+          "durationInFrames": 176
+        }
+      ],
+      "durationInFrames": 566
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "Vì sao chọn NestJS?",
+        "bullets": [
+          {
+            "icon": "🌀",
+            "text": "Express: tự do nhưng dễ lộn xộn khi dự án lớn",
+            "sentence": 0
+          },
+          {
+            "icon": "🗂️",
+            "text": "NestJS: mọi thứ có chỗ của nó",
+            "sentence": 1
+          },
+          {
+            "icon": "🔌",
+            "text": "Tích hợp sẵn: microservices, WebSocket, validation...",
+            "sentence": 2
+          },
+          {
+            "icon": "🏢",
+            "text": "Được nhiều công ty lớn tin dùng",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep01/scene-03-0-aaf48876.wav",
+          "startFrame": 0,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep01/scene-03-1-59028ca4.wav",
+          "startFrame": 224,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep01/scene-03-2-860f09b6.wav",
+          "startFrame": 384,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep01/scene-03-3-7eda77ff.wav",
+          "startFrame": 620,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 744
+    },
+    {
+      "id": "scene-04",
+      "type": "concept",
+      "visual": {
+        "title": "NestJS giống một nhà hàng 🍜",
+        "bullets": [
+          {
+            "icon": "🛎️",
+            "text": "Controller = người phục vụ: nhận yêu cầu, trả món",
+            "sentence": 1
+          },
+          {
+            "icon": "👨‍🍳",
+            "text": "Service = đầu bếp: xử lý công việc thật sự",
+            "sentence": 2
+          },
+          {
+            "icon": "🏠",
+            "text": "Module = khu bếp: gom nhóm lại một chỗ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep01/scene-04-0-eb2be4c4.wav",
+          "startFrame": 0,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep01/scene-04-1-7221e9ae.wav",
+          "startFrame": 85,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep01/scene-04-2-15eb23e4.wav",
+          "startFrame": 218,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep01/scene-04-3-859587b0.wav",
+          "startFrame": 320,
+          "durationInFrames": 128
+        }
+      ],
+      "durationInFrames": 466
+    },
+    {
+      "id": "scene-05",
+      "type": "diagram",
+      "visual": {
+        "title": "Một request đi qua NestJS như thế nào?",
+        "boxes": [
+          {
+            "id": "client",
+            "label": "Client",
+            "emoji": "📱"
+          },
+          {
+            "id": "controller",
+            "label": "Controller",
+            "emoji": "🛎️"
+          },
+          {
+            "id": "service",
+            "label": "Service",
+            "emoji": "👨‍🍳"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "GET /users",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "gọi hàm",
+            "sentence": 2
+          },
+          {
+            "from": 2,
+            "to": 0,
+            "label": "JSON",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep01/scene-05-0-726ab1db.wav",
+          "startFrame": 0,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep01/scene-05-1-bfd4046a.wav",
+          "startFrame": 104,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep01/scene-05-2-69b30ef9.wav",
+          "startFrame": 278,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep01/scene-05-3-6f2ce85b.wav",
+          "startFrame": 440,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 593
+    },
+    {
+      "id": "scene-06",
+      "type": "terminal",
+      "visual": {
+        "title": "Cài đặt và tạo project",
+        "commands": [
+          {
+            "cmd": "npm i -g @nestjs/cli",
+            "output": "added 249 packages in 12s",
+            "sentence": 1
+          },
+          {
+            "cmd": "nest new demo-app",
+            "output": "⚡ Installation in progress...\n🚀 Successfully created project demo-app",
+            "sentence": 2
+          },
+          {
+            "cmd": "cd demo-app && npm run start:dev",
+            "output": "[Nest] LOG [NestApplication] Nest application successfully started\n[Nest] LOG Listening on http://localhost:3000",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep01/scene-06-0-4b0f4527.wav",
+          "startFrame": 0,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep01/scene-06-1-af1a615a.wav",
+          "startFrame": 162,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep01/scene-06-2-13e42114.wav",
+          "startFrame": 326,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep01/scene-06-3-7a7225a7.wav",
+          "startFrame": 507,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 689
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "src/app.module.ts",
+        "language": "tsx",
+        "code": "import { Module } from '@nestjs/common';\nimport { AppController } from './app.controller';\nimport { AppService } from './app.service';\n\n@Module({\n  imports: [],\n  controllers: [AppController],\n  providers: [AppService],\n})\nexport class AppModule {}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 9,
+            "sentence": 2
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep01/scene-07-0-8c5c2261.wav",
+          "startFrame": 0,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep01/scene-07-1-90070e26.wav",
+          "startFrame": 169,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep01/scene-07-2-3380b558.wav",
+          "startFrame": 281,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep01/scene-07-3-6486b1d7.wav",
+          "startFrame": 493,
+          "durationInFrames": 108
+        }
+      ],
+      "durationInFrames": 619
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "src/users/users.controller.ts",
+        "language": "tsx",
+        "code": "import { Controller, Get } from '@nestjs/common';\nimport { UsersService } from './users.service';\n\n@Controller('users')\nexport class UsersController {\n  constructor(private usersService: UsersService) {}\n\n  @Get()\n  findAll() {\n    return this.usersService.findAll();\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 8,
+            "to": 11,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep01/scene-08-0-204318e5.wav",
+          "startFrame": 0,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep01/scene-08-1-41c98636.wav",
+          "startFrame": 155,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep01/scene-08-2-7171c5d7.wav",
+          "startFrame": 355,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep01/scene-08-3-d38261d7.wav",
+          "startFrame": 555,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 780
+    },
+    {
+      "id": "scene-09",
+      "type": "code",
+      "visual": {
+        "filename": "src/users/users.service.ts",
+        "language": "tsx",
+        "code": "import { Injectable } from '@nestjs/common';\n\n@Injectable()\nexport class UsersService {\n  private users = [\n    { id: 1, name: 'Minh' },\n    { id: 2, name: 'Lan' },\n  ];\n\n  findAll() {\n    return this.users;\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 10,
+            "to": 12,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep01/scene-09-0-5aa91cfe.wav",
+          "startFrame": 0,
+          "durationInFrames": 70
+        },
+        {
+          "file": "audio/ep01/scene-09-1-908285b1.wav",
+          "startFrame": 78,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep01/scene-09-2-899ad88c.wav",
+          "startFrame": 259,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep01/scene-09-3-b5074dfd.wav",
+          "startFrame": 385,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 526
+    },
+    {
+      "id": "scene-10",
+      "type": "terminal",
+      "visual": {
+        "title": "Chạy thử! 🎉",
+        "commands": [
+          {
+            "cmd": "curl http://localhost:3000/users",
+            "output": "[{\"id\":1,\"name\":\"Minh\"},{\"id\":2,\"name\":\"Lan\"}]",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep01/scene-10-0-9256d8ba.wav",
+          "startFrame": 0,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep01/scene-10-1-ab47c8d8.wav",
+          "startFrame": 85,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep01/scene-10-2-32aa2023.wav",
+          "startFrame": 249,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep01/scene-10-3-f38e8a2e.wav",
+          "startFrame": 457,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 569
+    },
+    {
+      "id": "scene-11",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "NestJS = framework backend có cấu trúc, dùng TypeScript",
+            "sentence": 0
+          },
+          {
+            "text": "Controller nhận request, Service xử lý, Module gom nhóm",
+            "sentence": 1
+          },
+          {
+            "text": "Tạo project với nest new, API đầu tiên với @Controller và @Get",
+            "sentence": 2
+          }
+        ],
+        "next": "Tập 2: Microservices — chia nhà hàng thành chuỗi cửa hàng"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep01/scene-11-0-5275eab4.wav",
+          "startFrame": 0,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep01/scene-11-1-62df5f84.wav",
+          "startFrame": 167,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep01/scene-11-2-78551d28.wav",
+          "startFrame": 341,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep01/scene-11-3-dba50936.wav",
+          "startFrame": 453,
+          "durationInFrames": 195
+        }
+      ],
+      "durationInFrames": 666
     }
   ]
 }
