@@ -51,6 +51,26 @@
         {"file": "", "startFrame": 176, "durationInFrames": 80}
       ],
       "durationInFrames": 274
+    },
+    {
+      "id": "fx-code",
+      "type": "code",
+      "visual": {
+        "filename": "src/users/users.controller.ts",
+        "language": "tsx",
+        "code": "import { Controller, Get } from '@nestjs/common';\nimport { UsersService } from './users.service';\n\n@Controller('users')\nexport class UsersController {\n  constructor(private usersService: UsersService) {}\n\n  @Get()\n  findAll() {\n    return this.usersService.findAll();\n  }\n}",
+        "steps": [
+          {"from": 1, "to": 12, "sentence": 0},
+          {"from": 4, "to": 4, "sentence": 1},
+          {"from": 8, "to": 11, "sentence": 2}
+        ]
+      },
+      "sentences": [
+        {"file": "", "startFrame": 0, "durationInFrames": 80},
+        {"file": "", "startFrame": 88, "durationInFrames": 80},
+        {"file": "", "startFrame": 176, "durationInFrames": 80}
+      ],
+      "durationInFrames": 274
     }
   ]
 }
