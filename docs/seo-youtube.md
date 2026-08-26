@@ -194,6 +194,159 @@ nestjs, app chat, xây app chat, chat realtime, websocket, microservices, nestjs
 
 ---
 
+## PHẦN NÂNG CAO — Series "NestJS nâng cao: Request Lifecycle"
+
+> Playlist mới: **"NestJS nâng cao 🇻🇳"**. Đăng sau khi hoàn thành series cơ bản. Code chung repo: https://github.com/Leung190299/nestjs-tutorial-series (thư mục `demo-advanced/`).
+
+### Nâng cao #1 — Pipes (3:15)
+
+**Tiêu đề (chính):**
+Pipes trong NestJS: chặn dữ liệu rác không cần viết if | NestJS nâng cao #1
+
+**Tiêu đề (phương án khác):**
+- Validation chuẩn NestJS: DTO + class-validator trong 3 phút
+- Đừng tin dữ liệu người dùng! Pipes & ValidationPipe | NestJS nâng cao #1
+
+**Mô tả:**
+```
+Người dùng gửi email sai, tên rỗng, dữ liệu phá hoại? Với Pipes của NestJS, API tự động chặn tất cả — bạn không phải viết một dòng if nào.
+
+Ví von dễ hiểu: Pipe là nhân viên soát vé 🎫 — kiểm tra và chỉnh trang mọi dữ liệu trước khi cho vào ứng dụng.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu phần nâng cao
+0:14 Vấn đề: dữ liệu không đáng tin
+0:37 Pipe = nhân viên soát vé
+1:00 Pipe đứng ở đâu trong request?
+1:21 Cài class-validator + class-transformer
+1:32 Viết DTO — luật kiểm tra bằng decorator
+1:56 Khai kiểu ở @Body
+2:15 Bật ValidationPipe global trong main.ts
+2:29 Demo: dữ liệu sạch vào, dữ liệu rác bị chặn 400
+2:48 Tóm tắt & hẹn tập Guards
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+▶️ Series cơ bản (4 tập): [LINK PLAYLIST CƠ BẢN]
+Tập 2 nâng cao (Guards): [LINK NC2]
+
+#nestjs #validation #nodejs #backend #laptrinh
+```
+
+**Tags:**
+```
+nestjs pipes, validation nestjs, class-validator, dto là gì, validationpipe, kiểm tra dữ liệu, nestjs nâng cao, nestjs tiếng việt, học nestjs, backend nodejs, data validation, request lifecycle, nestjs tutorial, nodejs tiếng việt, api an toàn
+```
+
+### Nâng cao #2 — Guards (3:06)
+
+**Tiêu đề (chính):**
+Guards trong NestJS: phân quyền route trong 10 dòng code | NestJS nâng cao #2
+
+**Tiêu đề (phương án khác):**
+- Ai được vào /admin? Guards & CanActivate giải thích dễ hiểu
+- Bảo vệ API NestJS: Guards từ A đến Z | NestJS nâng cao #2
+
+**Mô tả:**
+```
+Trang /admin của bạn đang mở toang cho cả thế giới? Guards — người bảo vệ 💂 của NestJS — sẽ khóa lại chỉ với 10 dòng code, và là nền tảng của mọi hệ thống đăng nhập/phân quyền (JWT, Roles) sau này.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu
+0:12 Vấn đề: cửa nào cũng mở toang
+0:32 Guard = bảo vệ khu VIP (khác Pipe thế nào?)
+0:56 Guard đứng ở đâu trong request?
+1:17 Viết ApiKeyGuard — CanActivate
+1:45 Cắt cử bảo vệ bằng @UseGuards
+2:04 Demo: 403 tay không, 200 khi có key
+2:19 Guard trong dự án thật: JWT, Roles
+2:40 Tóm tắt & hẹn tập Interceptors
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Tập 1 nâng cao (Pipes): [LINK NC1] · Tập 3 (Interceptors): [LINK NC3]
+
+#nestjs #authentication #nodejs #backend #laptrinh
+```
+
+**Tags:**
+```
+nestjs guards, canactivate, phân quyền nestjs, useguards, bảo vệ api, authorization, authentication nestjs, api key, nestjs nâng cao, nestjs tiếng việt, học nestjs, backend nodejs, jwt nestjs, roles guard, request lifecycle
+```
+
+### Nâng cao #3 — Interceptors (3:16)
+
+**Tiêu đề (chính):**
+Interceptors trong NestJS: log + bọc response toàn app trong 1 class | NestJS nâng cao #3
+
+**Tiêu đề (phương án khác):**
+- Nhân vật đa tài nhất NestJS: Interceptors giải thích dễ hiểu
+- Đo thời gian & chuẩn hóa response mọi API — Interceptors #3
+
+**Mô tả:**
+```
+Sếp muốn log thời gian xử lý mọi API, frontend muốn mọi response cùng một khuôn {success, data}? Một class Interceptor lo cả hai — không sửa một handler nào.
+
+Ví von: Interceptor là camera an ninh 🎥 + người gói quà 🎁 — nhân vật duy nhất đứng ở CẢ HAI đầu: trước khi xử lý và sau khi có kết quả.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu
+0:12 Vấn đề: việc lặp ở trước VÀ sau handler
+0:35 Camera + người gói quà
+0:56 Interceptor bọc quanh handler thế nào?
+1:19 Viết LoggingInterceptor — next.handle, tap, map
+1:50 Gắn bằng @UseInterceptors
+2:09 Demo: response bọc khuôn + log ms
+2:28 Dùng thật: cache, timeout, ẩn trường nhạy cảm
+2:48 Tóm tắt & hẹn tập Exception Filters
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Tập 2 nâng cao (Guards): [LINK NC2] · Tập 4 (Filters): [LINK NC4]
+
+#nestjs #interceptor #rxjs #nodejs #laptrinh
+```
+
+**Tags:**
+```
+nestjs interceptors, useinterceptors, rxjs nestjs, logging nestjs, transform response, middleware nestjs, nestjs nâng cao, nestjs tiếng việt, học nestjs, backend nodejs, đo thời gian api, chuẩn hóa response, request lifecycle, observable, nestjs tutorial
+```
+
+### Nâng cao #4 — Exception Filters (3:27)
+
+**Tiêu đề (chính):**
+Exception Filters: mọi lỗi API đều đẹp và thống nhất | NestJS nâng cao #4 (cuối)
+
+**Tiêu đề (phương án khác):**
+- Xử lý lỗi chuyên nghiệp trong NestJS — Exception Filters
+- Đừng để API trả lỗi xấu xí! Exception Filters #4
+
+**Mô tả:**
+```
+Lỗi là không thể tránh — nhưng TRẢ LỖI thế nào là đẳng cấp của bạn. Exception Filters biến mọi sự cố thành JSON lỗi đẹp, thống nhất, an toàn — như bộ phận chăm sóc khách hàng 🚑 của ứng dụng.
+
+Tập cuối phần nâng cao, kèm tổng kết "bộ tứ vệ sĩ" của một request: Guard → Pipe → Interceptor → Filter.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu tập cuối
+0:13 Vấn đề: lỗi xấu xí, mỗi nơi một kiểu
+0:35 Filter = bộ phận chăm sóc khách hàng
+1:00 Đường dây nóng sự cố trong request
+1:22 Viết HttpExceptionFilter — @Catch
+1:50 @UseFilters + ném NotFoundException
+2:14 Demo: JSON lỗi đẹp, có giờ xảy ra
+2:34 Tổng kết bộ tứ vệ sĩ của request
+2:58 Kết phần nâng cao — vote chủ đề tiếp theo!
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Xem từ đầu phần nâng cao: [LINK NC1]
+💬 Comment vote phần tiếp theo: Redis / RabbitMQ / Kafka / gRPC!
+
+#nestjs #errorhandling #nodejs #backend #laptrinh
+```
+
+**Tags:**
+```
+nestjs exception filter, xử lý lỗi nestjs, error handling, catch httpexception, usefilters, notfoundexception, nestjs nâng cao, nestjs tiếng việt, học nestjs, backend nodejs, api error format, request lifecycle, nestjs tutorial, nodejs tiếng việt, xử lý lỗi api
+```
+
 ## Thumbnail
 
 Đã render sẵn tại `video/out/thumbs/ep0X-thumb.png` (1280×720, <2MB, chuẩn YouTube). Muốn sửa chữ/bố cục: sửa mảng `thumbnails` trong `video/src/Root.tsx` hoặc component `video/src/Thumbnail.tsx`, rồi chạy `npx remotion still Thumb0X out/thumbs/ep0X-thumb.png`.

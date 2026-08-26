@@ -1,0 +1,186 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng đến với tập cuối của phần NestJS nâng cao!",
+      "Soát vé, bảo vệ, camera đều có đủ. Nhưng lỡ trong bếp có sự cố thì ai đứng ra nói chuyện với khách?",
+      "Đó là Exception Filters: bộ phận chăm sóc khách hàng của ứng dụng."
+    ],
+    "visual": {
+      "title": "Exception Filters — Lỗi cũng phải đẹp",
+      "subtitle": "NestJS nâng cao · Tập 4 · Error handling",
+      "badge": "Series NestJS nâng cao · Tập cuối"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Lỗi là chuyện không thể tránh: đơn hàng không tồn tại, database sập, mạng chập chờn.",
+      "Vấn đề không phải là CÓ lỗi, mà là bạn TRẢ LỖI cho người dùng như thế nào.",
+      "Lỗi mặc định của framework thì khô khan, mỗi nơi một kiểu, có khi lộ cả thông tin nội bộ nguy hiểm.",
+      "Team frontend thì khổ sở vì mỗi API trả lỗi một định dạng khác nhau.",
+      "Điều ta muốn: mọi lỗi trong app đi ra theo MỘT khuôn thống nhất, lịch sự và an toàn."
+    ],
+    "visual": {
+      "title": "Vấn đề: lỗi xấu xí, mỗi nơi một kiểu",
+      "bullets": [
+        {"icon": "💥", "text": "Lỗi là không thể tránh khỏi", "sentence": 0},
+        {"icon": "🎭", "text": "Quan trọng là TRẢ LỖI thế nào", "sentence": 1},
+        {"icon": "🔓", "text": "Lỗi mặc định: khô khan, dễ lộ nội bộ", "sentence": 2},
+        {"icon": "🎯", "text": "Muốn: một khuôn lỗi thống nhất toàn app", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "Exception Filter giống bộ phận chăm sóc khách hàng của một cửa hàng tử tế.",
+      "Trong bếp có thể đổ vỡ loảng xoảng, nhưng khách chỉ nghe lời xin lỗi nhẹ nhàng kèm hướng giải quyết.",
+      "Mọi sự cố, từ bất cứ đâu trong app, đều được chuyển về một cửa duy nhất để trả lời.",
+      "Nhờ vậy thông điệp lỗi nhất quán, thân thiện, và không bao giờ lộ bí mật trong bếp.",
+      "Trong NestJS, sự cố gọi là exception, và bộ phận đứng ra hứng là Exception Filter."
+    ],
+    "visual": {
+      "title": "Bộ phận chăm sóc khách hàng 🚑",
+      "bullets": [
+        {"icon": "🍽️", "text": "Bếp đổ vỡ — khách vẫn nghe lời tử tế", "sentence": 1},
+        {"icon": "🚪", "text": "Mọi sự cố dồn về một cửa trả lời", "sentence": 2},
+        {"icon": "🔒", "text": "Nhất quán, thân thiện, không lộ nội bộ", "sentence": 3},
+        {"icon": "🚑", "text": "Exception + Filter = cặp đôi xử lý lỗi", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "diagram",
+    "narration": [
+      "Vị trí của Filter đặc biệt lắm: nó không nằm trên đường đi, mà đứng chờ ở đường DÂY NÓNG sự cố.",
+      "Request vào handler bình thường, không ai đụng đến nó.",
+      "Nhưng khi handler ném ra một exception, request lập tức được chuyển hướng sang Filter.",
+      "Filter soạn lại thành JSON lỗi đẹp, đúng khuôn, rồi thay mặt gửi cho client.",
+      "Handler chỉ việc ném lỗi đúng loại, còn ăn nói với khách đã có Filter lo."
+    ],
+    "visual": {
+      "title": "Filter — đường dây nóng sự cố",
+      "boxes": [
+        {"id": "client", "label": "Client", "emoji": "📱"},
+        {"id": "handler", "label": "Handler", "emoji": "🧑‍🍳"},
+        {"id": "filter", "label": "Filter", "emoji": "🚑"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "GET /orders/99", "sentence": 1},
+        {"from": 1, "to": 2, "label": "ném exception", "sentence": 2},
+        {"from": 2, "to": 0, "label": "JSON lỗi đẹp", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Viết bộ phận chăm sóc khách hàng nào: HttpExceptionFilter.",
+      "Decorator @Catch khai báo loại sự cố mình phụ trách: ở đây là mọi HttpException.",
+      "Hàm catch nhận exception vừa bị ném, kèm host để lấy ra đối tượng response.",
+      "Từ exception, mình lấy mã lỗi qua getStatus.",
+      "Rồi tự tay soạn JSON trả về: success false, mã lỗi, thông điệp, kèm cả thời điểm xảy ra.",
+      "Từ nay mọi lỗi HTTP trong khu vực gắn filter đều mặc đồng phục này."
+    ],
+    "visual": {
+      "filename": "src/orders/http-exception.filter.ts",
+      "language": "tsx",
+      "code": "import {\n  ArgumentsHost,\n  Catch,\n  ExceptionFilter,\n  HttpException,\n} from '@nestjs/common';\n\n@Catch(HttpException)\nexport class HttpExceptionFilter implements ExceptionFilter {\n  catch(exception: HttpException, host: ArgumentsHost) {\n    const response = host.switchToHttp().getResponse();\n    const status = exception.getStatus();\n    response.status(status).json({\n      success: false,\n      statusCode: status,\n      message: exception.message,\n      time: new Date().toISOString(),\n    });\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 20, "sentence": 0},
+        {"from": 8, "to": 8, "sentence": 1},
+        {"from": 10, "to": 11, "sentence": 2},
+        {"from": 12, "to": 12, "sentence": 3},
+        {"from": 13, "to": 18, "sentence": 4},
+        {"from": 1, "to": 20, "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Bên phía controller, mọi thứ giờ nhẹ nhàng lắm.",
+      "Gắn bộ phận chăm sóc khách bằng @UseFilters, đúng công thức quen thuộc của cả series.",
+      "Khi không tìm thấy đơn hàng, handler chỉ việc ném NotFoundException kèm lời nhắn tiếng Việt.",
+      "Ném xong là xong việc: không try catch, không tự soạn response lỗi.",
+      "NestJS có sẵn cả họ exception: BadRequest, Unauthorized, Forbidden... cứ đúng loại mà ném."
+    ],
+    "visual": {
+      "filename": "src/orders/orders.controller.ts",
+      "language": "tsx",
+      "code": "import {\n  Controller,\n  Get,\n  NotFoundException,\n  Param,\n  UseFilters,\n} from '@nestjs/common';\nimport { HttpExceptionFilter } from './http-exception.filter';\n\n@UseFilters(HttpExceptionFilter)\n@Controller('orders')\nexport class OrdersController {\n  @Get(':id')\n  findOne(@Param('id') id: string) {\n    throw new NotFoundException(`Không tìm thấy đơn hàng ${id}`);\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 17, "sentence": 0},
+        {"from": 10, "to": 10, "sentence": 1},
+        {"from": 13, "to": 15, "sentence": 2},
+        {"from": 15, "to": 15, "sentence": 3},
+        {"from": 4, "to": 4, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "terminal",
+    "narration": [
+      "Thử gây sự cố xem bộ phận chăm sóc khách phản ứng thế nào.",
+      "Hỏi đơn hàng số chín mươi chín, một đơn không hề tồn tại.",
+      "Và đây: mã 404, success false, thông điệp tiếng Việt rõ ràng, kèm đúng thời điểm xảy ra.",
+      "So với trang lỗi mặc định khô khan, đây là một trời một vực.",
+      "Đồng phục lỗi này giờ áp dụng cho mọi sự cố trong khu vực được gắn filter."
+    ],
+    "visual": {
+      "title": "Gây sự cố thử! 🚑",
+      "commands": [
+        {"cmd": "curl -w '\\n%{http_code}' localhost:3000/orders/99", "output": "{\"success\":false,\"statusCode\":404,\"message\":\"Không tìm thấy đơn hàng 99\",\"time\":\"2026-08-26T09:15:00.000Z\"}\n404", "sentence": 2}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "concept",
+    "narration": [
+      "Vậy là đủ bộ tứ vệ sĩ của một request. Xếp hàng lại cho dễ nhớ nhé.",
+      "Guard đứng đầu tiên: bạn là ai, có được vào không?",
+      "Pipe tiếp theo: đồ bạn mang có hợp lệ không?",
+      "Interceptor bọc quanh handler: quan sát và gói ghém hai chiều.",
+      "Và Exception Filter trực đường dây nóng: bất cứ đâu có sự cố, nó đứng ra ăn nói cho tử tế.",
+      "Bốn nhân vật này chính là bộ khung chuyên nghiệp của mọi ứng dụng NestJS thực chiến."
+    ],
+    "visual": {
+      "title": "Bộ tứ vệ sĩ của request 🛡️",
+      "bullets": [
+        {"icon": "💂", "text": "Guard — bạn là ai, được vào không?", "sentence": 1},
+        {"icon": "🎫", "text": "Pipe — đồ mang theo có hợp lệ?", "sentence": 2},
+        {"icon": "🎥", "text": "Interceptor — quan sát & gói 2 chiều", "sentence": 3},
+        {"icon": "🚑", "text": "Filter — sự cố nào cũng trả lời đẹp", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "outro",
+    "narration": [
+      "Khép lại phần nâng cao: bạn đã nắm trọn bộ tứ Pipes, Guards, Interceptors và Exception Filters.",
+      "Cùng một triết lý xuyên suốt: tách việc chung ra khỏi logic chính, khai báo một lần, dùng mọi nơi.",
+      "Kết hợp với phần cơ bản và microservices, bạn đã đủ đồ nghề xây backend chuyên nghiệp thực thụ.",
+      "Toàn bộ source code vẫn ở link quen thuộc trong phần mô tả.",
+      "Cảm ơn các bạn đã theo đến tận đây. Nếu muốn mình làm tiếp phần transporters với Redis, RabbitMQ, Kafka, hãy để lại bình luận nhé. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hoàn thành phần nâng cao! 🎓",
+      "summary": [
+        {"text": "Bộ tứ: Pipe · Guard · Interceptor · Filter", "sentence": 0},
+        {"text": "Khai báo một lần — áp dụng mọi nơi", "sentence": 1},
+        {"text": "Comment để vote phần tiếp: Redis/RabbitMQ/Kafka", "sentence": 4}
+      ],
+      "next": "Bình luận vote chủ đề tiếp theo! 💬"
+    }
+  }
+]

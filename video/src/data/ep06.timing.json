@@ -1,0 +1,500 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Guards — Bảo vệ ở cửa",
+        "subtitle": "NestJS nâng cao · Tập 2 · Phân quyền",
+        "badge": "Series NestJS nâng cao"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep06/scene-01-0-a2982e97.wav",
+          "startFrame": 0,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep06/scene-01-1-be19f2de.wav",
+          "startFrame": 109,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep06/scene-01-2-a8c55940.wav",
+          "startFrame": 261,
+          "durationInFrames": 89
+        }
+      ],
+      "durationInFrames": 368
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Vấn đề: cửa nào cũng mở toang",
+        "bullets": [
+          {
+            "icon": "🚪",
+            "text": "/admin mà ai gõ đúng cũng vào được",
+            "sentence": 1
+          },
+          {
+            "icon": "😰",
+            "text": "If quyền trong từng hàm: quên 1 chỗ là toang",
+            "sentence": 2
+          },
+          {
+            "icon": "🎯",
+            "text": "Cần người chuyên trách việc gác cửa",
+            "sentence": 3
+          },
+          {
+            "icon": "💂",
+            "text": "NestJS gọi đó là Guard",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep06/scene-02-0-89f8df39.wav",
+          "startFrame": 0,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep06/scene-02-1-62715bd2.wav",
+          "startFrame": 114,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep06/scene-02-2-c7214be0.wav",
+          "startFrame": 240,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep06/scene-02-3-54481dfa.wav",
+          "startFrame": 388,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep06/scene-02-4-896778ce.wav",
+          "startFrame": 504,
+          "durationInFrames": 70
+        }
+      ],
+      "durationInFrames": 592
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "Guard = bảo vệ khu VIP 💂",
+        "bullets": [
+          {
+            "icon": "💂",
+            "text": "Đứng TRƯỚC cửa, kiểm tra trước tiên",
+            "sentence": 0
+          },
+          {
+            "icon": "❓",
+            "text": "Chỉ trả lời: true (vào) / false (chặn)",
+            "sentence": 1
+          },
+          {
+            "icon": "⛔",
+            "text": "Không quyền → 403, handler không hay biết",
+            "sentence": 3
+          },
+          {
+            "icon": "🆚",
+            "text": "Guard hỏi BẠN LÀ AI, Pipe xét ĐỒ BẠN MANG",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep06/scene-03-0-dc3886a6.wav",
+          "startFrame": 0,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep06/scene-03-1-41f0eb3a.wav",
+          "startFrame": 136,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep06/scene-03-2-587e4d71.wav",
+          "startFrame": 296,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep06/scene-03-3-7e460cfc.wav",
+          "startFrame": 400,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep06/scene-03-4-94df1d0b.wav",
+          "startFrame": 576,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 729
+    },
+    {
+      "id": "scene-04",
+      "type": "diagram",
+      "visual": {
+        "title": "Guard đứng ở đâu trong request?",
+        "boxes": [
+          {
+            "id": "client",
+            "label": "Client",
+            "emoji": "📱"
+          },
+          {
+            "id": "guard",
+            "label": "Guard",
+            "emoji": "💂"
+          },
+          {
+            "id": "handler",
+            "label": "Handler",
+            "emoji": "🧑‍🍳"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "GET /admin + key",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "cho qua",
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 0,
+            "label": "403 Forbidden",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep06/scene-04-0-42a32068.wav",
+          "startFrame": 0,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep06/scene-04-1-50f973e6.wav",
+          "startFrame": 121,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep06/scene-04-2-b66be6cf.wav",
+          "startFrame": 269,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep06/scene-04-3-f41f5bf5.wav",
+          "startFrame": 376,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep06/scene-04-4-939fe359.wav",
+          "startFrame": 497,
+          "durationInFrames": 108
+        }
+      ],
+      "durationInFrames": 623
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "src/admin/api-key.guard.ts",
+        "language": "tsx",
+        "code": "import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';\n\n@Injectable()\nexport class ApiKeyGuard implements CanActivate {\n  canActivate(context: ExecutionContext): boolean {\n    const request = context.switchToHttp().getRequest();\n    return request.headers['x-api-key'] === 'bi-mat-123';\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 4
+          },
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep06/scene-05-0-195b9250.wav",
+          "startFrame": 0,
+          "durationInFrames": 82
+        },
+        {
+          "file": "audio/ep06/scene-05-1-891ad47f.wav",
+          "startFrame": 90,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep06/scene-05-2-3bf547fa.wav",
+          "startFrame": 266,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep06/scene-05-3-1c658eab.wav",
+          "startFrame": 423,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep06/scene-05-4-fee85de1.wav",
+          "startFrame": 566,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep06/scene-05-5-6ba4902c.wav",
+          "startFrame": 723,
+          "durationInFrames": 101
+        }
+      ],
+      "durationInFrames": 842
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "src/admin/admin.controller.ts",
+        "language": "tsx",
+        "code": "import { Controller, Get, UseGuards } from '@nestjs/common';\nimport { ApiKeyGuard } from './api-key.guard';\n\n@UseGuards(ApiKeyGuard)\n@Controller('admin')\nexport class AdminController {\n  @Get()\n  dashboard() {\n    return { secret: 'Chào sếp, đây là khu vực quản trị!' };\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 5,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep06/scene-06-0-7bd4a1ca.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep06/scene-06-1-8537bfdc.wav",
+          "startFrame": 145,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep06/scene-06-2-f0787a69.wav",
+          "startFrame": 278,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep06/scene-06-3-9679c5b7.wav",
+          "startFrame": 411,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 583
+    },
+    {
+      "id": "scene-07",
+      "type": "terminal",
+      "visual": {
+        "title": "Thử gõ cửa khu VIP 💂",
+        "commands": [
+          {
+            "cmd": "curl -w '\\n%{http_code}' localhost:3000/admin",
+            "output": "{\"message\":\"Forbidden resource\",\"error\":\"Forbidden\",\"statusCode\":403}\n403",
+            "sentence": 1
+          },
+          {
+            "cmd": "curl -H 'x-api-key: bi-mat-123' localhost:3000/admin",
+            "output": "{\"secret\":\"Chào sếp, đây là khu vực quản trị!\"}",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep06/scene-07-0-638ef98b.wav",
+          "startFrame": 0,
+          "durationInFrames": 56
+        },
+        {
+          "file": "audio/ep06/scene-07-1-bef00fa5.wav",
+          "startFrame": 64,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep06/scene-07-2-1d2e764a.wav",
+          "startFrame": 195,
+          "durationInFrames": 68
+        },
+        {
+          "file": "audio/ep06/scene-07-3-4d864800.wav",
+          "startFrame": 271,
+          "durationInFrames": 68
+        },
+        {
+          "file": "audio/ep06/scene-07-4-3ef5d281.wav",
+          "startFrame": 347,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 459
+    },
+    {
+      "id": "scene-08",
+      "type": "concept",
+      "visual": {
+        "title": "Guard trong dự án thật",
+        "bullets": [
+          {
+            "icon": "🔑",
+            "text": "AuthGuard: đã đăng nhập chưa? (JWT)",
+            "sentence": 1
+          },
+          {
+            "icon": "👑",
+            "text": "RolesGuard: admin hay user thường?",
+            "sentence": 2
+          },
+          {
+            "icon": "🧱",
+            "text": "Xếp chồng nhiều guard theo thứ tự",
+            "sentence": 3
+          },
+          {
+            "icon": "🚀",
+            "text": "Cùng bộ khung CanActivate bạn vừa học",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep06/scene-08-0-2018f530.wav",
+          "startFrame": 0,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep06/scene-08-1-36e8fd4b.wav",
+          "startFrame": 109,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep06/scene-08-2-ebbfe475.wav",
+          "startFrame": 221,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep06/scene-08-3-c34af2c5.wav",
+          "startFrame": 337,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep06/scene-08-4-894f77b9.wav",
+          "startFrame": 451,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 633
+    },
+    {
+      "id": "scene-09",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "Guard = ai được vào? true / false",
+            "sentence": 0
+          },
+          {
+            "text": "CanActivate + @UseGuards = xong",
+            "sentence": 1
+          },
+          {
+            "text": "Không quyền → 403 ngay từ cửa",
+            "sentence": 2
+          }
+        ],
+        "next": "Nâng cao Tập 3: Interceptors — can thiệp 2 chiều"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep06/scene-09-0-b34b8049.wav",
+          "startFrame": 0,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep06/scene-09-1-994b98c6.wav",
+          "startFrame": 131,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep06/scene-09-2-0c6cff91.wav",
+          "startFrame": 319,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep06/scene-09-3-781b69af.wav",
+          "startFrame": 452,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep06/scene-09-4-0eb0f171.wav",
+          "startFrame": 576,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 760
+    }
+  ]
+}

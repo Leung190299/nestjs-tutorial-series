@@ -7,7 +7,7 @@ export type ThumbnailProps = {
   line1: string;      // dòng chữ trắng lớn
   line2: string;      // dòng chữ đỏ lớn
   subtitle: string;   // pill phụ đề
-  variant: 'ep1' | 'ep2' | 'ep3' | 'ep4';
+  variant: 'ep1' | 'ep2' | 'ep3' | 'ep4' | 'ep5' | 'ep6' | 'ep7' | 'ep8';
 };
 
 const Card: React.FC<{children: React.ReactNode; style?: React.CSSProperties}> = ({
@@ -123,6 +123,108 @@ const Visual: React.FC<{variant: ThumbnailProps['variant']}> = ({variant}) => {
           }}
         >
           Hi! Nhận ngay ⚡
+        </div>
+      </div>
+    );
+  }
+  if (variant === 'ep5') {
+    return (
+      <div style={{position: 'relative'}}>
+        <Card style={{width: 460, padding: '26px 30px', fontFamily: theme.fontMono}}>
+          <div style={{color: theme.textDim, fontSize: 24, marginBottom: 14}}>
+            create-user.dto.ts
+          </div>
+          <div style={{fontSize: 34, lineHeight: 1.6}}>
+            <div style={{color: theme.yellow}}>@IsNotEmpty()</div>
+            <div style={{color: theme.blue}}>@MinLength(3)</div>
+            <div style={{color: theme.green}}>@IsEmail()</div>
+          </div>
+        </Card>
+        <div
+          style={{
+            position: 'absolute',
+            top: -46,
+            right: -40,
+            backgroundColor: theme.accent,
+            color: '#fff',
+            fontSize: 44,
+            fontWeight: 900,
+            padding: '16px 26px',
+            borderRadius: 999,
+            boxShadow: '0 14px 30px rgba(234,40,69,0.5)',
+          }}
+        >
+          400 ⛔
+        </div>
+      </div>
+    );
+  }
+  if (variant === 'ep6') {
+    return (
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 22}}>
+        <div style={{fontSize: 110}}>💂</div>
+        <Card
+          style={{
+            padding: '16px 30px',
+            fontSize: 36,
+            fontWeight: 700,
+            color: theme.accent,
+            fontFamily: theme.fontMono,
+          }}
+        >
+          ❌ 403 Forbidden
+        </Card>
+        <div
+          style={{
+            padding: '16px 30px',
+            fontSize: 36,
+            fontWeight: 700,
+            color: '#fff',
+            backgroundColor: '#166534',
+            borderRadius: 20,
+            fontFamily: theme.fontMono,
+            boxShadow: '0 14px 30px rgba(22,101,52,0.5)',
+          }}
+        >
+          ✅ 200 + 🔑
+        </div>
+      </div>
+    );
+  }
+  if (variant === 'ep7') {
+    return (
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20}}>
+        <div style={{fontSize: 96}}>🎥</div>
+        <Card style={{padding: '24px 34px', fontFamily: theme.fontMono, fontSize: 34, lineHeight: 1.6}}>
+          <div style={{color: theme.text}}>{'{'}</div>
+          <div style={{color: theme.green, paddingLeft: 30}}>success: true,</div>
+          <div style={{color: theme.blue, paddingLeft: 30}}>data: [...]</div>
+          <div style={{color: theme.text}}>{'}'}</div>
+        </Card>
+      </div>
+    );
+  }
+  if (variant === 'ep8') {
+    return (
+      <div style={{position: 'relative'}}>
+        <Card style={{width: 470, padding: '26px 30px', fontFamily: theme.fontMono}}>
+          <div style={{fontSize: 32, lineHeight: 1.65}}>
+            <div style={{color: theme.accent}}>"success": false,</div>
+            <div style={{color: theme.yellow}}>"statusCode": 404,</div>
+            <div style={{color: theme.text}}>"message": "Không tìm</div>
+            <div style={{color: theme.text}}>  thấy đơn hàng 99"</div>
+          </div>
+        </Card>
+        <div
+          style={{
+            position: 'absolute',
+            top: -50,
+            right: -36,
+            fontSize: 100,
+            filter: 'drop-shadow(0 12px 24px rgba(0,0,0,0.5))',
+          }}
+        >
+          🚑
         </div>
       </div>
     );
