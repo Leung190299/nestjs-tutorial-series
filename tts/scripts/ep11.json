@@ -106,7 +106,7 @@
     "narration": [
       "Dựng Kafka: nghe đồn khó, nhưng thời nay cũng chỉ là một lệnh Docker.",
       "Image chính chủ apache kafka, chạy chế độ một máy, phát sóng ở cổng chín không chín hai.",
-      "Tạo thử một topic và liệt kê: sổ đã sẵn sàng nhận ghi chép.",
+      "Liệt kê danh sách topic thử xem: sổ đã sẵn sàng nhận ghi chép.",
       "Cuối cùng cài kafkajs, thư viện nói chuyện với Kafka, vào cả hai app."
     ],
     "visual": {
@@ -114,7 +114,7 @@
       "commands": [
         {"cmd": "docker run -d --name tutorial-kafka -p 9092:9092 apache/kafka:3.7.0", "output": "a350b3e6458a3c220e1865803fa70252...", "sentence": 1},
         {"cmd": "docker exec tutorial-kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list", "output": "test-topic", "sentence": 2},
-        {"cmd": "npm i @nestjs/microservices kafkajs", "output": "added 6 packages — cài vào CẢ HAI app", "sentence": 3}
+        {"cmd": "npm i @nestjs/microservices kafkajs", "output": "added 3 packages — cài vào CẢ HAI app", "sentence": 3}
       ]
     }
   },

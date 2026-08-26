@@ -425,6 +425,11 @@ Tập 1 (Redis): [LINK T1] · Tập 3 (Kafka): [LINK T3]
 #rabbitmq #messagequeue #nestjs #nodejs #laptrinh
 ```
 
+**Comment ghim gợi ý (chống bắt bẻ từ dân pro):**
+```
+⚠️ Lưu ý cho production: demo dùng cấu hình mặc định của NestJS RMQ. Để "không mất tin" tuyệt đối cả khi worker crash GIỮA LÚC xử lý hoặc broker restart, bạn cần thêm: queueOptions: { durable: true }, persistent: true khi emit, và noAck: false + tự ack sau khi xử lý xong. Chi tiết trong docs NestJS phần RabbitMQ nhé!
+```
+
 **Tags:**
 ```
 rabbitmq, message queue, rabbitmq nestjs, event pattern, hàng đợi tin nhắn, rabbitmq là gì, docker rabbitmq, xử lý bất đồng bộ, background job, nestjs tiếng việt, học nestjs, microservices, fire and forget, emit nestjs, độ tin cậy hệ thống

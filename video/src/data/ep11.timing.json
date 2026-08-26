@@ -304,7 +304,7 @@
           },
           {
             "cmd": "npm i @nestjs/microservices kafkajs",
-            "output": "added 6 packages — cài vào CẢ HAI app",
+            "output": "added 3 packages — cài vào CẢ HAI app",
             "sentence": 3
           }
         ]
@@ -321,17 +321,17 @@
           "durationInFrames": 142
         },
         {
-          "file": "audio/ep11/scene-06-2-346e0fdb.wav",
+          "file": "audio/ep11/scene-06-2-0aa3494a.wav",
           "startFrame": 259,
-          "durationInFrames": 106
+          "durationInFrames": 104
         },
         {
           "file": "audio/ep11/scene-06-3-873edfef.wav",
-          "startFrame": 373,
+          "startFrame": 371,
           "durationInFrames": 118
         }
       ],
-      "durationInFrames": 509
+      "durationInFrames": 507
     },
     {
       "id": "scene-07",
