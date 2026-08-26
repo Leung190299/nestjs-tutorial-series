@@ -35,7 +35,7 @@ Giải thích bằng ví dụ nhà hàng 🍜: Controller là người phục v�
 5:11 Chạy thử API GET /users
 5:36 Tóm tắt & hẹn tập 2
 
-📦 Source code: [LINK GITHUB]
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
 ▶️ Trọn bộ series: [LINK PLAYLIST]
 Tập 2 (Microservices): [LINK TẬP 2]
 
@@ -82,7 +82,7 @@ Tiếp nối tập 1, chúng ta biến "nhà hàng" NestJS thành cả một chu
 4:13 Chạy cả hai service + demo
 4:36 Tóm tắt & hẹn tập 3
 
-📦 Source code: [LINK GITHUB]
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
 ▶️ Trọn bộ series: [LINK PLAYLIST]
 Tập 1 (NestJS cơ bản): [LINK TẬP 1]
 Tập 3 (WebSocket): [LINK TẬP 3]
@@ -130,7 +130,7 @@ Dễ hiểu bằng ví von: HTTP là gửi thư bưu điện ✉️, WebSocket l
 3:58 So sánh @Get vs @MessagePattern vs @SubscribeMessage
 4:18 Tóm tắt & hẹn tập cuối
 
-📦 Source code: [LINK GITHUB]
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
 ▶️ Trọn bộ series: [LINK PLAYLIST]
 Tập 2 (Microservices): [LINK TẬP 2]
 Tập 4 (Ghép tất cả): [LINK TẬP 4]
@@ -176,7 +176,7 @@ Kiến trúc: Gateway nhận WebSocket từ người dùng, Chat Service lưu tr
 3:04 Hướng đi tiếp: database, auth, Redis
 3:28 Tổng kết series
 
-📦 Source code trọn bộ 4 tập: [LINK GITHUB]
+📦 Source code trọn bộ 4 tập: https://github.com/Leung190299/nestjs-tutorial-series
 ▶️ Xem lại từ đầu: [LINK PLAYLIST]
 Tập 1: [LINK TẬP 1] · Tập 2: [LINK TẬP 2] · Tập 3: [LINK TẬP 3]
 
