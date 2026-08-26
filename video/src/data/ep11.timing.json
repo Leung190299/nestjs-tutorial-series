@@ -1,0 +1,737 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Kafka — Sổ nhật ký của cả công ty",
+        "subtitle": "Transporters Tập 3 · Event Streaming",
+        "badge": "NestJS nâng cao · Transporters · Tập cuối"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep11/scene-01-0-7791db0e.wav",
+          "startFrame": 0,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep11/scene-01-1-2031ca46.wav",
+          "startFrame": 184,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep11/scene-01-2-3077824b.wav",
+          "startFrame": 312,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep11/scene-01-3-8e9195cb.wav",
+          "startFrame": 467,
+          "durationInFrames": 142
+        }
+      ],
+      "durationInFrames": 627
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Ba việc bưu điện không làm được",
+        "bullets": [
+          {
+            "icon": "🗑️",
+            "text": "Thư phát xong là mất — không đọc lại được",
+            "sentence": 1
+          },
+          {
+            "icon": "👥",
+            "text": "Nhiều phòng cùng muốn nghe một sự kiện",
+            "sentence": 2
+          },
+          {
+            "icon": "🌊",
+            "text": "Triệu sự kiện/giờ, cần giữ để phân tích",
+            "sentence": 3
+          },
+          {
+            "icon": "💡",
+            "text": "Đổi tư duy: đừng PHÁT — hãy GHI LẠI",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep11/scene-02-0-286e5ff0.wav",
+          "startFrame": 0,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep11/scene-02-1-064a6c86.wav",
+          "startFrame": 143,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep11/scene-02-2-345acc8e.wav",
+          "startFrame": 276,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep11/scene-02-3-05188e1a.wav",
+          "startFrame": 445,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep11/scene-02-4-0fb184d8.wav",
+          "startFrame": 585,
+          "durationInFrames": 113
+        }
+      ],
+      "durationInFrames": 716
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "Kafka = sổ nhật ký chung 📒",
+        "bullets": [
+          {
+            "icon": "📒",
+            "text": "Mọi sự kiện GHI vào sổ theo dòng thời gian",
+            "sentence": 1
+          },
+          {
+            "icon": "🔒",
+            "text": "Ghi rồi không xóa — nằm đó nhiều ngày",
+            "sentence": 2
+          },
+          {
+            "icon": "🔖",
+            "text": "Mỗi phòng tự đọc theo nhịp, có kẹp đánh dấu",
+            "sentence": 3
+          },
+          {
+            "icon": "⏪",
+            "text": "Người mới đọc lại từ đầu được (replay)",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep11/scene-03-0-e3764e18.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep11/scene-03-1-5f533534.wav",
+          "startFrame": 107,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep11/scene-03-2-368f2e4a.wav",
+          "startFrame": 262,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep11/scene-03-3-44988827.wav",
+          "startFrame": 390,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep11/scene-03-4-24f2b4fc.wav",
+          "startFrame": 542,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep11/scene-03-5-369f1d73.wav",
+          "startFrame": 680,
+          "durationInFrames": 108
+        }
+      ],
+      "durationInFrames": 806
+    },
+    {
+      "id": "scene-04",
+      "type": "concept",
+      "visual": {
+        "title": "3 từ khóa, dịch ra tiếng 'sổ'",
+        "bullets": [
+          {
+            "icon": "📖",
+            "text": "Topic = một chương sổ (page_view, orders...)",
+            "sentence": 1
+          },
+          {
+            "icon": "🏢",
+            "text": "Consumer group = phòng ban có kẹp riêng",
+            "sentence": 2
+          },
+          {
+            "icon": "📚",
+            "text": "Partition = chia chương thành nhiều cuốn nhỏ",
+            "sentence": 3
+          },
+          {
+            "icon": "🎯",
+            "text": "Người mới: chỉ cần nhớ topic + group",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep11/scene-04-0-e96ce4c4.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep11/scene-04-1-f03765c2.wav",
+          "startFrame": 107,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep11/scene-04-2-708f5836.wav",
+          "startFrame": 279,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep11/scene-04-3-7508f4f4.wav",
+          "startFrame": 477,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep11/scene-04-4-a28fa928.wav",
+          "startFrame": 689,
+          "durationInFrames": 137
+        }
+      ],
+      "durationInFrames": 844
+    },
+    {
+      "id": "scene-05",
+      "type": "diagram",
+      "visual": {
+        "title": "Ghi một lần — bao nhiêu người đọc cũng được",
+        "boxes": [
+          {
+            "id": "gateway",
+            "label": "Gateway",
+            "emoji": "🚪"
+          },
+          {
+            "id": "kafka",
+            "label": "Kafka",
+            "emoji": "📒"
+          },
+          {
+            "id": "analytics",
+            "label": "Analytics",
+            "emoji": "📈"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "ghi: page_view",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "đọc chương page_view",
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 0,
+            "label": "OK ngay",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep11/scene-05-0-7d82f6f9.wav",
+          "startFrame": 0,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep11/scene-05-1-66201806.wav",
+          "startFrame": 140,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep11/scene-05-2-5e598b82.wav",
+          "startFrame": 259,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep11/scene-05-3-58af72a0.wav",
+          "startFrame": 380,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep11/scene-05-4-5b1b9b4c.wav",
+          "startFrame": 508,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep11/scene-05-5-7ed07bf4.wav",
+          "startFrame": 704,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 828
+    },
+    {
+      "id": "scene-06",
+      "type": "terminal",
+      "visual": {
+        "title": "Dựng sổ Kafka bằng Docker",
+        "commands": [
+          {
+            "cmd": "docker run -d --name tutorial-kafka -p 9092:9092 apache/kafka:3.7.0",
+            "output": "a350b3e6458a3c220e1865803fa70252...",
+            "sentence": 1
+          },
+          {
+            "cmd": "docker exec tutorial-kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list",
+            "output": "test-topic",
+            "sentence": 2
+          },
+          {
+            "cmd": "npm i @nestjs/microservices kafkajs",
+            "output": "added 6 packages — cài vào CẢ HAI app",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep11/scene-06-0-ca69f00b.wav",
+          "startFrame": 0,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep11/scene-06-1-d3ea9cbc.wav",
+          "startFrame": 109,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep11/scene-06-2-346e0fdb.wav",
+          "startFrame": 259,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep11/scene-06-3-873edfef.wav",
+          "startFrame": 373,
+          "durationInFrames": 118
+        }
+      ],
+      "durationInFrames": 509
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "gateway/src/app.module.ts",
+        "language": "tsx",
+        "code": "import { Module } from '@nestjs/common';\nimport { ClientsModule, Transport } from '@nestjs/microservices';\nimport { TrackController } from './track.controller';\n\n@Module({\n  imports: [\n    ClientsModule.register([\n      {\n        name: 'ANALYTICS',\n        transport: Transport.KAFKA,\n        options: {\n          client: { brokers: ['localhost:9092'] },\n        },\n      },\n    ]),\n  ],\n  controllers: [TrackController],\n})\nexport class AppModule {}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 19,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 13,
+            "sentence": 1
+          },
+          {
+            "from": 12,
+            "to": 12,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 19,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep11/scene-07-0-98d817d8.wav",
+          "startFrame": 0,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep11/scene-07-1-a416febc.wav",
+          "startFrame": 104,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep11/scene-07-2-48f73fb8.wav",
+          "startFrame": 268,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep11/scene-07-3-9cf3c9fc.wav",
+          "startFrame": 413,
+          "durationInFrames": 111
+        }
+      ],
+      "durationInFrames": 542
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "gateway/src/track.controller.ts",
+        "language": "tsx",
+        "code": "import { Body, Controller, Inject, Post } from '@nestjs/common';\nimport { ClientProxy } from '@nestjs/microservices';\n\n@Controller('track')\nexport class TrackController {\n  constructor(@Inject('ANALYTICS') private client: ClientProxy) {}\n\n  @Post()\n  track(@Body() event: { page: string }) {\n    this.client.emit('page_view', event);\n    return { message: `Đã ghi nhận lượt xem ${event.page}` };\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 1
+          },
+          {
+            "from": 11,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep11/scene-08-0-1512d5b8.wav",
+          "startFrame": 0,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep11/scene-08-1-b1a53891.wav",
+          "startFrame": 128,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep11/scene-08-2-f1c48010.wav",
+          "startFrame": 283,
+          "durationInFrames": 75
+        },
+        {
+          "file": "audio/ep11/scene-08-3-8b3aa223.wav",
+          "startFrame": 366,
+          "durationInFrames": 185
+        }
+      ],
+      "durationInFrames": 569
+    },
+    {
+      "id": "scene-09",
+      "type": "code",
+      "visual": {
+        "filename": "analytics-service/src/main.ts",
+        "language": "tsx",
+        "code": "import { NestFactory } from '@nestjs/core';\nimport { Transport } from '@nestjs/microservices';\nimport { AppModule } from './app.module';\n\nasync function bootstrap() {\n  const app = await NestFactory.createMicroservice(AppModule, {\n    transport: Transport.KAFKA,\n    options: {\n      client: { brokers: ['localhost:9092'] },\n      consumer: { groupId: 'analytics' },\n    },\n  });\n  await app.listen();\n}\nbootstrap();",
+        "steps": [
+          {
+            "from": 1,
+            "to": 15,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 9,
+            "to": 10,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 15,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep11/scene-09-0-d2c5671a.wav",
+          "startFrame": 0,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep11/scene-09-1-364aaabd.wav",
+          "startFrame": 112,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep11/scene-09-2-a16c073f.wav",
+          "startFrame": 248,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep11/scene-09-3-31910533.wav",
+          "startFrame": 410,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep11/scene-09-4-064bc424.wav",
+          "startFrame": 572,
+          "durationInFrames": 99
+        }
+      ],
+      "durationInFrames": 689
+    },
+    {
+      "id": "scene-10",
+      "type": "code",
+      "visual": {
+        "filename": "analytics-service/src/analytics.controller.ts",
+        "language": "tsx",
+        "code": "import { Controller } from '@nestjs/common';\nimport { EventPattern, Payload } from '@nestjs/microservices';\n\n@Controller()\nexport class AnalyticsController {\n  private views = 0;\n\n  @EventPattern('page_view')\n  handleView(@Payload() event: { page: string }) {\n    this.views = this.views + 1;\n    console.log(`📈 Lượt xem thứ ${this.views}: trang ${event.page}`);\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 9,
+            "to": 9,
+            "sentence": 2
+          },
+          {
+            "from": 10,
+            "to": 11,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep11/scene-10-0-66e79cc5.wav",
+          "startFrame": 0,
+          "durationInFrames": 80
+        },
+        {
+          "file": "audio/ep11/scene-10-1-b4f2ece5.wav",
+          "startFrame": 88,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep11/scene-10-2-5fc0cd55.wav",
+          "startFrame": 233,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep11/scene-10-3-9b896d1e.wav",
+          "startFrame": 318,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep11/scene-10-4-647bcb44.wav",
+          "startFrame": 449,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 611
+    },
+    {
+      "id": "scene-11",
+      "type": "terminal",
+      "visual": {
+        "title": "Ghi sổ & đọc sổ! 📒",
+        "commands": [
+          {
+            "cmd": "curl -X POST localhost:3000/track -H 'Content-Type: application/json' -d '{\"page\":\"/home\"}'",
+            "output": "{\"message\":\"Đã ghi nhận lượt xem /home\"}",
+            "sentence": 1
+          },
+          {
+            "cmd": "curl ... -d '{\"page\":\"/pricing\"}' && curl ... -d '{\"page\":\"/home\"}'",
+            "output": "{\"message\":\"Đã ghi nhận lượt xem /pricing\"}\n{\"message\":\"Đã ghi nhận lượt xem /home\"}",
+            "sentence": 2
+          },
+          {
+            "cmd": "npm run start   # log của analytics-service",
+            "output": "📈 Lượt xem thứ 1: trang /home\n📈 Lượt xem thứ 2: trang /pricing\n📈 Lượt xem thứ 3: trang /home",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep11/scene-11-0-0a7e8e9d.wav",
+          "startFrame": 0,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep11/scene-11-1-236533cd.wav",
+          "startFrame": 157,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep11/scene-11-2-faa33ba8.wav",
+          "startFrame": 288,
+          "durationInFrames": 72
+        },
+        {
+          "file": "audio/ep11/scene-11-3-63d3985e.wav",
+          "startFrame": 368,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep11/scene-11-4-930f7192.wav",
+          "startFrame": 525,
+          "durationInFrames": 137
+        }
+      ],
+      "durationInFrames": 680
+    },
+    {
+      "id": "scene-12",
+      "type": "concept",
+      "visual": {
+        "title": "Chọn transporter nào? 🧭",
+        "bullets": [
+          {
+            "icon": "☎️",
+            "text": "TCP — trực tiếp, đơn giản, ít service",
+            "sentence": 1
+          },
+          {
+            "icon": "📻",
+            "text": "Redis — nhẹ nhanh, không giữ tin",
+            "sentence": 2
+          },
+          {
+            "icon": "📮",
+            "text": "RabbitMQ — việc nền, không được mất tin",
+            "sentence": 3
+          },
+          {
+            "icon": "📒",
+            "text": "Kafka — sự kiện lớn, nhiều bên đọc, replay",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep11/scene-12-0-a3eb8388.wav",
+          "startFrame": 0,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep11/scene-12-1-30c516a2.wav",
+          "startFrame": 126,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep11/scene-12-2-a2ec8459.wav",
+          "startFrame": 269,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep11/scene-12-3-02cbdc61.wav",
+          "startFrame": 417,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep11/scene-12-4-04ee5075.wav",
+          "startFrame": 574,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep11/scene-12-5-c9f46d5e.wav",
+          "startFrame": 712,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 882
+    },
+    {
+      "id": "scene-13",
+      "type": "outro",
+      "visual": {
+        "title": "Trọn bộ hành trình! 🎓🧡",
+        "summary": [
+          {
+            "text": "11 tập: từ số 0 đến kiến trúc triệu người dùng",
+            "sentence": 1
+          },
+          {
+            "text": "Source code trọn bộ trong phần mô tả",
+            "sentence": 2
+          },
+          {
+            "text": "Like · Subscribe · Comment để ủng hộ 🧡",
+            "sentence": 3
+          }
+        ],
+        "next": "Cảm ơn bạn đã theo dõi trọn series! Hẹn series sau 🎉"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep11/scene-13-0-7dd054a7.wav",
+          "startFrame": 0,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep11/scene-13-1-13e9db49.wav",
+          "startFrame": 232,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep11/scene-13-2-fbf20dc2.wav",
+          "startFrame": 411,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep11/scene-13-3-23b19142.wav",
+          "startFrame": 542,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep11/scene-13-4-06035a11.wav",
+          "startFrame": 716,
+          "durationInFrames": 161
+        }
+      ],
+      "durationInFrames": 895
+    }
+  ]
+}

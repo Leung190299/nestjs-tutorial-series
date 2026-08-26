@@ -1,0 +1,742 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "RabbitMQ — Bưu điện giữ thư",
+        "subtitle": "Transporters Tập 2 · Message Queue",
+        "badge": "NestJS nâng cao · Transporters"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep10/scene-01-0-afcb75eb.wav",
+          "startFrame": 0,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep10/scene-01-1-bebdd075.wav",
+          "startFrame": 121,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep10/scene-01-2-b2f8eebf.wav",
+          "startFrame": 269,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep10/scene-01-3-0aff31d0.wav",
+          "startFrame": 467,
+          "durationInFrames": 137
+        }
+      ],
+      "durationInFrames": 622
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Hai bài toán khó của hỏi-đáp",
+        "bullets": [
+          {
+            "icon": "🐌",
+            "text": "Việc nặng trong request → khách ngồi chờ",
+            "sentence": 2
+          },
+          {
+            "icon": "💀",
+            "text": "Service chết đúng lúc = mất đơn của khách",
+            "sentence": 3
+          },
+          {
+            "icon": "📻",
+            "text": "Redis: không ai nghe là tin bay màu",
+            "sentence": 4
+          },
+          {
+            "icon": "🎯",
+            "text": "Cần: nhận ngay · giữ hộ · giao lại sau",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep10/scene-02-0-b47494b9.wav",
+          "startFrame": 0,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep10/scene-02-1-29907acd.wav",
+          "startFrame": 126,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep10/scene-02-2-c9037eaa.wav",
+          "startFrame": 290,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep10/scene-02-3-6cc8f65a.wav",
+          "startFrame": 445,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep10/scene-02-4-5571c0f1.wav",
+          "startFrame": 557,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep10/scene-02-5-bfaa91e0.wav",
+          "startFrame": 690,
+          "durationInFrames": 137
+        }
+      ],
+      "durationInFrames": 845
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "Message Queue = bưu điện 📮",
+        "bullets": [
+          {
+            "icon": "📤",
+            "text": "Gửi xong là xong việc — không đứng chờ",
+            "sentence": 1
+          },
+          {
+            "icon": "🏠",
+            "text": "Người nhận vắng? Thư nằm chờ an toàn",
+            "sentence": 2
+          },
+          {
+            "icon": "📚",
+            "text": "Xếp hàng ngay ngắn, gửi trước phát trước",
+            "sentence": 3
+          },
+          {
+            "icon": "🐰",
+            "text": "RabbitMQ = bưu điện nổi tiếng nhất",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep10/scene-03-0-4bc3e2b7.wav",
+          "startFrame": 0,
+          "durationInFrames": 87
+        },
+        {
+          "file": "audio/ep10/scene-03-1-542f7df9.wav",
+          "startFrame": 95,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep10/scene-03-2-1484083a.wav",
+          "startFrame": 228,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep10/scene-03-3-a617f27f.wav",
+          "startFrame": 366,
+          "durationInFrames": 75
+        },
+        {
+          "file": "audio/ep10/scene-03-4-fed6024c.wav",
+          "startFrame": 449,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 633
+    },
+    {
+      "id": "scene-04",
+      "type": "concept",
+      "visual": {
+        "title": "send/hỏi-đáp 🆚 emit/gửi thư",
+        "bullets": [
+          {
+            "icon": "🙋",
+            "text": "send + @MessagePattern: hỏi và ĐỢI đáp",
+            "sentence": 1
+          },
+          {
+            "icon": "📨",
+            "text": "emit + @EventPattern: báo tin, KHÔNG chờ",
+            "sentence": 2
+          },
+          {
+            "icon": "🔥",
+            "text": "Fire and forget — bắn xong là quên",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep10/scene-04-0-84dfe5cc.wav",
+          "startFrame": 0,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep10/scene-04-1-d01e153d.wav",
+          "startFrame": 162,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep10/scene-04-2-864f41c1.wav",
+          "startFrame": 334,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep10/scene-04-3-a23cce39.wav",
+          "startFrame": 534,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep10/scene-04-4-72c5421e.wav",
+          "startFrame": 636,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 789
+    },
+    {
+      "id": "scene-05",
+      "type": "diagram",
+      "visual": {
+        "title": "Gateway → Bưu điện → Worker",
+        "boxes": [
+          {
+            "id": "gateway",
+            "label": "Gateway",
+            "emoji": "🚪"
+          },
+          {
+            "id": "rabbit",
+            "label": "RabbitMQ",
+            "emoji": "📮"
+          },
+          {
+            "id": "worker",
+            "label": "Worker",
+            "emoji": "⚙️"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "emit: order_created",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "orders_queue",
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 0,
+            "label": "OK ngay lập tức",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep10/scene-05-0-efae968f.wav",
+          "startFrame": 0,
+          "durationInFrames": 70
+        },
+        {
+          "file": "audio/ep10/scene-05-1-ec5466b9.wav",
+          "startFrame": 78,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep10/scene-05-2-279cef07.wav",
+          "startFrame": 262,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep10/scene-05-3-b4fc20ed.wav",
+          "startFrame": 393,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep10/scene-05-4-26c82e55.wav",
+          "startFrame": 550,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep10/scene-05-5-928309b7.wav",
+          "startFrame": 657,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 791
+    },
+    {
+      "id": "scene-06",
+      "type": "terminal",
+      "visual": {
+        "title": "Dựng bưu điện RabbitMQ",
+        "commands": [
+          {
+            "cmd": "docker run -d --name tutorial-rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management",
+            "output": "98214aa5eab3e238d2512069b97a4d7e...",
+            "sentence": 1
+          },
+          {
+            "cmd": "docker exec tutorial-rabbitmq rabbitmq-diagnostics -q ping",
+            "output": "Ping succeeded",
+            "sentence": 2
+          },
+          {
+            "cmd": "npm i @nestjs/microservices amqplib amqp-connection-manager",
+            "output": "added 25 packages — cài vào CẢ HAI app",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep10/scene-06-0-d8843062.wav",
+          "startFrame": 0,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep10/scene-06-1-1ee96177.wav",
+          "startFrame": 100,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep10/scene-06-2-fdc47dca.wav",
+          "startFrame": 276,
+          "durationInFrames": 53
+        },
+        {
+          "file": "audio/ep10/scene-06-3-43580b1e.wav",
+          "startFrame": 337,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 519
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "gateway/src/app.module.ts",
+        "language": "tsx",
+        "code": "import { Module } from '@nestjs/common';\nimport { ClientsModule, Transport } from '@nestjs/microservices';\nimport { OrdersController } from './orders.controller';\n\n@Module({\n  imports: [\n    ClientsModule.register([\n      {\n        name: 'ORDERS_QUEUE',\n        transport: Transport.RMQ,\n        options: {\n          urls: ['amqp://localhost:5672'],\n          queue: 'orders_queue',\n        },\n      },\n    ]),\n  ],\n  controllers: [OrdersController],\n})\nexport class AppModule {}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 20,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 1
+          },
+          {
+            "from": 11,
+            "to": 14,
+            "sentence": 2
+          },
+          {
+            "from": 13,
+            "to": 13,
+            "sentence": 3
+          },
+          {
+            "from": 9,
+            "to": 9,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep10/scene-07-0-ba97d015.wav",
+          "startFrame": 0,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep10/scene-07-1-a6a8a549.wav",
+          "startFrame": 162,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep10/scene-07-2-bf6c8c6b.wav",
+          "startFrame": 271,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep10/scene-07-3-19411004.wav",
+          "startFrame": 428,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep10/scene-07-4-e8e740e3.wav",
+          "startFrame": 566,
+          "durationInFrames": 99
+        }
+      ],
+      "durationInFrames": 683
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "gateway/src/orders.controller.ts",
+        "language": "tsx",
+        "code": "import { Body, Controller, Inject, Post } from '@nestjs/common';\nimport { ClientProxy } from '@nestjs/microservices';\n\n@Controller('orders')\nexport class OrdersController {\n  constructor(@Inject('ORDERS_QUEUE') private client: ClientProxy) {}\n\n  @Post()\n  create(@Body() order: { item: string }) {\n    this.client.emit('order_created', order);\n    return { message: `Đã nhận đơn ${order.item}, đang xử lý!` };\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 11,
+            "to": 11,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep10/scene-08-0-8850e297.wav",
+          "startFrame": 0,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep10/scene-08-1-b3085670.wav",
+          "startFrame": 85,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep10/scene-08-2-8c5984fc.wav",
+          "startFrame": 230,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep10/scene-08-3-de41faf9.wav",
+          "startFrame": 346,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep10/scene-08-4-0918fb38.wav",
+          "startFrame": 474,
+          "durationInFrames": 92
+        }
+      ],
+      "durationInFrames": 584
+    },
+    {
+      "id": "scene-09",
+      "type": "code",
+      "visual": {
+        "filename": "worker-service/src/main.ts",
+        "language": "tsx",
+        "code": "import { NestFactory } from '@nestjs/core';\nimport { Transport } from '@nestjs/microservices';\nimport { AppModule } from './app.module';\n\nasync function bootstrap() {\n  const app = await NestFactory.createMicroservice(AppModule, {\n    transport: Transport.RMQ,\n    options: {\n      urls: ['amqp://localhost:5672'],\n      queue: 'orders_queue',\n    },\n  });\n  await app.listen();\n}\nbootstrap();",
+        "steps": [
+          {
+            "from": 1,
+            "to": 15,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 15,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep10/scene-09-0-ded10929.wav",
+          "startFrame": 0,
+          "durationInFrames": 75
+        },
+        {
+          "file": "audio/ep10/scene-09-1-8bce8290.wav",
+          "startFrame": 83,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep10/scene-09-2-688defed.wav",
+          "startFrame": 223,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep10/scene-09-3-f4aa0ec3.wav",
+          "startFrame": 385,
+          "durationInFrames": 113
+        }
+      ],
+      "durationInFrames": 516
+    },
+    {
+      "id": "scene-10",
+      "type": "code",
+      "visual": {
+        "filename": "worker-service/src/orders.controller.ts",
+        "language": "tsx",
+        "code": "import { Controller } from '@nestjs/common';\nimport { EventPattern } from '@nestjs/microservices';\n\n@Controller()\nexport class OrdersController {\n  @EventPattern('order_created')\n  handleOrder(order: { item: string }) {\n    console.log(`📦 Đang xử lý đơn: ${order.item}`);\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 9,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep10/scene-10-0-d52eedb6.wav",
+          "startFrame": 0,
+          "durationInFrames": 89
+        },
+        {
+          "file": "audio/ep10/scene-10-1-285e7418.wav",
+          "startFrame": 97,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep10/scene-10-2-7a7d4cb5.wav",
+          "startFrame": 324,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep10/scene-10-3-7c24afb2.wav",
+          "startFrame": 500,
+          "durationInFrames": 99
+        }
+      ],
+      "durationInFrames": 617
+    },
+    {
+      "id": "scene-11",
+      "type": "terminal",
+      "visual": {
+        "title": "Siêu năng lực: giữ thư chờ người nhận 📮",
+        "commands": [
+          {
+            "cmd": "curl -X POST localhost:3000/orders -H 'Content-Type: application/json' -d '{\"item\":\"bàn phím cơ\"}'",
+            "output": "{\"message\":\"Đã nhận đơn bàn phím cơ, đang xử lý!\"}   |   worker: 📦 Đang xử lý đơn: bàn phím cơ",
+            "sentence": 1
+          },
+          {
+            "cmd": "kill %worker   # TẮT HẲN worker-service",
+            "output": "worker đã dừng — không còn ai xử lý đơn",
+            "sentence": 2
+          },
+          {
+            "cmd": "curl -X POST localhost:3000/orders -d '{\"item\":\"chuột gaming\"}' && curl -X POST localhost:3000/orders -d '{\"item\":\"màn hình 4K\"}'",
+            "output": "{\"message\":\"Đã nhận đơn chuột gaming, đang xử lý!\"}\n{\"message\":\"Đã nhận đơn màn hình 4K, đang xử lý!\"}",
+            "sentence": 3
+          },
+          {
+            "cmd": "npm run start   # BẬT LẠI worker",
+            "output": "📦 Đang xử lý đơn: chuột gaming\n📦 Đang xử lý đơn: màn hình 4K   ← 2 thư chờ được phát đủ!",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep10/scene-11-0-73d826fe.wav",
+          "startFrame": 0,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep10/scene-11-1-a54496ee.wav",
+          "startFrame": 100,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep10/scene-11-2-1f9d0c27.wav",
+          "startFrame": 276,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep10/scene-11-3-8bf7f879.wav",
+          "startFrame": 385,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep10/scene-11-4-a99a8f16.wav",
+          "startFrame": 602,
+          "durationInFrames": 82
+        },
+        {
+          "file": "audio/ep10/scene-11-5-4eeccebe.wav",
+          "startFrame": 692,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep10/scene-11-6-a5c02bb4.wav",
+          "startFrame": 840,
+          "durationInFrames": 111
+        }
+      ],
+      "durationInFrames": 969
+    },
+    {
+      "id": "scene-12",
+      "type": "concept",
+      "visual": {
+        "title": "Khi nào chọn RabbitMQ?",
+        "bullets": [
+          {
+            "icon": "🏋️",
+            "text": "Việc nặng làm sau: email, báo cáo, ảnh...",
+            "sentence": 1
+          },
+          {
+            "icon": "🛡️",
+            "text": "Tuyệt đối không được mất tin",
+            "sentence": 2
+          },
+          {
+            "icon": "👷",
+            "text": "Nhiều worker chia nhau một hàng đợi",
+            "sentence": 3
+          },
+          {
+            "icon": "📒",
+            "text": "Cần sổ ghi mọi sự kiện? → chờ Kafka",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep10/scene-12-0-e64a01e5.wav",
+          "startFrame": 0,
+          "durationInFrames": 68
+        },
+        {
+          "file": "audio/ep10/scene-12-1-2dac6ba3.wav",
+          "startFrame": 76,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep10/scene-12-2-45875644.wav",
+          "startFrame": 228,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep10/scene-12-3-2d7d792e.wav",
+          "startFrame": 347,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep10/scene-12-4-4e880852.wav",
+          "startFrame": 492,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 664
+    },
+    {
+      "id": "scene-13",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "RabbitMQ = bưu điện: nhận ngay, giữ hộ, giao sau",
+            "sentence": 0
+          },
+          {
+            "text": "emit + @EventPattern = fire and forget",
+            "sentence": 1
+          },
+          {
+            "text": "Worker chết, queue vẫn giữ đủ từng tin",
+            "sentence": 2
+          }
+        ],
+        "next": "Transporters Tập 3: Kafka — sổ nhật ký của cả công ty 📒"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep10/scene-13-0-19df918a.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep10/scene-13-1-8d0fa122.wav",
+          "startFrame": 200,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep10/scene-13-2-7b25738d.wav",
+          "startFrame": 369,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep10/scene-13-3-5373e3e6.wav",
+          "startFrame": 512,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep10/scene-13-4-2b08354b.wav",
+          "startFrame": 715,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 921
+    }
+  ]
+}

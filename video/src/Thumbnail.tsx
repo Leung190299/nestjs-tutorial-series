@@ -7,7 +7,18 @@ export type ThumbnailProps = {
   line1: string;      // dòng chữ trắng lớn
   line2: string;      // dòng chữ đỏ lớn
   subtitle: string;   // pill phụ đề
-  variant: 'ep1' | 'ep2' | 'ep3' | 'ep4' | 'ep5' | 'ep6' | 'ep7' | 'ep8';
+  variant:
+    | 'ep1'
+    | 'ep2'
+    | 'ep3'
+    | 'ep4'
+    | 'ep5'
+    | 'ep6'
+    | 'ep7'
+    | 'ep8'
+    | 'ep9'
+    | 'ep10'
+    | 'ep11';
 };
 
 const Card: React.FC<{children: React.ReactNode; style?: React.CSSProperties}> = ({
@@ -225,6 +236,91 @@ const Visual: React.FC<{variant: ThumbnailProps['variant']}> = ({variant}) => {
           }}
         >
           🚑
+        </div>
+      </div>
+    );
+  }
+  if (variant === 'ep9') {
+    return (
+      <div style={{position: 'relative'}}>
+        <Card style={{width: 470, padding: '26px 30px', fontFamily: theme.fontMono}}>
+          <div style={{color: theme.textDim, fontSize: 24, marginBottom: 14}}>main.ts</div>
+          <div style={{fontSize: 33, lineHeight: 1.65}}>
+            <div style={{color: theme.textDim, textDecoration: 'line-through'}}>
+              - Transport.TCP
+            </div>
+            <div style={{color: theme.green}}>+ Transport.REDIS</div>
+            <div style={{color: theme.blue}}>{"  port: 6379"}</div>
+          </div>
+        </Card>
+        <div
+          style={{
+            position: 'absolute',
+            top: -52,
+            right: -30,
+            fontSize: 100,
+            filter: 'drop-shadow(0 12px 24px rgba(0,0,0,0.5))',
+          }}
+        >
+          📻
+        </div>
+      </div>
+    );
+  }
+  if (variant === 'ep10') {
+    return (
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18}}>
+        <div style={{fontSize: 104}}>📮</div>
+        <Card
+          style={{
+            padding: '16px 28px',
+            fontSize: 34,
+            fontWeight: 700,
+            color: theme.accent,
+            fontFamily: theme.fontMono,
+          }}
+        >
+          worker: OFF 💤
+        </Card>
+        <div
+          style={{
+            padding: '16px 28px',
+            fontSize: 34,
+            fontWeight: 700,
+            color: '#fff',
+            backgroundColor: '#166534',
+            borderRadius: 20,
+            boxShadow: '0 14px 30px rgba(22,101,52,0.5)',
+          }}
+        >
+          ✉️✉️ đơn vẫn chờ, không mất!
+        </div>
+      </div>
+    );
+  }
+  if (variant === 'ep11') {
+    return (
+      <div style={{position: 'relative'}}>
+        <Card style={{width: 470, padding: '26px 32px', fontFamily: theme.fontMono}}>
+          <div style={{color: theme.textDim, fontSize: 24, marginBottom: 14}}>
+            topic: page_view
+          </div>
+          <div style={{fontSize: 33, lineHeight: 1.7}}>
+            <div style={{color: theme.text}}>1. 👀 /home</div>
+            <div style={{color: theme.text}}>2. 👀 /pricing</div>
+            <div style={{color: theme.yellow}}>3. 👀 /home ◀ analytics</div>
+          </div>
+        </Card>
+        <div
+          style={{
+            position: 'absolute',
+            top: -52,
+            right: -30,
+            fontSize: 100,
+            filter: 'drop-shadow(0 12px 24px rgba(0,0,0,0.5))',
+          }}
+        >
+          📒
         </div>
       </div>
     );

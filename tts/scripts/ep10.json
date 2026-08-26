@@ -1,0 +1,270 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại phần Transporters của series NestJS nâng cao!",
+      "Tập trước, đài phát thanh Redis có một điểm yếu: tin phát ra mà không ai nghe là mất luôn.",
+      "Hôm nay chúng ta gặp nhân vật khắc phục đúng điểm yếu đó: RabbitMQ, bưu điện giữ thư của thế giới microservices.",
+      "Kèm một màn demo mãn nhãn: tắt hẳn service xử lý, đơn hàng vẫn không mất một cái nào."
+    ],
+    "visual": {
+      "title": "RabbitMQ — Bưu điện giữ thư",
+      "subtitle": "Transporters Tập 2 · Message Queue",
+      "badge": "NestJS nâng cao · Transporters"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Trước hết, xem hai tình huống rất đời thường mà kiểu hỏi-đáp không giải quyết nổi nhé.",
+      "Tình huống một: khách bấm đặt hàng. Sau đó phải gửi email, xuất hóa đơn, trừ kho... toàn việc chậm chạp.",
+      "Nếu làm hết những việc đó NGAY TRONG request, khách phải ngồi nhìn vòng xoay chờ đến hết kiên nhẫn.",
+      "Tình huống hai: service xử lý đơn lăn ra chết đúng lúc khách đặt hàng.",
+      "Với Redis Pub Sub, tin phát lúc không ai nghe là bay màu: đơn của khách mất trắng.",
+      "Chúng ta cần một nơi NHẬN việc ngay, GIỮ việc hộ, và giao lại khi người xử lý sẵn sàng."
+    ],
+    "visual": {
+      "title": "Hai bài toán khó của hỏi-đáp",
+      "bullets": [
+        {"icon": "🐌", "text": "Việc nặng trong request → khách ngồi chờ", "sentence": 2},
+        {"icon": "💀", "text": "Service chết đúng lúc = mất đơn của khách", "sentence": 3},
+        {"icon": "📻", "text": "Redis: không ai nghe là tin bay màu", "sentence": 4},
+        {"icon": "🎯", "text": "Cần: nhận ngay · giữ hộ · giao lại sau", "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "Và đó chính xác là mô tả công việc của một bưu điện.",
+      "Bạn gửi thư: bỏ vào thùng là xong việc, đi về, không cần đứng chờ người nhận đọc thư.",
+      "Người nhận vắng nhà? Không sao cả: thư nằm an toàn ở bưu điện, khi nào họ về thì nhận đủ.",
+      "Thư được xếp hàng ngay ngắn, ai gửi trước phát trước.",
+      "Trong phần mềm, mô hình này gọi là Message Queue, hàng đợi tin nhắn, và RabbitMQ là bưu điện nổi tiếng nhất."
+    ],
+    "visual": {
+      "title": "Message Queue = bưu điện 📮",
+      "bullets": [
+        {"icon": "📤", "text": "Gửi xong là xong việc — không đứng chờ", "sentence": 1},
+        {"icon": "🏠", "text": "Người nhận vắng? Thư nằm chờ an toàn", "sentence": 2},
+        {"icon": "📚", "text": "Xếp hàng ngay ngắn, gửi trước phát trước", "sentence": 3},
+        {"icon": "🐰", "text": "RabbitMQ = bưu điện nổi tiếng nhất", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "concept",
+    "narration": [
+      "Đi kèm bưu điện là một cách nói chuyện mới mà hôm nay bạn sẽ gặp lần đầu: gửi mà không chờ đáp.",
+      "Từ đầu series, ta dùng client.send với @MessagePattern: đó là HỎI và ĐỢI câu trả lời.",
+      "Hôm nay là cặp mới: client.emit với @EventPattern: THÔNG BÁO một sự kiện đã xảy ra, rồi đi làm việc khác.",
+      "Giống hệt gửi thư: không ai đứng ở bưu điện chờ hồi âm cả.",
+      "Cách này gọi là fire and forget: bắn xong là quên, cực hợp với những việc nền chậm chạp."
+    ],
+    "visual": {
+      "title": "send/hỏi-đáp 🆚 emit/gửi thư",
+      "bullets": [
+        {"icon": "🙋", "text": "send + @MessagePattern: hỏi và ĐỢI đáp", "sentence": 1},
+        {"icon": "📨", "text": "emit + @EventPattern: báo tin, KHÔNG chờ", "sentence": 2},
+        {"icon": "🔥", "text": "Fire and forget — bắn xong là quên", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "diagram",
+    "narration": [
+      "Hệ thống hôm nay gồm ba nhân vật như thế này.",
+      "Khách đặt hàng qua gateway. Gateway chỉ làm một việc: bỏ lá thư order created vào bưu điện RabbitMQ.",
+      "Bỏ thư xong, gateway trả lời khách NGAY LẬP TỨC: đã nhận đơn, đang xử lý.",
+      "Còn worker-service, người xử lý thật sự, nhận thư từ hàng đợi và lặng lẽ làm việc ở hậu trường.",
+      "Khách thấy nhanh, việc nặng vẫn được làm, không bên nào phải chờ bên nào.",
+      "Và nếu worker tạm vắng mặt? Thư cứ nằm trong hàng đợi, chờ ngày worker trở lại."
+    ],
+    "visual": {
+      "title": "Gateway → Bưu điện → Worker",
+      "boxes": [
+        {"id": "gateway", "label": "Gateway", "emoji": "🚪"},
+        {"id": "rabbit", "label": "RabbitMQ", "emoji": "📮"},
+        {"id": "worker", "label": "Worker", "emoji": "⚙️"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "emit: order_created", "sentence": 1},
+        {"from": 1, "to": 2, "label": "orders_queue", "sentence": 3},
+        {"from": 1, "to": 0, "label": "OK ngay lập tức", "sentence": 2}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "terminal",
+    "narration": [
+      "Dựng bưu điện trước: vẫn công thức một lệnh Docker quen thuộc.",
+      "Bản 3-management còn tặng kèm trang quản trị web ở cổng một năm sáu bảy hai để ngó hàng đợi bằng mắt.",
+      "Ping thử: bưu điện đã mở cửa.",
+      "Rồi cài bộ đồ nghề nói chuyện với RabbitMQ vào cả hai app: amqplib và amqp-connection-manager."
+    ],
+    "visual": {
+      "title": "Dựng bưu điện RabbitMQ",
+      "commands": [
+        {"cmd": "docker run -d --name tutorial-rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management", "output": "98214aa5eab3e238d2512069b97a4d7e...", "sentence": 1},
+        {"cmd": "docker exec tutorial-rabbitmq rabbitmq-diagnostics -q ping", "output": "Ping succeeded", "sentence": 2},
+        {"cmd": "npm i @nestjs/microservices amqplib amqp-connection-manager", "output": "added 25 packages — cài vào CẢ HAI app", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Code gateway nào. Trong app.module, vẫn là ClientsModule.register như mọi khi.",
+      "Transport lần này là RMQ, viết tắt của RabbitMQ.",
+      "Options gồm hai thứ: urls trỏ đến bưu điện, và queue: tên hàng đợi, ở đây là orders_queue.",
+      "Hãy coi tên queue như tên Ô THƯ riêng: ai gửi vào ô này, người giữ chìa ô này sẽ nhận.",
+      "Đặt tên client là ORDERS_QUEUE cho dễ nhớ nhiệm vụ của nó."
+    ],
+    "visual": {
+      "filename": "gateway/src/app.module.ts",
+      "language": "tsx",
+      "code": "import { Module } from '@nestjs/common';\nimport { ClientsModule, Transport } from '@nestjs/microservices';\nimport { OrdersController } from './orders.controller';\n\n@Module({\n  imports: [\n    ClientsModule.register([\n      {\n        name: 'ORDERS_QUEUE',\n        transport: Transport.RMQ,\n        options: {\n          urls: ['amqp://localhost:5672'],\n          queue: 'orders_queue',\n        },\n      },\n    ]),\n  ],\n  controllers: [OrdersController],\n})\nexport class AppModule {}",
+      "steps": [
+        {"from": 1, "to": 20, "sentence": 0},
+        {"from": 10, "to": 10, "sentence": 1},
+        {"from": 11, "to": 14, "sentence": 2},
+        {"from": 13, "to": 13, "sentence": 3},
+        {"from": 9, "to": 9, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Controller của gateway: nơi khách bấm đặt hàng.",
+      "Điểm mới nằm ở dòng client.emit: sự kiện tên order created, kèm nội dung đơn hàng.",
+      "Emit là BỎ THƯ VÀO THÙNG: không chờ ai đáp, chạy tiếp luôn dòng dưới.",
+      "Vậy nên khách nhận ngay câu: đã nhận đơn, đang xử lý — dù việc thật chưa ai làm.",
+      "So với send phải đợi kết quả, bạn thấy triết lý khác hẳn chưa?"
+    ],
+    "visual": {
+      "filename": "gateway/src/orders.controller.ts",
+      "language": "tsx",
+      "code": "import { Body, Controller, Inject, Post } from '@nestjs/common';\nimport { ClientProxy } from '@nestjs/microservices';\n\n@Controller('orders')\nexport class OrdersController {\n  constructor(@Inject('ORDERS_QUEUE') private client: ClientProxy) {}\n\n  @Post()\n  create(@Body() order: { item: string }) {\n    this.client.emit('order_created', order);\n    return { message: `Đã nhận đơn ${order.item}, đang xử lý!` };\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 13, "sentence": 0},
+        {"from": 10, "to": 10, "sentence": 1},
+        {"from": 10, "to": 10, "sentence": 2},
+        {"from": 11, "to": 11, "sentence": 3},
+        {"from": 1, "to": 13, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "code",
+    "narration": [
+      "Sang worker-service, người giữ chìa khóa ô thư.",
+      "Main.ts theo đúng công thức createMicroservice, transport RMQ.",
+      "Options y hệt bên gateway: cùng bưu điện, cùng ô thư orders_queue: nhờ vậy hai bên khớp nhau.",
+      "Worker không cần cổng HTTP nào cả: nó chỉ sống bằng những lá thư."
+    ],
+    "visual": {
+      "filename": "worker-service/src/main.ts",
+      "language": "tsx",
+      "code": "import { NestFactory } from '@nestjs/core';\nimport { Transport } from '@nestjs/microservices';\nimport { AppModule } from './app.module';\n\nasync function bootstrap() {\n  const app = await NestFactory.createMicroservice(AppModule, {\n    transport: Transport.RMQ,\n    options: {\n      urls: ['amqp://localhost:5672'],\n      queue: 'orders_queue',\n    },\n  });\n  await app.listen();\n}\nbootstrap();",
+      "steps": [
+        {"from": 1, "to": 15, "sentence": 0},
+        {"from": 6, "to": 7, "sentence": 1},
+        {"from": 8, "to": 11, "sentence": 2},
+        {"from": 1, "to": 15, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "code",
+    "narration": [
+      "Và người xử lý thư: OrdersController của worker.",
+      "@EventPattern order created: chính là người anh em của emit bên kia. Emit gửi sự kiện nào, EventPattern nhận sự kiện đó.",
+      "Hàm handleOrder nhận nội dung đơn và xử lý: ở demo mình chỉ in log, thực tế là chỗ gửi email, trừ kho.",
+      "Để ý: hàm không return gì cả, vì có ai chờ câu trả lời đâu."
+    ],
+    "visual": {
+      "filename": "worker-service/src/orders.controller.ts",
+      "language": "tsx",
+      "code": "import { Controller } from '@nestjs/common';\nimport { EventPattern } from '@nestjs/microservices';\n\n@Controller()\nexport class OrdersController {\n  @EventPattern('order_created')\n  handleOrder(order: { item: string }) {\n    console.log(`📦 Đang xử lý đơn: ${order.item}`);\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 10, "sentence": 0},
+        {"from": 6, "to": 6, "sentence": 1},
+        {"from": 7, "to": 8, "sentence": 2},
+        {"from": 7, "to": 9, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "terminal",
+    "narration": [
+      "Giờ là màn trình diễn được mong chờ nhất: siêu năng lực giữ thư.",
+      "Chạy đủ bộ trước: đặt một đơn bàn phím cơ. Gateway đáp ngay, và log worker hiện đang xử lý đơn. Mượt.",
+      "Bây giờ, mình TẮT HẲN worker-service. Người xử lý đơn đã về quê.",
+      "Đặt tiếp hai đơn: chuột gaming và màn hình 4K. Nhìn kìa: gateway vẫn nhận đơn ngon lành, khách không hề biết hậu trường đang vắng người!",
+      "Hai lá thư giờ nằm im trong orders_queue, chờ đợi.",
+      "Bật worker dậy... và trong vài giây: cả hai đơn được xử lý, đúng thứ tự, không mất một cái nào.",
+      "Đây chính là lý do các hệ thống lớn không thể sống thiếu message queue."
+    ],
+    "visual": {
+      "title": "Siêu năng lực: giữ thư chờ người nhận 📮",
+      "commands": [
+        {"cmd": "curl -X POST localhost:3000/orders -H 'Content-Type: application/json' -d '{\"item\":\"bàn phím cơ\"}'", "output": "{\"message\":\"Đã nhận đơn bàn phím cơ, đang xử lý!\"}   |   worker: 📦 Đang xử lý đơn: bàn phím cơ", "sentence": 1},
+        {"cmd": "kill %worker   # TẮT HẲN worker-service", "output": "worker đã dừng — không còn ai xử lý đơn", "sentence": 2},
+        {"cmd": "curl -X POST localhost:3000/orders -d '{\"item\":\"chuột gaming\"}' && curl -X POST localhost:3000/orders -d '{\"item\":\"màn hình 4K\"}'", "output": "{\"message\":\"Đã nhận đơn chuột gaming, đang xử lý!\"}\n{\"message\":\"Đã nhận đơn màn hình 4K, đang xử lý!\"}", "sentence": 3},
+        {"cmd": "npm run start   # BẬT LẠI worker", "output": "📦 Đang xử lý đơn: chuột gaming\n📦 Đang xử lý đơn: màn hình 4K   ← 2 thư chờ được phát đủ!", "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "concept",
+    "narration": [
+      "Khi nào bạn nên nghĩ đến RabbitMQ?",
+      "Mọi việc nặng có thể làm sau: gửi email, xuất báo cáo, xử lý ảnh, thanh toán... cứ ném vào hàng đợi.",
+      "Khi tuyệt đối không được mất tin, kể cả lúc service xử lý gặp sự cố.",
+      "Khi muốn nhiều worker cùng chia nhau một hàng đợi để xử lý cho nhanh: thêm người phát thư là xong.",
+      "Còn nếu bạn cần một cuốn sổ ghi lại MỌI sự kiện, ai muốn đọc bao nhiêu lần cũng được... thì mai gặp Kafka."
+    ],
+    "visual": {
+      "title": "Khi nào chọn RabbitMQ?",
+      "bullets": [
+        {"icon": "🏋️", "text": "Việc nặng làm sau: email, báo cáo, ảnh...", "sentence": 1},
+        {"icon": "🛡️", "text": "Tuyệt đối không được mất tin", "sentence": 2},
+        {"icon": "👷", "text": "Nhiều worker chia nhau một hàng đợi", "sentence": 3},
+        {"icon": "📒", "text": "Cần sổ ghi mọi sự kiện? → chờ Kafka", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-13",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: RabbitMQ là bưu điện của microservices: nhận việc ngay, giữ việc hộ, giao lại khi người xử lý sẵn sàng.",
+      "Bộ đôi mới của bạn: client.emit để gửi sự kiện, @EventPattern để nhận, không ai phải chờ ai.",
+      "Và siêu năng lực giữ thư: worker chết đi sống lại, hàng đợi vẫn không mất một tin nào.",
+      "Bài tập nhỏ: mở trang quản trị ở cổng một năm sáu bảy hai, tắt worker rồi gửi đơn, và nhìn số thư trong queue tăng lên bằng mắt thường nhé.",
+      "Tập sau, tập cuối của series: Kafka, cuốn sổ nhật ký khổng lồ ghi lại mọi sự kiện của cả hệ thống. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "RabbitMQ = bưu điện: nhận ngay, giữ hộ, giao sau", "sentence": 0},
+        {"text": "emit + @EventPattern = fire and forget", "sentence": 1},
+        {"text": "Worker chết, queue vẫn giữ đủ từng tin", "sentence": 2}
+      ],
+      "next": "Transporters Tập 3: Kafka — sổ nhật ký của cả công ty 📒"
+    }
+  }
+]
