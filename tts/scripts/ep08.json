@@ -86,7 +86,7 @@
       "Hàm catch nhận exception vừa bị ném, kèm host để lấy ra đối tượng response.",
       "Từ exception, mình lấy mã lỗi qua getStatus.",
       "Rồi tự tay soạn JSON trả về: success false, mã lỗi, thông điệp, kèm cả thời điểm xảy ra.",
-      "Từ nay mọi lỗi HTTP đi ra đều mặc đồng phục này."
+      "Từ nay mọi lỗi HTTP trong khu vực gắn filter đều mặc đồng phục này."
     ],
     "visual": {
       "filename": "src/orders/http-exception.filter.ts",

@@ -420,12 +420,12 @@
         "title": "Soát vé thực chiến! 🎫",
         "commands": [
           {
-            "cmd": "curl -X POST localhost:3000/users -d '{\"name\":\"Minh\",\"email\":\"minh@example.com\"}'",
+            "cmd": "curl -X POST localhost:3000/users -H 'Content-Type: application/json' -d '{\"name\":\"Minh\",\"email\":\"minh@example.com\"}'",
             "output": "{\"message\":\"Đã tạo user Minh\",\"user\":{\"name\":\"Minh\",\"email\":\"minh@example.com\"}}",
             "sentence": 1
           },
           {
-            "cmd": "curl -X POST localhost:3000/users -d '{\"name\":\"M\",\"email\":\"sai-roi\"}'",
+            "cmd": "curl -X POST localhost:3000/users -H 'Content-Type: application/json' -d '{\"name\":\"M\",\"email\":\"sai-roi\"}'",
             "output": "{\"message\":[\"name must be longer than or equal to 3 characters\",\"email must be an email\"],\"error\":\"Bad Request\",\"statusCode\":400}",
             "sentence": 3
           }

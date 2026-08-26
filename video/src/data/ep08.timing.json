@@ -281,12 +281,12 @@
           "durationInFrames": 166
         },
         {
-          "file": "audio/ep08/scene-05-5-65438f7e.wav",
+          "file": "audio/ep08/scene-05-5-dcdf0547.wav",
           "startFrame": 717,
-          "durationInFrames": 104
+          "durationInFrames": 111
         }
       ],
-      "durationInFrames": 839
+      "durationInFrames": 846
     },
     {
       "id": "scene-06",
