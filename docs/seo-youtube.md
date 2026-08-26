@@ -347,6 +347,135 @@ Xem từ đầu phần nâng cao: [LINK NC1]
 nestjs exception filter, xử lý lỗi nestjs, error handling, catch httpexception, usefilters, notfoundexception, nestjs nâng cao, nestjs tiếng việt, học nestjs, backend nodejs, api error format, request lifecycle, nestjs tutorial, nodejs tiếng việt, xử lý lỗi api
 ```
 
+## PHẦN TRANSPORTERS — Series "Microservices nâng cao: Redis · RabbitMQ · Kafka"
+
+> Thêm vào playlist "NestJS nâng cao 🇻🇳". Demo cần Docker (hướng dẫn trong video). Code: thư mục `demo-redis/`, `demo-rabbitmq/`, `demo-kafka/` trong repo.
+
+### Transporters #1 — Redis (4:33)
+
+**Tiêu đề (chính):**
+Redis làm "dây liên lạc" microservices: đổi 2 dòng config, không đổi code | Transporters #1
+
+**Tiêu đề (phương án khác):**
+- Redis Pub/Sub với NestJS: hết cảnh service nhớ địa chỉ nhau
+- Từ TCP sang Redis trong 2 dòng — NestJS Transporters #1
+
+**Mô tả:**
+```
+Hệ thống 30 microservices mà nối dây TCP trực tiếp? Một rừng dây chằng chịt. Tập này thay tất cả bằng một "đài phát thanh" Redis 📻 — và giữ đúng lời hứa của NestJS: đổi transporter chỉ mất 2 dòng config, logic không đổi một chữ.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu phần Transporters
+0:22 Giới hạn của TCP điểm-nối-điểm
+0:47 Redis là gì? (cache + tài năng ẩn Pub/Sub)
+1:11 Ví von: đài phát thanh khu phố
+1:36 Kiến trúc: mọi tin đi qua đài Redis
+1:59 Dựng Redis bằng 1 lệnh Docker
+2:21 Đổi transport trong main.ts (2 dòng!)
+2:44 Đổi phía gateway
+3:03 Điều kỳ diệu: logic không đổi
+3:21 Demo: chạy thử + tắt service xem sao
+3:42 Khi nào chọn Redis?
+4:05 Tóm tắt & hẹn tập RabbitMQ
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Tập 2 (RabbitMQ): [LINK T2] · Xem lại Microservices cơ bản: [LINK EP2]
+
+#nestjs #redis #microservices #nodejs #laptrinh
+```
+
+**Tags:**
+```
+redis, redis pub sub, nestjs redis, redis transporter, microservices nestjs, redis là gì, docker redis, nestjs tiếng việt, học nestjs, backend nodejs, message broker, giao tiếp microservices, transport nestjs, nodejs tiếng việt, kiến trúc hệ thống
+```
+
+### Transporters #2 — RabbitMQ (5:05)
+
+**Tiêu đề (chính):**
+RabbitMQ: tắt hẳn service mà KHÔNG mất một đơn hàng | NestJS Transporters #2
+
+**Tiêu đề (phương án khác):**
+- Message Queue giải thích bằng... bưu điện 📮 | RabbitMQ + NestJS
+- emit & @EventPattern: xử lý việc nặng không bắt khách chờ
+
+**Mô tả:**
+```
+Điều gì xảy ra nếu service xử lý đơn hàng CHẾT đúng lúc khách bấm đặt hàng? Với RabbitMQ: không gì cả — đơn nằm an toàn trong hàng đợi, service sống lại là xử lý tiếp. Tập này có màn demo tắt service trực tiếp để chứng minh.
+
+Ví von xuyên suốt: RabbitMQ là bưu điện 📮 — gửi thư xong là xong việc, người nhận vắng nhà thì thư nằm chờ.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu
+0:20 Hai bài toán khó của kiểu hỏi-đáp
+0:48 Message Queue = bưu điện
+1:10 send/hỏi-đáp 🆚 emit/gửi thư (fire & forget)
+1:36 Kiến trúc: Gateway → Queue → Worker
+2:02 Dựng RabbitMQ bằng Docker
+2:19 Config RMQ + tên queue
+2:42 client.emit — bỏ thư vào thùng
+3:02 Worker: cùng queue, khớp nhau
+3:19 @EventPattern — người xử lý thư
+3:39 DEMO ĐINH: tắt worker, đơn vẫn không mất!
+4:12 Khi nào chọn RabbitMQ?
+4:34 Tóm tắt & hẹn tập Kafka
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Tập 1 (Redis): [LINK T1] · Tập 3 (Kafka): [LINK T3]
+
+#rabbitmq #messagequeue #nestjs #nodejs #laptrinh
+```
+
+**Comment ghim gợi ý (chống bắt bẻ từ dân pro):**
+```
+⚠️ Lưu ý cho production: demo dùng cấu hình mặc định của NestJS RMQ. Để "không mất tin" tuyệt đối cả khi worker crash GIỮA LÚC xử lý hoặc broker restart, bạn cần thêm: queueOptions: { durable: true }, persistent: true khi emit, và noAck: false + tự ack sau khi xử lý xong. Chi tiết trong docs NestJS phần RabbitMQ nhé!
+```
+
+**Tags:**
+```
+rabbitmq, message queue, rabbitmq nestjs, event pattern, hàng đợi tin nhắn, rabbitmq là gì, docker rabbitmq, xử lý bất đồng bộ, background job, nestjs tiếng việt, học nestjs, microservices, fire and forget, emit nestjs, độ tin cậy hệ thống
+```
+
+### Transporters #3 — Kafka (5:07)
+
+**Tiêu đề (chính):**
+Kafka không đáng sợ: hiểu bằng một cuốn sổ nhật ký | NestJS Transporters #3 (cuối)
+
+**Tiêu đề (phương án khác):**
+- Kafka là gì? Event streaming giải thích cho người mới
+- Xương sống dữ liệu của Netflix, Uber — tự chạy Kafka trong 5 phút
+
+**Mô tả:**
+```
+Kafka — xương sống dữ liệu của LinkedIn, Netflix, Uber — nghe đồn rất khó. Nhưng nếu coi nó là một CUỐN SỔ NHẬT KÝ 📒 ghi lại mọi sự kiện của công ty, mọi thứ bỗng dễ hiểu: ghi một lần, bao nhiêu phòng ban đọc cũng được, người mới đọc lại từ đầu.
+
+Tập cuối series Transporters, kèm bảng tổng kết chọn TCP / Redis / RabbitMQ / Kafka cho đúng bài toán.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu tập cuối
+0:20 Ba việc "bưu điện" không làm được
+0:44 Kafka = sổ nhật ký chung (event streaming)
+1:11 Topic · Consumer Group · Partition — dịch ra tiếng "sổ"
+1:39 Kiến trúc: ghi 1 lần, nhiều người đọc
+2:07 Dựng Kafka bằng 1 lệnh Docker
+2:24 Config KAFKA + brokers
+2:42 Ghi sự kiện page_view
+3:01 groupId — "tên phòng ban" và cái kẹp sổ
+3:24 Đọc sổ + đếm lượt xem
+3:44 Demo: 3 lượt xem, đúng thứ tự
+4:07 Tổng kết: chọn transporter nào?
+4:36 Lời chào cuối series 🧡
+
+📦 Source code trọn bộ: https://github.com/Leung190299/nestjs-tutorial-series
+Xem từ đầu phần Transporters: [LINK T1]
+
+#kafka #eventstreaming #nestjs #nodejs #laptrinh
+```
+
+**Tags:**
+```
+kafka, apache kafka, kafka là gì, event streaming, kafka nestjs, consumer group, kafka topic, docker kafka, kafkajs, nestjs tiếng việt, học kafka, big data, xử lý sự kiện, kiến trúc dữ liệu, microservices nâng cao
+```
+
 ## Thumbnail
 
 Đã render sẵn tại `video/out/thumbs/ep0X-thumb.png` (1280×720, <2MB, chuẩn YouTube). Muốn sửa chữ/bố cục: sửa mảng `thumbnails` trong `video/src/Root.tsx` hoặc component `video/src/Thumbnail.tsx`, rồi chạy `npx remotion still Thumb0X out/thumbs/ep0X-thumb.png`.

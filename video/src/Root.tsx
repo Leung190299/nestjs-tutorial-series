@@ -11,6 +11,9 @@ import ep05 from './data/ep05.timing.json';
 import ep06 from './data/ep06.timing.json';
 import ep07 from './data/ep07.timing.json';
 import ep08 from './data/ep08.timing.json';
+import ep09 from './data/ep09.timing.json';
+import ep10 from './data/ep10.timing.json';
+import ep11 from './data/ep11.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -22,6 +25,9 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode06', timing: ep06 as unknown as EpisodeTiming},
   {id: 'Episode07', timing: ep07 as unknown as EpisodeTiming},
   {id: 'Episode08', timing: ep08 as unknown as EpisodeTiming},
+  {id: 'Episode09', timing: ep09 as unknown as EpisodeTiming},
+  {id: 'Episode10', timing: ep10 as unknown as EpisodeTiming},
+  {id: 'Episode11', timing: ep11 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -104,6 +110,36 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       line2: 'PHẢI ĐẸP',
       subtitle: 'Exception Filters',
       variant: 'ep8',
+    },
+  },
+  {
+    id: 'Thumb09',
+    props: {
+      badge: 'TRANSPORTERS 1',
+      line1: 'ĐỔI DÂY',
+      line2: 'KHÔNG ĐỔI CODE',
+      subtitle: 'Redis Pub/Sub · 2 dòng config',
+      variant: 'ep9',
+    },
+  },
+  {
+    id: 'Thumb10',
+    props: {
+      badge: 'TRANSPORTERS 2',
+      line1: 'TẮT SERVICE',
+      line2: 'KHÔNG MẤT ĐƠN',
+      subtitle: 'RabbitMQ · Message Queue',
+      variant: 'ep10',
+    },
+  },
+  {
+    id: 'Thumb11',
+    props: {
+      badge: 'TRANSPORTERS 3',
+      line1: 'SỔ NHẬT KÝ',
+      line2: 'TRIỆU SỰ KIỆN',
+      subtitle: 'Kafka · Event Streaming',
+      variant: 'ep11',
     },
   },
 ];

@@ -1,0 +1,656 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Redis Transport",
+        "subtitle": "Transporters Tập 1 · Đổi dây, không đổi logic",
+        "badge": "NestJS nâng cao · Transporters"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep09/scene-01-0-45f00eb0.wav",
+          "startFrame": 0,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep09/scene-01-1-798cd998.wav",
+          "startFrame": 131,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep09/scene-01-2-d35c3da9.wav",
+          "startFrame": 372,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep09/scene-01-3-18249dd2.wav",
+          "startFrame": 517,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 687
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Giới hạn của TCP điểm-nối-điểm",
+        "bullets": [
+          {
+            "icon": "☎️",
+            "text": "TCP = gọi điện trực tiếp: phải biết số nhau",
+            "sentence": 1
+          },
+          {
+            "icon": "🕸️",
+            "text": "30 service = rừng dây chằng chịt",
+            "sentence": 2
+          },
+          {
+            "icon": "😫",
+            "text": "1 service đổi địa chỉ, cả đám sửa theo",
+            "sentence": 3
+          },
+          {
+            "icon": "📉",
+            "text": "Điểm-nối-điểm không lớn theo hệ thống",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep09/scene-02-0-b71504f8.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep09/scene-02-1-701a0a1a.wav",
+          "startFrame": 145,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep09/scene-02-2-de971f48.wav",
+          "startFrame": 348,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep09/scene-02-3-a8427b0b.wav",
+          "startFrame": 505,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep09/scene-02-4-6410cc27.wav",
+          "startFrame": 614,
+          "durationInFrames": 120
+        }
+      ],
+      "durationInFrames": 752
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "Redis là gì?",
+        "bullets": [
+          {
+            "icon": "⚡",
+            "text": "Kho dữ liệu trên RAM — nhanh cỡ micro giây",
+            "sentence": 1
+          },
+          {
+            "icon": "📡",
+            "text": "Tài năng ẩn: trạm phát sóng Pub/Sub",
+            "sentence": 2
+          },
+          {
+            "icon": "🔊",
+            "text": "Pub = phát lên kênh · Sub = nghe kênh",
+            "sentence": 3
+          },
+          {
+            "icon": "🐈",
+            "text": "NestJS dùng luôn làm transporter",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep09/scene-03-0-2783b3d7.wav",
+          "startFrame": 0,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep09/scene-03-1-21002bf6.wav",
+          "startFrame": 85,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep09/scene-03-2-753b74c1.wav",
+          "startFrame": 271,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep09/scene-03-3-9b7f1846.wav",
+          "startFrame": 433,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep09/scene-03-4-08ce29b8.wav",
+          "startFrame": 569,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 710
+    },
+    {
+      "id": "scene-04",
+      "type": "concept",
+      "visual": {
+        "title": "Redis = đài phát thanh khu phố 📻",
+        "bullets": [
+          {
+            "icon": "📻",
+            "text": "Một đài chung cho cả khu phố",
+            "sentence": 0
+          },
+          {
+            "icon": "🎙️",
+            "text": "Nói vào micro, không gọi số riêng ai",
+            "sentence": 1
+          },
+          {
+            "icon": "👂",
+            "text": "Ai phụ trách kênh nào thì dò kênh đó",
+            "sentence": 2
+          },
+          {
+            "icon": "➕",
+            "text": "Thêm service = dò thêm kênh, khỏi kéo dây",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep09/scene-04-0-23e32e83.wav",
+          "startFrame": 0,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep09/scene-04-1-3a336a2f.wav",
+          "startFrame": 119,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep09/scene-04-2-aed45751.wav",
+          "startFrame": 319,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep09/scene-04-3-65ada734.wav",
+          "startFrame": 498,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep09/scene-04-4-35cfe3b7.wav",
+          "startFrame": 614,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 748
+    },
+    {
+      "id": "scene-05",
+      "type": "diagram",
+      "visual": {
+        "title": "Kiến trúc: mọi tin đi qua đài Redis",
+        "boxes": [
+          {
+            "id": "gateway",
+            "label": "Gateway",
+            "emoji": "🚪"
+          },
+          {
+            "id": "redis",
+            "label": "Redis",
+            "emoji": "📻"
+          },
+          {
+            "id": "users",
+            "label": "Users Service",
+            "emoji": "👥"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "phát: get_users",
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "kênh get_users",
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 0,
+            "label": "đáp án",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep09/scene-05-0-729a7a45.wav",
+          "startFrame": 0,
+          "durationInFrames": 53
+        },
+        {
+          "file": "audio/ep09/scene-05-1-fe1bbfc1.wav",
+          "startFrame": 61,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep09/scene-05-2-05a0f8c8.wav",
+          "startFrame": 230,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep09/scene-05-3-4675c48a.wav",
+          "startFrame": 330,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep09/scene-05-4-b67d9c10.wav",
+          "startFrame": 430,
+          "durationInFrames": 89
+        },
+        {
+          "file": "audio/ep09/scene-05-5-9cc3cbdf.wav",
+          "startFrame": 527,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 697
+    },
+    {
+      "id": "scene-06",
+      "type": "terminal",
+      "visual": {
+        "title": "Dựng đài Redis bằng Docker",
+        "commands": [
+          {
+            "cmd": "docker run -d --name tutorial-redis -p 6379:6379 redis:7",
+            "output": "b6a2b10a99d3b2403b62a7aa6b6b48aa...",
+            "sentence": 2
+          },
+          {
+            "cmd": "docker exec tutorial-redis redis-cli ping",
+            "output": "PONG",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep09/scene-06-0-82db018d.wav",
+          "startFrame": 0,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep09/scene-06-1-65c2f712.wav",
+          "startFrame": 116,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep09/scene-06-2-42294925.wav",
+          "startFrame": 268,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep09/scene-06-3-31d6abfe.wav",
+          "startFrame": 394,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep09/scene-06-4-9ad55841.wav",
+          "startFrame": 508,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 661
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "users-service/src/main.ts",
+        "language": "tsx",
+        "code": "import { NestFactory } from '@nestjs/core';\nimport { Transport } from '@nestjs/microservices';\nimport { AppModule } from './app.module';\n\nasync function bootstrap() {\n  const app = await NestFactory.createMicroservice(AppModule, {\n    transport: Transport.REDIS,\n    options: { host: 'localhost', port: 6379 },\n  });\n  await app.listen();\n}\nbootstrap();",
+        "steps": [
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep09/scene-07-0-816a4e2c.wav",
+          "startFrame": 0,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep09/scene-07-1-ea6d830a.wav",
+          "startFrame": 167,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep09/scene-07-2-5fbba1b1.wav",
+          "startFrame": 293,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep09/scene-07-3-8b4661ee.wav",
+          "startFrame": 433,
+          "durationInFrames": 82
+        },
+        {
+          "file": "audio/ep09/scene-07-4-9919ca38.wav",
+          "startFrame": 523,
+          "durationInFrames": 137
+        }
+      ],
+      "durationInFrames": 678
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "gateway/src/app.module.ts",
+        "language": "tsx",
+        "code": "import { Module } from '@nestjs/common';\nimport { ClientsModule, Transport } from '@nestjs/microservices';\nimport { UsersController } from './users.controller';\n\n@Module({\n  imports: [\n    ClientsModule.register([\n      {\n        name: 'USERS_SERVICE',\n        transport: Transport.REDIS,\n        options: { host: 'localhost', port: 6379 },\n      },\n    ]),\n  ],\n  controllers: [UsersController],\n})\nexport class AppModule {}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 11,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 13,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep09/scene-08-0-ab480609.wav",
+          "startFrame": 0,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep09/scene-08-1-4d606760.wav",
+          "startFrame": 133,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep09/scene-08-2-56567997.wav",
+          "startFrame": 285,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep09/scene-08-3-0d5d3536.wav",
+          "startFrame": 423,
+          "durationInFrames": 120
+        }
+      ],
+      "durationInFrames": 561
+    },
+    {
+      "id": "scene-09",
+      "type": "concept",
+      "visual": {
+        "title": "Đổi dây — không đổi logic ✨",
+        "bullets": [
+          {
+            "icon": "🧠",
+            "text": "@MessagePattern, client.send: không đổi",
+            "sentence": 1
+          },
+          {
+            "icon": "🔌",
+            "text": "Chỉ thay đường dây bên dưới (2 dòng config)",
+            "sentence": 2
+          },
+          {
+            "icon": "🏆",
+            "text": "Hạ tầng tách rời nghiệp vụ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep09/scene-09-0-357d5075.wav",
+          "startFrame": 0,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep09/scene-09-1-e277825c.wav",
+          "startFrame": 85,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep09/scene-09-2-988b9931.wav",
+          "startFrame": 269,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep09/scene-09-3-5387ab0f.wav",
+          "startFrame": 385,
+          "durationInFrames": 159
+        }
+      ],
+      "durationInFrames": 562
+    },
+    {
+      "id": "scene-10",
+      "type": "terminal",
+      "visual": {
+        "title": "Lên sóng thử! 📻",
+        "commands": [
+          {
+            "cmd": "cd users-service && npm run start",
+            "output": "[Nest] LOG [NestMicroservice] Nest microservice successfully started",
+            "sentence": 1
+          },
+          {
+            "cmd": "curl http://localhost:3000/users",
+            "output": "[{\"id\":1,\"name\":\"Minh\"},{\"id\":2,\"name\":\"Lan\"}]   ← đi qua Redis!",
+            "sentence": 2
+          },
+          {
+            "cmd": "curl --max-time 5 localhost:3000/users   # sau khi TẮT users-service",
+            "output": "curl: (28) Operation timed out — không ai trả lời trên kênh",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep09/scene-10-0-cc9f79de.wav",
+          "startFrame": 0,
+          "durationInFrames": 87
+        },
+        {
+          "file": "audio/ep09/scene-10-1-8b2743e0.wav",
+          "startFrame": 95,
+          "durationInFrames": 48
+        },
+        {
+          "file": "audio/ep09/scene-10-2-1c69503f.wav",
+          "startFrame": 151,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep09/scene-10-3-eabc2a74.wav",
+          "startFrame": 320,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep09/scene-10-4-fa3beae5.wav",
+          "startFrame": 487,
+          "durationInFrames": 101
+        }
+      ],
+      "durationInFrames": 606
+    },
+    {
+      "id": "scene-11",
+      "type": "concept",
+      "visual": {
+        "title": "Khi nào chọn Redis?",
+        "bullets": [
+          {
+            "icon": "🚀",
+            "text": "Nhẹ, nhanh, dựng bằng một lệnh",
+            "sentence": 1
+          },
+          {
+            "icon": "♻️",
+            "text": "Tận dụng Redis cache có sẵn trong dự án",
+            "sentence": 2
+          },
+          {
+            "icon": "⚠️",
+            "text": "Không ai đang nghe = tin mất luôn",
+            "sentence": 3
+          },
+          {
+            "icon": "📮",
+            "text": "Cần giữ tin chờ người nhận? → RabbitMQ",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep09/scene-11-0-46bd272d.wav",
+          "startFrame": 0,
+          "durationInFrames": 80
+        },
+        {
+          "file": "audio/ep09/scene-11-1-3f855b4a.wav",
+          "startFrame": 88,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep09/scene-11-2-29d07a7c.wav",
+          "startFrame": 243,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep09/scene-11-3-e4d21f51.wav",
+          "startFrame": 383,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep09/scene-11-4-bb14cd32.wav",
+          "startFrame": 552,
+          "durationInFrames": 142
+        }
+      ],
+      "durationInFrames": 712
+    },
+    {
+      "id": "scene-12",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "Redis = đài phát thanh Pub/Sub giữa services",
+            "sentence": 0
+          },
+          {
+            "text": "Không cần biết địa chỉ nhau — chỉ cần biết đài",
+            "sentence": 1
+          },
+          {
+            "text": "Đổi transport = đổi config, logic nguyên vẹn",
+            "sentence": 2
+          }
+        ],
+        "next": "Transporters Tập 2: RabbitMQ — bưu điện giữ thư 📮"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep09/scene-12-0-90ccd90f.wav",
+          "startFrame": 0,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep09/scene-12-1-5e1c4300.wav",
+          "startFrame": 121,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep09/scene-12-2-6ba05e47.wav",
+          "startFrame": 252,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep09/scene-12-3-10116e4f.wav",
+          "startFrame": 421,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep09/scene-12-4-0d48718b.wav",
+          "startFrame": 588,
+          "durationInFrames": 219
+        }
+      ],
+      "durationInFrames": 825
+    }
+  ]
+}
