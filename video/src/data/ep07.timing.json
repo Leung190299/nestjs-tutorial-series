@@ -1,0 +1,505 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Interceptors — Can thiệp 2 chiều",
+        "subtitle": "NestJS nâng cao · Tập 3 · Log & Transform",
+        "badge": "Series NestJS nâng cao"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep07/scene-01-0-e999589f.wav",
+          "startFrame": 0,
+          "durationInFrames": 87
+        },
+        {
+          "file": "audio/ep07/scene-01-1-3d5ce2a0.wav",
+          "startFrame": 95,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep07/scene-01-2-a4eb2eb6.wav",
+          "startFrame": 235,
+          "durationInFrames": 125
+        }
+      ],
+      "durationInFrames": 378
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Vấn đề: việc lặp ở trước VÀ sau",
+        "bullets": [
+          {
+            "icon": "⏱️",
+            "text": "Đo thời gian xử lý mọi API",
+            "sentence": 1
+          },
+          {
+            "icon": "📦",
+            "text": "Bọc mọi response theo khuôn chung",
+            "sentence": 2
+          },
+          {
+            "icon": "😩",
+            "text": "Sửa tay từng hàm? Trăm lần lặp lại",
+            "sentence": 3
+          },
+          {
+            "icon": "🎬",
+            "text": "Việc trước & sau handler = Interceptor",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep07/scene-02-0-93096e7e.wav",
+          "startFrame": 0,
+          "durationInFrames": 87
+        },
+        {
+          "file": "audio/ep07/scene-02-1-c9521304.wav",
+          "startFrame": 95,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep07/scene-02-2-14367c3a.wav",
+          "startFrame": 228,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep07/scene-02-3-6285e30e.wav",
+          "startFrame": 385,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep07/scene-02-4-4cf96e88.wav",
+          "startFrame": 533,
+          "durationInFrames": 140
+        }
+      ],
+      "durationInFrames": 691
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "Camera + người gói quà 🎥🎁",
+        "bullets": [
+          {
+            "icon": "🎥",
+            "text": "Chiều đi: thấy request trước handler",
+            "sentence": 1
+          },
+          {
+            "icon": "🎁",
+            "text": "Chiều về: gói response trước khi trả",
+            "sentence": 2
+          },
+          {
+            "icon": "🙈",
+            "text": "Handler không hề hay biết",
+            "sentence": 3
+          },
+          {
+            "icon": "✌️",
+            "text": "Vừa quan sát, vừa biến đổi kết quả",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep07/scene-03-0-2b5a886b.wav",
+          "startFrame": 0,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep07/scene-03-1-b293728c.wav",
+          "startFrame": 116,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep07/scene-03-2-7c68c3bf.wav",
+          "startFrame": 249,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep07/scene-03-3-44a6a2b6.wav",
+          "startFrame": 387,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep07/scene-03-4-eae0396e.wav",
+          "startFrame": 518,
+          "durationInFrames": 101
+        }
+      ],
+      "durationInFrames": 637
+    },
+    {
+      "id": "scene-04",
+      "type": "diagram",
+      "visual": {
+        "title": "Interceptor bọc quanh handler",
+        "boxes": [
+          {
+            "id": "client",
+            "label": "Client",
+            "emoji": "📱"
+          },
+          {
+            "id": "interceptor",
+            "label": "Interceptor",
+            "emoji": "🎥"
+          },
+          {
+            "id": "handler",
+            "label": "Handler",
+            "emoji": "🧑‍🍳"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "GET /products",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "next.handle()",
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 0,
+            "label": "{success, data}",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep07/scene-04-0-f86f647a.wav",
+          "startFrame": 0,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep07/scene-04-1-44ae54ac.wav",
+          "startFrame": 102,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep07/scene-04-2-0621de2b.wav",
+          "startFrame": 221,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep07/scene-04-3-f5e20ab8.wav",
+          "startFrame": 340,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep07/scene-04-4-7d447dd4.wav",
+          "startFrame": 536,
+          "durationInFrames": 113
+        }
+      ],
+      "durationInFrames": 667
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "src/products/logging.interceptor.ts",
+        "language": "tsx",
+        "code": "import {\n  CallHandler,\n  ExecutionContext,\n  Injectable,\n  NestInterceptor,\n} from '@nestjs/common';\nimport { Observable, map, tap } from 'rxjs';\n\n@Injectable()\nexport class LoggingInterceptor implements NestInterceptor {\n  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {\n    const start = Date.now();\n    return next.handle().pipe(\n      tap(() => console.log(`Xử lý mất ${Date.now() - start}ms`)),\n      map((data) => ({ success: true, data })),\n    );\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 18,
+            "sentence": 0
+          },
+          {
+            "from": 9,
+            "to": 11,
+            "sentence": 1
+          },
+          {
+            "from": 12,
+            "to": 12,
+            "sentence": 2
+          },
+          {
+            "from": 13,
+            "to": 13,
+            "sentence": 3
+          },
+          {
+            "from": 14,
+            "to": 14,
+            "sentence": 4
+          },
+          {
+            "from": 15,
+            "to": 15,
+            "sentence": 5
+          },
+          {
+            "from": 1,
+            "to": 18,
+            "sentence": 6
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep07/scene-05-0-b6842f5e.wav",
+          "startFrame": 0,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep07/scene-05-1-2719647c.wav",
+          "startFrame": 112,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep07/scene-05-2-ac9592a5.wav",
+          "startFrame": 267,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep07/scene-05-3-3f62bc46.wav",
+          "startFrame": 386,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep07/scene-05-4-109b8953.wav",
+          "startFrame": 577,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep07/scene-05-5-cb708584.wav",
+          "startFrame": 717,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep07/scene-05-6-f3017499.wav",
+          "startFrame": 841,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 953
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "src/products/products.controller.ts",
+        "language": "tsx",
+        "code": "import { Controller, Get, UseInterceptors } from '@nestjs/common';\nimport { LoggingInterceptor } from './logging.interceptor';\n\n@UseInterceptors(LoggingInterceptor)\n@Controller('products')\nexport class ProductsController {\n  @Get()\n  findAll() {\n    return [{ id: 1, name: 'Bàn phím cơ' }];\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 5,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep07/scene-06-0-ec9a1b04.wav",
+          "startFrame": 0,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep07/scene-06-1-03c7a294.wav",
+          "startFrame": 140,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep07/scene-06-2-490ed13b.wav",
+          "startFrame": 264,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep07/scene-06-3-c829ec3c.wav",
+          "startFrame": 409,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 557
+    },
+    {
+      "id": "scene-07",
+      "type": "terminal",
+      "visual": {
+        "title": "Camera & gói quà hoạt động! 🎥",
+        "commands": [
+          {
+            "cmd": "curl localhost:3000/products",
+            "output": "{\"success\":true,\"data\":[{\"id\":1,\"name\":\"Bàn phím cơ\"}]}",
+            "sentence": 1
+          },
+          {
+            "cmd": "npm run start   # cửa sổ server",
+            "output": "Xử lý mất 3ms\nXử lý mất 1ms",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep07/scene-07-0-2547aacd.wav",
+          "startFrame": 0,
+          "durationInFrames": 82
+        },
+        {
+          "file": "audio/ep07/scene-07-1-873d8722.wav",
+          "startFrame": 90,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep07/scene-07-2-d8c224fa.wav",
+          "startFrame": 288,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep07/scene-07-3-f74c4e0d.wav",
+          "startFrame": 436,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 586
+    },
+    {
+      "id": "scene-08",
+      "type": "concept",
+      "visual": {
+        "title": "Interceptor trong dự án thật",
+        "bullets": [
+          {
+            "icon": "⚡",
+            "text": "Cache kết quả — khỏi tính lại",
+            "sentence": 1
+          },
+          {
+            "icon": "⏲️",
+            "text": "Timeout — cắt request quá lâu",
+            "sentence": 2
+          },
+          {
+            "icon": "🙈",
+            "text": "Gỡ trường nhạy cảm khỏi response",
+            "sentence": 3
+          },
+          {
+            "icon": "🧠",
+            "text": "Việc quanh handler 2 chiều → Interceptor",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep07/scene-08-0-e257e67b.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep07/scene-08-1-af66ca7e.wav",
+          "startFrame": 107,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep07/scene-08-2-2f35adb9.wav",
+          "startFrame": 211,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep07/scene-08-3-b69b008c.wav",
+          "startFrame": 323,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep07/scene-08-4-b1129adc.wav",
+          "startFrame": 447,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 600
+    },
+    {
+      "id": "scene-09",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "Interceptor = can thiệp trước VÀ sau handler",
+            "sentence": 0
+          },
+          {
+            "text": "next.handle() + tap/map của RxJS",
+            "sentence": 1
+          },
+          {
+            "text": "@UseInterceptors hoặc global cho cả app",
+            "sentence": 2
+          }
+        ],
+        "next": "Nâng cao Tập 4: Exception Filters — xử lý lỗi đẹp"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep07/scene-09-0-8b0c50f2.wav",
+          "startFrame": 0,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep07/scene-09-1-c4d054bf.wav",
+          "startFrame": 138,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep07/scene-09-2-53fbd1ca.wav",
+          "startFrame": 334,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep07/scene-09-3-bb934854.wav",
+          "startFrame": 486,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep07/scene-09-4-ea61a73c.wav",
+          "startFrame": 610,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 808
+    }
+  ]
+}

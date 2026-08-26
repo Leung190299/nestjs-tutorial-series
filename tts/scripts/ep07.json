@@ -1,0 +1,185 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại phần nâng cao của series NestJS!",
+      "Đã có người soát vé, có anh bảo vệ. Hôm nay là nhân vật đa tài nhất: Interceptors.",
+      "Nhân vật duy nhất đứng được ở CẢ HAI đầu: trước khi xử lý và sau khi có kết quả."
+    ],
+    "visual": {
+      "title": "Interceptors — Can thiệp 2 chiều",
+      "subtitle": "NestJS nâng cao · Tập 3 · Log & Transform",
+      "badge": "Series NestJS nâng cao"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Thử nghĩ về mấy yêu cầu rất hay gặp trong dự án thật nhé.",
+      "Sếp bảo: đo xem mỗi API chạy mất bao lâu, ghi log lại toàn bộ.",
+      "Team frontend bảo: mọi response phải bọc trong một khuôn chung, có trường success đàng hoàng.",
+      "Chẳng lẽ vào từng hàm, thêm bấm giờ và bọc kết quả bằng tay? Trăm hàm là trăm lần lặp.",
+      "Những việc cần làm TRƯỚC và SAU mọi handler như vậy, chính là đất diễn của Interceptor."
+    ],
+    "visual": {
+      "title": "Vấn đề: việc lặp ở trước VÀ sau",
+      "bullets": [
+        {"icon": "⏱️", "text": "Đo thời gian xử lý mọi API", "sentence": 1},
+        {"icon": "📦", "text": "Bọc mọi response theo khuôn chung", "sentence": 2},
+        {"icon": "😩", "text": "Sửa tay từng hàm? Trăm lần lặp lại", "sentence": 3},
+        {"icon": "🎬", "text": "Việc trước & sau handler = Interceptor", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "Interceptor giống tổ hợp camera an ninh cộng người gói quà của cửa hàng.",
+      "Chiều đi: nó thấy request TRƯỚC khi handler xử lý, tha hồ ghi hình, bấm giờ.",
+      "Chiều về: nó nhận kết quả TỪ handler, và được quyền gói lại cho đẹp trước khi trao khách.",
+      "Handler ở giữa hoàn toàn không biết mình đang được quay phim và có người gói hộ quà.",
+      "Một nhân vật, hai nhiệm vụ: quan sát hai chiều và biến đổi kết quả."
+    ],
+    "visual": {
+      "title": "Camera + người gói quà 🎥🎁",
+      "bullets": [
+        {"icon": "🎥", "text": "Chiều đi: thấy request trước handler", "sentence": 1},
+        {"icon": "🎁", "text": "Chiều về: gói response trước khi trả", "sentence": 2},
+        {"icon": "🙈", "text": "Handler không hề hay biết", "sentence": 3},
+        {"icon": "✌️", "text": "Vừa quan sát, vừa biến đổi kết quả", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "diagram",
+    "narration": [
+      "Nhìn vị trí của Interceptor trong hành trình request nhé.",
+      "Request đi vào, xuyên qua Interceptor: đồng hồ bấm giờ bắt đầu chạy.",
+      "Interceptor gọi tiếp vào handler qua hàm next.handle, chờ kết quả.",
+      "Kết quả quay về lại đi xuyên qua Interceptor lần nữa: dừng đồng hồ, gói response, rồi mới trao cho client.",
+      "Bao trọn hai đầu như vậy nên nó tên là Interceptor: kẻ chặn giữa đường."
+    ],
+    "visual": {
+      "title": "Interceptor bọc quanh handler",
+      "boxes": [
+        {"id": "client", "label": "Client", "emoji": "📱"},
+        {"id": "interceptor", "label": "Interceptor", "emoji": "🎥"},
+        {"id": "handler", "label": "Handler", "emoji": "🧑‍🍳"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "GET /products", "sentence": 1},
+        {"from": 1, "to": 2, "label": "next.handle()", "sentence": 2},
+        {"from": 1, "to": 0, "label": "{success, data}", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Viết Interceptor đa tài của chúng ta: LoggingInterceptor.",
+      "Class @Injectable implements NestInterceptor, với đúng một hàm: intercept.",
+      "Dòng đầu tiên chạy TRƯỚC handler: mình ghi lại mốc thời gian bắt đầu.",
+      "next.handle là lời gọi vào handler, trả về một Observable: dòng dữ liệu kết quả mà mình được phép can thiệp bằng pipe.",
+      "tap là camera chiều về: kết quả vừa có, mình in ra xử lý mất bao nhiêu mili giây.",
+      "map là người gói quà: bọc mọi kết quả vào khuôn success kèm data.",
+      "Đo giờ và đóng gói cho TOÀN BỘ app, gói gọn một class."
+    ],
+    "visual": {
+      "filename": "src/products/logging.interceptor.ts",
+      "language": "tsx",
+      "code": "import {\n  CallHandler,\n  ExecutionContext,\n  Injectable,\n  NestInterceptor,\n} from '@nestjs/common';\nimport { Observable, map, tap } from 'rxjs';\n\n@Injectable()\nexport class LoggingInterceptor implements NestInterceptor {\n  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {\n    const start = Date.now();\n    return next.handle().pipe(\n      tap(() => console.log(`Xử lý mất ${Date.now() - start}ms`)),\n      map((data) => ({ success: true, data })),\n    );\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 18, "sentence": 0},
+        {"from": 9, "to": 11, "sentence": 1},
+        {"from": 12, "to": 12, "sentence": 2},
+        {"from": 13, "to": 13, "sentence": 3},
+        {"from": 14, "to": 14, "sentence": 4},
+        {"from": 15, "to": 15, "sentence": 5},
+        {"from": 1, "to": 18, "sentence": 6}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Gắn vào đâu thì quen thuộc rồi: @UseInterceptors ngay trên controller.",
+      "Từ giờ mọi route của /products đều được quay phim và gói quà tự động.",
+      "Handler findAll bên trong vẫn ngây thơ trả về mảng sản phẩm như xưa, không biết gì cả.",
+      "Muốn áp cho cả app: useGlobalInterceptors trong main.ts, đúng bài cũ."
+    ],
+    "visual": {
+      "filename": "src/products/products.controller.ts",
+      "language": "tsx",
+      "code": "import { Controller, Get, UseInterceptors } from '@nestjs/common';\nimport { LoggingInterceptor } from './logging.interceptor';\n\n@UseInterceptors(LoggingInterceptor)\n@Controller('products')\nexport class ProductsController {\n  @Get()\n  findAll() {\n    return [{ id: 1, name: 'Bàn phím cơ' }];\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 11, "sentence": 0},
+        {"from": 4, "to": 5, "sentence": 1},
+        {"from": 7, "to": 10, "sentence": 2},
+        {"from": 1, "to": 11, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "terminal",
+    "narration": [
+      "Chạy thử xem hai nhiệm vụ có hoàn thành không nhé.",
+      "Gọi GET /products: kết quả trả về đã nằm gọn trong khuôn success kèm data, dù handler chỉ trả mảng trần.",
+      "Còn bên cửa sổ server: dòng log đo thời gian xử lý hiện ra đều đặn mỗi lần gọi.",
+      "Frontend vui vì khuôn chung, sếp vui vì có số liệu: một mũi tên trúng hai đích."
+    ],
+    "visual": {
+      "title": "Camera & gói quà hoạt động! 🎥",
+      "commands": [
+        {"cmd": "curl localhost:3000/products", "output": "{\"success\":true,\"data\":[{\"id\":1,\"name\":\"Bàn phím cơ\"}]}", "sentence": 1},
+        {"cmd": "npm run start   # cửa sổ server", "output": "Xử lý mất 3ms\nXử lý mất 1ms", "sentence": 2}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "concept",
+    "narration": [
+      "Interceptor còn nhiều đất diễn hơn thế trong dự án thật.",
+      "Cache: kết quả câu hỏi cũ còn đó thì trả luôn, khỏi làm lại.",
+      "Timeout: handler chạy quá lâu thì chủ động cắt, trả lỗi lịch sự.",
+      "Ẩn trường nhạy cảm: gỡ password ra khỏi mọi response trước khi trả.",
+      "Cứ việc gì cần làm quanh handler theo cả hai chiều, hãy nghĩ đến Interceptor đầu tiên."
+    ],
+    "visual": {
+      "title": "Interceptor trong dự án thật",
+      "bullets": [
+        {"icon": "⚡", "text": "Cache kết quả — khỏi tính lại", "sentence": 1},
+        {"icon": "⏲️", "text": "Timeout — cắt request quá lâu", "sentence": 2},
+        {"icon": "🙈", "text": "Gỡ trường nhạy cảm khỏi response", "sentence": 3},
+        {"icon": "🧠", "text": "Việc quanh handler 2 chiều → Interceptor", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: Interceptor bọc quanh handler, can thiệp được cả chiều đi lẫn chiều về.",
+      "Bộ đồ nghề: NestInterceptor với hàm intercept, next.handle gọi vào trong, tap để quan sát, map để biến đổi.",
+      "Gắn bằng @UseInterceptors, hoặc useGlobalInterceptors cho cả app.",
+      "Bài tập nhỏ: thêm console.log tên route đang được gọi, lấy từ context nhé.",
+      "Tập sau, cũng là tập cuối phần này: Exception filters — khi có lỗi, ai là người đứng ra xin lỗi khách? Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "Interceptor = can thiệp trước VÀ sau handler", "sentence": 0},
+        {"text": "next.handle() + tap/map của RxJS", "sentence": 1},
+        {"text": "@UseInterceptors hoặc global cho cả app", "sentence": 2}
+      ],
+      "next": "Nâng cao Tập 4: Exception Filters — xử lý lỗi đẹp"
+    }
+  }
+]

@@ -1,0 +1,197 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng đến với phần nâng cao của series NestJS cho người mới bắt đầu!",
+      "Mở màn là Pipes: người soát vé kiểm tra mọi dữ liệu trước khi cho vào ứng dụng của bạn.",
+      "Cuối tập, API của bạn sẽ tự động từ chối mọi dữ liệu rác mà không cần viết một dòng if nào."
+    ],
+    "visual": {
+      "title": "Pipes — Soát vé dữ liệu",
+      "subtitle": "NestJS nâng cao · Tập 1 · Validation",
+      "badge": "Series NestJS nâng cao"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Ở phần cơ bản, API của chúng ta tin tưởng người dùng tuyệt đối: gửi gì nhận nấy.",
+      "Nhưng thực tế thì sao? Người dùng có thể gửi tên rỗng, email viết sai, thậm chí dữ liệu phá hoại.",
+      "Nếu cứ thế lưu vào hệ thống, app của bạn sẽ đầy dữ liệu rác và lỗi khó lường.",
+      "Viết if kiểm tra từng trường trong từng hàm? Lặp code khủng khiếp và rất dễ bỏ sót.",
+      "NestJS có lời giải thanh lịch hơn nhiều, và đó là nhân vật chính hôm nay: Pipes."
+    ],
+    "visual": {
+      "title": "Vấn đề: dữ liệu không đáng tin",
+      "bullets": [
+        {"icon": "🤝", "text": "API cơ bản: tin người dùng tuyệt đối", "sentence": 0},
+        {"icon": "🗑️", "text": "Thực tế: tên rỗng, email sai, dữ liệu rác", "sentence": 1},
+        {"icon": "😵", "text": "Viết if từng trường: lặp code, dễ sót", "sentence": 3},
+        {"icon": "💡", "text": "Lời giải của NestJS: Pipes", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "Pipe giống nhân viên soát vé ở cổng sự kiện: ai vào cũng phải qua kiểm tra.",
+      "Vé hợp lệ thì mời vào, kèm chỉnh trang: pipe còn biết biến đổi dữ liệu, ví dụ đổi chuỗi thành số.",
+      "Vé giả thì chặn ngay tại cổng, trả lỗi 400 kèm lý do rõ ràng: handler bên trong không hề bị làm phiền.",
+      "Và điểm hay nhất: bạn khai báo luật MỘT lần, mọi cánh cổng trong app đều được bảo vệ.",
+      "Không còn cảnh mỗi hàm một rừng if nữa."
+    ],
+    "visual": {
+      "title": "Pipe = nhân viên soát vé 🎫",
+      "bullets": [
+        {"icon": "🎫", "text": "Kiểm tra mọi dữ liệu trước khi vào", "sentence": 0},
+        {"icon": "🔄", "text": "Biến đổi: chuỗi → số, cắt khoảng trắng", "sentence": 1},
+        {"icon": "⛔", "text": "Sai thì chặn ngay, trả 400 kèm lý do", "sentence": 2},
+        {"icon": "1️⃣", "text": "Khai báo luật một lần, bảo vệ mọi nơi", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "diagram",
+    "narration": [
+      "Vị trí của Pipe trong hành trình một request như thế này.",
+      "Request từ client mang theo body dữ liệu, phải đến cổng soát vé Pipe trước tiên.",
+      "Dữ liệu hợp lệ mới được đi tiếp vào handler, lúc này đã sạch và đúng kiểu.",
+      "Dữ liệu sai bị trả ngược về ngay với mã 400, kèm danh sách lỗi cụ thể.",
+      "Handler của bạn từ nay chỉ nhận dữ liệu sạch: code gọn hơn hẳn."
+    ],
+    "visual": {
+      "title": "Pipe đứng ở đâu trong request?",
+      "boxes": [
+        {"id": "client", "label": "Client", "emoji": "📱"},
+        {"id": "pipe", "label": "Pipe", "emoji": "🎫"},
+        {"id": "handler", "label": "Handler", "emoji": "🧑‍🍳"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "POST /users", "sentence": 1},
+        {"from": 1, "to": 2, "label": "dữ liệu sạch", "sentence": 2},
+        {"from": 1, "to": 0, "label": "400 + lý do", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Mình tạo một project mới cho cả phần nâng cao: demo-advanced.",
+      "Cài hai gói: class-validator để khai báo luật, và class-transformer để biến đổi dữ liệu.",
+      "Xong phần chuẩn bị, vào code!"
+    ],
+    "visual": {
+      "title": "Chuẩn bị project",
+      "commands": [
+        {"cmd": "nest new demo-advanced", "output": "🚀 Successfully created project demo-advanced", "sentence": 0},
+        {"cmd": "npm i class-validator class-transformer", "output": "added 4 packages in 3s", "sentence": 1}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Đầu tiên, khai báo luật soát vé bằng một class gọi là DTO: Data Transfer Object.",
+      "Trường name có hai luật: @IsNotEmpty là không được rỗng, @MinLength ba là tối thiểu ba ký tự.",
+      "Trường email chỉ cần một luật: @IsEmail, phải đúng định dạng email.",
+      "Mỗi decorator là một luật, đọc lên như văn xuôi, ai trong team cũng hiểu.",
+      "DTO vừa là bộ luật kiểm tra, vừa là bản hợp đồng mô tả dữ liệu cho cả dự án."
+    ],
+    "visual": {
+      "filename": "src/users/create-user.dto.ts",
+      "language": "tsx",
+      "code": "import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';\n\nexport class CreateUserDto {\n  @IsNotEmpty()\n  @MinLength(3)\n  name: string;\n\n  @IsEmail()\n  email: string;\n}",
+      "steps": [
+        {"from": 1, "to": 10, "sentence": 0},
+        {"from": 4, "to": 6, "sentence": 1},
+        {"from": 8, "to": 9, "sentence": 2},
+        {"from": 1, "to": 10, "sentence": 3},
+        {"from": 1, "to": 10, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Trong controller, hàm create nhận body qua @Body, và khai báo kiểu là CreateUserDto.",
+      "Chỉ cần khai kiểu như vậy, NestJS biết phải soát body theo đúng luật của DTO.",
+      "Dữ liệu vào được đến đây là đã qua cổng kiểm tra, đảm bảo sạch, cứ thế dùng thôi.",
+      "Bạn để ý nhé: không một dòng if kiểm tra nào trong logic chính."
+    ],
+    "visual": {
+      "filename": "src/users/users.controller.ts",
+      "language": "tsx",
+      "code": "import { Body, Controller, Post } from '@nestjs/common';\nimport { CreateUserDto } from './create-user.dto';\n\n@Controller('users')\nexport class UsersController {\n  @Post()\n  create(@Body() user: CreateUserDto) {\n    return { message: `Đã tạo user ${user.name}`, user };\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 10, "sentence": 0},
+        {"from": 7, "to": 7, "sentence": 1},
+        {"from": 8, "to": 8, "sentence": 2},
+        {"from": 1, "to": 10, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Bước cuối: bật hệ thống soát vé trong main.ts.",
+      "Một dòng duy nhất: useGlobalPipes với ValidationPipe. Global nghĩa là mọi route trong app đều được bảo vệ.",
+      "Từ nay, mọi DTO bạn viết đều tự động có hiệu lực, không phải bật từng chỗ."
+    ],
+    "visual": {
+      "filename": "src/main.ts",
+      "language": "tsx",
+      "code": "import { ValidationPipe } from '@nestjs/common';\nimport { NestFactory } from '@nestjs/core';\nimport { AppModule } from './app.module';\n\nasync function bootstrap() {\n  const app = await NestFactory.create(AppModule);\n  app.useGlobalPipes(new ValidationPipe());\n  await app.listen(3000);\n}\nbootstrap();",
+      "steps": [
+        {"from": 1, "to": 10, "sentence": 0},
+        {"from": 7, "to": 7, "sentence": 1},
+        {"from": 1, "to": 10, "sentence": 2}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "terminal",
+    "narration": [
+      "Chạy thử nhé: gửi một user hợp lệ trước.",
+      "Minh với email chuẩn: được chào đón, tạo thành công.",
+      "Giờ chơi xấu: tên chỉ một ký tự, email thì sai bét.",
+      "Bùm: 400 Bad Request, kèm danh sách lỗi nói rõ tên phải từ ba ký tự và email không hợp lệ.",
+      "Người dùng biết chính xác mình sai chỗ nào, còn dữ liệu của bạn thì sạch tuyệt đối."
+    ],
+    "visual": {
+      "title": "Soát vé thực chiến! 🎫",
+      "commands": [
+        {"cmd": "curl -X POST localhost:3000/users -d '{\"name\":\"Minh\",\"email\":\"minh@example.com\"}'", "output": "{\"message\":\"Đã tạo user Minh\",\"user\":{\"name\":\"Minh\",\"email\":\"minh@example.com\"}}", "sentence": 1},
+        {"cmd": "curl -X POST localhost:3000/users -d '{\"name\":\"M\",\"email\":\"sai-roi\"}'", "output": "{\"message\":[\"name must be longer than or equal to 3 characters\",\"email must be an email\"],\"error\":\"Bad Request\",\"statusCode\":400}", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: Pipe là trạm kiểm tra và biến đổi dữ liệu trước khi dữ liệu chạm vào handler.",
+      "Công thức ba bước: viết DTO với class-validator, khai kiểu ở @Body, và bật ValidationPipe trong main.ts.",
+      "Sai luật là chặn ngay với mã 400 kèm lý do, handler chỉ còn nhận dữ liệu sạch.",
+      "Bài tập nhỏ: thêm trường age với luật @IsInt và @Min mười tám xem hệ thống phản ứng thế nào nhé.",
+      "Tập sau: Guards — người bảo vệ quyết định AI được phép đi vào. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "Pipe = soát vé + biến đổi dữ liệu đầu vào", "sentence": 0},
+        {"text": "DTO + @Body + ValidationPipe = xong", "sentence": 1},
+        {"text": "Sai luật → 400 kèm lý do, handler luôn sạch", "sentence": 2}
+      ],
+      "next": "Nâng cao Tập 2: Guards — phân quyền truy cập"
+    }
+  }
+]

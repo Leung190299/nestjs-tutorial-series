@@ -7,13 +7,23 @@ import ep01 from './data/ep01.timing.json';
 import ep02 from './data/ep02.timing.json';
 import ep03 from './data/ep03.timing.json';
 import ep04 from './data/ep04.timing.json';
+import ep05 from './data/ep05.timing.json';
+import ep06 from './data/ep06.timing.json';
+import ep07 from './data/ep07.timing.json';
+import ep08 from './data/ep08.timing.json';
 import type {EpisodeTiming} from './data/types';
 
-const t01 = ep01 as unknown as EpisodeTiming;
-const t02 = ep02 as unknown as EpisodeTiming;
-const t03 = ep03 as unknown as EpisodeTiming;
-const t04 = ep04 as unknown as EpisodeTiming;
-const t00 = ep00 as unknown as EpisodeTiming;
+const episodes: {id: string; timing: EpisodeTiming}[] = [
+  {id: 'Episode01', timing: ep01 as unknown as EpisodeTiming},
+  {id: 'Episode02', timing: ep02 as unknown as EpisodeTiming},
+  {id: 'Episode03', timing: ep03 as unknown as EpisodeTiming},
+  {id: 'Episode04', timing: ep04 as unknown as EpisodeTiming},
+  {id: 'Episode05', timing: ep05 as unknown as EpisodeTiming},
+  {id: 'Episode06', timing: ep06 as unknown as EpisodeTiming},
+  {id: 'Episode07', timing: ep07 as unknown as EpisodeTiming},
+  {id: 'Episode08', timing: ep08 as unknown as EpisodeTiming},
+  {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
+];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
   {
@@ -56,6 +66,46 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'ep4',
     },
   },
+  {
+    id: 'Thumb05',
+    props: {
+      badge: 'NÂNG CAO 1',
+      line1: 'CHẶN',
+      line2: 'DỮ LIỆU RÁC',
+      subtitle: 'Pipes & Validation',
+      variant: 'ep5',
+    },
+  },
+  {
+    id: 'Thumb06',
+    props: {
+      badge: 'NÂNG CAO 2',
+      line1: 'KHÓA',
+      line2: 'ROUTE LẠI',
+      subtitle: 'Guards & phân quyền',
+      variant: 'ep6',
+    },
+  },
+  {
+    id: 'Thumb07',
+    props: {
+      badge: 'NÂNG CAO 3',
+      line1: 'CAN THIỆP',
+      line2: 'HAI CHIỀU',
+      subtitle: 'Interceptors · log & transform',
+      variant: 'ep7',
+    },
+  },
+  {
+    id: 'Thumb08',
+    props: {
+      badge: 'NÂNG CAO 4',
+      line1: 'LỖI CŨNG',
+      line2: 'PHẢI ĐẸP',
+      subtitle: 'Exception Filters',
+      variant: 'ep8',
+    },
+  },
 ];
 
 export const RemotionRoot: React.FC = () => (
@@ -72,50 +122,17 @@ export const RemotionRoot: React.FC = () => (
         height={720}
       />
     ))}
-    <Composition
-      id="Episode01"
-      component={Episode}
-      defaultProps={{timing: t01}}
-      durationInFrames={totalDuration(t01)}
-      fps={t01.fps}
-      width={1920}
-      height={1080}
-    />
-    <Composition
-      id="Episode02"
-      component={Episode}
-      defaultProps={{timing: t02}}
-      durationInFrames={totalDuration(t02)}
-      fps={t02.fps}
-      width={1920}
-      height={1080}
-    />
-    <Composition
-      id="Episode03"
-      component={Episode}
-      defaultProps={{timing: t03}}
-      durationInFrames={totalDuration(t03)}
-      fps={t03.fps}
-      width={1920}
-      height={1080}
-    />
-    <Composition
-      id="Episode04"
-      component={Episode}
-      defaultProps={{timing: t04}}
-      durationInFrames={totalDuration(t04)}
-      fps={t04.fps}
-      width={1920}
-      height={1080}
-    />
-    <Composition
-      id="Preview"
-      component={Episode}
-      defaultProps={{timing: t00}}
-      durationInFrames={totalDuration(t00)}
-      fps={t00.fps}
-      width={1920}
-      height={1080}
-    />
+    {episodes.map((e) => (
+      <Composition
+        key={e.id}
+        id={e.id}
+        component={Episode}
+        defaultProps={{timing: e.timing}}
+        durationInFrames={totalDuration(e.timing)}
+        fps={e.timing.fps}
+        width={1920}
+        height={1080}
+      />
+    ))}
   </>
 );

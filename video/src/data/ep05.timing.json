@@ -1,0 +1,514 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Pipes — Soát vé dữ liệu",
+        "subtitle": "NestJS nâng cao · Tập 1 · Validation",
+        "badge": "Series NestJS nâng cao"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep05/scene-01-0-6b00c3fe.wav",
+          "startFrame": 0,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep05/scene-01-1-238f3da9.wav",
+          "startFrame": 121,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep05/scene-01-2-e7d5f0d8.wav",
+          "startFrame": 257,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 429
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Vấn đề: dữ liệu không đáng tin",
+        "bullets": [
+          {
+            "icon": "🤝",
+            "text": "API cơ bản: tin người dùng tuyệt đối",
+            "sentence": 0
+          },
+          {
+            "icon": "🗑️",
+            "text": "Thực tế: tên rỗng, email sai, dữ liệu rác",
+            "sentence": 1
+          },
+          {
+            "icon": "😵",
+            "text": "Viết if từng trường: lặp code, dễ sót",
+            "sentence": 3
+          },
+          {
+            "icon": "💡",
+            "text": "Lời giải của NestJS: Pipes",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep05/scene-02-0-c08b53f5.wav",
+          "startFrame": 0,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep05/scene-02-1-e42fc183.wav",
+          "startFrame": 136,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep05/scene-02-2-007f7d15.wav",
+          "startFrame": 296,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep05/scene-02-3-1b17f735.wav",
+          "startFrame": 424,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep05/scene-02-4-9d41b053.wav",
+          "startFrame": 555,
+          "durationInFrames": 137
+        }
+      ],
+      "durationInFrames": 710
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "Pipe = nhân viên soát vé 🎫",
+        "bullets": [
+          {
+            "icon": "🎫",
+            "text": "Kiểm tra mọi dữ liệu trước khi vào",
+            "sentence": 0
+          },
+          {
+            "icon": "🔄",
+            "text": "Biến đổi: chuỗi → số, cắt khoảng trắng",
+            "sentence": 1
+          },
+          {
+            "icon": "⛔",
+            "text": "Sai thì chặn ngay, trả 400 kèm lý do",
+            "sentence": 2
+          },
+          {
+            "icon": "1️⃣",
+            "text": "Khai báo luật một lần, bảo vệ mọi nơi",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep05/scene-03-0-8157d353.wav",
+          "startFrame": 0,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep05/scene-03-1-e46b9ee1.wav",
+          "startFrame": 126,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep05/scene-03-2-a0756365.wav",
+          "startFrame": 281,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep05/scene-03-3-1a6dca2b.wav",
+          "startFrame": 457,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep05/scene-03-4-282ec2d1.wav",
+          "startFrame": 595,
+          "durationInFrames": 68
+        }
+      ],
+      "durationInFrames": 681
+    },
+    {
+      "id": "scene-04",
+      "type": "diagram",
+      "visual": {
+        "title": "Pipe đứng ở đâu trong request?",
+        "boxes": [
+          {
+            "id": "client",
+            "label": "Client",
+            "emoji": "📱"
+          },
+          {
+            "id": "pipe",
+            "label": "Pipe",
+            "emoji": "🎫"
+          },
+          {
+            "id": "handler",
+            "label": "Handler",
+            "emoji": "🧑‍🍳"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "POST /users",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "dữ liệu sạch",
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 0,
+            "label": "400 + lý do",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep05/scene-04-0-c6bbb76d.wav",
+          "startFrame": 0,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep05/scene-04-1-368bf7bc.wav",
+          "startFrame": 102,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep05/scene-04-2-ad8353a8.wav",
+          "startFrame": 242,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep05/scene-04-3-fe0eb042.wav",
+          "startFrame": 368,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep05/scene-04-4-6b52eacf.wav",
+          "startFrame": 506,
+          "durationInFrames": 108
+        }
+      ],
+      "durationInFrames": 632
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "Chuẩn bị project",
+        "commands": [
+          {
+            "cmd": "nest new demo-advanced",
+            "output": "🚀 Successfully created project demo-advanced",
+            "sentence": 0
+          },
+          {
+            "cmd": "npm i class-validator class-transformer",
+            "output": "added 4 packages in 3s",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep05/scene-05-0-5ba3b057.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep05/scene-05-1-e2f73a8c.wav",
+          "startFrame": 107,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep05/scene-05-2-9e6df47f.wav",
+          "startFrame": 255,
+          "durationInFrames": 53
+        }
+      ],
+      "durationInFrames": 326
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "src/users/create-user.dto.ts",
+        "language": "tsx",
+        "code": "import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';\n\nexport class CreateUserDto {\n  @IsNotEmpty()\n  @MinLength(3)\n  name: string;\n\n  @IsEmail()\n  email: string;\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 9,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep05/scene-06-0-28bcbb2e.wav",
+          "startFrame": 0,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep05/scene-06-1-e8c04bc8.wav",
+          "startFrame": 140,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep05/scene-06-2-31c72554.wav",
+          "startFrame": 321,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep05/scene-06-3-37b7b5e3.wav",
+          "startFrame": 447,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep05/scene-06-4-8a6d80b0.wav",
+          "startFrame": 571,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 724
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "src/users/users.controller.ts",
+        "language": "tsx",
+        "code": "import { Body, Controller, Post } from '@nestjs/common';\nimport { CreateUserDto } from './create-user.dto';\n\n@Controller('users')\nexport class UsersController {\n  @Post()\n  create(@Body() user: CreateUserDto) {\n    return { message: `Đã tạo user ${user.name}`, user };\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep05/scene-07-0-b4dae2d6.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep05/scene-07-1-ded24983.wav",
+          "startFrame": 172,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep05/scene-07-2-e5c5178c.wav",
+          "startFrame": 317,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep05/scene-07-3-d6c17a1f.wav",
+          "startFrame": 453,
+          "durationInFrames": 99
+        }
+      ],
+      "durationInFrames": 570
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "src/main.ts",
+        "language": "tsx",
+        "code": "import { ValidationPipe } from '@nestjs/common';\nimport { NestFactory } from '@nestjs/core';\nimport { AppModule } from './app.module';\n\nasync function bootstrap() {\n  const app = await NestFactory.create(AppModule);\n  app.useGlobalPipes(new ValidationPipe());\n  await app.listen(3000);\n}\nbootstrap();",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep05/scene-08-0-3ca70a43.wav",
+          "startFrame": 0,
+          "durationInFrames": 87
+        },
+        {
+          "file": "audio/ep05/scene-08-1-9d1fbc25.wav",
+          "startFrame": 95,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep05/scene-08-2-89fa511a.wav",
+          "startFrame": 286,
+          "durationInFrames": 118
+        }
+      ],
+      "durationInFrames": 422
+    },
+    {
+      "id": "scene-09",
+      "type": "terminal",
+      "visual": {
+        "title": "Soát vé thực chiến! 🎫",
+        "commands": [
+          {
+            "cmd": "curl -X POST localhost:3000/users -d '{\"name\":\"Minh\",\"email\":\"minh@example.com\"}'",
+            "output": "{\"message\":\"Đã tạo user Minh\",\"user\":{\"name\":\"Minh\",\"email\":\"minh@example.com\"}}",
+            "sentence": 1
+          },
+          {
+            "cmd": "curl -X POST localhost:3000/users -d '{\"name\":\"M\",\"email\":\"sai-roi\"}'",
+            "output": "{\"message\":[\"name must be longer than or equal to 3 characters\",\"email must be an email\"],\"error\":\"Bad Request\",\"statusCode\":400}",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep05/scene-09-0-056b2c1e.wav",
+          "startFrame": 0,
+          "durationInFrames": 68
+        },
+        {
+          "file": "audio/ep05/scene-09-1-0d46f454.wav",
+          "startFrame": 76,
+          "durationInFrames": 82
+        },
+        {
+          "file": "audio/ep05/scene-09-2-53714e6b.wav",
+          "startFrame": 166,
+          "durationInFrames": 89
+        },
+        {
+          "file": "audio/ep05/scene-09-3-f6b90b43.wav",
+          "startFrame": 263,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep05/scene-09-4-f3e0cfc1.wav",
+          "startFrame": 427,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 568
+    },
+    {
+      "id": "scene-10",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "Pipe = soát vé + biến đổi dữ liệu đầu vào",
+            "sentence": 0
+          },
+          {
+            "text": "DTO + @Body + ValidationPipe = xong",
+            "sentence": 1
+          },
+          {
+            "text": "Sai luật → 400 kèm lý do, handler luôn sạch",
+            "sentence": 2
+          }
+        ],
+        "next": "Nâng cao Tập 2: Guards — phân quyền truy cập"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep05/scene-10-0-001a74e5.wav",
+          "startFrame": 0,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep05/scene-10-1-a0f19385.wav",
+          "startFrame": 131,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep05/scene-10-2-28f71ee4.wav",
+          "startFrame": 348,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep05/scene-10-3-f4139e37.wav",
+          "startFrame": 491,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep05/scene-10-4-c733fe96.wav",
+          "startFrame": 665,
+          "durationInFrames": 111
+        }
+      ],
+      "durationInFrames": 794
+    }
+  ]
+}

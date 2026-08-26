@@ -1,0 +1,184 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại với phần nâng cao của series NestJS!",
+      "Tập trước Pipe đã lo phần CÁI GÌ được gửi vào. Hôm nay là câu hỏi quan trọng hơn: AI được phép vào?",
+      "Đó là việc của Guards: người bảo vệ đứng ở cửa từng route."
+    ],
+    "visual": {
+      "title": "Guards — Bảo vệ ở cửa",
+      "subtitle": "NestJS nâng cao · Tập 2 · Phân quyền",
+      "badge": "Series NestJS nâng cao"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Tưởng tượng app của bạn có trang quản trị ở đường dẫn /admin.",
+      "Hiện tại, BẤT KỲ AI gõ đúng địa chỉ đều xem được: khách vãng lai, đối thủ, hacker.",
+      "Bạn không thể viết if kiểm tra quyền trong từng hàm: lặp lại, dễ quên, và quên một chỗ là toang.",
+      "Việc gác cửa cần một nhân vật chuyên trách, tách hẳn khỏi logic chính.",
+      "NestJS gọi nhân vật đó là Guard."
+    ],
+    "visual": {
+      "title": "Vấn đề: cửa nào cũng mở toang",
+      "bullets": [
+        {"icon": "🚪", "text": "/admin mà ai gõ đúng cũng vào được", "sentence": 1},
+        {"icon": "😰", "text": "If quyền trong từng hàm: quên 1 chỗ là toang", "sentence": 2},
+        {"icon": "🎯", "text": "Cần người chuyên trách việc gác cửa", "sentence": 3},
+        {"icon": "💂", "text": "NestJS gọi đó là Guard", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "Guard giống anh bảo vệ đứng trước cửa khu VIP: kiểm tra thẻ trước, mọi thứ khác tính sau.",
+      "Anh ấy chỉ trả lời một câu hỏi duy nhất: cho vào, hay không cho vào. Đúng hay sai, true hay false.",
+      "Có thẻ hợp lệ: mời anh chị vào, request đi tiếp như bình thường.",
+      "Không thẻ? Chặn ngay từ cửa với mã 403 Forbidden, handler thậm chí không biết có người từng gõ cửa.",
+      "Phân biệt với Pipe nhé: bảo vệ hỏi BẠN LÀ AI, còn soát vé kiểm tra ĐỒ BẠN MANG."
+    ],
+    "visual": {
+      "title": "Guard = bảo vệ khu VIP 💂",
+      "bullets": [
+        {"icon": "💂", "text": "Đứng TRƯỚC cửa, kiểm tra trước tiên", "sentence": 0},
+        {"icon": "❓", "text": "Chỉ trả lời: true (vào) / false (chặn)", "sentence": 1},
+        {"icon": "⛔", "text": "Không quyền → 403, handler không hay biết", "sentence": 3},
+        {"icon": "🆚", "text": "Guard hỏi BẠN LÀ AI, Pipe xét ĐỒ BẠN MANG", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "diagram",
+    "narration": [
+      "Trong hành trình request, Guard đứng ngay sau cánh cửa, TRƯỚC cả Pipe và handler.",
+      "Request đến, kèm theo giấy tờ tùy thân: thường là header chứa token hay API key.",
+      "Guard xem giấy tờ: hợp lệ thì request đi tiếp vào trong.",
+      "Không hợp lệ: quay xe ngay tại cửa, mã 403, không bàn cãi.",
+      "Nhờ đứng ngoài cùng, mọi thứ phía trong không phải bận tâm chuyện an ninh nữa."
+    ],
+    "visual": {
+      "title": "Guard đứng ở đâu trong request?",
+      "boxes": [
+        {"id": "client", "label": "Client", "emoji": "📱"},
+        {"id": "guard", "label": "Guard", "emoji": "💂"},
+        {"id": "handler", "label": "Handler", "emoji": "🧑‍🍳"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "GET /admin + key", "sentence": 1},
+        {"from": 1, "to": 2, "label": "cho qua", "sentence": 2},
+        {"from": 1, "to": 0, "label": "403 Forbidden", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Viết anh bảo vệ đầu tiên nào: ApiKeyGuard.",
+      "Một Guard là class có @Injectable và implements CanActivate: hợp đồng chỉ gồm đúng một hàm.",
+      "Hàm canActivate nhận context: từ đó lấy ra được request hiện tại với đầy đủ headers.",
+      "Luật của mình đơn giản: header x-api-key phải đúng mật khẩu bí mật, trả về true hoặc false.",
+      "Thực tế bạn sẽ kiểm tra JWT token hay session ở đây, nhưng bộ khung thì y hệt thế này.",
+      "Chưa đầy mười dòng cho một người gác cửa tái sử dụng được ở mọi nơi."
+    ],
+    "visual": {
+      "filename": "src/admin/api-key.guard.ts",
+      "language": "tsx",
+      "code": "import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';\n\n@Injectable()\nexport class ApiKeyGuard implements CanActivate {\n  canActivate(context: ExecutionContext): boolean {\n    const request = context.switchToHttp().getRequest();\n    return request.headers['x-api-key'] === 'bi-mat-123';\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 9, "sentence": 0},
+        {"from": 3, "to": 4, "sentence": 1},
+        {"from": 5, "to": 6, "sentence": 2},
+        {"from": 7, "to": 7, "sentence": 3},
+        {"from": 1, "to": 9, "sentence": 4},
+        {"from": 1, "to": 9, "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Cắt cử bảo vệ đi làm bằng decorator @UseGuards, đặt ngay trên controller.",
+      "Đặt ở cấp controller nghĩa là mọi route bên trong /admin đều được canh gác.",
+      "Muốn gác riêng một route thì chuyển @UseGuards xuống ngay trên hàm đó, rất linh hoạt.",
+      "Còn muốn gác cả tòa nhà? useGlobalGuards trong main.ts, giống ValidationPipe tập trước."
+    ],
+    "visual": {
+      "filename": "src/admin/admin.controller.ts",
+      "language": "tsx",
+      "code": "import { Controller, Get, UseGuards } from '@nestjs/common';\nimport { ApiKeyGuard } from './api-key.guard';\n\n@UseGuards(ApiKeyGuard)\n@Controller('admin')\nexport class AdminController {\n  @Get()\n  dashboard() {\n    return { secret: 'Chào sếp, đây là khu vực quản trị!' };\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 11, "sentence": 0},
+        {"from": 4, "to": 5, "sentence": 1},
+        {"from": 7, "to": 8, "sentence": 2},
+        {"from": 1, "to": 11, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "terminal",
+    "narration": [
+      "Kiểm tra năng lực anh bảo vệ nào.",
+      "Gõ cửa /admin tay không: 403 Forbidden, mời anh ra cho.",
+      "Giờ chìa đúng thẻ x-api-key ra.",
+      "Cửa mở: chào sếp, đây là khu vực quản trị!",
+      "Cùng một đường dẫn, hai số phận: khác nhau đúng một cái thẻ."
+    ],
+    "visual": {
+      "title": "Thử gõ cửa khu VIP 💂",
+      "commands": [
+        {"cmd": "curl -w '\\n%{http_code}' localhost:3000/admin", "output": "{\"message\":\"Forbidden resource\",\"error\":\"Forbidden\",\"statusCode\":403}\n403", "sentence": 1},
+        {"cmd": "curl -H 'x-api-key: bi-mat-123' localhost:3000/admin", "output": "{\"secret\":\"Chào sếp, đây là khu vực quản trị!\"}", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "concept",
+    "narration": [
+      "Trong dự án thật, Guard chính là nơi đặt chuyện đăng nhập và phân quyền.",
+      "AuthGuard kiểm tra JWT token: bạn đã đăng nhập chưa?",
+      "RolesGuard đọc vai trò từ token: bạn là admin hay người dùng thường?",
+      "Và các guard xếp chồng được: đăng nhập đã, rồi mới xét vai trò.",
+      "Nắm được CanActivate hôm nay, gặp AuthGuard của Passport hay JWT bạn sẽ thấy quen ngay."
+    ],
+    "visual": {
+      "title": "Guard trong dự án thật",
+      "bullets": [
+        {"icon": "🔑", "text": "AuthGuard: đã đăng nhập chưa? (JWT)", "sentence": 1},
+        {"icon": "👑", "text": "RolesGuard: admin hay user thường?", "sentence": 2},
+        {"icon": "🧱", "text": "Xếp chồng nhiều guard theo thứ tự", "sentence": 3},
+        {"icon": "🚀", "text": "Cùng bộ khung CanActivate bạn vừa học", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: Guard là người bảo vệ trả lời câu hỏi ai được vào, bằng true hoặc false.",
+      "Công thức: class @Injectable implements CanActivate, rồi cắt cử bằng @UseGuards.",
+      "Không quyền là 403 ngay từ cửa, logic chính không phải bận tâm an ninh.",
+      "Bài tập nhỏ: viết thêm RolesGuard đọc header x-role, chỉ cho 'boss' đi qua nhé.",
+      "Tập sau: Interceptors — nhân vật đứng cả hai đầu, vừa camera an ninh vừa người gói quà. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "Guard = ai được vào? true / false", "sentence": 0},
+        {"text": "CanActivate + @UseGuards = xong", "sentence": 1},
+        {"text": "Không quyền → 403 ngay từ cửa", "sentence": 2}
+      ],
+      "next": "Nâng cao Tập 3: Interceptors — can thiệp 2 chiều"
+    }
+  }
+]
