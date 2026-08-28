@@ -38,7 +38,7 @@
     "id": "scene-03",
     "type": "concept",
     "narration": [
-      "gRPC là viết tắt của Google Remote Procedure Call: gọi hàm từ xa.",
+      "gRPC là một hệ thống Remote Procedure Call do Google tạo ra: nghĩa là gọi hàm từ xa.",
       "Ý tưởng: gọi một hàm ở service khác mà cứ NHƯ gọi hàm ngay trong code của mình.",
       "Bên dưới, nó chạy trên HTTP/2 và gửi dữ liệu dạng nhị phân: gọn hơn chữ JSON nhiều lần.",
       "Điểm ăn tiền nhất: hai bên phải thống nhất một bản HỢP ĐỒNG trước khi nói chuyện, viết trong file đuôi proto.",

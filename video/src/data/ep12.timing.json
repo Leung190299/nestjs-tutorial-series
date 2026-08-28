@@ -120,32 +120,32 @@
       },
       "sentences": [
         {
-          "file": "audio/ep12/scene-03-0-454fc07e.wav",
+          "file": "audio/ep12/scene-03-0-0854bd53.wav",
           "startFrame": 0,
-          "durationInFrames": 128
+          "durationInFrames": 156
         },
         {
           "file": "audio/ep12/scene-03-1-106286da.wav",
-          "startFrame": 136,
+          "startFrame": 164,
           "durationInFrames": 123
         },
         {
           "file": "audio/ep12/scene-03-2-f6c8a71e.wav",
-          "startFrame": 267,
+          "startFrame": 295,
           "durationInFrames": 166
         },
         {
           "file": "audio/ep12/scene-03-3-5689ec55.wav",
-          "startFrame": 441,
+          "startFrame": 469,
           "durationInFrames": 152
         },
         {
           "file": "audio/ep12/scene-03-4-317e3015.wav",
-          "startFrame": 601,
+          "startFrame": 629,
           "durationInFrames": 77
         }
       ],
-      "durationInFrames": 696
+      "durationInFrames": 724
     },
     {
       "id": "scene-04",
