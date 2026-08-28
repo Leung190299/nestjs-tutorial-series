@@ -1,0 +1,9 @@
+{
+  "name": "@vietsuper/mini-food",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  }
+}
