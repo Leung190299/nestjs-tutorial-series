@@ -1,0 +1,272 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Xin chào! Đây là một tập bonus đặc biệt, dành cho những bạn đã hỏi: thế còn gRPC thì sao?",
+      "gRPC là đường dây liên lạc do Google tạo ra, nổi tiếng nhanh và chặt chẽ, được dùng ở những hệ thống lớn nhất thế giới.",
+      "Và nó sẽ khép lại trọn vẹn bộ sưu tập transporter của series chúng ta.",
+      "Như thường lệ: một ví von thật dễ, và một demo chạy thật."
+    ],
+    "visual": {
+      "title": "gRPC — Hợp đồng tốc độ cao",
+      "subtitle": "Transporters · Tập bonus · Google RPC",
+      "badge": "NestJS nâng cao · Transporters"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Từ đầu series, dữ liệu giữa các service đều được gói bằng JSON: chữ và chữ.",
+      "JSON dễ đọc với con người, nhưng máy phải gói ra chữ, gửi cả đoạn text dài, rồi bên kia mổ xẻ ngược lại: tốn công và tốn băng thông.",
+      "Nguy hiểm hơn: không ai ĐẢM BẢO cấu trúc. Bên gửi đổi tên trường name thành fullName, bên nhận sập lúc nào không hay.",
+      "Nhân lên hàng triệu cuộc gọi mỗi ngày giữa các service, hai điểm yếu này thành chuyện lớn.",
+      "gRPC sinh ra để xử cả hai: nhanh hơn, và chặt chẽ hơn."
+    ],
+    "visual": {
+      "title": "Hai điểm yếu của JSON",
+      "bullets": [
+        {"icon": "📝", "text": "JSON = chữ: gói/mổ xẻ tốn công, text dài", "sentence": 1},
+        {"icon": "💣", "text": "Không ai đảm bảo cấu trúc — đổi tên trường là sập", "sentence": 2},
+        {"icon": "🔁", "text": "Nhân triệu cuộc gọi/ngày → chuyện lớn", "sentence": 3},
+        {"icon": "⚡", "text": "gRPC: nhanh hơn + chặt chẽ hơn", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "gRPC là viết tắt của Google Remote Procedure Call: gọi hàm từ xa.",
+      "Ý tưởng: gọi một hàm ở service khác mà cứ NHƯ gọi hàm ngay trong code của mình.",
+      "Bên dưới, nó chạy trên HTTP/2 và gửi dữ liệu dạng nhị phân: gọn hơn chữ JSON nhiều lần.",
+      "Điểm ăn tiền nhất: hai bên phải thống nhất một bản HỢP ĐỒNG trước khi nói chuyện, viết trong file đuôi proto.",
+      "Hợp đồng có rồi thì không còn chỗ cho hiểu nhầm."
+    ],
+    "visual": {
+      "title": "gRPC là gì?",
+      "bullets": [
+        {"icon": "📞", "text": "Gọi hàm từ xa — như hàm trong nhà", "sentence": 1},
+        {"icon": "🚄", "text": "HTTP/2 + nhị phân: gọn hơn JSON nhiều lần", "sentence": 2},
+        {"icon": "📜", "text": "Hợp đồng .proto ký trước khi nói chuyện", "sentence": 3},
+        {"icon": "🤝", "text": "Có hợp đồng = không thể hiểu nhầm", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "concept",
+    "narration": [
+      "Ví von thế này: JSON như thư viết tay tự do: muốn viết gì thì viết, người nhận tự đọc tự hiểu.",
+      "Còn gRPC là BIỂU MẪU IN SẴN của cơ quan: từng ô đánh số rõ ràng, hai bên cầm cùng một mẫu.",
+      "Gửi đi không cần chép cả cái mẫu, chỉ cần gửi số liệu điền vào các ô: nên mới gọn và nhanh như vậy.",
+      "Điền sai kiểu ô nào là bị phát hiện NGAY từ lúc viết code, không đợi đến lúc chạy.",
+      "Và cái biểu mẫu chung đó, chính là file users chấm proto mà ta sắp viết."
+    ],
+    "visual": {
+      "title": "Biểu mẫu in sẵn 📋",
+      "bullets": [
+        {"icon": "✍️", "text": "JSON = thư tay tự do, tự đọc tự hiểu", "sentence": 0},
+        {"icon": "📋", "text": "gRPC = biểu mẫu in sẵn, ô đánh số", "sentence": 1},
+        {"icon": "📦", "text": "Chỉ gửi số liệu trong ô → gọn, nhanh", "sentence": 2},
+        {"icon": "🛡️", "text": "Điền sai ô: báo ngay lúc viết code", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "diagram",
+    "narration": [
+      "Kiến trúc tập này có một nhân vật đặc biệt đứng giữa: bản hợp đồng users chấm proto.",
+      "Cả gateway lẫn users-service đều cầm CÙNG một bản hợp đồng này.",
+      "Nhờ đó hai bên biết chính xác: có hàm FindAll, nhận gì, trả về gì.",
+      "Còn cuộc gọi thật thì đi thẳng giữa hai service, dạng nhị phân trên HTTP/2, không qua trạm trung gian nào.",
+      "Không broker, không hàng đợi: gRPC là đường dây trực tiếp, nhưng có hợp đồng công chứng."
+    ],
+    "visual": {
+      "title": "Hợp đồng chung — đường dây trực tiếp",
+      "boxes": [
+        {"id": "gateway", "label": "Gateway", "emoji": "🚪"},
+        {"id": "proto", "label": "users.proto", "emoji": "📜"},
+        {"id": "users", "label": "Users Service", "emoji": "👥"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "đọc hợp đồng", "sentence": 1},
+        {"from": 1, "to": 2, "label": "đọc hợp đồng", "sentence": 1},
+        {"from": 2, "to": 0, "label": "FindAll · nhị phân HTTP/2", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Đây rồi, ngôi sao của tập này: file users chấm proto.",
+      "Dòng syntax khai báo đời ngôn ngữ: proto3, bản hiện đại nhất.",
+      "Service UsersService với rpc FindAll: hợp đồng ghi rõ có một hàm FindAll, nhận Empty, trả về UserList.",
+      "Message User: một người dùng gồm ô số một là id kiểu số, ô số hai là name kiểu chữ: từng ô đánh số đúng kiểu biểu mẫu.",
+      "UserList: danh sách nhiều User: từ khóa repeated nghĩa là lặp lại nhiều lần.",
+      "Chưa đầy hai mươi dòng, nhưng là tiếng nói chung tuyệt đối giữa hai service."
+    ],
+    "visual": {
+      "filename": "src/users.proto",
+      "language": "clike",
+      "code": "syntax = \"proto3\";\n\npackage users;\n\nservice UsersService {\n  rpc FindAll (Empty) returns (UserList);\n}\n\nmessage Empty {}\n\nmessage User {\n  int32 id = 1;\n  string name = 2;\n}\n\nmessage UserList {\n  repeated User users = 1;\n}",
+      "steps": [
+        {"from": 1, "to": 18, "sentence": 0},
+        {"from": 1, "to": 1, "sentence": 1},
+        {"from": 5, "to": 7, "sentence": 2},
+        {"from": 11, "to": 14, "sentence": 3},
+        {"from": 16, "to": 18, "sentence": 4},
+        {"from": 1, "to": 18, "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Bên users-service, main.ts theo đúng công thức createMicroservice bạn đã thuộc lòng.",
+      "Transport.GRPC: thành viên thứ năm trong bộ sưu tập của chúng ta.",
+      "Options ba dòng: package trùng tên trong proto, protoPath trỏ đến bản hợp đồng, và url là địa chỉ lắng nghe.",
+      "Cổng năm không không năm mốt là cổng quen thuộc của giới gRPC.",
+      "Vậy là service sẵn sàng tiếp khách theo đúng hợp đồng."
+    ],
+    "visual": {
+      "filename": "users-service/src/main.ts",
+      "language": "tsx",
+      "code": "import { NestFactory } from '@nestjs/core';\nimport { Transport } from '@nestjs/microservices';\nimport { join } from 'path';\nimport { AppModule } from './app.module';\n\nasync function bootstrap() {\n  const app = await NestFactory.createMicroservice(AppModule, {\n    transport: Transport.GRPC,\n    options: {\n      package: 'users',\n      protoPath: join(__dirname, 'users.proto'),\n      url: 'localhost:50051',\n    },\n  });\n  await app.listen();\n}\nbootstrap();",
+      "steps": [
+        {"from": 1, "to": 17, "sentence": 0},
+        {"from": 8, "to": 8, "sentence": 1},
+        {"from": 10, "to": 12, "sentence": 2},
+        {"from": 12, "to": 12, "sentence": 3},
+        {"from": 1, "to": 17, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Người thực hiện hợp đồng: UsersController, với dữ liệu Minh và Lan quen thuộc.",
+      "@GrpcMethod nhận hai tham số: tên service và tên hàm, khớp từng chữ với file proto.",
+      "Hàm trả về object có trường users: đúng khuôn message UserList đã ký.",
+      "Anh em với @MessagePattern cả thôi, chỉ là phiên bản có hợp đồng chặt chẽ."
+    ],
+    "visual": {
+      "filename": "users-service/src/users.controller.ts",
+      "language": "tsx",
+      "code": "import { Controller } from '@nestjs/common';\nimport { GrpcMethod } from '@nestjs/microservices';\n\n@Controller()\nexport class UsersController {\n  private users = [\n    { id: 1, name: 'Minh' },\n    { id: 2, name: 'Lan' },\n  ];\n\n  @GrpcMethod('UsersService', 'FindAll')\n  findAll() {\n    return { users: this.users };\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 15, "sentence": 0},
+        {"from": 11, "to": 11, "sentence": 1},
+        {"from": 12, "to": 14, "sentence": 2},
+        {"from": 1, "to": 15, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "code",
+    "narration": [
+      "Sang gateway: ClientsModule.register lần thứ năm, chắc bạn nhắm mắt cũng viết được.",
+      "Transport GRPC, options giống hệt bên kia: cùng package, cùng bản hợp đồng, cùng địa chỉ.",
+      "Tên client là USERS_PACKAGE: với gRPC, ta kết nối tới cả một gói dịch vụ.",
+      "Hai bên cầm cùng một bản hợp đồng: điều kiện bắt buộc của gRPC."
+    ],
+    "visual": {
+      "filename": "gateway/src/app.module.ts",
+      "language": "tsx",
+      "code": "import { Module } from '@nestjs/common';\nimport { ClientsModule, Transport } from '@nestjs/microservices';\nimport { join } from 'path';\nimport { UsersController } from './users.controller';\n\n@Module({\n  imports: [\n    ClientsModule.register([\n      {\n        name: 'USERS_PACKAGE',\n        transport: Transport.GRPC,\n        options: {\n          package: 'users',\n          protoPath: join(__dirname, 'users.proto'),\n          url: 'localhost:50051',\n        },\n      },\n    ]),\n  ],\n  controllers: [UsersController],\n})\nexport class AppModule {}",
+      "steps": [
+        {"from": 1, "to": 22, "sentence": 0},
+        {"from": 11, "to": 16, "sentence": 1},
+        {"from": 10, "to": 10, "sentence": 2},
+        {"from": 1, "to": 22, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "code",
+    "narration": [
+      "Controller của gateway có một điểm mới thú vị: interface UsersGrpcService.",
+      "Đây là bản dịch hợp đồng sang TypeScript: hàm findAll trả về Observable chứa danh sách users.",
+      "Trong onModuleInit, client.getService lấy ra ĐẠI DIỆN của service bên kia, đúng theo hợp đồng.",
+      "Và ở @Get, mình gọi this.usersService.findAll như gọi hàm ngay trong nhà: đó chính là phép màu Remote Procedure Call.",
+      "Gõ sai tên hàm hay sai kiểu dữ liệu? TypeScript gạch đỏ ngay lập tức."
+    ],
+    "visual": {
+      "filename": "gateway/src/users.controller.ts",
+      "language": "tsx",
+      "code": "import { Controller, Get, Inject, OnModuleInit } from '@nestjs/common';\nimport { ClientGrpc } from '@nestjs/microservices';\nimport { Observable } from 'rxjs';\n\ninterface UsersGrpcService {\n  findAll(request: object): Observable<{ users: { id: number; name: string }[] }>;\n}\n\n@Controller('users')\nexport class UsersController implements OnModuleInit {\n  private usersService: UsersGrpcService;\n\n  constructor(@Inject('USERS_PACKAGE') private client: ClientGrpc) {}\n\n  onModuleInit() {\n    this.usersService = this.client.getService<UsersGrpcService>('UsersService');\n  }\n\n  @Get()\n  findAll() {\n    return this.usersService.findAll({});\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 23, "sentence": 0},
+        {"from": 5, "to": 7, "sentence": 1},
+        {"from": 15, "to": 17, "sentence": 2},
+        {"from": 19, "to": 22, "sentence": 3},
+        {"from": 1, "to": 23, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "terminal",
+    "narration": [
+      "Chạy thử: users-service lên trước ở cổng năm không không năm mốt, gateway theo sau.",
+      "Curl vào gateway... và đây: Minh và Lan trở lại, lần này được vận chuyển dạng nhị phân theo hợp đồng gRPC.",
+      "Bên ngoài nhìn y hệt mọi tập trước: đó chính là cái hay, transporter là chuyện nội bộ.",
+      "Còn bên trong, cuộc gọi đã nhanh và an toàn theo kiểu Google."
+    ],
+    "visual": {
+      "title": "Ký hợp đồng & chạy thử! 📜",
+      "commands": [
+        {"cmd": "cd users-service && npm run start", "output": "[Nest] LOG [NestMicroservice] Nest microservice successfully started", "sentence": 0},
+        {"cmd": "curl http://localhost:3000/users", "output": "{\"users\":[{\"id\":1,\"name\":\"Minh\"},{\"id\":2,\"name\":\"Lan\"}]}   ← nhị phân qua gRPC!", "sentence": 1}
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "concept",
+    "narration": [
+      "Bộ sưu tập transporter đã đủ năm mảnh. Treo bảng lần cuối nhé.",
+      "TCP và Redis: hỏi đáp đơn giản: một cái trực tiếp, một cái qua đài.",
+      "RabbitMQ: bưu điện giữ việc. Kafka: sổ nhật ký sự kiện.",
+      "Còn gRPC: đường dây trực tiếp tốc độ cao, có hợp đồng chặt chẽ: chuẩn mực cho service gọi service ở hệ thống lớn.",
+      "Nó cũng là lựa chọn số một khi các service viết bằng NHIỀU ngôn ngữ khác nhau: hợp đồng proto dịch được ra mọi thứ tiếng.",
+      "Chọn đúng dây cho đúng bài toán: đó là đẳng cấp kiến trúc sư mà bạn đang tiến tới."
+    ],
+    "visual": {
+      "title": "Bảng chọn transporter — bản đầy đủ 🧭",
+      "bullets": [
+        {"icon": "☎️", "text": "TCP · 📻 Redis — hỏi đáp đơn giản", "sentence": 1},
+        {"icon": "📮", "text": "RabbitMQ giữ việc · 📒 Kafka ghi sự kiện", "sentence": 2},
+        {"icon": "🚄", "text": "gRPC — trực tiếp, nhanh, có hợp đồng", "sentence": 3},
+        {"icon": "🌍", "text": "Service đa ngôn ngữ? gRPC là số một", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-13",
+    "type": "outro",
+    "narration": [
+      "Vậy là bộ sưu tập transporter chính thức khép lại: năm cách để các service nói chuyện với nhau, bạn đều đã tự tay chạy thử.",
+      "gRPC cho bạn tốc độ nhị phân và bản hợp đồng không thể hiểu nhầm: vũ khí của những hệ thống lớn.",
+      "Toàn bộ source code, như mọi khi, nằm trong phần mô tả.",
+      "Nếu bạn muốn có series tiếp theo: NestJS với database thật, hay triển khai lên server, hãy bình luận cho mình biết nhé.",
+      "Cảm ơn các bạn đã đồng hành suốt mười hai tập. Code vui nhé, hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Trọn bộ 5 transporters! 🎓",
+      "summary": [
+        {"text": "5 transporters: TCP · Redis · RabbitMQ · Kafka · gRPC", "sentence": 0},
+        {"text": "gRPC = nhanh + hợp đồng .proto chặt chẽ", "sentence": 1},
+        {"text": "Comment vote series tiếp theo! 💬", "sentence": 3}
+      ],
+      "next": "Cảm ơn bạn đã theo dõi! Vote series tiếp theo 🎉"
+    }
+  }
+]

@@ -18,7 +18,8 @@ export type ThumbnailProps = {
     | 'ep8'
     | 'ep9'
     | 'ep10'
-    | 'ep11';
+    | 'ep11'
+    | 'ep12';
 };
 
 const Card: React.FC<{children: React.ReactNode; style?: React.CSSProperties}> = ({
@@ -321,6 +322,32 @@ const Visual: React.FC<{variant: ThumbnailProps['variant']}> = ({variant}) => {
           }}
         >
           📒
+        </div>
+      </div>
+    );
+  }
+  if (variant === 'ep12') {
+    return (
+      <div style={{position: 'relative'}}>
+        <Card style={{width: 470, padding: '26px 32px', fontFamily: theme.fontMono}}>
+          <div style={{color: theme.textDim, fontSize: 24, marginBottom: 14}}>users.proto</div>
+          <div style={{fontSize: 32, lineHeight: 1.65}}>
+            <div style={{color: theme.blue}}>service UsersService {'{'}</div>
+            <div style={{color: theme.yellow, paddingLeft: 28}}>rpc FindAll (...)</div>
+            <div style={{color: theme.blue}}>{'}'}</div>
+            <div style={{color: theme.green}}>message User {'{ ... }'}</div>
+          </div>
+        </Card>
+        <div
+          style={{
+            position: 'absolute',
+            top: -52,
+            right: -30,
+            fontSize: 100,
+            filter: 'drop-shadow(0 12px 24px rgba(0,0,0,0.5))',
+          }}
+        >
+          📜
         </div>
       </div>
     );

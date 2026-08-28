@@ -476,6 +476,48 @@ Xem từ đầu phần Transporters: [LINK T1]
 kafka, apache kafka, kafka là gì, event streaming, kafka nestjs, consumer group, kafka topic, docker kafka, kafkajs, nestjs tiếng việt, học kafka, big data, xử lý sự kiện, kiến trúc dữ liệu, microservices nâng cao
 ```
 
+### Transporters BONUS — gRPC (5:17)
+
+**Tiêu đề (chính):**
+gRPC: nhanh kiểu Google, không thể hiểu nhầm nhờ hợp đồng .proto | NestJS (bonus)
+
+**Tiêu đề (phương án khác):**
+- gRPC là gì? Giải thích bằng... biểu mẫu in sẵn 📋
+- Transporter thứ 5 khép bộ sưu tập: gRPC + NestJS trong 5 phút
+
+**Mô tả:**
+```
+JSON dễ đọc nhưng chậm và không ai đảm bảo cấu trúc — đổi tên một trường là service bên kia sập. gRPC của Google xử cả hai: dữ liệu nhị phân trên HTTP/2 (nhanh) + bản hợp đồng .proto hai bên cùng ký (không thể hiểu nhầm).
+
+Ví von xuyên suốt: JSON là thư viết tay tự do ✍️, gRPC là biểu mẫu in sẵn từng ô đánh số 📋 — tập bonus khép trọn bộ sưu tập 5 transporters.
+
+⏱️ NỘI DUNG:
+0:00 Tập bonus theo yêu cầu!
+0:20 Hai điểm yếu của JSON
+0:47 gRPC là gì? (HTTP/2 + nhị phân + hợp đồng)
+1:11 Ví von: biểu mẫu in sẵn
+1:36 Kiến trúc: hợp đồng chung, đường dây trực tiếp
+2:00 Viết users.proto — ngôi sao của tập
+2:30 Transport.GRPC trong main.ts
+2:52 @GrpcMethod — người thực hiện hợp đồng
+3:12 Gateway: ClientsModule + cùng bản proto
+3:32 getService — gọi hàm từ xa như hàm trong nhà
+4:00 Demo chạy thật
+4:19 Bảng chọn transporter — bản đầy đủ 5 mảnh
+4:50 Lời kết + vote series tiếp theo
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Xem trọn playlist Transporters: [LINK PLAYLIST]
+💬 Comment vote series tiếp: NestJS + Database / Deploy lên server!
+
+#grpc #nestjs #microservices #nodejs #laptrinh
+```
+
+**Tags:**
+```
+grpc, grpc là gì, grpc nestjs, protobuf, protocol buffers, proto file, http2, grpc vs rest, remote procedure call, nestjs tiếng việt, học nestjs, microservices, backend nodejs, google grpc, giao tiếp service
+```
+
 ## Thumbnail
 
 Đã render sẵn tại `video/out/thumbs/ep0X-thumb.png` (1280×720, <2MB, chuẩn YouTube). Muốn sửa chữ/bố cục: sửa mảng `thumbnails` trong `video/src/Root.tsx` hoặc component `video/src/Thumbnail.tsx`, rồi chạy `npx remotion still Thumb0X out/thumbs/ep0X-thumb.png`.

@@ -22,7 +22,7 @@ export const CodeScene: React.FC<SceneProps> = ({visual, sentences}) => {
   const lines = v.code.split('\n');
   const lineCount = lines.length;
   const longestLine = Math.max(...lines.map((l) => l.length));
-  let fontSize = lineCount > 16 ? 24 : lineCount > 13 ? 27 : 30;
+  let fontSize = lineCount > 20 ? 22 : lineCount > 16 ? 24 : lineCount > 13 ? 27 : 30;
   if (longestLine > 84) fontSize = Math.min(fontSize, 24);
   else if (longestLine > 72) fontSize = Math.min(fontSize, 27);
   return (

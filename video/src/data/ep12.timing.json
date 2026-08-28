@@ -1,0 +1,744 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "gRPC — Hợp đồng tốc độ cao",
+        "subtitle": "Transporters · Tập bonus · Google RPC",
+        "badge": "NestJS nâng cao · Transporters"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep12/scene-01-0-2b052d5c.wav",
+          "startFrame": 0,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep12/scene-01-1-6cdbdfae.wav",
+          "startFrame": 174,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep12/scene-01-2-e07885c5.wav",
+          "startFrame": 379,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep12/scene-01-3-df382f95.wav",
+          "startFrame": 505,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 629
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Hai điểm yếu của JSON",
+        "bullets": [
+          {
+            "icon": "📝",
+            "text": "JSON = chữ: gói/mổ xẻ tốn công, text dài",
+            "sentence": 1
+          },
+          {
+            "icon": "💣",
+            "text": "Không ai đảm bảo cấu trúc — đổi tên trường là sập",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "Nhân triệu cuộc gọi/ngày → chuyện lớn",
+            "sentence": 3
+          },
+          {
+            "icon": "⚡",
+            "text": "gRPC: nhanh hơn + chặt chẽ hơn",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep12/scene-02-0-0310d4a1.wav",
+          "startFrame": 0,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep12/scene-02-1-f02f5376.wav",
+          "startFrame": 138,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep12/scene-02-2-885ba64f.wav",
+          "startFrame": 360,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep12/scene-02-3-68d19675.wav",
+          "startFrame": 544,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep12/scene-02-4-e7022a4e.wav",
+          "startFrame": 682,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 806
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "gRPC là gì?",
+        "bullets": [
+          {
+            "icon": "📞",
+            "text": "Gọi hàm từ xa — như hàm trong nhà",
+            "sentence": 1
+          },
+          {
+            "icon": "🚄",
+            "text": "HTTP/2 + nhị phân: gọn hơn JSON nhiều lần",
+            "sentence": 2
+          },
+          {
+            "icon": "📜",
+            "text": "Hợp đồng .proto ký trước khi nói chuyện",
+            "sentence": 3
+          },
+          {
+            "icon": "🤝",
+            "text": "Có hợp đồng = không thể hiểu nhầm",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep12/scene-03-0-454fc07e.wav",
+          "startFrame": 0,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep12/scene-03-1-106286da.wav",
+          "startFrame": 136,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep12/scene-03-2-f6c8a71e.wav",
+          "startFrame": 267,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep12/scene-03-3-5689ec55.wav",
+          "startFrame": 441,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep12/scene-03-4-317e3015.wav",
+          "startFrame": 601,
+          "durationInFrames": 77
+        }
+      ],
+      "durationInFrames": 696
+    },
+    {
+      "id": "scene-04",
+      "type": "concept",
+      "visual": {
+        "title": "Biểu mẫu in sẵn 📋",
+        "bullets": [
+          {
+            "icon": "✍️",
+            "text": "JSON = thư tay tự do, tự đọc tự hiểu",
+            "sentence": 0
+          },
+          {
+            "icon": "📋",
+            "text": "gRPC = biểu mẫu in sẵn, ô đánh số",
+            "sentence": 1
+          },
+          {
+            "icon": "📦",
+            "text": "Chỉ gửi số liệu trong ô → gọn, nhanh",
+            "sentence": 2
+          },
+          {
+            "icon": "🛡️",
+            "text": "Điền sai ô: báo ngay lúc viết code",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep12/scene-04-0-15ce9fa0.wav",
+          "startFrame": 0,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep12/scene-04-1-a5de7aaa.wav",
+          "startFrame": 169,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep12/scene-04-2-a6312ff5.wav",
+          "startFrame": 336,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep12/scene-04-3-d0d18049.wav",
+          "startFrame": 500,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep12/scene-04-4-02e9027d.wav",
+          "startFrame": 633,
+          "durationInFrames": 118
+        }
+      ],
+      "durationInFrames": 769
+    },
+    {
+      "id": "scene-05",
+      "type": "diagram",
+      "visual": {
+        "title": "Hợp đồng chung — đường dây trực tiếp",
+        "boxes": [
+          {
+            "id": "gateway",
+            "label": "Gateway",
+            "emoji": "🚪"
+          },
+          {
+            "id": "proto",
+            "label": "users.proto",
+            "emoji": "📜"
+          },
+          {
+            "id": "users",
+            "label": "Users Service",
+            "emoji": "👥"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "đọc hợp đồng",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "đọc hợp đồng",
+            "sentence": 1
+          },
+          {
+            "from": 2,
+            "to": 0,
+            "label": "FindAll · nhị phân HTTP/2",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep12/scene-05-0-3fa1a5e3.wav",
+          "startFrame": 0,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep12/scene-05-1-395a7ca5.wav",
+          "startFrame": 143,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep12/scene-05-2-c22847ff.wav",
+          "startFrame": 247,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep12/scene-05-3-915dd22f.wav",
+          "startFrame": 366,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep12/scene-05-4-28494b4e.wav",
+          "startFrame": 554,
+          "durationInFrames": 156
+        }
+      ],
+      "durationInFrames": 728
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "src/users.proto",
+        "language": "clike",
+        "code": "syntax = \"proto3\";\n\npackage users;\n\nservice UsersService {\n  rpc FindAll (Empty) returns (UserList);\n}\n\nmessage Empty {}\n\nmessage User {\n  int32 id = 1;\n  string name = 2;\n}\n\nmessage UserList {\n  repeated User users = 1;\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 18,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 7,
+            "sentence": 2
+          },
+          {
+            "from": 11,
+            "to": 14,
+            "sentence": 3
+          },
+          {
+            "from": 16,
+            "to": 18,
+            "sentence": 4
+          },
+          {
+            "from": 1,
+            "to": 18,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep12/scene-06-0-e6d34ae9.wav",
+          "startFrame": 0,
+          "durationInFrames": 87
+        },
+        {
+          "file": "audio/ep12/scene-06-1-efd84b14.wav",
+          "startFrame": 95,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep12/scene-06-2-c429aaf6.wav",
+          "startFrame": 207,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep12/scene-06-3-435a742f.wav",
+          "startFrame": 415,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep12/scene-06-4-19d3e9cd.wav",
+          "startFrame": 613,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep12/scene-06-5-a87b4d30.wav",
+          "startFrame": 751,
+          "durationInFrames": 108
+        }
+      ],
+      "durationInFrames": 877
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "users-service/src/main.ts",
+        "language": "tsx",
+        "code": "import { NestFactory } from '@nestjs/core';\nimport { Transport } from '@nestjs/microservices';\nimport { join } from 'path';\nimport { AppModule } from './app.module';\n\nasync function bootstrap() {\n  const app = await NestFactory.createMicroservice(AppModule, {\n    transport: Transport.GRPC,\n    options: {\n      package: 'users',\n      protoPath: join(__dirname, 'users.proto'),\n      url: 'localhost:50051',\n    },\n  });\n  await app.listen();\n}\nbootstrap();",
+        "steps": [
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 12,
+            "sentence": 2
+          },
+          {
+            "from": 12,
+            "to": 12,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep12/scene-07-0-22d6bfca.wav",
+          "startFrame": 0,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep12/scene-07-1-af52dcc4.wav",
+          "startFrame": 152,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep12/scene-07-2-6a4be960.wav",
+          "startFrame": 276,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep12/scene-07-3-de6764b7.wav",
+          "startFrame": 467,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep12/scene-07-4-473302ad.wav",
+          "startFrame": 574,
+          "durationInFrames": 80
+        }
+      ],
+      "durationInFrames": 672
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "users-service/src/users.controller.ts",
+        "language": "tsx",
+        "code": "import { Controller } from '@nestjs/common';\nimport { GrpcMethod } from '@nestjs/microservices';\n\n@Controller()\nexport class UsersController {\n  private users = [\n    { id: 1, name: 'Minh' },\n    { id: 2, name: 'Lan' },\n  ];\n\n  @GrpcMethod('UsersService', 'FindAll')\n  findAll() {\n    return { users: this.users };\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 15,
+            "sentence": 0
+          },
+          {
+            "from": 11,
+            "to": 11,
+            "sentence": 1
+          },
+          {
+            "from": 12,
+            "to": 14,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 15,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep12/scene-08-0-79ba8e3b.wav",
+          "startFrame": 0,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep12/scene-08-1-3d20e2ee.wav",
+          "startFrame": 136,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep12/scene-08-2-14cfa892.wav",
+          "startFrame": 305,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep12/scene-08-3-d159bb6d.wav",
+          "startFrame": 443,
+          "durationInFrames": 140
+        }
+      ],
+      "durationInFrames": 601
+    },
+    {
+      "id": "scene-09",
+      "type": "code",
+      "visual": {
+        "filename": "gateway/src/app.module.ts",
+        "language": "tsx",
+        "code": "import { Module } from '@nestjs/common';\nimport { ClientsModule, Transport } from '@nestjs/microservices';\nimport { join } from 'path';\nimport { UsersController } from './users.controller';\n\n@Module({\n  imports: [\n    ClientsModule.register([\n      {\n        name: 'USERS_PACKAGE',\n        transport: Transport.GRPC,\n        options: {\n          package: 'users',\n          protoPath: join(__dirname, 'users.proto'),\n          url: 'localhost:50051',\n        },\n      },\n    ]),\n  ],\n  controllers: [UsersController],\n})\nexport class AppModule {}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 0
+          },
+          {
+            "from": 11,
+            "to": 16,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep12/scene-09-0-032e7fcf.wav",
+          "startFrame": 0,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep12/scene-09-1-30bff745.wav",
+          "startFrame": 143,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep12/scene-09-2-f9f61756.wav",
+          "startFrame": 305,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep12/scene-09-3-7948766d.wav",
+          "startFrame": 460,
+          "durationInFrames": 113
+        }
+      ],
+      "durationInFrames": 591
+    },
+    {
+      "id": "scene-10",
+      "type": "code",
+      "visual": {
+        "filename": "gateway/src/users.controller.ts",
+        "language": "tsx",
+        "code": "import { Controller, Get, Inject, OnModuleInit } from '@nestjs/common';\nimport { ClientGrpc } from '@nestjs/microservices';\nimport { Observable } from 'rxjs';\n\ninterface UsersGrpcService {\n  findAll(request: object): Observable<{ users: { id: number; name: string }[] }>;\n}\n\n@Controller('users')\nexport class UsersController implements OnModuleInit {\n  private usersService: UsersGrpcService;\n\n  constructor(@Inject('USERS_PACKAGE') private client: ClientGrpc) {}\n\n  onModuleInit() {\n    this.usersService = this.client.getService<UsersGrpcService>('UsersService');\n  }\n\n  @Get()\n  findAll() {\n    return this.usersService.findAll({});\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 23,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 15,
+            "to": 17,
+            "sentence": 2
+          },
+          {
+            "from": 19,
+            "to": 22,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 23,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep12/scene-10-0-6214f1b2.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep12/scene-10-1-525b60e7.wav",
+          "startFrame": 148,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep12/scene-10-2-cc36e66e.wav",
+          "startFrame": 305,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep12/scene-10-3-165d0b55.wav",
+          "startFrame": 493,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep12/scene-10-4-5d4a5ef5.wav",
+          "startFrame": 722,
+          "durationInFrames": 120
+        }
+      ],
+      "durationInFrames": 860
+    },
+    {
+      "id": "scene-11",
+      "type": "terminal",
+      "visual": {
+        "title": "Ký hợp đồng & chạy thử! 📜",
+        "commands": [
+          {
+            "cmd": "cd users-service && npm run start",
+            "output": "[Nest] LOG [NestMicroservice] Nest microservice successfully started",
+            "sentence": 0
+          },
+          {
+            "cmd": "curl http://localhost:3000/users",
+            "output": "{\"users\":[{\"id\":1,\"name\":\"Minh\"},{\"id\":2,\"name\":\"Lan\"}]}   ← nhị phân qua gRPC!",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep12/scene-11-0-474211dc.wav",
+          "startFrame": 0,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep12/scene-11-1-3ff7e3c0.wav",
+          "startFrame": 126,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep12/scene-11-2-cf32e7a1.wav",
+          "startFrame": 312,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep12/scene-11-3-88661a10.wav",
+          "startFrame": 452,
+          "durationInFrames": 99
+        }
+      ],
+      "durationInFrames": 569
+    },
+    {
+      "id": "scene-12",
+      "type": "concept",
+      "visual": {
+        "title": "Bảng chọn transporter — bản đầy đủ 🧭",
+        "bullets": [
+          {
+            "icon": "☎️",
+            "text": "TCP · 📻 Redis — hỏi đáp đơn giản",
+            "sentence": 1
+          },
+          {
+            "icon": "📮",
+            "text": "RabbitMQ giữ việc · 📒 Kafka ghi sự kiện",
+            "sentence": 2
+          },
+          {
+            "icon": "🚄",
+            "text": "gRPC — trực tiếp, nhanh, có hợp đồng",
+            "sentence": 3
+          },
+          {
+            "icon": "🌍",
+            "text": "Service đa ngôn ngữ? gRPC là số một",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep12/scene-12-0-2ac14131.wav",
+          "startFrame": 0,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep12/scene-12-1-62aa2694.wav",
+          "startFrame": 112,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep12/scene-12-2-1b6b3b4f.wav",
+          "startFrame": 240,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep12/scene-12-3-41d86358.wav",
+          "startFrame": 352,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep12/scene-12-4-c6ec347e.wav",
+          "startFrame": 579,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep12/scene-12-5-769eafba.wav",
+          "startFrame": 767,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 915
+    },
+    {
+      "id": "scene-13",
+      "type": "outro",
+      "visual": {
+        "title": "Trọn bộ 5 transporters! 🎓",
+        "summary": [
+          {
+            "text": "5 transporters: TCP · Redis · RabbitMQ · Kafka · gRPC",
+            "sentence": 0
+          },
+          {
+            "text": "gRPC = nhanh + hợp đồng .proto chặt chẽ",
+            "sentence": 1
+          },
+          {
+            "text": "Comment vote series tiếp theo! 💬",
+            "sentence": 3
+          }
+        ],
+        "next": "Cảm ơn bạn đã theo dõi! Vote series tiếp theo 🎉"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep12/scene-13-0-60fe2604.wav",
+          "startFrame": 0,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep12/scene-13-1-bcf5e62b.wav",
+          "startFrame": 203,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep12/scene-13-2-ec2cca51.wav",
+          "startFrame": 372,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep12/scene-13-3-9032c88d.wav",
+          "startFrame": 472,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep12/scene-13-4-d3f817af.wav",
+          "startFrame": 663,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 787
+    }
+  ]
+}

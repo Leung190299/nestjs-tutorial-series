@@ -14,6 +14,7 @@ import ep08 from './data/ep08.timing.json';
 import ep09 from './data/ep09.timing.json';
 import ep10 from './data/ep10.timing.json';
 import ep11 from './data/ep11.timing.json';
+import ep12 from './data/ep12.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -28,6 +29,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode09', timing: ep09 as unknown as EpisodeTiming},
   {id: 'Episode10', timing: ep10 as unknown as EpisodeTiming},
   {id: 'Episode11', timing: ep11 as unknown as EpisodeTiming},
+  {id: 'Episode12', timing: ep12 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -140,6 +142,16 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       line2: 'TRIỆU SỰ KIỆN',
       subtitle: 'Kafka · Event Streaming',
       variant: 'ep11',
+    },
+  },
+  {
+    id: 'Thumb12',
+    props: {
+      badge: 'BONUS',
+      line1: 'NHANH KIỂU',
+      line2: 'GOOGLE',
+      subtitle: 'gRPC · hợp đồng .proto',
+      variant: 'ep12',
     },
   },
 ];
