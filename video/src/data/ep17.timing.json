@@ -110,6 +110,11 @@
             "icon": "🌐",
             "text": "Như localStorage web, nhưng bất đồng bộ",
             "sentence": 4
+          },
+          {
+            "icon": "📦",
+            "text": "npx expo install @react-native-async-storage/async-storage",
+            "sentence": 5
           }
         ]
       },
@@ -140,12 +145,12 @@
           "durationInFrames": 159
         },
         {
-          "file": "audio/ep17/scene-03-5-a9ceaad5.wav",
+          "file": "audio/ep17/scene-03-5-988f7745.wav",
           "startFrame": 690,
-          "durationInFrames": 130
+          "durationInFrames": 156
         }
       ],
-      "durationInFrames": 838
+      "durationInFrames": 864
     },
     {
       "id": "scene-04",

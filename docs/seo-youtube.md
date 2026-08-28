@@ -636,7 +636,7 @@ useState là trí nhớ NGẮN HẠN — tắt app là quên sạch. Ví tiền 
 
 📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
 Tập 4: [LINK M4] · Tập 6: [LINK M6]
-#reactnative #asyncstorage #viden tu #laptrinh #expo
+#reactnative #asyncstorage #vidientu #laptrinh #expo
 ```
 **Tags:** `asyncstorage, async storage react native, lưu dữ liệu app, ví điện tử, e-wallet app, useeffect, json stringify parse, react native tiếng việt, học react native, persistence, local storage mobile, super app, việtsuper, momo clone, app không mất dữ liệu`
 

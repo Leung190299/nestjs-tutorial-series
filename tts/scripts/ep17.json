@@ -42,7 +42,7 @@
       "getItem: mở ngăn, rút tờ giấy theo nhãn ra đọc.",
       "Giấy chỉ ghi được CHỮ, nên object phải ép phẳng bằng JSON.stringify khi cất, và JSON.parse khi đọc lại.",
       "Nếu bạn từng dùng localStorage bên web: đúng nó đấy, chỉ khác là bất đồng bộ, phải await hoặc then.",
-      "Cài một lệnh: npx expo install async-storage là có ngăn kéo xài."
+      "Cài đặt bằng npx expo install, tên gói đầy đủ mình để ngay trên màn hình cho bạn copy."
     ],
     "visual": {
       "title": "AsyncStorage = ngăn kéo hồ sơ 🗄️",
@@ -50,7 +50,8 @@
         {"icon": "📥", "text": "setItem('wallet', ...) — cất giấy có nhãn", "sentence": 1},
         {"icon": "📤", "text": "getItem('wallet') — rút giấy ra đọc", "sentence": 2},
         {"icon": "📝", "text": "JSON.stringify cất · JSON.parse đọc", "sentence": 3},
-        {"icon": "🌐", "text": "Như localStorage web, nhưng bất đồng bộ", "sentence": 4}
+        {"icon": "🌐", "text": "Như localStorage web, nhưng bất đồng bộ", "sentence": 4},
+        {"icon": "📦", "text": "npx expo install @react-native-async-storage/async-storage", "sentence": 5}
       ]
     }
   },

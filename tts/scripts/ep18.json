@@ -52,7 +52,7 @@
         {"from": 1, "to": 17, "sentence": 0},
         {"from": 5, "to": 6, "sentence": 1},
         {"from": 7, "to": 11, "sentence": 2},
-        {"from": 13, "to": 16, "sentence": 3},
+        {"from": 1, "to": 17, "sentence": 3},
         {"from": 1, "to": 17, "sentence": 4}
       ]
     }
