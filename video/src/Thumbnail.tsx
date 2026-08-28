@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill} from 'remotion';
+import {AbsoluteFill, Img, staticFile} from 'remotion';
 import {theme} from './components/theme';
 
 export type ThumbnailProps = {
@@ -19,7 +19,11 @@ export type ThumbnailProps = {
     | 'ep9'
     | 'ep10'
     | 'ep11'
-    | 'ep12';
+    | 'ep12'
+    | 'shot';
+  image?: string;      // variant 'shot': ảnh chụp app thật (staticFile path)
+  badgeEmoji?: string; // variant 'shot': emoji nổi cạnh khung điện thoại
+  seriesTag?: string;  // dòng tag series góc dưới trái (mặc định: series NestJS)
 };
 
 const Card: React.FC<{children: React.ReactNode; style?: React.CSSProperties}> = ({
@@ -60,7 +64,46 @@ const Arrow: React.FC = () => (
 );
 
 // Hình minh họa bên phải cho từng tập
-const Visual: React.FC<{variant: ThumbnailProps['variant']}> = ({variant}) => {
+const Visual: React.FC<{
+  variant: ThumbnailProps['variant'];
+  image?: string;
+  badgeEmoji?: string;
+}> = ({variant, image, badgeEmoji}) => {
+  if (variant === 'shot' && image) {
+    return (
+      <div style={{position: 'relative'}}>
+        <div
+          style={{
+            width: 300,
+            height: 620,
+            borderRadius: 42,
+            border: '8px solid #334155',
+            overflow: 'hidden',
+            backgroundColor: '#000',
+            boxShadow: '0 24px 60px rgba(0,0,0,0.55)',
+          }}
+        >
+          <Img
+            src={staticFile(image)}
+            style={{width: '100%', height: '100%', objectFit: 'cover'}}
+          />
+        </div>
+        {badgeEmoji ? (
+          <div
+            style={{
+              position: 'absolute',
+              top: -40,
+              left: -56,
+              fontSize: 110,
+              filter: 'drop-shadow(0 12px 24px rgba(0,0,0,0.5))',
+            }}
+          >
+            {badgeEmoji}
+          </div>
+        ) : null}
+      </div>
+    );
+  }
   if (variant === 'ep1') {
     return (
       <div style={{position: 'relative'}}>
@@ -379,7 +422,16 @@ const Visual: React.FC<{variant: ThumbnailProps['variant']}> = ({variant}) => {
 // Chữ dài thì co lại để không tràn cột trái (rộng 660px, Inter 900 ≈ 0.62em/ký tự)
 const fitFont = (text: string): number => Math.min(108, Math.floor(1064 / text.length));
 
-export const Thumbnail: React.FC<ThumbnailProps> = ({badge, line1, line2, subtitle, variant}) => (
+export const Thumbnail: React.FC<ThumbnailProps> = ({
+  badge,
+  line1,
+  line2,
+  subtitle,
+  variant,
+  image,
+  badgeEmoji,
+  seriesTag,
+}) => (
   <AbsoluteFill style={{backgroundColor: theme.bg, fontFamily: theme.fontSans, overflow: 'hidden'}}>
     {/* dải chéo đỏ góc phải dưới tạo điểm nhấn */}
     <div
@@ -423,7 +475,7 @@ export const Thumbnail: React.FC<ThumbnailProps> = ({badge, line1, line2, subtit
         fontWeight: 700,
       }}
     >
-      NestJS cho người mới bắt đầu 🇻🇳
+      {seriesTag ?? 'NestJS cho người mới bắt đầu 🇻🇳'}
     </div>
     {/* khối chữ chính bên trái */}
     <div
@@ -478,7 +530,7 @@ export const Thumbnail: React.FC<ThumbnailProps> = ({badge, line1, line2, subtit
         alignItems: 'center',
       }}
     >
-      <Visual variant={variant} />
+      <Visual variant={variant} image={image} badgeEmoji={badgeEmoji} />
     </div>
   </AbsoluteFill>
 );

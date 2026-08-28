@@ -1,0 +1,182 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng đến với một hành trình hoàn toàn mới: series Super App với React Native và Expo!",
+      "Suốt các series trước, chúng ta xây phần chìm của tảng băng: backend. Giờ là lúc xây phần ai cũng thấy: ứng dụng trên điện thoại.",
+      "Đích đến của series: ViệtSuper, một siêu ứng dụng kiểu Grab thu nhỏ, chạy thật trên iPhone, do chính tay bạn viết.",
+      "Và ngay tập này, app đầu tiên của bạn sẽ hiện lên màn hình điện thoại."
+    ],
+    "visual": {
+      "title": "Super App với React Native",
+      "subtitle": "Tập 1 · Expo và app đầu tiên của bạn",
+      "badge": "Series Super App · ViệtSuper"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Câu hỏi đầu tiên: React Native là gì?",
+      "Bình thường, muốn làm app iPhone bạn phải học Swift, làm app Android phải học Kotlin: hai ngôn ngữ, hai đội, hai lần công sức.",
+      "React Native cho bạn viết MỘT lần bằng JavaScript, chạy ra app THẬT trên cả hai hệ điều hành.",
+      "Giống như một công thức nấu ăn dùng được cho hai căn bếp khác nhau.",
+      "Và quan trọng: không phải web đội lốt app đâu, giao diện là linh kiện thật của điện thoại."
+    ],
+    "visual": {
+      "title": "React Native là gì?",
+      "bullets": [
+        {"icon": "😰", "text": "Cách cũ: Swift cho iPhone + Kotlin cho Android", "sentence": 1},
+        {"icon": "⚛️", "text": "React Native: viết 1 lần chạy cả 2", "sentence": 2},
+        {"icon": "🍳", "text": "Một công thức — nấu được ở hai căn bếp", "sentence": 3},
+        {"icon": "📱", "text": "Ra app THẬT, không phải web đội lốt", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "Còn Expo là gì mà luôn đi kèm React Native?",
+      "React Native thuần giống như được giao động cơ rời: mạnh, nhưng bạn phải tự lắp xe.",
+      "Expo là chiếc xe lắp sẵn: công cụ tạo project, app xem thử trên điện thoại, và hàng trăm linh kiện có sẵn như camera, bản đồ, thông báo.",
+      "Chính đội React khuyên người mới bắt đầu bằng Expo.",
+      "Đồ nghề cần có: chỉ Node.js, thứ bạn đã có sẵn từ series backend."
+    ],
+    "visual": {
+      "title": "Expo là gì?",
+      "bullets": [
+        {"icon": "🔧", "text": "RN thuần = động cơ rời, tự lắp xe", "sentence": 1},
+        {"icon": "🚗", "text": "Expo = xe lắp sẵn, lên là chạy", "sentence": 2},
+        {"icon": "✅", "text": "Chính đội React khuyên người mới dùng Expo", "sentence": 3},
+        {"icon": "🟢", "text": "Chỉ cần Node.js — bạn có sẵn rồi!", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Tạo app đầu tiên nào: create-expo-app, đặt tên demo-hello, template blank TypeScript cho gọn.",
+      "Vào thư mục và chạy npx expo start: trung tâm chỉ huy của Expo hiện lên.",
+      "Bấm chữ i, app sẽ mở trong iPhone giả lập trên máy. Có điện thoại thật? Quét QR bằng app Expo Go là chạy luôn trên máy bạn.",
+      "Dòng iOS Bundled hiện ra: app của bạn đã lên sóng!"
+    ],
+    "visual": {
+      "title": "Tạo và chạy app đầu tiên",
+      "commands": [
+        {"cmd": "npx create-expo-app demo-hello --template blank-typescript", "output": "✅ Your project is ready!", "sentence": 0},
+        {"cmd": "cd demo-hello && npx expo start", "output": "› Metro waiting on exp://192.168.1.5:8081\n› Press i │ open iOS simulator", "sentence": 1},
+        {"cmd": "i", "output": "iOS Bundled 3770ms index.ts (705 modules)", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Mở file App.tsx: trái tim của app nằm cả ở đây, và nếu bạn biết React thì mọi thứ rất quen.",
+      "useState đếm số lần chạm: đúng useState bạn từng biết, không khác một ly.",
+      "Điểm khác duy nhất: không có div hay span. Trên mobile, khối là View, chữ là Text.",
+      "Nút bấm là Pressable, với onPress thay cho onClick.",
+      "Quy tắc vàng của React Native: đổi thẻ HTML thành linh kiện mobile, còn tư duy React giữ nguyên."
+    ],
+    "visual": {
+      "filename": "App.tsx (phần component)",
+      "language": "tsx",
+      "code": "import { useState } from 'react';\nimport { Pressable, StyleSheet, Text, View } from 'react-native';\n\nexport default function App() {\n  const [taps, setTaps] = useState(0);\n\n  return (\n    <View style={styles.container}>\n      <Text style={styles.flag}>🇻🇳</Text>\n      <Text style={styles.title}>ViệtSuper</Text>\n      <Text style={styles.subtitle}>Siêu ứng dụng đầu tiên của mình</Text>\n      <Pressable style={styles.button} onPress={() => setTaps((t) => t + 1)}>\n        <Text style={styles.buttonText}>Đã chạm {taps} lần 👋</Text>\n      </Pressable>\n    </View>\n  );\n}",
+      "steps": [
+        {"from": 1, "to": 17, "sentence": 0},
+        {"from": 5, "to": 5, "sentence": 1},
+        {"from": 8, "to": 11, "sentence": 2},
+        {"from": 12, "to": 14, "sentence": 3},
+        {"from": 1, "to": 17, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Còn trang điểm cho app thì sao? StyleSheet.create: CSS phiên bản JavaScript.",
+      "Thuộc tính viết theo lối camelCase: backgroundColor thay vì background-color.",
+      "Flexbox là ngôn ngữ dàn trang mặc định của mobile: flex một, alignItems, justifyContent center là mọi thứ vào giữa màn hình.",
+      "Nền tối, chữ trắng, nút đỏ bo tròn: nhận diện ViệtSuper y hệt theme của series."
+    ],
+    "visual": {
+      "filename": "App.tsx (phần styles — trích)",
+      "language": "tsx",
+      "code": "const styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    backgroundColor: '#0f172a',\n    alignItems: 'center',\n    justifyContent: 'center',\n    gap: 12,\n  },\n  flag: {\n    fontSize: 64,\n  },\n  title: {\n    color: '#ffffff',\n    fontSize: 32,\n    fontWeight: 'bold',\n  },",
+      "steps": [
+        {"from": 1, "to": 16, "sentence": 0},
+        {"from": 4, "to": 4, "sentence": 1},
+        {"from": 3, "to": 6, "sentence": 2},
+        {"from": 1, "to": 16, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "phone",
+    "narration": [
+      "Và đây, không phải hình vẽ minh họa đâu: ảnh chụp thẳng từ iPhone giả lập đang chạy code của chúng ta.",
+      "Cờ đỏ sao vàng, tên app, và nút đếm đang ở số không.",
+      "Chạm thử ba lần... con số nhảy theo từng cú chạm, mượt như app xịn.",
+      "Hay nhất là hot reload: sửa code, bấm lưu, màn hình đổi NGAY, không cần build lại.",
+      "Cảm giác sửa một dòng chữ và thấy điện thoại đổi theo tức thì: đó là lúc nhiều người phải lòng React Native."
+    ],
+    "visual": {
+      "title": "App thật, chạy thật 📱",
+      "screens": [
+        {"src": "screens/ep13/hello-0.png", "sentence": 0},
+        {"src": "screens/ep13/hello-3taps.png", "sentence": 2}
+      ],
+      "bullets": [
+        {"icon": "📸", "text": "Ảnh chụp thật từ iPhone Simulator", "sentence": 0},
+        {"icon": "👆", "text": "Chạm 3 lần — state đổi, UI đổi theo", "sentence": 2},
+        {"icon": "⚡", "text": "Hot reload: sửa code là thấy ngay", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "concept",
+    "narration": [
+      "Bảng quy đổi bỏ túi cho dân web chuyển sang mobile nhé.",
+      "div thành View. span và p thành Text: mọi con chữ BẮT BUỘC nằm trong Text.",
+      "button thành Pressable, onClick thành onPress.",
+      "CSS thành StyleSheet.create, và Flexbox là mặc định ở khắp nơi.",
+      "Chỉ chừng đó khác biệt: kiến thức React của bạn giữ nguyên giá trị."
+    ],
+    "visual": {
+      "title": "Bảng quy đổi Web → Mobile",
+      "bullets": [
+        {"icon": "📦", "text": "div → View · span/p → Text", "sentence": 1},
+        {"icon": "👆", "text": "button → Pressable · onClick → onPress", "sentence": 2},
+        {"icon": "🎨", "text": "CSS → StyleSheet.create (camelCase)", "sentence": 3},
+        {"icon": "📐", "text": "Flexbox là mặc định mọi nơi", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: React Native cho bạn viết app thật bằng JavaScript, Expo là bộ đồ nghề trọn gói để bắt đầu trong một lệnh.",
+      "View, Text, Pressable, StyleSheet: bốn viên gạch đầu tiên của mọi màn hình.",
+      "Và bạn đã có app đầu tiên chạy trên iPhone rồi đấy!",
+      "Bài tập nhỏ: thêm nút thứ hai để trừ bộ đếm, xem hot reload lợi hại cỡ nào nhé.",
+      "Tập sau, ta bắt đầu xây ViệtSuper thật sự: siêu ứng dụng nhiều tab với expo-router. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "RN = viết JS, ra app thật iOS + Android", "sentence": 0},
+        {"text": "View · Text · Pressable · StyleSheet", "sentence": 1},
+        {"text": "App đầu tiên đã chạy trên iPhone 🎉", "sentence": 2}
+      ],
+      "next": "Tập 2: Siêu ứng dụng nhiều tab với expo-router"
+    }
+  }
+]

@@ -1,0 +1,373 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Mini-app Đồ ăn",
+        "subtitle": "Tập 4 · Giỏ hàng & state",
+        "badge": "Series Super App · ViệtSuper"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep16/scene-01-0-1b02752b.wav",
+          "startFrame": 0,
+          "durationInFrames": 51
+        },
+        {
+          "file": "audio/ep16/scene-01-1-6180c4d0.wav",
+          "startFrame": 59,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep16/scene-01-2-23735ba5.wav",
+          "startFrame": 171,
+          "durationInFrames": 120
+        }
+      ],
+      "durationInFrames": 309
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Giải phẫu màn đặt đồ ăn",
+        "bullets": [
+          {
+            "icon": "📜",
+            "text": "Danh sách món — FlatList quen thuộc",
+            "sentence": 1
+          },
+          {
+            "icon": "➕",
+            "text": "Nút thêm vào giỏ ở từng món",
+            "sentence": 2
+          },
+          {
+            "icon": "🛒",
+            "text": "Thanh tổng kết: số món + tổng tiền",
+            "sentence": 3
+          },
+          {
+            "icon": "🧠",
+            "text": "Bí quyết: state — trí nhớ của màn hình",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep16/scene-02-0-37f6569a.wav",
+          "startFrame": 0,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep16/scene-02-1-8f3d7620.wav",
+          "startFrame": 128,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep16/scene-02-2-b05bb8f6.wav",
+          "startFrame": 235,
+          "durationInFrames": 58
+        },
+        {
+          "file": "audio/ep16/scene-02-3-7abc781b.wav",
+          "startFrame": 301,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep16/scene-02-4-e637d05a.wav",
+          "startFrame": 439,
+          "durationInFrames": 96
+        }
+      ],
+      "durationInFrames": 553
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "app/(tabs)/food.tsx (menu)",
+        "language": "tsx",
+        "code": "type MenuItem = { id: string; name: string; emoji: string; price: number };\n\nconst menu: MenuItem[] = [\n  { id: 'pho-bo', name: 'Phở bò', emoji: '🍜', price: 45000 },\n  { id: 'com-tam', name: 'Cơm tấm', emoji: '🍚', price: 40000 },\n  { id: 'banh-mi', name: 'Bánh mì', emoji: '🥖', price: 25000 },\n  { id: 'tra-sua', name: 'Trà sữa', emoji: '🧋', price: 30000 },\n];",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 7,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep16/scene-03-0-f24ad229.wav",
+          "startFrame": 0,
+          "durationInFrames": 70
+        },
+        {
+          "file": "audio/ep16/scene-03-1-4de70a5e.wav",
+          "startFrame": 78,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep16/scene-03-2-d98e4a36.wav",
+          "startFrame": 204,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep16/scene-03-3-fa8bc9f9.wav",
+          "startFrame": 308,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 432
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "app/(tabs)/food.tsx (state & tổng tiền)",
+        "language": "tsx",
+        "code": "export default function FoodScreen() {\n  const [cart, setCart] = useState<string[]>([]);\n\n  const total = cart.reduce((sum, id) => {\n    const item = menu.find((m) => m.id === id);\n    return sum + (item?.price ?? 0);\n  }, 0);",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 7,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep16/scene-04-0-3e464051.wav",
+          "startFrame": 0,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep16/scene-04-1-69e98ab7.wav",
+          "startFrame": 102,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep16/scene-04-2-e2fbf18a.wav",
+          "startFrame": 298,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep16/scene-04-3-05fd3615.wav",
+          "startFrame": 450,
+          "durationInFrames": 171
+        }
+      ],
+      "durationInFrames": 639
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "app/(tabs)/food.tsx (nút thêm & thanh giỏ)",
+        "language": "tsx",
+        "code": "            <Pressable style={styles.addButton} onPress={() => setCart((c) => [...c, item.id])}>\n              <Text style={styles.addButtonText}>+ Thêm</Text>\n            </Pressable>\n          </View>\n        )}\n      />\n      <View style={styles.bottomBar}>\n        <Text style={styles.bottomText}>🛒 {cart.length} món</Text>\n        <Text style={styles.bottomTotal}>{total.toLocaleString('vi')}đ</Text>\n      </View>",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 10,
+            "sentence": 3
+          },
+          {
+            "from": 9,
+            "to": 9,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep16/scene-05-0-617922a2.wav",
+          "startFrame": 0,
+          "durationInFrames": 82
+        },
+        {
+          "file": "audio/ep16/scene-05-1-a7d8d98e.wav",
+          "startFrame": 90,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep16/scene-05-2-d9785261.wav",
+          "startFrame": 221,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep16/scene-05-3-873393de.wav",
+          "startFrame": 393,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep16/scene-05-4-0946a3e5.wav",
+          "startFrame": 536,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 686
+    },
+    {
+      "id": "scene-06",
+      "type": "phone",
+      "visual": {
+        "title": "Gian Đồ ăn mở hàng 🍜",
+        "screens": [
+          {
+            "src": "screens/ep16/food-0.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep16/food-2mon.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🛒",
+            "text": "Mở hàng: 0 món · 0đ",
+            "sentence": 0
+          },
+          {
+            "icon": "👆",
+            "text": "Thêm Phở bò + Trà sữa",
+            "sentence": 2
+          },
+          {
+            "icon": "💯",
+            "text": "2 món · 75.000đ — tự cộng chuẩn",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep16/scene-06-0-5ece714c.wav",
+          "startFrame": 0,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep16/scene-06-1-5a9d07c4.wav",
+          "startFrame": 119,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep16/scene-06-2-ccafb49e.wav",
+          "startFrame": 219,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep16/scene-06-3-0812be4e.wav",
+          "startFrame": 386,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep16/scene-06-4-c7007d3f.wav",
+          "startFrame": 522,
+          "durationInFrames": 84
+        }
+      ],
+      "durationInFrames": 624
+    },
+    {
+      "id": "scene-07",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "Giỏ hàng = mảng id trong useState",
+            "sentence": 0
+          },
+          {
+            "text": "[...cart, id] — luôn tạo mảng mới",
+            "sentence": 1
+          },
+          {
+            "text": "reduce + toLocaleString('vi') = tính tiền chuẩn",
+            "sentence": 2
+          }
+        ],
+        "next": "Tập 5: Ví điện tử — app nhớ tiền kể cả khi tắt"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep16/scene-07-0-58479f75.wav",
+          "startFrame": 0,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep16/scene-07-1-9ab9d233.wav",
+          "startFrame": 157,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep16/scene-07-2-75e30288.wav",
+          "startFrame": 276,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep16/scene-07-3-77432784.wav",
+          "startFrame": 376,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep16/scene-07-4-4f4530b2.wav",
+          "startFrame": 512,
+          "durationInFrames": 142
+        }
+      ],
+      "durationInFrames": 672
+    }
+  ]
+}

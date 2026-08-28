@@ -15,6 +15,12 @@ import ep09 from './data/ep09.timing.json';
 import ep10 from './data/ep10.timing.json';
 import ep11 from './data/ep11.timing.json';
 import ep12 from './data/ep12.timing.json';
+import ep13 from './data/ep13.timing.json';
+import ep14 from './data/ep14.timing.json';
+import ep15 from './data/ep15.timing.json';
+import ep16 from './data/ep16.timing.json';
+import ep17 from './data/ep17.timing.json';
+import ep18 from './data/ep18.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -30,6 +36,12 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode10', timing: ep10 as unknown as EpisodeTiming},
   {id: 'Episode11', timing: ep11 as unknown as EpisodeTiming},
   {id: 'Episode12', timing: ep12 as unknown as EpisodeTiming},
+  {id: 'Episode13', timing: ep13 as unknown as EpisodeTiming},
+  {id: 'Episode14', timing: ep14 as unknown as EpisodeTiming},
+  {id: 'Episode15', timing: ep15 as unknown as EpisodeTiming},
+  {id: 'Episode16', timing: ep16 as unknown as EpisodeTiming},
+  {id: 'Episode17', timing: ep17 as unknown as EpisodeTiming},
+  {id: 'Episode18', timing: ep18 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -152,6 +164,84 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       line2: 'GOOGLE',
       subtitle: 'gRPC · hợp đồng .proto',
       variant: 'ep12',
+    },
+  },
+  {
+    id: 'Thumb13',
+    props: {
+      badge: 'MOBILE 1',
+      line1: 'APP ĐẦU TIÊN',
+      line2: 'TRÊN IPHONE',
+      subtitle: 'React Native + Expo',
+      variant: 'shot',
+      image: 'screens/ep13/hello-3taps.png',
+      badgeEmoji: '📱',
+      seriesTag: 'Super App với React Native 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb14',
+    props: {
+      badge: 'MOBILE 2',
+      line1: 'SUPER APP',
+      line2: '4 TAB',
+      subtitle: 'expo-router · ViệtSuper',
+      variant: 'shot',
+      image: 'screens/ep14/tabs.png',
+      badgeEmoji: '🛗',
+      seriesTag: 'Super App với React Native 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb15',
+    props: {
+      badge: 'MOBILE 3',
+      line1: 'LƯỚI DỊCH VỤ',
+      line2: 'KIỂU GRAB',
+      subtitle: 'FlatList · numColumns',
+      variant: 'shot',
+      image: 'screens/ep15/home.png',
+      badgeEmoji: '🏠',
+      seriesTag: 'Super App với React Native 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb16',
+    props: {
+      badge: 'MOBILE 4',
+      line1: 'GIỎ HÀNG',
+      line2: 'TỰ TÍNH TIỀN',
+      subtitle: 'useState · reduce',
+      variant: 'shot',
+      image: 'screens/ep16/food-2mon.png',
+      badgeEmoji: '🍜',
+      seriesTag: 'Super App với React Native 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb17',
+    props: {
+      badge: 'MOBILE 5',
+      line1: 'TẮT APP',
+      line2: 'TIỀN CÒN NGUYÊN',
+      subtitle: 'AsyncStorage',
+      variant: 'shot',
+      image: 'screens/ep17/wallet-persist.png',
+      badgeEmoji: '💰',
+      seriesTag: 'Super App với React Native 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb18',
+    props: {
+      badge: 'MOBILE 6 · CUỐI',
+      line1: 'APP GẶP',
+      line2: 'BACKEND',
+      subtitle: 'fetch · NestJS · fullstack',
+      variant: 'shot',
+      image: 'screens/ep18/promo.png',
+      badgeEmoji: '🔌',
+      seriesTag: 'Super App với React Native 🇻🇳',
     },
   },
 ];

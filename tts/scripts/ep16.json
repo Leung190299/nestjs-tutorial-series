@@ -1,0 +1,144 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại ViệtSuper!",
+      "Hôm nay gian hàng đông khách nhất chính thức khai trương: mini-app Đặt đồ ăn.",
+      "Menu món Việt, nút thêm món, và thanh giỏ hàng tự cộng tiền: tất cả trong một tập."
+    ],
+    "visual": {
+      "title": "Mini-app Đồ ăn",
+      "subtitle": "Tập 4 · Giỏ hàng & state",
+      "badge": "Series Super App · ViệtSuper"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Mổ xẻ màn đặt đồ ăn của mọi app giao đồ ăn, bạn sẽ thấy đúng ba mảnh.",
+      "Một: danh sách món để khách chọn: FlatList, vừa học tập trước.",
+      "Hai: nút thêm vào giỏ ở từng món.",
+      "Ba: thanh tổng kết dưới đáy: bao nhiêu món, bao nhiêu tiền, cập nhật NGAY mỗi lần thêm.",
+      "Mảnh ba chính là bài học hôm nay: state, trí nhớ tạm của màn hình."
+    ],
+    "visual": {
+      "title": "Giải phẫu màn đặt đồ ăn",
+      "bullets": [
+        {"icon": "📜", "text": "Danh sách món — FlatList quen thuộc", "sentence": 1},
+        {"icon": "➕", "text": "Nút thêm vào giỏ ở từng món", "sentence": 2},
+        {"icon": "🛒", "text": "Thanh tổng kết: số món + tổng tiền", "sentence": 3},
+        {"icon": "🧠", "text": "Bí quyết: state — trí nhớ của màn hình", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Thực đơn khai trương: bốn quốc bảo ẩm thực Việt.",
+      "Phở bò bốn lăm nghìn, cơm tấm bốn chục, bánh mì hai lăm, trà sữa ba chục.",
+      "Mỗi món một id riêng: chút nữa giỏ hàng sẽ lưu bằng id này.",
+      "Dữ liệu tách khỏi giao diện: mai này đổi menu chỉ sửa đúng chỗ này."
+    ],
+    "visual": {
+      "filename": "app/(tabs)/food.tsx (menu)",
+      "language": "tsx",
+      "code": "type MenuItem = { id: string; name: string; emoji: string; price: number };\n\nconst menu: MenuItem[] = [\n  { id: 'pho-bo', name: 'Phở bò', emoji: '🍜', price: 45000 },\n  { id: 'com-tam', name: 'Cơm tấm', emoji: '🍚', price: 40000 },\n  { id: 'banh-mi', name: 'Bánh mì', emoji: '🥖', price: 25000 },\n  { id: 'tra-sua', name: 'Trà sữa', emoji: '🧋', price: 30000 },\n];",
+      "steps": [
+        {"from": 1, "to": 8, "sentence": 0},
+        {"from": 4, "to": 7, "sentence": 1},
+        {"from": 4, "to": 7, "sentence": 2},
+        {"from": 1, "to": 8, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "Trái tim của giỏ hàng: hai dòng khai báo và một phép tính.",
+      "cart là mảng id các món đã chọn, bắt đầu rỗng: khách gọi hai phở thì id phở nằm hai lần: thế là tính được số lượng.",
+      "total dùng reduce: đi qua từng id trong giỏ, tra giá trong menu, cộng dồn lại.",
+      "Điều kỳ diệu của React: cart đổi là total tự tính lại, giao diện tự vẽ lại, bạn không phải ra lệnh gì thêm."
+    ],
+    "visual": {
+      "filename": "app/(tabs)/food.tsx (state & tổng tiền)",
+      "language": "tsx",
+      "code": "export default function FoodScreen() {\n  const [cart, setCart] = useState<string[]>([]);\n\n  const total = cart.reduce((sum, id) => {\n    const item = menu.find((m) => m.id === id);\n    return sum + (item?.price ?? 0);\n  }, 0);",
+      "steps": [
+        {"from": 1, "to": 7, "sentence": 0},
+        {"from": 2, "to": 2, "sentence": 1},
+        {"from": 4, "to": 7, "sentence": 2},
+        {"from": 1, "to": 7, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Ghép nốt hai mảnh còn lại: nút thêm và thanh giỏ.",
+      "Nút cộng Thêm: setCart với dấu ba chấm: TẠO MẢNG MỚI gồm giỏ cũ cộng món mới.",
+      "Nhớ luật bất di bất dịch của React: không sửa mảng cũ, luôn tạo mảng mới, React mới biết đường vẽ lại.",
+      "Thanh dưới đáy: cart.length đếm món, total format kiểu Việt Nam bằng toLocaleString vi.",
+      "Bảy lăm nghìn hiện ra là bảy mươi lăm chấm không không không: chuẩn dấu chấm phân cách của mình."
+    ],
+    "visual": {
+      "filename": "app/(tabs)/food.tsx (nút thêm & thanh giỏ)",
+      "language": "tsx",
+      "code": "            <Pressable style={styles.addButton} onPress={() => setCart((c) => [...c, item.id])}>\n              <Text style={styles.addButtonText}>+ Thêm</Text>\n            </Pressable>\n          </View>\n        )}\n      />\n      <View style={styles.bottomBar}>\n        <Text style={styles.bottomText}>🛒 {cart.length} món</Text>\n        <Text style={styles.bottomTotal}>{total.toLocaleString('vi')}đ</Text>\n      </View>",
+      "steps": [
+        {"from": 1, "to": 10, "sentence": 0},
+        {"from": 1, "to": 1, "sentence": 1},
+        {"from": 1, "to": 1, "sentence": 2},
+        {"from": 7, "to": 10, "sentence": 3},
+        {"from": 9, "to": 9, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "phone",
+    "narration": [
+      "Lên máy xem nào: gian Đồ ăn lúc mở hàng, giỏ đang không món, không đồng.",
+      "Bốn món xếp hàng ngay ngắn, giá cả rõ ràng, nút đỏ mời gọi.",
+      "Khách gọi một phở bò, một trà sữa... và nhìn thanh giỏ: HAI MÓN, BẢY MƯƠI LĂM NGHÌN, tự cộng không sai một đồng.",
+      "Bốn lăm cộng ba chục, đúng là bảy lăm: reduce làm toán nhanh hơn cả chủ quán.",
+      "Mini-app đầu tiên của ViệtSuper chính thức phục vụ!"
+    ],
+    "visual": {
+      "title": "Gian Đồ ăn mở hàng 🍜",
+      "screens": [
+        {"src": "screens/ep16/food-0.png", "sentence": 0},
+        {"src": "screens/ep16/food-2mon.png", "sentence": 2}
+      ],
+      "bullets": [
+        {"icon": "🛒", "text": "Mở hàng: 0 món · 0đ", "sentence": 0},
+        {"icon": "👆", "text": "Thêm Phở bò + Trà sữa", "sentence": 2},
+        {"icon": "💯", "text": "2 món · 75.000đ — tự cộng chuẩn", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: giỏ hàng chỉ là một mảng id trong useState, và tổng tiền là một phép reduce.",
+      "Luật vàng: cập nhật state bằng mảng MỚI với dấu ba chấm, không sửa mảng cũ.",
+      "toLocaleString vi cho tiền tệ hiển thị chuẩn kiểu Việt.",
+      "Bài tập nhỏ: thêm nút Xóa giỏ đặt cạnh thanh tổng, một dòng setCart mảng rỗng là xong.",
+      "Tập sau: gian hàng nhạy cảm nhất: Ví tiền, nơi app phải NHỚ số dư kể cả khi bị tắt. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "Giỏ hàng = mảng id trong useState", "sentence": 0},
+        {"text": "[...cart, id] — luôn tạo mảng mới", "sentence": 1},
+        {"text": "reduce + toLocaleString('vi') = tính tiền chuẩn", "sentence": 2}
+      ],
+      "next": "Tập 5: Ví điện tử — app nhớ tiền kể cả khi tắt"
+    }
+  }
+]

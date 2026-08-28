@@ -1,0 +1,184 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng đến với tập cuối của series Super App!",
+      "ViệtSuper đã đẹp, đã chạy: nhưng mọi dữ liệu vẫn viết cứng trong code: app chưa thật sự SỐNG.",
+      "Hôm nay ta cắm dây mạng cho nó: màn Ưu đãi sẽ lấy dữ liệu từ một server NestJS thật, do chính bạn viết bằng kiến thức series đầu tiên.",
+      "Frontend gặp backend: vòng tròn fullstack chính thức khép lại."
+    ],
+    "visual": {
+      "title": "Nối App với Backend NestJS",
+      "subtitle": "Tập 6 · Fetch API — vòng tròn fullstack",
+      "badge": "Series Super App · ViệtSuper · Tập cuối"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Vì sao phải có backend? Ba lý do nhìn từ màn Ưu đãi.",
+      "Một: ưu đãi thay đổi mỗi ngày: sửa app rồi chờ duyệt lên store thì ưu đãi hết hạn từ lâu.",
+      "Hai: dữ liệu trên server sửa MỘT lần, triệu máy cập nhật cùng lúc.",
+      "Ba: có những thứ không được nhét vào app: giá, tồn kho, bí mật kinh doanh.",
+      "Kiến trúc chuẩn: app là mặt tiền, server là nhà kho: và ta đã biết xây nhà kho từ series NestJS."
+    ],
+    "visual": {
+      "title": "Vì sao app cần backend?",
+      "bullets": [
+        {"icon": "📅", "text": "Ưu đãi đổi mỗi ngày — không thể sửa app", "sentence": 1},
+        {"icon": "🌍", "text": "Server sửa 1 lần, triệu máy cập nhật", "sentence": 2},
+        {"icon": "🔐", "text": "Bí mật kinh doanh không nằm trong app", "sentence": 3},
+        {"icon": "🏗️", "text": "App = mặt tiền · Server = nhà kho", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Ôn bài mười giây: dựng nhà kho bằng NestJS, đúng công thức tập một series đầu.",
+      "PromosController với @Controller promos và @Get: hứng đường dẫn GET /promos.",
+      "Ba ưu đãi mẫu: giảm ba mươi phần trăm đồ ăn, freeship, mua một tặng một vé phim.",
+      "Server nghe ở cổng ba chín chín chín, bật CORS cho client gọi thoải mái.",
+      "Nếu bạn theo series từ đầu, file này đọc dễ như đọc truyện."
+    ],
+    "visual": {
+      "filename": "demo-superapp-api/src/promos.controller.ts",
+      "language": "tsx",
+      "code": "import { Controller, Get } from '@nestjs/common';\n\ntype Promo = { id: number; emoji: string; title: string; detail: string };\n\n@Controller('promos')\nexport class PromosController {\n  private readonly promos: Promo[] = [\n    { id: 1, emoji: '🍜', title: 'Giảm 30% đồ ăn', detail: 'Cho đơn đầu tiên trong ngày' },\n    { id: 2, emoji: '🛵', title: 'Freeship 0đ', detail: 'Mọi chuyến xe dưới 3km' },\n    { id: 3, emoji: '🎬', title: 'Mua 1 tặng 1 vé phim', detail: 'Riêng tối thứ Tư hằng tuần' },\n  ];\n\n  @Get()\n  findAll(): Promo[] {\n    return this.promos;\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 17, "sentence": 0},
+        {"from": 5, "to": 6, "sentence": 1},
+        {"from": 7, "to": 11, "sentence": 2},
+        {"from": 1, "to": 17, "sentence": 3},
+        {"from": 1, "to": 17, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy nhà kho lên và gõ cửa thử bằng curl.",
+      "Ba ưu đãi bay về dạng JSON: nhà kho sẵn sàng giao hàng.",
+      "Địa chỉ ghi nhớ: localhost cổng ba chín chín chín, đường promos."
+    ],
+    "visual": {
+      "title": "Nhà kho mở cửa",
+      "commands": [
+        {"cmd": "cd demo-superapp-api && npm run start", "output": "[Nest] LOG [NestApplication] Nest application successfully started", "sentence": 0},
+        {"cmd": "curl localhost:3999/promos", "output": "[{\"id\":1,\"emoji\":\"🍜\",\"title\":\"Giảm 30% đồ ăn\",...},\n {\"id\":2,\"emoji\":\"🛵\",\"title\":\"Freeship 0đ\",...},\n {\"id\":3,\"emoji\":\"🎬\",\"title\":\"Mua 1 tặng 1 vé phim\",...}]", "sentence": 1}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Giờ sang phía app: màn Ưu đãi đi lấy hàng.",
+      "useEffect mảng rỗng: gọi hàng đúng một lần lúc màn hình mở, y chang bài AsyncStorage.",
+      "fetch đến địa chỉ nhà kho: fetch có sẵn trong React Native, không phải cài gì.",
+      "res.json bóc kiện hàng thành object, setPromos đổ vào state.",
+      "finally tắt cờ loading dù thành công hay thất bại: màn hình không bao giờ kẹt ở trạng thái chờ."
+    ],
+    "visual": {
+      "filename": "app/(tabs)/promo.tsx (đi lấy hàng)",
+      "language": "tsx",
+      "code": "  useEffect(() => {\n    fetch('http://localhost:3999/promos')\n      .then((res) => res.json())\n      .then(setPromos)\n      .finally(() => setLoading(false));\n  }, []);",
+      "steps": [
+        {"from": 1, "to": 6, "sentence": 0},
+        {"from": 1, "to": 1, "sentence": 1},
+        {"from": 2, "to": 2, "sentence": 2},
+        {"from": 3, "to": 4, "sentence": 3},
+        {"from": 5, "to": 5, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Mạng thì không tức thì: trong lúc chờ hàng về, khách phải thấy gì đó.",
+      "Cờ loading bật sẵn từ đầu: đang chờ thì trả về màn hình chờ riêng.",
+      "ActivityIndicator: vòng xoay chờ chính chủ của mobile, tô màu đỏ thương hiệu.",
+      "Kèm dòng chữ đang tải ưu đãi cho thân thiện.",
+      "Loading xong, FlatList ưu đãi hiện ra: mẫu loading rồi dữ liệu này bạn sẽ dùng cả đời làm app."
+    ],
+    "visual": {
+      "filename": "app/(tabs)/promo.tsx (màn hình chờ)",
+      "language": "tsx",
+      "code": "  if (loading) {\n    return (\n      <View style={styles.center}>\n        <ActivityIndicator color=\"#ea2845\" size=\"large\" />\n        <Text style={styles.loadingText}>Đang tải ưu đãi...</Text>\n      </View>\n    );\n  }",
+      "steps": [
+        {"from": 1, "to": 8, "sentence": 0},
+        {"from": 1, "to": 2, "sentence": 1},
+        {"from": 4, "to": 4, "sentence": 2},
+        {"from": 5, "to": 5, "sentence": 3},
+        {"from": 1, "to": 8, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "phone",
+    "narration": [
+      "Và khoảnh khắc lịch sử của series: màn Ưu đãi trên iPhone, dữ liệu đến từ server NestJS đang chạy trên máy.",
+      "Ba tấm thẻ ưu đãi: giảm ba mươi phần trăm, freeship, mua một tặng một: đúng từng chữ trong controller.",
+      "Đổi chữ trong controller, app đổi theo mà KHÔNG cần build lại: vì dữ liệu giờ sống ở server.",
+      "Frontend React Native bắt tay backend NestJS: cả hai đều do chính tay bạn viết.",
+      "Đây, chính xác, là fullstack."
+    ],
+    "visual": {
+      "title": "Dữ liệu thật từ server thật 🔌",
+      "screens": [
+        {"src": "screens/ep18/promo.png", "sentence": 0}
+      ],
+      "bullets": [
+        {"icon": "📡", "text": "3 ưu đãi bay từ NestJS :3999 vào iPhone", "sentence": 1},
+        {"icon": "🔄", "text": "Sửa server → app đổi, không build lại", "sentence": 2},
+        {"icon": "🤝", "text": "RN + NestJS — đều do bạn viết", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "concept",
+    "narration": [
+      "Nhìn lại sáu tập: bạn đã đi một chặng đường dài đến khó tin.",
+      "Từ app một nút bấm, đến siêu ứng dụng bốn tab có điều hướng chuẩn.",
+      "Lưới dịch vụ, giỏ hàng biết tính tiền, ví điện tử nhớ số dư qua cả lần tắt app.",
+      "Và hôm nay: dữ liệu sống từ backend của chính bạn.",
+      "Đường tiếp theo nếu muốn đi xa: đăng nhập với JWT, đẩy thông báo, và đóng gói lên App Store bằng EAS của Expo."
+    ],
+    "visual": {
+      "title": "Hành trình 6 tập của bạn",
+      "bullets": [
+        {"icon": "📱", "text": "App đầu tiên → super app 4 tab", "sentence": 1},
+        {"icon": "🛒", "text": "Giỏ hàng, ví điện tử có trí nhớ", "sentence": 2},
+        {"icon": "🔌", "text": "Dữ liệu sống từ backend NestJS", "sentence": 3},
+        {"icon": "🚀", "text": "Tiếp theo: JWT · Push · lên App Store", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "outro",
+    "narration": [
+      "Vậy là trọn bộ Super App: sáu tập, một ứng dụng ViệtSuper hoàn chỉnh chạy thật trên iPhone.",
+      "Cộng với mười hai tập backend trước đó, bạn đã cầm trong tay cả hai nửa của nghề: client và server.",
+      "Toàn bộ source code, quen thuộc rồi: nằm trong phần mô tả.",
+      "Nếu series giúp ích, hãy để lại một like, một subscribe, và comment cho mình biết bạn muốn học gì tiếp theo.",
+      "Cảm ơn các bạn đã đồng hành suốt mười tám tập. Code vui, và hẹn gặp lại ở hành trình kế tiếp!"
+    ],
+    "visual": {
+      "title": "Trọn bộ ViệtSuper! 🎓🧡",
+      "summary": [
+        {"text": "6 tập: ViệtSuper chạy thật trên iPhone", "sentence": 0},
+        {"text": "18 tập: đủ cả client + server = fullstack", "sentence": 1},
+        {"text": "Like · Subscribe · Comment chủ đề tiếp 💬", "sentence": 3}
+      ],
+      "next": "Cảm ơn bạn đã theo dõi! Hẹn series sau 🎉"
+    }
+  }
+]

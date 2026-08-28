@@ -1,0 +1,410 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Mini-app Ví điện tử",
+        "subtitle": "Tập 5 · AsyncStorage — trí nhớ dài hạn",
+        "badge": "Series Super App · ViệtSuper"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep17/scene-01-0-1b02752b.wav",
+          "startFrame": 0,
+          "durationInFrames": 46
+        },
+        {
+          "file": "audio/ep17/scene-01-1-29d31740.wav",
+          "startFrame": 54,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep17/scene-01-2-8317b9ce.wav",
+          "startFrame": 158,
+          "durationInFrames": 128
+        }
+      ],
+      "durationInFrames": 304
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Trí nhớ ngắn hạn vs dài hạn",
+        "bullets": [
+          {
+            "icon": "🧠",
+            "text": "useState: app tắt là quên sạch",
+            "sentence": 1
+          },
+          {
+            "icon": "😱",
+            "text": "Ví mà quên số dư = thảm họa",
+            "sentence": 2
+          },
+          {
+            "icon": "🗄️",
+            "text": "Cần ngăn kéo lưu lâu dài trên máy",
+            "sentence": 3
+          },
+          {
+            "icon": "📦",
+            "text": "Đó là AsyncStorage",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep17/scene-02-0-320fa36b.wav",
+          "startFrame": 0,
+          "durationInFrames": 68
+        },
+        {
+          "file": "audio/ep17/scene-02-1-c4cd7752.wav",
+          "startFrame": 76,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep17/scene-02-2-f320c477.wav",
+          "startFrame": 204,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep17/scene-02-3-f77d9032.wav",
+          "startFrame": 368,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep17/scene-02-4-a80291df.wav",
+          "startFrame": 484,
+          "durationInFrames": 89
+        }
+      ],
+      "durationInFrames": 591
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "AsyncStorage = ngăn kéo hồ sơ 🗄️",
+        "bullets": [
+          {
+            "icon": "📥",
+            "text": "setItem('wallet', ...) — cất giấy có nhãn",
+            "sentence": 1
+          },
+          {
+            "icon": "📤",
+            "text": "getItem('wallet') — rút giấy ra đọc",
+            "sentence": 2
+          },
+          {
+            "icon": "📝",
+            "text": "JSON.stringify cất · JSON.parse đọc",
+            "sentence": 3
+          },
+          {
+            "icon": "🌐",
+            "text": "Như localStorage web, nhưng bất đồng bộ",
+            "sentence": 4
+          },
+          {
+            "icon": "📦",
+            "text": "npx expo install @react-native-async-storage/async-storage",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep17/scene-03-0-a0739dcf.wav",
+          "startFrame": 0,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep17/scene-03-1-b0ada25f.wav",
+          "startFrame": 104,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep17/scene-03-2-7ade8579.wav",
+          "startFrame": 235,
+          "durationInFrames": 89
+        },
+        {
+          "file": "audio/ep17/scene-03-3-5ccc43f9.wav",
+          "startFrame": 332,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep17/scene-03-4-5a1addd3.wav",
+          "startFrame": 523,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep17/scene-03-5-988f7745.wav",
+          "startFrame": 690,
+          "durationInFrames": 156
+        }
+      ],
+      "durationInFrames": 864
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "app/(tabs)/wallet.tsx (đọc lúc mở app)",
+        "language": "tsx",
+        "code": "  useEffect(() => {\n    AsyncStorage.getItem(STORAGE_KEY).then((raw) => {\n      if (!raw) return;\n      const saved = JSON.parse(raw) as { balance: number; transactions: Tx[] };\n      setBalance(saved.balance);\n      setTransactions(saved.transactions);\n    });\n  }, []);",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 2,
+            "to": 3,
+            "sentence": 2
+          },
+          {
+            "from": 4,
+            "to": 6,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep17/scene-04-0-abd124bb.wav",
+          "startFrame": 0,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep17/scene-04-1-9c6eb65e.wav",
+          "startFrame": 104,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep17/scene-04-2-cc1c7aaa.wav",
+          "startFrame": 276,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep17/scene-04-3-95335db7.wav",
+          "startFrame": 421,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep17/scene-04-4-c78de808.wav",
+          "startFrame": 561,
+          "durationInFrames": 77
+        }
+      ],
+      "durationInFrames": 656
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "app/(tabs)/wallet.tsx (nạp tiền & lưu)",
+        "language": "tsx",
+        "code": "  const topUp = () => {\n    const tx: Tx = { id: Date.now().toString(), label: 'Nạp tiền', amount: 100000 };\n    const nextBalance = balance + tx.amount;\n    const nextTransactions = [tx, ...transactions];\n    setBalance(nextBalance);\n    setTransactions(nextTransactions);\n    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify({ balance: nextBalance, transactions: nextTransactions }));\n  };",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 3,
+            "to": 4,
+            "sentence": 2
+          },
+          {
+            "from": 5,
+            "to": 7,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep17/scene-05-0-335fe1ad.wav",
+          "startFrame": 0,
+          "durationInFrames": 87
+        },
+        {
+          "file": "audio/ep17/scene-05-1-4129a786.wav",
+          "startFrame": 95,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep17/scene-05-2-d378a5ff.wav",
+          "startFrame": 228,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep17/scene-05-3-9b8f33bc.wav",
+          "startFrame": 337,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep17/scene-05-4-cbbcf22d.wav",
+          "startFrame": 477,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 611
+    },
+    {
+      "id": "scene-06",
+      "type": "phone",
+      "visual": {
+        "title": "Tắt app — tiền còn nguyên 💰",
+        "screens": [
+          {
+            "src": "screens/ep17/wallet-0.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep17/wallet-200k.png",
+            "sentence": 1
+          },
+          {
+            "src": "screens/ep17/wallet-persist.png",
+            "sentence": 3
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "0️⃣",
+            "text": "Mở ví lần đầu: 0đ",
+            "sentence": 0
+          },
+          {
+            "icon": "💸",
+            "text": "Nạp 2 lần → 200.000đ + 2 dòng lịch sử",
+            "sentence": 1
+          },
+          {
+            "icon": "🔌",
+            "text": "TẮT HẲN app rồi mở lại...",
+            "sentence": 2
+          },
+          {
+            "icon": "🎉",
+            "text": "Tiền còn nguyên — AsyncStorage không quên",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep17/scene-06-0-463ca55e.wav",
+          "startFrame": 0,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep17/scene-06-1-1950a82a.wav",
+          "startFrame": 150,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep17/scene-06-2-efb4d118.wav",
+          "startFrame": 276,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep17/scene-06-3-7e2b9f75.wav",
+          "startFrame": 400,
+          "durationInFrames": 82
+        },
+        {
+          "file": "audio/ep17/scene-06-4-c89d20b5.wav",
+          "startFrame": 490,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep17/scene-06-5-ff301942.wav",
+          "startFrame": 652,
+          "durationInFrames": 84
+        }
+      ],
+      "durationInFrames": 754
+    },
+    {
+      "id": "scene-07",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "useState = ngắn hạn · AsyncStorage = dài hạn",
+            "sentence": 0
+          },
+          {
+            "text": "getItem lúc mở · setItem cùng nhịp setState",
+            "sentence": 1
+          },
+          {
+            "text": "Đã chứng kiến: tắt app, tiền còn nguyên",
+            "sentence": 2
+          }
+        ],
+        "next": "Tập 6 (cuối): Nối app với backend NestJS thật"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep17/scene-07-0-825f8425.wav",
+          "startFrame": 0,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep17/scene-07-1-c0de732c.wav",
+          "startFrame": 164,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep17/scene-07-2-fb52f07a.wav",
+          "startFrame": 319,
+          "durationInFrames": 80
+        },
+        {
+          "file": "audio/ep17/scene-07-3-549280f7.wav",
+          "startFrame": 407,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep17/scene-07-4-24ed6fc8.wav",
+          "startFrame": 533,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 748
+    }
+  ]
+}

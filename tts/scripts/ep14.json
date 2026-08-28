@@ -1,0 +1,182 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại series Super App!",
+      "Tập trước app của ta mới có một màn hình. Nhưng siêu ứng dụng thì cần cả một tòa nhà nhiều gian hàng.",
+      "Hôm nay ta dựng bộ khung của ViệtSuper: bốn tab dịch vụ, điều hướng bằng expo-router."
+    ],
+    "visual": {
+      "title": "Siêu ứng dụng & Navigation",
+      "subtitle": "Tập 2 · Bộ khung 4 tab với expo-router",
+      "badge": "Series Super App · ViệtSuper"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Super app là gì mà nghe oách vậy?",
+      "Hãy nhìn Grab, MoMo hay WeChat: MỘT app nhưng chứa cả chục dịch vụ: gọi xe, đồ ăn, ví tiền, vé phim.",
+      "Giống một trung tâm thương mại: một tòa nhà, nhiều gian hàng, khách vào một cửa rồi muốn đi đâu thì đi.",
+      "Mỗi dịch vụ là một mini-app sống chung một mái nhà.",
+      "Muốn xây kiểu đó, việc đầu tiên là làm hệ thống hành lang và thang máy: đó chính là navigation."
+    ],
+    "visual": {
+      "title": "Super app = trung tâm thương mại 🏬",
+      "bullets": [
+        {"icon": "🏬", "text": "1 app chứa nhiều dịch vụ (Grab, MoMo...)", "sentence": 1},
+        {"icon": "🛍️", "text": "Một tòa nhà — nhiều gian hàng", "sentence": 2},
+        {"icon": "🧩", "text": "Mỗi dịch vụ = một mini-app", "sentence": 3},
+        {"icon": "🛗", "text": "Việc đầu tiên: xây thang máy (navigation)", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "Expo có sẵn hệ thống điều hướng tên là expo-router, với một ý tưởng cực kỳ dễ nhớ.",
+      "MỖI FILE trong thư mục app là MỘT màn hình. Tạo file food.tsx: có ngay đường dẫn /food.",
+      "Nếu bạn từng nghe Next.js bên web thì đúng rồi đấy: cùng triết lý file-based routing.",
+      "Muốn nhóm màn hình thành tab? Đặt chúng vào thư mục ngoặc tròn tabs, kèm một file layout khai báo dãy nút.",
+      "Thư mục app giống sơ đồ tòa nhà: nhìn cây file là biết app có những phòng nào."
+    ],
+    "visual": {
+      "title": "expo-router: file = màn hình",
+      "bullets": [
+        {"icon": "📄", "text": "Tạo food.tsx → có ngay đường dẫn /food", "sentence": 1},
+        {"icon": "▲", "text": "Cùng triết lý Next.js bên web", "sentence": 2},
+        {"icon": "📁", "text": "Thư mục (tabs) + _layout = dãy tab", "sentence": 3},
+        {"icon": "🗺️", "text": "Cây file = sơ đồ tòa nhà của app", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "diagram",
+    "narration": [
+      "Sơ đồ tòa nhà ViệtSuper của chúng ta đây.",
+      "Tầng trệt là thanh tab: bốn nút thang máy luôn hiện dưới đáy màn hình.",
+      "Bốn gian hàng: Trang chủ, Đồ ăn, Ví, và Ưu đãi: mỗi gian là một file trong thư mục tabs.",
+      "Khách bấm nút nào, thang máy đưa ngay đến gian đó, trạng thái từng gian được giữ nguyên.",
+      "Tập này ta dựng khung cả bốn gian; ba tập tới sẽ trang trí từng gian một."
+    ],
+    "visual": {
+      "title": "Sơ đồ tòa nhà ViệtSuper",
+      "boxes": [
+        {"id": "home", "label": "Trang chủ", "emoji": "🏠"},
+        {"id": "tabs", "label": "Tab Bar", "emoji": "🛗"},
+        {"id": "food", "label": "Đồ ăn · Ví · Ưu đãi", "emoji": "🍜"}
+      ],
+      "flows": [
+        {"from": 1, "to": 0, "label": "tab 1", "sentence": 2},
+        {"from": 1, "to": 2, "label": "tab 2·3·4", "sentence": 2},
+        {"from": 0, "to": 1, "label": "bấm là chuyển", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Tạo project ViệtSuper: create-expo-app với template mặc định, expo-router đã cài sẵn trong đó.",
+      "Cấu trúc ta cần gọn thế này: thư mục app có layout gốc, và thư mục tabs chứa bốn màn hình cùng một layout riêng.",
+      "Bốn file màn hình: index, food, wallet, promo. Xong phần móng!"
+    ],
+    "visual": {
+      "title": "Dựng khung project",
+      "commands": [
+        {"cmd": "npx create-expo-app demo-superapp", "output": "✅ Your project is ready! (expo-router có sẵn)", "sentence": 0},
+        {"cmd": "tree app", "output": "app/\n├── _layout.tsx\n└── (tabs)/\n    ├── _layout.tsx\n    ├── index.tsx\n    ├── food.tsx\n    ├── wallet.tsx\n    └── promo.tsx", "sentence": 1}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "File layout gốc của cả app: ngắn đến bất ngờ.",
+      "Stack là kiểu điều hướng chồng màn hình, và bên trong nó ta đặt cả nhóm tabs.",
+      "headerShown false để nhóm tab tự lo phần tiêu đề của mình.",
+      "Chỉ vậy: cánh cổng tòa nhà đã dựng xong."
+    ],
+    "visual": {
+      "filename": "app/_layout.tsx",
+      "language": "tsx",
+      "code": "import { Stack } from 'expo-router';\n\nexport default function RootLayout() {\n  return (\n    <Stack screenOptions={{ headerShown: false }}>\n      <Stack.Screen name=\"(tabs)\" />\n    </Stack>\n  );\n}",
+      "steps": [
+        {"from": 1, "to": 9, "sentence": 0},
+        {"from": 5, "to": 6, "sentence": 1},
+        {"from": 5, "to": 5, "sentence": 2},
+        {"from": 1, "to": 9, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Còn đây là dãy nút thang máy: layout của nhóm tabs.",
+      "Component Tabs của expo-router: khai mỗi màn hình một Tabs.Screen với tiêu đề và icon.",
+      "Icon mình chơi kiểu tiết kiệm mà vui: một hàm nhỏ trả về Text chứa emoji.",
+      "tabBarActiveTintColor màu đỏ thương hiệu: tab đang chọn sẽ rực lên.",
+      "Bốn dòng khai báo: Trang chủ, Đồ ăn, Ví, Ưu đãi: đủ đội hình ViệtSuper."
+    ],
+    "visual": {
+      "filename": "app/(tabs)/_layout.tsx",
+      "language": "tsx",
+      "code": "import { Tabs } from 'expo-router';\nimport { Text } from 'react-native';\n\nfunction tabIcon(emoji: string) {\n  return () => <Text style={{ fontSize: 22 }}>{emoji}</Text>;\n}\n\nexport default function TabLayout() {\n  return (\n    <Tabs screenOptions={{ tabBarActiveTintColor: '#ea2845' }}>\n      <Tabs.Screen\n        name=\"index\"\n        options={{ title: 'Trang chủ', tabBarIcon: tabIcon('🏠') }}\n      />\n      <Tabs.Screen\n        name=\"food\"\n        options={{ title: 'Đồ ăn', tabBarIcon: tabIcon('🍜') }}\n      />\n      <Tabs.Screen\n        name=\"wallet\"\n        options={{ title: 'Ví', tabBarIcon: tabIcon('💰') }}\n      />\n      <Tabs.Screen\n        name=\"promo\"\n        options={{ title: 'Ưu đãi', tabBarIcon: tabIcon('🎁') }}\n      />\n    </Tabs>\n  );\n}",
+      "steps": [
+        {"from": 1, "to": 29, "sentence": 0},
+        {"from": 10, "to": 10, "sentence": 1},
+        {"from": 4, "to": 6, "sentence": 2},
+        {"from": 10, "to": 10, "sentence": 3},
+        {"from": 11, "to": 26, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "phone",
+    "narration": [
+      "Chạy lên và nhìn thành quả: ảnh chụp thật từ giả lập đây.",
+      "Thanh tab bốn nút nằm gọn dưới đáy: nhà, phở, túi tiền, hộp quà.",
+      "Tab đang chọn đỏ rực đúng màu thương hiệu, bấm tab nào nhảy ngay tab đó.",
+      "Tiêu đề màn hình tự động hiện theo tab: expo-router lo giùm hết.",
+      "Khung siêu ứng dụng đã đứng vững: giờ chỉ việc trang trí từng gian hàng."
+    ],
+    "visual": {
+      "title": "Bộ khung 4 tab chạy thật 🛗",
+      "screens": [
+        {"src": "screens/ep14/tabs.png", "sentence": 0}
+      ],
+      "bullets": [
+        {"icon": "🛗", "text": "Tab bar 4 nút luôn nằm dưới đáy", "sentence": 1},
+        {"icon": "🔴", "text": "Tab đang chọn rực màu #ea2845", "sentence": 2},
+        {"icon": "🎩", "text": "Header tự hiện theo từng tab", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: super app là một tòa nhà nhiều gian hàng, và expo-router là hệ thang máy của nó.",
+      "Nhớ câu thần chú: mỗi file trong thư mục app là một màn hình, nhóm ngoặc tròn tabs cộng layout là dãy tab.",
+      "Bộ khung bốn tab của ViệtSuper đã chạy thật trên iPhone.",
+      "Bài tập nhỏ: thêm tab thứ năm tên Cá nhân với icon 👤 xem nào, chỉ hai bước thôi đấy.",
+      "Tập sau: trang trí gian đầu tiên, màn Trang chủ với lưới dịch vụ xịn như Grab. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "Super app = 1 tòa nhà, nhiều gian hàng", "sentence": 0},
+        {"text": "File = màn hình · (tabs) + _layout = tab bar", "sentence": 1},
+        {"text": "Khung 4 tab ViệtSuper đã chạy thật", "sentence": 2}
+      ],
+      "next": "Tập 3: Màn Trang chủ — lưới dịch vụ kiểu Grab"
+    }
+  }
+]

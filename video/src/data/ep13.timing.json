@@ -1,0 +1,485 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Super App với React Native",
+        "subtitle": "Tập 1 · Expo và app đầu tiên của bạn",
+        "badge": "Series Super App · ViệtSuper"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep13/scene-01-0-c8e8affa.wav",
+          "startFrame": 0,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep13/scene-01-1-ea6077c3.wav",
+          "startFrame": 164,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep13/scene-01-2-deeb064d.wav",
+          "startFrame": 379,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep13/scene-01-3-1c3ff2d1.wav",
+          "startFrame": 560,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 684
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "React Native là gì?",
+        "bullets": [
+          {
+            "icon": "😰",
+            "text": "Cách cũ: Swift cho iPhone + Kotlin cho Android",
+            "sentence": 1
+          },
+          {
+            "icon": "⚛️",
+            "text": "React Native: viết 1 lần chạy cả 2",
+            "sentence": 2
+          },
+          {
+            "icon": "🍳",
+            "text": "Một công thức — nấu được ở hai căn bếp",
+            "sentence": 3
+          },
+          {
+            "icon": "📱",
+            "text": "Ra app THẬT, không phải web đội lốt",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep13/scene-02-0-7452b9cd.wav",
+          "startFrame": 0,
+          "durationInFrames": 68
+        },
+        {
+          "file": "audio/ep13/scene-02-1-b4f23d09.wav",
+          "startFrame": 76,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep13/scene-02-2-36aef6dc.wav",
+          "startFrame": 274,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep13/scene-02-3-3671e23d.wav",
+          "startFrame": 434,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep13/scene-02-4-8797e923.wav",
+          "startFrame": 546,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 696
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "Expo là gì?",
+        "bullets": [
+          {
+            "icon": "🔧",
+            "text": "RN thuần = động cơ rời, tự lắp xe",
+            "sentence": 1
+          },
+          {
+            "icon": "🚗",
+            "text": "Expo = xe lắp sẵn, lên là chạy",
+            "sentence": 2
+          },
+          {
+            "icon": "✅",
+            "text": "Chính đội React khuyên người mới dùng Expo",
+            "sentence": 3
+          },
+          {
+            "icon": "🟢",
+            "text": "Chỉ cần Node.js — bạn có sẵn rồi!",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep13/scene-03-0-47a55385.wav",
+          "startFrame": 0,
+          "durationInFrames": 84
+        },
+        {
+          "file": "audio/ep13/scene-03-1-36d8e4b0.wav",
+          "startFrame": 92,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep13/scene-03-2-41e0dc74.wav",
+          "startFrame": 223,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep13/scene-03-3-a527d7d2.wav",
+          "startFrame": 433,
+          "durationInFrames": 80
+        },
+        {
+          "file": "audio/ep13/scene-03-4-245fe840.wav",
+          "startFrame": 521,
+          "durationInFrames": 140
+        }
+      ],
+      "durationInFrames": 679
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "Tạo và chạy app đầu tiên",
+        "commands": [
+          {
+            "cmd": "npx create-expo-app demo-hello --template blank-typescript",
+            "output": "✅ Your project is ready!",
+            "sentence": 0
+          },
+          {
+            "cmd": "cd demo-hello && npx expo start",
+            "output": "› Metro waiting on exp://192.168.1.5:8081\n› Press i │ open iOS simulator",
+            "sentence": 1
+          },
+          {
+            "cmd": "i",
+            "output": "iOS Bundled 3770ms index.ts (705 modules)",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep13/scene-04-0-6c0a33c5.wav",
+          "startFrame": 0,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep13/scene-04-1-c479d291.wav",
+          "startFrame": 176,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep13/scene-04-2-32ba93cf.wav",
+          "startFrame": 314,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep13/scene-04-3-3b9738cb.wav",
+          "startFrame": 524,
+          "durationInFrames": 101
+        }
+      ],
+      "durationInFrames": 643
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "App.tsx (phần component)",
+        "language": "tsx",
+        "code": "import { useState } from 'react';\nimport { Pressable, StyleSheet, Text, View } from 'react-native';\n\nexport default function App() {\n  const [taps, setTaps] = useState(0);\n\n  return (\n    <View style={styles.container}>\n      <Text style={styles.flag}>🇻🇳</Text>\n      <Text style={styles.title}>ViệtSuper</Text>\n      <Text style={styles.subtitle}>Siêu ứng dụng đầu tiên của mình</Text>\n      <Pressable style={styles.button} onPress={() => setTaps((t) => t + 1)}>\n        <Text style={styles.buttonText}>Đã chạm {taps} lần 👋</Text>\n      </Pressable>\n    </View>\n  );\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 5,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 12,
+            "to": 14,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep13/scene-05-0-cced0ba1.wav",
+          "startFrame": 0,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep13/scene-05-1-7453a367.wav",
+          "startFrame": 193,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep13/scene-05-2-efddb695.wav",
+          "startFrame": 317,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep13/scene-05-3-957c146c.wav",
+          "startFrame": 455,
+          "durationInFrames": 84
+        },
+        {
+          "file": "audio/ep13/scene-05-4-94abb383.wav",
+          "startFrame": 547,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 729
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "App.tsx (phần styles — trích)",
+        "language": "tsx",
+        "code": "const styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    backgroundColor: '#0f172a',\n    alignItems: 'center',\n    justifyContent: 'center',\n    gap: 12,\n  },\n  flag: {\n    fontSize: 64,\n  },\n  title: {\n    color: '#ffffff',\n    fontSize: 32,\n    fontWeight: 'bold',\n  },",
+        "steps": [
+          {
+            "from": 1,
+            "to": 16,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 3,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 16,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep13/scene-06-0-7399c171.wav",
+          "startFrame": 0,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep13/scene-06-1-c78950c9.wav",
+          "startFrame": 143,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep13/scene-06-2-fd2a4eed.wav",
+          "startFrame": 264,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep13/scene-06-3-ed4dfc0a.wav",
+          "startFrame": 484,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 637
+    },
+    {
+      "id": "scene-07",
+      "type": "phone",
+      "visual": {
+        "title": "App thật, chạy thật 📱",
+        "screens": [
+          {
+            "src": "screens/ep13/hello-0.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep13/hello-3taps.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "📸",
+            "text": "Ảnh chụp thật từ iPhone Simulator",
+            "sentence": 0
+          },
+          {
+            "icon": "👆",
+            "text": "Chạm 3 lần — state đổi, UI đổi theo",
+            "sentence": 2
+          },
+          {
+            "icon": "⚡",
+            "text": "Hot reload: sửa code là thấy ngay",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep13/scene-07-0-e6c64b69.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep13/scene-07-1-53162a84.wav",
+          "startFrame": 148,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep13/scene-07-2-ee07471e.wav",
+          "startFrame": 248,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep13/scene-07-3-b3535b76.wav",
+          "startFrame": 367,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep13/scene-07-4-6eb212b4.wav",
+          "startFrame": 500,
+          "durationInFrames": 171
+        }
+      ],
+      "durationInFrames": 689
+    },
+    {
+      "id": "scene-08",
+      "type": "concept",
+      "visual": {
+        "title": "Bảng quy đổi Web → Mobile",
+        "bullets": [
+          {
+            "icon": "📦",
+            "text": "div → View · span/p → Text",
+            "sentence": 1
+          },
+          {
+            "icon": "👆",
+            "text": "button → Pressable · onClick → onPress",
+            "sentence": 2
+          },
+          {
+            "icon": "🎨",
+            "text": "CSS → StyleSheet.create (camelCase)",
+            "sentence": 3
+          },
+          {
+            "icon": "📐",
+            "text": "Flexbox là mặc định mọi nơi",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep13/scene-08-0-8c8c557b.wav",
+          "startFrame": 0,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep13/scene-08-1-00c3dd33.wav",
+          "startFrame": 104,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep13/scene-08-2-1bfb7f04.wav",
+          "startFrame": 240,
+          "durationInFrames": 84
+        },
+        {
+          "file": "audio/ep13/scene-08-3-b4bf03dc.wav",
+          "startFrame": 332,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep13/scene-08-4-0516c5ad.wav",
+          "startFrame": 470,
+          "durationInFrames": 92
+        }
+      ],
+      "durationInFrames": 580
+    },
+    {
+      "id": "scene-09",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "RN = viết JS, ra app thật iOS + Android",
+            "sentence": 0
+          },
+          {
+            "text": "View · Text · Pressable · StyleSheet",
+            "sentence": 1
+          },
+          {
+            "text": "App đầu tiên đã chạy trên iPhone 🎉",
+            "sentence": 2
+          }
+        ],
+        "next": "Tập 2: Siêu ứng dụng nhiều tab với expo-router"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep13/scene-09-0-de095cb0.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep13/scene-09-1-cb8bf201.wav",
+          "startFrame": 200,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep13/scene-09-2-21915cf6.wav",
+          "startFrame": 321,
+          "durationInFrames": 87
+        },
+        {
+          "file": "audio/ep13/scene-09-3-df8290c2.wav",
+          "startFrame": 416,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep13/scene-09-4-dd4899b7.wav",
+          "startFrame": 552,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 722
+    }
+  ]
+}
