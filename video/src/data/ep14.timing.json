@@ -1,0 +1,481 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Siêu ứng dụng & Navigation",
+        "subtitle": "Tập 2 · Bộ khung 4 tab với expo-router",
+        "badge": "Series Super App · ViệtSuper"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep14/scene-01-0-b5d35165.wav",
+          "startFrame": 0,
+          "durationInFrames": 58
+        },
+        {
+          "file": "audio/ep14/scene-01-1-83b79dc9.wav",
+          "startFrame": 66,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep14/scene-01-2-7bbea30d.wav",
+          "startFrame": 218,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 371
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Super app = trung tâm thương mại 🏬",
+        "bullets": [
+          {
+            "icon": "🏬",
+            "text": "1 app chứa nhiều dịch vụ (Grab, MoMo...)",
+            "sentence": 1
+          },
+          {
+            "icon": "🛍️",
+            "text": "Một tòa nhà — nhiều gian hàng",
+            "sentence": 2
+          },
+          {
+            "icon": "🧩",
+            "text": "Mỗi dịch vụ = một mini-app",
+            "sentence": 3
+          },
+          {
+            "icon": "🛗",
+            "text": "Việc đầu tiên: xây thang máy (navigation)",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep14/scene-02-0-4a199e4d.wav",
+          "startFrame": 0,
+          "durationInFrames": 58
+        },
+        {
+          "file": "audio/ep14/scene-02-1-d70e8384.wav",
+          "startFrame": 66,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep14/scene-02-2-d21e0de8.wav",
+          "startFrame": 235,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep14/scene-02-3-27b1d687.wav",
+          "startFrame": 383,
+          "durationInFrames": 87
+        },
+        {
+          "file": "audio/ep14/scene-02-4-4add3ef2.wav",
+          "startFrame": 478,
+          "durationInFrames": 137
+        }
+      ],
+      "durationInFrames": 633
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "expo-router: file = màn hình",
+        "bullets": [
+          {
+            "icon": "📄",
+            "text": "Tạo food.tsx → có ngay đường dẫn /food",
+            "sentence": 1
+          },
+          {
+            "icon": "▲",
+            "text": "Cùng triết lý Next.js bên web",
+            "sentence": 2
+          },
+          {
+            "icon": "📁",
+            "text": "Thư mục (tabs) + _layout = dãy tab",
+            "sentence": 3
+          },
+          {
+            "icon": "🗺️",
+            "text": "Cây file = sơ đồ tòa nhà của app",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep14/scene-03-0-39a2e84b.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep14/scene-03-1-6df51d3a.wav",
+          "startFrame": 148,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep14/scene-03-2-9f5c7ccf.wav",
+          "startFrame": 329,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep14/scene-03-3-c33ac197.wav",
+          "startFrame": 484,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep14/scene-03-4-418669b5.wav",
+          "startFrame": 653,
+          "durationInFrames": 113
+        }
+      ],
+      "durationInFrames": 784
+    },
+    {
+      "id": "scene-04",
+      "type": "diagram",
+      "visual": {
+        "title": "Sơ đồ tòa nhà ViệtSuper",
+        "boxes": [
+          {
+            "id": "home",
+            "label": "Trang chủ",
+            "emoji": "🏠"
+          },
+          {
+            "id": "tabs",
+            "label": "Tab Bar",
+            "emoji": "🛗"
+          },
+          {
+            "id": "food",
+            "label": "Đồ ăn · Ví · Ưu đãi",
+            "emoji": "🍜"
+          }
+        ],
+        "flows": [
+          {
+            "from": 1,
+            "to": 0,
+            "label": "tab 1",
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "tab 2·3·4",
+            "sentence": 2
+          },
+          {
+            "from": 0,
+            "to": 1,
+            "label": "bấm là chuyển",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep14/scene-04-0-c2c6371d.wav",
+          "startFrame": 0,
+          "durationInFrames": 72
+        },
+        {
+          "file": "audio/ep14/scene-04-1-40b2a67d.wav",
+          "startFrame": 80,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep14/scene-04-2-86e9f3bb.wav",
+          "startFrame": 187,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep14/scene-04-3-a3157590.wav",
+          "startFrame": 325,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep14/scene-04-4-06027d17.wav",
+          "startFrame": 446,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 580
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "Dựng khung project",
+        "commands": [
+          {
+            "cmd": "npx create-expo-app demo-superapp",
+            "output": "✅ Your project is ready! (expo-router có sẵn)",
+            "sentence": 0
+          },
+          {
+            "cmd": "tree app",
+            "output": "app/\n├── _layout.tsx\n└── (tabs)/\n    ├── _layout.tsx\n    ├── index.tsx\n    ├── food.tsx\n    ├── wallet.tsx\n    └── promo.tsx",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep14/scene-05-0-be848f34.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep14/scene-05-1-3cbab736.wav",
+          "startFrame": 172,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep14/scene-05-2-e4d84709.wav",
+          "startFrame": 341,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 475
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "app/_layout.tsx",
+        "language": "tsx",
+        "code": "import { Stack } from 'expo-router';\n\nexport default function RootLayout() {\n  return (\n    <Stack screenOptions={{ headerShown: false }}>\n      <Stack.Screen name=\"(tabs)\" />\n    </Stack>\n  );\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 5,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep14/scene-06-0-58030134.wav",
+          "startFrame": 0,
+          "durationInFrames": 80
+        },
+        {
+          "file": "audio/ep14/scene-06-1-242d593e.wav",
+          "startFrame": 88,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep14/scene-06-2-e4066642.wav",
+          "startFrame": 216,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep14/scene-06-3-69ff4b55.wav",
+          "startFrame": 325,
+          "durationInFrames": 65
+        }
+      ],
+      "durationInFrames": 408
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "app/(tabs)/_layout.tsx",
+        "language": "tsx",
+        "code": "import { Tabs } from 'expo-router';\nimport { Text } from 'react-native';\n\nfunction tabIcon(emoji: string) {\n  return () => <Text style={{ fontSize: 22 }}>{emoji}</Text>;\n}\n\nexport default function TabLayout() {\n  return (\n    <Tabs screenOptions={{ tabBarActiveTintColor: '#ea2845' }}>\n      <Tabs.Screen\n        name=\"index\"\n        options={{ title: 'Trang chủ', tabBarIcon: tabIcon('🏠') }}\n      />\n      <Tabs.Screen\n        name=\"food\"\n        options={{ title: 'Đồ ăn', tabBarIcon: tabIcon('🍜') }}\n      />\n      <Tabs.Screen\n        name=\"wallet\"\n        options={{ title: 'Ví', tabBarIcon: tabIcon('💰') }}\n      />\n      <Tabs.Screen\n        name=\"promo\"\n        options={{ title: 'Ưu đãi', tabBarIcon: tabIcon('🎁') }}\n      />\n    </Tabs>\n  );\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 29,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 3
+          },
+          {
+            "from": 11,
+            "to": 26,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep14/scene-07-0-898bc19b.wav",
+          "startFrame": 0,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep14/scene-07-1-bb68f6df.wav",
+          "startFrame": 104,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep14/scene-07-2-e056ab83.wav",
+          "startFrame": 264,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep14/scene-07-3-d4a71b43.wav",
+          "startFrame": 397,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep14/scene-07-4-0162e39e.wav",
+          "startFrame": 521,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 655
+    },
+    {
+      "id": "scene-08",
+      "type": "phone",
+      "visual": {
+        "title": "Bộ khung 4 tab chạy thật 🛗",
+        "screens": [
+          {
+            "src": "screens/ep14/tabs.png",
+            "sentence": 0
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🛗",
+            "text": "Tab bar 4 nút luôn nằm dưới đáy",
+            "sentence": 1
+          },
+          {
+            "icon": "🔴",
+            "text": "Tab đang chọn rực màu #ea2845",
+            "sentence": 2
+          },
+          {
+            "icon": "🎩",
+            "text": "Header tự hiện theo từng tab",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep14/scene-08-0-0e3fa4cc.wav",
+          "startFrame": 0,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep14/scene-08-1-3efd3124.wav",
+          "startFrame": 100,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep14/scene-08-2-2a183086.wav",
+          "startFrame": 207,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep14/scene-08-3-8561d2bd.wav",
+          "startFrame": 323,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep14/scene-08-4-3370958b.wav",
+          "startFrame": 430,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 554
+    },
+    {
+      "id": "scene-09",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "Super app = 1 tòa nhà, nhiều gian hàng",
+            "sentence": 0
+          },
+          {
+            "text": "File = màn hình · (tabs) + _layout = tab bar",
+            "sentence": 1
+          },
+          {
+            "text": "Khung 4 tab ViệtSuper đã chạy thật",
+            "sentence": 2
+          }
+        ],
+        "next": "Tập 3: Màn Trang chủ — lưới dịch vụ kiểu Grab"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep14/scene-09-0-d41cc0f5.wav",
+          "startFrame": 0,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep14/scene-09-1-cd2af31d.wav",
+          "startFrame": 157,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep14/scene-09-2-ac631315.wav",
+          "startFrame": 321,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep14/scene-09-3-87ded764.wav",
+          "startFrame": 421,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep14/scene-09-4-2ac0b406.wav",
+          "startFrame": 557,
+          "durationInFrames": 147
+        }
+      ],
+      "durationInFrames": 722
+    }
+  ]
+}

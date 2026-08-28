@@ -1,0 +1,149 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại ViệtSuper!",
+      "Hôm nay mở gian hàng nhạy cảm nhất của mọi super app: Ví điện tử.",
+      "Và giải một bài toán sống còn: làm sao app NHỚ được số tiền, kể cả khi bị tắt hẳn?"
+    ],
+    "visual": {
+      "title": "Mini-app Ví điện tử",
+      "subtitle": "Tập 5 · AsyncStorage — trí nhớ dài hạn",
+      "badge": "Series Super App · ViệtSuper"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Trước tiên, một sự thật phũ phàng về useState.",
+      "State giống trí nhớ NGẮN HẠN: app còn mở thì nhớ, app bị tắt là quên sạch.",
+      "Giỏ đồ ăn tập trước quên thì bực chút thôi. Nhưng ví tiền mà quên số dư thì... khách hàng gọi công an luôn.",
+      "Chúng ta cần trí nhớ DÀI HẠN: ghi ra giấy, cất vào ngăn kéo của điện thoại.",
+      "Ngăn kéo đó của React Native tên là AsyncStorage."
+    ],
+    "visual": {
+      "title": "Trí nhớ ngắn hạn vs dài hạn",
+      "bullets": [
+        {"icon": "🧠", "text": "useState: app tắt là quên sạch", "sentence": 1},
+        {"icon": "😱", "text": "Ví mà quên số dư = thảm họa", "sentence": 2},
+        {"icon": "🗄️", "text": "Cần ngăn kéo lưu lâu dài trên máy", "sentence": 3},
+        {"icon": "📦", "text": "Đó là AsyncStorage", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "AsyncStorage hoạt động y hệt một ngăn kéo hồ sơ.",
+      "setItem: cất một tờ giấy vào ngăn, có dán nhãn: nhãn của ta là chữ wallet.",
+      "getItem: mở ngăn, rút tờ giấy theo nhãn ra đọc.",
+      "Giấy chỉ ghi được CHỮ, nên object phải ép phẳng bằng JSON.stringify khi cất, và JSON.parse khi đọc lại.",
+      "Nếu bạn từng dùng localStorage bên web: đúng nó đấy, chỉ khác là bất đồng bộ, phải await hoặc then.",
+      "Cài một lệnh: npx expo install async-storage là có ngăn kéo xài."
+    ],
+    "visual": {
+      "title": "AsyncStorage = ngăn kéo hồ sơ 🗄️",
+      "bullets": [
+        {"icon": "📥", "text": "setItem('wallet', ...) — cất giấy có nhãn", "sentence": 1},
+        {"icon": "📤", "text": "getItem('wallet') — rút giấy ra đọc", "sentence": 2},
+        {"icon": "📝", "text": "JSON.stringify cất · JSON.parse đọc", "sentence": 3},
+        {"icon": "🌐", "text": "Như localStorage web, nhưng bất đồng bộ", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "Chiều đọc trước: khi khách mở ví, phải lấy ngay số dư cũ ra.",
+      "useEffect với mảng phụ thuộc rỗng: chạy đúng MỘT lần lúc màn hình xuất hiện: thời điểm vàng để mở ngăn kéo.",
+      "getItem trả về Promise, then nhận tờ giấy raw: chưa có giấy thì thôi, khách mới toanh.",
+      "Có giấy: JSON.parse dựng lại object, rồi đổ số dư và lịch sử vào state.",
+      "Từ ngăn kéo lên màn hình: mất vài phần nghìn giây."
+    ],
+    "visual": {
+      "filename": "app/(tabs)/wallet.tsx (đọc lúc mở app)",
+      "language": "tsx",
+      "code": "  useEffect(() => {\n    AsyncStorage.getItem(STORAGE_KEY).then((raw) => {\n      if (!raw) return;\n      const saved = JSON.parse(raw) as { balance: number; transactions: Tx[] };\n      setBalance(saved.balance);\n      setTransactions(saved.transactions);\n    });\n  }, []);",
+      "steps": [
+        {"from": 1, "to": 8, "sentence": 0},
+        {"from": 1, "to": 1, "sentence": 1},
+        {"from": 2, "to": 3, "sentence": 2},
+        {"from": 4, "to": 6, "sentence": 3},
+        {"from": 1, "to": 8, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Chiều ghi: hàm topUp chạy mỗi lần khách bấm nạp tiền.",
+      "Tạo một giao dịch mới: id theo thời gian, nhãn Nạp tiền, số tiền một trăm nghìn.",
+      "Tính số dư mới, danh sách giao dịch mới: giao dịch mới nhất đứng đầu.",
+      "Cập nhật state cho màn hình đổi ngay, VÀ setItem cất luôn bản mới vào ngăn kéo.",
+      "Màn hình và ngăn kéo luôn song hành: đó là công thức không bao giờ mất dữ liệu."
+    ],
+    "visual": {
+      "filename": "app/(tabs)/wallet.tsx (nạp tiền & lưu)",
+      "language": "tsx",
+      "code": "  const topUp = () => {\n    const tx: Tx = { id: Date.now().toString(), label: 'Nạp tiền', amount: 100000 };\n    const nextBalance = balance + tx.amount;\n    const nextTransactions = [tx, ...transactions];\n    setBalance(nextBalance);\n    setTransactions(nextTransactions);\n    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify({ balance: nextBalance, transactions: nextTransactions }));\n  };",
+      "steps": [
+        {"from": 1, "to": 8, "sentence": 0},
+        {"from": 2, "to": 2, "sentence": 1},
+        {"from": 3, "to": 4, "sentence": 2},
+        {"from": 5, "to": 7, "sentence": 3},
+        {"from": 1, "to": 8, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "phone",
+    "narration": [
+      "Giờ là màn trình diễn quan trọng nhất series. Ví lúc mới mở: không đồng, lịch sử trống trơn.",
+      "Bấm nạp hai lần: số dư hai trăm nghìn, lịch sử ghi đủ hai dòng cộng một trăm nghìn.",
+      "Và đây, khoảnh khắc quyết định: mình TẮT HẲN app. Không phải thu nhỏ đâu, tắt hẳn.",
+      "Mở lại... VẪN HAI TRĂM NGHÌN, lịch sử vẹn nguyên hai dòng!",
+      "Ảnh bạn đang xem chụp SAU khi app bị tắt và mở lại: ngăn kéo AsyncStorage không quên một xu.",
+      "Đây chính là ranh giới giữa app đồ chơi và app dùng thật."
+    ],
+    "visual": {
+      "title": "Tắt app — tiền còn nguyên 💰",
+      "screens": [
+        {"src": "screens/ep17/wallet-0.png", "sentence": 0},
+        {"src": "screens/ep17/wallet-200k.png", "sentence": 1},
+        {"src": "screens/ep17/wallet-persist.png", "sentence": 3}
+      ],
+      "bullets": [
+        {"icon": "0️⃣", "text": "Mở ví lần đầu: 0đ", "sentence": 0},
+        {"icon": "💸", "text": "Nạp 2 lần → 200.000đ + 2 dòng lịch sử", "sentence": 1},
+        {"icon": "🔌", "text": "TẮT HẲN app rồi mở lại...", "sentence": 2},
+        {"icon": "🎉", "text": "Tiền còn nguyên — AsyncStorage không quên", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: useState là trí nhớ ngắn hạn, AsyncStorage là ngăn kéo dài hạn của điện thoại.",
+      "Công thức ví: useEffect getItem lúc mở, setItem cùng nhịp với mỗi lần setState.",
+      "Và bạn đã tự tay chứng kiến: tắt app, tiền còn nguyên.",
+      "Bài tập nhỏ: thêm nút Rút 50.000đ, nhớ chặn không cho số dư âm nhé.",
+      "Tập sau là tập cuối: nối ViệtSuper với backend NestJS THẬT từ series đầu tiên: vòng tròn fullstack khép lại. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "useState = ngắn hạn · AsyncStorage = dài hạn", "sentence": 0},
+        {"text": "getItem lúc mở · setItem cùng nhịp setState", "sentence": 1},
+        {"text": "Đã chứng kiến: tắt app, tiền còn nguyên", "sentence": 2}
+      ],
+      "next": "Tập 6 (cuối): Nối app với backend NestJS thật"
+    }
+  }
+]

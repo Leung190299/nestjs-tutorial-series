@@ -1,0 +1,382 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Màn Trang chủ",
+        "subtitle": "Tập 3 · Lưới dịch vụ với FlatList",
+        "badge": "Series Super App · ViệtSuper"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep15/scene-01-0-caf14af8.wav",
+          "startFrame": 0,
+          "durationInFrames": 56
+        },
+        {
+          "file": "audio/ep15/scene-01-1-f08dc3ff.wav",
+          "startFrame": 64,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep15/scene-01-2-fdc4a14e.wav",
+          "startFrame": 185,
+          "durationInFrames": 111
+        }
+      ],
+      "durationInFrames": 314
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Lưới dịch vụ — bộ mặt super app",
+        "bullets": [
+          {
+            "icon": "🏬",
+            "text": "Grab/MoMo đều mở màn bằng lưới dịch vụ",
+            "sentence": 1
+          },
+          {
+            "icon": "6️⃣",
+            "text": "ViệtSuper: 3 dịch vụ thật + 3 sắp ra mắt",
+            "sentence": 2
+          },
+          {
+            "icon": "📜",
+            "text": "Nguyên liệu chính: FlatList",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep15/scene-02-0-4ca61ec2.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep15/scene-02-1-de2d021c.wav",
+          "startFrame": 145,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep15/scene-02-2-835e8c76.wav",
+          "startFrame": 314,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep15/scene-02-3-8a57d5c5.wav",
+          "startFrame": 502,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 674
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "FlatList — đầu bếp thông minh 🍽️",
+        "bullets": [
+          {
+            "icon": "🐌",
+            "text": "map: nấu cả nghìn đĩa cùng lúc → đơ",
+            "sentence": 1
+          },
+          {
+            "icon": "🧠",
+            "text": "FlatList: chỉ nấu phần đang nhìn thấy",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "data · keyExtractor · renderItem",
+            "sentence": 3
+          },
+          {
+            "icon": "🔲",
+            "text": "numColumns={3} → lưới 3 cột tự động",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep15/scene-03-0-bdae0159.wav",
+          "startFrame": 0,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep15/scene-03-1-508e02b0.wav",
+          "startFrame": 102,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep15/scene-03-2-e57b70e4.wav",
+          "startFrame": 233,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep15/scene-03-3-d8be880b.wav",
+          "startFrame": 388,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep15/scene-03-4-341ca2f1.wav",
+          "startFrame": 545,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 698
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "app/(tabs)/index.tsx (dữ liệu)",
+        "language": "tsx",
+        "code": "type Service = {\n  id: string;\n  label: string;\n  emoji: string;\n  route?: '/food' | '/wallet' | '/promo';\n};\n\nconst services: Service[] = [\n  { id: 'food', label: 'Đồ ăn', emoji: '🍜', route: '/food' },\n  { id: 'wallet', label: 'Ví tiền', emoji: '💰', route: '/wallet' },\n  { id: 'promo', label: 'Ưu đãi', emoji: '🎁', route: '/promo' },\n  { id: 'ride', label: 'Đặt xe', emoji: '🛵' },\n  { id: 'movie', label: 'Xem phim', emoji: '🎬' },\n  { id: 'topup', label: 'Nạp thẻ', emoji: '📱' },\n];",
+        "steps": [
+          {
+            "from": 1,
+            "to": 15,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 5,
+            "sentence": 1
+          },
+          {
+            "from": 9,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 12,
+            "to": 14,
+            "sentence": 3
+          },
+          {
+            "from": 5,
+            "to": 5,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep15/scene-04-0-4a03b79e.wav",
+          "startFrame": 0,
+          "durationInFrames": 75
+        },
+        {
+          "file": "audio/ep15/scene-04-1-a91c0b9b.wav",
+          "startFrame": 83,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep15/scene-04-2-d5943f70.wav",
+          "startFrame": 245,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep15/scene-04-3-35390c69.wav",
+          "startFrame": 378,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep15/scene-04-4-7760754e.wav",
+          "startFrame": 521,
+          "durationInFrames": 125
+        }
+      ],
+      "durationInFrames": 664
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "app/(tabs)/index.tsx (component)",
+        "language": "tsx",
+        "code": "export default function HomeScreen() {\n  return (\n    <View style={styles.container}>\n      <Text style={styles.greeting}>Chào bạn 👋</Text>\n      <Text style={styles.question}>Hôm nay bạn cần gì?</Text>\n      <FlatList\n        data={services}\n        keyExtractor={(item) => item.id}\n        numColumns={3}\n        renderItem={({ item }) =>\n          item.route ? (\n            <Link href={item.route} asChild>\n              <Pressable style={styles.card}>\n                <Text style={styles.emoji}>{item.emoji}</Text>\n                <Text style={styles.label}>{item.label}</Text>\n              </Pressable>\n            </Link>\n          ) : (\n            <Pressable style={[styles.card, styles.disabled]} disabled>\n              <Text style={styles.emoji}>{item.emoji}</Text>\n              <Text style={styles.label}>{item.label}</Text>\n            </Pressable>\n          )\n        }\n      />\n    </View>\n  );\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 28,
+            "sentence": 0
+          },
+          {
+            "from": 9,
+            "to": 9,
+            "sentence": 1
+          },
+          {
+            "from": 11,
+            "to": 17,
+            "sentence": 2
+          },
+          {
+            "from": 12,
+            "to": 12,
+            "sentence": 3
+          },
+          {
+            "from": 18,
+            "to": 23,
+            "sentence": 4
+          },
+          {
+            "from": 10,
+            "to": 24,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep15/scene-05-0-c18d354b.wav",
+          "startFrame": 0,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep15/scene-05-1-76fee759.wav",
+          "startFrame": 100,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep15/scene-05-2-beb8a1ba.wav",
+          "startFrame": 207,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep15/scene-05-3-e19ed4be.wav",
+          "startFrame": 403,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep15/scene-05-4-94241f65.wav",
+          "startFrame": 582,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep15/scene-05-5-2f36d69b.wav",
+          "startFrame": 758,
+          "durationInFrames": 80
+        }
+      ],
+      "durationInFrames": 856
+    },
+    {
+      "id": "scene-06",
+      "type": "phone",
+      "visual": {
+        "title": "Trang chủ ViệtSuper 🏠",
+        "screens": [
+          {
+            "src": "screens/ep15/home.png",
+            "sentence": 0
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🔲",
+            "text": "Lưới 3 cột từ numColumns={3}",
+            "sentence": 2
+          },
+          {
+            "icon": "🌫️",
+            "text": "Dịch vụ tương lai: mờ 40%, disabled",
+            "sentence": 2
+          },
+          {
+            "icon": "🔗",
+            "text": "Bấm card → Link đưa sang đúng tab",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep15/scene-06-0-efc23c0a.wav",
+          "startFrame": 0,
+          "durationInFrames": 84
+        },
+        {
+          "file": "audio/ep15/scene-06-1-f23cd71d.wav",
+          "startFrame": 92,
+          "durationInFrames": 84
+        },
+        {
+          "file": "audio/ep15/scene-06-2-28d05813.wav",
+          "startFrame": 184,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep15/scene-06-3-d10afed6.wav",
+          "startFrame": 341,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep15/scene-06-4-b71b64f2.wav",
+          "startFrame": 481,
+          "durationInFrames": 84
+        }
+      ],
+      "durationInFrames": 583
+    },
+    {
+      "id": "scene-07",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "FlatList: chỉ render phần nhìn thấy",
+            "sentence": 0
+          },
+          {
+            "text": "numColumns lưới · Link asChild điều hướng",
+            "sentence": 1
+          },
+          {
+            "text": "Trang chủ ViệtSuper đã lên hình",
+            "sentence": 2
+          }
+        ],
+        "next": "Tập 4: Mini-app Đồ ăn — giỏ hàng & tính tiền"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep15/scene-07-0-fe798a59.wav",
+          "startFrame": 0,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep15/scene-07-1-51a57345.wav",
+          "startFrame": 160,
+          "durationInFrames": 87
+        },
+        {
+          "file": "audio/ep15/scene-07-2-6151b580.wav",
+          "startFrame": 255,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep15/scene-07-3-ec982dfd.wav",
+          "startFrame": 388,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep15/scene-07-4-308f7c25.wav",
+          "startFrame": 521,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 693
+    }
+  ]
+}

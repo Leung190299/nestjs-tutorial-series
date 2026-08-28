@@ -1,0 +1,144 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại với ViệtSuper!",
+      "Khung bốn tab đã có, hôm nay ta trang trí gian quan trọng nhất: màn Trang chủ.",
+      "Mục tiêu: lưới dịch vụ xịn như Grab, bấm phát là bay đến đúng mini-app."
+    ],
+    "visual": {
+      "title": "Màn Trang chủ",
+      "subtitle": "Tập 3 · Lưới dịch vụ với FlatList",
+      "badge": "Series Super App · ViệtSuper"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Mở Grab hay MoMo lên, thứ đầu tiên đập vào mắt là gì? Một lưới ô vuông dịch vụ.",
+      "Đó không phải ngẫu nhiên: lưới dịch vụ là bộ mặt của mọi super app, nơi khách chọn hôm nay mình cần gì.",
+      "Phiên bản ViệtSuper: sáu ô: ba dịch vụ thật đã có tab, và ba dịch vụ sắp ra mắt làm mờ đi cho có khát vọng.",
+      "Nguyên liệu chính của món này: FlatList, linh kiện danh sách quan trọng bậc nhất của React Native."
+    ],
+    "visual": {
+      "title": "Lưới dịch vụ — bộ mặt super app",
+      "bullets": [
+        {"icon": "🏬", "text": "Grab/MoMo đều mở màn bằng lưới dịch vụ", "sentence": 1},
+        {"icon": "6️⃣", "text": "ViệtSuper: 3 dịch vụ thật + 3 sắp ra mắt", "sentence": 2},
+        {"icon": "📜", "text": "Nguyên liệu chính: FlatList", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "Vì sao phải FlatList mà không tự xếp từng ô bằng map?",
+      "Tưởng tượng danh sách một nghìn món: map sẽ nấu cả nghìn đĩa cùng lúc, máy đơ ngay.",
+      "FlatList như đầu bếp thông minh: chỉ nấu những đĩa đang bày trên bàn, khách cuộn tới đâu nấu tới đó.",
+      "Cho nó ba thứ: data là danh sách, keyExtractor là số ghế, renderItem là cách bày một đĩa.",
+      "Và numColumns bằng ba: tự động xếp thành lưới ba cột, khỏi tính toán vị trí."
+    ],
+    "visual": {
+      "title": "FlatList — đầu bếp thông minh 🍽️",
+      "bullets": [
+        {"icon": "🐌", "text": "map: nấu cả nghìn đĩa cùng lúc → đơ", "sentence": 1},
+        {"icon": "🧠", "text": "FlatList: chỉ nấu phần đang nhìn thấy", "sentence": 2},
+        {"icon": "3️⃣", "text": "data · keyExtractor · renderItem", "sentence": 3},
+        {"icon": "🔲", "text": "numColumns={3} → lưới 3 cột tự động", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "Bắt đầu từ dữ liệu: danh sách sáu dịch vụ.",
+      "Mỗi dịch vụ có id, tên, emoji, và một trường route ĐÁNH DẤU HỎI: có thể có, có thể không.",
+      "Ba anh có route: Đồ ăn, Ví tiền, Ưu đãi: trỏ thẳng đến ba tab đã dựng tập trước.",
+      "Ba anh chưa có route: Đặt xe, Xem phim, Nạp thẻ: chính là danh sách việc tương lai của bạn.",
+      "Kiểu route giới hạn đúng ba đường dẫn: gõ sai một chữ là TypeScript tuýt còi ngay."
+    ],
+    "visual": {
+      "filename": "app/(tabs)/index.tsx (dữ liệu)",
+      "language": "tsx",
+      "code": "type Service = {\n  id: string;\n  label: string;\n  emoji: string;\n  route?: '/food' | '/wallet' | '/promo';\n};\n\nconst services: Service[] = [\n  { id: 'food', label: 'Đồ ăn', emoji: '🍜', route: '/food' },\n  { id: 'wallet', label: 'Ví tiền', emoji: '💰', route: '/wallet' },\n  { id: 'promo', label: 'Ưu đãi', emoji: '🎁', route: '/promo' },\n  { id: 'ride', label: 'Đặt xe', emoji: '🛵' },\n  { id: 'movie', label: 'Xem phim', emoji: '🎬' },\n  { id: 'topup', label: 'Nạp thẻ', emoji: '📱' },\n];",
+      "steps": [
+        {"from": 1, "to": 15, "sentence": 0},
+        {"from": 5, "to": 5, "sentence": 1},
+        {"from": 9, "to": 11, "sentence": 2},
+        {"from": 12, "to": 14, "sentence": 3},
+        {"from": 5, "to": 5, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Giờ đến màn hình chính: lời chào, câu hỏi, và lưới FlatList.",
+      "numColumns ba: sáu dịch vụ tự xếp thành hai hàng ba cột.",
+      "Trong renderItem có một ngã rẽ: dịch vụ CÓ route được bọc trong Link với asChild, biến cả tấm card thành nút điều hướng.",
+      "Link là cách chuyển màn hình của expo-router: bấm card Đồ ăn, href /food, nhảy đúng tab Đồ ăn.",
+      "Còn dịch vụ chưa có route: Pressable bị disabled, kèm style mờ bốn mươi phần trăm: nhìn là biết sắp ra mắt.",
+      "Một điều kiện ba ngôi, hai số phận của tấm card."
+    ],
+    "visual": {
+      "filename": "app/(tabs)/index.tsx (component)",
+      "language": "tsx",
+      "code": "export default function HomeScreen() {\n  return (\n    <View style={styles.container}>\n      <Text style={styles.greeting}>Chào bạn 👋</Text>\n      <Text style={styles.question}>Hôm nay bạn cần gì?</Text>\n      <FlatList\n        data={services}\n        keyExtractor={(item) => item.id}\n        numColumns={3}\n        renderItem={({ item }) =>\n          item.route ? (\n            <Link href={item.route} asChild>\n              <Pressable style={styles.card}>\n                <Text style={styles.emoji}>{item.emoji}</Text>\n                <Text style={styles.label}>{item.label}</Text>\n              </Pressable>\n            </Link>\n          ) : (\n            <Pressable style={[styles.card, styles.disabled]} disabled>\n              <Text style={styles.emoji}>{item.emoji}</Text>\n              <Text style={styles.label}>{item.label}</Text>\n            </Pressable>\n          )\n        }\n      />\n    </View>\n  );\n}",
+      "steps": [
+        {"from": 1, "to": 28, "sentence": 0},
+        {"from": 9, "to": 9, "sentence": 1},
+        {"from": 11, "to": 17, "sentence": 2},
+        {"from": 12, "to": 12, "sentence": 3},
+        {"from": 18, "to": 23, "sentence": 4},
+        {"from": 10, "to": 24, "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "phone",
+    "narration": [
+      "Thành quả trên máy thật đây: Trang chủ ViệtSuper.",
+      "Chào bạn, hôm nay bạn cần gì: lời chào ấm áp mở màn.",
+      "Lưới ba cột đều tăm tắp: hàng trên ba dịch vụ thật sáng rõ, hàng dưới ba dịch vụ tương lai mờ nhẹ.",
+      "Bấm ô Đồ ăn là nhảy thẳng sang tab Đồ ăn: Link đã nối các gian hàng lại với nhau.",
+      "Nhìn tổng thể đã ra dáng super app lắm rồi, đúng không?"
+    ],
+    "visual": {
+      "title": "Trang chủ ViệtSuper 🏠",
+      "screens": [
+        {"src": "screens/ep15/home.png", "sentence": 0}
+      ],
+      "bullets": [
+        {"icon": "🔲", "text": "Lưới 3 cột từ numColumns={3}", "sentence": 2},
+        {"icon": "🌫️", "text": "Dịch vụ tương lai: mờ 40%, disabled", "sentence": 2},
+        {"icon": "🔗", "text": "Bấm card → Link đưa sang đúng tab", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: FlatList là đầu bếp thông minh chỉ nấu phần nhìn thấy, numColumns biến danh sách thành lưới.",
+      "Link với asChild biến bất cứ thứ gì thành nút điều hướng.",
+      "Và một mẹo thiết kế super app: cứ để vài ô sắp ra mắt, app trông đầy tham vọng.",
+      "Bài tập nhỏ: thêm dịch vụ thứ bảy của riêng bạn vào lưới, kèm emoji thật ngầu nhé.",
+      "Tập sau: gian hàng đông khách nhất khai trương: mini-app Đồ ăn với giỏ hàng tính tiền thật. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "FlatList: chỉ render phần nhìn thấy", "sentence": 0},
+        {"text": "numColumns lưới · Link asChild điều hướng", "sentence": 1},
+        {"text": "Trang chủ ViệtSuper đã lên hình", "sentence": 2}
+      ],
+      "next": "Tập 4: Mini-app Đồ ăn — giỏ hàng & tính tiền"
+    }
+  }
+]

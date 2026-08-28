@@ -1,0 +1,488 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Nối App với Backend NestJS",
+        "subtitle": "Tập 6 · Fetch API — vòng tròn fullstack",
+        "badge": "Series Super App · ViệtSuper · Tập cuối"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep18/scene-01-0-840dc877.wav",
+          "startFrame": 0,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep18/scene-01-1-1f6e01af.wav",
+          "startFrame": 85,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep18/scene-01-2-88b6de11.wav",
+          "startFrame": 225,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep18/scene-01-3-424e6125.wav",
+          "startFrame": 442,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 554
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Vì sao app cần backend?",
+        "bullets": [
+          {
+            "icon": "📅",
+            "text": "Ưu đãi đổi mỗi ngày — không thể sửa app",
+            "sentence": 1
+          },
+          {
+            "icon": "🌍",
+            "text": "Server sửa 1 lần, triệu máy cập nhật",
+            "sentence": 2
+          },
+          {
+            "icon": "🔐",
+            "text": "Bí mật kinh doanh không nằm trong app",
+            "sentence": 3
+          },
+          {
+            "icon": "🏗️",
+            "text": "App = mặt tiền · Server = nhà kho",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep18/scene-02-0-78ea9fc3.wav",
+          "startFrame": 0,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep18/scene-02-1-9feae65a.wav",
+          "startFrame": 102,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep18/scene-02-2-41e7582c.wav",
+          "startFrame": 254,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep18/scene-02-3-9baf3c19.wav",
+          "startFrame": 361,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep18/scene-02-4-30e66fb7.wav",
+          "startFrame": 482,
+          "durationInFrames": 171
+        }
+      ],
+      "durationInFrames": 671
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "demo-superapp-api/src/promos.controller.ts",
+        "language": "tsx",
+        "code": "import { Controller, Get } from '@nestjs/common';\n\ntype Promo = { id: number; emoji: string; title: string; detail: string };\n\n@Controller('promos')\nexport class PromosController {\n  private readonly promos: Promo[] = [\n    { id: 1, emoji: '🍜', title: 'Giảm 30% đồ ăn', detail: 'Cho đơn đầu tiên trong ngày' },\n    { id: 2, emoji: '🛵', title: 'Freeship 0đ', detail: 'Mọi chuyến xe dưới 3km' },\n    { id: 3, emoji: '🎬', title: 'Mua 1 tặng 1 vé phim', detail: 'Riêng tối thứ Tư hằng tuần' },\n  ];\n\n  @Get()\n  findAll(): Promo[] {\n    return this.promos;\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 13,
+            "to": 16,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep18/scene-03-0-cf3db4b6.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep18/scene-03-1-ae1dc1f0.wav",
+          "startFrame": 148,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep18/scene-03-2-1cd3a16e.wav",
+          "startFrame": 336,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep18/scene-03-3-5ed61217.wav",
+          "startFrame": 467,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep18/scene-03-4-e3c867b6.wav",
+          "startFrame": 607,
+          "durationInFrames": 92
+        }
+      ],
+      "durationInFrames": 717
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "Nhà kho mở cửa",
+        "commands": [
+          {
+            "cmd": "cd demo-superapp-api && npm run start",
+            "output": "[Nest] LOG [NestApplication] Nest application successfully started",
+            "sentence": 0
+          },
+          {
+            "cmd": "curl localhost:3999/promos",
+            "output": "[{\"id\":1,\"emoji\":\"🍜\",\"title\":\"Giảm 30% đồ ăn\",...},\n {\"id\":2,\"emoji\":\"🛵\",\"title\":\"Freeship 0đ\",...},\n {\"id\":3,\"emoji\":\"🎬\",\"title\":\"Mua 1 tặng 1 vé phim\",...}]",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep18/scene-04-0-0ed53ce1.wav",
+          "startFrame": 0,
+          "durationInFrames": 68
+        },
+        {
+          "file": "audio/ep18/scene-04-1-2304d595.wav",
+          "startFrame": 76,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep18/scene-04-2-1d976b4c.wav",
+          "startFrame": 183,
+          "durationInFrames": 113
+        }
+      ],
+      "durationInFrames": 314
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "app/(tabs)/promo.tsx (đi lấy hàng)",
+        "language": "tsx",
+        "code": "  useEffect(() => {\n    fetch('http://localhost:3999/promos')\n      .then((res) => res.json())\n      .then(setPromos)\n      .finally(() => setLoading(false));\n  }, []);",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 2
+          },
+          {
+            "from": 3,
+            "to": 4,
+            "sentence": 3
+          },
+          {
+            "from": 5,
+            "to": 5,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep18/scene-05-0-fb311672.wav",
+          "startFrame": 0,
+          "durationInFrames": 70
+        },
+        {
+          "file": "audio/ep18/scene-05-1-e131f2b5.wav",
+          "startFrame": 78,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep18/scene-05-2-9444599f.wav",
+          "startFrame": 230,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep18/scene-05-3-ae1f7954.wav",
+          "startFrame": 373,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep18/scene-05-4-a7e693ca.wav",
+          "startFrame": 506,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 656
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "app/(tabs)/promo.tsx (màn hình chờ)",
+        "language": "tsx",
+        "code": "  if (loading) {\n    return (\n      <View style={styles.center}>\n        <ActivityIndicator color=\"#ea2845\" size=\"large\" />\n        <Text style={styles.loadingText}>Đang tải ưu đãi...</Text>\n      </View>\n    );\n  }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 2
+          },
+          {
+            "from": 5,
+            "to": 5,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep18/scene-06-0-17522aae.wav",
+          "startFrame": 0,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep18/scene-06-1-f4cef618.wav",
+          "startFrame": 112,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep18/scene-06-2-93a3f8aa.wav",
+          "startFrame": 226,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep18/scene-06-3-7d31fb81.wav",
+          "startFrame": 364,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep18/scene-06-4-55b2e826.wav",
+          "startFrame": 449,
+          "durationInFrames": 173
+        }
+      ],
+      "durationInFrames": 640
+    },
+    {
+      "id": "scene-07",
+      "type": "phone",
+      "visual": {
+        "title": "Dữ liệu thật từ server thật 🔌",
+        "screens": [
+          {
+            "src": "screens/ep18/promo.png",
+            "sentence": 0
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "📡",
+            "text": "3 ưu đãi bay từ NestJS :3999 vào iPhone",
+            "sentence": 1
+          },
+          {
+            "icon": "🔄",
+            "text": "Sửa server → app đổi, không build lại",
+            "sentence": 2
+          },
+          {
+            "icon": "🤝",
+            "text": "RN + NestJS — đều do bạn viết",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep18/scene-07-0-c8a2c63d.wav",
+          "startFrame": 0,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep18/scene-07-1-c9ed7825.wav",
+          "startFrame": 205,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep18/scene-07-2-4cdb2d2e.wav",
+          "startFrame": 377,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep18/scene-07-3-e44f3c66.wav",
+          "startFrame": 525,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep18/scene-07-4-f67e5ba6.wav",
+          "startFrame": 682,
+          "durationInFrames": 56
+        }
+      ],
+      "durationInFrames": 756
+    },
+    {
+      "id": "scene-08",
+      "type": "concept",
+      "visual": {
+        "title": "Hành trình 6 tập của bạn",
+        "bullets": [
+          {
+            "icon": "📱",
+            "text": "App đầu tiên → super app 4 tab",
+            "sentence": 1
+          },
+          {
+            "icon": "🛒",
+            "text": "Giỏ hàng, ví điện tử có trí nhớ",
+            "sentence": 2
+          },
+          {
+            "icon": "🔌",
+            "text": "Dữ liệu sống từ backend NestJS",
+            "sentence": 3
+          },
+          {
+            "icon": "🚀",
+            "text": "Tiếp theo: JWT · Push · lên App Store",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep18/scene-08-0-c096bf58.wav",
+          "startFrame": 0,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep18/scene-08-1-46c38763.wav",
+          "startFrame": 104,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep18/scene-08-2-239266db.wav",
+          "startFrame": 218,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep18/scene-08-3-acc718dd.wav",
+          "startFrame": 351,
+          "durationInFrames": 82
+        },
+        {
+          "file": "audio/ep18/scene-08-4-43c5ce2b.wav",
+          "startFrame": 441,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 649
+    },
+    {
+      "id": "scene-09",
+      "type": "outro",
+      "visual": {
+        "title": "Trọn bộ ViệtSuper! 🎓🧡",
+        "summary": [
+          {
+            "text": "6 tập: ViệtSuper chạy thật trên iPhone",
+            "sentence": 0
+          },
+          {
+            "text": "18 tập: đủ cả client + server = fullstack",
+            "sentence": 1
+          },
+          {
+            "text": "Like · Subscribe · Comment chủ đề tiếp 💬",
+            "sentence": 3
+          }
+        ],
+        "next": "Cảm ơn bạn đã theo dõi! Hẹn series sau 🎉"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep18/scene-09-0-7cc125be.wav",
+          "startFrame": 0,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep18/scene-09-1-26cf1c53.wav",
+          "startFrame": 152,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep18/scene-09-2-da3b515a.wav",
+          "startFrame": 304,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep18/scene-09-3-ef59210b.wav",
+          "startFrame": 408,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep18/scene-09-4-bcb3974a.wav",
+          "startFrame": 589,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 742
+    }
+  ]
+}
