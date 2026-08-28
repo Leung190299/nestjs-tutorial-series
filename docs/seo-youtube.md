@@ -518,6 +518,153 @@ Xem trọn playlist Transporters: [LINK PLAYLIST]
 grpc, grpc là gì, grpc nestjs, protobuf, protocol buffers, proto file, http2, grpc vs rest, remote procedure call, nestjs tiếng việt, học nestjs, microservices, backend nodejs, google grpc, giao tiếp service
 ```
 
+## SERIES SUPER APP — "Super App với React Native + Expo" (ViệtSuper)
+
+> Playlist mới: **"Super App với React Native 🇻🇳"**. Series mobile đầu tiên của kênh — 6 tập xây app ViệtSuper kiểu Grab thu nhỏ, chạy thật trên iPhone Simulator (mọi ảnh trong video là screenshot thật). Code: `demo-hello/`, `demo-superapp/`, `demo-superapp-api/`. Thumbnail dùng ảnh app thật (`video/out/thumbs/ep13-18`).
+
+### Mobile #1 — Expo & app đầu tiên (3:22)
+
+**Tiêu đề:** App iPhone đầu tiên bằng React Native + Expo trong 3 phút | Super App #1
+**Phương án khác:** Viết app di động bằng JavaScript? React Native giải thích siêu dễ / Từ web sang mobile: div → View, onClick → onPress
+
+**Mô tả:**
+```
+Bạn biết JavaScript? Vậy bạn đã đủ đồ nghề viết app iPhone THẬT. Tập mở màn series Super App: hiểu React Native bằng ví von "một công thức nấu hai bếp", tạo app đầu tiên bằng 1 lệnh Expo, và thấy nó chạy trên iPhone.
+
+Series này xây ViệtSuper — siêu ứng dụng kiểu Grab thu nhỏ — và mọi màn hình bạn thấy đều là ảnh chụp thật từ iPhone Simulator.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu series Super App
+0:22 React Native là gì? (1 công thức, 2 căn bếp)
+0:46 Expo là gì? (chiếc xe lắp sẵn)
+1:08 create-expo-app + expo start
+1:30 App.tsx: View, Text, Pressable, useState
+1:54 StyleSheet — CSS phiên bản JS
+2:15 App chạy thật trên iPhone 📱
+2:38 Bảng quy đổi Web → Mobile
+2:57 Tóm tắt & hẹn tập 2
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Tập 2 (Navigation): [LINK M2]
+#reactnative #expo #mobiledev #laptrinh #hoclaptrinh
+```
+**Tags:** `react native, react native là gì, expo, học react native, react native tiếng việt, làm app iphone, làm app bằng javascript, mobile developer, app di động, expo tutorial, view text pressable, stylesheet, lập trình mobile cho người mới, super app, việtsuper`
+
+### Mobile #2 — Super app & Navigation (2:53)
+
+**Tiêu đề:** Super app 4 tab với expo-router: file = màn hình | Super App #2
+**Mô tả:**
+```
+Grab, MoMo, WeChat — 1 app chứa cả chục dịch vụ. Tập này dựng bộ khung đó cho ViệtSuper: 4 tab điều hướng bằng expo-router, nơi MỖI FILE là MỘT màn hình (đúng triết lý Next.js).
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu
+0:12 Super app = trung tâm thương mại
+0:33 expo-router: file = màn hình
+0:59 Sơ đồ tòa nhà ViệtSuper
+1:18 Cấu trúc thư mục app/(tabs)
+1:34 Layout gốc (Stack)
+1:48 Tab bar 4 nút + emoji icon
+2:10 Chạy thật: 4 tab trên iPhone
+2:28 Tóm tắt & hẹn tập 3
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Tập 1: [LINK M1] · Tập 3: [LINK M3]
+#reactnative #expo #exporouter #navigation #laptrinh
+```
+**Tags:** `expo router, react native navigation, tab navigation, file based routing, super app, react native tiếng việt, học react native, expo tabs, app nhiều màn hình, mobile app tutorial, việtsuper, grab clone, làm app như grab, expo tutorial, lập trình mobile`
+
+### Mobile #3 — Màn Home lưới dịch vụ (2:29)
+
+**Tiêu đề:** Lưới dịch vụ kiểu Grab với FlatList | Super App #3
+**Mô tả:**
+```
+Mở Grab lên là thấy gì? Lưới dịch vụ. Tập này xây đúng cái lưới đó: FlatList — "đầu bếp thông minh chỉ nấu phần nhìn thấy", numColumns 3 cột, và Link asChild biến cả tấm card thành nút điều hướng.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu
+0:10 Lưới dịch vụ — bộ mặt super app
+0:32 FlatList vs map: đầu bếp thông minh
+0:56 Dữ liệu 6 dịch vụ + typed route
+1:18 FlatList numColumns + Link asChild
+1:46 Trang chủ ViệtSuper chạy thật
+2:06 Tóm tắt & hẹn tập 4
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Tập 2: [LINK M2] · Tập 4: [LINK M4]
+#reactnative #flatlist #expo #laptrinh #uiux
+```
+**Tags:** `flatlist, flatlist react native, numcolumns, lưới dịch vụ, grid layout react native, link expo router, react native tiếng việt, học react native, super app ui, grab ui, mobile ui, expo, việtsuper, danh sách hiệu năng cao, render list`
+
+### Mobile #4 — Mini-app Đồ ăn & giỏ hàng (2:11)
+
+**Tiêu đề:** Giỏ hàng tự tính tiền với useState + reduce | Super App #4
+**Mô tả:**
+```
+Mini-app đầu tiên của ViệtSuper khai trương: Đặt đồ ăn! Menu món Việt, nút "+ Thêm", và thanh giỏ hàng tự cộng tiền — tất cả chỉ là một mảng id trong useState và một phép reduce.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu
+0:10 Giải phẫu màn đặt đồ ăn
+0:28 Menu 4 món Việt
+0:43 State giỏ hàng + reduce tính tổng
+1:04 Nút thêm món + thanh giỏ (toLocaleString 'vi')
+1:27 Chạy thật: 2 món — 75.000đ
+1:48 Tóm tắt & hẹn tập 5
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Tập 3: [LINK M3] · Tập 5: [LINK M5]
+#reactnative #usestate #giohang #laptrinh #expo
+```
+**Tags:** `giỏ hàng react native, usestate, reduce javascript, shopping cart, app đặt đồ ăn, food app, react native tiếng việt, học react native, state management, tolocalestring, format tiền việt, mini app, super app, việtsuper, immutable state`
+
+### Mobile #5 — Ví điện tử & AsyncStorage (2:30)
+
+**Tiêu đề:** Tắt app tiền vẫn còn: AsyncStorage giải thích dễ hiểu | Super App #5
+**Mô tả:**
+```
+useState là trí nhớ NGẮN HẠN — tắt app là quên sạch. Ví tiền mà quên số dư thì khách gọi công an 😅. Tập này học AsyncStorage — "ngăn kéo hồ sơ của điện thoại" — và demo thật: nạp 200k, TẮT HẲN app, mở lại... tiền còn nguyên!
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu
+0:10 useState: trí nhớ ngắn hạn
+0:29 AsyncStorage = ngăn kéo hồ sơ
+0:57 useEffect + getItem: đọc lúc mở app
+1:19 topUp: setState + setItem song hành
+1:40 DEMO ĐINH: tắt app — tiền còn nguyên 💰
+2:05 Tóm tắt & hẹn tập cuối
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Tập 4: [LINK M4] · Tập 6: [LINK M6]
+#reactnative #asyncstorage #viden tu #laptrinh #expo
+```
+**Tags:** `asyncstorage, async storage react native, lưu dữ liệu app, ví điện tử, e-wallet app, useeffect, json stringify parse, react native tiếng việt, học react native, persistence, local storage mobile, super app, việtsuper, momo clone, app không mất dữ liệu`
+
+### Mobile #6 (CUỐI) — Nối app với backend NestJS (3:10)
+
+**Tiêu đề:** Fullstack thật sự: React Native gọi API NestJS | Super App #6 (cuối)
+**Mô tả:**
+```
+Tập cuối — cắm dây mạng cho ViệtSuper: màn Ưu đãi fetch dữ liệu từ server NestJS THẬT viết bằng kiến thức series đầu tiên của kênh. Sửa server, app đổi theo, không cần build lại. Frontend gặp backend — cả hai đều do chính tay bạn viết. Đó là fullstack.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu tập cuối
+0:18 Vì sao app cần backend?
+0:40 Ôn NestJS 10 giây: PromosController
+1:04 Chạy server + curl thử
+1:15 fetch trong useEffect
+1:37 Loading state với ActivityIndicator
+1:58 Dữ liệu thật từ server thật trên iPhone 🔌
+2:23 Nhìn lại hành trình 6 tập + hướng đi tiếp
+2:45 Lời kết 18 tập fullstack 🧡
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+▶️ Series NestJS từ đầu: [LINK PLAYLIST NESTJS]
+💬 Comment chủ đề bạn muốn học tiếp!
+#reactnative #nestjs #fullstack #fetch #laptrinh
+```
+**Tags:** `fetch api react native, gọi api, react native nestjs, fullstack javascript, activityindicator, loading state, kết nối backend, react native tiếng việt, học fullstack, expo fetch, api mobile app, super app, việtsuper, fullstack developer, nói app với server`
+
 ## Thumbnail
 
 Đã render sẵn tại `video/out/thumbs/ep0X-thumb.png` (1280×720, <2MB, chuẩn YouTube). Muốn sửa chữ/bố cục: sửa mảng `thumbnails` trong `video/src/Root.tsx` hoặc component `video/src/Thumbnail.tsx`, rồi chạy `npx remotion still Thumb0X out/thumbs/ep0X-thumb.png`.
