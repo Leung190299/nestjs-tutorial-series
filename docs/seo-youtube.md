@@ -665,6 +665,38 @@ Tập cuối — cắm dây mạng cho ViệtSuper: màn Ưu đãi fetch dữ li
 ```
 **Tags:** `fetch api react native, gọi api, react native nestjs, fullstack javascript, activityindicator, loading state, kết nối backend, react native tiếng việt, học fullstack, expo fetch, api mobile app, super app, việtsuper, fullstack developer, nói app với server`
 
+### Mobile #7 (THEO YÊU CẦU) — Kiến trúc Mini-App (4:24)
+
+**Tiêu đề:** Mỗi tính năng = 1 app riêng, gộp thành 1 app: kiến trúc mini-app kiểu Grab | Super App #7
+**Phương án khác:** Monorepo React Native: tách super app thành các mini-app độc lập / Làm theo yêu cầu khán giả: kiến trúc mini-app thật sự
+
+**Mô tả:**
+```
+Tập này làm theo ĐÚNG yêu cầu từ khán giả: "muốn app tách ra nhiều tính năng, mỗi tính năng như 1 app riêng biệt, và gộp chung thành 1 app." Đó chính là kiến trúc mini-app mà Grab, WeChat, Shopee vận hành thật.
+
+Giải pháp: monorepo + npm workspaces — ví von "khu chung cư": mỗi mini-app là một căn hộ có sổ đỏ riêng (package.json), app chủ là tòa nhà gắn biển, và căn hộ tách ra ở riêng vẫn sống tốt (demo mini-food chạy MỘT MÌNH trên simulator, không cần app chủ!).
+
+⏱️ NỘI DUNG:
+0:00 Yêu cầu từ khán giả
+0:20 Vấn đề: mọi tính năng dính chung một khối
+0:43 Monorepo = khu chung cư
+1:11 Kiến trúc: 3 căn hộ — 1 tòa nhà
+1:33 Cây thư mục packages/ + apps/
+1:52 workspaces — 8 dòng hạ tầng
+2:08 "Sổ đỏ" của mini-food (package.json + peerDeps)
+2:35 Tab app chủ chỉ còn 3 DÒNG
+2:52 Vỏ chạy riêng: food-standalone
+3:12 DEMO: mini-app chạy MỘT MÌNH 🚀
+3:37 Đổi đời quy trình: team riêng, test riêng, tái dùng
+3:59 Tóm tắt & lời cảm ơn
+
+📦 Source code (demo-miniapps/): https://github.com/Leung190299/nestjs-tutorial-series
+Xem từ đầu series Super App: [LINK M1]
+💬 Video này ra đời từ comment của khán giả — comment yêu cầu của BẠN ngay!
+#reactnative #monorepo #superapp #miniapp #laptrinh
+```
+**Tags:** `monorepo, npm workspaces, mini app, super app architecture, kiến trúc super app, micro frontend mobile, react native monorepo, expo monorepo, tách module, grab architecture, wechat mini app, react native tiếng việt, học react native, việtsuper, package json workspaces`
+
 ## Thumbnail
 
 Đã render sẵn tại `video/out/thumbs/ep0X-thumb.png` (1280×720, <2MB, chuẩn YouTube). Muốn sửa chữ/bố cục: sửa mảng `thumbnails` trong `video/src/Root.tsx` hoặc component `video/src/Thumbnail.tsx`, rồi chạy `npx remotion still Thumb0X out/thumbs/ep0X-thumb.png`.
