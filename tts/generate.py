@@ -54,7 +54,7 @@ def validate_script(script: list[dict]) -> list[str]:
                 errors.append(f"{scene['id']} câu {i}: {len(s)} > {MAX_SENTENCE_CHARS} ký tự")
         visual = scene.get("visual", {})
         refs = []
-        for key in ("bullets", "steps", "commands", "flows", "summary"):
+        for key in ("bullets", "steps", "commands", "flows", "summary", "screens"):
             refs += [item.get("sentence") for item in visual.get(key, [])]
         for r in refs:
             if r is not None and r >= len(sentences):
