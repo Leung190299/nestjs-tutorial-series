@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package users;
+
+service UsersService {
+  rpc FindAll (Empty) returns (UserList);
+}
+
+message Empty {}
+
+message User {
+  int32 id = 1;
+  string name = 2;
+}
+
+message UserList {
+  repeated User users = 1;
+}
