@@ -21,6 +21,7 @@ import ep15 from './data/ep15.timing.json';
 import ep16 from './data/ep16.timing.json';
 import ep17 from './data/ep17.timing.json';
 import ep18 from './data/ep18.timing.json';
+import ep19 from './data/ep19.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -42,6 +43,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode16', timing: ep16 as unknown as EpisodeTiming},
   {id: 'Episode17', timing: ep17 as unknown as EpisodeTiming},
   {id: 'Episode18', timing: ep18 as unknown as EpisodeTiming},
+  {id: 'Episode19', timing: ep19 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -241,6 +243,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/ep18/promo.png',
       badgeEmoji: '🔌',
+      seriesTag: 'Super App với React Native 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb19',
+    props: {
+      badge: 'MOBILE 7 · THEO YÊU CẦU',
+      line1: 'MỖI TÍNH NĂNG',
+      line2: '1 APP RIÊNG',
+      subtitle: 'Monorepo · mini-app kiểu Grab',
+      variant: 'shot',
+      image: 'screens/ep19/standalone-1mon.png',
+      badgeEmoji: '📦',
       seriesTag: 'Super App với React Native 🇻🇳',
     },
   },

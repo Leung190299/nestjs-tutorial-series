@@ -1,0 +1,664 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Kiến trúc Mini-App",
+        "subtitle": "Tập 7 · Mỗi tính năng = 1 app riêng, gộp thành 1",
+        "badge": "Series Super App · Theo yêu cầu khán giả"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep19/scene-01-0-27fa88c7.wav",
+          "startFrame": 0,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep19/scene-01-1-bb51a4a0.wav",
+          "startFrame": 136,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep19/scene-01-2-155372af.wav",
+          "startFrame": 298,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep19/scene-01-3-074a1693.wav",
+          "startFrame": 438,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 622
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Vấn đề: tất cả dính chung một khối",
+        "bullets": [
+          {
+            "icon": "🧱",
+            "text": "6 tập qua: mọi tính năng chung 1 codebase",
+            "sentence": 1
+          },
+          {
+            "icon": "👣",
+            "text": "Team đông là giẫm chân nhau",
+            "sentence": 2
+          },
+          {
+            "icon": "📋",
+            "text": "Tái dùng tính năng = copy dán",
+            "sentence": 3
+          },
+          {
+            "icon": "🏢",
+            "text": "Super app thật: mỗi tính năng độc lập",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep19/scene-02-0-9a4b141c.wav",
+          "startFrame": 0,
+          "durationInFrames": 87
+        },
+        {
+          "file": "audio/ep19/scene-02-1-41982bfb.wav",
+          "startFrame": 95,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep19/scene-02-2-e5f3d311.wav",
+          "startFrame": 259,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep19/scene-02-3-6d836097.wav",
+          "startFrame": 397,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep19/scene-02-4-864972aa.wav",
+          "startFrame": 504,
+          "durationInFrames": 147
+        }
+      ],
+      "durationInFrames": 669
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "Monorepo = khu chung cư 🏙️",
+        "bullets": [
+          {
+            "icon": "🏠",
+            "text": "Mỗi mini-app = 1 căn hộ có sổ đỏ (package.json)",
+            "sentence": 1
+          },
+          {
+            "icon": "🏙️",
+            "text": "App chủ = tòa nhà gắn các căn hộ vào",
+            "sentence": 2
+          },
+          {
+            "icon": "🚀",
+            "text": "Căn hộ tách ra ở riêng vẫn sống tốt",
+            "sentence": 3
+          },
+          {
+            "icon": "🔗",
+            "text": "npm workspaces = ban quản lý kết nối",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep19/scene-03-0-d3841135.wav",
+          "startFrame": 0,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep19/scene-03-1-d15e7754.wav",
+          "startFrame": 143,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep19/scene-03-2-ec1413ad.wav",
+          "startFrame": 348,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep19/scene-03-3-a6971576.wav",
+          "startFrame": 491,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep19/scene-03-4-8ad3bccf.wav",
+          "startFrame": 675,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 847
+    },
+    {
+      "id": "scene-04",
+      "type": "diagram",
+      "visual": {
+        "title": "Ba căn hộ — một tòa nhà",
+        "boxes": [
+          {
+            "id": "minis",
+            "label": "3 Mini-apps",
+            "emoji": "📦"
+          },
+          {
+            "id": "ws",
+            "label": "workspaces",
+            "emoji": "🔗"
+          },
+          {
+            "id": "host",
+            "label": "ViệtSuper",
+            "emoji": "🏙️"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "@vietsuper/*",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "import vào tab",
+            "sentence": 2
+          },
+          {
+            "from": 2,
+            "to": 0,
+            "label": "mini vẫn chạy riêng được",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep19/scene-04-0-ea5b45da.wav",
+          "startFrame": 0,
+          "durationInFrames": 68
+        },
+        {
+          "file": "audio/ep19/scene-04-1-6d77dd12.wav",
+          "startFrame": 76,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep19/scene-04-2-eaa937c1.wav",
+          "startFrame": 255,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep19/scene-04-3-fe6def70.wav",
+          "startFrame": 431,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep19/scene-04-4-86cf15e7.wav",
+          "startFrame": 571,
+          "durationInFrames": 87
+        }
+      ],
+      "durationInFrames": 676
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "Cây thư mục khu chung cư",
+        "commands": [
+          {
+            "cmd": "tree demo-miniapps -L 2",
+            "output": "demo-miniapps/\n├── package.json      ← ban quản lý\n├── packages/\n│   ├── mini-food/    ← căn hộ 🍜\n│   ├── mini-wallet/  ← căn hộ 💰\n│   └── mini-promo/   ← căn hộ 🎁\n└── apps/\n    ├── vietsuper/        ← tòa nhà 🏙️\n    └── food-standalone/  ← vỏ chạy riêng 🚀",
+            "sentence": 1
+          },
+          {
+            "cmd": "npm install",
+            "output": "node_modules/@vietsuper/mini-food -> packages/mini-food (symlink)",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep19/scene-05-0-f67d649f.wav",
+          "startFrame": 0,
+          "durationInFrames": 68
+        },
+        {
+          "file": "audio/ep19/scene-05-1-9a50509f.wav",
+          "startFrame": 76,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep19/scene-05-2-3cd2a70c.wav",
+          "startFrame": 284,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep19/scene-05-3-85608bb0.wav",
+          "startFrame": 427,
+          "durationInFrames": 104
+        }
+      ],
+      "durationInFrames": 549
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "demo-miniapps/package.json",
+        "language": "json",
+        "code": "{\n  \"name\": \"demo-miniapps\",\n  \"private\": true,\n  \"workspaces\": [\n    \"packages/*\",\n    \"apps/*\"\n  ]\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep19/scene-06-0-591ca69a.wav",
+          "startFrame": 0,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep19/scene-06-1-c35555f0.wav",
+          "startFrame": 128,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep19/scene-06-2-f0037fa6.wav",
+          "startFrame": 300,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep19/scene-06-3-e680ba12.wav",
+          "startFrame": 414,
+          "durationInFrames": 68
+        }
+      ],
+      "durationInFrames": 500
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "packages/mini-food/package.json",
+        "language": "json",
+        "code": "{\n  \"name\": \"@vietsuper/mini-food\",\n  \"version\": \"1.0.0\",\n  \"main\": \"src/index.ts\",\n  \"peerDependencies\": {\n    \"react\": \"*\",\n    \"react-native\": \"*\"\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 2
+          },
+          {
+            "from": 5,
+            "to": 8,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep19/scene-07-0-2366bee7.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep19/scene-07-1-4f774fbc.wav",
+          "startFrame": 107,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep19/scene-07-2-8cd988d8.wav",
+          "startFrame": 262,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep19/scene-07-3-5304ab65.wav",
+          "startFrame": 422,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep19/scene-07-4-a2c745fc.wav",
+          "startFrame": 642,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 812
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "apps/vietsuper/app/(tabs)/food.tsx — TOÀN BỘ FILE",
+        "language": "tsx",
+        "code": "import { FoodScreen } from '@vietsuper/mini-food';\n\nexport default FoodScreen;",
+        "steps": [
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep19/scene-08-0-f52d1c9e.wav",
+          "startFrame": 0,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep19/scene-08-1-b3eb2103.wav",
+          "startFrame": 128,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep19/scene-08-2-e6fd3190.wav",
+          "startFrame": 261,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep19/scene-08-3-13b03e14.wav",
+          "startFrame": 346,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 496
+    },
+    {
+      "id": "scene-09",
+      "type": "code",
+      "visual": {
+        "filename": "apps/food-standalone/App.tsx",
+        "language": "tsx",
+        "code": "import { FoodScreen } from '@vietsuper/mini-food';\nimport { StatusBar } from 'expo-status-bar';\nimport { SafeAreaView, StyleSheet } from 'react-native';\n\nexport default function App() {\n  return (\n    <SafeAreaView style={styles.container}>\n      <FoodScreen />\n      <StatusBar style=\"auto\" />\n    </SafeAreaView>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    backgroundColor: '#f8fafc',\n  },\n});",
+        "steps": [
+          {
+            "from": 1,
+            "to": 19,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 19,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep19/scene-09-0-efd5f0b7.wav",
+          "startFrame": 0,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep19/scene-09-1-0d315cc6.wav",
+          "startFrame": 109,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep19/scene-09-2-7e4129b5.wav",
+          "startFrame": 317,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep19/scene-09-3-62afcfba.wav",
+          "startFrame": 438,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 591
+    },
+    {
+      "id": "scene-10",
+      "type": "phone",
+      "visual": {
+        "title": "Một mini-app — hai cuộc đời 🚀",
+        "screens": [
+          {
+            "src": "screens/ep19/standalone-0.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep19/standalone-1mon.png",
+            "sentence": 2
+          },
+          {
+            "src": "screens/ep19/host-food.png",
+            "sentence": 3
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🚀",
+            "text": "Chạy MỘT MÌNH — không tab bar, không app chủ",
+            "sentence": 1
+          },
+          {
+            "icon": "🛒",
+            "text": "Thêm món: 1 món · 40.000đ — nguyên vẹn",
+            "sentence": 2
+          },
+          {
+            "icon": "🏙️",
+            "text": "Trong app chủ: y hệt — chung 1 nguồn code",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep19/scene-10-0-ac81adf0.wav",
+          "startFrame": 0,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep19/scene-10-1-cfb110a9.wav",
+          "startFrame": 138,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep19/scene-10-2-de874192.wav",
+          "startFrame": 290,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep19/scene-10-3-472131d6.wav",
+          "startFrame": 416,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep19/scene-10-4-deace15d.wav",
+          "startFrame": 585,
+          "durationInFrames": 147
+        }
+      ],
+      "durationInFrames": 750
+    },
+    {
+      "id": "scene-11",
+      "type": "concept",
+      "visual": {
+        "title": "Đổi đời quy trình làm việc",
+        "bullets": [
+          {
+            "icon": "👥",
+            "text": "Mỗi team một căn hộ — hết giẫm chân",
+            "sentence": 1
+          },
+          {
+            "icon": "⚡",
+            "text": "Test 1 tính năng: chạy mini standalone",
+            "sentence": 2
+          },
+          {
+            "icon": "♻️",
+            "text": "App khác cần? Cắm lại căn hộ là xong",
+            "sentence": 3
+          },
+          {
+            "icon": "🏆",
+            "text": "Grab vận hành đúng triết lý này",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep19/scene-11-0-c7209f4b.wav",
+          "startFrame": 0,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep19/scene-11-1-678f1df8.wav",
+          "startFrame": 85,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep19/scene-11-2-620ec810.wav",
+          "startFrame": 209,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep19/scene-11-3-301b52ab.wav",
+          "startFrame": 357,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep19/scene-11-4-c90a62b7.wav",
+          "startFrame": 497,
+          "durationInFrames": 161
+        }
+      ],
+      "durationInFrames": 676
+    },
+    {
+      "id": "scene-12",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "Mỗi tính năng = 1 package có sổ đỏ riêng",
+            "sentence": 0
+          },
+          {
+            "text": "App chủ = tòa nhà, mỗi tab 3 dòng import",
+            "sentence": 1
+          },
+          {
+            "text": "Chạy riêng được — gộp lại vẫn là một app",
+            "sentence": 2
+          }
+        ],
+        "next": "Comment yêu cầu tiếp theo của bạn! 💬"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep19/scene-12-0-fceb3258.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep19/scene-12-1-f32b78b8.wav",
+          "startFrame": 181,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep19/scene-12-2-a5550117.wav",
+          "startFrame": 288,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep19/scene-12-3-b3209800.wav",
+          "startFrame": 448,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep19/scene-12-4-0cbb5816.wav",
+          "startFrame": 598,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 746
+    }
+  ]
+}

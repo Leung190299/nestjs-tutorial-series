@@ -1,0 +1,248 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng đến với tập đặc biệt của series Super App, làm theo đúng yêu cầu từ khán giả!",
+      "Câu hỏi nhận được: em muốn app tách ra nhiều tính năng, MỖI tính năng như MỘT app riêng biệt, rồi gộp chung thành một app.",
+      "Đó chính xác là kiến trúc mini-app mà Grab, WeChat, Shopee đang chạy thật.",
+      "Và hôm nay chúng ta xây nó: mỗi tính năng một app độc lập, chạy riêng được, gộp lại vẫn là một ViệtSuper."
+    ],
+    "visual": {
+      "title": "Kiến trúc Mini-App",
+      "subtitle": "Tập 7 · Mỗi tính năng = 1 app riêng, gộp thành 1",
+      "badge": "Series Super App · Theo yêu cầu khán giả"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Trước tiên, vì sao ViệtSuper hiện tại chưa đạt chuẩn đó?",
+      "Sáu tập qua, mọi tính năng nằm chung một codebase: food, wallet, promo đều là file trong cùng một app.",
+      "Team đông lên là giẫm chân nhau: ai sửa gì cũng đụng chung một project, một lần build.",
+      "Muốn tái dùng màn Đồ ăn cho một app khác? Chỉ có nước copy dán.",
+      "Các super app thật tách mỗi tính năng thành một đơn vị độc lập: team riêng, vòng đời riêng, chạy thử riêng."
+    ],
+    "visual": {
+      "title": "Vấn đề: tất cả dính chung một khối",
+      "bullets": [
+        {"icon": "🧱", "text": "6 tập qua: mọi tính năng chung 1 codebase", "sentence": 1},
+        {"icon": "👣", "text": "Team đông là giẫm chân nhau", "sentence": 2},
+        {"icon": "📋", "text": "Tái dùng tính năng = copy dán", "sentence": 3},
+        {"icon": "🏢", "text": "Super app thật: mỗi tính năng độc lập", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "Lời giải mang tên monorepo với workspaces: nghe sang nhưng ví von phát là hiểu ngay.",
+      "Hãy coi dự án như một KHU CHUNG CƯ: mỗi mini-app là một căn hộ, có sổ đỏ riêng: chính là file package.json của nó.",
+      "App chủ ViệtSuper là tòa nhà: không xây phòng nào cả, chỉ GẮN các căn hộ vào từng tầng.",
+      "Và điểm ăn tiền: căn hộ tách ra vẫn sống tốt: mini-app cắm vào một cái vỏ Expo trống là chạy một mình được.",
+      "npm workspaces là ban quản lý khu chung cư: nối tất cả lại, ai cần ai là tự tìm thấy."
+    ],
+    "visual": {
+      "title": "Monorepo = khu chung cư 🏙️",
+      "bullets": [
+        {"icon": "🏠", "text": "Mỗi mini-app = 1 căn hộ có sổ đỏ (package.json)", "sentence": 1},
+        {"icon": "🏙️", "text": "App chủ = tòa nhà gắn các căn hộ vào", "sentence": 2},
+        {"icon": "🚀", "text": "Căn hộ tách ra ở riêng vẫn sống tốt", "sentence": 3},
+        {"icon": "🔗", "text": "npm workspaces = ban quản lý kết nối", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "diagram",
+    "narration": [
+      "Kiến trúc mới của ViệtSuper nhìn thế này.",
+      "Ba mini-app: mini-food, mini-wallet, mini-promo: mỗi cái một package tên @vietsuper trên đầu.",
+      "Ban quản lý workspaces nối chúng vào app chủ: mỗi tab của ViệtSuper chỉ việc import màn hình từ căn hộ tương ứng.",
+      "Và chiều ngược lại: bất cứ mini nào cũng cắm được vào một vỏ Expo trống để chạy độc lập.",
+      "Một tính năng, hai cách sống: trong tòa nhà, hoặc ở riêng."
+    ],
+    "visual": {
+      "title": "Ba căn hộ — một tòa nhà",
+      "boxes": [
+        {"id": "minis", "label": "3 Mini-apps", "emoji": "📦"},
+        {"id": "ws", "label": "workspaces", "emoji": "🔗"},
+        {"id": "host", "label": "ViệtSuper", "emoji": "🏙️"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "@vietsuper/*", "sentence": 1},
+        {"from": 1, "to": 2, "label": "import vào tab", "sentence": 2},
+        {"from": 2, "to": 0, "label": "mini vẫn chạy riêng được", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Nhìn cây thư mục là thấy rõ triết lý.",
+      "Thư mục packages: ba căn hộ mini-food, mini-wallet, mini-promo: mỗi cái chỉ có package.json và source màn hình.",
+      "Thư mục apps: tòa nhà vietsuper, và food-standalone: cái vỏ để chạy riêng mini Đồ ăn.",
+      "Một lệnh npm install ở gốc: ban quản lý tự nối tất cả."
+    ],
+    "visual": {
+      "title": "Cây thư mục khu chung cư",
+      "commands": [
+        {"cmd": "tree demo-miniapps -L 2", "output": "demo-miniapps/\n├── package.json      ← ban quản lý\n├── packages/\n│   ├── mini-food/    ← căn hộ 🍜\n│   ├── mini-wallet/  ← căn hộ 💰\n│   └── mini-promo/   ← căn hộ 🎁\n└── apps/\n    ├── vietsuper/        ← tòa nhà 🏙️\n    └── food-standalone/  ← vỏ chạy riêng 🚀", "sentence": 1},
+        {"cmd": "npm install", "output": "node_modules/@vietsuper/mini-food -> packages/mini-food (symlink)", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Toàn bộ phép màu bắt đầu từ file bé xíu này: package.json ở gốc.",
+      "Trường workspaces khai hai vùng: mọi thư mục trong packages và trong apps đều là thành viên khu chung cư.",
+      "private true vì gốc chỉ là ban quản lý, không phải app để phát hành.",
+      "Tám dòng: xong hạ tầng của cả kiến trúc."
+    ],
+    "visual": {
+      "filename": "demo-miniapps/package.json",
+      "language": "json",
+      "code": "{\n  \"name\": \"demo-miniapps\",\n  \"private\": true,\n  \"workspaces\": [\n    \"packages/*\",\n    \"apps/*\"\n  ]\n}",
+      "steps": [
+        {"from": 1, "to": 8, "sentence": 0},
+        {"from": 4, "to": 7, "sentence": 1},
+        {"from": 3, "to": 3, "sentence": 2},
+        {"from": 1, "to": 8, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Sổ đỏ của căn hộ Đồ ăn: package.json của mini-food.",
+      "Tên căn hộ: a còng vietsuper trên mini-food: từ nay ai muốn dùng chỉ cần gọi đúng tên này.",
+      "main trỏ vào src index: cửa chính của căn hộ, nơi export ra màn hình FoodScreen.",
+      "peerDependencies khai react và react-native: căn hộ KHÔNG mang theo đồ đạc riêng, dùng chung điện nước của tòa nhà: tránh hai bản React đá nhau.",
+      "Màn hình FoodScreen bên trong: chính là code menu và giỏ hàng của tập bốn, chuyển hộ khẩu về đây."
+    ],
+    "visual": {
+      "filename": "packages/mini-food/package.json",
+      "language": "json",
+      "code": "{\n  \"name\": \"@vietsuper/mini-food\",\n  \"version\": \"1.0.0\",\n  \"main\": \"src/index.ts\",\n  \"peerDependencies\": {\n    \"react\": \"*\",\n    \"react-native\": \"*\"\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 9, "sentence": 0},
+        {"from": 2, "to": 2, "sentence": 1},
+        {"from": 4, "to": 4, "sentence": 2},
+        {"from": 5, "to": 8, "sentence": 3},
+        {"from": 1, "to": 9, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Giờ nhìn tab Đồ ăn của app chủ sau cải tổ: và đây là TOÀN BỘ file.",
+      "Import FoodScreen từ căn hộ mini-food, export ra làm màn hình tab. Hết.",
+      "Ba dòng: tab chỉ là cái biển gắn ngoài cửa căn hộ.",
+      "Wallet và promo cũng y hệt ba dòng như vậy: app chủ giờ gần như không có logic gì."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/app/(tabs)/food.tsx — TOÀN BỘ FILE",
+      "language": "tsx",
+      "code": "import { FoodScreen } from '@vietsuper/mini-food';\n\nexport default FoodScreen;",
+      "steps": [
+        {"from": 1, "to": 3, "sentence": 0},
+        {"from": 1, "to": 3, "sentence": 1},
+        {"from": 1, "to": 3, "sentence": 2},
+        {"from": 1, "to": 3, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "code",
+    "narration": [
+      "Còn đây là bằng chứng căn hộ sống riêng được: app food-standalone.",
+      "Một vỏ Expo trống trơn: App.tsx import đúng FoodScreen đó và render, bọc thêm SafeAreaView cho khỏi đè tai thỏ.",
+      "Không tab bar, không app chủ, không các mini khác: chỉ mình tính năng Đồ ăn.",
+      "Team Đồ ăn từ nay phát triển và chạy thử tính năng của mình mà KHÔNG cần build cả ViệtSuper."
+    ],
+    "visual": {
+      "filename": "apps/food-standalone/App.tsx",
+      "language": "tsx",
+      "code": "import { FoodScreen } from '@vietsuper/mini-food';\nimport { StatusBar } from 'expo-status-bar';\nimport { SafeAreaView, StyleSheet } from 'react-native';\n\nexport default function App() {\n  return (\n    <SafeAreaView style={styles.container}>\n      <FoodScreen />\n      <StatusBar style=\"auto\" />\n    </SafeAreaView>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    backgroundColor: '#f8fafc',\n  },\n});",
+      "steps": [
+        {"from": 1, "to": 19, "sentence": 0},
+        {"from": 1, "to": 12, "sentence": 1},
+        {"from": 7, "to": 10, "sentence": 2},
+        {"from": 1, "to": 19, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "phone",
+    "narration": [
+      "Và đây, ảnh chụp thật từ simulator: mini-app Đồ ăn đang chạy HOÀN TOÀN MỘT MÌNH.",
+      "Nhìn kỹ nhé: không có thanh tab nào cả: đây không phải ViệtSuper, đây là app Đồ ăn độc lập.",
+      "Bấm thêm một cơm tấm: giỏ hàng nhảy một món, bốn mươi nghìn: tính năng nguyên vẹn.",
+      "Cùng lúc đó, mở app chủ ViệtSuper: tab Đồ ăn vẫn y hệt, vì cả hai dùng CHUNG một căn hộ code.",
+      "Sửa FoodScreen một lần: cả app riêng lẫn app chủ cùng nhận: đó là sức mạnh của kiến trúc này."
+    ],
+    "visual": {
+      "title": "Một mini-app — hai cuộc đời 🚀",
+      "screens": [
+        {"src": "screens/ep19/standalone-0.png", "sentence": 0},
+        {"src": "screens/ep19/standalone-1mon.png", "sentence": 2},
+        {"src": "screens/ep19/host-food.png", "sentence": 3}
+      ],
+      "bullets": [
+        {"icon": "🚀", "text": "Chạy MỘT MÌNH — không tab bar, không app chủ", "sentence": 1},
+        {"icon": "🛒", "text": "Thêm món: 1 món · 40.000đ — nguyên vẹn", "sentence": 2},
+        {"icon": "🏙️", "text": "Trong app chủ: y hệt — chung 1 nguồn code", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "concept",
+    "narration": [
+      "Kiến trúc này đổi đời quy trình làm việc thế nào?",
+      "Team Đồ ăn, team Ví, team Ưu đãi: mỗi team một thư mục, hết cảnh giẫm chân.",
+      "Chạy thử một tính năng: mở app standalone của nó, nhanh và nhẹ hơn build cả siêu ứng dụng.",
+      "Công ty có app thứ hai? Cắm lại đúng căn hộ mini-food là có ngay tính năng Đồ ăn.",
+      "Grab với hàng trăm kỹ sư vận hành đúng triết lý này, chỉ ở quy mô lớn hơn: bạn vừa nắm được cái lõi."
+    ],
+    "visual": {
+      "title": "Đổi đời quy trình làm việc",
+      "bullets": [
+        {"icon": "👥", "text": "Mỗi team một căn hộ — hết giẫm chân", "sentence": 1},
+        {"icon": "⚡", "text": "Test 1 tính năng: chạy mini standalone", "sentence": 2},
+        {"icon": "♻️", "text": "App khác cần? Cắm lại căn hộ là xong", "sentence": 3},
+        {"icon": "🏆", "text": "Grab vận hành đúng triết lý này", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: monorepo workspaces biến mỗi tính năng thành một package độc lập: có sổ đỏ riêng, chạy riêng được.",
+      "App chủ chỉ còn là tòa nhà gắn biển: mỗi tab ba dòng import.",
+      "Đúng yêu cầu đặt hàng: tách ra nhiều tính năng, mỗi tính năng như một app riêng biệt, gộp chung thành một app.",
+      "Bài tập nhỏ: tạo vỏ wallet-standalone cho căn hộ Ví, theo đúng công thức food-standalone nhé.",
+      "Cảm ơn bạn đã gửi yêu cầu cho series: tiếp tục comment điều bạn muốn học, và hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "Mỗi tính năng = 1 package có sổ đỏ riêng", "sentence": 0},
+        {"text": "App chủ = tòa nhà, mỗi tab 3 dòng import", "sentence": 1},
+        {"text": "Chạy riêng được — gộp lại vẫn là một app", "sentence": 2}
+      ],
+      "next": "Comment yêu cầu tiếp theo của bạn! 💬"
+    }
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "name": "@vietsuper/mini-wallet",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "@react-native-async-storage/async-storage": "*"
+  }
+}
