@@ -804,6 +804,37 @@ Xem từ đầu: [LINK MA1]
 ```
 **Tags:** `mini app mới, công thức mini app, thêm tính năng app, react native tabs, expo router tab, toggle button, mini app từ a đến z, monorepo workflow, super app architecture, grab mini app, học react native, kiến trúc mobile, mini app tiếng việt, việtsuper, mini cinema`
 
+### Mini-App #5 (CHỮA BÀI) — mini-booking Đặt xe (4:12)
+
+**Tiêu đề:** Chữa bài tốt nghiệp: mini-app Đặt xe KHÔNG cần tab | Mini-App A-Z #5
+**Phương án khác:** Màn hình ngoài tab bar với Stack route / Single-select + stepper: 2 kỹ thuật state mới
+
+**Mô tả:**
+```
+Tập CHỮA BÀI tốt nghiệp của series: xây mini-booking Đặt xe 🛵 — và né cái bẫy lớn nhất của bài tập: KHÔNG thêm tab thứ 6 (tab bar chật!). Thay vào đó: màn hình Stack đẩy lên từ card Trang chủ, có header + nút back tự động — đúng cách Grab tổ chức hàng chục dịch vụ với chỉ vài tab.
+
+Kèm 2 kỹ thuật state mới: chọn-MỘT (string | null — so với chọn-nhiều string[] của tập 4) và stepper quãng đường với clamp Math.max/Math.min.
+
+⏱️ NỘI DUNG:
+0:00 Tập chữa bài!
+0:21 Cái bẫy: tab thứ 6? KHÔNG
+0:47 Push lên — pop về: mô hình Stack
+1:06 Công thức cũ, 2 điểm mới
+1:25 Single-select: string | null (vs string[])
+1:54 Nút chọn-một — đơn giản là đúng
+2:12 Stepper km + clamp Math.max/min
+2:33 Stack.Screen: header + title + back "tặng sẵn"
+2:58 Bật card Đặt xe (2 dòng)
+3:13 Nghiệm thu: Ô tô 4 chỗ · 7km = 175.000đ
+3:41 5/6 ô sáng — ô cuối Nạp thẻ dành cho BẠN
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+💡 Repo có TAG theo từng tập (miniapp-tap-4, miniapp-tap-5...) — checkout tag để xem đúng code của tập đang xem.
+💬 Làm xong mini-topup Nạp thẻ? Comment khoe thành quả!
+#miniapp #reactnative #exporouter #stack #laptrinh
+```
+**Tags:** `stack navigation, expo router stack, màn hình ngoài tab, single select, stepper react native, math clamp, headerbacktitle, đặt xe app, grab clone, mini app, react native tiếng việt, học react native, mini app từ a đến z, chữa bài tập, việtsuper`
+
 ## Thumbnail
 
 Đã render sẵn tại `video/out/thumbs/ep0X-thumb.png` (1280×720, <2MB, chuẩn YouTube). Muốn sửa chữ/bố cục: sửa mảng `thumbnails` trong `video/src/Root.tsx` hoặc component `video/src/Thumbnail.tsx`, rồi chạy `npx remotion still Thumb0X out/thumbs/ep0X-thumb.png`.
