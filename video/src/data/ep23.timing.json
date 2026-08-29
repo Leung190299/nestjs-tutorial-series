@@ -153,7 +153,7 @@
       "id": "scene-04",
       "type": "code",
       "visual": {
-        "filename": "packages/mini-cinema/package.json + src/index.ts",
+        "filename": "packages/mini-cinema/package.json",
         "language": "json",
         "code": "{\n  \"name\": \"@vietsuper/mini-cinema\",\n  \"version\": \"1.0.0\",\n  \"main\": \"src/index.ts\",\n  \"peerDependencies\": {\n    \"react\": \"*\",\n    \"react-native\": \"*\"\n  }\n}",
         "steps": [
@@ -250,22 +250,22 @@
           "durationInFrames": 101
         },
         {
-          "file": "audio/ep23/scene-05-2-709bc767.wav",
+          "file": "audio/ep23/scene-05-2-42413e7b.wav",
           "startFrame": 247,
-          "durationInFrames": 214
+          "durationInFrames": 185
         },
         {
           "file": "audio/ep23/scene-05-3-d2a6a8bf.wav",
-          "startFrame": 469,
+          "startFrame": 440,
           "durationInFrames": 164
         },
         {
           "file": "audio/ep23/scene-05-4-b88072ad.wav",
-          "startFrame": 641,
+          "startFrame": 612,
           "durationInFrames": 147
         }
       ],
-      "durationInFrames": 806
+      "durationInFrames": 777
     },
     {
       "id": "scene-06",
@@ -281,8 +281,8 @@
             "sentence": 0
           },
           {
-            "from": 5,
-            "to": 5,
+            "from": 4,
+            "to": 6,
             "sentence": 1
           },
           {
@@ -309,33 +309,33 @@
           "durationInFrames": 94
         },
         {
-          "file": "audio/ep23/scene-06-1-005a10ec.wav",
+          "file": "audio/ep23/scene-06-1-0a1b1ab6.wav",
           "startFrame": 102,
-          "durationInFrames": 87
+          "durationInFrames": 197
         },
         {
           "file": "audio/ep23/scene-06-2-3be05ab0.wav",
-          "startFrame": 197,
+          "startFrame": 307,
           "durationInFrames": 188
         },
         {
           "file": "audio/ep23/scene-06-3-e1eb11d5.wav",
-          "startFrame": 393,
+          "startFrame": 503,
           "durationInFrames": 99
         },
         {
           "file": "audio/ep23/scene-06-4-4181a5bd.wav",
-          "startFrame": 500,
+          "startFrame": 610,
           "durationInFrames": 84
         }
       ],
-      "durationInFrames": 602
+      "durationInFrames": 712
     },
     {
       "id": "scene-07",
       "type": "code",
       "visual": {
-        "filename": "cinema.tsx + (tabs)/_layout.tsx (phần thêm)",
+        "filename": "apps/vietsuper/app/(tabs)/cinema.tsx — TOÀN BỘ FILE",
         "language": "tsx",
         "code": "import { CinemaScreen } from '@vietsuper/mini-cinema';\n\nexport default CinemaScreen;",
         "steps": [
@@ -368,22 +368,76 @@
           "durationInFrames": 75
         },
         {
-          "file": "audio/ep23/scene-07-1-d8ba5e17.wav",
+          "file": "audio/ep23/scene-07-1-64514ba2.wav",
           "startFrame": 83,
-          "durationInFrames": 166
+          "durationInFrames": 159
         },
         {
-          "file": "audio/ep23/scene-07-2-4b63a35c.wav",
-          "startFrame": 257,
-          "durationInFrames": 154
+          "file": "audio/ep23/scene-07-2-4d2f1b4c.wav",
+          "startFrame": 250,
+          "durationInFrames": 140
         },
         {
-          "file": "audio/ep23/scene-07-3-edd90f81.wav",
-          "startFrame": 419,
-          "durationInFrames": 116
+          "file": "audio/ep23/scene-07-3-669ad300.wav",
+          "startFrame": 398,
+          "durationInFrames": 92
         }
       ],
-      "durationInFrames": 553
+      "durationInFrames": 508
+    },
+    {
+      "id": "scene-07b",
+      "type": "code",
+      "visual": {
+        "filename": "apps/vietsuper/app/(tabs)/_layout.tsx (phần thêm)",
+        "language": "tsx",
+        "code": "      <Tabs.Screen\n        name=\"cinema\"\n        options={{ title: 'Xem phim', tabBarIcon: tabIcon('🎬') }}\n      />",
+        "steps": [
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep23/scene-07b-0-f0d50eda.wav",
+          "startFrame": 0,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep23/scene-07b-1-8765becd.wav",
+          "startFrame": 119,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep23/scene-07b-2-12080a65.wav",
+          "startFrame": 274,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep23/scene-07b-3-4352e7f8.wav",
+          "startFrame": 381,
+          "durationInFrames": 104
+        }
+      ],
+      "durationInFrames": 503
     },
     {
       "id": "scene-08",

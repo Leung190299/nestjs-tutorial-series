@@ -27,10 +27,26 @@
     "visual": {
       "title": "Nỗi khổ của multi-repo",
       "bullets": [
-        {"icon": "🏘️", "text": "Mỗi tính năng một repo, rải rác khắp nơi", "sentence": 1},
-        {"icon": "📋", "text": "Dùng chung code = copy dán, lệch nhau dần", "sentence": 2},
-        {"icon": "🔁", "text": "Sửa 1 lỗi chung = sửa N nơi, N lần duyệt", "sentence": 3},
-        {"icon": "📉", "text": "Càng nhiều tính năng càng đuối", "sentence": 4}
+        {
+          "icon": "🏘️",
+          "text": "Mỗi tính năng một repo, rải rác khắp nơi",
+          "sentence": 1
+        },
+        {
+          "icon": "📋",
+          "text": "Dùng chung code = copy dán, lệch nhau dần",
+          "sentence": 2
+        },
+        {
+          "icon": "🔁",
+          "text": "Sửa 1 lỗi chung = sửa N nơi, N lần duyệt",
+          "sentence": 3
+        },
+        {
+          "icon": "📉",
+          "text": "Càng nhiều tính năng càng đuối",
+          "sentence": 4
+        }
       ]
     }
   },
@@ -47,10 +63,26 @@
     "visual": {
       "title": "Monorepo = khu chung cư 🏙️",
       "bullets": [
-        {"icon": "🏙️", "text": "Tất cả về một khu — vẫn phòng ai nấy ở", "sentence": 1},
-        {"icon": "🏠", "text": "Mỗi tính năng một căn hộ có sổ đỏ riêng", "sentence": 2},
-        {"icon": "🛗", "text": "Chung địa chỉ, chung thang máy", "sentence": 3},
-        {"icon": "🏆", "text": "Google, Meta, Grab đều dùng", "sentence": 4}
+        {
+          "icon": "🏙️",
+          "text": "Tất cả về một khu — vẫn phòng ai nấy ở",
+          "sentence": 1
+        },
+        {
+          "icon": "🏠",
+          "text": "Mỗi tính năng một căn hộ có sổ đỏ riêng",
+          "sentence": 2
+        },
+        {
+          "icon": "🛗",
+          "text": "Chung địa chỉ, chung thang máy",
+          "sentence": 3
+        },
+        {
+          "icon": "🏆",
+          "text": "Google, Meta, Grab đều dùng",
+          "sentence": 4
+        }
       ]
     }
   },
@@ -67,10 +99,26 @@
     "visual": {
       "title": "npm workspaces = ban quản lý",
       "bullets": [
-        {"icon": "📦", "text": "Có sẵn trong npm — không cài gì thêm", "sentence": 0},
-        {"icon": "🗂️", "text": "Khai thành viên ở package.json gốc", "sentence": 1},
-        {"icon": "🔗", "text": "npm tự NỐI: import nhau bằng TÊN", "sentence": 3},
-        {"icon": "🚫", "text": "Hết cảnh ../../.. dài dằng dặc", "sentence": 4}
+        {
+          "icon": "📦",
+          "text": "Có sẵn trong npm — không cài gì thêm",
+          "sentence": 0
+        },
+        {
+          "icon": "🗂️",
+          "text": "Khai thành viên ở package.json gốc",
+          "sentence": 1
+        },
+        {
+          "icon": "🔗",
+          "text": "npm tự NỐI: import nhau bằng TÊN",
+          "sentence": 3
+        },
+        {
+          "icon": "🚫",
+          "text": "Hết cảnh ../../.. dài dằng dặc",
+          "sentence": 4
+        }
       ]
     }
   },
@@ -87,14 +135,41 @@
     "visual": {
       "title": "Hai khu của monorepo",
       "boxes": [
-        {"id": "root", "label": "package.json gốc", "emoji": "📋"},
-        {"id": "packages", "label": "packages/*", "emoji": "🏠"},
-        {"id": "apps", "label": "apps/*", "emoji": "📱"}
+        {
+          "id": "root",
+          "label": "package.json gốc",
+          "emoji": "📋"
+        },
+        {
+          "id": "packages",
+          "label": "packages/*",
+          "emoji": "🏠"
+        },
+        {
+          "id": "apps",
+          "label": "apps/*",
+          "emoji": "📱"
+        }
       ],
       "flows": [
-        {"from": 0, "to": 1, "label": "quản lý", "sentence": 1},
-        {"from": 1, "to": 2, "label": "cung cấp linh kiện", "sentence": 3},
-        {"from": 2, "to": 0, "label": "import bằng tên", "sentence": 3}
+        {
+          "from": 0,
+          "to": 1,
+          "label": "quản lý",
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "cung cấp linh kiện",
+          "sentence": 3
+        },
+        {
+          "from": 2,
+          "to": 1,
+          "label": "import bằng tên",
+          "sentence": 3
+        }
       ]
     }
   },
@@ -111,9 +186,21 @@
     "visual": {
       "title": "Dựng khung từ thư mục trống",
       "commands": [
-        {"cmd": "mkdir demo-miniapps && cd demo-miniapps", "output": "", "sentence": 1},
-        {"cmd": "npm init -y", "output": "Wrote to demo-miniapps/package.json", "sentence": 1},
-        {"cmd": "mkdir packages apps", "output": "packages/  apps/  ← hai khu đất sẵn sàng", "sentence": 2}
+        {
+          "cmd": "mkdir demo-miniapps && cd demo-miniapps",
+          "output": "",
+          "sentence": 1
+        },
+        {
+          "cmd": "npm init -y",
+          "output": "Wrote to demo-miniapps/package.json",
+          "sentence": 1
+        },
+        {
+          "cmd": "mkdir packages apps",
+          "output": "packages/  apps/  ← hai khu đất sẵn sàng",
+          "sentence": 2
+        }
       ]
     }
   },
@@ -133,12 +220,36 @@
       "language": "json",
       "code": "{\n  \"name\": \"demo-miniapps\",\n  \"private\": true,\n  \"workspaces\": [\n    \"packages/*\",\n    \"apps/*\"\n  ]\n}",
       "steps": [
-        {"from": 1, "to": 8, "sentence": 0},
-        {"from": 2, "to": 2, "sentence": 1},
-        {"from": 3, "to": 3, "sentence": 2},
-        {"from": 4, "to": 7, "sentence": 3},
-        {"from": 5, "to": 5, "sentence": 4},
-        {"from": 6, "to": 6, "sentence": 5}
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 2
+        },
+        {
+          "from": 4,
+          "to": 7,
+          "sentence": 3
+        },
+        {
+          "from": 5,
+          "to": 5,
+          "sentence": 4
+        },
+        {
+          "from": 6,
+          "to": 6,
+          "sentence": 5
+        }
       ]
     }
   },
@@ -148,15 +259,23 @@
     "narration": [
       "Giờ xem ban quản lý làm việc thật. Chạy npm install ở gốc.",
       "Rồi soi vào node_modules, thư mục a còng vietsuper: bạn thấy gì đặc biệt?",
-      "Những SYMLINK: mũi tên trỏ thẳng về thư mục packages: mini-food ở đây chỉ là LỐI ĐI TẮT đến căn hộ thật.",
+      "Nhìn trước một chút, khi khu đã có đủ các căn hộ của những tập sau: các SYMLINK: mũi tên trỏ thẳng về packages: mini-food ở đây chỉ là LỐI ĐI TẮT đến căn hộ thật.",
       "Đây chính là phép nối của workspaces: khi code import a còng vietsuper trên mini-food, node đi theo lối tắt này về đúng căn hộ.",
       "Không copy, không publish: sửa code trong căn hộ là MỌI nơi đang dùng nhận được ngay lập tức."
     ],
     "visual": {
       "title": "Soi phép nối: symlink",
       "commands": [
-        {"cmd": "npm install", "output": "added 599 packages in 12s", "sentence": 0},
-        {"cmd": "ls -la node_modules/@vietsuper/", "output": "mini-food   -> ../../packages/mini-food\nmini-wallet -> ../../packages/mini-wallet\nmini-promo  -> ../../packages/mini-promo   ← lối đi tắt!", "sentence": 2}
+        {
+          "cmd": "npm install",
+          "output": "added 599 packages in 12s",
+          "sentence": 0
+        },
+        {
+          "cmd": "ls -la node_modules/@vietsuper/",
+          "output": "mini-food   -> ../../packages/mini-food\nmini-wallet -> ../../packages/mini-wallet\nmini-promo  -> ../../packages/mini-promo   ← lối đi tắt!",
+          "sentence": 2
+        }
       ]
     }
   },
@@ -173,10 +292,26 @@
     "visual": {
       "title": "3 quy tắc vàng 🥇",
       "bullets": [
-        {"icon": "1️⃣", "text": "npm install luôn chạy ở GỐC", "sentence": 1},
-        {"icon": "2️⃣", "text": "Import bằng TÊN — cấm ../ xuyên căn hộ", "sentence": 2},
-        {"icon": "3️⃣", "text": "Gốc không chứa code tính năng", "sentence": 3},
-        {"icon": "🛡️", "text": "Tránh được 90% lỗi monorepo người mới", "sentence": 4}
+        {
+          "icon": "1️⃣",
+          "text": "npm install luôn chạy ở GỐC",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Import bằng TÊN — cấm ../ xuyên căn hộ",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Gốc không chứa code tính năng",
+          "sentence": 3
+        },
+        {
+          "icon": "🛡️",
+          "text": "Tránh được 90% lỗi monorepo người mới",
+          "sentence": 4
+        }
       ]
     }
   },
@@ -192,9 +327,18 @@
     "visual": {
       "title": "Hẹn gặp lại! 👋",
       "summary": [
-        {"text": "Monorepo = khu chung cư · workspaces = ban quản lý", "sentence": 0},
-        {"text": "Symlink nối các package — import bằng TÊN", "sentence": 0},
-        {"text": "8 dòng package.json = xong nền móng", "sentence": 1}
+        {
+          "text": "Monorepo = khu chung cư · workspaces = ban quản lý",
+          "sentence": 0
+        },
+        {
+          "text": "Symlink nối các package — import bằng TÊN",
+          "sentence": 0
+        },
+        {
+          "text": "8 dòng package.json = xong nền móng",
+          "sentence": 1
+        }
       ],
       "next": "Tập 2: Xây mini-app đầu tiên — mini-food 🍜"
     }

@@ -389,6 +389,60 @@
       "durationInFrames": 753
     },
     {
+      "id": "scene-07b",
+      "type": "code",
+      "visual": {
+        "filename": "packages/mini-food/src/FoodScreen.tsx (giao diện)",
+        "language": "tsx",
+        "code": "            <Pressable style={styles.addButton} onPress={() => setCart((c) => [...c, item.id])}>\n              <Text style={styles.addButtonText}>+ Thêm</Text>\n            </Pressable>\n          </View>\n        )}\n      />\n      <View style={styles.bottomBar}>\n        <Text style={styles.bottomText}>🛒 {cart.length} món</Text>\n        <Text style={styles.bottomTotal}>{total.toLocaleString('vi')}đ</Text>\n      </View>",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep21/scene-07b-0-304baf10.wav",
+          "startFrame": 0,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep21/scene-07b-1-6dc8365c.wav",
+          "startFrame": 119,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep21/scene-07b-2-3c1718c1.wav",
+          "startFrame": 293,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep21/scene-07b-3-816352e8.wav",
+          "startFrame": 467,
+          "durationInFrames": 108
+        }
+      ],
+      "durationInFrames": 593
+    },
+    {
       "id": "scene-08",
       "type": "phone",
       "visual": {

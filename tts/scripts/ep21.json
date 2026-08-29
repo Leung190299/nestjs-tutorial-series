@@ -26,10 +26,26 @@
     "visual": {
       "title": "Giải phẫu một mini-app",
       "bullets": [
-        {"icon": "📋", "text": "Sổ đỏ — package.json: danh tính", "sentence": 1},
-        {"icon": "🚪", "text": "Cửa chính — index.ts: lối vào duy nhất", "sentence": 2},
-        {"icon": "🛋️", "text": "Căn phòng — FoodScreen: màn hình thật", "sentence": 3},
-        {"icon": "♻️", "text": "Công thức nhân bản cho mọi mini khác", "sentence": 4}
+        {
+          "icon": "📋",
+          "text": "Sổ đỏ — package.json: danh tính",
+          "sentence": 1
+        },
+        {
+          "icon": "🚪",
+          "text": "Cửa chính — index.ts: lối vào duy nhất",
+          "sentence": 2
+        },
+        {
+          "icon": "🛋️",
+          "text": "Căn phòng — FoodScreen: màn hình thật",
+          "sentence": 3
+        },
+        {
+          "icon": "♻️",
+          "text": "Công thức nhân bản cho mọi mini khác",
+          "sentence": 4
+        }
       ]
     }
   },
@@ -49,12 +65,36 @@
       "language": "json",
       "code": "{\n  \"name\": \"@vietsuper/mini-food\",\n  \"version\": \"1.0.0\",\n  \"main\": \"src/index.ts\",\n  \"peerDependencies\": {\n    \"react\": \"*\",\n    \"react-native\": \"*\"\n  }\n}",
       "steps": [
-        {"from": 1, "to": 9, "sentence": 0},
-        {"from": 2, "to": 2, "sentence": 1},
-        {"from": 3, "to": 3, "sentence": 2},
-        {"from": 4, "to": 4, "sentence": 3},
-        {"from": 5, "to": 8, "sentence": 4},
-        {"from": 6, "to": 7, "sentence": 5}
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 2
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 3
+        },
+        {
+          "from": 5,
+          "to": 8,
+          "sentence": 4
+        },
+        {
+          "from": 6,
+          "to": 7,
+          "sentence": 5
+        }
       ]
     }
   },
@@ -71,10 +111,26 @@
     "visual": {
       "title": "Vì sao PEER chứ không phải dependencies?",
       "bullets": [
-        {"icon": "⚡", "text": "dependencies = tự khiêng máy phát điện vào", "sentence": 1},
-        {"icon": "💥", "text": "2 bản React cùng chạy = sập (lỗi hooks)", "sentence": 2},
-        {"icon": "🏙️", "text": "peer = dùng điện nước chung của tòa nhà", "sentence": 3},
-        {"icon": "✍️", "text": "\"Tôi cần điện — nhưng dùng điện chung\"", "sentence": 4}
+        {
+          "icon": "⚡",
+          "text": "dependencies = tự khiêng máy phát điện vào",
+          "sentence": 1
+        },
+        {
+          "icon": "💥",
+          "text": "2 bản React cùng chạy = sập (lỗi hooks)",
+          "sentence": 2
+        },
+        {
+          "icon": "🏙️",
+          "text": "peer = dùng điện nước chung của tòa nhà",
+          "sentence": 3
+        },
+        {
+          "icon": "✍️",
+          "text": "\"Tôi cần điện — nhưng dùng điện chung\"",
+          "sentence": 4
+        }
       ]
     }
   },
@@ -92,10 +148,26 @@
       "language": "tsx",
       "code": "export { FoodScreen } from './FoodScreen';",
       "steps": [
-        {"from": 1, "to": 1, "sentence": 0},
-        {"from": 1, "to": 1, "sentence": 1},
-        {"from": 1, "to": 1, "sentence": 2},
-        {"from": 1, "to": 1, "sentence": 3}
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 3
+        }
       ]
     }
   },
@@ -113,10 +185,26 @@
       "language": "tsx",
       "code": "type MenuItem = { id: string; name: string; emoji: string; price: number };\n\nconst menu: MenuItem[] = [\n  { id: 'pho-bo', name: 'Phở bò', emoji: '🍜', price: 45000 },\n  { id: 'com-tam', name: 'Cơm tấm', emoji: '🍚', price: 40000 },\n  { id: 'banh-mi', name: 'Bánh mì', emoji: '🥖', price: 25000 },\n  { id: 'tra-sua', name: 'Trà sữa', emoji: '🧋', price: 30000 },\n];",
       "steps": [
-        {"from": 1, "to": 8, "sentence": 0},
-        {"from": 3, "to": 8, "sentence": 1},
-        {"from": 1, "to": 8, "sentence": 2},
-        {"from": 1, "to": 8, "sentence": 3}
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 3
+        }
       ]
     }
   },
@@ -135,11 +223,68 @@
       "language": "tsx",
       "code": "export function FoodScreen() {\n  const [cart, setCart] = useState<string[]>([]);\n\n  const total = cart.reduce((sum, id) => {\n    const item = menu.find((m) => m.id === id);\n    return sum + (item?.price ?? 0);\n  }, 0);",
       "steps": [
-        {"from": 1, "to": 7, "sentence": 0},
-        {"from": 1, "to": 1, "sentence": 1},
-        {"from": 2, "to": 2, "sentence": 2},
-        {"from": 4, "to": 7, "sentence": 3},
-        {"from": 1, "to": 7, "sentence": 4}
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 1
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 2
+        },
+        {
+          "from": 4,
+          "to": 7,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07b",
+    "type": "code",
+    "narration": [
+      "Phần ba của căn phòng: giao diện, và đây là hai chi tiết đáng soi nhất.",
+      "Nút cộng Thêm: setCart với dấu ba chấm tạo MẢNG MỚI gồm giỏ cũ cộng món mới: đúng luật bất biến của React.",
+      "Thanh giỏ dưới đáy: đếm số món bằng cart.length, và tổng tiền format kiểu Việt bằng toLocaleString vi.",
+      "Data, logic, giao diện: căn phòng đủ ba lớp, tự túc trọn vẹn."
+    ],
+    "visual": {
+      "filename": "packages/mini-food/src/FoodScreen.tsx (giao diện)",
+      "language": "tsx",
+      "code": "            <Pressable style={styles.addButton} onPress={() => setCart((c) => [...c, item.id])}>\n              <Text style={styles.addButtonText}>+ Thêm</Text>\n            </Pressable>\n          </View>\n        )}\n      />\n      <View style={styles.bottomBar}>\n        <Text style={styles.bottomText}>🛒 {cart.length} món</Text>\n        <Text style={styles.bottomTotal}>{total.toLocaleString('vi')}đ</Text>\n      </View>",
+      "steps": [
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 1
+        },
+        {
+          "from": 7,
+          "to": 10,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 3
+        }
       ]
     }
   },
@@ -155,12 +300,27 @@
     "visual": {
       "title": "Căn hộ mini-food hoàn thiện 🍜",
       "screens": [
-        {"src": "screens/ep19/standalone-0.png", "sentence": 0}
+        {
+          "src": "screens/ep19/standalone-0.png",
+          "sentence": 0
+        }
       ],
       "bullets": [
-        {"icon": "📦", "text": "Tất cả đóng gói trong packages/mini-food", "sentence": 2},
-        {"icon": "🧠", "text": "Data + logic + UI: căn hộ tự túc", "sentence": 2},
-        {"icon": "🤫", "text": "Ảnh từ app chạy độc lập — hồi sau sẽ rõ", "sentence": 3}
+        {
+          "icon": "📦",
+          "text": "Tất cả đóng gói trong packages/mini-food",
+          "sentence": 2
+        },
+        {
+          "icon": "🧠",
+          "text": "Data + logic + UI: căn hộ tự túc",
+          "sentence": 2
+        },
+        {
+          "icon": "🤫",
+          "text": "Ảnh từ app chạy độc lập — hồi sau sẽ rõ",
+          "sentence": 3
+        }
       ]
     }
   },
@@ -176,9 +336,18 @@
     "visual": {
       "title": "Hẹn gặp lại! 👋",
       "summary": [
-        {"text": "Sổ đỏ + cửa chính + căn phòng = 1 mini-app", "sentence": 0},
-        {"text": "react ở PEER — tránh ác mộng 2 bản React", "sentence": 1},
-        {"text": "Căn hộ tự túc data + logic + UI", "sentence": 0}
+        {
+          "text": "Sổ đỏ + cửa chính + căn phòng = 1 mini-app",
+          "sentence": 0
+        },
+        {
+          "text": "react ở PEER — tránh ác mộng 2 bản React",
+          "sentence": 1
+        },
+        {
+          "text": "Căn hộ tự túc data + logic + UI",
+          "sentence": 0
+        }
       ],
       "next": "Tập 3: Cho mini-app ra ở riêng — chạy độc lập 🚀"
     }

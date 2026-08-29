@@ -701,7 +701,7 @@ Xem từ đầu series Super App: [LINK M1]
 
 > Playlist RIÊNG: **"Mini-App từ A đến Z 🇻🇳"** — series độc lập, KHÔNG đánh số theo series Super App (đăng riêng được ngay). Đào sâu kiến trúc mini-app từng bước một; ep19 (Super App #7) đóng vai trailer tổng quan trỏ về playlist này. Code: `demo-miniapps/`.
 
-### Mini-App #1 — Monorepo từ con số 0 (4:09)
+### Mini-App #1 — Monorepo từ con số 0 (4:12)
 
 **Tiêu đề:** Monorepo & npm workspaces từ số 0: nền móng của mọi super app | Mini-App A-Z #1
 **Mô tả:**
@@ -719,8 +719,8 @@ Ví von xuyên suốt: monorepo = khu chung cư 🏙️, workspaces = ban quản
 2:02 Dựng từ thư mục trống: mkdir + npm init
 2:21 8 dòng package.json — soi TỪNG dòng
 2:55 npm install + soi symlink tận mắt
-3:23 3 quy tắc vàng của monorepo
-3:46 Tóm tắt & hẹn tập 2
+3:26 3 quy tắc vàng của monorepo
+3:49 Tóm tắt & hẹn tập 2
 
 📦 Source code (demo-miniapps/): https://github.com/Leung190299/nestjs-tutorial-series
 Tập 2: [LINK MA2]
@@ -728,7 +728,7 @@ Tập 2: [LINK MA2]
 ```
 **Tags:** `monorepo, npm workspaces, monorepo là gì, workspaces tutorial, symlink node modules, kiến trúc monorepo, mini app, super app, react native monorepo, npm init, package json, học lập trình, mini app tiếng việt, grab architecture, multi repo vs monorepo`
 
-### Mini-App #2 — Xây mini-app đầu tiên (3:24)
+### Mini-App #2 — Xây mini-app đầu tiên (3:44)
 
 **Tiêu đề:** Sổ đỏ, cửa chính, căn phòng: giải phẫu một mini-app đúng chuẩn | Mini-App A-Z #2
 **Mô tả:**
@@ -743,8 +743,9 @@ Một mini-app đúng chuẩn chỉ cần đúng 3 thứ: package.json (sổ đ�
 1:37 Cửa chính index.ts — 1 dòng, triết lý đóng gói
 1:58 Căn phòng FoodScreen: data tự túc
 2:15 Logic giỏ hàng trong package
-2:41 Căn hộ hoàn thiện (ảnh thật)
-2:56 Tóm tắt & hẹn tập 3
+2:41 Giao diện: nút Thêm + thanh giỏ
+3:00 Căn hộ hoàn thiện (ảnh thật)
+3:16 Tóm tắt & hẹn tập 3
 
 📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
 Tập 1: [LINK MA1] · Tập 3: [LINK MA3]
@@ -776,7 +777,7 @@ Tập 2: [LINK MA2] · Tập 4: [LINK MA4]
 ```
 **Tags:** `standalone app, mini app chạy riêng, expo blank template, safeareaview, dev workflow, team độc lập, micro frontend mobile, react native mini app, app shell, mini app tiếng việt, học react native, kiến trúc grab, chạy độc lập, expo start, mini app từ a đến z`
 
-### Mini-App #4 (CUỐI) — Công thức 4 bước (3:42)
+### Mini-App #4 (CUỐI) — Công thức 4 bước (4:00)
 
 **Tiêu đề:** Thêm mini-app MỚI trong vài phút: công thức 4 bước | Mini-App A-Z #4 (cuối)
 **Mô tả:**
@@ -789,11 +790,12 @@ Tập tốt nghiệp: kiểm chứng công thức bằng cách xây MỚI nguyê
 0:38 CÔNG THỨC 4 BƯỚC (thuộc lòng là vô địch)
 1:02 Bước 1: căn hộ mini-cinema (sổ đỏ + cửa chính)
 1:21 Bước 2: CinemaScreen — 3 phim Việt + reduce
-1:48 Nút "Đặt vé" biến hình (toggle + style 2 lớp)
-2:08 Bước 3: cắm tab cinema vào app chủ
-2:26 Bước 4: bật card Xem phim (2 dòng diff)
-2:46 NGHIỆM THU: 5 tab, 2 vé 185.000đ trên iPhone thật
-3:13 Tốt nghiệp + bài tập mini-booking 🛵
+1:47 Nút "Đặt vé" biến hình (toggle + style 2 lớp)
+2:11 Bước 3a: tab cinema.tsx — 3 dòng
+2:28 Bước 3b: treo biển Tabs.Screen lên tab bar
+2:44 Bước 4: bật card Xem phim (2 dòng diff)
+3:04 NGHIỆM THU: 5 tab, 2 vé 185.000đ trên iPhone thật
+3:31 Tốt nghiệp + bài tập mini-booking 🛵
 
 📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
 Xem từ đầu: [LINK MA1]

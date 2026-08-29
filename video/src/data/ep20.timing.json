@@ -241,7 +241,7 @@
           },
           {
             "from": 2,
-            "to": 0,
+            "to": 1,
             "label": "import bằng tên",
             "sentence": 3
           }
@@ -432,22 +432,22 @@
           "durationInFrames": 118
         },
         {
-          "file": "audio/ep20/scene-08-2-a648c2c0.wav",
+          "file": "audio/ep20/scene-08-2-5330099d.wav",
           "startFrame": 245,
-          "durationInFrames": 202
+          "durationInFrames": 300
         },
         {
           "file": "audio/ep20/scene-08-3-bcb8a0a8.wav",
-          "startFrame": 455,
+          "startFrame": 553,
           "durationInFrames": 216
         },
         {
           "file": "audio/ep20/scene-08-4-a6b878b4.wav",
-          "startFrame": 679,
+          "startFrame": 777,
           "durationInFrames": 144
         }
       ],
-      "durationInFrames": 841
+      "durationInFrames": 939
     },
     {
       "id": "scene-09",
