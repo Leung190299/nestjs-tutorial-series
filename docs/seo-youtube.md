@@ -804,7 +804,7 @@ Xem từ đầu: [LINK MA1]
 ```
 **Tags:** `mini app mới, công thức mini app, thêm tính năng app, react native tabs, expo router tab, toggle button, mini app từ a đến z, monorepo workflow, super app architecture, grab mini app, học react native, kiến trúc mobile, mini app tiếng việt, việtsuper, mini cinema`
 
-### Mini-App #5 (CHỮA BÀI) — mini-booking Đặt xe (4:12)
+### Mini-App #5 (CHỮA BÀI) — mini-booking Đặt xe (4:13)
 
 **Tiêu đề:** Chữa bài tốt nghiệp: mini-app Đặt xe KHÔNG cần tab | Mini-App A-Z #5
 **Phương án khác:** Màn hình ngoài tab bar với Stack route / Single-select + stepper: 2 kỹ thuật state mới
@@ -825,8 +825,8 @@ Kèm 2 kỹ thuật state mới: chọn-MỘT (string | null — so với chọn
 2:12 Stepper km + clamp Math.max/min
 2:33 Stack.Screen: header + title + back "tặng sẵn"
 2:58 Bật card Đặt xe (2 dòng)
-3:13 Nghiệm thu: Ô tô 4 chỗ · 7km = 175.000đ
-3:41 5/6 ô sáng — ô cuối Nạp thẻ dành cho BẠN
+3:14 Nghiệm thu: Ô tô 4 chỗ · 7km = 175.000đ
+3:42 5/6 ô sáng — ô cuối Nạp thẻ dành cho BẠN
 
 📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
 💡 Repo có TAG theo từng tập (miniapp-tap-4, miniapp-tap-5...) — checkout tag để xem đúng code của tập đang xem.

@@ -512,17 +512,17 @@
           "durationInFrames": 101
         },
         {
-          "file": "audio/ep24/scene-09-2-c826ea4c.wav",
+          "file": "audio/ep24/scene-09-2-10c75141.wav",
           "startFrame": 197,
-          "durationInFrames": 120
+          "durationInFrames": 116
         },
         {
-          "file": "audio/ep24/scene-09-3-3f8f9279.wav",
-          "startFrame": 325,
-          "durationInFrames": 99
+          "file": "audio/ep24/scene-09-3-dd7fd3a6.wav",
+          "startFrame": 321,
+          "durationInFrames": 132
         }
       ],
-      "durationInFrames": 442
+      "durationInFrames": 471
     },
     {
       "id": "scene-10",
@@ -594,7 +594,7 @@
       "id": "scene-11",
       "type": "outro",
       "visual": {
-        "title": "Lưới đủ 6 ô — tốt nghiệp thật sự! 🎓",
+        "title": "5/6 ô sáng — tốt nghiệp thật sự! 🎓",
         "summary": [
           {
             "text": "5/6 dịch vụ sáng — ô cuối dành cho bạn",
