@@ -9,6 +9,7 @@
     "@vietsuper/mini-cinema": "1.0.0",
     "@vietsuper/mini-food": "1.0.0",
     "@vietsuper/mini-promo": "1.0.0",
+    "@vietsuper/mini-topup": "1.0.0",
     "@vietsuper/mini-wallet": "1.0.0",
     "expo": "~57.0.17",
     "expo-constants": "~57.0.15",

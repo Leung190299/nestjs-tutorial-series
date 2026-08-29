@@ -1,0 +1,236 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng đến với tập HOÀN THIỆN của series Mini-App từ A đến Z!",
+      "Lưới dịch vụ ViệtSuper còn đúng một ô mờ cuối cùng: Nạp thẻ: và hôm nay chúng ta thắp sáng nốt.",
+      "Mini-app thứ sáu, cũng là lần thứ TƯ công thức bốn bước được kiểm chứng.",
+      "Kèm một kỹ thuật mới đáng giá: MỘT màn hình, HAI trạng thái giao diện: form nạp và màn cảm ơn."
+    ],
+    "visual": {
+      "title": "Hoàn thiện 6/6: mini-topup Nạp thẻ",
+      "subtitle": "Mini-App từ A đến Z · Tập 6 · Hoàn thiện lưới",
+      "badge": "Series Mini-App · Tập hoàn thiện"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Mổ xẻ màn nạp thẻ của mọi ví điện tử, bạn thấy đúng bốn mảnh.",
+      "Chọn nhà mạng: một hàng chip. Chọn mệnh giá: một lưới số tiền.",
+      "Một nút hành động lớn: Nạp ngay: chỉ hiện khi đã chọn ĐỦ cả hai.",
+      "Và mảnh mới hôm nay: sau khi nạp, cả form biến mất, nhường chỗ cho MÀN CẢM ƠN: cùng một màn hình, hai bộ mặt.",
+      "Trạng thái giao diện chuyển bằng một biến boolean: kỹ thuật nhỏ, cảm giác chuyên nghiệp tăng gấp đôi."
+    ],
+    "visual": {
+      "title": "Giải phẫu màn nạp thẻ",
+      "bullets": [
+        {"icon": "📡", "text": "Chip nhà mạng + lưới mệnh giá", "sentence": 1},
+        {"icon": "🔘", "text": "Nút Nạp ngay — chỉ hiện khi chọn ĐỦ", "sentence": 2},
+        {"icon": "🎭", "text": "Một màn hình — hai bộ mặt: form ↔ cảm ơn", "sentence": 3},
+        {"icon": "💡", "text": "Chuyển cảnh bằng 1 biến boolean", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "diagram",
+    "narration": [
+      "Vòng đời của màn hình này là một vòng tròn khép kín.",
+      "Bắt đầu ở trạng thái FORM: người dùng chọn nhà mạng, chọn mệnh giá.",
+      "Bấm Nạp ngay: biến done bật true: giao diện lột xác thành màn THÀNH CÔNG.",
+      "Bấm Nạp thêm: cả ba state được reset về ban đầu: quay lại form sạch sẽ.",
+      "Mô hình vòng trạng thái này gặp ở mọi flow thanh toán, đặt hàng, gửi form trên đời."
+    ],
+    "visual": {
+      "title": "Vòng đời: form → thành công → form",
+      "boxes": [
+        {"id": "form", "label": "Form nạp", "emoji": "📝"},
+        {"id": "done", "label": "done = true", "emoji": "🔁"},
+        {"id": "success", "label": "Thành công", "emoji": "✅"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "Nạp ngay", "sentence": 2},
+        {"from": 1, "to": 2, "label": "lột xác", "sentence": 2},
+        {"from": 2, "to": 0, "label": "Nạp thêm (reset)", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "Dữ liệu của căn phòng: gọn nhất series.",
+      "Ba nhà mạng quốc dân: Viettel, VinaPhone, MobiFone: mỗi anh một màu chấm tròn.",
+      "Sáu mệnh giá quen thuộc: từ mười nghìn đến năm trăm nghìn: chỉ là mảng SỐ thuần, không cần object.",
+      "Dữ liệu đơn giản đến đâu, code phía sau nhẹ đến đó."
+    ],
+    "visual": {
+      "filename": "packages/mini-topup/src/TopupScreen.tsx (dữ liệu)",
+      "language": "tsx",
+      "code": "type Network = { id: string; name: string; emoji: string };\n\nconst networks: Network[] = [\n  { id: 'viettel', name: 'Viettel', emoji: '🔴' },\n  { id: 'vina', name: 'VinaPhone', emoji: '🔵' },\n  { id: 'mobi', name: 'MobiFone', emoji: '🟡' },\n];\n\nconst amounts = [10000, 20000, 50000, 100000, 200000, 500000];",
+      "steps": [
+        {"from": 1, "to": 9, "sentence": 0},
+        {"from": 3, "to": 7, "sentence": 1},
+        {"from": 9, "to": 9, "sentence": 2},
+        {"from": 1, "to": 9, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Bộ não: ba state và một biến suy ra.",
+      "network và amount: hai lựa chọn chọn-một, đều khởi đầu null: bài tập năm vừa học.",
+      "done: công tắc boolean chuyển giữa hai bộ mặt của màn hình.",
+      "Và canPay: KHÔNG phải state: nó SUY RA từ hai state kia: cả hai khác null thì đủ điều kiện nạp.",
+      "Quy tắc đáng khắc cốt: cái gì suy ra được thì đừng lưu thành state: ít state, ít lỗi."
+    ],
+    "visual": {
+      "filename": "TopupScreen.tsx (3 state + 1 biến suy ra)",
+      "language": "tsx",
+      "code": "export function TopupScreen() {\n  const [network, setNetwork] = useState<string | null>(null);\n  const [amount, setAmount] = useState<number | null>(null);\n  const [done, setDone] = useState(false);\n\n  const selectedNetwork = networks.find((n) => n.id === network);\n  const canPay = network !== null && amount !== null;",
+      "steps": [
+        {"from": 1, "to": 7, "sentence": 0},
+        {"from": 2, "to": 3, "sentence": 1},
+        {"from": 4, "to": 4, "sentence": 2},
+        {"from": 7, "to": 7, "sentence": 3},
+        {"from": 7, "to": 7, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Điểm nhấn của tập: màn cảm ơn bằng early return.",
+      "Ngay đầu phần render: if done thì RETURN LUÔN giao diện thành công: code form phía dưới không bao giờ chạy tới.",
+      "Màn thành công: dấu tích to, dòng chữ Nạp thành công, và chi tiết: bao nhiêu tiền, cho thuê bao nhà mạng nào.",
+      "Nút Nạp thêm là chỗ tinh tế nhất: reset CẢ BA state: network, amount, done: quên một cái là form cũ còn dính lựa chọn.",
+      "Early return: cách sạch nhất để một component có nhiều bộ mặt.",
+      "Không thư viện điều hướng, không màn hình mới: chỉ một chữ if."
+    ],
+    "visual": {
+      "filename": "TopupScreen.tsx (màn cảm ơn — early return)",
+      "language": "tsx",
+      "code": "  if (done) {\n    return (\n      <View style={styles.successContainer}>\n        <Text style={styles.successEmoji}>✅</Text>\n        <Text style={styles.successTitle}>Nạp thành công!</Text>\n        <Text style={styles.successDetail}>\n          {amount?.toLocaleString('vi')}đ cho thuê bao {selectedNetwork?.name}\n        </Text>\n        <Pressable\n          style={styles.againButton}\n          onPress={() => {\n            setNetwork(null);\n            setAmount(null);\n            setDone(false);\n          }}\n        >\n          <Text style={styles.againButtonText}>Nạp thêm</Text>\n        </Pressable>\n      </View>\n    );\n  }",
+      "steps": [
+        {"from": 1, "to": 21, "sentence": 0},
+        {"from": 1, "to": 2, "sentence": 1},
+        {"from": 4, "to": 8, "sentence": 2},
+        {"from": 11, "to": 15, "sentence": 3},
+        {"from": 1, "to": 2, "sentence": 4},
+        {"from": 1, "to": 21, "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Thanh dưới đáy cũng biết đổi mặt theo canPay.",
+      "Đủ điều kiện: hiện nút đỏ Nạp ngay kèm số tiền: bấm là done bật true.",
+      "Chưa đủ: chỉ một dòng nhắc lịch sự: chọn nhà mạng và mệnh giá.",
+      "Nút hành động chỉ xuất hiện khi bấm được: người dùng không bao giờ gặp nút chết."
+    ],
+    "visual": {
+      "filename": "TopupScreen.tsx (thanh hành động)",
+      "language": "tsx",
+      "code": "      <View style={styles.bottomBar}>\n        {canPay ? (\n          <Pressable style={styles.payButton} onPress={() => setDone(true)}>\n            <Text style={styles.payButtonText}>Nạp ngay · {amount.toLocaleString('vi')}đ</Text>\n          </Pressable>\n        ) : (\n          <Text style={styles.bottomText}>Chọn nhà mạng và mệnh giá</Text>\n        )}\n      </View>",
+      "steps": [
+        {"from": 1, "to": 9, "sentence": 0},
+        {"from": 2, "to": 5, "sentence": 1},
+        {"from": 6, "to": 8, "sentence": 2},
+        {"from": 1, "to": 9, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Cắm vào app chủ: lần thứ tư, chắc bạn đọc thuộc lòng cùng mình được rồi.",
+      "File topup.tsx: ba dòng import và export.",
+      "Stack.Screen tên topup trong layout gốc: header Nạp thẻ, nút back Trang chủ: y đúc bài Đặt xe tập trước.",
+      "Card Nạp thẻ ở lưới nhận route: và đó là mảnh ghép CUỐI CÙNG."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/app/topup.tsx — TOÀN BỘ FILE",
+      "language": "tsx",
+      "code": "import { TopupScreen } from '@vietsuper/mini-topup';\n\nexport default TopupScreen;",
+      "steps": [
+        {"from": 1, "to": 3, "sentence": 0},
+        {"from": 1, "to": 3, "sentence": 1},
+        {"from": 1, "to": 3, "sentence": 2},
+        {"from": 1, "to": 3, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "phone",
+    "narration": [
+      "Nghiệm thu lần cuối. Chọn Viettel, chọn một trăm nghìn: hai lựa chọn viền đỏ, nút Nạp ngay hiện ra đúng hẹn.",
+      "Bấm nạp... và màn hình lột xác: dấu tích xanh, Nạp thành công, một trăm nghìn cho thuê bao Viettel.",
+      "Bấm Nạp thêm: form trở lại sạch sẽ, sẵn sàng lượt mới.",
+      "Và giây phút cả series chờ đợi: quay về trang chủ: SÁU TRÊN SÁU ô dịch vụ SÁNG ĐÈN.",
+      "Không còn một ô mờ nào: ViệtSuper hoàn thiện, sáu căn hộ mini-app cùng chung sống dưới một mái nhà."
+    ],
+    "visual": {
+      "title": "Khoảnh khắc 6/6 🎆",
+      "screens": [
+        {"src": "screens/ep25/topup-selected.png", "sentence": 0},
+        {"src": "screens/ep25/topup-success.png", "sentence": 1},
+        {"src": "screens/ep25/home-6-6.png", "sentence": 3}
+      ],
+      "bullets": [
+        {"icon": "🔴", "text": "Viettel + 100.000đ → nút Nạp ngay hiện", "sentence": 0},
+        {"icon": "✅", "text": "Lột xác: màn Nạp thành công", "sentence": 1},
+        {"icon": "🎆", "text": "TRANG CHỦ: 6/6 Ô SÁNG ĐÈN", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "concept",
+    "narration": [
+      "Nhìn lại toàn cảnh vương quốc bạn vừa xây xong.",
+      "Sáu căn hộ trong packages: food, wallet, promo, cinema, booking, topup: mỗi căn một package độc lập.",
+      "Hai mô hình cắm: bốn tính năng hằng ngày lên thanh tab, hai tính năng còn lại đi cửa Stack.",
+      "Một app chủ gần như rỗng: chỉ toàn biển chỉ đường ba dòng.",
+      "Đây không phải app đồ chơi nữa: đây là kiến trúc thu nhỏ của một super app thật."
+    ],
+    "visual": {
+      "title": "Toàn cảnh vương quốc ViệtSuper 🏰",
+      "bullets": [
+        {"icon": "🏠", "text": "6 căn hộ độc lập trong packages/", "sentence": 1},
+        {"icon": "🛗", "text": "4 tính năng lên tab · 2 đi cửa Stack", "sentence": 2},
+        {"icon": "🪧", "text": "App chủ rỗng — toàn biển 3 dòng", "sentence": 3},
+        {"icon": "🏰", "text": "Kiến trúc thu nhỏ của super app thật", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "outro",
+    "narration": [
+      "Vậy là series Mini-App từ A đến Z khép lại TRỌN VẸN: từ thư mục trống đến sáu mini-app sáng đèn.",
+      "Công thức bốn bước đã chạy bốn lần trước mắt bạn: giờ nó là của bạn.",
+      "Repo có tag từng tập: miniapp-tap-sáu là trạng thái cuối cùng, đầy đủ nhất.",
+      "Cảm ơn bạn: người đã gửi yêu cầu mở ra cả series này, và cảm ơn mọi khán giả đồng hành.",
+      "Comment chủ đề bạn muốn học tiếp: series sau đang chờ được đặt tên. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Trọn vẹn từ A đến Z! 🎓🏆",
+      "summary": [
+        {"text": "Thư mục trống → 6 mini-app sáng đèn", "sentence": 0},
+        {"text": "Công thức 4 bước × 4 lần — giờ là của bạn", "sentence": 1},
+        {"text": "Tag miniapp-tap-6 = trạng thái đầy đủ nhất", "sentence": 2}
+      ],
+      "next": "Comment đặt tên series tiếp theo! 💬🎉"
+    }
+  }
+]

@@ -27,6 +27,7 @@ import ep21 from './data/ep21.timing.json';
 import ep22 from './data/ep22.timing.json';
 import ep23 from './data/ep23.timing.json';
 import ep24 from './data/ep24.timing.json';
+import ep25 from './data/ep25.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -54,6 +55,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode22', timing: ep22 as unknown as EpisodeTiming},
   {id: 'Episode23', timing: ep23 as unknown as EpisodeTiming},
   {id: 'Episode24', timing: ep24 as unknown as EpisodeTiming},
+  {id: 'Episode25', timing: ep25 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -329,6 +331,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/ep24/booking-selected.png',
       badgeEmoji: '🛵',
+      seriesTag: 'Mini-App từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb25',
+    props: {
+      badge: 'MINI-APP 6 · HOÀN THIỆN',
+      line1: 'SÁNG ĐÈN',
+      line2: '6/6 Ô',
+      subtitle: 'Nạp thẻ · 2 trạng thái giao diện',
+      variant: 'shot',
+      image: 'screens/ep25/topup-success.png',
+      badgeEmoji: '📱',
       seriesTag: 'Mini-App từ A đến Z 🇻🇳',
     },
   },

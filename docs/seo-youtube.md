@@ -835,6 +835,37 @@ Kèm 2 kỹ thuật state mới: chọn-MỘT (string | null — so với chọn
 ```
 **Tags:** `stack navigation, expo router stack, màn hình ngoài tab, single select, stepper react native, math clamp, headerbacktitle, đặt xe app, grab clone, mini app, react native tiếng việt, học react native, mini app từ a đến z, chữa bài tập, việtsuper`
 
+### Mini-App #6 (HOÀN THIỆN) — mini-topup Nạp thẻ (3:46)
+
+**Tiêu đề:** Sáng đèn 6/6: mini-app cuối cùng + màn "Nạp thành công" | Mini-App A-Z #6
+**Phương án khác:** Một màn hình, hai bộ mặt: early return + reset state / Hoàn thiện super app ViệtSuper: khoảnh khắc 6/6
+
+**Mô tả:**
+```
+Tập HOÀN THIỆN: thắp sáng ô cuối cùng của lưới dịch vụ — mini-topup Nạp thẻ 📱. Công thức 4 bước chạy lần thứ TƯ, kèm kỹ thuật mới đáng giá: MỘT màn hình – HAI trạng thái giao diện (form nạp ↔ màn "Nạp thành công") chỉ bằng một biến boolean + early return, và quy tắc vàng "cái gì suy ra được thì đừng lưu thành state".
+
+Cuối tập: khoảnh khắc cả series chờ đợi — trang chủ ViệtSuper SÁNG ĐỦ 6/6 Ô. 🎆
+
+⏱️ NỘI DUNG:
+0:00 Tập hoàn thiện — ô cuối cùng
+0:17 Giải phẫu màn nạp thẻ (một màn hình, hai bộ mặt)
+0:38 Vòng đời: form → thành công → form
+0:58 Dữ liệu: 3 nhà mạng + 6 mệnh giá
+1:14 3 state + canPay (biến SUY RA, không phải state!)
+1:35 Điểm nhấn: màn cảm ơn bằng early return + reset
+2:04 Thanh hành động đổi mặt theo canPay
+2:19 Cắm vào app chủ — lần thứ 4, 3 dòng
+2:36 KHOẢNH KHẮC 6/6: trang chủ sáng đèn toàn bộ 🎆
+3:01 Toàn cảnh vương quốc: 6 căn hộ, 2 mô hình cắm
+3:22 Lời kết trọn vẹn series
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+💡 Tag miniapp-tap-6 = trạng thái đầy đủ nhất của repo.
+💬 Comment đặt tên series tiếp theo!
+#miniapp #reactnative #superapp #uistate #laptrinh
+```
+**Tags:** `nạp thẻ điện thoại app, early return react, ui state, conditional rendering, derived state, reset state, mini app cuối, super app hoàn chỉnh, react native tiếng việt, học react native, mini app từ a đến z, việtsuper, form success screen, một màn hình hai trạng thái, grab clone`
+
 ## Thumbnail
 
 Đã render sẵn tại `video/out/thumbs/ep0X-thumb.png` (1280×720, <2MB, chuẩn YouTube). Muốn sửa chữ/bố cục: sửa mảng `thumbnails` trong `video/src/Root.tsx` hoặc component `video/src/Thumbnail.tsx`, rồi chạy `npx remotion still Thumb0X out/thumbs/ep0X-thumb.png`.
