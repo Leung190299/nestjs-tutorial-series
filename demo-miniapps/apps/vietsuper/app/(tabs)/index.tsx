@@ -5,14 +5,14 @@ type Service = {
   id: string;
   label: string;
   emoji: string;
-  route?: '/food' | '/wallet' | '/promo' | '/cinema';
+  route?: '/food' | '/wallet' | '/promo' | '/cinema' | '/booking';
 };
 
 const services: Service[] = [
   { id: 'food', label: 'Đồ ăn', emoji: '🍜', route: '/food' },
   { id: 'wallet', label: 'Ví tiền', emoji: '💰', route: '/wallet' },
   { id: 'promo', label: 'Ưu đãi', emoji: '🎁', route: '/promo' },
-  { id: 'ride', label: 'Đặt xe', emoji: '🛵' },
+  { id: 'ride', label: 'Đặt xe', emoji: '🛵', route: '/booking' },
   { id: 'movie', label: 'Xem phim', emoji: '🎬', route: '/cinema' },
   { id: 'topup', label: 'Nạp thẻ', emoji: '📱' },
 ];
