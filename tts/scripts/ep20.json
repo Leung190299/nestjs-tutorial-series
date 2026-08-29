@@ -1,0 +1,346 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng đến với series hoàn toàn mới: Mini-App từ A đến Z!",
+      "Trong series này, chúng ta mổ xẻ ĐẾN NƠI ĐẾN CHỐN kiến trúc mà Grab, Shopee, WeChat đang dùng: mỗi tính năng là một app riêng biệt, gộp chung thành một app.",
+      "Không lướt nhanh nữa: mỗi tập một bước, mỗi dòng config đều được giải thích tại sao nó ở đó.",
+      "Tập một hôm nay: nền móng của tất cả: monorepo và workspaces, bắt đầu từ một thư mục trống trơn."
+    ],
+    "visual": {
+      "title": "Monorepo từ con số 0",
+      "subtitle": "Mini-App từ A đến Z · Tập 1",
+      "badge": "Series Mini-App · Nền móng"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Trước khi xây, phải hiểu vì sao cần. Tưởng tượng công ty bạn có ba tính năng: đồ ăn, ví tiền, ưu đãi.",
+      "Cách quen thuộc: mỗi tính năng một repo git riêng, nằm rải rác ba nơi.",
+      "Nghe ổn, cho đến ngày tính năng ví cần dùng chung một component với đồ ăn: bạn copy code qua lại, và hai bản lệch nhau dần.",
+      "Sửa một lỗi chung? Sửa ba nơi, tạo ba pull request, đợi ba lần duyệt.",
+      "Mô hình nhà-rải-rác-khắp-phố này gọi là multi-repo, và nó đuối dần khi tính năng nhân lên."
+    ],
+    "visual": {
+      "title": "Nỗi khổ của multi-repo",
+      "bullets": [
+        {
+          "icon": "🏘️",
+          "text": "Mỗi tính năng một repo, rải rác khắp nơi",
+          "sentence": 1
+        },
+        {
+          "icon": "📋",
+          "text": "Dùng chung code = copy dán, lệch nhau dần",
+          "sentence": 2
+        },
+        {
+          "icon": "🔁",
+          "text": "Sửa 1 lỗi chung = sửa N nơi, N lần duyệt",
+          "sentence": 3
+        },
+        {
+          "icon": "📉",
+          "text": "Càng nhiều tính năng càng đuối",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "Monorepo lật ngược lại: TẤT CẢ dọn về sống chung MỘT repo, nhưng mỗi tính năng vẫn có phòng riêng.",
+      "Ví von cho dễ nhớ: thay vì mỗi nhà một góc phố, cả công ty chuyển vào một khu chung cư.",
+      "Mỗi tính năng một căn hộ: cửa khóa riêng, đồ đạc riêng, sổ đỏ riêng.",
+      "Nhưng chung một địa chỉ, chung thang máy, chung ban quản lý: cần gặp nhau chỉ mất một bước chân.",
+      "Google, Meta, và chính Grab đều tổ chức code kiểu này."
+    ],
+    "visual": {
+      "title": "Monorepo = khu chung cư 🏙️",
+      "bullets": [
+        {
+          "icon": "🏙️",
+          "text": "Tất cả về một khu — vẫn phòng ai nấy ở",
+          "sentence": 1
+        },
+        {
+          "icon": "🏠",
+          "text": "Mỗi tính năng một căn hộ có sổ đỏ riêng",
+          "sentence": 2
+        },
+        {
+          "icon": "🛗",
+          "text": "Chung địa chỉ, chung thang máy",
+          "sentence": 3
+        },
+        {
+          "icon": "🏆",
+          "text": "Google, Meta, Grab đều dùng",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "concept",
+    "narration": [
+      "Vậy ai là ban quản lý khu chung cư? Chính là npm workspaces: tính năng CÓ SẴN trong npm, không cần cài thêm bất cứ thứ gì.",
+      "Bạn chỉ cần khai báo trong package.json ở gốc: những thư mục nào là thành viên.",
+      "Từ đó npm lo hết: cài dependency một lần cho cả khu, và quan trọng nhất: NỐI các thành viên lại với nhau.",
+      "Nối nghĩa là: căn hộ A import được căn hộ B bằng TÊN, y như import một thư viện tải trên mạng.",
+      "Không còn những đường dẫn tương đối chấm chấm xẹt chấm chấm xẹt dài dằng dặc nữa."
+    ],
+    "visual": {
+      "title": "npm workspaces = ban quản lý",
+      "bullets": [
+        {
+          "icon": "📦",
+          "text": "Có sẵn trong npm — không cài gì thêm",
+          "sentence": 0
+        },
+        {
+          "icon": "🗂️",
+          "text": "Khai thành viên ở package.json gốc",
+          "sentence": 1
+        },
+        {
+          "icon": "🔗",
+          "text": "npm tự NỐI: import nhau bằng TÊN",
+          "sentence": 3
+        },
+        {
+          "icon": "🚫",
+          "text": "Hết cảnh ../../.. dài dằng dặc",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "diagram",
+    "narration": [
+      "Cấu trúc chuẩn của một monorepo mini-app nhìn như thế này.",
+      "Trên cùng: package.json gốc: ban quản lý, khai báo hai khu packages và apps.",
+      "Khu packages chứa các căn hộ tính năng: chính là những mini-app của chúng ta.",
+      "Khu apps chứa những app hoàn chỉnh: chúng import các căn hộ theo tên để lắp thành sản phẩm.",
+      "Phân biệt rõ nhé: packages là LINH KIỆN, apps là SẢN PHẨM lắp từ linh kiện."
+    ],
+    "visual": {
+      "title": "Hai khu của monorepo",
+      "boxes": [
+        {
+          "id": "root",
+          "label": "package.json gốc",
+          "emoji": "📋"
+        },
+        {
+          "id": "packages",
+          "label": "packages/*",
+          "emoji": "🏠"
+        },
+        {
+          "id": "apps",
+          "label": "apps/*",
+          "emoji": "📱"
+        }
+      ],
+      "flows": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "quản lý",
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "cung cấp linh kiện",
+          "sentence": 3
+        },
+        {
+          "from": 2,
+          "to": 1,
+          "label": "import bằng tên",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "terminal",
+    "narration": [
+      "Bắt tay làm từ con số không đúng nghĩa: một thư mục trống.",
+      "mkdir demo-miniapps, đi vào trong, rồi npm init trừ y để có package.json khởi đầu.",
+      "Tạo sẵn hai khu đất: mkdir packages và apps.",
+      "Vậy là khung khu chung cư đã dựng: một sổ cái và hai khu đất trống.",
+      "Giờ mở sổ cái ra khai báo luật chơi."
+    ],
+    "visual": {
+      "title": "Dựng khung từ thư mục trống",
+      "commands": [
+        {
+          "cmd": "mkdir demo-miniapps && cd demo-miniapps",
+          "output": "",
+          "sentence": 1
+        },
+        {
+          "cmd": "npm init -y",
+          "output": "Wrote to demo-miniapps/package.json",
+          "sentence": 1
+        },
+        {
+          "cmd": "mkdir packages apps",
+          "output": "packages/  apps/  ← hai khu đất sẵn sàng",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Đây là TOÀN BỘ package.json ở gốc sau khi chỉnh: tám dòng, và dòng nào cũng có lý do tồn tại.",
+      "name demo-miniapps: tên khu chung cư, thuần để nhận diện.",
+      "private true: dòng QUAN TRỌNG nhất mà hay bị bỏ qua: gốc monorepo không bao giờ được publish lên npm, true là để npm chặn tay bạn publish nhầm.",
+      "Và ngôi sao của file: workspaces: mảng các đường tìm thành viên.",
+      "packages xẹt sao nghĩa là MỌI thư mục con trong packages đều tự động là thành viên: mai này thêm căn hộ mới, KHÔNG phải sửa file này.",
+      "apps xẹt sao y hệt cho khu apps. Tám dòng: xong toàn bộ hạ tầng."
+    ],
+    "visual": {
+      "filename": "demo-miniapps/package.json — TOÀN BỘ FILE",
+      "language": "json",
+      "code": "{\n  \"name\": \"demo-miniapps\",\n  \"private\": true,\n  \"workspaces\": [\n    \"packages/*\",\n    \"apps/*\"\n  ]\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 2
+        },
+        {
+          "from": 4,
+          "to": 7,
+          "sentence": 3
+        },
+        {
+          "from": 5,
+          "to": 5,
+          "sentence": 4
+        },
+        {
+          "from": 6,
+          "to": 6,
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "terminal",
+    "narration": [
+      "Giờ xem ban quản lý làm việc thật. Chạy npm install ở gốc.",
+      "Rồi soi vào node_modules, thư mục a còng vietsuper: bạn thấy gì đặc biệt?",
+      "Nhìn trước một chút, khi khu đã có đủ các căn hộ của những tập sau: các SYMLINK: mũi tên trỏ thẳng về packages: mini-food ở đây chỉ là LỐI ĐI TẮT đến căn hộ thật.",
+      "Đây chính là phép nối của workspaces: khi code import a còng vietsuper trên mini-food, node đi theo lối tắt này về đúng căn hộ.",
+      "Không copy, không publish: sửa code trong căn hộ là MỌI nơi đang dùng nhận được ngay lập tức."
+    ],
+    "visual": {
+      "title": "Soi phép nối: symlink",
+      "commands": [
+        {
+          "cmd": "npm install",
+          "output": "added 599 packages in 12s",
+          "sentence": 0
+        },
+        {
+          "cmd": "ls -la node_modules/@vietsuper/",
+          "output": "mini-food   -> ../../packages/mini-food\nmini-wallet -> ../../packages/mini-wallet\nmini-promo  -> ../../packages/mini-promo   ← lối đi tắt!",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "concept",
+    "narration": [
+      "Trước khi hạ màn, ghi nhớ ba quy tắc vàng của khu chung cư.",
+      "Một: mọi lệnh npm install chạy ở GỐC: ban quản lý cài cho cả khu, không cài lẻ tẻ trong từng phòng.",
+      "Hai: các package import nhau bằng TÊN, tuyệt đối không dùng đường dẫn tương đối xuyên căn hộ.",
+      "Ba: gốc là ban quản lý, không chứa code tính năng: code sống trong packages và apps.",
+      "Thuộc ba điều này, bạn tránh được chín mươi phần trăm lỗi monorepo của người mới."
+    ],
+    "visual": {
+      "title": "3 quy tắc vàng 🥇",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "npm install luôn chạy ở GỐC",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Import bằng TÊN — cấm ../ xuyên căn hộ",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Gốc không chứa code tính năng",
+          "sentence": 3
+        },
+        {
+          "icon": "🛡️",
+          "text": "Tránh được 90% lỗi monorepo người mới",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: monorepo là khu chung cư cho code, workspaces là ban quản lý, và symlink là phép nối các căn hộ.",
+      "Bạn đã tự tay dựng nền móng từ một thư mục trống, bằng đúng tám dòng package.json.",
+      "Bài tập nhỏ: chạy npm ls xem npm liệt kê cây thành viên khu chung cư của bạn thế nào nhé.",
+      "Tập sau: xây căn hộ ĐẦU TIÊN đúng chuẩn: mini-app Đồ ăn, với sổ đỏ, cửa chính, và căn phòng bên trong. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {
+          "text": "Monorepo = khu chung cư · workspaces = ban quản lý",
+          "sentence": 0
+        },
+        {
+          "text": "Symlink nối các package — import bằng TÊN",
+          "sentence": 0
+        },
+        {
+          "text": "8 dòng package.json = xong nền móng",
+          "sentence": 1
+        }
+      ],
+      "next": "Tập 2: Xây mini-app đầu tiên — mini-food 🍜"
+    }
+  }
+]

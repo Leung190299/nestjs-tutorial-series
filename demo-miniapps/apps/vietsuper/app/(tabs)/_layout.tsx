@@ -24,6 +24,10 @@ export default function TabLayout() {
         name="promo"
         options={{ title: 'Ưu đãi', tabBarIcon: tabIcon('🎁') }}
       />
+      <Tabs.Screen
+        name="cinema"
+        options={{ title: 'Xem phim', tabBarIcon: tabIcon('🎬') }}
+      />
     </Tabs>
   );
 }

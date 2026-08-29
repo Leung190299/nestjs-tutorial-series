@@ -1,0 +1,355 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại series Mini-App từ A đến Z!",
+      "Tập trước ta dựng xong khu chung cư trống. Hôm nay: xây căn hộ ĐẦU TIÊN đúng chuẩn, từ móng đến nóc.",
+      "Căn hộ mang tên mini-food: mini-app Đặt đồ ăn, và sau tập này bạn sẽ có công thức xây MỌI mini-app khác."
+    ],
+    "visual": {
+      "title": "Xây mini-app đầu tiên",
+      "subtitle": "Mini-App từ A đến Z · Tập 2 · mini-food",
+      "badge": "Series Mini-App"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Một mini-app đúng chuẩn cần đúng BA thứ, không hơn.",
+      "Thứ nhất: SỔ ĐỎ: file package.json khai danh tính: tên gì, cửa vào đâu, phụ thuộc gì.",
+      "Thứ hai: CỬA CHÍNH: file index.ts: nơi duy nhất người ngoài bước vào căn hộ.",
+      "Thứ ba: CĂN PHÒNG: code màn hình thật sự, ở đây là FoodScreen.",
+      "Cầm ba thứ này, bạn nhân bản ra mini-wallet, mini-promo, hay bất cứ mini nào khác."
+    ],
+    "visual": {
+      "title": "Giải phẫu một mini-app",
+      "bullets": [
+        {
+          "icon": "📋",
+          "text": "Sổ đỏ — package.json: danh tính",
+          "sentence": 1
+        },
+        {
+          "icon": "🚪",
+          "text": "Cửa chính — index.ts: lối vào duy nhất",
+          "sentence": 2
+        },
+        {
+          "icon": "🛋️",
+          "text": "Căn phòng — FoodScreen: màn hình thật",
+          "sentence": 3
+        },
+        {
+          "icon": "♻️",
+          "text": "Công thức nhân bản cho mọi mini khác",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Sổ đỏ trước: package.json của mini-food: chín dòng, soi từng dòng một.",
+      "name: a còng vietsuper xẹt mini-food. Phần a còng vietsuper gọi là SCOPE: họ của cả gia đình package, gom mọi mini của công ty về một họ, tránh trùng tên với thiên hạ.",
+      "version một chấm không chấm không: căn hộ cũng cần số nhà để theo dõi đời sau.",
+      "main trỏ src index: khai báo CỬA CHÍNH: ai import package này, node sẽ mở đúng file đó.",
+      "Và phần dễ sai nhất: peerDependencies thay vì dependencies: khác nhau một chữ, khác nhau một trời.",
+      "Khai react ở peer nghĩa là: căn hộ CẦN react, nhưng KHÔNG tự mang theo: nó dùng chung bản react của tòa nhà."
+    ],
+    "visual": {
+      "filename": "packages/mini-food/package.json — TOÀN BỘ FILE",
+      "language": "json",
+      "code": "{\n  \"name\": \"@vietsuper/mini-food\",\n  \"version\": \"1.0.0\",\n  \"main\": \"src/index.ts\",\n  \"peerDependencies\": {\n    \"react\": \"*\",\n    \"react-native\": \"*\"\n  }\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 2
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 3
+        },
+        {
+          "from": 5,
+          "to": 8,
+          "sentence": 4
+        },
+        {
+          "from": 6,
+          "to": 7,
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "concept",
+    "narration": [
+      "Dừng lại một phút cho peerDependencies, vì đây là chỗ người mới hay sập nhất.",
+      "Nếu khai react ở dependencies thường, căn hộ sẽ TỰ MANG một bản react riêng vào.",
+      "Khi đó app chủ có react của nó, căn hộ có react của mình: HAI bản react cùng chạy: và React Native sập ngay với lỗi hooks nổi tiếng khó hiểu.",
+      "Ví von thế này: căn hộ nên xài điện nước của tòa nhà, chứ đừng khiêng máy phát điện riêng vào phòng.",
+      "peerDependencies chính là dòng chữ: tôi cần điện, nhưng tôi dùng điện chung."
+    ],
+    "visual": {
+      "title": "Vì sao PEER chứ không phải dependencies?",
+      "bullets": [
+        {
+          "icon": "⚡",
+          "text": "dependencies = tự khiêng máy phát điện vào",
+          "sentence": 1
+        },
+        {
+          "icon": "💥",
+          "text": "2 bản React cùng chạy = sập (lỗi hooks)",
+          "sentence": 2
+        },
+        {
+          "icon": "🏙️",
+          "text": "peer = dùng điện nước chung của tòa nhà",
+          "sentence": 3
+        },
+        {
+          "icon": "✍️",
+          "text": "\"Tôi cần điện — nhưng dùng điện chung\"",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Cửa chính của căn hộ: file index.ts. Chuẩn bị tinh thần nhé: nó chỉ có MỘT dòng.",
+      "Export FoodScreen từ file FoodScreen: hết.",
+      "Nhưng một dòng này mang triết lý lớn: người ngoài CHỈ thấy những gì bạn export ở đây: mọi thứ khác trong căn hộ là chuyện nội bộ.",
+      "Mai này căn hộ có thêm hằng số, hàm phụ, component con... không export là không ai đụng được: đó gọi là đóng gói."
+    ],
+    "visual": {
+      "filename": "packages/mini-food/src/index.ts — TOÀN BỘ FILE",
+      "language": "tsx",
+      "code": "export { FoodScreen } from './FoodScreen';",
+      "steps": [
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Giờ vào căn phòng: FoodScreen. Phần một: dữ liệu thực đơn.",
+      "Kiểu MenuItem và bốn món quốc dân: phở bò, cơm tấm, bánh mì, trà sữa, giá cả rõ ràng.",
+      "Chú ý: dữ liệu nằm TRONG package: căn hộ tự túc đồ đạc của mình, không xin từ app chủ.",
+      "Đó là điều kiện để nó sống độc lập được ở tập sau."
+    ],
+    "visual": {
+      "filename": "packages/mini-food/src/FoodScreen.tsx (dữ liệu)",
+      "language": "tsx",
+      "code": "type MenuItem = { id: string; name: string; emoji: string; price: number };\n\nconst menu: MenuItem[] = [\n  { id: 'pho-bo', name: 'Phở bò', emoji: '🍜', price: 45000 },\n  { id: 'com-tam', name: 'Cơm tấm', emoji: '🍚', price: 40000 },\n  { id: 'banh-mi', name: 'Bánh mì', emoji: '🥖', price: 25000 },\n  { id: 'tra-sua', name: 'Trà sữa', emoji: '🧋', price: 30000 },\n];",
+      "steps": [
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Phần hai: bộ não của căn phòng.",
+      "Để ý dòng đầu: export FUNCTION FoodScreen, không phải export default: vì cửa chính index.ts export theo TÊN.",
+      "cart là mảng id các món đã chọn trong useState: trí nhớ của màn hình.",
+      "total dùng reduce đi qua giỏ, tra giá từng món trong menu, cộng dồn: cart đổi là total tự tính lại.",
+      "Toàn bộ logic sống TRONG package: app chủ sau này không phải viết một dòng nghiệp vụ nào."
+    ],
+    "visual": {
+      "filename": "packages/mini-food/src/FoodScreen.tsx (logic)",
+      "language": "tsx",
+      "code": "export function FoodScreen() {\n  const [cart, setCart] = useState<string[]>([]);\n\n  const total = cart.reduce((sum, id) => {\n    const item = menu.find((m) => m.id === id);\n    return sum + (item?.price ?? 0);\n  }, 0);",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 1
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 2
+        },
+        {
+          "from": 4,
+          "to": 7,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07b",
+    "type": "code",
+    "narration": [
+      "Phần ba của căn phòng: giao diện, và đây là hai chi tiết đáng soi nhất.",
+      "Nút cộng Thêm: setCart với dấu ba chấm tạo MẢNG MỚI gồm giỏ cũ cộng món mới: đúng luật bất biến của React.",
+      "Thanh giỏ dưới đáy: đếm số món bằng cart.length, và tổng tiền format kiểu Việt bằng toLocaleString vi.",
+      "Data, logic, giao diện: căn phòng đủ ba lớp, tự túc trọn vẹn."
+    ],
+    "visual": {
+      "filename": "packages/mini-food/src/FoodScreen.tsx (giao diện)",
+      "language": "tsx",
+      "code": "            <Pressable style={styles.addButton} onPress={() => setCart((c) => [...c, item.id])}>\n              <Text style={styles.addButtonText}>+ Thêm</Text>\n            </Pressable>\n          </View>\n        )}\n      />\n      <View style={styles.bottomBar}>\n        <Text style={styles.bottomText}>🛒 {cart.length} món</Text>\n        <Text style={styles.bottomTotal}>{total.toLocaleString('vi')}đ</Text>\n      </View>",
+      "steps": [
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 1
+        },
+        {
+          "from": 7,
+          "to": 10,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "phone",
+    "narration": [
+      "Căn hộ hoàn thiện trông thế nào? Đây, ảnh chụp thật.",
+      "Thực đơn bốn món, nút thêm đỏ rực, thanh giỏ hàng tối màu dưới đáy.",
+      "Điều đáng nói: TOÀN BỘ những gì bạn thấy được đóng gói trong packages mini-food.",
+      "Ảnh này chụp từ app chạy độc lập đấy: nhưng khoan, đó là chuyện của tập sau."
+    ],
+    "visual": {
+      "title": "Căn hộ mini-food hoàn thiện 🍜",
+      "screens": [
+        {
+          "src": "screens/ep19/standalone-0.png",
+          "sentence": 0
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "📦",
+          "text": "Tất cả đóng gói trong packages/mini-food",
+          "sentence": 2
+        },
+        {
+          "icon": "🧠",
+          "text": "Data + logic + UI: căn hộ tự túc",
+          "sentence": 2
+        },
+        {
+          "icon": "🤫",
+          "text": "Ảnh từ app chạy độc lập — hồi sau sẽ rõ",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "outro",
+    "narration": [
+      "Tóm lại, một mini-app chuẩn gồm: sổ đỏ package.json với scope và peerDependencies, cửa chính index.ts, và căn phòng tự túc data lẫn logic.",
+      "Khắc cốt ghi tâm: react ở PEER, không ở dependencies: một chữ tránh cả cơn ác mộng hai bản React.",
+      "Bài tập nhỏ: tự xây căn hộ mini-wallet theo đúng ba bước này: sổ đỏ, cửa chính, căn phòng.",
+      "Tập sau, khoảnh khắc hồi hộp nhất: cho căn hộ RA Ở RIÊNG: mini-food chạy một mình không cần app chủ. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {
+          "text": "Sổ đỏ + cửa chính + căn phòng = 1 mini-app",
+          "sentence": 0
+        },
+        {
+          "text": "react ở PEER — tránh ác mộng 2 bản React",
+          "sentence": 1
+        },
+        {
+          "text": "Căn hộ tự túc data + logic + UI",
+          "sentence": 0
+        }
+      ],
+      "next": "Tập 3: Cho mini-app ra ở riêng — chạy độc lập 🚀"
+    }
+  }
+]

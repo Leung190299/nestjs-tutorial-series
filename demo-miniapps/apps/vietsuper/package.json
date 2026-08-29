@@ -5,6 +5,7 @@
   "dependencies": {
     "@expo/ui": "~57.0.14",
     "@react-native-async-storage/async-storage": "2.2.0",
+    "@vietsuper/mini-cinema": "1.0.0",
     "@vietsuper/mini-food": "1.0.0",
     "@vietsuper/mini-promo": "1.0.0",
     "@vietsuper/mini-wallet": "1.0.0",

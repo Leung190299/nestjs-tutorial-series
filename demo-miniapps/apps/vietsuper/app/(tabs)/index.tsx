@@ -5,7 +5,7 @@ type Service = {
   id: string;
   label: string;
   emoji: string;
-  route?: '/food' | '/wallet' | '/promo';
+  route?: '/food' | '/wallet' | '/promo' | '/cinema';
 };
 
 const services: Service[] = [
@@ -13,7 +13,7 @@ const services: Service[] = [
   { id: 'wallet', label: 'Ví tiền', emoji: '💰', route: '/wallet' },
   { id: 'promo', label: 'Ưu đãi', emoji: '🎁', route: '/promo' },
   { id: 'ride', label: 'Đặt xe', emoji: '🛵' },
-  { id: 'movie', label: 'Xem phim', emoji: '🎬' },
+  { id: 'movie', label: 'Xem phim', emoji: '🎬', route: '/cinema' },
   { id: 'topup', label: 'Nạp thẻ', emoji: '📱' },
 ];
 
