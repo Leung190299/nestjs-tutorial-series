@@ -1,0 +1,644 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Chữa bài: mini-booking Đặt xe",
+        "subtitle": "Mini-App từ A đến Z · Tập 5 · Chữa bài tốt nghiệp",
+        "badge": "Series Mini-App · Tập chữa bài"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep24/scene-01-0-29f39080.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep24/scene-01-1-cc47ffe2.wav",
+          "startFrame": 148,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep24/scene-01-2-6641cd1b.wav",
+          "startFrame": 322,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep24/scene-01-3-d7aebb02.wav",
+          "startFrame": 479,
+          "durationInFrames": 137
+        }
+      ],
+      "durationInFrames": 634
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Tab thứ 6? KHÔNG — và đây là lý do",
+        "bullets": [
+          {
+            "icon": "😵",
+            "text": "6+ tab = chữ bé, bấm trượt",
+            "sentence": 1
+          },
+          {
+            "icon": "🟢",
+            "text": "Grab: chục dịch vụ — tab bar chỉ vài nút",
+            "sentence": 2
+          },
+          {
+            "icon": "🚪",
+            "text": "Giải pháp: màn Stack + nút back",
+            "sentence": 3
+          },
+          {
+            "icon": "🛗",
+            "text": "Không phải mini nào cũng cần chỗ trên thang máy",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep24/scene-02-0-472df174.wav",
+          "startFrame": 0,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep24/scene-02-1-b1686136.wav",
+          "startFrame": 160,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep24/scene-02-2-b0ab8489.wav",
+          "startFrame": 296,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep24/scene-02-3-ec7a0b23.wav",
+          "startFrame": 477,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep24/scene-02-4-7d645f3d.wav",
+          "startFrame": 646,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 780
+    },
+    {
+      "id": "scene-03",
+      "type": "diagram",
+      "visual": {
+        "title": "Đường đi: push lên — pop về",
+        "boxes": [
+          {
+            "id": "home",
+            "label": "Trang chủ (tabs)",
+            "emoji": "🏠"
+          },
+          {
+            "id": "stack",
+            "label": "Stack",
+            "emoji": "🗂️"
+          },
+          {
+            "id": "booking",
+            "label": "Đặt xe",
+            "emoji": "🛵"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "bấm card",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "push /booking",
+            "sentence": 2
+          },
+          {
+            "from": 2,
+            "to": 0,
+            "label": "back (pop)",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep24/scene-03-0-27e1c9d6.wav",
+          "startFrame": 0,
+          "durationInFrames": 68
+        },
+        {
+          "file": "audio/ep24/scene-03-1-6054f59f.wav",
+          "startFrame": 76,
+          "durationInFrames": 80
+        },
+        {
+          "file": "audio/ep24/scene-03-2-0dd97aa5.wav",
+          "startFrame": 164,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep24/scene-03-3-98a2209b.wav",
+          "startFrame": 319,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep24/scene-03-4-d57c74a0.wav",
+          "startFrame": 445,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 579
+    },
+    {
+      "id": "scene-04",
+      "type": "concept",
+      "visual": {
+        "title": "Công thức cũ — hai điểm mới",
+        "bullets": [
+          {
+            "icon": "♻️",
+            "text": "4 bước giữ nguyên: căn hộ → lối đi",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "Bước 1 y hệt: sổ đỏ + cửa chính",
+            "sentence": 1
+          },
+          {
+            "icon": "🆕",
+            "text": "Bước 3 khác: biển treo ở Stack, không phải tab",
+            "sentence": 2
+          },
+          {
+            "icon": "🧠",
+            "text": "2 kỹ thuật state mới trong căn phòng",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep24/scene-04-0-d0145f16.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep24/scene-04-1-0fc2bbf2.wav",
+          "startFrame": 107,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep24/scene-04-2-3d4c6898.wav",
+          "startFrame": 303,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep24/scene-04-3-d5425b8c.wav",
+          "startFrame": 448,
+          "durationInFrames": 108
+        }
+      ],
+      "durationInFrames": 574
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "packages/mini-booking/src/BookingScreen.tsx (dữ liệu & state)",
+        "language": "tsx",
+        "code": "type Ride = { id: string; name: string; emoji: string; pricePerKm: number };\n\nconst rides: Ride[] = [\n  { id: 'bike', name: 'Xe máy', emoji: '🛵', pricePerKm: 15000 },\n  { id: 'car4', name: 'Ô tô 4 chỗ', emoji: '🚗', pricePerKm: 25000 },\n  { id: 'car7', name: 'Ô tô 7 chỗ', emoji: '🚐', pricePerKm: 32000 },\n];\n\nexport function BookingScreen() {\n  const [ride, setRide] = useState<string | null>(null);\n  const [km, setKm] = useState(5);\n\n  const selectedRide = rides.find((r) => r.id === ride);\n  const total = selectedRide ? selectedRide.pricePerKm * km : 0;",
+        "steps": [
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 3
+          },
+          {
+            "from": 11,
+            "to": 11,
+            "sentence": 4
+          },
+          {
+            "from": 13,
+            "to": 14,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep24/scene-05-0-475c24ff.wav",
+          "startFrame": 0,
+          "durationInFrames": 80
+        },
+        {
+          "file": "audio/ep24/scene-05-1-4bbf1b9a.wav",
+          "startFrame": 88,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep24/scene-05-2-21b2b9a0.wav",
+          "startFrame": 245,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep24/scene-05-3-c0c1b57a.wav",
+          "startFrame": 385,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep24/scene-05-4-3e90d0ed.wav",
+          "startFrame": 571,
+          "durationInFrames": 70
+        },
+        {
+          "file": "audio/ep24/scene-05-5-8b85cce4.wav",
+          "startFrame": 649,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 864
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "BookingScreen.tsx (nút chọn-một)",
+        "language": "tsx",
+        "code": "              <Pressable\n                style={[styles.rideButton, isSelected && styles.rideButtonSelected]}\n                onPress={() => setRide(item.id)}\n              >\n                <Text style={styles.rideButtonText}>\n                  {isSelected ? 'Đang chọn ✓' : 'Chọn'}\n                </Text>\n              </Pressable>",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 2
+          },
+          {
+            "from": 2,
+            "to": 7,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep24/scene-06-0-e012e901.wav",
+          "startFrame": 0,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep24/scene-06-1-b260c083.wav",
+          "startFrame": 121,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep24/scene-06-2-3c376eb8.wav",
+          "startFrame": 295,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep24/scene-06-3-d8655510.wav",
+          "startFrame": 416,
+          "durationInFrames": 113
+        }
+      ],
+      "durationInFrames": 547
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "BookingScreen.tsx (stepper quãng đường)",
+        "language": "tsx",
+        "code": "              <Pressable\n                style={styles.stepperButton}\n                onPress={() => setKm((k) => Math.max(1, Math.min(20, k - 1)))}\n              >\n                <Text style={styles.stepperButtonText}>−</Text>\n              </Pressable>\n              <Text style={styles.stepperValue}>{km} km</Text>\n              <Pressable\n                style={styles.stepperButton}\n                onPress={() => setKm((k) => Math.max(1, Math.min(20, k + 1)))}\n              >\n                <Text style={styles.stepperButtonText}>+</Text>\n              </Pressable>",
+        "steps": [
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 2
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep24/scene-07-0-f6e2878a.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep24/scene-07-1-6c47091d.wav",
+          "startFrame": 107,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep24/scene-07-2-cbaff448.wav",
+          "startFrame": 271,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep24/scene-07-3-4ebc4336.wav",
+          "startFrame": 416,
+          "durationInFrames": 72
+        },
+        {
+          "file": "audio/ep24/scene-07-4-5dd288fe.wav",
+          "startFrame": 496,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 620
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "apps/vietsuper/app/_layout.tsx — TOÀN BỘ FILE",
+        "language": "tsx",
+        "code": "import { Stack } from 'expo-router';\n\nexport default function RootLayout() {\n  return (\n    <Stack screenOptions={{ headerShown: false }}>\n      <Stack.Screen name=\"(tabs)\" />\n      <Stack.Screen name=\"booking\" options={{ headerShown: true, title: 'Đặt xe', headerBackTitle: 'Trang chủ' }} />\n    </Stack>\n  );\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep24/scene-08-0-fb9c66c2.wav",
+          "startFrame": 0,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep24/scene-08-1-24c7d126.wav",
+          "startFrame": 164,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep24/scene-08-2-9cd4ac10.wav",
+          "startFrame": 307,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep24/scene-08-3-4a2936da.wav",
+          "startFrame": 443,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep24/scene-08-4-fcc7af94.wav",
+          "startFrame": 636,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 770
+    },
+    {
+      "id": "scene-09",
+      "type": "code",
+      "visual": {
+        "filename": "apps/vietsuper/app/(tabs)/index.tsx (2 dòng đổi)",
+        "language": "tsx",
+        "code": "  route?: '/food' | '/wallet' | '/promo' | '/cinema' | '/booking';\n};\n\nconst services: Service[] = [\n  { id: 'food', label: 'Đồ ăn', emoji: '🍜', route: '/food' },\n  { id: 'wallet', label: 'Ví tiền', emoji: '💰', route: '/wallet' },\n  { id: 'promo', label: 'Ưu đãi', emoji: '🎁', route: '/promo' },\n  { id: 'ride', label: 'Đặt xe', emoji: '🛵', route: '/booking' },",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep24/scene-09-0-9feddcbb.wav",
+          "startFrame": 0,
+          "durationInFrames": 80
+        },
+        {
+          "file": "audio/ep24/scene-09-1-1deae732.wav",
+          "startFrame": 88,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep24/scene-09-2-10c75141.wav",
+          "startFrame": 197,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep24/scene-09-3-dd7fd3a6.wav",
+          "startFrame": 321,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 471
+    },
+    {
+      "id": "scene-10",
+      "type": "phone",
+      "visual": {
+        "title": "Chữa bài trên máy thật 🛵",
+        "screens": [
+          {
+            "src": "screens/ep24/booking-empty.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep24/booking-selected.png",
+            "sentence": 2
+          },
+          {
+            "src": "screens/ep24/home-full.png",
+            "sentence": 4
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🔙",
+            "text": "Header + back \"Trang chủ\" — Stack tặng sẵn",
+            "sentence": 0
+          },
+          {
+            "icon": "💬",
+            "text": "Chưa chọn: mời chọn xe lịch sự",
+            "sentence": 1
+          },
+          {
+            "icon": "🚗",
+            "text": "Ô tô 4 chỗ · 7 km = 175.000đ chuẩn",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep24/scene-10-0-5108395b.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep24/scene-10-1-39e62981.wav",
+          "startFrame": 200,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep24/scene-10-2-952f871a.wav",
+          "startFrame": 319,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep24/scene-10-3-364c9d72.wav",
+          "startFrame": 476,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep24/scene-10-4-e3d38154.wav",
+          "startFrame": 643,
+          "durationInFrames": 176
+        }
+      ],
+      "durationInFrames": 837
+    },
+    {
+      "id": "scene-11",
+      "type": "outro",
+      "visual": {
+        "title": "5/6 ô sáng — tốt nghiệp thật sự! 🎓",
+        "summary": [
+          {
+            "text": "5/6 dịch vụ sáng — ô cuối dành cho bạn",
+            "sentence": 0
+          },
+          {
+            "text": "2 mô hình: tab (hằng ngày) · Stack (còn lại)",
+            "sentence": 1
+          },
+          {
+            "text": "Repo có tag từng tập — checkout là khớp video",
+            "sentence": 2
+          }
+        ],
+        "next": "Cảm ơn bạn đã theo dõi! Comment chủ đề tiếp 💬"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep24/scene-11-0-415d2db2.wav",
+          "startFrame": 0,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep24/scene-11-1-bddd67f7.wav",
+          "startFrame": 193,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep24/scene-11-2-6e7e0978.wav",
+          "startFrame": 377,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep24/scene-11-3-4199c171.wav",
+          "startFrame": 546,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep24/scene-11-4-5258067a.wav",
+          "startFrame": 739,
+          "durationInFrames": 142
+        }
+      ],
+      "durationInFrames": 899
+    }
+  ]
+}

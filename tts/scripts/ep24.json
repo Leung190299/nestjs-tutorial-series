@@ -1,0 +1,422 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại series Mini-App từ A đến Z, với một tập ngoài kế hoạch: tập CHỮA BÀI!",
+      "Cuối tập bốn, mình giao bài tập tốt nghiệp: tự xây mini-booking Đặt xe. Hôm nay chúng ta chữa bài cùng nhau.",
+      "Ai đã tự làm rồi: xem để đối chiếu. Ai chưa: đây là cơ hội thấy công thức bốn bước chạy lần thứ ba.",
+      "Kèm hai kỹ thuật mới toanh: chọn-MỘT thay vì chọn-nhiều, và màn hình nằm NGOÀI thanh tab."
+    ],
+    "visual": {
+      "title": "Chữa bài: mini-booking Đặt xe",
+      "subtitle": "Mini-App từ A đến Z · Tập 5 · Chữa bài tốt nghiệp",
+      "badge": "Series Mini-App · Tập chữa bài"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Câu hỏi thiết kế đầu tiên, và cũng là cái bẫy của bài tập: Đặt xe có nên là tab thứ SÁU không?",
+      "Không nên: thanh tab đã có năm nút, thêm nữa là chữ bé tí, bấm trượt liên tục.",
+      "Nhìn Grab thật mà xem: hàng chục dịch vụ nhưng tab bar chỉ vài nút: đa số dịch vụ đi vào từ LƯỚI ở trang chủ.",
+      "Giải pháp của expo-router: màn hình Stack: một sảnh phụ mở ra TRÊN tòa nhà, có nút back để quay về.",
+      "Bài học lớn hơn cả code: không phải mini-app nào cũng cần một chỗ trên thang máy."
+    ],
+    "visual": {
+      "title": "Tab thứ 6? KHÔNG — và đây là lý do",
+      "bullets": [
+        {
+          "icon": "😵",
+          "text": "6+ tab = chữ bé, bấm trượt",
+          "sentence": 1
+        },
+        {
+          "icon": "🟢",
+          "text": "Grab: chục dịch vụ — tab bar chỉ vài nút",
+          "sentence": 2
+        },
+        {
+          "icon": "🚪",
+          "text": "Giải pháp: màn Stack + nút back",
+          "sentence": 3
+        },
+        {
+          "icon": "🛗",
+          "text": "Không phải mini nào cũng cần chỗ trên thang máy",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "diagram",
+    "narration": [
+      "Đường đi của người dùng sẽ như thế này.",
+      "Từ lưới dịch vụ ở Trang chủ, bấm card Đặt xe.",
+      "Router ĐẨY màn booking lên trên toàn bộ khu tab: choán trọn màn hình, có header và nút back riêng.",
+      "Xong việc, bấm back: màn booking rút đi, khu tab vẫn nguyên trạng thái cũ bên dưới.",
+      "Push và pop: mô hình chồng bài của Stack, khác hẳn mô hình chuyển kênh của Tabs."
+    ],
+    "visual": {
+      "title": "Đường đi: push lên — pop về",
+      "boxes": [
+        {
+          "id": "home",
+          "label": "Trang chủ (tabs)",
+          "emoji": "🏠"
+        },
+        {
+          "id": "stack",
+          "label": "Stack",
+          "emoji": "🗂️"
+        },
+        {
+          "id": "booking",
+          "label": "Đặt xe",
+          "emoji": "🛵"
+        }
+      ],
+      "flows": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "bấm card",
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "push /booking",
+          "sentence": 2
+        },
+        {
+          "from": 2,
+          "to": 0,
+          "label": "back (pop)",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "concept",
+    "narration": [
+      "Công thức bốn bước vẫn nguyên: căn hộ, căn phòng, tấm biển, lối đi.",
+      "Bước một y hệt hai lần trước: package mini-booking với sổ đỏ và cửa chính export BookingScreen: mình không chiếu lại nữa.",
+      "Khác biệt nằm ở bước ba: tấm biển lần này không treo trên thanh tab, mà khai ở Stack gốc.",
+      "Và trong căn phòng có hai kỹ thuật state mới đáng học: xem ngay đây."
+    ],
+    "visual": {
+      "title": "Công thức cũ — hai điểm mới",
+      "bullets": [
+        {
+          "icon": "♻️",
+          "text": "4 bước giữ nguyên: căn hộ → lối đi",
+          "sentence": 0
+        },
+        {
+          "icon": "1️⃣",
+          "text": "Bước 1 y hệt: sổ đỏ + cửa chính",
+          "sentence": 1
+        },
+        {
+          "icon": "🆕",
+          "text": "Bước 3 khác: biển treo ở Stack, không phải tab",
+          "sentence": 2
+        },
+        {
+          "icon": "🧠",
+          "text": "2 kỹ thuật state mới trong căn phòng",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Căn phòng BookingScreen: dữ liệu và bộ não.",
+      "Ba loại xe với giá TRÊN MỖI KM: xe máy mười lăm nghìn, bốn chỗ hai lăm, bảy chỗ ba hai.",
+      "Kỹ thuật mới số một đây: ride kiểu string HOẶC null: vì khách chỉ đi MỘT xe một lúc.",
+      "So với cinema tập trước dùng MẢNG string cho phép chọn nhiều vé: kiểu dữ liệu của state chính là luật chơi của tính năng.",
+      "km khởi đầu năm: quãng đường ước tính.",
+      "selectedRide tra thông tin xe đang chọn, và total: giá mỗi km nhân số km, chưa chọn xe thì bằng không."
+    ],
+    "visual": {
+      "filename": "packages/mini-booking/src/BookingScreen.tsx (dữ liệu & state)",
+      "language": "tsx",
+      "code": "type Ride = { id: string; name: string; emoji: string; pricePerKm: number };\n\nconst rides: Ride[] = [\n  { id: 'bike', name: 'Xe máy', emoji: '🛵', pricePerKm: 15000 },\n  { id: 'car4', name: 'Ô tô 4 chỗ', emoji: '🚗', pricePerKm: 25000 },\n  { id: 'car7', name: 'Ô tô 7 chỗ', emoji: '🚐', pricePerKm: 32000 },\n];\n\nexport function BookingScreen() {\n  const [ride, setRide] = useState<string | null>(null);\n  const [km, setKm] = useState(5);\n\n  const selectedRide = rides.find((r) => r.id === ride);\n  const total = selectedRide ? selectedRide.pricePerKm * km : 0;",
+      "steps": [
+        {
+          "from": 1,
+          "to": 14,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 7,
+          "sentence": 1
+        },
+        {
+          "from": 10,
+          "to": 10,
+          "sentence": 2
+        },
+        {
+          "from": 10,
+          "to": 10,
+          "sentence": 3
+        },
+        {
+          "from": 11,
+          "to": 11,
+          "sentence": 4
+        },
+        {
+          "from": 13,
+          "to": 14,
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Nút Chọn của từng xe: đơn giản hơn cinema một bậc, và đó là chủ đích.",
+      "onPress chỉ việc setRide bằng id xe này: chọn xe khác là THAY THẾ, không cần filter thêm bớt gì.",
+      "Chọn-một luôn dễ hơn chọn-nhiều: state đơn giản nhất đủ dùng là state đúng.",
+      "Nút vẫn biến hình như cũ: đỏ Chọn, xanh Đang chọn: người xem quen mắt ngay."
+    ],
+    "visual": {
+      "filename": "BookingScreen.tsx (nút chọn-một)",
+      "language": "tsx",
+      "code": "              <Pressable\n                style={[styles.rideButton, isSelected && styles.rideButtonSelected]}\n                onPress={() => setRide(item.id)}\n              >\n                <Text style={styles.rideButtonText}>\n                  {isSelected ? 'Đang chọn ✓' : 'Chọn'}\n                </Text>\n              </Pressable>",
+      "steps": [
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 2
+        },
+        {
+          "from": 2,
+          "to": 7,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Kỹ thuật mới số hai: bộ đếm quãng đường, gọi là stepper.",
+      "Nút trừ: setKm với công thức lồng nhau: Math min hai mươi giữ trần, Math max một giữ sàn.",
+      "Nghĩa là km chỉ chạy trong khoảng một đến hai mươi: bấm mấy cũng không âm, không vô cực.",
+      "Nút cộng y hệt, chỉ đổi trừ thành cộng.",
+      "Kẹp giá trị kiểu này gọi là clamp: mẹo nhỏ nhưng dùng cả đời làm app."
+    ],
+    "visual": {
+      "filename": "BookingScreen.tsx (stepper quãng đường)",
+      "language": "tsx",
+      "code": "              <Pressable\n                style={styles.stepperButton}\n                onPress={() => setKm((k) => Math.max(1, Math.min(20, k - 1)))}\n              >\n                <Text style={styles.stepperButtonText}>−</Text>\n              </Pressable>\n              <Text style={styles.stepperValue}>{km} km</Text>\n              <Pressable\n                style={styles.stepperButton}\n                onPress={() => setKm((k) => Math.max(1, Math.min(20, k + 1)))}\n              >\n                <Text style={styles.stepperButtonText}>+</Text>\n              </Pressable>",
+      "steps": [
+        {
+          "from": 1,
+          "to": 13,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 2
+        },
+        {
+          "from": 10,
+          "to": 10,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 13,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Bước ba kiểu mới: treo biển ở Stack gốc thay vì thanh tab. Đây là TOÀN BỘ layout gốc sau khi thêm.",
+      "Dòng mới: Stack.Screen tên booking: khớp file booking.tsx ba dòng quen thuộc.",
+      "headerShown true: vì màn này đứng ngoài khu tab nên phải tự bật header của mình.",
+      "title Đặt xe hiện giữa header, headerBackTitle Trang chủ hiện cạnh nút back: và nút back thì Stack TẶNG sẵn, không phải viết.",
+      "Một dòng khai báo: đủ cả header, tiêu đề, nút quay về."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/app/_layout.tsx — TOÀN BỘ FILE",
+      "language": "tsx",
+      "code": "import { Stack } from 'expo-router';\n\nexport default function RootLayout() {\n  return (\n    <Stack screenOptions={{ headerShown: false }}>\n      <Stack.Screen name=\"(tabs)\" />\n      <Stack.Screen name=\"booking\" options={{ headerShown: true, title: 'Đặt xe', headerBackTitle: 'Trang chủ' }} />\n    </Stack>\n  );\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 0
+        },
+        {
+          "from": 7,
+          "to": 7,
+          "sentence": 1
+        },
+        {
+          "from": 7,
+          "to": 7,
+          "sentence": 2
+        },
+        {
+          "from": 7,
+          "to": 7,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "code",
+    "narration": [
+      "Bước bốn: mở lối đi cuối cùng của lưới dịch vụ.",
+      "Union route nhận thêm xẹt booking: giờ đủ năm đường dẫn.",
+      "Card Đặt xe nhận route xẹt booking: dịch vụ Đặt xe chính thức sáng đèn.",
+      "Lưới dịch vụ giờ sáng năm trên sáu ô: và ô cuối cùng, mình sẽ nói ở phần kết."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/app/(tabs)/index.tsx (2 dòng đổi)",
+      "language": "tsx",
+      "code": "  route?: '/food' | '/wallet' | '/promo' | '/cinema' | '/booking';\n};\n\nconst services: Service[] = [\n  { id: 'food', label: 'Đồ ăn', emoji: '🍜', route: '/food' },\n  { id: 'wallet', label: 'Ví tiền', emoji: '💰', route: '/wallet' },\n  { id: 'promo', label: 'Ưu đãi', emoji: '🎁', route: '/promo' },\n  { id: 'ride', label: 'Đặt xe', emoji: '🛵', route: '/booking' },",
+      "steps": [
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 8,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "phone",
+    "narration": [
+      "Nghiệm thu trên máy thật. Bấm card Đặt xe: màn booking đẩy lên với header riêng, nút back Trang chủ góc trái: đúng mô hình sảnh phụ.",
+      "Chưa chọn xe: thanh dưới lịch sự mời: chọn xe để xem giá ước tính.",
+      "Chọn Ô tô bốn chỗ: nút hóa xanh Đang chọn: và bấm cộng hai lần: quãng đường lên bảy km.",
+      "Thanh dưới chốt: Ô tô bốn chỗ, bảy km: một trăm bảy lăm nghìn: hai lăm nhân bảy, chuẩn từng đồng.",
+      "Và lướt về trang chủ nhìn lại: NĂM trên sáu ô đã sáng đèn. Bài tập tốt nghiệp: chữa xong, chạy thật trên iPhone."
+    ],
+    "visual": {
+      "title": "Chữa bài trên máy thật 🛵",
+      "screens": [
+        {
+          "src": "screens/ep24/booking-empty.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/ep24/booking-selected.png",
+          "sentence": 2
+        },
+        {
+          "src": "screens/ep24/home-full.png",
+          "sentence": 4
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🔙",
+          "text": "Header + back \"Trang chủ\" — Stack tặng sẵn",
+          "sentence": 0
+        },
+        {
+          "icon": "💬",
+          "text": "Chưa chọn: mời chọn xe lịch sự",
+          "sentence": 1
+        },
+        {
+          "icon": "🚗",
+          "text": "Ô tô 4 chỗ · 7 km = 175.000đ chuẩn",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "outro",
+    "narration": [
+      "Và khoảnh khắc xứng đáng một tràng pháo tay: NĂM căn hộ mini-app cùng chung sống, lưới dịch vụ chỉ còn đúng một ô chờ chủ.",
+      "Bạn giờ có đủ hai mô hình cắm mini-app: lên thanh tab cho tính năng dùng hằng ngày, và qua Stack cho phần còn lại.",
+      "Mẹo cho người học theo: repo có TAG theo từng tập: checkout đúng tag là thấy đúng code của tập đó.",
+      "Ô cuối cùng, Nạp thẻ 📱, mình cố tình để dành: đó là bài tập của BẠN, đủ đồ nghề rồi đấy. Code đầy đủ vẫn ở phần mô tả.",
+      "Cảm ơn bạn đã đồng hành trọn series Mini-App: comment điều bạn muốn học tiếp, và hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "5/6 ô sáng — tốt nghiệp thật sự! 🎓",
+      "summary": [
+        {
+          "text": "5/6 dịch vụ sáng — ô cuối dành cho bạn",
+          "sentence": 0
+        },
+        {
+          "text": "2 mô hình: tab (hằng ngày) · Stack (còn lại)",
+          "sentence": 1
+        },
+        {
+          "text": "Repo có tag từng tập — checkout là khớp video",
+          "sentence": 2
+        }
+      ],
+      "next": "Cảm ơn bạn đã theo dõi! Comment chủ đề tiếp 💬"
+    }
+  }
+]
