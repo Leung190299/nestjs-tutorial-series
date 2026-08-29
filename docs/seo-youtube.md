@@ -848,16 +848,16 @@ Cuối tập: khoảnh khắc cả series chờ đợi — trang chủ ViệtSup
 
 ⏱️ NỘI DUNG:
 0:00 Tập hoàn thiện — ô cuối cùng
-0:20 Giải phẫu màn nạp thẻ (một màn hình, hai bộ mặt)
-0:44 Vòng đời: form → thành công → form
-1:05 Dữ liệu: 3 nhà mạng + 6 mệnh giá
-1:22 3 state + canPay (biến SUY RA, không phải state!)
-1:47 Điểm nhấn: màn cảm ơn bằng early return + reset
-2:22 Thanh hành động đổi mặt theo canPay
-2:41 Cắm vào app chủ — lần thứ 4, 3 dòng
-2:59 KHOẢNH KHẮC 6/6: trang chủ sáng đèn toàn bộ 🎆
-3:24 Toàn cảnh vương quốc: 6 căn hộ, 2 mô hình cắm
-3:46… Lời kết trọn vẹn series
+0:17 Giải phẫu màn nạp thẻ (một màn hình, hai bộ mặt)
+0:38 Vòng đời: form → thành công → form
+0:58 Dữ liệu: 3 nhà mạng + 6 mệnh giá
+1:14 3 state + canPay (biến SUY RA, không phải state!)
+1:35 Điểm nhấn: màn cảm ơn bằng early return + reset
+2:04 Thanh hành động đổi mặt theo canPay
+2:19 Cắm vào app chủ — lần thứ 4, 3 dòng
+2:36 KHOẢNH KHẮC 6/6: trang chủ sáng đèn toàn bộ 🎆
+3:01 Toàn cảnh vương quốc: 6 căn hộ, 2 mô hình cắm
+3:22 Lời kết trọn vẹn series
 
 📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
 💡 Tag miniapp-tap-6 = trạng thái đầy đủ nhất của repo.
