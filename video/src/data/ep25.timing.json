@@ -1,0 +1,639 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Hoàn thiện 6/6: mini-topup Nạp thẻ",
+        "subtitle": "Mini-App từ A đến Z · Tập 6 · Hoàn thiện lưới",
+        "badge": "Series Mini-App · Tập hoàn thiện"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep25/scene-01-0-aa30328f.wav",
+          "startFrame": 0,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep25/scene-01-1-90ff9074.wav",
+          "startFrame": 112,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep25/scene-01-2-3cde6cca.wav",
+          "startFrame": 272,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep25/scene-01-3-e0f731f5.wav",
+          "startFrame": 386,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 539
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Giải phẫu màn nạp thẻ",
+        "bullets": [
+          {
+            "icon": "📡",
+            "text": "Chip nhà mạng + lưới mệnh giá",
+            "sentence": 1
+          },
+          {
+            "icon": "🔘",
+            "text": "Nút Nạp ngay — chỉ hiện khi chọn ĐỦ",
+            "sentence": 2
+          },
+          {
+            "icon": "🎭",
+            "text": "Một màn hình — hai bộ mặt: form ↔ cảm ơn",
+            "sentence": 3
+          },
+          {
+            "icon": "💡",
+            "text": "Chuyển cảnh bằng 1 biến boolean",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep25/scene-02-0-5ab67dd5.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep25/scene-02-1-ec0c53c7.wav",
+          "startFrame": 107,
+          "durationInFrames": 89
+        },
+        {
+          "file": "audio/ep25/scene-02-2-d05c7709.wav",
+          "startFrame": 204,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep25/scene-02-3-1fb231c7.wav",
+          "startFrame": 311,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep25/scene-02-4-62b27f2b.wav",
+          "startFrame": 475,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 628
+    },
+    {
+      "id": "scene-03",
+      "type": "diagram",
+      "visual": {
+        "title": "Vòng đời: form → thành công → form",
+        "boxes": [
+          {
+            "id": "form",
+            "label": "Form nạp",
+            "emoji": "📝"
+          },
+          {
+            "id": "done",
+            "label": "done = true",
+            "emoji": "🔁"
+          },
+          {
+            "id": "success",
+            "label": "Thành công",
+            "emoji": "✅"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "Nạp ngay",
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "lột xác",
+            "sentence": 2
+          },
+          {
+            "from": 2,
+            "to": 0,
+            "label": "Nạp thêm (reset)",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep25/scene-03-0-78213168.wav",
+          "startFrame": 0,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep25/scene-03-1-d6a78039.wav",
+          "startFrame": 85,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep25/scene-03-2-742354c6.wav",
+          "startFrame": 201,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep25/scene-03-3-8a040f71.wav",
+          "startFrame": 315,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep25/scene-03-4-d1388246.wav",
+          "startFrame": 441,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 582
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "packages/mini-topup/src/TopupScreen.tsx (dữ liệu)",
+        "language": "tsx",
+        "code": "type Network = { id: string; name: string; emoji: string };\n\nconst networks: Network[] = [\n  { id: 'viettel', name: 'Viettel', emoji: '🔴' },\n  { id: 'vina', name: 'VinaPhone', emoji: '🔵' },\n  { id: 'mobi', name: 'MobiFone', emoji: '🟡' },\n];\n\nconst amounts = [10000, 20000, 50000, 100000, 200000, 500000];",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 9,
+            "to": 9,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep25/scene-04-0-18817a04.wav",
+          "startFrame": 0,
+          "durationInFrames": 70
+        },
+        {
+          "file": "audio/ep25/scene-04-1-a5046b18.wav",
+          "startFrame": 78,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep25/scene-04-2-f133d8f3.wav",
+          "startFrame": 230,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep25/scene-04-3-eb23d3c0.wav",
+          "startFrame": 390,
+          "durationInFrames": 77
+        }
+      ],
+      "durationInFrames": 485
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "TopupScreen.tsx (3 state + 1 biến suy ra)",
+        "language": "tsx",
+        "code": "export function TopupScreen() {\n  const [network, setNetwork] = useState<string | null>(null);\n  const [amount, setAmount] = useState<number | null>(null);\n  const [done, setDone] = useState(false);\n\n  const selectedNetwork = networks.find((n) => n.id === network);\n  const canPay = network !== null && amount !== null;",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 3
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep25/scene-05-0-4ab9c05e.wav",
+          "startFrame": 0,
+          "durationInFrames": 70
+        },
+        {
+          "file": "audio/ep25/scene-05-1-fbc98654.wav",
+          "startFrame": 78,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep25/scene-05-2-3ef43e6f.wav",
+          "startFrame": 216,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep25/scene-05-3-ecb9bc11.wav",
+          "startFrame": 320,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep25/scene-05-4-ee1c2408.wav",
+          "startFrame": 470,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 618
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "TopupScreen.tsx (màn cảm ơn — early return)",
+        "language": "tsx",
+        "code": "  if (done) {\n    return (\n      <View style={styles.successContainer}>\n        <Text style={styles.successEmoji}>✅</Text>\n        <Text style={styles.successTitle}>Nạp thành công!</Text>\n        <Text style={styles.successDetail}>\n          {amount?.toLocaleString('vi')}đ cho thuê bao {selectedNetwork?.name}\n        </Text>\n        <Pressable\n          style={styles.againButton}\n          onPress={() => {\n            setNetwork(null);\n            setAmount(null);\n            setDone(false);\n          }}\n        >\n          <Text style={styles.againButtonText}>Nạp thêm</Text>\n        </Pressable>\n      </View>\n    );\n  }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 21,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 11,
+            "to": 15,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "sentence": 4
+          },
+          {
+            "from": 1,
+            "to": 21,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep25/scene-06-0-5ad7ee19.wav",
+          "startFrame": 0,
+          "durationInFrames": 84
+        },
+        {
+          "file": "audio/ep25/scene-06-1-1baf2411.wav",
+          "startFrame": 92,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep25/scene-06-2-25e11d67.wav",
+          "startFrame": 295,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep25/scene-06-3-02400bef.wav",
+          "startFrame": 464,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep25/scene-06-4-f77bafb2.wav",
+          "startFrame": 669,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep25/scene-06-5-155f300c.wav",
+          "startFrame": 781,
+          "durationInFrames": 77
+        }
+      ],
+      "durationInFrames": 876
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "TopupScreen.tsx (thanh hành động)",
+        "language": "tsx",
+        "code": "      <View style={styles.bottomBar}>\n        {canPay ? (\n          <Pressable style={styles.payButton} onPress={() => setDone(true)}>\n            <Text style={styles.payButtonText}>Nạp ngay · {amount.toLocaleString('vi')}đ</Text>\n          </Pressable>\n        ) : (\n          <Text style={styles.bottomText}>Chọn nhà mạng và mệnh giá</Text>\n        )}\n      </View>",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 5,
+            "sentence": 1
+          },
+          {
+            "from": 6,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep25/scene-07-0-def0c6e7.wav",
+          "startFrame": 0,
+          "durationInFrames": 72
+        },
+        {
+          "file": "audio/ep25/scene-07-1-96c0ad33.wav",
+          "startFrame": 80,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep25/scene-07-2-37b5fe32.wav",
+          "startFrame": 194,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep25/scene-07-3-cfac724a.wav",
+          "startFrame": 308,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 449
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "apps/vietsuper/app/topup.tsx — TOÀN BỘ FILE",
+        "language": "tsx",
+        "code": "import { TopupScreen } from '@vietsuper/mini-topup';\n\nexport default TopupScreen;",
+        "steps": [
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep25/scene-08-0-c5e7ab6a.wav",
+          "startFrame": 0,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep25/scene-08-1-9f0f6093.wav",
+          "startFrame": 109,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep25/scene-08-2-2d7d51ce.wav",
+          "startFrame": 211,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep25/scene-08-3-998006a4.wav",
+          "startFrame": 397,
+          "durationInFrames": 96
+        }
+      ],
+      "durationInFrames": 511
+    },
+    {
+      "id": "scene-09",
+      "type": "phone",
+      "visual": {
+        "title": "Khoảnh khắc 6/6 🎆",
+        "screens": [
+          {
+            "src": "screens/ep25/topup-selected.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep25/topup-success.png",
+            "sentence": 1
+          },
+          {
+            "src": "screens/ep25/home-6-6.png",
+            "sentence": 3
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🔴",
+            "text": "Viettel + 100.000đ → nút Nạp ngay hiện",
+            "sentence": 0
+          },
+          {
+            "icon": "✅",
+            "text": "Lột xác: màn Nạp thành công",
+            "sentence": 1
+          },
+          {
+            "icon": "🎆",
+            "text": "TRANG CHỦ: 6/6 Ô SÁNG ĐÈN",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep25/scene-09-0-1fc7d38c.wav",
+          "startFrame": 0,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep25/scene-09-1-8a034b09.wav",
+          "startFrame": 164,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep25/scene-09-2-bdc75149.wav",
+          "startFrame": 324,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep25/scene-09-3-f03e5721.wav",
+          "startFrame": 426,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep25/scene-09-4-6d78d6c3.wav",
+          "startFrame": 576,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 758
+    },
+    {
+      "id": "scene-10",
+      "type": "concept",
+      "visual": {
+        "title": "Toàn cảnh vương quốc ViệtSuper 🏰",
+        "bullets": [
+          {
+            "icon": "🏠",
+            "text": "6 căn hộ độc lập trong packages/",
+            "sentence": 1
+          },
+          {
+            "icon": "🛗",
+            "text": "4 tính năng lên tab · 2 đi cửa Stack",
+            "sentence": 2
+          },
+          {
+            "icon": "🪧",
+            "text": "App chủ rỗng — toàn biển 3 dòng",
+            "sentence": 3
+          },
+          {
+            "icon": "🏰",
+            "text": "Kiến trúc thu nhỏ của super app thật",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep25/scene-10-0-f4878cad.wav",
+          "startFrame": 0,
+          "durationInFrames": 70
+        },
+        {
+          "file": "audio/ep25/scene-10-1-f3db3046.wav",
+          "startFrame": 78,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep25/scene-10-2-27a0c9a8.wav",
+          "startFrame": 259,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep25/scene-10-3-94572000.wav",
+          "startFrame": 387,
+          "durationInFrames": 89
+        },
+        {
+          "file": "audio/ep25/scene-10-4-3784c265.wav",
+          "startFrame": 484,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 618
+    },
+    {
+      "id": "scene-11",
+      "type": "outro",
+      "visual": {
+        "title": "Trọn vẹn từ A đến Z! 🎓🏆",
+        "summary": [
+          {
+            "text": "Thư mục trống → 6 mini-app sáng đèn",
+            "sentence": 0
+          },
+          {
+            "text": "Công thức 4 bước × 4 lần — giờ là của bạn",
+            "sentence": 1
+          },
+          {
+            "text": "Tag miniapp-tap-6 = trạng thái đầy đủ nhất",
+            "sentence": 2
+          }
+        ],
+        "next": "Comment đặt tên series tiếp theo! 💬🎉"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep25/scene-11-0-0a19537e.wav",
+          "startFrame": 0,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep25/scene-11-1-88461f7b.wav",
+          "startFrame": 169,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep25/scene-11-2-fd83ce8d.wav",
+          "startFrame": 290,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep25/scene-11-3-a89a0be1.wav",
+          "startFrame": 418,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep25/scene-11-4-13481aa3.wav",
+          "startFrame": 561,
+          "durationInFrames": 128
+        }
+      ],
+      "durationInFrames": 707
+    }
+  ]
+}
