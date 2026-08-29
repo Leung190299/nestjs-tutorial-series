@@ -5,7 +5,7 @@ type Service = {
   id: string;
   label: string;
   emoji: string;
-  route?: '/food' | '/wallet' | '/promo' | '/cinema' | '/booking';
+  route?: '/food' | '/wallet' | '/promo' | '/cinema' | '/booking' | '/topup';
 };
 
 const services: Service[] = [
@@ -14,7 +14,7 @@ const services: Service[] = [
   { id: 'promo', label: 'Ưu đãi', emoji: '🎁', route: '/promo' },
   { id: 'ride', label: 'Đặt xe', emoji: '🛵', route: '/booking' },
   { id: 'movie', label: 'Xem phim', emoji: '🎬', route: '/cinema' },
-  { id: 'topup', label: 'Nạp thẻ', emoji: '📱' },
+  { id: 'topup', label: 'Nạp thẻ', emoji: '📱', route: '/topup' },
 ];
 
 export default function HomeScreen() {
