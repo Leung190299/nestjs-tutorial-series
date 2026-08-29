@@ -1,0 +1,498 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Cho mini-app ra ở riêng",
+        "subtitle": "Mini-App từ A đến Z · Tập 3 · Chạy độc lập",
+        "badge": "Series Mini-App"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep22/scene-01-0-c9dc5008.wav",
+          "startFrame": 0,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep22/scene-01-1-465ded47.wav",
+          "startFrame": 85,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep22/scene-01-2-f71794e2.wav",
+          "startFrame": 235,
+          "durationInFrames": 171
+        }
+      ],
+      "durationInFrames": 424
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Vì sao chạy riêng là siêu năng lực?",
+        "bullets": [
+          {
+            "icon": "⚡",
+            "text": "Nhẹ tênh — sửa code thấy ngay",
+            "sentence": 1
+          },
+          {
+            "icon": "👥",
+            "text": "Team dev độc lập, không đợi nhau",
+            "sentence": 2
+          },
+          {
+            "icon": "🔍",
+            "text": "Tester nhận đúng 1 app nhỏ để test",
+            "sentence": 3
+          },
+          {
+            "icon": "🪶",
+            "text": "Giá phải trả: một cái vỏ mỏng dính",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep22/scene-02-0-f0aae7b0.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep22/scene-02-1-be842493.wav",
+          "startFrame": 145,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep22/scene-02-2-4ab6be92.wav",
+          "startFrame": 360,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep22/scene-02-3-844cb22d.wav",
+          "startFrame": 548,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep22/scene-02-4-504745b2.wav",
+          "startFrame": 712,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 846
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "Standalone shell = cái vỏ cắm điện",
+        "bullets": [
+          {
+            "icon": "🐚",
+            "text": "App Expo trắng tinh, không logic riêng",
+            "sentence": 1
+          },
+          {
+            "icon": "🔌",
+            "text": "Nhiệm vụ duy nhất: bật 1 căn hộ lên",
+            "sentence": 2
+          },
+          {
+            "icon": "🏠",
+            "text": "Căn hộ ra studio riêng — nội thất giữ nguyên",
+            "sentence": 3
+          },
+          {
+            "icon": "🏢",
+            "text": "Công ty thật: mỗi mini một shell",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep22/scene-03-0-3e9855d2.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep22/scene-03-1-90e00fc2.wav",
+          "startFrame": 172,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep22/scene-03-2-adc4c5ca.wav",
+          "startFrame": 288,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep22/scene-03-3-f3d1313c.wav",
+          "startFrame": 400,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep22/scene-03-4-803fb014.wav",
+          "startFrame": 579,
+          "durationInFrames": 128
+        }
+      ],
+      "durationInFrames": 725
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "Tạo vỏ trong khu apps",
+        "commands": [
+          {
+            "cmd": "cd apps && npx create-expo-app food-standalone --template blank-typescript",
+            "output": "✅ Your project is ready!",
+            "sentence": 1
+          },
+          {
+            "cmd": "cd .. && npm install",
+            "output": "node_modules/@vietsuper/mini-food -> packages/mini-food   ← vỏ dùng được ngay",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep22/scene-04-0-5d89fbb9.wav",
+          "startFrame": 0,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep22/scene-04-1-f81b36ed.wav",
+          "startFrame": 169,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep22/scene-04-2-05978061.wav",
+          "startFrame": 285,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep22/scene-04-3-9756427a.wav",
+          "startFrame": 485,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 667
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "apps/food-standalone/App.tsx — TOÀN BỘ FILE",
+        "language": "tsx",
+        "code": "import { FoodScreen } from '@vietsuper/mini-food';\nimport { StatusBar } from 'expo-status-bar';\nimport { SafeAreaView, StyleSheet } from 'react-native';\n\nexport default function App() {\n  return (\n    <SafeAreaView style={styles.container}>\n      <FoodScreen />\n      <StatusBar style=\"auto\" />\n    </SafeAreaView>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    backgroundColor: '#f8fafc',\n  },\n});",
+        "steps": [
+          {
+            "from": 1,
+            "to": 19,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 12,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 3
+          },
+          {
+            "from": 9,
+            "to": 9,
+            "sentence": 4
+          },
+          {
+            "from": 1,
+            "to": 19,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep22/scene-05-0-77576bc1.wav",
+          "startFrame": 0,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep22/scene-05-1-b9d761bc.wav",
+          "startFrame": 152,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep22/scene-05-2-183b4241.wav",
+          "startFrame": 403,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep22/scene-05-3-624c97b2.wav",
+          "startFrame": 517,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep22/scene-05-4-baecaa5f.wav",
+          "startFrame": 727,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep22/scene-05-5-75515181.wav",
+          "startFrame": 853,
+          "durationInFrames": 113
+        }
+      ],
+      "durationInFrames": 984
+    },
+    {
+      "id": "scene-06",
+      "type": "diagram",
+      "visual": {
+        "title": "Một căn hộ — hai cuộc đời",
+        "boxes": [
+          {
+            "id": "standalone",
+            "label": "food-standalone",
+            "emoji": "🚀"
+          },
+          {
+            "id": "mini",
+            "label": "mini-food",
+            "emoji": "📦"
+          },
+          {
+            "id": "host",
+            "label": "ViệtSuper",
+            "emoji": "🏙️"
+          }
+        ],
+        "flows": [
+          {
+            "from": 1,
+            "to": 0,
+            "label": "cuộc đời 1: chạy riêng",
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "cuộc đời 2: vào tab",
+            "sentence": 3
+          },
+          {
+            "from": 2,
+            "to": 1,
+            "label": "sửa 1 lần — cả 2 nhận",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep22/scene-06-0-5c891eb8.wav",
+          "startFrame": 0,
+          "durationInFrames": 70
+        },
+        {
+          "file": "audio/ep22/scene-06-1-ef4d450d.wav",
+          "startFrame": 78,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep22/scene-06-2-9bf73b35.wav",
+          "startFrame": 192,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep22/scene-06-3-e59100df.wav",
+          "startFrame": 337,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep22/scene-06-4-052eb320.wav",
+          "startFrame": 470,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 632
+    },
+    {
+      "id": "scene-07",
+      "type": "phone",
+      "visual": {
+        "title": "Ra ở riêng thành công 🚀",
+        "screens": [
+          {
+            "src": "screens/ep19/standalone-0.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep19/standalone-1mon.png",
+            "sentence": 3
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🚫",
+            "text": "Mép dưới: KHÔNG có thanh tab nào",
+            "sentence": 1
+          },
+          {
+            "icon": "🍜",
+            "text": "App Đồ ăn nguyên con, một mình một cõi",
+            "sentence": 2
+          },
+          {
+            "icon": "🛒",
+            "text": "Thêm món: 1 món · 40.000đ — chạy hoàn hảo",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep22/scene-07-0-5fdbe9c4.wav",
+          "startFrame": 0,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep22/scene-07-1-8676294a.wav",
+          "startFrame": 164,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep22/scene-07-2-895a911d.wav",
+          "startFrame": 297,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep22/scene-07-3-866e6102.wav",
+          "startFrame": 425,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep22/scene-07-4-b8850f45.wav",
+          "startFrame": 589,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 739
+    },
+    {
+      "id": "scene-08",
+      "type": "concept",
+      "visual": {
+        "title": "Một ngày của team Đồ ăn",
+        "bullets": [
+          {
+            "icon": "🌅",
+            "text": "Sáng: dev trên standalone, reload nhẹ tênh",
+            "sentence": 1
+          },
+          {
+            "icon": "🕵️",
+            "text": "Chiều: tester test đúng app nhỏ đó",
+            "sentence": 2
+          },
+          {
+            "icon": "🌆",
+            "text": "Cuối ngày: mở app chủ kiểm tra hòa nhập",
+            "sentence": 3
+          },
+          {
+            "icon": "🕊️",
+            "text": "Cả tuần đụng app chủ vài lần — tự do!",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep22/scene-08-0-ff6390cb.wav",
+          "startFrame": 0,
+          "durationInFrames": 87
+        },
+        {
+          "file": "audio/ep22/scene-08-1-b7559ce4.wav",
+          "startFrame": 95,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep22/scene-08-2-c577fade.wav",
+          "startFrame": 250,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep22/scene-08-3-167b7606.wav",
+          "startFrame": 405,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep22/scene-08-4-390f43e6.wav",
+          "startFrame": 550,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 700
+    },
+    {
+      "id": "scene-09",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "Shell = vỏ mỏng bật mini-app toàn màn hình",
+            "sentence": 0
+          },
+          {
+            "text": "19 dòng đổi lấy tốc độ + độc lập + dễ test",
+            "sentence": 1
+          },
+          {
+            "text": "Một nguồn code — hai cuộc đời",
+            "sentence": 0
+          }
+        ],
+        "next": "Tập 4 (cuối): Gộp vào app chủ + làm mini-app mới từ A-Z 🎬"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep22/scene-09-0-73b258bb.wav",
+          "startFrame": 0,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep22/scene-09-1-21dd30f4.wav",
+          "startFrame": 174,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep22/scene-09-2-95372475.wav",
+          "startFrame": 350,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep22/scene-09-3-1730b830.wav",
+          "startFrame": 488,
+          "durationInFrames": 219
+        }
+      ],
+      "durationInFrames": 725
+    }
+  ]
+}

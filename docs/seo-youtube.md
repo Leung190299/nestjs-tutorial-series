@@ -697,6 +697,111 @@ Xem từ đầu series Super App: [LINK M1]
 ```
 **Tags:** `monorepo, npm workspaces, mini app, super app architecture, kiến trúc super app, micro frontend mobile, react native monorepo, expo monorepo, tách module, grab architecture, wechat mini app, react native tiếng việt, học react native, việtsuper, package json workspaces`
 
+## SERIES MINI-APP — "Mini-App từ A đến Z" (4 tập chi tiết)
+
+> Playlist RIÊNG: **"Mini-App từ A đến Z 🇻🇳"** — series độc lập, KHÔNG đánh số theo series Super App (đăng riêng được ngay). Đào sâu kiến trúc mini-app từng bước một; ep19 (Super App #7) đóng vai trailer tổng quan trỏ về playlist này. Code: `demo-miniapps/`.
+
+### Mini-App #1 — Monorepo từ con số 0 (4:09)
+
+**Tiêu đề:** Monorepo & npm workspaces từ số 0: nền móng của mọi super app | Mini-App A-Z #1
+**Mô tả:**
+```
+Trước khi tách app thành các mini-app độc lập, bạn cần hiểu MỘT thứ cho thật chắc: monorepo. Tập này đi từ thư mục trống → npm init → 8 dòng package.json → soi tận mắt symlink mà npm tạo ra để "nối" các package. Mỗi dòng config đều được giải thích tại sao.
+
+Ví von xuyên suốt: monorepo = khu chung cư 🏙️, workspaces = ban quản lý, symlink = lối đi tắt giữa các căn hộ.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu series mới
+0:22 Nỗi khổ của multi-repo
+0:48 Monorepo = khu chung cư
+1:10 npm workspaces = ban quản lý (có sẵn trong npm!)
+1:39 Hai khu: packages (linh kiện) & apps (sản phẩm)
+2:02 Dựng từ thư mục trống: mkdir + npm init
+2:21 8 dòng package.json — soi TỪNG dòng
+2:55 npm install + soi symlink tận mắt
+3:23 3 quy tắc vàng của monorepo
+3:46 Tóm tắt & hẹn tập 2
+
+📦 Source code (demo-miniapps/): https://github.com/Leung190299/nestjs-tutorial-series
+Tập 2: [LINK MA2]
+#monorepo #npmworkspaces #reactnative #miniapp #laptrinh
+```
+**Tags:** `monorepo, npm workspaces, monorepo là gì, workspaces tutorial, symlink node modules, kiến trúc monorepo, mini app, super app, react native monorepo, npm init, package json, học lập trình, mini app tiếng việt, grab architecture, multi repo vs monorepo`
+
+### Mini-App #2 — Xây mini-app đầu tiên (3:24)
+
+**Tiêu đề:** Sổ đỏ, cửa chính, căn phòng: giải phẫu một mini-app đúng chuẩn | Mini-App A-Z #2
+**Mô tả:**
+```
+Một mini-app đúng chuẩn chỉ cần đúng 3 thứ: package.json (sổ đỏ), index.ts (cửa chính), và màn hình (căn phòng). Tập này xây mini-food từng bước — và dành hẳn một phần giải thích peerDependencies: vì sao khai react ở PEER chứ không phải dependencies (sai một chữ = lỗi hooks 2 bản React kinh điển).
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu
+0:14 Giải phẫu mini-app: 3 bộ phận
+0:35 Sổ đỏ package.json — soi từng trường (scope, main, version)
+1:11 peerDependencies: đừng khiêng máy phát điện vào căn hộ!
+1:37 Cửa chính index.ts — 1 dòng, triết lý đóng gói
+1:58 Căn phòng FoodScreen: data tự túc
+2:15 Logic giỏ hàng trong package
+2:41 Căn hộ hoàn thiện (ảnh thật)
+2:56 Tóm tắt & hẹn tập 3
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Tập 1: [LINK MA1] · Tập 3: [LINK MA3]
+#miniapp #peerdependencies #reactnative #package #laptrinh
+```
+**Tags:** `peer dependencies, peerdependencies là gì, tạo npm package, package json main, scope npm, mini app, react native package, export index, đóng gói component, monorepo package, two reacts error, invalid hook call, mini app tiếng việt, học react native, kiến trúc mini app`
+
+### Mini-App #3 — Cho mini-app ra ở riêng (3:35)
+
+**Tiêu đề:** Mini-app chạy MỘT MÌNH không cần app chủ: standalone shell | Mini-App A-Z #3
+**Mô tả:**
+```
+Khoảnh khắc định nghĩa kiến trúc mini-app: tính năng Đồ ăn chạy MỘT MÌNH trên iPhone — không tab bar, không app chủ. Bí quyết là "standalone shell": một vỏ Expo 19 dòng import mini-app bằng tên và bật lên toàn màn hình. Đổi lại: dev loop siêu nhanh, team độc lập, tester nhận đúng một app nhỏ.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu
+0:14 Vì sao chạy riêng là siêu năng lực (dev/test/team)
+0:42 Standalone shell = cái vỏ cắm điện
+1:06 Tạo vỏ trong khu apps + workspaces tự nhận
+1:28 App.tsx 19 dòng — soi từng phần (SafeAreaView vì sao cần)
+2:01 Một căn hộ — hai cuộc đời
+2:22 DEMO: chạy một mình trên iPhone thật 🚀
+2:47 Một ngày làm việc của team Đồ ăn
+3:10 Tóm tắt & hẹn tập cuối
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Tập 2: [LINK MA2] · Tập 4: [LINK MA4]
+#miniapp #standalone #expo #reactnative #laptrinh
+```
+**Tags:** `standalone app, mini app chạy riêng, expo blank template, safeareaview, dev workflow, team độc lập, micro frontend mobile, react native mini app, app shell, mini app tiếng việt, học react native, kiến trúc grab, chạy độc lập, expo start, mini app từ a đến z`
+
+### Mini-App #4 (CUỐI) — Công thức 4 bước (3:42)
+
+**Tiêu đề:** Thêm mini-app MỚI trong vài phút: công thức 4 bước | Mini-App A-Z #4 (cuối)
+**Mô tả:**
+```
+Tập tốt nghiệp: kiểm chứng công thức bằng cách xây MỚI nguyên mini-app Xem phim 🎬 từ số 0 đến lên hình — tạo căn hộ (package) → viết căn phòng (CinemaScreen với nút Đặt vé biến hình) → cắm tab vào app chủ (3 dòng) → bật card ở trang chủ (2 dòng diff). Card "Xem phim" mờ câm từ series Super App chính thức thành dịch vụ thật, tab bar lên 5 nút.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu tập cuối
+0:19 Ôn: tab app chủ = 3 dòng
+0:38 CÔNG THỨC 4 BƯỚC (thuộc lòng là vô địch)
+1:02 Bước 1: căn hộ mini-cinema (sổ đỏ + cửa chính)
+1:21 Bước 2: CinemaScreen — 3 phim Việt + reduce
+1:48 Nút "Đặt vé" biến hình (toggle + style 2 lớp)
+2:08 Bước 3: cắm tab cinema vào app chủ
+2:26 Bước 4: bật card Xem phim (2 dòng diff)
+2:46 NGHIỆM THU: 5 tab, 2 vé 185.000đ trên iPhone thật
+3:13 Tốt nghiệp + bài tập mini-booking 🛵
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series
+Xem từ đầu: [LINK MA1]
+💬 Comment thành quả mini-booking của bạn!
+#miniapp #reactnative #monorepo #superapp #laptrinh
+```
+**Tags:** `mini app mới, công thức mini app, thêm tính năng app, react native tabs, expo router tab, toggle button, mini app từ a đến z, monorepo workflow, super app architecture, grab mini app, học react native, kiến trúc mobile, mini app tiếng việt, việtsuper, mini cinema`
+
 ## Thumbnail
 
 Đã render sẵn tại `video/out/thumbs/ep0X-thumb.png` (1280×720, <2MB, chuẩn YouTube). Muốn sửa chữ/bố cục: sửa mảng `thumbnails` trong `video/src/Root.tsx` hoặc component `video/src/Thumbnail.tsx`, rồi chạy `npx remotion still Thumb0X out/thumbs/ep0X-thumb.png`.

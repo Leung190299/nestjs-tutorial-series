@@ -1,0 +1,184 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại series Mini-App từ A đến Z!",
+      "Căn hộ mini-food đã xây xong ở tập trước. Hôm nay là khoảnh khắc định nghĩa cả kiến trúc này:",
+      "cho mini-app RA Ở RIÊNG: chạy một mình trên điện thoại, không tab bar, không app chủ, không anh em nào bên cạnh."
+    ],
+    "visual": {
+      "title": "Cho mini-app ra ở riêng",
+      "subtitle": "Mini-App từ A đến Z · Tập 3 · Chạy độc lập",
+      "badge": "Series Mini-App"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Khoan đã: vì sao phải chạy riêng? Đây không phải trò biểu diễn đâu, nó đổi cả cách team làm việc.",
+      "Thứ nhất: tốc độ. App chủ càng phình to, mỗi lần khởi động càng chậm: chạy riêng một mini thì nhẹ tênh, sửa code thấy kết quả tức thì.",
+      "Thứ hai: độc lập. Team Đồ ăn dev cả ngày trên app riêng của mình, không đợi team Ví, không sợ code người khác làm sập môi trường.",
+      "Thứ ba: kiểm thử. Tester nhận đúng một app nhỏ chỉ chứa tính năng cần test: khoanh vùng lỗi dễ hơn hẳn.",
+      "Và cái giá phải trả? Gần như bằng không: một cái vỏ Expo mỏng dính."
+    ],
+    "visual": {
+      "title": "Vì sao chạy riêng là siêu năng lực?",
+      "bullets": [
+        {"icon": "⚡", "text": "Nhẹ tênh — sửa code thấy ngay", "sentence": 1},
+        {"icon": "👥", "text": "Team dev độc lập, không đợi nhau", "sentence": 2},
+        {"icon": "🔍", "text": "Tester nhận đúng 1 app nhỏ để test", "sentence": 3},
+        {"icon": "🪶", "text": "Giá phải trả: một cái vỏ mỏng dính", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "concept",
+    "narration": [
+      "Cái vỏ đó gọi là STANDALONE SHELL: nghe sang, bản chất cực đơn giản.",
+      "Nó là một app Expo trắng tinh, gần như không có code gì của riêng mình.",
+      "Nhiệm vụ duy nhất: cắm điện cho MỘT căn hộ và bật nó lên toàn màn hình.",
+      "Ví von: căn hộ mini-food chuyển ra ở studio riêng: vẫn nguyên đồ đạc nội thất, chỉ đổi cái vỏ nhà bên ngoài.",
+      "Mỗi mini-app trong công ty thật thường có một shell như vậy nằm cạnh trong khu apps."
+    ],
+    "visual": {
+      "title": "Standalone shell = cái vỏ cắm điện",
+      "bullets": [
+        {"icon": "🐚", "text": "App Expo trắng tinh, không logic riêng", "sentence": 1},
+        {"icon": "🔌", "text": "Nhiệm vụ duy nhất: bật 1 căn hộ lên", "sentence": 2},
+        {"icon": "🏠", "text": "Căn hộ ra studio riêng — nội thất giữ nguyên", "sentence": 3},
+        {"icon": "🏢", "text": "Công ty thật: mỗi mini một shell", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Tạo vỏ: đứng trong thư mục apps của khu chung cư, chạy create-expo-app với template blank TypeScript.",
+      "Tên app: food-standalone: nhìn tên biết ngay nó là vỏ chạy riêng của ai.",
+      "Điểm tinh tế: vì nó nằm trong apps, ban quản lý workspaces TỰ ĐỘNG nhận nó làm thành viên: không khai báo gì thêm.",
+      "Chạy npm install ở gốc một lần: lối tắt symlink đến mini-food lập tức có sẵn cho vỏ này dùng."
+    ],
+    "visual": {
+      "title": "Tạo vỏ trong khu apps",
+      "commands": [
+        {"cmd": "cd apps && npx create-expo-app food-standalone --template blank-typescript", "output": "✅ Your project is ready!", "sentence": 1},
+        {"cmd": "cd .. && npm install", "output": "node_modules/@vietsuper/mini-food -> packages/mini-food   ← vỏ dùng được ngay", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Toàn bộ code của cái vỏ nằm trong một file App.tsx này: mười chín dòng, đi từng phần nhé.",
+      "Dòng import quan trọng nhất: FoodScreen từ a còng vietsuper trên mini-food: gọi bằng TÊN package, đúng quy tắc vàng tập một, không một dấu chấm chấm xẹt nào.",
+      "Component App: trả về FoodScreen bọc trong SafeAreaView.",
+      "SafeAreaView là gì? Vùng an toàn: đẩy nội dung tránh tai thỏ và vạch home của iPhone: thiếu nó là thực đơn bị che mất đầu.",
+      "StatusBar auto cho đồng hồ với pin hiển thị đẹp trên nền sáng.",
+      "Hết. Cái vỏ đúng nghĩa chỉ là vỏ: mọi ruột gan nằm trong package."
+    ],
+    "visual": {
+      "filename": "apps/food-standalone/App.tsx — TOÀN BỘ FILE",
+      "language": "tsx",
+      "code": "import { FoodScreen } from '@vietsuper/mini-food';\nimport { StatusBar } from 'expo-status-bar';\nimport { SafeAreaView, StyleSheet } from 'react-native';\n\nexport default function App() {\n  return (\n    <SafeAreaView style={styles.container}>\n      <FoodScreen />\n      <StatusBar style=\"auto\" />\n    </SafeAreaView>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    backgroundColor: '#f8fafc',\n  },\n});",
+      "steps": [
+        {"from": 1, "to": 19, "sentence": 0},
+        {"from": 1, "to": 1, "sentence": 1},
+        {"from": 5, "to": 12, "sentence": 2},
+        {"from": 7, "to": 7, "sentence": 3},
+        {"from": 9, "to": 9, "sentence": 4},
+        {"from": 1, "to": 19, "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "diagram",
+    "narration": [
+      "Nhìn lại bức tranh: một căn hộ, hai cuộc đời.",
+      "FoodScreen sống trong package mini-food: MỘT nguồn code duy nhất.",
+      "Cuộc đời thứ nhất: được vỏ food-standalone bật lên: thành app độc lập cho team dev và test.",
+      "Cuộc đời thứ hai: được app chủ ViệtSuper gắn vào tab: thành một tính năng của siêu ứng dụng.",
+      "Sửa code một lần trong package: CẢ HAI cuộc đời cùng cập nhật: không copy, không lệch phiên bản."
+    ],
+    "visual": {
+      "title": "Một căn hộ — hai cuộc đời",
+      "boxes": [
+        {"id": "standalone", "label": "food-standalone", "emoji": "🚀"},
+        {"id": "mini", "label": "mini-food", "emoji": "📦"},
+        {"id": "host", "label": "ViệtSuper", "emoji": "🏙️"}
+      ],
+      "flows": [
+        {"from": 1, "to": 0, "label": "cuộc đời 1: chạy riêng", "sentence": 2},
+        {"from": 1, "to": 2, "label": "cuộc đời 2: vào tab", "sentence": 3},
+        {"from": 2, "to": 1, "label": "sửa 1 lần — cả 2 nhận", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "phone",
+    "narration": [
+      "Khoảnh khắc sự thật: expo start trong food-standalone, và đây, ảnh chụp thật từ iPhone.",
+      "Soi kỹ mép dưới màn hình nhé: KHÔNG có thanh tab: không Trang chủ, không Ví, không Ưu đãi.",
+      "Vì đây không phải ViệtSuper: đây là app Đồ ăn, nguyên con, một mình một cõi.",
+      "Bấm thêm một cơm tấm: một món, bốn mươi nghìn: giỏ hàng chạy hoàn hảo, chẳng cần app chủ nào chống lưng.",
+      "Mỗi tính năng như một app riêng biệt: điều đó vừa xảy ra trước mắt bạn theo đúng nghĩa đen."
+    ],
+    "visual": {
+      "title": "Ra ở riêng thành công 🚀",
+      "screens": [
+        {"src": "screens/ep19/standalone-0.png", "sentence": 0},
+        {"src": "screens/ep19/standalone-1mon.png", "sentence": 3}
+      ],
+      "bullets": [
+        {"icon": "🚫", "text": "Mép dưới: KHÔNG có thanh tab nào", "sentence": 1},
+        {"icon": "🍜", "text": "App Đồ ăn nguyên con, một mình một cõi", "sentence": 2},
+        {"icon": "🛒", "text": "Thêm món: 1 món · 40.000đ — chạy hoàn hảo", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "concept",
+    "narration": [
+      "Quy trình làm việc của team thật với kiến trúc này trông thế nào?",
+      "Sáng: developer đồ ăn mở food-standalone, code tính năng mới, hot reload nhẹ tênh cả ngày.",
+      "Chiều: đẩy code lên, tester cũng test ngay trên app standalone đó: gọn phạm vi, dễ khoanh lỗi.",
+      "Cuối ngày: mở app chủ ViệtSuper kiểm tra một vòng xem căn hộ hòa nhập tòa nhà ổn không.",
+      "Cả tuần có khi chỉ đụng app chủ vài lần: đó là sự tự do mà bạn vừa xây được."
+    ],
+    "visual": {
+      "title": "Một ngày của team Đồ ăn",
+      "bullets": [
+        {"icon": "🌅", "text": "Sáng: dev trên standalone, reload nhẹ tênh", "sentence": 1},
+        {"icon": "🕵️", "text": "Chiều: tester test đúng app nhỏ đó", "sentence": 2},
+        {"icon": "🌆", "text": "Cuối ngày: mở app chủ kiểm tra hòa nhập", "sentence": 3},
+        {"icon": "🕊️", "text": "Cả tuần đụng app chủ vài lần — tự do!", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "outro",
+    "narration": [
+      "Tóm lại: standalone shell là cái vỏ Expo mỏng, import mini-app bằng tên và bật nó lên toàn màn hình.",
+      "Mười chín dòng App.tsx: đổi lại là tốc độ dev, sự độc lập của team, và phạm vi test gọn gàng.",
+      "Bài tập nhỏ: tự tạo wallet-standalone cho căn hộ Ví: đủ ba bước như hôm nay là chạy.",
+      "Tập sau, tập cuối: gộp tất cả vào app chủ, và làm MỚI nguyên một mini-app từ A đến Z trong vài phút: công thức trọn gói chờ bạn. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Hẹn gặp lại! 👋",
+      "summary": [
+        {"text": "Shell = vỏ mỏng bật mini-app toàn màn hình", "sentence": 0},
+        {"text": "19 dòng đổi lấy tốc độ + độc lập + dễ test", "sentence": 1},
+        {"text": "Một nguồn code — hai cuộc đời", "sentence": 0}
+      ],
+      "next": "Tập 4 (cuối): Gộp vào app chủ + làm mini-app mới từ A-Z 🎬"
+    }
+  }
+]

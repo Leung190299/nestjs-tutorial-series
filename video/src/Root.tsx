@@ -22,6 +22,10 @@ import ep16 from './data/ep16.timing.json';
 import ep17 from './data/ep17.timing.json';
 import ep18 from './data/ep18.timing.json';
 import ep19 from './data/ep19.timing.json';
+import ep20 from './data/ep20.timing.json';
+import ep21 from './data/ep21.timing.json';
+import ep22 from './data/ep22.timing.json';
+import ep23 from './data/ep23.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -44,6 +48,10 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode17', timing: ep17 as unknown as EpisodeTiming},
   {id: 'Episode18', timing: ep18 as unknown as EpisodeTiming},
   {id: 'Episode19', timing: ep19 as unknown as EpisodeTiming},
+  {id: 'Episode20', timing: ep20 as unknown as EpisodeTiming},
+  {id: 'Episode21', timing: ep21 as unknown as EpisodeTiming},
+  {id: 'Episode22', timing: ep22 as unknown as EpisodeTiming},
+  {id: 'Episode23', timing: ep23 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -257,6 +265,56 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       image: 'screens/ep19/standalone-1mon.png',
       badgeEmoji: '📦',
       seriesTag: 'Super App với React Native 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb20',
+    props: {
+      badge: 'MINI-APP 1',
+      line1: 'MONOREPO',
+      line2: 'TỪ SỐ 0',
+      subtitle: 'npm workspaces · 8 dòng',
+      variant: 'ep9',
+      seriesTag: 'Mini-App từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb21',
+    props: {
+      badge: 'MINI-APP 2',
+      line1: 'XÂY CĂN HỘ',
+      line2: 'MINI-FOOD',
+      subtitle: 'package.json · peerDeps · export',
+      variant: 'shot',
+      image: 'screens/ep19/standalone-0.png',
+      badgeEmoji: '🏠',
+      seriesTag: 'Mini-App từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb22',
+    props: {
+      badge: 'MINI-APP 3',
+      line1: 'CHO RA',
+      line2: 'Ở RIÊNG',
+      subtitle: 'Standalone shell · 19 dòng',
+      variant: 'shot',
+      image: 'screens/ep19/standalone-1mon.png',
+      badgeEmoji: '🚀',
+      seriesTag: 'Mini-App từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb23',
+    props: {
+      badge: 'MINI-APP 4 · CUỐI',
+      line1: 'CÔNG THỨC',
+      line2: '4 BƯỚC',
+      subtitle: 'Thêm mini-app mới trong vài phút',
+      variant: 'shot',
+      image: 'screens/ep23/cinema-2ve.png',
+      badgeEmoji: '🎬',
+      seriesTag: 'Mini-App từ A đến Z 🇻🇳',
     },
   },
 ];

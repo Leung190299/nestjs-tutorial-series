@@ -1,0 +1,555 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Monorepo từ con số 0",
+        "subtitle": "Mini-App từ A đến Z · Tập 1",
+        "badge": "Series Mini-App · Nền móng"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep20/scene-01-0-45456623.wav",
+          "startFrame": 0,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep20/scene-01-1-7db4427f.wav",
+          "startFrame": 114,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep20/scene-01-2-0d875960.wav",
+          "startFrame": 346,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep20/scene-01-3-d3a5f40e.wav",
+          "startFrame": 486,
+          "durationInFrames": 173
+        }
+      ],
+      "durationInFrames": 677
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Nỗi khổ của multi-repo",
+        "bullets": [
+          {
+            "icon": "🏘️",
+            "text": "Mỗi tính năng một repo, rải rác khắp nơi",
+            "sentence": 1
+          },
+          {
+            "icon": "📋",
+            "text": "Dùng chung code = copy dán, lệch nhau dần",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "Sửa 1 lỗi chung = sửa N nơi, N lần duyệt",
+            "sentence": 3
+          },
+          {
+            "icon": "📉",
+            "text": "Càng nhiều tính năng càng đuối",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep20/scene-02-0-fcaf6e6e.wav",
+          "startFrame": 0,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep20/scene-02-1-597a0a9c.wav",
+          "startFrame": 160,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep20/scene-02-2-0f684549.wav",
+          "startFrame": 276,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep20/scene-02-3-86129f79.wav",
+          "startFrame": 488,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep20/scene-02-4-50d0d2ff.wav",
+          "startFrame": 616,
+          "durationInFrames": 140
+        }
+      ],
+      "durationInFrames": 774
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "Monorepo = khu chung cư 🏙️",
+        "bullets": [
+          {
+            "icon": "🏙️",
+            "text": "Tất cả về một khu — vẫn phòng ai nấy ở",
+            "sentence": 1
+          },
+          {
+            "icon": "🏠",
+            "text": "Mỗi tính năng một căn hộ có sổ đỏ riêng",
+            "sentence": 2
+          },
+          {
+            "icon": "🛗",
+            "text": "Chung địa chỉ, chung thang máy",
+            "sentence": 3
+          },
+          {
+            "icon": "🏆",
+            "text": "Google, Meta, Grab đều dùng",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep20/scene-03-0-9875c85e.wav",
+          "startFrame": 0,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep20/scene-03-1-11711c36.wav",
+          "startFrame": 162,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep20/scene-03-2-dbc94c6e.wav",
+          "startFrame": 302,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep20/scene-03-3-eab9f5b4.wav",
+          "startFrame": 411,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep20/scene-03-4-fb13752a.wav",
+          "startFrame": 549,
+          "durationInFrames": 89
+        }
+      ],
+      "durationInFrames": 656
+    },
+    {
+      "id": "scene-04",
+      "type": "concept",
+      "visual": {
+        "title": "npm workspaces = ban quản lý",
+        "bullets": [
+          {
+            "icon": "📦",
+            "text": "Có sẵn trong npm — không cài gì thêm",
+            "sentence": 0
+          },
+          {
+            "icon": "🗂️",
+            "text": "Khai thành viên ở package.json gốc",
+            "sentence": 1
+          },
+          {
+            "icon": "🔗",
+            "text": "npm tự NỐI: import nhau bằng TÊN",
+            "sentence": 3
+          },
+          {
+            "icon": "🚫",
+            "text": "Hết cảnh ../../.. dài dằng dặc",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep20/scene-04-0-ed4b5f68.wav",
+          "startFrame": 0,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep20/scene-04-1-09ae8285.wav",
+          "startFrame": 229,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep20/scene-04-2-16eb2d11.wav",
+          "startFrame": 377,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep20/scene-04-3-911016e5.wav",
+          "startFrame": 570,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep20/scene-04-4-d7a33ef1.wav",
+          "startFrame": 739,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 887
+    },
+    {
+      "id": "scene-05",
+      "type": "diagram",
+      "visual": {
+        "title": "Hai khu của monorepo",
+        "boxes": [
+          {
+            "id": "root",
+            "label": "package.json gốc",
+            "emoji": "📋"
+          },
+          {
+            "id": "packages",
+            "label": "packages/*",
+            "emoji": "🏠"
+          },
+          {
+            "id": "apps",
+            "label": "apps/*",
+            "emoji": "📱"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "quản lý",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "cung cấp linh kiện",
+            "sentence": 3
+          },
+          {
+            "from": 2,
+            "to": 0,
+            "label": "import bằng tên",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep20/scene-05-0-d5e28078.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep20/scene-05-1-27918856.wav",
+          "startFrame": 107,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep20/scene-05-2-4991874f.wav",
+          "startFrame": 252,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep20/scene-05-3-2d653fcf.wav",
+          "startFrame": 388,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep20/scene-05-4-34479c7b.wav",
+          "startFrame": 528,
+          "durationInFrames": 120
+        }
+      ],
+      "durationInFrames": 666
+    },
+    {
+      "id": "scene-06",
+      "type": "terminal",
+      "visual": {
+        "title": "Dựng khung từ thư mục trống",
+        "commands": [
+          {
+            "cmd": "mkdir demo-miniapps && cd demo-miniapps",
+            "output": "",
+            "sentence": 1
+          },
+          {
+            "cmd": "npm init -y",
+            "output": "Wrote to demo-miniapps/package.json",
+            "sentence": 1
+          },
+          {
+            "cmd": "mkdir packages apps",
+            "output": "packages/  apps/  ← hai khu đất sẵn sàng",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep20/scene-06-0-5af76981.wav",
+          "startFrame": 0,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep20/scene-06-1-c1a14f6f.wav",
+          "startFrame": 100,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep20/scene-06-2-0256903d.wav",
+          "startFrame": 288,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep20/scene-06-3-4e0d6609.wav",
+          "startFrame": 390,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep20/scene-06-4-335dcd93.wav",
+          "startFrame": 502,
+          "durationInFrames": 60
+        }
+      ],
+      "durationInFrames": 580
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "demo-miniapps/package.json — TOÀN BỘ FILE",
+        "language": "json",
+        "code": "{\n  \"name\": \"demo-miniapps\",\n  \"private\": true,\n  \"workspaces\": [\n    \"packages/*\",\n    \"apps/*\"\n  ]\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 2
+          },
+          {
+            "from": 4,
+            "to": 7,
+            "sentence": 3
+          },
+          {
+            "from": 5,
+            "to": 5,
+            "sentence": 4
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep20/scene-07-0-1767ba5c.wav",
+          "startFrame": 0,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep20/scene-07-1-b4e560e4.wav",
+          "startFrame": 176,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep20/scene-07-2-dbae6d58.wav",
+          "startFrame": 280,
+          "durationInFrames": 267
+        },
+        {
+          "file": "audio/ep20/scene-07-3-26b1ebc4.wav",
+          "startFrame": 555,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep20/scene-07-4-d2026b67.wav",
+          "startFrame": 662,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep20/scene-07-5-78886a5f.wav",
+          "startFrame": 882,
+          "durationInFrames": 113
+        }
+      ],
+      "durationInFrames": 1013
+    },
+    {
+      "id": "scene-08",
+      "type": "terminal",
+      "visual": {
+        "title": "Soi phép nối: symlink",
+        "commands": [
+          {
+            "cmd": "npm install",
+            "output": "added 599 packages in 12s",
+            "sentence": 0
+          },
+          {
+            "cmd": "ls -la node_modules/@vietsuper/",
+            "output": "mini-food   -> ../../packages/mini-food\nmini-wallet -> ../../packages/mini-wallet\nmini-promo  -> ../../packages/mini-promo   ← lối đi tắt!",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep20/scene-08-0-894f30fa.wav",
+          "startFrame": 0,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep20/scene-08-1-e17eb6a7.wav",
+          "startFrame": 119,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep20/scene-08-2-a648c2c0.wav",
+          "startFrame": 245,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep20/scene-08-3-bcb8a0a8.wav",
+          "startFrame": 455,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep20/scene-08-4-a6b878b4.wav",
+          "startFrame": 679,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 841
+    },
+    {
+      "id": "scene-09",
+      "type": "concept",
+      "visual": {
+        "title": "3 quy tắc vàng 🥇",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "npm install luôn chạy ở GỐC",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Import bằng TÊN — cấm ../ xuyên căn hộ",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Gốc không chứa code tính năng",
+            "sentence": 3
+          },
+          {
+            "icon": "🛡️",
+            "text": "Tránh được 90% lỗi monorepo người mới",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep20/scene-09-0-12eb039f.wav",
+          "startFrame": 0,
+          "durationInFrames": 84
+        },
+        {
+          "file": "audio/ep20/scene-09-1-c0d2045e.wav",
+          "startFrame": 92,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep20/scene-09-2-017a2a18.wav",
+          "startFrame": 268,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep20/scene-09-3-b69b896c.wav",
+          "startFrame": 418,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep20/scene-09-4-900aa937.wav",
+          "startFrame": 558,
+          "durationInFrames": 120
+        }
+      ],
+      "durationInFrames": 696
+    },
+    {
+      "id": "scene-10",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "Monorepo = khu chung cư · workspaces = ban quản lý",
+            "sentence": 0
+          },
+          {
+            "text": "Symlink nối các package — import bằng TÊN",
+            "sentence": 0
+          },
+          {
+            "text": "8 dòng package.json = xong nền móng",
+            "sentence": 1
+          }
+        ],
+        "next": "Tập 2: Xây mini-app đầu tiên — mini-food 🍜"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep20/scene-10-0-a75a491f.wav",
+          "startFrame": 0,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep20/scene-10-1-995de95e.wav",
+          "startFrame": 188,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep20/scene-10-2-65d51729.wav",
+          "startFrame": 333,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep20/scene-10-3-52fa9d9f.wav",
+          "startFrame": 490,
+          "durationInFrames": 168
+        }
+      ],
+      "durationInFrames": 676
+    }
+  ]
+}

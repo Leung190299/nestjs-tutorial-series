@@ -1,0 +1,490 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Xây mini-app đầu tiên",
+        "subtitle": "Mini-App từ A đến Z · Tập 2 · mini-food",
+        "badge": "Series Mini-App"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep21/scene-01-0-c9dc5008.wav",
+          "startFrame": 0,
+          "durationInFrames": 80
+        },
+        {
+          "file": "audio/ep21/scene-01-1-cce8e04c.wav",
+          "startFrame": 88,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep21/scene-01-2-727e9b79.wav",
+          "startFrame": 236,
+          "durationInFrames": 183
+        }
+      ],
+      "durationInFrames": 437
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Giải phẫu một mini-app",
+        "bullets": [
+          {
+            "icon": "📋",
+            "text": "Sổ đỏ — package.json: danh tính",
+            "sentence": 1
+          },
+          {
+            "icon": "🚪",
+            "text": "Cửa chính — index.ts: lối vào duy nhất",
+            "sentence": 2
+          },
+          {
+            "icon": "🛋️",
+            "text": "Căn phòng — FoodScreen: màn hình thật",
+            "sentence": 3
+          },
+          {
+            "icon": "♻️",
+            "text": "Công thức nhân bản cho mọi mini khác",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep21/scene-02-0-0016f929.wav",
+          "startFrame": 0,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep21/scene-02-1-0b7b8d47.wav",
+          "startFrame": 85,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep21/scene-02-2-c38128a8.wav",
+          "startFrame": 240,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep21/scene-02-3-ee9401c6.wav",
+          "startFrame": 361,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep21/scene-02-4-2c8b6182.wav",
+          "startFrame": 468,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 621
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "packages/mini-food/package.json — TOÀN BỘ FILE",
+        "language": "json",
+        "code": "{\n  \"name\": \"@vietsuper/mini-food\",\n  \"version\": \"1.0.0\",\n  \"main\": \"src/index.ts\",\n  \"peerDependencies\": {\n    \"react\": \"*\",\n    \"react-native\": \"*\"\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 2
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 3
+          },
+          {
+            "from": 5,
+            "to": 8,
+            "sentence": 4
+          },
+          {
+            "from": 6,
+            "to": 7,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep21/scene-03-0-9ba282ab.wav",
+          "startFrame": 0,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep21/scene-03-1-b0e73cfa.wav",
+          "startFrame": 133,
+          "durationInFrames": 284
+        },
+        {
+          "file": "audio/ep21/scene-03-2-59f9e848.wav",
+          "startFrame": 425,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep21/scene-03-3-eb015348.wav",
+          "startFrame": 561,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep21/scene-03-4-85fa52f9.wav",
+          "startFrame": 730,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep21/scene-03-5-6497c9c8.wav",
+          "startFrame": 902,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 1072
+    },
+    {
+      "id": "scene-04",
+      "type": "concept",
+      "visual": {
+        "title": "Vì sao PEER chứ không phải dependencies?",
+        "bullets": [
+          {
+            "icon": "⚡",
+            "text": "dependencies = tự khiêng máy phát điện vào",
+            "sentence": 1
+          },
+          {
+            "icon": "💥",
+            "text": "2 bản React cùng chạy = sập (lỗi hooks)",
+            "sentence": 2
+          },
+          {
+            "icon": "🏙️",
+            "text": "peer = dùng điện nước chung của tòa nhà",
+            "sentence": 3
+          },
+          {
+            "icon": "✍️",
+            "text": "\"Tôi cần điện — nhưng dùng điện chung\"",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep21/scene-04-0-3f0be217.wav",
+          "startFrame": 0,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep21/scene-04-1-858244d1.wav",
+          "startFrame": 138,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep21/scene-04-2-826e5121.wav",
+          "startFrame": 281,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep21/scene-04-3-80414191.wav",
+          "startFrame": 503,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep21/scene-04-4-a4112f6b.wav",
+          "startFrame": 653,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 787
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "packages/mini-food/src/index.ts — TOÀN BỘ FILE",
+        "language": "tsx",
+        "code": "export { FoodScreen } from './FoodScreen';",
+        "steps": [
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep21/scene-05-0-ae58174d.wav",
+          "startFrame": 0,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep21/scene-05-1-d8a43f95.wav",
+          "startFrame": 150,
+          "durationInFrames": 77
+        },
+        {
+          "file": "audio/ep21/scene-05-2-3ea33c5f.wav",
+          "startFrame": 235,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep21/scene-05-3-67d4c0c1.wav",
+          "startFrame": 443,
+          "durationInFrames": 183
+        }
+      ],
+      "durationInFrames": 644
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "packages/mini-food/src/FoodScreen.tsx (dữ liệu)",
+        "language": "tsx",
+        "code": "type MenuItem = { id: string; name: string; emoji: string; price: number };\n\nconst menu: MenuItem[] = [\n  { id: 'pho-bo', name: 'Phở bò', emoji: '🍜', price: 45000 },\n  { id: 'com-tam', name: 'Cơm tấm', emoji: '🍚', price: 40000 },\n  { id: 'banh-mi', name: 'Bánh mì', emoji: '🥖', price: 25000 },\n  { id: 'tra-sua', name: 'Trà sữa', emoji: '🧋', price: 30000 },\n];",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep21/scene-06-0-64a8f2bd.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep21/scene-06-1-0826b67d.wav",
+          "startFrame": 107,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep21/scene-06-2-9aee3ac1.wav",
+          "startFrame": 264,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep21/scene-06-3-9ba14b57.wav",
+          "startFrame": 412,
+          "durationInFrames": 87
+        }
+      ],
+      "durationInFrames": 517
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "packages/mini-food/src/FoodScreen.tsx (logic)",
+        "language": "tsx",
+        "code": "export function FoodScreen() {\n  const [cart, setCart] = useState<string[]>([]);\n\n  const total = cart.reduce((sum, id) => {\n    const item = menu.find((m) => m.id === id);\n    return sum + (item?.price ?? 0);\n  }, 0);",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 2
+          },
+          {
+            "from": 4,
+            "to": 7,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep21/scene-07-0-fec62169.wav",
+          "startFrame": 0,
+          "durationInFrames": 51
+        },
+        {
+          "file": "audio/ep21/scene-07-1-927895b2.wav",
+          "startFrame": 59,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep21/scene-07-2-60c05515.wav",
+          "startFrame": 312,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep21/scene-07-3-b166429a.wav",
+          "startFrame": 438,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep21/scene-07-4-78b3d5e7.wav",
+          "startFrame": 605,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 753
+    },
+    {
+      "id": "scene-08",
+      "type": "phone",
+      "visual": {
+        "title": "Căn hộ mini-food hoàn thiện 🍜",
+        "screens": [
+          {
+            "src": "screens/ep19/standalone-0.png",
+            "sentence": 0
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "📦",
+            "text": "Tất cả đóng gói trong packages/mini-food",
+            "sentence": 2
+          },
+          {
+            "icon": "🧠",
+            "text": "Data + logic + UI: căn hộ tự túc",
+            "sentence": 2
+          },
+          {
+            "icon": "🤫",
+            "text": "Ảnh từ app chạy độc lập — hồi sau sẽ rõ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep21/scene-08-0-16650c79.wav",
+          "startFrame": 0,
+          "durationInFrames": 82
+        },
+        {
+          "file": "audio/ep21/scene-08-1-9a2d4378.wav",
+          "startFrame": 90,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep21/scene-08-2-6f50a55d.wav",
+          "startFrame": 209,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep21/scene-08-3-88a8ef96.wav",
+          "startFrame": 342,
+          "durationInFrames": 111
+        }
+      ],
+      "durationInFrames": 471
+    },
+    {
+      "id": "scene-09",
+      "type": "outro",
+      "visual": {
+        "title": "Hẹn gặp lại! 👋",
+        "summary": [
+          {
+            "text": "Sổ đỏ + cửa chính + căn phòng = 1 mini-app",
+            "sentence": 0
+          },
+          {
+            "text": "react ở PEER — tránh ác mộng 2 bản React",
+            "sentence": 1
+          },
+          {
+            "text": "Căn hộ tự túc data + logic + UI",
+            "sentence": 0
+          }
+        ],
+        "next": "Tập 3: Cho mini-app ra ở riêng — chạy độc lập 🚀"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep21/scene-09-0-101b5757.wav",
+          "startFrame": 0,
+          "durationInFrames": 257
+        },
+        {
+          "file": "audio/ep21/scene-09-1-72ca0ed3.wav",
+          "startFrame": 265,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep21/scene-09-2-8fa279b6.wav",
+          "startFrame": 485,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep21/scene-09-3-34b8b7b2.wav",
+          "startFrame": 637,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 821
+    }
+  ]
+}
