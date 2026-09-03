@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'cinema_screen.dart';
 import 'food_screen.dart';
+import 'wallet_screen.dart';
 
 void main() => runApp(const DebugMenuApp());
 
@@ -24,6 +26,8 @@ class _MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final minis = <(String, String, Widget)>[
       ('🍜', 'Đồ ăn', const FoodScreen()),
+      ('👛', 'Ví', const WalletScreen()),
+      ('🎬', 'Xem phim', const CinemaScreen()),
     ];
     return Scaffold(
       appBar: AppBar(title: const Text('mini_flutter — menu debug')),
