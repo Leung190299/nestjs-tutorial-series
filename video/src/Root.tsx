@@ -28,6 +28,7 @@ import ep22 from './data/ep22.timing.json';
 import ep23 from './data/ep23.timing.json';
 import ep24 from './data/ep24.timing.json';
 import ep25 from './data/ep25.timing.json';
+import ep26 from './data/ep26.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -56,6 +57,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode23', timing: ep23 as unknown as EpisodeTiming},
   {id: 'Episode24', timing: ep24 as unknown as EpisodeTiming},
   {id: 'Episode25', timing: ep25 as unknown as EpisodeTiming},
+  {id: 'Episode26', timing: ep26 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -345,6 +347,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       image: 'screens/ep25/topup-success.png',
       badgeEmoji: '📱',
       seriesTag: 'Mini-App từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb26',
+    props: {
+      badge: 'FLUTTER MINI-APP 1',
+      line1: 'FLUTTER',
+      line2: 'APP THẬT',
+      subtitle: 'Module · Engine riêng · MethodChannel',
+      variant: 'shot',
+      image: 'screens/ep26/standalone-food-cart.png',
+      badgeEmoji: '🍜',
+      seriesTag: 'Mini-App với Flutter 🇻🇳',
     },
   },
 ];

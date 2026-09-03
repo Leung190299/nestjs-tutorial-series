@@ -1,0 +1,678 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Add-to-app: mini-app đúng nghĩa đen",
+        "subtitle": "Mini-App với Flutter · Tập 1/6 · Nhúng Flutter vào app native",
+        "badge": "Series Mini-App với Flutter · Tập 1"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep26/scene-01-0-c828ed9e.wav",
+          "startFrame": 0,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep26/scene-01-1-5aa63f3e.wav",
+          "startFrame": 268,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep26/scene-01-2-084577dc.wav",
+          "startFrame": 514,
+          "durationInFrames": 276
+        },
+        {
+          "file": "audio/ep26/scene-01-3-ee5bbae8.wav",
+          "startFrame": 798,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep26/scene-01-4-fe306d70.wav",
+          "startFrame": 1058,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 1314
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Module ≠ App: gộp lúc runtime, không phải lúc build",
+        "bullets": [
+          {
+            "icon": "📦",
+            "text": "RN cũ: gộp bằng workspace, lúc BUILD",
+            "sentence": 0
+          },
+          {
+            "icon": "⚙️",
+            "text": "Flutter: gộp lúc RUNTIME, 2 dự án tách biệt",
+            "sentence": 1
+          },
+          {
+            "icon": "🏗️",
+            "text": "flutter create --template=module (không phải app)",
+            "sentence": 2
+          },
+          {
+            "icon": "🚪",
+            "text": "Module = căn hộ lắp ghép, chờ được nhúng",
+            "sentence": 3
+          },
+          {
+            "icon": "💧",
+            "text": "Mỗi module 1 ENGINE = đồng hồ điện nước riêng",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep26/scene-02-0-c7a87af0.wav",
+          "startFrame": 0,
+          "durationInFrames": 288
+        },
+        {
+          "file": "audio/ep26/scene-02-1-f6a2db46.wav",
+          "startFrame": 296,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep26/scene-02-2-20f17724.wav",
+          "startFrame": 559,
+          "durationInFrames": 276
+        },
+        {
+          "file": "audio/ep26/scene-02-3-3f794f39.wav",
+          "startFrame": 843,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep26/scene-02-4-7432176e.wav",
+          "startFrame": 1070,
+          "durationInFrames": 281
+        }
+      ],
+      "durationInFrames": 1369
+    },
+    {
+      "id": "scene-03",
+      "type": "diagram",
+      "visual": {
+        "title": "Một cửa vào (@pragma) → một Engine riêng",
+        "boxes": [
+          {
+            "id": "module",
+            "label": "mini_flutter",
+            "emoji": "📦"
+          },
+          {
+            "id": "entry",
+            "label": "main_food.dart",
+            "emoji": "🚪"
+          },
+          {
+            "id": "engine",
+            "label": "FlutterEngine",
+            "emoji": "💧"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "cửa @pragma entry-point",
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "gọi tới → dựng engine",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep26/scene-03-0-e0b9c581.wav",
+          "startFrame": 0,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep26/scene-03-1-e3c43d58.wav",
+          "startFrame": 203,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep26/scene-03-2-68faea1b.wav",
+          "startFrame": 442,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep26/scene-03-3-e855e7ab.wav",
+          "startFrame": 695,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/ep26/scene-03-4-89e79068.wav",
+          "startFrame": 951,
+          "durationInFrames": 231
+        }
+      ],
+      "durationInFrames": 1200
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "Một dòng lệnh: sinh module Flutter",
+        "commands": [
+          {
+            "cmd": "fvm flutter create --template=module mini_flutter",
+            "output": "Creating project mini_flutter...\nWrote 68 files.\n\nAll done!",
+            "sentence": 1
+          },
+          {
+            "cmd": "cat mini_flutter/pubspec.yaml | tail -5",
+            "output": "  module:\n    androidX: true\n    androidPackage: com.vietsuper.mini_flutter\n    iosBundleIdentifier: com.vietsuper.miniFlutter",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep26/scene-04-0-a876d461.wav",
+          "startFrame": 0,
+          "durationInFrames": 58
+        },
+        {
+          "file": "audio/ep26/scene-04-1-db83e192.wav",
+          "startFrame": 66,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep26/scene-04-2-92d20894.wav",
+          "startFrame": 288,
+          "durationInFrames": 264
+        },
+        {
+          "file": "audio/ep26/scene-04-3-65ada71e.wav",
+          "startFrame": 560,
+          "durationInFrames": 204
+        }
+      ],
+      "durationInFrames": 782
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "lib/main_food.dart — TOÀN BỘ FILE (mini_flutter)",
+        "language": "clike",
+        "code": "import 'package:flutter/material.dart';\n\nimport 'food_screen.dart';\nimport 'mini_shell.dart';\n\n@pragma('vm:entry-point')\nvoid main() =>\n    runApp(const MiniAppShell(title: 'Đồ ăn ViệtSuper', child: FoodScreen()));",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 3
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep26/scene-05-0-1fcf7016.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep26/scene-05-1-08034545.wav",
+          "startFrame": 148,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep26/scene-05-2-2b57459c.wav",
+          "startFrame": 375,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep26/scene-05-3-1c31aac5.wav",
+          "startFrame": 571,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep26/scene-05-4-e6d96951.wav",
+          "startFrame": 771,
+          "durationInFrames": 221
+        }
+      ],
+      "durationInFrames": 1010
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "lib/food_screen.dart (dữ liệu 3 món)",
+        "language": "clike",
+        "code": "class FoodItem {\n  const FoodItem({\n    required this.id,\n    required this.name,\n    required this.emoji,\n    required this.price,\n  });\n\n  final String id;\n  final String name;\n  final String emoji;\n  final int price;\n}\n\nconst foods = [\n  FoodItem(id: 'pho', name: 'Phở bò', emoji: '🍜', price: 45000),\n  FoodItem(id: 'banhmi', name: 'Bánh mì thịt', emoji: '🥖', price: 25000),\n  FoodItem(id: 'comtam', name: 'Cơm tấm sườn', emoji: '🍛', price: 40000),\n];",
+        "steps": [
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 15,
+            "to": 19,
+            "sentence": 2
+          },
+          {
+            "from": 15,
+            "to": 19,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep26/scene-06-0-5259c67f.wav",
+          "startFrame": 0,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep26/scene-06-1-4f70fb28.wav",
+          "startFrame": 212,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep26/scene-06-2-b503d73e.wav",
+          "startFrame": 405,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep26/scene-06-3-f2c27523.wav",
+          "startFrame": 687,
+          "durationInFrames": 192
+        }
+      ],
+      "durationInFrames": 897
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "lib/food_screen.dart (Set giỏ hàng + fold tổng)",
+        "language": "clike",
+        "code": "class _FoodScreenState extends State<FoodScreen> {\n  final Set<String> _cart = {};\n\n  int get _total => foods\n      .where((f) => _cart.contains(f.id))\n      .fold(0, (sum, f) => sum + f.price);",
+        "steps": [
+          {
+            "from": 1,
+            "to": 2,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 3
+          },
+          {
+            "from": 2,
+            "to": 6,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep26/scene-07-0-ed15471c.wav",
+          "startFrame": 0,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep26/scene-07-1-cc965ce2.wav",
+          "startFrame": 174,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep26/scene-07-2-a92c9831.wav",
+          "startFrame": 362,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep26/scene-07-3-ba883637.wav",
+          "startFrame": 531,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep26/scene-07-4-d8a20869.wav",
+          "startFrame": 715,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 921
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "lib/mini_shell.dart (MethodChannel + _close)",
+        "language": "clike",
+        "code": "/// Kênh nói chuyện với app chủ. Chạy lẻ thì đầu dây bên kia không tồn tại.\nconst hostChannel = MethodChannel('vietsuper/host');\n\nclass MiniAppShell extends StatelessWidget {\n  const MiniAppShell({super.key, required this.title, required this.child});\n\n  final String title;\n  final Widget child;\n\n  Future<void> _close() async {\n    try {\n      await hostChannel.invokeMethod('close');\n    } on MissingPluginException {\n      // Chạy lẻ: không có host để đóng.\n    }\n  }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 16,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 10,
+            "to": 12,
+            "sentence": 3
+          },
+          {
+            "from": 13,
+            "to": 13,
+            "sentence": 4
+          },
+          {
+            "from": 11,
+            "to": 15,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep26/scene-08-0-8e7fb753.wav",
+          "startFrame": 0,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep26/scene-08-1-a7b3da57.wav",
+          "startFrame": 152,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep26/scene-08-2-037669f3.wav",
+          "startFrame": 400,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep26/scene-08-3-4503e6ea.wav",
+          "startFrame": 605,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep26/scene-08-4-83273610.wav",
+          "startFrame": 817,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep26/scene-08-5-9ddbf0d2.wav",
+          "startFrame": 1025,
+          "durationInFrames": 209
+        }
+      ],
+      "durationInFrames": 1252
+    },
+    {
+      "id": "scene-09",
+      "type": "terminal",
+      "visual": {
+        "title": "Chạy thẳng vào 1 cửa: -t lib/main_food.dart",
+        "commands": [
+          {
+            "cmd": "fvm flutter run -t lib/main_food.dart",
+            "output": "Launching lib/main_food.dart on iPhone 16 Pro...\nSyncing files to device iPhone 16 Pro...\n\nFlutter run key commands.",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep26/scene-09-0-d0e163d1.wav",
+          "startFrame": 0,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep26/scene-09-1-75bca8a6.wav",
+          "startFrame": 121,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep26/scene-09-2-893ead66.wav",
+          "startFrame": 333,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep26/scene-09-3-012560fc.wav",
+          "startFrame": 562,
+          "durationInFrames": 252
+        }
+      ],
+      "durationInFrames": 832
+    },
+    {
+      "id": "scene-10",
+      "type": "phone",
+      "visual": {
+        "title": "Nghiệm thu mini Đồ ăn chạy lẻ 🍜",
+        "screens": [
+          {
+            "src": "screens/ep26/standalone-food.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep26/standalone-food-cart.png",
+            "sentence": 1
+          },
+          {
+            "src": "screens/ep26/debug-menu.png",
+            "sentence": 3
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🍜",
+            "text": "45.000đ · 25.000đ · 40.000đ — khớp code",
+            "sentence": 0
+          },
+          {
+            "icon": "✅",
+            "text": "Thêm → Đã thêm ✓, tổng 45.000đ",
+            "sentence": 1
+          },
+          {
+            "icon": "📋",
+            "text": "Set + fold — đủ cho giỏ hàng thật",
+            "sentence": 2
+          },
+          {
+            "icon": "🐛",
+            "text": "main.dart: menu debug, 1 dòng 'Đồ ăn'",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep26/scene-10-0-a3b4e026.wav",
+          "startFrame": 0,
+          "durationInFrames": 269
+        },
+        {
+          "file": "audio/ep26/scene-10-1-cec7f778.wav",
+          "startFrame": 277,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep26/scene-10-2-bdf9904c.wav",
+          "startFrame": 506,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep26/scene-10-3-90ecfed2.wav",
+          "startFrame": 685,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 941
+    },
+    {
+      "id": "scene-11",
+      "type": "concept",
+      "visual": {
+        "title": "Tổng kết Tập 1: module độc lập trước, nhúng sau",
+        "bullets": [
+          {
+            "icon": "🏗️",
+            "text": "--template=module: sinh MODULE, không phải app",
+            "sentence": 0
+          },
+          {
+            "icon": "🚪",
+            "text": "@pragma vm:entry-point + Set/fold + MethodChannel",
+            "sentence": 1
+          },
+          {
+            "icon": "🆚",
+            "text": "RN: export + workspace · Flutter: engine + entry point",
+            "sentence": 2
+          },
+          {
+            "icon": "🧵",
+            "text": "1 sợi dây MethodChannel — chưa ai cầm đầu bên kia",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep26/scene-11-0-106ef1d7.wav",
+          "startFrame": 0,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep26/scene-11-1-b03464d3.wav",
+          "startFrame": 179,
+          "durationInFrames": 392
+        },
+        {
+          "file": "audio/ep26/scene-11-2-aa2edee5.wav",
+          "startFrame": 579,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep26/scene-11-3-4701e270.wav",
+          "startFrame": 832,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep26/scene-11-4-4c7a3a1d.wav",
+          "startFrame": 1092,
+          "durationInFrames": 185
+        }
+      ],
+      "durationInFrames": 1295
+    },
+    {
+      "id": "scene-12",
+      "type": "outro",
+      "visual": {
+        "title": "Tập 1/6 xong — hẹn gặp Tập 2! 👋",
+        "summary": [
+          {
+            "text": "Mini Đồ ăn Flutter chạy lẻ — Set + fold + MethodChannel sẵn sàng",
+            "sentence": 0
+          },
+          {
+            "text": "Tập 2: host SwiftUI từ số 0 + cắm căn hộ đầu tiên",
+            "sentence": 1
+          },
+          {
+            "text": "Tag flutter-miniapp-tap-1 = đúng code hôm nay",
+            "sentence": 3
+          }
+        ],
+        "next": "Tập 2/6: SwiftUI từ số 0 — cắm căn hộ Flutter đầu tiên 🏗️"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep26/scene-12-0-7c7e6e16.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep26/scene-12-1-c96ea7aa.wav",
+          "startFrame": 200,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep26/scene-12-2-ef5b3443.wav",
+          "startFrame": 412,
+          "durationInFrames": 264
+        },
+        {
+          "file": "audio/ep26/scene-12-3-d5da8fdb.wav",
+          "startFrame": 684,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep26/scene-12-4-7186697d.wav",
+          "startFrame": 916,
+          "durationInFrames": 171
+        }
+      ],
+      "durationInFrames": 1105
+    }
+  ]
+}
