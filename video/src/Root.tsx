@@ -35,6 +35,7 @@ import ep29 from './data/ep29.timing.json';
 import ep30 from './data/ep30.timing.json';
 import ep31 from './data/ep31.timing.json';
 import ep32 from './data/ep32.timing.json';
+import ep33 from './data/ep33.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -70,6 +71,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode30', timing: ep30 as unknown as EpisodeTiming},
   {id: 'Episode31', timing: ep31 as unknown as EpisodeTiming},
   {id: 'Episode32', timing: ep32 as unknown as EpisodeTiming},
+  {id: 'Episode33', timing: ep33 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -449,6 +451,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/ep32/android-mini-food.png',
       badgeEmoji: '🤖',
+      seriesTag: 'Mini-App với Flutter 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb33',
+    props: {
+      badge: 'FLUTTER MINI-APP BONUS 2/2',
+      line1: 'TẬP CUỐI',
+      line2: '8 VIDEO',
+      subtitle: 'Bug double-tap · kết chùm 8 video',
+      variant: 'shot',
+      image: 'screens/ep33/android-host-grid-3-cards.png',
+      badgeEmoji: '🏁',
       seriesTag: 'Mini-App với Flutter 🇻🇳',
     },
   },
