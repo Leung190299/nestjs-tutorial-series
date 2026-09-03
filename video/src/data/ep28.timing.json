@@ -1,0 +1,608 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "FlutterEngineGroup — thêm mini gần như miễn phí",
+        "subtitle": "Mini-App với Flutter · Tập 3/6 · FlutterEngineGroup + 1 dòng Swift",
+        "badge": "Series Mini-App với Flutter · Tập 3"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep28/scene-01-0-bda6b4ff.wav",
+          "startFrame": 0,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep28/scene-01-1-f2ee2481.wav",
+          "startFrame": 234,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep28/scene-01-2-b34366b2.wav",
+          "startFrame": 461,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep28/scene-01-3-c43ab4b6.wav",
+          "startFrame": 666,
+          "durationInFrames": 264
+        },
+        {
+          "file": "audio/ep28/scene-01-4-a091f43f.wav",
+          "startFrame": 938,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 1110
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "FlutterEngineGroup: trạm biến áp dùng chung",
+        "bullets": [
+          {
+            "icon": "💧",
+            "text": "Engine = đồng hồ điện nước riêng (nhắc lại)",
+            "sentence": 0
+          },
+          {
+            "icon": "🔌",
+            "text": "EngineGroup = trạm biến áp chung cả tòa nhà",
+            "sentence": 1
+          },
+          {
+            "icon": "💾",
+            "text": "Chia sẻ tài nguyên nền → engine 2 rẻ hơn hẳn",
+            "sentence": 2
+          },
+          {
+            "icon": "⚙️",
+            "text": "1 EngineGroup dựng ở Tập 2 — nay thêm 1 entrypoint",
+            "sentence": 3
+          },
+          {
+            "icon": "🔁",
+            "text": "Gần miễn phí ≠ chạy song song — vẫn thay nhau",
+            "sentence": 4
+          },
+          {
+            "icon": "👉",
+            "text": "Trọng tâm hôm nay: đúng 1 phần tử Swift mới",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep28/scene-02-0-5906a7b3.wav",
+          "startFrame": 0,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep28/scene-02-1-9fcc5712.wav",
+          "startFrame": 229,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep28/scene-02-2-3057e475.wav",
+          "startFrame": 458,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep28/scene-02-3-32577b31.wav",
+          "startFrame": 675,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep28/scene-02-4-2161dd30.wav",
+          "startFrame": 907,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep28/scene-02-5-a790cbe6.wav",
+          "startFrame": 1105,
+          "durationInFrames": 212
+        }
+      ],
+      "durationInFrames": 1335
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "mini_flutter/lib/main_wallet.dart — TOÀN BỘ FILE",
+        "language": "clike",
+        "code": "import 'package:flutter/material.dart';\n\nimport 'mini_shell.dart';\nimport 'wallet_screen.dart';\n\n@pragma('vm:entry-point')\nvoid main() =>\n    runApp(const MiniAppShell(title: 'Ví ViệtSuper', child: WalletScreen()));",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep28/scene-03-0-4b7aac30.wav",
+          "startFrame": 0,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep28/scene-03-1-74d5da50.wav",
+          "startFrame": 203,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep28/scene-03-2-ae978ac5.wav",
+          "startFrame": 451,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep28/scene-03-3-63a1d6b2.wav",
+          "startFrame": 671,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep28/scene-03-4-fa397bc1.wav",
+          "startFrame": 871,
+          "durationInFrames": 240
+        }
+      ],
+      "durationInFrames": 1129
+    },
+    {
+      "id": "scene-04",
+      "type": "diagram",
+      "visual": {
+        "title": "EngineGroup: engine thứ 2 gần như miễn phí",
+        "boxes": [
+          {
+            "id": "module",
+            "label": "mini_flutter",
+            "emoji": "📦"
+          },
+          {
+            "id": "group",
+            "label": "EngineGroup",
+            "emoji": "🔌"
+          },
+          {
+            "id": "engines",
+            "label": "2 Engine",
+            "emoji": "💧"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "2 cửa vào → 1 EngineGroup",
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "dựng engine gần miễn phí",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep28/scene-04-0-0074ba9a.wav",
+          "startFrame": 0,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep28/scene-04-1-aafeaf7c.wav",
+          "startFrame": 186,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep28/scene-04-2-c1977fe2.wav",
+          "startFrame": 410,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep28/scene-04-3-0b830d42.wav",
+          "startFrame": 651,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep28/scene-04-4-41b0c3ce.wav",
+          "startFrame": 885,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 1093
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "VietSuper/MiniApp.swift — TOÀN BỘ FILE (2 mini)",
+        "language": "swift",
+        "code": "import Foundation\n\nstruct MiniApp: Identifiable {\n  let id: String\n  let name: String\n  let emoji: String\n  /// File Dart chứa hàm main của mini này.\n  let library: String\n}\n\nlet miniApps: [MiniApp] = [\n  MiniApp(id: \"food\", name: \"Đồ ăn\", emoji: \"🍜\",\n          library: \"package:mini_flutter/main_food.dart\"),\n  MiniApp(id: \"wallet\", name: \"Ví\", emoji: \"👛\",\n          library: \"package:mini_flutter/main_wallet.dart\"),\n]",
+        "steps": [
+          {
+            "from": 1,
+            "to": 16,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 9,
+            "sentence": 1
+          },
+          {
+            "from": 12,
+            "to": 15,
+            "sentence": 2
+          },
+          {
+            "from": 14,
+            "to": 15,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 16,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep28/scene-05-0-14433f85.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep28/scene-05-1-6fb90a82.wav",
+          "startFrame": 172,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep28/scene-05-2-0202f877.wav",
+          "startFrame": 360,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep28/scene-05-3-a9e2d4d0.wav",
+          "startFrame": 592,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep28/scene-05-4-aef5deae.wav",
+          "startFrame": 828,
+          "durationInFrames": 195
+        }
+      ],
+      "durationInFrames": 1041
+    },
+    {
+      "id": "scene-06",
+      "type": "terminal",
+      "visual": {
+        "title": "Rebuild nhanh: không cần pod install lần này",
+        "commands": [
+          {
+            "cmd": "# So với Tập 2: bỏ qua pod install, chỉ rebuild Swift",
+            "output": "— (Podfile không đổi, Flutter framework không đổi)",
+            "sentence": 0
+          },
+          {
+            "cmd": "xcodebuild -workspace VietSuper.xcworkspace -scheme VietSuper -destination 'platform=iOS Simulator,name=iPhone 16 Pro' build",
+            "output": "** BUILD SUCCEEDED **",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep28/scene-06-0-ca731659.wav",
+          "startFrame": 0,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep28/scene-06-1-137c8a51.wav",
+          "startFrame": 174,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep28/scene-06-2-16b1968a.wav",
+          "startFrame": 403,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep28/scene-06-3-25748e6e.wav",
+          "startFrame": 587,
+          "durationInFrames": 159
+        }
+      ],
+      "durationInFrames": 764
+    },
+    {
+      "id": "scene-07",
+      "type": "phone",
+      "visual": {
+        "title": "Nghiệm thu: 2 card, 1 câu hỏi 👛",
+        "screens": [
+          {
+            "src": "screens/ep28/host-grid-2-cards.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep28/mini-wallet-open.png",
+            "sentence": 1
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🏠",
+            "text": "Host: 2 card lưới — Đồ ăn + Ví",
+            "sentence": 0
+          },
+          {
+            "icon": "👛",
+            "text": "Ví ViệtSuper full-screen, cùng MiniAppShell",
+            "sentence": 1
+          },
+          {
+            "icon": "❓",
+            "text": "Lee / 1.250.000đ — Flutter không hề biết ai tên Lee",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "Thay nhau chạy — không song song",
+            "sentence": 3
+          },
+          {
+            "icon": "🚫",
+            "text": "Không có ảnh 'song song' — vì nó không tồn tại",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep28/scene-07-0-49d283b8.wav",
+          "startFrame": 0,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep28/scene-07-1-b07d715b.wav",
+          "startFrame": 232,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep28/scene-07-2-8d879646.wav",
+          "startFrame": 464,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/ep28/scene-07-3-a148a4eb.wav",
+          "startFrame": 720,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep28/scene-07-4-37d97f61.wav",
+          "startFrame": 930,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 1128
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "mini_flutter/lib/wallet_screen.dart (Card số dư)",
+        "language": "clike",
+        "code": "          Card(\n            color: const Color(0xffea2845),\n            child: Padding(\n              padding: const EdgeInsets.all(24),\n              child: Column(\n                crossAxisAlignment: CrossAxisAlignment.start,\n                children: [\n                  Text(_name,\n                      style: const TextStyle(color: Colors.white70, fontSize: 16)),\n                  const SizedBox(height: 8),\n                  Text(formatVnd(_balance),\n                      style: const TextStyle(\n                        color: Colors.white,\n                        fontSize: 36,\n                        fontWeight: FontWeight.bold,\n                      )),\n                ],\n              ),\n            ),\n          ),",
+        "steps": [
+          {
+            "from": 1,
+            "to": 20,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 11,
+            "to": 16,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 20,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep28/scene-08-0-b0681fe3.wav",
+          "startFrame": 0,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep28/scene-08-1-e5128844.wav",
+          "startFrame": 239,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep28/scene-08-2-59301ada.wav",
+          "startFrame": 492,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep28/scene-08-3-78ebc57a.wav",
+          "startFrame": 649,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep28/scene-08-4-8d43f015.wav",
+          "startFrame": 885,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 1083
+    },
+    {
+      "id": "scene-09",
+      "type": "concept",
+      "visual": {
+        "title": "Tổng kết Tập 3: căn hộ thứ hai, gần miễn phí",
+        "bullets": [
+          {
+            "icon": "🔌",
+            "text": "EngineGroup = trạm biến áp, engine 2 gần miễn phí",
+            "sentence": 0
+          },
+          {
+            "icon": "🧩",
+            "text": "Thêm mini mới = 1 phần tử trong MiniApp.swift",
+            "sentence": 1
+          },
+          {
+            "icon": "🔁",
+            "text": "KHÔNG song song — 2 mini thay nhau chạy",
+            "sentence": 2
+          },
+          {
+            "icon": "❓",
+            "text": "Lee / 1.250.000đ từ đâu? Không hard-code trong Dart",
+            "sentence": 3
+          },
+          {
+            "icon": "📡",
+            "text": "Gợi ý: hostChannel đã có người trả lời",
+            "sentence": 4
+          },
+          {
+            "icon": "🏢",
+            "text": "2 căn hộ, 1 trạm biến áp — chi phí biên rẻ dần",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep28/scene-09-0-6b0c4ae7.wav",
+          "startFrame": 0,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep28/scene-09-1-a5e1295f.wav",
+          "startFrame": 239,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep28/scene-09-2-4519daae.wav",
+          "startFrame": 435,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep28/scene-09-3-a993012c.wav",
+          "startFrame": 631,
+          "durationInFrames": 267
+        },
+        {
+          "file": "audio/ep28/scene-09-4-4b9da5da.wav",
+          "startFrame": 906,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep28/scene-09-5-9e89e697.wav",
+          "startFrame": 1116,
+          "durationInFrames": 195
+        }
+      ],
+      "durationInFrames": 1329
+    },
+    {
+      "id": "scene-10",
+      "type": "outro",
+      "visual": {
+        "title": "Tập 3/6 xong — hẹn gặp Tập 4! 👋",
+        "summary": [
+          {
+            "text": "Mini Ví cắm xong: main_wallet.dart 8 dòng + MiniApp.swift thêm 1 phần tử",
+            "sentence": 0
+          },
+          {
+            "text": "Tập 4: mở hộp đen MethodChannel — vì sao Ví biết tên Lee",
+            "sentence": 1
+          },
+          {
+            "text": "Tag flutter-miniapp-tap-3 = đúng code hôm nay",
+            "sentence": 3
+          }
+        ],
+        "next": "Tập 4/6: MethodChannel — mini hỏi, app chủ trả lời 📡"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep28/scene-10-0-1640d3d9.wav",
+          "startFrame": 0,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep28/scene-10-1-2a4f1768.wav",
+          "startFrame": 193,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep28/scene-10-2-8d087eab.wav",
+          "startFrame": 434,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep28/scene-10-3-564a6570.wav",
+          "startFrame": 694,
+          "durationInFrames": 288
+        },
+        {
+          "file": "audio/ep28/scene-10-4-7bf4a9dd.wav",
+          "startFrame": 990,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 1196
+    }
+  ]
+}
