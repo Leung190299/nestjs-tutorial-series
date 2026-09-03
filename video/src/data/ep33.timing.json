@@ -1,0 +1,618 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Lễ tân Kotlin, bug double-tap và lời chào 8 video",
+        "subtitle": "Mini-App với Flutter · Bonus Android 2/2 · Tập cuối",
+        "badge": "Bonus Android · Phần 2/2"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep33/scene-01-0-4b4abd58.wav",
+          "startFrame": 0,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep33/scene-01-1-4a4cf54e.wav",
+          "startFrame": 263,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep33/scene-01-2-a097816d.wav",
+          "startFrame": 492,
+          "durationInFrames": 264
+        },
+        {
+          "file": "audio/ep33/scene-01-3-fb3fdb7b.wav",
+          "startFrame": 764,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep33/scene-01-4-a0ac3265.wav",
+          "startFrame": 996,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 1146
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Mở hộp lễ tân Kotlin",
+        "bullets": [
+          {
+            "icon": "📞",
+            "text": "Mở hộp lễ tân Kotlin: attachHostChannel",
+            "sentence": 0
+          },
+          {
+            "icon": "🧑‍💼",
+            "text": "Lễ tân = code lắng nghe, trả lời hộ mini",
+            "sentence": 1
+          },
+          {
+            "icon": "🍎",
+            "text": "Swift Tập 4: setMethodCallHandler + switch",
+            "sentence": 2
+          },
+          {
+            "icon": "🤖",
+            "text": "Kotlin: setMethodCallHandler + when(...)",
+            "sentence": 3
+          },
+          {
+            "icon": "🔁",
+            "text": "Lễ tân đổi ngôn ngữ, kịch bản giữ nguyên",
+            "sentence": 4
+          },
+          {
+            "icon": "🪞",
+            "text": "Đối chiếu song song, không dạy lại từ đầu",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep33/scene-02-0-6c947b49.wav",
+          "startFrame": 0,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep33/scene-02-1-5b5bb20c.wav",
+          "startFrame": 198,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep33/scene-02-2-a014d9f7.wav",
+          "startFrame": 418,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep33/scene-02-3-227d1b5f.wav",
+          "startFrame": 635,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep33/scene-02-4-b1d69b44.wav",
+          "startFrame": 857,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep33/scene-02-5-090b4d61.wav",
+          "startFrame": 1089,
+          "durationInFrames": 212
+        }
+      ],
+      "durationInFrames": 1319
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "com/vietsuper/host/MiniAppLauncher.kt (attachHostChannel)",
+        "language": "kotlin",
+        "code": "    private fun attachHostChannel(engine: FlutterEngine) {\n        MethodChannel(engine.dartExecutor.binaryMessenger, \"vietsuper/host\")\n            .setMethodCallHandler { call, result ->\n                when (call.method) {\n                    \"getUserInfo\" ->\n                        result.success(mapOf(\"name\" to \"Lee\", \"balance\" to 1_250_000))\n                    \"close\" -> {\n                        MiniActivity.current?.finish()\n                        result.success(null)\n                    }\n                    else -> result.notImplemented()\n                }\n            }\n    }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 3,
+            "to": 4,
+            "sentence": 2
+          },
+          {
+            "from": 5,
+            "to": 6,
+            "sentence": 3
+          },
+          {
+            "from": 7,
+            "to": 14,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep33/scene-03-0-43c06546.wav",
+          "startFrame": 0,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep33/scene-03-1-9346067d.wav",
+          "startFrame": 253,
+          "durationInFrames": 317
+        },
+        {
+          "file": "audio/ep33/scene-03-2-53e11471.wav",
+          "startFrame": 578,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep33/scene-03-3-aee60d09.wav",
+          "startFrame": 841,
+          "durationInFrames": 356
+        },
+        {
+          "file": "audio/ep33/scene-03-4-3cc799ad.wav",
+          "startFrame": 1205,
+          "durationInFrames": 288
+        }
+      ],
+      "durationInFrames": 1511
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "com/vietsuper/host/MiniApp.kt — TOÀN BỘ FILE",
+        "language": "kotlin",
+        "code": "package com.vietsuper.host\n\ndata class MiniApp(\n    val id: String,\n    val name: String,\n    val emoji: String,\n    /** File Dart chứa hàm main của mini này — cùng địa chỉ với bản iOS. */\n    val library: String,\n)\n\nval miniApps = listOf(\n    MiniApp(\"food\", \"Đồ ăn\", \"🍜\", \"package:mini_flutter/main_food.dart\"),\n    MiniApp(\"wallet\", \"Ví\", \"👛\", \"package:mini_flutter/main_wallet.dart\"),\n    MiniApp(\"cinema\", \"Xem phim\", \"🎬\", \"package:mini_flutter/main_cinema.dart\"),\n)",
+        "steps": [
+          {
+            "from": 1,
+            "to": 15,
+            "sentence": 0
+          },
+          {
+            "from": 12,
+            "to": 12,
+            "sentence": 1
+          },
+          {
+            "from": 13,
+            "to": 14,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 15,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep33/scene-04-0-5c7d83c5.wav",
+          "startFrame": 0,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep33/scene-04-1-a2310f8f.wav",
+          "startFrame": 167,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep33/scene-04-2-bb2cd680.wav",
+          "startFrame": 286,
+          "durationInFrames": 356
+        },
+        {
+          "file": "audio/ep33/scene-04-3-f5be83b9.wav",
+          "startFrame": 650,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 834
+    },
+    {
+      "id": "scene-05",
+      "type": "phone",
+      "visual": {
+        "title": "Nghiệm thu tòa nhà Android 🏁",
+        "screens": [
+          {
+            "src": "screens/ep33/android-host-grid-3-cards.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep33/android-mini-wallet-from-host.png",
+            "sentence": 1
+          },
+          {
+            "src": "screens/ep33/android-mini-cinema-ticket.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🏠",
+            "text": "Lưới Android đủ 3 card — Đồ ăn/Ví/Xem phim",
+            "sentence": 0
+          },
+          {
+            "icon": "👛",
+            "text": "Ví: Lee / 1.250.000đ — từ channel Kotlin",
+            "sentence": 1
+          },
+          {
+            "icon": "🎬",
+            "text": "Xem phim: Đã đặt ✓, Tổng 90.000đ",
+            "sentence": 2
+          },
+          {
+            "icon": "🧩",
+            "text": "1 module, 2 tòa nhà, chạy y hệt nhau",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep33/scene-05-0-b274f3da.wav",
+          "startFrame": 0,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep33/scene-05-1-48538ecb.wav",
+          "startFrame": 220,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep33/scene-05-2-6becfecd.wav",
+          "startFrame": 454,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep33/scene-05-3-a2a830e7.wav",
+          "startFrame": 669,
+          "durationInFrames": 176
+        }
+      ],
+      "durationInFrames": 863
+    },
+    {
+      "id": "scene-06",
+      "type": "concept",
+      "visual": {
+        "title": "Thú nhận thật: chip vẫn ghi (Swift)",
+        "bullets": [
+          {
+            "icon": "🔍",
+            "text": "Chip Ví trên Android vẫn ghi '(Swift)'",
+            "sentence": 0
+          },
+          {
+            "icon": "🐦",
+            "text": "Chuỗi hard-code trong wallet_screen.dart (Dart)",
+            "sentence": 1
+          },
+          {
+            "icon": "🏢",
+            "text": "Mini không nên biết nó đang ở tòa nhà nào",
+            "sentence": 2
+          },
+          {
+            "icon": "💡",
+            "text": "Bài học: chuỗi UI của mini nên trung lập",
+            "sentence": 3
+          },
+          {
+            "icon": "📝",
+            "text": "Giữ nguyên để đúng byte-match tag android-2",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep33/scene-06-0-80f2d105.wav",
+          "startFrame": 0,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep33/scene-06-1-f11300d9.wav",
+          "startFrame": 227,
+          "durationInFrames": 264
+        },
+        {
+          "file": "audio/ep33/scene-06-2-75a5b8b4.wav",
+          "startFrame": 499,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep33/scene-06-3-1c51330f.wav",
+          "startFrame": 757,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep33/scene-06-4-0428af63.wav",
+          "startFrame": 1025,
+          "durationInFrames": 209
+        }
+      ],
+      "durationInFrames": 1252
+    },
+    {
+      "id": "scene-07",
+      "type": "concept",
+      "visual": {
+        "title": "Bug thật: double-tap và rò rỉ engine",
+        "bullets": [
+          {
+            "icon": "🐛",
+            "text": "Bug thật: tap card 2 lần thật nhanh",
+            "sentence": 0
+          },
+          {
+            "icon": "⚙️",
+            "text": "2 lần openMini → 2 engine, cùng 1 id",
+            "sentence": 1
+          },
+          {
+            "icon": "🕳️",
+            "text": "Cache ghi đè: engine đầu rò vĩnh viễn",
+            "sentence": 2
+          },
+          {
+            "icon": "🍎",
+            "text": "iOS an toàn tự nhiên: fullScreenCover(item:)",
+            "sentence": 3
+          },
+          {
+            "icon": "🔧",
+            "text": "Fix: đúng 2 dòng guard",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep33/scene-07-0-7752d1e8.wav",
+          "startFrame": 0,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep33/scene-07-1-881660f6.wav",
+          "startFrame": 176,
+          "durationInFrames": 276
+        },
+        {
+          "file": "audio/ep33/scene-07-2-f63b8492.wav",
+          "startFrame": 460,
+          "durationInFrames": 264
+        },
+        {
+          "file": "audio/ep33/scene-07-3-0fe052b6.wav",
+          "startFrame": 732,
+          "durationInFrames": 303
+        },
+        {
+          "file": "audio/ep33/scene-07-4-08c0c667.wav",
+          "startFrame": 1043,
+          "durationInFrames": 228
+        }
+      ],
+      "durationInFrames": 1289
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "com/vietsuper/host/MiniAppLauncher.kt (openMini — đã fix)",
+        "language": "kotlin",
+        "code": "    fun openMini(activity: Activity, mini: MiniApp) {\n        // Chặn double-tap: mini này đang mở thì không tạo engine thứ hai.\n        if (FlutterEngineCache.getInstance().contains(mini.id)) return\n        val group = engines\n            ?: FlutterEngineGroup(activity.applicationContext).also { engines = it }\n        val bundle = FlutterInjector.instance().flutterLoader().findAppBundlePath()\n        val entrypoint = DartExecutor.DartEntrypoint(bundle, mini.library, \"main\")\n        val engine = group.createAndRunEngine(activity, entrypoint)\n        attachHostChannel(engine)\n        FlutterEngineCache.getInstance().put(mini.id, engine)\n        activity.startActivity(MiniActivity.intent(activity, mini.id))\n    }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 2,
+            "to": 3,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep33/scene-08-0-a83723e2.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep33/scene-08-1-d9813d47.wav",
+          "startFrame": 172,
+          "durationInFrames": 291
+        },
+        {
+          "file": "audio/ep33/scene-08-2-f2af2d4f.wav",
+          "startFrame": 471,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep33/scene-08-3-e61747a0.wav",
+          "startFrame": 705,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep33/scene-08-4-836cb3e4.wav",
+          "startFrame": 891,
+          "durationInFrames": 176
+        }
+      ],
+      "durationInFrames": 1085
+    },
+    {
+      "id": "scene-09",
+      "type": "concept",
+      "visual": {
+        "title": "So găng cuối: Swift vs Kotlin",
+        "bullets": [
+          {
+            "icon": "🎨",
+            "text": "SwiftUI ↔ Jetpack Compose — cùng declarative",
+            "sentence": 0
+          },
+          {
+            "icon": "🔗",
+            "text": "podhelper.rb ↔ include_flutter.groovy",
+            "sentence": 1
+          },
+          {
+            "icon": "🖼️",
+            "text": "fullScreenCover(item:) ↔ Activity riêng",
+            "sentence": 2
+          },
+          {
+            "icon": "🧩",
+            "text": "Cùng module · cùng channel vietsuper/host",
+            "sentence": 3
+          },
+          {
+            "icon": "🎭",
+            "text": "Khác chỉ ở lớp vỏ, lõi Flutter y hệt",
+            "sentence": 4
+          },
+          {
+            "icon": "🏁",
+            "text": "Viết mini 1 lần, cắm 2 tòa nhà",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep33/scene-09-0-d3452cd0.wav",
+          "startFrame": 0,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep33/scene-09-1-9d84e460.wav",
+          "startFrame": 268,
+          "durationInFrames": 298
+        },
+        {
+          "file": "audio/ep33/scene-09-2-c9b7323d.wav",
+          "startFrame": 574,
+          "durationInFrames": 286
+        },
+        {
+          "file": "audio/ep33/scene-09-3-e59f86a4.wav",
+          "startFrame": 868,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep33/scene-09-4-b014ccf1.wav",
+          "startFrame": 1114,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep33/scene-09-5-d4e279b9.wav",
+          "startFrame": 1336,
+          "durationInFrames": 214
+        }
+      ],
+      "durationInFrames": 1568
+    },
+    {
+      "id": "scene-10",
+      "type": "outro",
+      "visual": {
+        "title": "8 video khép lại — cảm ơn bạn! 🏁",
+        "summary": [
+          {
+            "text": "8 video: module đơn độc → 2 tòa nhà cùng cắm 1 module",
+            "sentence": 0
+          },
+          {
+            "text": "Công thức đủ: entrypoint + EngineGroup + channel + guard double-tap",
+            "sentence": 1
+          },
+          {
+            "text": "Repo + 2 bộ tag: tap-1..6 (Swift) + android-1..2 (Kotlin)",
+            "sentence": 2
+          }
+        ],
+        "next": "Vote: lên store thật, Flutter Web, hay chủ đề khác? 🗳️"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep33/scene-10-0-71a5a8ed.wav",
+          "startFrame": 0,
+          "durationInFrames": 257
+        },
+        {
+          "file": "audio/ep33/scene-10-1-16167a55.wav",
+          "startFrame": 265,
+          "durationInFrames": 308
+        },
+        {
+          "file": "audio/ep33/scene-10-2-2d52384a.wav",
+          "startFrame": 581,
+          "durationInFrames": 351
+        },
+        {
+          "file": "audio/ep33/scene-10-3-d2ceaeb9.wav",
+          "startFrame": 940,
+          "durationInFrames": 305
+        },
+        {
+          "file": "audio/ep33/scene-10-4-4bd22596.wav",
+          "startFrame": 1253,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep33/scene-10-5-4020e377.wav",
+          "startFrame": 1494,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep33/scene-10-6-dab80600.wav",
+          "startFrame": 1702,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 1855
+    }
+  ]
+}

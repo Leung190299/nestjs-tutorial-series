@@ -1,0 +1,397 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Bonus Android 1 trên 2 khép lại với ba lời hứa: đủ 3 mini, mở hộp lễ tân Kotlin, và một bug thật do reviewer bắt được — hôm nay giữ trọn cả ba lời hứa đó.",
+      "Đây là Bonus Android 2 trên 2 — tập CUỐI CÙNG, khép lại toàn bộ chùm 8 video Mini-App với Flutter, tính từ Tập 1 cho tới hôm nay.",
+      "Hôm nay: mở khóa attachHostChannel bản Kotlin, thêm hai mini còn thiếu vào MiniApp.kt, thú nhận thật một chi tiết chưa hoàn hảo, và kể chuyện bug double-tap có thật.",
+      "Cuối tập: so găng trực tiếp Swift với Kotlin, rồi khép lại bằng lời cảm ơn cho trọn cả 8 video — không chỉ riêng 2 tập bonus này.",
+      "Tập cuối, hôm nay: lễ tân Kotlin, một bug thật, và lời chào cả chùm 8 video."
+    ],
+    "visual": {
+      "title": "Lễ tân Kotlin, bug double-tap và lời chào 8 video",
+      "subtitle": "Mini-App với Flutter · Bonus Android 2/2 · Tập cuối",
+      "badge": "Bonus Android · Phần 2/2"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Tập trước hứa mở hộp lễ tân Kotlin — hôm nay mở đúng hộp đó: hàm attachHostChannel trong MiniAppLauncher.kt.",
+      "Nhắc lại ẩn dụ: lễ tân là đoạn code lắng nghe MethodChannel, trả lời câu hỏi mà mini Flutter tự nó không biết, như tên chủ tài khoản thật.",
+      "Bản Swift ở Tập 4 đã mở hộp này một lần: setMethodCallHandler, switch call.method, case getUserInfo và case close.",
+      "Bản Kotlin hôm nay dùng ĐÚNG kịch bản đó — chỉ đổi cú pháp: MethodChannel.setMethodCallHandler, when(call.method), cùng hai case.",
+      "Đúng như ẩn dụ: lễ tân đổi ngôn ngữ, nhưng kịch bản giữ nguyên — cùng channel vietsuper/host, cùng dữ liệu Lee và 1.250.000đ.",
+      "Không dạy lại từ đầu khái niệm MethodChannel — chỉ đối chiếu song song với những gì đã học ở Tập 4, xem Kotlin viết khác Swift ở đâu."
+    ],
+    "visual": {
+      "title": "Mở hộp lễ tân Kotlin",
+      "bullets": [
+        {
+          "icon": "📞",
+          "text": "Mở hộp lễ tân Kotlin: attachHostChannel",
+          "sentence": 0
+        },
+        {
+          "icon": "🧑‍💼",
+          "text": "Lễ tân = code lắng nghe, trả lời hộ mini",
+          "sentence": 1
+        },
+        {
+          "icon": "🍎",
+          "text": "Swift Tập 4: setMethodCallHandler + switch",
+          "sentence": 2
+        },
+        {
+          "icon": "🤖",
+          "text": "Kotlin: setMethodCallHandler + when(...)",
+          "sentence": 3
+        },
+        {
+          "icon": "🔁",
+          "text": "Lễ tân đổi ngôn ngữ, kịch bản giữ nguyên",
+          "sentence": 4
+        },
+        {
+          "icon": "🪞",
+          "text": "Đối chiếu song song, không dạy lại từ đầu",
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "attachHostChannel(engine) — toàn bộ 14 dòng — được gọi ngay sau khi engine mới chạy trong openMini, y hệt vị trí gọi channel bên Swift Tập 4.",
+      "Dòng 2: MethodChannel(engine.dartExecutor.binaryMessenger, \"vietsuper/host\") — CÙNG tên channel \"vietsuper/host\" với bản Swift, không đổi một ký tự.",
+      "Dòng 3–4: setMethodCallHandler nhận lambda (call, result), when(call.method) đóng vai trò switch call.method bên Swift — cùng cơ chế, khác từ khóa.",
+      "Dòng 5–6: case \"getUserInfo\" trả result.success(mapOf(\"name\" to \"Lee\", \"balance\" to 1_250_000)) — CÙNG Lee, CÙNG 1_250_000 hard-code như Dictionary bên Swift.",
+      "Dòng 7–10: case \"close\" gọi MiniActivity.current?.finish() rồi result.success(null) — đóng đúng Activity đang mở, thay vì đóng fullScreenCover như bên Swift."
+    ],
+    "visual": {
+      "filename": "com/vietsuper/host/MiniAppLauncher.kt (attachHostChannel)",
+      "language": "kotlin",
+      "code": "    private fun attachHostChannel(engine: FlutterEngine) {\n        MethodChannel(engine.dartExecutor.binaryMessenger, \"vietsuper/host\")\n            .setMethodCallHandler { call, result ->\n                when (call.method) {\n                    \"getUserInfo\" ->\n                        result.success(mapOf(\"name\" to \"Lee\", \"balance\" to 1_250_000))\n                    \"close\" -> {\n                        MiniActivity.current?.finish()\n                        result.success(null)\n                    }\n                    else -> result.notImplemented()\n                }\n            }\n    }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 14,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "sentence": 2
+        },
+        {
+          "from": 5,
+          "to": 6,
+          "sentence": 3
+        },
+        {
+          "from": 7,
+          "to": 14,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "MiniApp.kt hôm nay đủ 3 phần tử — công thức thêm mini y hệt Tập 3: thêm dòng, không sửa dòng cũ.",
+      "Dòng 12: food — phần tử duy nhất còn lại từ ep32, không đổi.",
+      "Dòng 13–14: hai phần tử MỚI toanh — wallet và cinema, CÙNG id, CÙNG emoji, CÙNG library package:mini_flutter/main_wallet.dart và main_cinema.dart như bản Swift Tập 3 và Tập 5.",
+      "Ba dòng, ba mini, một file 15 dòng — Android giờ đã đứng ngang hàng iOS: đủ cả Đồ ăn, Ví, Xem phim."
+    ],
+    "visual": {
+      "filename": "com/vietsuper/host/MiniApp.kt — TOÀN BỘ FILE",
+      "language": "kotlin",
+      "code": "package com.vietsuper.host\n\ndata class MiniApp(\n    val id: String,\n    val name: String,\n    val emoji: String,\n    /** File Dart chứa hàm main của mini này — cùng địa chỉ với bản iOS. */\n    val library: String,\n)\n\nval miniApps = listOf(\n    MiniApp(\"food\", \"Đồ ăn\", \"🍜\", \"package:mini_flutter/main_food.dart\"),\n    MiniApp(\"wallet\", \"Ví\", \"👛\", \"package:mini_flutter/main_wallet.dart\"),\n    MiniApp(\"cinema\", \"Xem phim\", \"🎬\", \"package:mini_flutter/main_cinema.dart\"),\n)",
+      "steps": [
+        {
+          "from": 1,
+          "to": 15,
+          "sentence": 0
+        },
+        {
+          "from": 12,
+          "to": 12,
+          "sentence": 1
+        },
+        {
+          "from": 13,
+          "to": 14,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 15,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "phone",
+    "narration": [
+      "Nghiệm thu trên Android thật: lưới ViệtSuper giờ đủ BA card — Đồ ăn, Ví, Xem phim — y hệt lưới bản Swift, chỉ khác vẽ bằng Compose.",
+      "Bấm vào Ví: card đỏ hiện đúng Lee và 1.250.000đ — dữ liệu từ attachHostChannel Kotlin vừa đọc, CÙNG số liệu với bản Swift.",
+      "Bấm vào Xem phim, đặt vé Đào, Phở và Piano: nút hóa xanh Đã đặt ✓, Tổng nhảy lên 90.000đ — đúng dữ liệu 3 phim từ Tập 5.",
+      "Ba ảnh, ba mini, một app chủ Kotlin — bằng chứng cuối cùng: module Flutter chạy trọn vẹn trên cả hai tòa nhà."
+    ],
+    "visual": {
+      "title": "Nghiệm thu tòa nhà Android 🏁",
+      "screens": [
+        {
+          "src": "screens/ep33/android-host-grid-3-cards.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/ep33/android-mini-wallet-from-host.png",
+          "sentence": 1
+        },
+        {
+          "src": "screens/ep33/android-mini-cinema-ticket.png",
+          "sentence": 2
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🏠",
+          "text": "Lưới Android đủ 3 card — Đồ ăn/Ví/Xem phim",
+          "sentence": 0
+        },
+        {
+          "icon": "👛",
+          "text": "Ví: Lee / 1.250.000đ — từ channel Kotlin",
+          "sentence": 1
+        },
+        {
+          "icon": "🎬",
+          "text": "Xem phim: Đã đặt ✓, Tổng 90.000đ",
+          "sentence": 2
+        },
+        {
+          "icon": "🧩",
+          "text": "1 module, 2 tòa nhà, chạy y hệt nhau",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "concept",
+    "narration": [
+      "Có một chi tiết CHƯA hoàn hảo, nói thật không giấu: ảnh Ví vừa xem, chip vẫn ghi 'Số dư lấy từ app chủ (Swift)' — dù đang chạy trên Android.",
+      "Nguyên nhân: dòng chữ đó nằm trong wallet_screen.dart — Dart, không phải Kotlin hay Swift — và bị hard-code cứng luôn chữ '(Swift)' ngay trong chuỗi UI.",
+      "Vì CÙNG một file Dart chạy trên cả hai tòa nhà, hard-code tên nền tảng ở phía mini là một lỗi thiết kế nhỏ — mini không nên biết, và không cần biết, nó đang đứng trong tòa nhà nào.",
+      "Bài học thật: chuỗi hiển thị của module Flutter nên trung lập, kiểu 'Số dư lấy từ app chủ' — bỏ hẳn tên ngôn ngữ, hoặc để app chủ tự truyền tên qua channel nếu thật sự cần.",
+      "Không sửa trong tập này để giữ đúng byte-match với tag android-2 — nhưng đây là ghi chú thật, đáng để khán giả tự vá nếu muốn."
+    ],
+    "visual": {
+      "title": "Thú nhận thật: chip vẫn ghi (Swift)",
+      "bullets": [
+        {
+          "icon": "🔍",
+          "text": "Chip Ví trên Android vẫn ghi '(Swift)'",
+          "sentence": 0
+        },
+        {
+          "icon": "🐦",
+          "text": "Chuỗi hard-code trong wallet_screen.dart (Dart)",
+          "sentence": 1
+        },
+        {
+          "icon": "🏢",
+          "text": "Mini không nên biết nó đang ở tòa nhà nào",
+          "sentence": 2
+        },
+        {
+          "icon": "💡",
+          "text": "Bài học: chuỗi UI của mini nên trung lập",
+          "sentence": 3
+        },
+        {
+          "icon": "📝",
+          "text": "Giữ nguyên để đúng byte-match tag android-2",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "concept",
+    "narration": [
+      "Chuyện có THẬT xảy ra lúc review demo này: tap card 2 lần thật nhanh — reviewer bắt được ngay một bug im lặng.",
+      "Tap nhanh, openMini chạy hai lần liên tiếp trước khi engine đầu kịp gắn vào MiniActivity — hai lần createAndRunEngine sinh ra HAI engine, cùng chung một mini.id.",
+      "FlutterEngineCache.put(mini.id, engine) ghi đè: engine THỨ HAI thắng trong cache, còn engine ĐẦU TIÊN không ai giữ tham chiếu nữa — rò rỉ vĩnh viễn, không bao giờ bị hủy.",
+      "Bản iOS lại AN TOÀN một cách tự nhiên: fullScreenCover(item:) của SwiftUI tự bỏ qua lần trình bày thứ hai khi item không đổi — Android không có cơ chế tương đương miễn phí như vậy.",
+      "Fix chỉ vỏn vẹn 2 dòng: kiểm tra FlutterEngineCache đã CÓ mini.id hay chưa, có rồi thì return ngay — xem đúng 2 dòng đó ở scene sau."
+    ],
+    "visual": {
+      "title": "Bug thật: double-tap và rò rỉ engine",
+      "bullets": [
+        {
+          "icon": "🐛",
+          "text": "Bug thật: tap card 2 lần thật nhanh",
+          "sentence": 0
+        },
+        {
+          "icon": "⚙️",
+          "text": "2 lần openMini → 2 engine, cùng 1 id",
+          "sentence": 1
+        },
+        {
+          "icon": "🕳️",
+          "text": "Cache ghi đè: engine đầu rò vĩnh viễn",
+          "sentence": 2
+        },
+        {
+          "icon": "🍎",
+          "text": "iOS an toàn tự nhiên: fullScreenCover(item:)",
+          "sentence": 3
+        },
+        {
+          "icon": "🔧",
+          "text": "Fix: đúng 2 dòng guard",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Đây là openMini SAU khi fix — 12 dòng, y hệt bản ep32 chỉ CỘNG THÊM đúng 2 dòng đầu.",
+      "Dòng 2–3 chính là 2 dòng guard: comment giải thích, rồi if (FlutterEngineCache.getInstance().contains(mini.id)) return — thấy CÓ RỒI thì thoát ngay, không tạo engine mới.",
+      "Không có 2 dòng này — đúng bản ep32 — tap nhanh 2 lần lọt qua dòng 8 group.createAndRunEngine hai lần liên tiếp, trước khi dòng 10 kịp ghi cache.",
+      "Có 2 dòng guard: lần tap thứ hai dừng lại NGAY dòng 3, engine đầu tiên vẫn là engine duy nhất — không rò rỉ, không tạo thừa.",
+      "2 dòng, đúng 1 câu lệnh if — bug thật, fix thật, đúng những gì reviewer yêu cầu trước khi merge tag android-2."
+    ],
+    "visual": {
+      "filename": "com/vietsuper/host/MiniAppLauncher.kt (openMini — đã fix)",
+      "language": "kotlin",
+      "code": "    fun openMini(activity: Activity, mini: MiniApp) {\n        // Chặn double-tap: mini này đang mở thì không tạo engine thứ hai.\n        if (FlutterEngineCache.getInstance().contains(mini.id)) return\n        val group = engines\n            ?: FlutterEngineGroup(activity.applicationContext).also { engines = it }\n        val bundle = FlutterInjector.instance().flutterLoader().findAppBundlePath()\n        val entrypoint = DartExecutor.DartEntrypoint(bundle, mini.library, \"main\")\n        val engine = group.createAndRunEngine(activity, entrypoint)\n        attachHostChannel(engine)\n        FlutterEngineCache.getInstance().put(mini.id, engine)\n        activity.startActivity(MiniActivity.intent(activity, mini.id))\n    }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 12,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 10,
+          "sentence": 2
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 12,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "concept",
+    "narration": [
+      "Đặt song song lần cuối: Swift dùng SwiftUI, Kotlin dùng Jetpack Compose — cả hai đều declarative, cùng triết lý 'mô tả UI, không tự vẽ tay'.",
+      "Swift lắp Flutter qua podhelper.rb trong Podfile; Kotlin lắp qua include_flutter.groovy trong settings.gradle — cùng vai trò 'hợp đồng lắp ghép', khác công cụ build.",
+      "Swift nhúng mini bằng fullScreenCover(item:) ngay trong View cha; Kotlin mở mini bằng một Activity RIÊNG, MiniActivity — khác mô hình UI, cùng kết quả full-screen.",
+      "Cả hai CÙNG một module mini_flutter, CÙNG một channel vietsuper/host, CÙNG FlutterEngineGroup dùng chung — không có dòng Dart nào phân biệt nền tảng.",
+      "Khác biệt chỉ nằm ở lớp vỏ ngoài cùng: ngôn ngữ app chủ, framework UI, cách nhúng — còn lõi Flutter và giao thức channel giữ nguyên tuyệt đối.",
+      "Kết luận sau 8 tập: viết một mini MỘT LẦN bằng Dart, cắm được vào HAI tòa nhà khác ngôn ngữ mà không sửa nổi một dòng bên trong."
+    ],
+    "visual": {
+      "title": "So găng cuối: Swift vs Kotlin",
+      "bullets": [
+        {
+          "icon": "🎨",
+          "text": "SwiftUI ↔ Jetpack Compose — cùng declarative",
+          "sentence": 0
+        },
+        {
+          "icon": "🔗",
+          "text": "podhelper.rb ↔ include_flutter.groovy",
+          "sentence": 1
+        },
+        {
+          "icon": "🖼️",
+          "text": "fullScreenCover(item:) ↔ Activity riêng",
+          "sentence": 2
+        },
+        {
+          "icon": "🧩",
+          "text": "Cùng module · cùng channel vietsuper/host",
+          "sentence": 3
+        },
+        {
+          "icon": "🎭",
+          "text": "Khác chỉ ở lớp vỏ, lõi Flutter y hệt",
+          "sentence": 4
+        },
+        {
+          "icon": "🏁",
+          "text": "Viết mini 1 lần, cắm 2 tòa nhà",
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "outro",
+    "narration": [
+      "Tám video, một hành trình trọn vẹn: từ module Flutter đơn độc ở Tập 1, tới hai tòa nhà — Swift và Kotlin — cùng cắm chung một module, không sửa một dòng Dart nào.",
+      "Công thức đã học đủ: --template=module, entrypoint @pragma vm:entry-point, FlutterEngineGroup dùng chung, MethodChannel lễ tân, và giờ thêm bài học thật về guard double-tap.",
+      "Toàn bộ mã nguồn ở github.com/Leung190299/nestjs-tutorial-series, thư mục demo-flutter-miniapp — đủ hai bộ tag cho cả Swift và Kotlin.",
+      "Bộ tag flutter-miniapp-tap-1 tới tap-6 là bản Swift, android-1 và android-2 là bản Kotlin — mỗi tag đúng một tập, checkout là thấy đúng code trên màn hình.",
+      "Series tiếp theo chưa chốt — vote ở phần bình luận: đưa mini-app này lên store thật, thử Flutter Web cho tòa nhà thứ ba, hay một chủ đề Flutter hoàn toàn khác?",
+      "Cảm ơn bạn đã đi trọn cả 8 video — từ mini Đồ ăn đơn độc Tập 1, tới hệ sinh thái 3 mini sống chung trên cả hai nền tảng hôm nay.",
+      "Hẹn gặp lại ở series tiếp theo — cảm ơn bạn rất nhiều, và đừng quên vote bên dưới!"
+    ],
+    "visual": {
+      "title": "8 video khép lại — cảm ơn bạn! 🏁",
+      "summary": [
+        {
+          "text": "8 video: module đơn độc → 2 tòa nhà cùng cắm 1 module",
+          "sentence": 0
+        },
+        {
+          "text": "Công thức đủ: entrypoint + EngineGroup + channel + guard double-tap",
+          "sentence": 1
+        },
+        {
+          "text": "Repo + 2 bộ tag: tap-1..6 (Swift) + android-1..2 (Kotlin)",
+          "sentence": 2
+        }
+      ],
+      "next": "Vote: lên store thật, Flutter Web, hay chủ đề khác? 🗳️"
+    }
+  }
+]

@@ -1,0 +1,510 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Cuối Tập 6, có một lời hứa: nếu nhiều bạn comment, sẽ làm tiếp bản Kotlin — bản Android. Hôm nay, lời hứa đó thành sự thật.",
+      "Cảm ơn tất cả các bạn đã vote bản Kotlin ở phần bình luận Tập 6 — đủ đông để bắt tay làm ngay bonus này.",
+      "Thông điệp vàng ngay từ đầu: module mini_flutter giữ NGUYÊN, không sửa một dòng Dart nào — hôm nay chỉ xây thêm một tòa nhà mới.",
+      "Đây là Bonus Android 1 trên 2, không phải Tập 7 — series 6 tập Flutter đã khép lại trọn vẹn ở Tập 6 rồi.",
+      "Hôm nay: dựng app chủ ViệtSuper bằng Kotlin và Jetpack Compose, cắm đúng mini Đồ ăn — cùng module, khác tòa nhà."
+    ],
+    "visual": {
+      "title": "Cùng căn hộ, tòa nhà Android — host Kotlin Compose",
+      "subtitle": "Mini-App với Flutter · Bonus Android 1/2",
+      "badge": "Bonus Android · Phần 1/2"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "60 giây dịch nhanh Jetpack Compose sang tiếng Flutter — tập này vẫn giả định bạn chưa biết Kotlin.",
+      "Composable, đánh dấu bằng @Composable, giống một Widget: một hàm MÔ TẢ giao diện, không phải chính giao diện đã vẽ ra.",
+      "Compose theo đúng triết lý declarative như Flutter: gọi lại hàm composable khi state đổi, không tự tay cập nhật từng View.",
+      "Tin vui: Compose dễ tiếp cận hơn SwiftUI Tập 2 — Kotlin vẫn hướng đối tượng quen thuộc, không cần học lối tư duy mới.",
+      "Ẩn dụ cập nhật: khu đất cũ giờ có thêm tòa nhà Android song song — căn hộ Flutter, đồng hồ điện nước, lễ tân MethodChannel vẫn giữ nguyên."
+    ],
+    "visual": {
+      "title": "Compose trong 60 giây, cho người biết Flutter",
+      "bullets": [
+        {
+          "icon": "⏱️",
+          "text": "60s dịch nhanh: Compose cho người biết Flutter",
+          "sentence": 0
+        },
+        {
+          "icon": "🧩",
+          "text": "@Composable ≈ Widget: hàm mô tả giao diện",
+          "sentence": 1
+        },
+        {
+          "icon": "🔄",
+          "text": "Declarative: gọi lại khi state đổi, y hệt Flutter",
+          "sentence": 2
+        },
+        {
+          "icon": "✅",
+          "text": "Dễ hơn SwiftUI: Kotlin không cần tư duy mới",
+          "sentence": 3
+        },
+        {
+          "icon": "🏢",
+          "text": "Tòa nhà Android mới — cùng khu đất với bản Swift",
+          "sentence": 4
+        },
+        {
+          "icon": "🔑",
+          "text": "Căn hộ · đồng hồ · lễ tân: ẩn dụ cũ vẫn đúng",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "settings.gradle của vietsuper_android — nơi Gradle biết dự án có những module nào trước khi build bất cứ thứ gì.",
+      "Dòng include ':app' khai module app Android gốc — tương đương target VietSuper trong project.yml ở bản iOS.",
+      "Phần dưới mới là chỗ đặc biệt: evaluate nạp thẳng file include_flutter.groovy trong module mini_flutter.",
+      "File groovy đó chính là 'hợp đồng lắp ghép' bản Android — cùng vai trò với podhelper.rb bên Podfile của iOS.",
+      "Chỉ vài dòng, nhưng đây là toàn bộ phép màu cắm dãy căn hộ Flutter vào tòa nhà Android — không cần thêm dependency thủ công."
+    ],
+    "visual": {
+      "filename": "vietsuper_android/settings.gradle — TOÀN BỘ FILE",
+      "language": "clike",
+      "code": "rootProject.name = 'vietsuper_android'\ninclude ':app'\n\n// Cắm dãy căn hộ Flutter vào tòa nhà Android — tương đương podhelper bên iOS.\nsetBinding(new Binding([gradle: this]))\nevaluate(new File(\n  settingsDir.parentFile,\n  'mini_flutter/.android/include_flutter.groovy'\n))",
+      "steps": [
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 5,
+          "to": 9,
+          "sentence": 2
+        },
+        {
+          "from": 6,
+          "to": 9,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "Chuyện có THẬT khi build demo này: máy cài Java 25 quá mới, Gradle không hiểu nổi, build chết ngay từ bước cấu hình.",
+      "gradle.properties ép Gradle dùng đúng Java nó hiểu — org.gradle.java.home trỏ vào bản JBR JDK 21 có sẵn trong Android Studio.",
+      "Không cần cài thêm JDK: JBR nằm sẵn trong Contents/jbr của Android Studio, chỉ việc trỏ đường dẫn tới đó.",
+      "org.gradle.jvmargs=-Xmx4g cấp 4GB RAM cho Gradle — build Android kéo nhiều dependency hơn build Flutter đơn thuần.",
+      "android.useAndroidX=true bật AndroidX — thư viện Jetpack mà Compose phụ thuộc vào, thiếu dòng này Compose không chạy nổi."
+    ],
+    "visual": {
+      "filename": "vietsuper_android/gradle.properties — TOÀN BỘ FILE",
+      "language": "clike",
+      "code": "org.gradle.java.home=/Applications/Android Studio.app/Contents/jbr/Contents/Home\norg.gradle.jvmargs=-Xmx4g\nandroid.useAndroidX=true",
+      "steps": [
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 2
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 3
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "app/build.gradle khai ba plugin android/kotlin/compose và vài con số quen thuộc: compileSdk 36, minSdk 24, target Java Kotlin 17.",
+      "Nhưng khối dependencies mới là chỗ quan trọng nhất — và đây, đúng dòng đó: implementation project(':flutter').",
+      "Dòng này kéo module Flutter local vào như một dependency Gradle bình thường — không zip, không Maven, chính là source mini_flutter.",
+      "compose-bom khóa version các thư viện Compose tương thích nhau; activity-compose và material3 nối Activity↔Compose và vẽ Card, Text."
+    ],
+    "visual": {
+      "filename": "vietsuper_android/app/build.gradle (trích — dependencies)",
+      "language": "clike",
+      "code": "dependencies {\n    implementation project(':flutter')\n    implementation platform('androidx.compose:compose-bom:2024.12.01')\n    implementation 'androidx.activity:activity-compose:1.9.3'\n    implementation 'androidx.compose.material3:material3'\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 2
+        },
+        {
+          "from": 3,
+          "to": 6,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "MiniApp.kt: sổ địa chỉ mini-app bản Kotlin — data class với đúng bốn field, y hệt struct MiniApp.swift ở Tập 2.",
+      "id, name, emoji, library — cùng tên field, cùng kiểu String với bản Swift; Kotlin dùng data class thay struct, nhưng vai trò giống hệt.",
+      "library vẫn là địa chỉ Dart tới đúng cửa vào của mini — app chủ Android không cần biết bên trong Flutter có gì, chỉ cần đúng địa chỉ này.",
+      "miniApps có ĐÚNG một phần tử, mini Đồ ăn — CÙNG id, CÙNG emoji, và quan trọng nhất: CÙNG library package:mini_flutter/main_food.dart."
+    ],
+    "visual": {
+      "filename": "com/vietsuper/host/MiniApp.kt — TOÀN BỘ FILE",
+      "language": "kotlin",
+      "code": "package com.vietsuper.host\n\ndata class MiniApp(\n    val id: String,\n    val name: String,\n    val emoji: String,\n    /** File Dart chứa hàm main của mini này — cùng địa chỉ với bản iOS. */\n    val library: String,\n)\n\nval miniApps = listOf(\n    MiniApp(\"food\", \"Đồ ăn\", \"🍜\", \"package:mini_flutter/main_food.dart\"),\n)",
+      "steps": [
+        {
+          "from": 1,
+          "to": 13,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 9,
+          "sentence": 1
+        },
+        {
+          "from": 7,
+          "to": 8,
+          "sentence": 2
+        },
+        {
+          "from": 11,
+          "to": 13,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "MainActivity.kt — nơi Android thật sự khởi động app, tương đương VietSuperApp.swift cộng ContentView.swift gộp lại.",
+      "class MainActivity kế thừa ComponentActivity — điểm bắt đầu chuẩn của mọi app Compose, giống @main struct bên Swift.",
+      "setContent { } 'trồng' cây Compose đầu tiên — gọi HomeScreen, truyền vào callback mở mini khi bấm card qua MiniAppLauncher.openMini.",
+      "@Composable đánh dấu HomeScreen là một hàm composable thật — Column bọc cả màn hình, Text đầu tiên vẽ tiêu đề ViệtSuper 🇻🇳."
+    ],
+    "visual": {
+      "filename": "com/vietsuper/host/MainActivity.kt (1/2 — onCreate)",
+      "language": "kotlin",
+      "code": "class MainActivity : ComponentActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContent { MaterialTheme { HomeScreen { MiniAppLauncher.openMini(this, it) } } }\n    }\n}\n\n@Composable\nfun HomeScreen(onOpen: (MiniApp) -> Unit) {\n    Column(Modifier.fillMaxSize().padding(16.dp)) {\n        Text(\"ViệtSuper 🇻🇳\", style = MaterialTheme.typography.headlineMedium)",
+      "steps": [
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 1
+        },
+        {
+          "from": 2,
+          "to": 4,
+          "sentence": 2
+        },
+        {
+          "from": 8,
+          "to": 11,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Phần còn lại của HomeScreen: LazyVerticalGrid — component Compose vẽ lưới cuộn được, giống hệt vai trò LazyVGrid bên SwiftUI.",
+      "GridCells.Fixed(2) ép hai cột; spacedBy(16.dp) cho cả chiều dọc lẫn ngang — cùng con số 16 như LazyVGrid bên Swift.",
+      "items(miniApps) lặp qua từng mini trong danh sách; mini -> là cú pháp lambda Kotlin, tương đương app in ForEach bên Swift.",
+      "Card(onClick = { onOpen(mini) }) đóng vai trò Button bên Swift: bấm vào card gọi ngược lên onOpen, rồi tới MiniAppLauncher.openMini.",
+      "Bên trong Card: một Column canh giữa, hiện emoji cỡ 44sp và tên mini — đúng bố cục VStack emoji lớn với tên bên dưới của bản iOS."
+    ],
+    "visual": {
+      "filename": "com/vietsuper/host/MainActivity.kt (2/2 — LazyVerticalGrid)",
+      "language": "kotlin",
+      "code": "        LazyVerticalGrid(\n            columns = GridCells.Fixed(2),\n            verticalArrangement = Arrangement.spacedBy(16.dp),\n            horizontalArrangement = Arrangement.spacedBy(16.dp),\n            modifier = Modifier.padding(top = 16.dp),\n        ) {\n            items(miniApps) { mini ->\n                Card(onClick = { onOpen(mini) }, modifier = Modifier.fillMaxWidth()) {\n                    Column(\n                        Modifier.fillMaxWidth().padding(vertical = 24.dp),\n                        horizontalAlignment = Alignment.CenterHorizontally,\n                    ) {\n                        Text(mini.emoji, fontSize = 44.sp)\n                        Text(mini.name, style = MaterialTheme.typography.titleMedium)\n                    }\n                }\n            }\n        }\n    }\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 5,
+          "sentence": 1
+        },
+        {
+          "from": 7,
+          "to": 7,
+          "sentence": 2
+        },
+        {
+          "from": 8,
+          "to": 8,
+          "sentence": 3
+        },
+        {
+          "from": 9,
+          "to": 20,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "code",
+    "narration": [
+      "MiniAppLauncher.kt bản Kotlin — trái tim của việc nhúng Flutter, cùng vai trò với file cùng tên bên Swift.",
+      "engines: FlutterEngineGroup — 'nhà máy engine' dùng chung, y hệt ẩn dụ Tập 3: engine thứ hai gần như miễn phí RAM.",
+      "openMini nhận Activity và MiniApp; engines chưa có thì tạo mới, có rồi thì DÙNG LẠI — lazy-init đúng một lần cho cả app.",
+      "DartExecutor.DartEntrypoint(bundle, mini.library, \"main\") gõ đúng địa chỉ mini.library — CÙNG package:mini_flutter/main_food.dart như bản iOS.",
+      "attachHostChannel(engine) gắn lễ tân MethodChannel — Kotlin có, Swift cũng có; lễ tân giờ nói tiếng Kotlin, chi tiết mở hộp ở tập sau.",
+      "FlutterEngineCache lưu engine theo mini.id, rồi mở MiniActivity — khác iOS: mini Android là Activity riêng, không phải fullScreenCover."
+    ],
+    "visual": {
+      "filename": "com/vietsuper/host/MiniAppLauncher.kt (openMini)",
+      "language": "kotlin",
+      "code": "object MiniAppLauncher {\n    /** \"Nhà máy engine\" dùng chung — các engine sinh ra chia sẻ tài nguyên. */\n    private var engines: FlutterEngineGroup? = null\n\n    fun openMini(activity: Activity, mini: MiniApp) {\n        val group = engines\n            ?: FlutterEngineGroup(activity.applicationContext).also { engines = it }\n        val bundle = FlutterInjector.instance().flutterLoader().findAppBundlePath()\n        val entrypoint = DartExecutor.DartEntrypoint(bundle, mini.library, \"main\")\n        val engine = group.createAndRunEngine(activity, entrypoint)\n        attachHostChannel(engine)\n        FlutterEngineCache.getInstance().put(mini.id, engine)\n        activity.startActivity(MiniActivity.intent(activity, mini.id))\n    }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 14,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 5,
+          "to": 7,
+          "sentence": 2
+        },
+        {
+          "from": 9,
+          "to": 9,
+          "sentence": 3
+        },
+        {
+          "from": 11,
+          "to": 11,
+          "sentence": 4
+        },
+        {
+          "from": 12,
+          "to": 14,
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "code",
+    "narration": [
+      "MiniActivity.kt — khác biệt lớn nhất với iOS: mini Android là một FlutterActivity RIÊNG, không nhúng trong Activity chính.",
+      "companion object giữ current — Activity mini đang mở, để lễ tân biết gọi finish() vào đúng ai khi Dart yêu cầu đóng.",
+      "Hàm intent() dùng CachedEngineIntentBuilder, lấy engine đã cache theo engineId — chính là mini.id vừa đặt bên MiniAppLauncher.",
+      "destroyEngineWithActivity(true): Activity mini bị hủy thì engine của NÓ cũng bị hủy theo — đồng hồ điện nước tắt đúng lúc căn hộ đóng cửa.",
+      "onResume gán current = this; onDestroy dọn current về null và gỡ engine khỏi cache — dọn dẹp đối xứng, không rò rỉ bộ nhớ.",
+      "Vì là một Activity thật, nút Back vật lý của Android đóng mini một cách TỰ NHIÊN — hệ thống tự gọi onDestroy, không cần thêm dòng code nào."
+    ],
+    "visual": {
+      "filename": "com/vietsuper/host/MiniActivity.kt (class body)",
+      "language": "kotlin",
+      "code": "class MiniActivity : FlutterActivity() {\n    companion object {\n        var current: MiniActivity? = null\n\n        fun intent(context: Context, engineId: String): Intent =\n            CachedEngineIntentBuilder(MiniActivity::class.java, engineId)\n                .destroyEngineWithActivity(true)\n                .build(context)\n    }\n\n    override fun onResume() {\n        super.onResume()\n        current = this\n    }\n\n    override fun onDestroy() {\n        if (current === this) current = null\n        cachedEngineId?.let { FlutterEngineCache.getInstance().remove(it) }\n        super.onDestroy()\n    }\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 21,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 5,
+          "to": 8,
+          "sentence": 2
+        },
+        {
+          "from": 7,
+          "to": 7,
+          "sentence": 3
+        },
+        {
+          "from": 11,
+          "to": 20,
+          "sentence": 4
+        },
+        {
+          "from": 1,
+          "to": 21,
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "terminal",
+    "narration": [
+      "Build APK debug bằng đúng công cụ Gradle chuẩn: ./gradlew :app:assembleDebug — không cần Android Studio mở lên.",
+      "Lần build đầu chậm vì Gradle tải dependency Flutter cộng Compose cùng lúc — các lần sau nhanh hơn nhiều nhờ cache.",
+      "Cài APK lên máy ảo hoặc thiết bị thật đang bật debug: adb install -r, cờ -r cho phép ghi đè bản cũ nếu đã cài trước đó.",
+      "adb shell monkey mở thẳng app bằng đúng package com.vietsuper.host — cách khởi chạy nhanh không cần chạm màn hình thiết bị."
+    ],
+    "visual": {
+      "title": "Build & chạy trên Android thật",
+      "commands": [
+        {
+          "cmd": "./gradlew :app:assembleDebug",
+          "output": "> Task :flutter:assembleDebug\n> Task :app:assembleDebug\n\nBUILD SUCCESSFUL in 48s",
+          "sentence": 1
+        },
+        {
+          "cmd": "adb install -r app/build/outputs/apk/debug/app-debug.apk",
+          "output": "Performing Streamed Install\nSuccess",
+          "sentence": 2
+        },
+        {
+          "cmd": "adb shell monkey -p com.vietsuper.host -c android.intent.category.LAUNCHER 1",
+          "output": "Events injected: 1\n## Network stats: elapsed time=...",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "phone",
+    "narration": [
+      "Nghiệm thu trên Android thật: màn hình chính ViệtSuper hiện đúng MỘT card — Đồ ăn — y hệt bản iOS Tập 2, chỉ khác vẽ bằng Compose.",
+      "Bấm vào card: mini Đồ ăn hiện FULL SCREEN như một Activity riêng — ba món Phở bò, Bánh mì thịt, Cơm tấm sườn, cùng dữ liệu mọi bản trước.",
+      "Bấm Thêm ở Phở bò: nút hóa xanh 'Đã thêm ✓', Tổng nhảy lên 45.000đ — giỏ hàng chạy đúng công thức Set cộng fold, không sửa nửa dòng Dart.",
+      "Ba ảnh này là bằng chứng: cùng module Flutter, cắm vào tòa nhà Kotlin, chạy đúng y hệt tòa nhà Swift — chỉ khác ngôn ngữ phía app chủ."
+    ],
+    "visual": {
+      "title": "Nghiệm thu tòa nhà Android 🤖",
+      "screens": [
+        {
+          "src": "screens/ep32/android-host-grid-food-only.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/ep32/android-mini-food.png",
+          "sentence": 1
+        },
+        {
+          "src": "screens/ep32/android-mini-food-cart.png",
+          "sentence": 2
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🏠",
+          "text": "Host Kotlin: 1 card lưới — Đồ ăn",
+          "sentence": 0
+        },
+        {
+          "icon": "🍜",
+          "text": "Mini full-screen: 3 món, cùng dữ liệu",
+          "sentence": 1
+        },
+        {
+          "icon": "✅",
+          "text": "Thêm → Đã thêm ✓, Tổng 45.000đ",
+          "sentence": 2
+        },
+        {
+          "icon": "🧩",
+          "text": "Cùng module Flutter, 2 tòa nhà khác ngôn ngữ",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-13",
+    "type": "outro",
+    "narration": [
+      "Bonus Android 1 trên 2 đã xong: host Kotlin Compose dựng từ số 0, FlutterEngineGroup tạo engine thật, mini Đồ ăn cắm đúng địa chỉ cũ.",
+      "Suốt tập này, module mini_flutter không hề bị đụng tới — không một dòng Dart nào sửa, y hệt lời hứa đầu tập.",
+      "Bonus 2 trên 2, tập sau: đủ 3 mini trên Android, mở hộp lễ tân MethodChannel bản Kotlin, và một bug có THẬT do reviewer bắt được khi duyệt demo — chưa tiết lộ là bug gì, hẹn tập sau kể chi tiết.",
+      "Repo vẫn ở github.com/Leung190299/nestjs-tutorial-series, tag flutter-miniapp-android-1 đúng trạng thái hôm nay.",
+      "Cảm ơn bạn đã theo tới bonus đầu tiên — hẹn gặp lại ở Bonus Android 2 trên 2, tập cuối khép cả series!"
+    ],
+    "visual": {
+      "title": "Bonus Android 1/2 xong — hẹn tập cuối! 🤖",
+      "summary": [
+        {
+          "text": "Host Kotlin Compose xong: engine thật, mini Đồ ăn cắm đúng địa chỉ",
+          "sentence": 0
+        },
+        {
+          "text": "Module Flutter không đổi 1 dòng Dart — lời hứa giữ trọn",
+          "sentence": 1
+        },
+        {
+          "text": "Tag flutter-miniapp-android-1 = đúng code hôm nay",
+          "sentence": 3
+        }
+      ],
+      "next": "Bonus 2/2: đủ 3 mini, mở hộp lễ tân Kotlin, và một bug thật 🐛"
+    }
+  }
+]
