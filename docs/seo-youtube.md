@@ -866,6 +866,247 @@ Cuối tập: khoảnh khắc cả series chờ đợi — trang chủ ViệtSup
 ```
 **Tags:** `nạp thẻ điện thoại app, early return react, ui state, conditional rendering, derived state, reset state, mini app cuối, super app hoàn chỉnh, react native tiếng việt, học react native, mini app từ a đến z, việtsuper, form success screen, một màn hình hai trạng thái, grab clone`
 
+## SERIES MINI-APP VỚI FLUTTER — "Mini-App với Flutter 🇻🇳" (Add-to-app, 6 tập)
+
+> Playlist đích: **"Mini-App với Flutter 🇻🇳"** — sẽ tạo khi đăng tập đầu tiên, thêm dần từng tập vào. Series MỚI, không đánh số theo series Mini-App RN — cấp độ thật hơn: app chủ viết native (SwiftUI), mỗi mini-app viết Flutter, chạy trong FlutterEngine riêng, gộp lúc RUNTIME thay vì lúc build. Code: `demo-flutter-miniapp/` (repo `nestjs-tutorial-series`), mỗi tập có tag riêng `flutter-miniapp-tap-N` — `git checkout flutter-miniapp-tap-N` để xem đúng code của tập đang xem. Ẩn dụ xuyên suốt: app chủ = tòa nhà bê tông, module Flutter = căn hộ lắp ghép, FlutterEngine = đồng hồ điện nước riêng, MethodChannel = đường dây xuống lễ tân.
+
+Từ khóa chủ lực toàn series: `flutter add-to-app`, `flutter tiếng việt`, `học flutter`, `mini app flutter`, `super app flutter`, `flutterenginegroup`, `methodchannel`, `swiftui tiếng việt`.
+
+### Flutter Mini-App #1 — Add-to-app: mini-app đúng nghĩa đen (7:11)
+
+**Tiêu đề:** Flutter add-to-app: tạo module & Engine riêng cho mini-app đầu tiên | Tập 1/6
+
+**Mô tả:**
+```
+Grab, Shopee, các ví điện tử thật ngoài kia không viết lại app từ đầu — họ NHÚNG từng tính năng như một app con vào app native đã có sẵn hàng triệu người dùng. Series MỚI "Mini-App với Flutter" lên một cấp so với series RN cũ: app chủ viết Swift, mỗi mini-app viết Flutter, và mỗi mini chạy trong một ENGINE Dart riêng biệt.
+
+Tập 1: tạo module Flutter bằng flutter create --template=module (không phải app!), đọc kỹ 3 file — main_food.dart (biển @pragma vm:entry-point), food_screen.dart (Set giỏ hàng + fold tính tổng), mini_shell.dart (MethodChannel cài cắm sẵn cho Tập 4) — rồi chạy thử lẻ trên simulator.
+
+Ẩn dụ xuyên suốt series: app chủ = tòa nhà bê tông 🏢, module Flutter = căn hộ lắp ghép 🚪, engine = đồng hồ điện nước riêng 💧.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu series Mini-App với Flutter
+0:43 Module ≠ App: entry point & engine riêng
+2:10 Tạo module bằng 1 dòng lệnh
+2:36 Đọc code: main_food, food_screen, mini_shell
+4:52 Chạy thử mini Đồ ăn (flutter run -t)
+5:19 Nghiệm thu trên simulator
+5:51 Tổng kết Tập 1
+6:34 Lời kết & hẹn Tập 2
+
+📦 Source code (demo-flutter-miniapp/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout flutter-miniapp-tap-1 để xem đúng code tập này.
+▶️ Series RN cũ "Mini-App từ A đến Z": https://www.youtube.com/playlist?list=PLY-i2_1YbKi4
+⏭️ Tập sau: [LINK-EP27]
+
+#flutter #addtoapp #miniapp #superapp #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+📌 Series MỚI bắt đầu: "Mini-App với Flutter" — add-to-app đúng nghĩa đen, khác hẳn cách gộp workspace của series RN cũ. Bạn đã làm add-to-app trong dự án thật chưa? Comment kể trải nghiệm của bạn nhé!
+```
+
+**Thumbnail:** badge "FLUTTER MINI-APP 1" · dòng lớn "FLUTTER" / "APP THẬT" · phụ đề "Module · Engine riêng · MethodChannel" · badge emoji 🍜 · ảnh nền `screens/ep26/standalone-food-cart.png`.
+
+**Tags:** `flutter add-to-app, flutter module, flutter create template module, mini app flutter, super app flutter, flutter engine, entry point flutter, pragma vm entry-point, flutter tiếng việt, học flutter, add to app là gì, methodchannel flutter, flutter cho người mới, kiến trúc mini app, grab shopee kiến trúc, flutter dart, mini app tiếng việt, flutter series`
+
+---
+
+### Flutter Mini-App #2 — Host SwiftUI từ số 0 — cắm căn hộ Flutter đầu tiên (9:39)
+
+**Tiêu đề:** SwiftUI từ số 0 + FlutterEngine: cắm mini-app Flutter đầu tiên | Tập 2/6
+
+**Mô tả:**
+```
+Tập 1, mini Đồ ăn Flutter đã chạy mượt — nhưng đứng một mình, chưa chạm app nào. Tập 2: xây app chủ ViệtSuper bằng SwiftUI TỪ SỐ 0 (60 giây dịch nhanh: View≈Widget, body≈build(), @State≈setState — không cần biết Swift trước), rồi cắm CĂN HỘ FLUTTER ĐẦU TIÊN bằng FlutterEngineGroup + FlutterViewController thật.
+
+Có cả một gotcha CÓ THẬT từng làm mini trắng trơn ngay lần build đầu: lỗi Dart_LookupLibrary vì kernel debug chỉ đóng gói code reachable từ lib/main.dart — cách bắt lỗi và vá kể chi tiết, không giấu diếm.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu Tập 2
+0:37 SwiftUI trong 60 giây cho người biết Flutter
+1:10 Dựng host: XcodeGen → App → ContentView → MiniApp.swift
+3:52 Nhúng Flutter thật: Podfile → MiniAppLauncher → MiniAppView
+6:01 Gotcha thật: mini trắng trơn & cách vá
+7:49 Nghiệm thu: căn hộ đầu tiên đã cắm điện
+8:21 Tổng kết Tập 2
+9:03 Lời kết & hẹn Tập 3
+
+📦 Source code (demo-flutter-miniapp/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout flutter-miniapp-tap-2 để xem đúng code tập này (kể cả gotcha Dart_LookupLibrary).
+⏮️ Tập trước: [LINK-EP26]
+⏭️ Tập sau: [LINK-EP28]
+
+#flutter #swiftui #flutterengine #addtoapp #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🐛 Gotcha thật trong tập này: kernel debug của Flutter chỉ đóng gói code REACHABLE từ lib/main.dart — quên import 1 entrypoint là màn TRẮNG TRƠN, không lỗi biên dịch nào báo trước. Bạn từng gặp lỗi entry point tương tự chưa? Comment kể lại nhé!
+```
+
+**Thumbnail:** badge "FLUTTER MINI-APP 2" · dòng lớn "SWIFTUI" / "ĐÃ SỐNG" · phụ đề "XcodeGen · FlutterEngineGroup · gotcha thật" · badge emoji 🏗️ · ảnh nền `screens/ep27/mini-food-embedded.png`.
+
+**Tags:** `swiftui cho người mới, swiftui là gì, flutterengine ios, flutterviewcontroller, xcodegen tutorial, podfile flutter, add-to-app ios, flutter add to app swift, methodchannel, flutter ios native, swiftui flutter, uiviewcontrollerrepresentable, dart lookuplibrary, flutter debugging, mini app flutter, học swiftui, flutter tiếng việt`
+
+---
+
+### Flutter Mini-App #3 — FlutterEngineGroup: thêm mini gần như miễn phí (6:13)
+
+**Tiêu đề:** FlutterEngineGroup: thêm mini-app thứ hai gần như miễn phí | Tập 3/6
+
+**Mô tả:**
+```
+Tập 3: cắm căn hộ THỨ HAI — mini Ví — chỉ bằng ĐÚNG MỘT phần tử Swift. Bí quyết là FlutterEngineGroup: một "trạm biến áp" dùng chung khiến engine thứ hai gần như MIỄN PHÍ RAM so với dựng một engine độc lập từ đầu.
+
+Nói ngay để không hiểu lầm: hai mini KHÔNG chạy song song — chúng THAY NHAU chiếm màn hình. Và một câu hỏi treo lơ lửng tới cuối tập: mini Ví hiện tên "Lee", số dư 1.250.000đ — dữ liệu đó Flutter lấy từ đâu, khi không hề định nghĩa user nào? (trả lời ở Tập 4)
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu Tập 3
+0:37 FlutterEngineGroup: trạm biến áp dùng chung
+2:35 Thêm mini thứ 2: đúng 1 phần tử Swift + rebuild
+3:35 Nghiệm thu: 2 card, 1 câu hỏi (Lee?)
+4:13 Bên trong wallet_screen: Card số dư
+4:49 Tổng kết Tập 3
+5:33 Lời kết & hẹn Tập 4
+
+📦 Source code (demo-flutter-miniapp/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout flutter-miniapp-tap-3 để xem đúng code tập này.
+⏮️ Tập trước: [LINK-EP27]
+⏭️ Tập sau: [LINK-EP29]
+
+#flutter #flutterenginegroup #addtoapp #superapp #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+❓ Cliffhanger cuối tập: mini Ví hiện "Lee / 1.250.000đ" nhưng module Flutter KHÔNG hề định nghĩa user nào tên Lee — dữ liệu này từ đâu ra? Comment đoán thử, đáp án có ở Tập 4!
+```
+
+**Thumbnail:** badge "FLUTTER MINI-APP 3" · dòng lớn "GẦN NHƯ" / "MIỄN PHÍ" · phụ đề "FlutterEngineGroup · thêm mini = 1 dòng Swift" · badge emoji 👛 · ảnh nền `screens/ep28/mini-wallet-open.png`.
+
+**Tags:** `flutterenginegroup, flutter engine group, flutter multiple engines, add-to-app flutter, mini app thứ hai, flutter ram usage, swift array flutter, kiến trúc mini app, flutter ios, methodchannel, super app flutter, flutter tiếng việt, học flutter, wallet app flutter, flutter card widget, mini app flutter tiếng việt`
+
+---
+
+### Flutter Mini-App #4 — MethodChannel: mini hỏi, app chủ trả lời (7:03)
+
+**Tiêu đề:** MethodChannel Flutter ↔ Swift: mini-app hỏi, app chủ trả lời | Tập 4/6
+
+**Mô tả:**
+```
+Tập 4 trả lời thẳng câu hỏi Tập 3 treo lại: "Lee" và "1.250.000đ" không đến từ Flutter — chúng được HARD-CODE trong result() của Swift, gửi qua MethodChannel. Ẩn dụ: căn hộ muốn biết tên chủ tòa nhà phải gọi điện xuống LỄ TÂN — MethodChannel chính là đường dây đó.
+
+Đọc từng dòng invokeMapMethod bên Dart, setMethodCallHandler bên Swift, và vì sao CÙNG một wallet_screen.dart lại cho ra HAI bối cảnh khác nhau: "Số dư lấy từ app chủ (Swift)" khi nhúng, "Khách chạy lẻ" 500.000đ khi chạy đơn độc.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu Tập 4
+0:36 MethodChannel: đường dây xuống lễ tân
+1:23 Dart hỏi: _loadUser + luồng gọi
+2:45 Swift trả lời: setMethodCallHandler + vì sao 2 bối cảnh
+4:18 Nghiệm thu: 1 code, 2 bối cảnh (nhúng vs chạy lẻ)
+4:57 Nút X gọi _close() qua MethodChannel
+5:30 Tổng kết Tập 4
+6:21 Lời kết & hẹn Tập 5
+
+📦 Source code (demo-flutter-miniapp/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout flutter-miniapp-tap-4 để xem đúng code tập này.
+⏮️ Tập trước: [LINK-EP28]
+⏭️ Tập sau: [LINK-EP30]
+
+#flutter #methodchannel #addtoapp #swift #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+📞 Hộp đen đã mở: MethodChannel là đường ống 2 chiều thật — invokeMethod GỌI, setMethodCallHandler NGHE, result() TRẢ LỜI. Bạn đoán được vì sao "Khách chạy lẻ" luôn đúng 500.000đ không? Comment thử xem!
+```
+
+**Thumbnail:** badge "FLUTTER MINI-APP 4" · dòng lớn "MỞ HỘP ĐEN" / "METHODCHANNEL" · phụ đề "Mini hỏi · Swift trả lời · 1 code 2 bối cảnh" · badge emoji 📞 · ảnh nền `screens/ep29/mini-wallet-from-host.png`.
+
+**Tags:** `methodchannel flutter, flutter swift communication, invokemapmethod, setmethodcallhandler, flutter ios bridge, native bridge flutter, missingpluginexception, flutter fallback data, flutter dart swift, add-to-app flutter, flutter học tiếng việt, ví điện tử app, flutter platform channel, ios swift dart, kiến trúc mini app`
+
+---
+
+### Flutter Mini-App #5 — Công thức 4 bước bản Flutter: mini Xem phim từ A-Z (7:06)
+
+**Tiêu đề:** Công thức 4 bước: xây mini-app Flutter mới từ A-Z (Xem phim) | Tập 5/6
+
+**Mô tả:**
+```
+Tập tốt nghiệp bản Flutter: kiểm chứng công thức 4 bước bằng cách xây MỚI nguyên mini Xem phim 🎬 từ số 0 — (1) viết căn phòng cinema_screen.dart (3 phim Việt CÙNG dữ liệu với series React Native trước đó), (2) mở cửa vào main_cinema.dart + 1 dòng import, (3) báo lễ tân — thêm ĐÚNG 2 dòng vào MiniApp.swift, (4) rebuild.
+
+Nhấn mạnh: KHÔNG sửa MiniAppLauncher, KHÔNG sửa ContentView — kiến trúc tốt là thêm tính năng mà không đụng lõi đã chạy ổn định.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu Tập 5
+0:33 Công thức 4 bước bản Flutter
+1:27 Bước 1: cinema_screen.dart — data + nút biến hình
+2:42 Sơ đồ công thức 4 bước
+3:15 Bước 2: main_cinema.dart + import main.dart
+4:23 Bước 3: báo lễ tân — thêm 2 dòng Swift
+5:02 Bước 4: rebuild + nghiệm thu 3 card
+6:13 Lời kết & hẹn Tập 6
+
+📦 Source code (demo-flutter-miniapp/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout flutter-miniapp-tap-5 để xem đúng code tập này.
+⏮️ Tập trước: [LINK-EP29]
+⏭️ Tập sau: [LINK-EP31]
+
+#flutter #miniapp #addtoapp #flutterdev #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🎬 Mini Xem phim dùng CÙNG dữ liệu 3 phim với series React Native cũ — khán giả cũ chắc nhận ra ngay! Comment nếu bạn đoán được vì sao mình cố tình lặp lại data này nhé.
+```
+
+**Thumbnail:** badge "FLUTTER MINI-APP 5" · dòng lớn "CÔNG THỨC" / "4 BƯỚC" · phụ đề "Viết phòng · mở cửa · báo lễ tân · rebuild" · badge emoji 🎬 · ảnh nền `screens/ep30/mini-cinema-ticket.png`.
+
+**Tags:** `flutter mini app từ a đến z, công thức mini app flutter, cinema app flutter, flutter set fold, flutter statefulwidget, add mini app flutter, flutter swift kiến trúc, xem phim app flutter, flutter tiếng việt, học flutter, flutterenginegroup, mini app mới, flutter dart pattern, super app flutter, việtsuper flutter`
+
+---
+
+### Flutter Mini-App #6 (CUỐI) — Chạy lẻ, bẫy FLUTTER_TARGET & so găng React Native (7:21)
+
+**Tiêu đề:** Flutter add-to-app vs React Native: so găng kiến trúc mini-app | Tập 6/6
+
+**Mô tả:**
+```
+Tập cuối series: chạy lẻ từng mini bằng cờ -t, đối mặt một BẪY THỰC CHIẾN có thật khi làm demo này — build lại app chủ sau khi chạy lẻ khiến Generated.xcconfig ghim cứng FLUTTER_TARGET, các mini khác lỗi Dart_LookupLibrary — và cách vá.
+
+Rồi so găng trực tiếp 2 công thức: series React Native cũ (1 dự án JS, gộp bằng npm workspaces lúc BUILD) và series Flutter add-to-app này (2 dự án tách biệt, gộp lúc RUNTIME qua FlutterEngine) — khi nào chọn gì.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu Tập 6 — tập cuối
+0:30 Ôn 4 mảnh ẩn dụ + 3 việc hôm nay
+1:20 Chạy lẻ 3 mini bằng -t + nghiệm thu
+2:25 Bẫy thực chiến: FLUTTER_TARGET bị ghim
+3:04 Tái hiện bẫy & fix + nghiệm thu
+4:05 Tổng kiến trúc: Host → Group → Engine → Mini
+4:38 So găng React Native vs Flutter + chọn công thức nào
+6:24 Lời kết series 6/6
+
+📦 Source code (demo-flutter-miniapp/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 Repo có tag theo từng tập (flutter-miniapp-tap-1 → tap-6) — checkout tag để xem đúng code của tập đang xem.
+▶️ Series RN cũ "Mini-App từ A đến Z": https://www.youtube.com/playlist?list=PLY-i2_1YbKi4
+⏮️ Tập trước: [LINK-EP30]
+▶️ Xem từ đầu series Flutter: [LINK-EP26]
+💬 Vote series tiếp theo: bản Kotlin add-to-app hay chủ đề Flutter khác?
+
+#flutter #reactnative #addtoapp #superapp #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🥊 So găng xong: add-to-app (Flutter) mạnh khi ĐÃ có app native triệu người dùng, workspace (React Native) đơn giản hơn khi xây MỚI từ 0. Comment vote: series tiếp theo nên làm bản Kotlin add-to-app (Android) hay chủ đề Flutter khác?
+```
+
+**Thumbnail:** badge "FLUTTER MINI-APP 6/6" · dòng lớn "TẬP CUỐI" / "SO GĂNG RN" · phụ đề "Chạy lẻ · bẫy FLUTTER_TARGET · vs React Native" · badge emoji 🏆 · ảnh nền `screens/ep31/host-grid-final.png`.
+
+**Tags:** `flutter vs react native, add-to-app vs workspace, flutter_target xcconfig, flutter generated xcconfig, flutter debugging thực chiến, flutter kiến trúc tổng, react native mini app, flutter add-to-app hoàn chỉnh, so sánh flutter react native, flutter tiếng việt, học flutter, mini app series, super app kiến trúc, flutter dart swift`
+
 ## Thumbnail
 
 Đã render sẵn tại `video/out/thumbs/ep0X-thumb.png` (1280×720, <2MB, chuẩn YouTube). Muốn sửa chữ/bố cục: sửa mảng `thumbnails` trong `video/src/Root.tsx` hoặc component `video/src/Thumbnail.tsx`, rồi chạy `npx remotion still Thumb0X out/thumbs/ep0X-thumb.png`.

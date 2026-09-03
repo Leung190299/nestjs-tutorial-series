@@ -1,0 +1,251 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Series Mini-App từ A đến Z từng nhúng React Native bằng workspace — hôm nay ta lên một cấp: series MỚI Mini-App với Flutter, add-to-app đúng nghĩa đen.",
+      "Grab, Shopee, các ví điện tử thật ngoài kia không viết lại app từ đầu: họ NHÚNG từng tính năng như một app con vào app native đã có sẵn hàng triệu người dùng.",
+      "Cấp độ lần này thật hơn nhiều: app chủ do dev native viết bằng Swift, còn mỗi mini-app viết bằng Flutter, và mỗi mini chạy trong một ENGINE Dart riêng biệt.",
+      "6 tập, mỗi tập cắm thêm một mảnh: hôm nay, Tập 1 trên 6, ta xây và chạy thử chính mini-app Flutter đầu tiên — mini Đồ ăn — trước khi cắm nó vào bất kỳ app nào.",
+      "Xuyên suốt series, nhớ ba ẩn dụ này: app chủ là tòa nhà bê tông, module Flutter là căn hộ lắp ghép, còn engine là đồng hồ điện nước riêng của từng căn."
+    ],
+    "visual": {
+      "title": "Add-to-app: mini-app đúng nghĩa đen",
+      "subtitle": "Mini-App với Flutter · Tập 1/6 · Nhúng Flutter vào app native",
+      "badge": "Series Mini-App với Flutter · Tập 1"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Series RN trước, mỗi mini-app là một PACKAGE trong cùng một dự án JS, gộp lại lúc BUILD bằng npm workspaces — một cách gộp ở tầng mã nguồn.",
+      "Flutter add-to-app gộp ở tầng khác hẳn: lúc RUNTIME, app native và app Flutter là hai dự án tách biệt hoàn toàn, chỉ gặp nhau khi máy đang CHẠY.",
+      "Vì vậy lệnh tạo dự án cũng khác: không phải flutter create bình thường, mà flutter create --template=module — sinh ra một MODULE, không phải một APP.",
+      "Module không có icon, không tự chạy độc lập trên máy người dùng: nó là một gói mã nguồn CHỜ được app khác nhúng vào, giống một căn hộ lắp ghép chờ đưa vào tòa nhà.",
+      "Khi bị nhúng, mỗi module chạy trong một FLUTTER ENGINE riêng — coi đó là đồng hồ điện nước riêng của căn hộ: đo đếm tài nguyên độc lập với tòa nhà chính."
+    ],
+    "visual": {
+      "title": "Module ≠ App: gộp lúc runtime, không phải lúc build",
+      "bullets": [
+        {"icon": "📦", "text": "RN cũ: gộp bằng workspace, lúc BUILD", "sentence": 0},
+        {"icon": "⚙️", "text": "Flutter: gộp lúc RUNTIME, 2 dự án tách biệt", "sentence": 1},
+        {"icon": "🏗️", "text": "flutter create --template=module (không phải app)", "sentence": 2},
+        {"icon": "🚪", "text": "Module = căn hộ lắp ghép, chờ được nhúng", "sentence": 3},
+        {"icon": "💧", "text": "Mỗi module 1 ENGINE = đồng hồ điện nước riêng", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "diagram",
+    "narration": [
+      "Nhìn vào bên trong module mini_flutter, có nhiều CỬA VÀO khác nhau, gọi là entry point — mỗi cửa là một hàm main() riêng.",
+      "Module cũng có cửa RIÊNG cho nhà phát triển: lib/main.dart mở ra một menu debug, liệt kê từng mini-app đang có để tự chạy thử nội bộ.",
+      "Nhưng cửa THẬT của mini Đồ ăn là lib/main_food.dart: cửa mà sau này app chủ Swift sẽ gọi vào để mở đúng mini này, không qua menu debug.",
+      "Khi cửa main_food.dart được gọi tới, Flutter DỰNG lên một ENGINE mới chỉ để chạy riêng nội dung sau cửa đó — độc lập với mọi engine khác.",
+      "Nhớ mô hình này: một module, nhiều cửa vào, mỗi cửa một engine khi cần — tập sau ta sẽ đứng ở phía BÊN KIA cánh cửa, viết code Swift để gõ cửa."
+    ],
+    "visual": {
+      "title": "Một cửa vào (@pragma) → một Engine riêng",
+      "boxes": [
+        {"id": "module", "label": "mini_flutter", "emoji": "📦"},
+        {"id": "entry", "label": "main_food.dart", "emoji": "🚪"},
+        {"id": "engine", "label": "FlutterEngine", "emoji": "💧"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "cửa @pragma entry-point", "sentence": 2},
+        {"from": 1, "to": 2, "label": "gọi tới → dựng engine", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Tạo module bằng đúng một dòng lệnh.",
+      "fvm flutter create --template=module mini_flutter: cờ --template=module là điểm khác biệt DUY NHẤT so với tạo app bình thường.",
+      "Kết quả: một thư mục mini_flutter với pubspec.yaml có thêm mục module — androidPackage và iosBundleIdentifier để hai nền tảng nhận diện gói này.",
+      "Không có android/ hay ios/ project đầy đủ như app thường: Flutter tự sinh chúng ẩn bên trong khi cần, gọn nhẹ hơn hẳn."
+    ],
+    "visual": {
+      "title": "Một dòng lệnh: sinh module Flutter",
+      "commands": [
+        {"cmd": "fvm flutter create --template=module mini_flutter", "output": "Creating project mini_flutter...\nWrote 68 files.\n\nAll done!", "sentence": 1},
+        {"cmd": "cat mini_flutter/pubspec.yaml | tail -5", "output": "# identifiers, which may be completely independent or the same as these.\n  module:\n    androidX: true\n    androidPackage: com.vietsuper.mini_flutter\n    iosBundleIdentifier: com.vietsuper.miniFlutter", "sentence": 2}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Đây là cửa vào thật: lib/main_food.dart — toàn bộ file chỉ vỏn vẹn 8 dòng.",
+      "Hai import đầu quen thuộc: food_screen.dart là căn phòng UI, mini_shell.dart là cái vỏ bọc chung cho mọi mini.",
+      "Dòng quan trọng nhất: @pragma('vm:entry-point') ngay trên hàm main — coi nó như biển 'CỬA VÀO HỢP LỆ' dán trước cửa.",
+      "Không có biển này, trình biên dịch AOT của Flutter sẽ COI NHƯ hàm main() này chết, cắt bỏ khỏi bản build cuối cùng để gọn nhẹ.",
+      "runApp bọc FoodScreen trong MiniAppShell với title 'Đồ ăn ViệtSuper': chạy xong dòng này là cả mini-app Đồ ăn đã sống dậy trên màn hình."
+    ],
+    "visual": {
+      "filename": "lib/main_food.dart — TOÀN BỘ FILE (mini_flutter)",
+      "language": "clike",
+      "code": "import 'package:flutter/material.dart';\n\nimport 'food_screen.dart';\nimport 'mini_shell.dart';\n\n@pragma('vm:entry-point')\nvoid main() =>\n    runApp(const MiniAppShell(title: 'Đồ ăn ViệtSuper', child: FoodScreen()));",
+      "steps": [
+        {"from": 1, "to": 8, "sentence": 0},
+        {"from": 3, "to": 4, "sentence": 1},
+        {"from": 6, "to": 6, "sentence": 2},
+        {"from": 6, "to": 6, "sentence": 3},
+        {"from": 7, "to": 8, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Căn phòng food_screen.dart bắt đầu bằng đúng một class dữ liệu: FoodItem, bốn field — id, name, emoji, price — không có gì thừa.",
+      "const constructor với required cho cả bốn field: object FoodItem tạo ra luôn đủ dữ liệu, không sợ thiếu.",
+      "Danh sách foods: đúng BA món quốc dân — phở bò 45.000đ, bánh mì thịt 25.000đ, cơm tấm sườn 40.000đ — y hệt giá bạn sẽ thấy trên điện thoại.",
+      "Đây là const list: khai báo một lần, không đổi trong suốt vòng đời app — dữ liệu tĩnh không cần lưu trên server cho một demo."
+    ],
+    "visual": {
+      "filename": "lib/food_screen.dart (dữ liệu 3 món)",
+      "language": "clike",
+      "code": "class FoodItem {\n  const FoodItem({\n    required this.id,\n    required this.name,\n    required this.emoji,\n    required this.price,\n  });\n\n  final String id;\n  final String name;\n  final String emoji;\n  final int price;\n}\n\nconst foods = [\n  FoodItem(id: 'pho', name: 'Phở bò', emoji: '🍜', price: 45000),\n  FoodItem(id: 'banhmi', name: 'Bánh mì thịt', emoji: '🥖', price: 25000),\n  FoodItem(id: 'comtam', name: 'Cơm tấm sườn', emoji: '🍛', price: 40000),\n];",
+      "steps": [
+        {"from": 1, "to": 13, "sentence": 0},
+        {"from": 2, "to": 7, "sentence": 1},
+        {"from": 15, "to": 19, "sentence": 2},
+        {"from": 15, "to": 19, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Bộ não của màn hình nằm trong _FoodScreenState, và giỏ hàng chỉ là MỘT dòng: Set<String> _cart.",
+      "Set nghĩa là mỗi món chỉ tồn tại một lần — thêm món đã có trong giỏ thì không nhân đôi, đúng bản chất 'đã chọn hay chưa'.",
+      "_total là getter, KHÔNG phải state: nó lọc foods theo những id có trong _cart, rồi fold cộng dồn price lại.",
+      "fold(0, ...) là gộp một danh sách thành MỘT giá trị: bắt đầu từ 0, cộng thêm price của từng món còn trong giỏ.",
+      "Bấm thêm hay bỏ món chỉ cần add hoặc remove trên Set — _total tự động tính lại đúng mỗi lần Flutter build lại giao diện."
+    ],
+    "visual": {
+      "filename": "lib/food_screen.dart (Set giỏ hàng + fold tổng)",
+      "language": "clike",
+      "code": "class _FoodScreenState extends State<FoodScreen> {\n  final Set<String> _cart = {};\n\n  int get _total => foods\n      .where((f) => _cart.contains(f.id))\n      .fold(0, (sum, f) => sum + f.price);",
+      "steps": [
+        {"from": 1, "to": 2, "sentence": 0},
+        {"from": 2, "to": 2, "sentence": 1},
+        {"from": 4, "to": 6, "sentence": 2},
+        {"from": 6, "to": 6, "sentence": 3},
+        {"from": 2, "to": 6, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Vỏ chung cho MỌI mini-app: mini_shell.dart — nơi đặt đường dây liên lạc với app chủ.",
+      "const hostChannel = MethodChannel('vietsuper/host'): một MethodChannel là đường ống hai chiều giữa code Dart và code Swift, đặt tên 'vietsuper/host'.",
+      "MiniAppShell là StatelessWidget nhận title và child: mỗi mini-app chỉ việc bọc UI của mình vào đây để có chung một vỏ bọc.",
+      "_close() gọi hostChannel.invokeMethod('close'): ném một tin nhắn 'đóng tôi lại' xuống phía app chủ đang lắng nghe ở đầu dây bên kia.",
+      "Nhưng nếu KHÔNG có ai lắng nghe — như khi ta chạy lẻ hôm nay — Flutter ném ra lỗi MissingPluginException ngay tại dòng invokeMethod.",
+      "Khối try/catch nuốt gọn lỗi đó, không làm gì cả: cài cắm nhỏ này sẽ nở hoa ở Tập 4, khi app chủ THẬT SỰ trả lời phía bên kia."
+    ],
+    "visual": {
+      "filename": "lib/mini_shell.dart (MethodChannel + _close)",
+      "language": "clike",
+      "code": "/// Kênh nói chuyện với app chủ. Chạy lẻ thì đầu dây bên kia không tồn tại.\nconst hostChannel = MethodChannel('vietsuper/host');\n\nclass MiniAppShell extends StatelessWidget {\n  const MiniAppShell({super.key, required this.title, required this.child});\n\n  final String title;\n  final Widget child;\n\n  Future<void> _close() async {\n    try {\n      await hostChannel.invokeMethod('close');\n    } on MissingPluginException {\n      // Chạy lẻ: không có host để đóng.\n    }\n  }",
+      "steps": [
+        {"from": 1, "to": 16, "sentence": 0},
+        {"from": 1, "to": 2, "sentence": 1},
+        {"from": 4, "to": 8, "sentence": 2},
+        {"from": 10, "to": 12, "sentence": 3},
+        {"from": 13, "to": 13, "sentence": 4},
+        {"from": 11, "to": 15, "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "terminal",
+    "narration": [
+      "Giờ chạy thử chính cửa main_food.dart, không qua menu debug.",
+      "fvm flutter run -t lib/main_food.dart: cờ -t trỏ thẳng vào ĐÚNG entry point muốn chạy, bỏ qua main.dart mặc định.",
+      "Vài giây build, và trên simulator hiện ra thẳng màn Đồ ăn ViệtSuper — không có menu debug bao quanh, y hệt khi app chủ sẽ gọi vào sau này.",
+      "Nút X góc trái header gọi _close() ta vừa đọc: bấm thử, MissingPluginException bị nuốt lặng lẽ, mini vẫn đứng yên vì chạy lẻ không có ai lắng nghe."
+    ],
+    "visual": {
+      "title": "Chạy thẳng vào 1 cửa: -t lib/main_food.dart",
+      "commands": [
+        {"cmd": "fvm flutter run -t lib/main_food.dart", "output": "Launching lib/main_food.dart on iPhone 17 Pro...\nSyncing files to device iPhone 17 Pro...\n\nFlutter run key commands.", "sentence": 1}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "phone",
+    "narration": [
+      "Nghiệm thu trên simulator. Màn Đồ ăn ViệtSuper: phở bò 45.000đ, bánh mì thịt 25.000đ, cơm tấm sườn 40.000đ — đúng ba dòng dữ liệu vừa đọc trong code.",
+      "Bấm Thêm ở phở bò: nút hóa xanh 'Đã thêm ✓', tổng dưới cùng nhảy từ 0đ lên 45.000đ — đúng bằng price của FoodItem đầu tiên trong Set.",
+      "Không cần backend, không cần state management phức tạp: một Set và một getter fold đã đủ cho giỏ hàng thật.",
+      "Và đây là cửa lib/main.dart — menu debug: chỉ có đúng một dòng 'Đồ ăn' vì mảng minis hiện mới khai một phần tử, tương lai mỗi tập thêm một dòng ở đây."
+    ],
+    "visual": {
+      "title": "Nghiệm thu mini Đồ ăn chạy lẻ 🍜",
+      "screens": [
+        {"src": "screens/ep26/standalone-food.png", "sentence": 0},
+        {"src": "screens/ep26/standalone-food-cart.png", "sentence": 1},
+        {"src": "screens/ep26/debug-menu.png", "sentence": 3}
+      ],
+      "bullets": [
+        {"icon": "🍜", "text": "45.000đ · 25.000đ · 40.000đ — khớp code", "sentence": 0},
+        {"icon": "✅", "text": "Thêm → Đã thêm ✓, tổng 45.000đ", "sentence": 1},
+        {"icon": "📋", "text": "Set + fold — đủ cho giỏ hàng thật", "sentence": 2},
+        {"icon": "🐛", "text": "main.dart: menu debug, 1 dòng 'Đồ ăn'", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "concept",
+    "narration": [
+      "Chốt lại Tập 1: ta đã tạo module bằng flutter create --template=module, KHÔNG phải flutter create thường.",
+      "Ta đọc kỹ ba file: main_food.dart với biển @pragma('vm:entry-point') làm cửa vào hợp lệ, food_screen.dart với Set và fold, và mini_shell.dart với MethodChannel chờ sẵn.",
+      "So với series RN cũ: ở đó một package chỉ cần export đúng component, gộp lúc build bằng workspace — không hề có khái niệm engine hay entry point riêng.",
+      "Ở đây, mỗi mini Flutter là một THẾ GIỚI riêng, chỉ nối với app chủ qua đúng MỘT sợi dây: MethodChannel — dây đó vẫn đang treo lơ lửng, chưa ai cầm đầu bên kia.",
+      "Công thức add-to-app dần lộ diện: viết module độc lập trước, chạy thử lẻ cho chắc, RỒI mới nghĩ tới chuyện nhúng vào app chủ."
+    ],
+    "visual": {
+      "title": "Tổng kết Tập 1: module độc lập trước, nhúng sau",
+      "bullets": [
+        {"icon": "🏗️", "text": "--template=module: sinh MODULE, không phải app", "sentence": 0},
+        {"icon": "🚪", "text": "@pragma vm:entry-point + Set/fold + MethodChannel", "sentence": 1},
+        {"icon": "🆚", "text": "RN: export + workspace · Flutter: engine + entry point", "sentence": 2},
+        {"icon": "🧵", "text": "1 sợi dây MethodChannel — chưa ai cầm đầu bên kia", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "outro",
+    "narration": [
+      "Vậy là mini Đồ ăn Flutter đã sống, chạy mượt, có cả giỏ hàng thật — nhưng vẫn đang đứng MỘT MÌNH, chưa hề chạm vào app native nào.",
+      "Tập sau, ta đổi vai: xây app chủ ViệtSuper bằng SwiftUI TỪ SỐ 0 — tòa nhà bê tông đúng nghĩa, cho người chưa biết một dòng Swift nào.",
+      "Rồi cắm CĂN HỘ FLUTTER ĐẦU TIÊN vào đúng tòa nhà đó bằng FlutterEngine và FlutterViewController — và một gotcha thật đã từng làm mini trắng trơn, sẽ kể chi tiết.",
+      "Repo có tag flutter-miniapp-tap-1 đúng trạng thái hôm nay: checkout là thấy đúng code trong video, không sai một dòng.",
+      "Cảm ơn bạn đã xem Tập 1 trên 6: comment nếu bạn từng làm add-to-app trong dự án thật, và hẹn gặp lại ở Tập 2!"
+    ],
+    "visual": {
+      "title": "Tập 1/6 xong — hẹn gặp Tập 2! 👋",
+      "summary": [
+        {"text": "Mini Đồ ăn Flutter chạy lẻ — Set + fold + MethodChannel sẵn sàng", "sentence": 0},
+        {"text": "Tập 2: host SwiftUI từ số 0 + cắm căn hộ đầu tiên", "sentence": 1},
+        {"text": "Tag flutter-miniapp-tap-1 = đúng code hôm nay", "sentence": 3}
+      ],
+      "next": "Tập 2/6: SwiftUI từ số 0 — cắm căn hộ Flutter đầu tiên 🏗️"
+    }
+  }
+]

@@ -1,0 +1,936 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Host SwiftUI từ số 0 — cắm căn hộ Flutter đầu tiên",
+        "subtitle": "Mini-App với Flutter · Tập 2/6 · SwiftUI + FlutterEngine",
+        "badge": "Series Mini-App với Flutter · Tập 2"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-01-0-cfb05802.wav",
+          "startFrame": 0,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep27/scene-01-1-03f15b27.wav",
+          "startFrame": 246,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep27/scene-01-2-e28b2252.wav",
+          "startFrame": 451,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep27/scene-01-3-0c8ce0ef.wav",
+          "startFrame": 685,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep27/scene-01-4-7329045a.wav",
+          "startFrame": 885,
+          "durationInFrames": 209
+        }
+      ],
+      "durationInFrames": 1112
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "SwiftUI trong 60 giây, cho người biết Flutter",
+        "bullets": [
+          {
+            "icon": "⏱️",
+            "text": "60s dịch nhanh: SwiftUI cho người biết Flutter",
+            "sentence": 0
+          },
+          {
+            "icon": "🧱",
+            "text": "View ≈ Widget: struct mô tả giao diện",
+            "sentence": 1
+          },
+          {
+            "icon": "🏗️",
+            "text": "body ≈ build(): trả về nội dung cần vẽ",
+            "sentence": 2
+          },
+          {
+            "icon": "🔄",
+            "text": "@State ≈ setState: đổi là vẽ lại",
+            "sentence": 3
+          },
+          {
+            "icon": "✅",
+            "text": "3 cặp nhớ: View/body/@State ≈ Widget/build/setState",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-02-0-fce11042.wav",
+          "startFrame": 0,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep27/scene-02-1-f383fe54.wav",
+          "startFrame": 167,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep27/scene-02-2-be564713.wav",
+          "startFrame": 346,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep27/scene-02-3-79792543.wav",
+          "startFrame": 554,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep27/scene-02-4-90dbee44.wav",
+          "startFrame": 793,
+          "durationInFrames": 204
+        }
+      ],
+      "durationInFrames": 1015
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "vietsuper_ios/project.yml — XcodeGen thay GUI",
+        "language": "yaml",
+        "code": "name: VietSuper\noptions:\n  bundleIdPrefix: com.vietsuper\ntargets:\n  VietSuper:\n    type: application\n    platform: iOS\n    deploymentTarget: \"16.0\"\n    sources: [VietSuper]\n    settings:\n      base:\n        GENERATE_INFOPLIST_FILE: YES\n        INFOPLIST_KEY_UILaunchScreen_Generation: YES\n        INFOPLIST_KEY_CFBundleDisplayName: ViệtSuper\n        PRODUCT_BUNDLE_IDENTIFIER: com.vietsuper.host\n        SWIFT_VERSION: \"5.9\"\n        TARGETED_DEVICE_FAMILY: \"1\"",
+        "steps": [
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 9,
+            "sentence": 2
+          },
+          {
+            "from": 9,
+            "to": 15,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-03-0-ecfc3a7b.wav",
+          "startFrame": 0,
+          "durationInFrames": 288
+        },
+        {
+          "file": "audio/ep27/scene-03-1-0c040f69.wav",
+          "startFrame": 296,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep27/scene-03-2-bbaea4f3.wav",
+          "startFrame": 525,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep27/scene-03-3-df7e3fb9.wav",
+          "startFrame": 793,
+          "durationInFrames": 276
+        },
+        {
+          "file": "audio/ep27/scene-03-4-caf87e29.wav",
+          "startFrame": 1077,
+          "durationInFrames": 221
+        }
+      ],
+      "durationInFrames": 1316
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "VietSuper/VietSuperApp.swift — TOÀN BỘ FILE",
+        "language": "swift",
+        "code": "import SwiftUI\n\n@main\nstruct VietSuperApp: App {\n  var body: some Scene {\n    WindowGroup { ContentView() }\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 6,
+            "to": 8,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-04-0-80f9a864.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep27/scene-04-1-5822eecf.wav",
+          "startFrame": 148,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep27/scene-04-2-182d1b42.wav",
+          "startFrame": 339,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep27/scene-04-3-e15a9800.wav",
+          "startFrame": 523,
+          "durationInFrames": 192
+        }
+      ],
+      "durationInFrames": 733
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "VietSuper/ContentView.swift (1/2 — lưới mini-app)",
+        "language": "swift",
+        "code": "import SwiftUI\n\nstruct ContentView: View {\n  @State private var selected: MiniApp?\n\n  var body: some View {\n    NavigationStack {\n      ScrollView {\n        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())],\n                  spacing: 16) {\n          ForEach(miniApps) { app in\n            Button { selected = app } label: {\n              VStack(spacing: 8) {\n                Text(app.emoji).font(.system(size: 44))\n                Text(app.name).font(.headline).foregroundStyle(.primary)\n              }\n              .frame(maxWidth: .infinity)\n              .padding(.vertical, 24)\n              .background(Color(.secondarySystemBackground))\n              .clipShape(RoundedRectangle(cornerRadius: 16))\n            }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 21,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 9,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 11,
+            "to": 12,
+            "sentence": 3
+          },
+          {
+            "from": 13,
+            "to": 21,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-05-0-1e792263.wav",
+          "startFrame": 0,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep27/scene-05-1-504da7dd.wav",
+          "startFrame": 157,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep27/scene-05-2-a1515edb.wav",
+          "startFrame": 348,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep27/scene-05-3-c9c2241d.wav",
+          "startFrame": 556,
+          "durationInFrames": 281
+        },
+        {
+          "file": "audio/ep27/scene-05-4-ad055804.wav",
+          "startFrame": 845,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 1101
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "VietSuper/ContentView.swift (2/2 — fullScreenCover)",
+        "language": "swift",
+        "code": "          }\n        }\n        .padding()\n      }\n      .navigationTitle(\"ViệtSuper 🇻🇳\")\n    }\n    .fullScreenCover(item: $selected) { app in\n      MiniAppView(library: app.library) { selected = nil }\n        .ignoresSafeArea()\n    }\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 5,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 9,
+            "sentence": 2
+          },
+          {
+            "from": 8,
+            "to": 12,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-06-0-d4a1cbee.wav",
+          "startFrame": 0,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep27/scene-06-1-3b548a96.wav",
+          "startFrame": 162,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep27/scene-06-2-f2ff05a1.wav",
+          "startFrame": 358,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep27/scene-06-3-697cf159.wav",
+          "startFrame": 594,
+          "durationInFrames": 240
+        }
+      ],
+      "durationInFrames": 852
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "VietSuper/MiniApp.swift — TOÀN BỘ FILE",
+        "language": "swift",
+        "code": "import Foundation\n\nstruct MiniApp: Identifiable {\n  let id: String\n  let name: String\n  let emoji: String\n  /// File Dart chứa hàm main của mini này.\n  let library: String\n}\n\nlet miniApps: [MiniApp] = [\n  MiniApp(id: \"food\", name: \"Đồ ăn\", emoji: \"🍜\",\n          library: \"package:mini_flutter/main_food.dart\"),\n]",
+        "steps": [
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 11,
+            "to": 14,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-07-0-ea9648b1.wav",
+          "startFrame": 0,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep27/scene-07-1-cbaf91a4.wav",
+          "startFrame": 193,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep27/scene-07-2-243f5134.wav",
+          "startFrame": 405,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep27/scene-07-3-35eec6e5.wav",
+          "startFrame": 593,
+          "durationInFrames": 226
+        }
+      ],
+      "durationInFrames": 837
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "vietsuper_ios/Podfile — TOÀN BỘ FILE",
+        "language": "clike",
+        "code": "platform :ios, '16.0'\n\nflutter_application_path = '../mini_flutter'\nload File.join(flutter_application_path, '.ios', 'Flutter', 'podhelper.rb')\n\ntarget 'VietSuper' do\n  install_all_flutter_pods(flutter_application_path)\nend\n\npost_install do |installer|\n  flutter_post_install(installer) if defined?(flutter_post_install)\nend",
+        "steps": [
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 3,
+            "to": 4,
+            "sentence": 2
+          },
+          {
+            "from": 6,
+            "to": 8,
+            "sentence": 3
+          },
+          {
+            "from": 10,
+            "to": 12,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-08-0-782a54a9.wav",
+          "startFrame": 0,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep27/scene-08-1-ffed477a.wav",
+          "startFrame": 203,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep27/scene-08-2-2b630ae0.wav",
+          "startFrame": 415,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep27/scene-08-3-68c57fb4.wav",
+          "startFrame": 639,
+          "durationInFrames": 296
+        },
+        {
+          "file": "audio/ep27/scene-08-4-5d2d4536.wav",
+          "startFrame": 943,
+          "durationInFrames": 212
+        }
+      ],
+      "durationInFrames": 1173
+    },
+    {
+      "id": "scene-09",
+      "type": "code",
+      "visual": {
+        "filename": "VietSuper/MiniAppLauncher.swift (1/2 — engine)",
+        "language": "swift",
+        "code": "import Flutter\n\nfinal class MiniAppLauncher {\n  static let shared = MiniAppLauncher()\n\n  /// Một \"nhà máy engine\" dùng chung: các engine sinh ra chia sẻ tài nguyên,\n  /// mở mini thứ hai gần như miễn phí RAM.\n  private let engines = FlutterEngineGroup(name: \"vietsuper\", project: nil)\n\n  func makeMiniViewController(\n    library: String,\n    onClose: @escaping () -> Void\n  ) -> FlutterViewController {\n    let options = FlutterEngineGroupOptions()\n    options.entrypoint = \"main\"\n    options.libraryURI = library\n    let engine = engines.makeEngine(with: options)\n\n    let controller = FlutterViewController(engine: engine, nibName: nil, bundle: nil)",
+        "steps": [
+          {
+            "from": 1,
+            "to": 19,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 13,
+            "sentence": 2
+          },
+          {
+            "from": 14,
+            "to": 19,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-09-0-1744d2c6.wav",
+          "startFrame": 0,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep27/scene-09-1-fa38fa71.wav",
+          "startFrame": 167,
+          "durationInFrames": 262
+        },
+        {
+          "file": "audio/ep27/scene-09-2-bd905762.wav",
+          "startFrame": 437,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep27/scene-09-3-c076a4c1.wav",
+          "startFrame": 657,
+          "durationInFrames": 300
+        }
+      ],
+      "durationInFrames": 975
+    },
+    {
+      "id": "scene-10",
+      "type": "code",
+      "visual": {
+        "filename": "VietSuper/MiniAppLauncher.swift (2/2 — channel)",
+        "language": "swift",
+        "code": "    let channel = FlutterMethodChannel(\n      name: \"vietsuper/host\",\n      binaryMessenger: controller.binaryMessenger\n    )\n    channel.setMethodCallHandler { call, result in\n      switch call.method {\n      case \"getUserInfo\":\n        result([\"name\": \"Lee\", \"balance\": 1_250_000])\n      case \"close\":\n        onClose()\n        result(nil)\n      default:\n        result(FlutterMethodNotImplemented)\n      }\n    }\n    return controller\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 15,
+            "sentence": 1
+          },
+          {
+            "from": 16,
+            "to": 18,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-10-0-1ae10021.wav",
+          "startFrame": 0,
+          "durationInFrames": 264
+        },
+        {
+          "file": "audio/ep27/scene-10-1-83935f41.wav",
+          "startFrame": 272,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep27/scene-10-2-797bae53.wav",
+          "startFrame": 530,
+          "durationInFrames": 226
+        }
+      ],
+      "durationInFrames": 774
+    },
+    {
+      "id": "scene-11",
+      "type": "code",
+      "visual": {
+        "filename": "VietSuper/MiniAppView.swift — TOÀN BỘ FILE",
+        "language": "swift",
+        "code": "import Flutter\nimport SwiftUI\n\nstruct MiniAppView: UIViewControllerRepresentable {\n  let library: String\n  let onClose: () -> Void\n\n  func makeUIViewController(context: Context) -> FlutterViewController {\n    MiniAppLauncher.shared.makeMiniViewController(library: library, onClose: onClose)\n  }\n\n  func updateUIViewController(_ controller: FlutterViewController, context: Context) {}\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 9,
+            "sentence": 2
+          },
+          {
+            "from": 12,
+            "to": 13,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-11-0-67e2b9f0.wav",
+          "startFrame": 0,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep27/scene-11-1-bf74565b.wav",
+          "startFrame": 239,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep27/scene-11-2-70df161a.wav",
+          "startFrame": 480,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep27/scene-11-3-30a1ce0a.wav",
+          "startFrame": 733,
+          "durationInFrames": 216
+        }
+      ],
+      "durationInFrames": 967
+    },
+    {
+      "id": "scene-12",
+      "type": "terminal",
+      "visual": {
+        "title": "Gotcha thật: mini trắng trơn lần build đầu",
+        "commands": [
+          {
+            "cmd": "# Bấm nút Đồ ăn trên host → màn hình mini TRẮNG TRƠN",
+            "output": "flutter: Unhandled Exception: Invalid argument(s): Dart_LookupLibrary\n  'package:mini_flutter/main_food.dart' not found in kernel snapshot",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-12-0-2f992c27.wav",
+          "startFrame": 0,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep27/scene-12-1-fde5f076.wav",
+          "startFrame": 188,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep27/scene-12-2-c3c633f8.wav",
+          "startFrame": 405,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep27/scene-12-3-b1d7137d.wav",
+          "startFrame": 646,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep27/scene-12-4-809006ee.wav",
+          "startFrame": 906,
+          "durationInFrames": 212
+        }
+      ],
+      "durationInFrames": 1136
+    },
+    {
+      "id": "scene-13",
+      "type": "code",
+      "visual": {
+        "filename": "mini_flutter/lib/main.dart (khối import — gotcha fix)",
+        "language": "clike",
+        "code": "import 'package:flutter/material.dart';\n\nimport 'cinema_screen.dart';\nimport 'food_screen.dart';\nimport 'wallet_screen.dart';\n\n// Kéo các entrypoint vào bản build debug để app chủ tìm thấy qua libraryURI.\n// ignore_for_file: unused_import\nimport 'main_cinema.dart';\nimport 'main_food.dart';\nimport 'main_wallet.dart';\n\nvoid main() => runApp(const DebugMenuApp());",
+        "steps": [
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 5,
+            "sentence": 1
+          },
+          {
+            "from": 9,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-13-0-c6d3061b.wav",
+          "startFrame": 0,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep27/scene-13-1-7f119cdb.wav",
+          "startFrame": 196,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep27/scene-13-2-ee25004d.wav",
+          "startFrame": 404,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep27/scene-13-3-627414bb.wav",
+          "startFrame": 672,
+          "durationInFrames": 284
+        },
+        {
+          "file": "audio/ep27/scene-13-4-9c23ff1b.wav",
+          "startFrame": 964,
+          "durationInFrames": 231
+        }
+      ],
+      "durationInFrames": 1213
+    },
+    {
+      "id": "scene-14",
+      "type": "terminal",
+      "visual": {
+        "title": "Vá xong: pod install + xcodebuild rebuild",
+        "commands": [
+          {
+            "cmd": "cd vietsuper_ios && pod install",
+            "output": "Analyzing dependencies\nInstalling Flutter (1.0.0)\nPod installation complete!",
+            "sentence": 1
+          },
+          {
+            "cmd": "xcodebuild -workspace VietSuper.xcworkspace -scheme VietSuper -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build",
+            "output": "** BUILD SUCCEEDED **",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-14-0-7a8ca468.wav",
+          "startFrame": 0,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep27/scene-14-1-316da499.wav",
+          "startFrame": 160,
+          "durationInFrames": 264
+        },
+        {
+          "file": "audio/ep27/scene-14-2-859bfa25.wav",
+          "startFrame": 432,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep27/scene-14-3-d75916bd.wav",
+          "startFrame": 676,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 882
+    },
+    {
+      "id": "scene-15",
+      "type": "phone",
+      "visual": {
+        "title": "Nghiệm thu: mini đã cắm điện 🏗️",
+        "screens": [
+          {
+            "src": "screens/ep27/host-grid-food-only.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep27/mini-food-embedded.png",
+            "sentence": 1
+          },
+          {
+            "src": "screens/ep27/mini-food-embedded-cart.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🏠",
+            "text": "Host: 1 card lưới — Đồ ăn",
+            "sentence": 0
+          },
+          {
+            "icon": "🍜",
+            "text": "Mini full-screen, nền hồng, nút X",
+            "sentence": 1
+          },
+          {
+            "icon": "✅",
+            "text": "Thêm → Đã thêm ✓, Tổng 45.000đ",
+            "sentence": 2
+          },
+          {
+            "icon": "🔌",
+            "text": "X → invokeMethod('close') → host lắng nghe thật",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-15-0-4faceb2e.wav",
+          "startFrame": 0,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep27/scene-15-1-928febe4.wav",
+          "startFrame": 196,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep27/scene-15-2-686f4da5.wav",
+          "startFrame": 437,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep27/scene-15-3-4dabf7b7.wav",
+          "startFrame": 688,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 944
+    },
+    {
+      "id": "scene-16",
+      "type": "concept",
+      "visual": {
+        "title": "Tổng kết Tập 2: căn hộ đầu tiên đã cắm điện",
+        "bullets": [
+          {
+            "icon": "🏗️",
+            "text": "XcodeGen + ContentView (LazyVGrid + fullScreenCover)",
+            "sentence": 0
+          },
+          {
+            "icon": "⚙️",
+            "text": "MiniAppLauncher: EngineGroup + ViewController + Channel",
+            "sentence": 1
+          },
+          {
+            "icon": "🐛",
+            "text": "Gotcha: kernel chỉ gói code reachable từ main.dart",
+            "sentence": 2
+          },
+          {
+            "icon": "🏢",
+            "text": "1 căn hộ đã cắm điện — sổ địa chỉ MiniApp.swift",
+            "sentence": 3
+          },
+          {
+            "icon": "🧩",
+            "text": "Công thức: khai địa chỉ + import tới cửa, chưa đụng lõi",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-16-0-51e32ddd.wav",
+          "startFrame": 0,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep27/scene-16-1-ce9243de.wav",
+          "startFrame": 196,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep27/scene-16-2-f25b32e6.wav",
+          "startFrame": 478,
+          "durationInFrames": 291
+        },
+        {
+          "file": "audio/ep27/scene-16-3-4a95bffe.wav",
+          "startFrame": 777,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep27/scene-16-4-e9cb72db.wav",
+          "startFrame": 997,
+          "durationInFrames": 248
+        }
+      ],
+      "durationInFrames": 1263
+    },
+    {
+      "id": "scene-17",
+      "type": "outro",
+      "visual": {
+        "title": "Tập 2/6 xong — hẹn gặp Tập 3! 👋",
+        "summary": [
+          {
+            "text": "Host SwiftUI xong: ContentView vẽ lưới, MiniAppLauncher dựng engine, mini Đồ ăn cắm thật",
+            "sentence": 0
+          },
+          {
+            "text": "Tập 3: cắm mini Ví chỉ bằng vài dòng nhờ FlutterEngineGroup",
+            "sentence": 1
+          },
+          {
+            "text": "Tag flutter-miniapp-tap-2 = đúng code hôm nay, kể cả gotcha Dart_LookupLibrary",
+            "sentence": 3
+          }
+        ],
+        "next": "Tập 3/6: FlutterEngineGroup — thêm mini gần như miễn phí 🔌"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep27/scene-17-0-0a64c7a4.wav",
+          "startFrame": 0,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep27/scene-17-1-3b9faf81.wav",
+          "startFrame": 222,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep27/scene-17-2-765232ca.wav",
+          "startFrame": 425,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep27/scene-17-3-ee931b02.wav",
+          "startFrame": 625,
+          "durationInFrames": 272
+        },
+        {
+          "file": "audio/ep27/scene-17-4-c24f0b46.wav",
+          "startFrame": 905,
+          "durationInFrames": 176
+        }
+      ],
+      "durationInFrames": 1099
+    }
+  ]
+}

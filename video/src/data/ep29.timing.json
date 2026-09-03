@@ -1,0 +1,623 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "MethodChannel — mini hỏi, app chủ trả lời",
+        "subtitle": "Mini-App với Flutter · Tập 4/6 · MethodChannel hai chiều",
+        "badge": "Series Mini-App với Flutter · Tập 4"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep29/scene-01-0-1c00143a.wav",
+          "startFrame": 0,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep29/scene-01-1-c163788d.wav",
+          "startFrame": 263,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep29/scene-01-2-26150b0c.wav",
+          "startFrame": 475,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep29/scene-01-3-5892c6fe.wav",
+          "startFrame": 685,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep29/scene-01-4-da6fdb08.wav",
+          "startFrame": 936,
+          "durationInFrames": 140
+        }
+      ],
+      "durationInFrames": 1094
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "MethodChannel: đường dây xuống lễ tân",
+        "bullets": [
+          {
+            "icon": "🏢",
+            "text": "Tòa nhà bê tông / căn hộ lắp ghép / đồng hồ riêng",
+            "sentence": 0
+          },
+          {
+            "icon": "📞",
+            "text": "MethodChannel = đường dây nội bộ xuống lễ tân",
+            "sentence": 1
+          },
+          {
+            "icon": "🧑‍💼",
+            "text": "Lễ tân = code Swift trong MiniAppLauncher",
+            "sentence": 2
+          },
+          {
+            "icon": "🔀",
+            "text": "Kênh 2 chiều: invokeMethod ↔ setMethodCallHandler",
+            "sentence": 3
+          },
+          {
+            "icon": "🔌",
+            "text": "2 đầu dây đã có sẵn từ Tập 1–2",
+            "sentence": 4
+          },
+          {
+            "icon": "☎️",
+            "text": "Hôm nay: bấm số và nghe lễ tân trả lời",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep29/scene-02-0-12c58303.wav",
+          "startFrame": 0,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep29/scene-02-1-1e647bb4.wav",
+          "startFrame": 227,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep29/scene-02-2-c7bdb482.wav",
+          "startFrame": 418,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep29/scene-02-3-4b8b2cd2.wav",
+          "startFrame": 654,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep29/scene-02-4-357435c1.wav",
+          "startFrame": 895,
+          "durationInFrames": 272
+        },
+        {
+          "file": "audio/ep29/scene-02-5-a72729b6.wav",
+          "startFrame": 1175,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 1400
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "mini_flutter/lib/wallet_screen.dart (_loadUser)",
+        "language": "clike",
+        "code": "  Future<void> _loadUser() async {\n    try {\n      final info = await hostChannel.invokeMapMethod<String, Object?>('getUserInfo');\n      if (!mounted) return;\n      setState(() {\n        _name = info?['name'] as String? ?? 'Khách';\n        _balance = (info?['balance'] as num?)?.toInt() ?? 0;\n        _fromHost = true;\n      });\n    } on MissingPluginException {\n      if (!mounted) return;\n      setState(() {\n        _name = 'Khách chạy lẻ';\n        _balance = 500000;\n        _fromHost = false;\n      });\n    }\n  }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 18,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 6,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 3
+          },
+          {
+            "from": 10,
+            "to": 17,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep29/scene-03-0-b39ff348.wav",
+          "startFrame": 0,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep29/scene-03-1-4ccc030f.wav",
+          "startFrame": 236,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep29/scene-03-2-c2c6cce5.wav",
+          "startFrame": 477,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep29/scene-03-3-594fae7f.wav",
+          "startFrame": 709,
+          "durationInFrames": 293
+        },
+        {
+          "file": "audio/ep29/scene-03-4-581eab7d.wav",
+          "startFrame": 1010,
+          "durationInFrames": 252
+        }
+      ],
+      "durationInFrames": 1280
+    },
+    {
+      "id": "scene-04",
+      "type": "diagram",
+      "visual": {
+        "title": "MethodChannel: Dart hỏi — Swift trả lời",
+        "boxes": [
+          {
+            "id": "dart",
+            "label": "Dart (mini Ví)",
+            "emoji": "📱"
+          },
+          {
+            "id": "swift",
+            "label": "Swift (lễ tân)",
+            "emoji": "🧑‍💼"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "invokeMapMethod('getUserInfo')",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 0,
+            "label": "result({name, balance})",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep29/scene-04-0-77ae72ea.wav",
+          "startFrame": 0,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep29/scene-04-1-f6483ee3.wav",
+          "startFrame": 224,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep29/scene-04-2-a45ec7cf.wav",
+          "startFrame": 432,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep29/scene-04-3-5bce421b.wav",
+          "startFrame": 683,
+          "durationInFrames": 291
+        },
+        {
+          "file": "audio/ep29/scene-04-4-329bb27d.wav",
+          "startFrame": 982,
+          "durationInFrames": 185
+        }
+      ],
+      "durationInFrames": 1185
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "VietSuper/MiniAppLauncher.swift (setMethodCallHandler)",
+        "language": "swift",
+        "code": "    channel.setMethodCallHandler { call, result in\n      switch call.method {\n      case \"getUserInfo\":\n        result([\"name\": \"Lee\", \"balance\": 1_250_000])\n      case \"close\":\n        onClose()\n        result(nil)\n      default:\n        result(FlutterMethodNotImplemented)\n      }\n    }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 2
+          },
+          {
+            "from": 5,
+            "to": 7,
+            "sentence": 3
+          },
+          {
+            "from": 8,
+            "to": 9,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep29/scene-05-0-605522d5.wav",
+          "startFrame": 0,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep29/scene-05-1-e8852395.wav",
+          "startFrame": 253,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep29/scene-05-2-c8e5c7d3.wav",
+          "startFrame": 513,
+          "durationInFrames": 312
+        },
+        {
+          "file": "audio/ep29/scene-05-3-92ee0e6e.wav",
+          "startFrame": 833,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep29/scene-05-4-a0c517b8.wav",
+          "startFrame": 1062,
+          "durationInFrames": 248
+        }
+      ],
+      "durationInFrames": 1328
+    },
+    {
+      "id": "scene-06",
+      "type": "concept",
+      "visual": {
+        "title": "Một code, hai bối cảnh — vì sao?",
+        "bullets": [
+          {
+            "icon": "🔍",
+            "text": "'Lee' / 1.250.000đ = hard-code trong result() Swift",
+            "sentence": 0
+          },
+          {
+            "icon": "🏃",
+            "text": "Chạy lẻ: channel 'vietsuper/host' không tồn tại",
+            "sentence": 1
+          },
+          {
+            "icon": "⚠️",
+            "text": "Không có result() → MissingPluginException",
+            "sentence": 2
+          },
+          {
+            "icon": "📵",
+            "text": "Gọi lễ tân nhưng tòa nhà không có lễ tân",
+            "sentence": 3
+          },
+          {
+            "icon": "🪞",
+            "text": "1 file Dart → 2 bối cảnh khác nhau",
+            "sentence": 4
+          },
+          {
+            "icon": "🏷️",
+            "text": "Chip đổi chữ theo _fromHost: nhúng hay chạy lẻ",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep29/scene-06-0-ca2732a2.wav",
+          "startFrame": 0,
+          "durationInFrames": 281
+        },
+        {
+          "file": "audio/ep29/scene-06-1-6df9d357.wav",
+          "startFrame": 289,
+          "durationInFrames": 262
+        },
+        {
+          "file": "audio/ep29/scene-06-2-65fc0dc3.wav",
+          "startFrame": 559,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep29/scene-06-3-58b437cc.wav",
+          "startFrame": 827,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep29/scene-06-4-a73f4752.wav",
+          "startFrame": 1025,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep29/scene-06-5-1233c1f8.wav",
+          "startFrame": 1242,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 1467
+    },
+    {
+      "id": "scene-07",
+      "type": "phone",
+      "visual": {
+        "title": "Một code, hai bối cảnh 📞",
+        "screens": [
+          {
+            "src": "screens/ep29/mini-wallet-from-host.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep29/mini-wallet-standalone-fallback.png",
+            "sentence": 1
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🏢",
+            "text": "Nhúng: Lee / 1.250.000đ — 'từ app chủ (Swift)'",
+            "sentence": 0
+          },
+          {
+            "icon": "🏕️",
+            "text": "Chạy lẻ: mini tự đứng như một app trọn vẹn",
+            "sentence": 1
+          },
+          {
+            "icon": "💸",
+            "text": "Chạy lẻ: Khách chạy lẻ / 500.000đ",
+            "sentence": 2
+          },
+          {
+            "icon": "🏷️",
+            "text": "Chip đổi theo _fromHost — cùng 1 widget",
+            "sentence": 3
+          },
+          {
+            "icon": "🧬",
+            "text": "1 code, 2 bối cảnh, không if-else platform",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep29/scene-07-0-e100c4a4.wav",
+          "startFrame": 0,
+          "durationInFrames": 267
+        },
+        {
+          "file": "audio/ep29/scene-07-1-59ffccb2.wav",
+          "startFrame": 275,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep29/scene-07-2-e59cb7fd.wav",
+          "startFrame": 533,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep29/scene-07-3-56ee4bf5.wav",
+          "startFrame": 745,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep29/scene-07-4-e8916760.wav",
+          "startFrame": 941,
+          "durationInFrames": 219
+        }
+      ],
+      "durationInFrames": 1178
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "mini_flutter/lib/mini_shell.dart (_close)",
+        "language": "clike",
+        "code": "  Future<void> _close() async {\n    try {\n      await hostChannel.invokeMethod('close');\n    } on MissingPluginException {\n      // Chạy lẻ: không có host để đóng.\n    }\n  }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep29/scene-08-0-804e5705.wav",
+          "startFrame": 0,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep29/scene-08-1-9653213a.wav",
+          "startFrame": 224,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep29/scene-08-2-9b2d3103.wav",
+          "startFrame": 463,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep29/scene-08-3-679a3ac0.wav",
+          "startFrame": 726,
+          "durationInFrames": 231
+        }
+      ],
+      "durationInFrames": 975
+    },
+    {
+      "id": "scene-09",
+      "type": "concept",
+      "visual": {
+        "title": "Tổng kết Tập 4: hộp đen đã mở",
+        "bullets": [
+          {
+            "icon": "🔀",
+            "text": "invokeMethod GỌI — setMethodCallHandler NGHE — result() TRẢ LỜI",
+            "sentence": 0
+          },
+          {
+            "icon": "3️⃣",
+            "text": "3 method: getUserInfo, close, default không hiểu",
+            "sentence": 1
+          },
+          {
+            "icon": "🛟",
+            "text": "MissingPluginException = graceful fallback, không phải lỗi",
+            "sentence": 2
+          },
+          {
+            "icon": "🧩",
+            "text": "Công thức đủ 3 mảnh: entrypoint + khai Swift + channel",
+            "sentence": 3
+          },
+          {
+            "icon": "🏢",
+            "text": "Tòa nhà · căn hộ · đồng hồ riêng · đường dây lễ tân",
+            "sentence": 4
+          },
+          {
+            "icon": "🎬",
+            "text": "Tập sau: xây mini Xem phim từ số 0 bằng đủ 3 mảnh",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep29/scene-09-0-9d6fbe32.wav",
+          "startFrame": 0,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep29/scene-09-1-09745bae.wav",
+          "startFrame": 263,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep29/scene-09-2-1f3ae64c.wav",
+          "startFrame": 545,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep29/scene-09-3-9b376aca.wav",
+          "startFrame": 789,
+          "durationInFrames": 269
+        },
+        {
+          "file": "audio/ep29/scene-09-4-ad606154.wav",
+          "startFrame": 1066,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep29/scene-09-5-425c86b6.wav",
+          "startFrame": 1302,
+          "durationInFrames": 228
+        }
+      ],
+      "durationInFrames": 1548
+    },
+    {
+      "id": "scene-10",
+      "type": "outro",
+      "visual": {
+        "title": "Tập 4/6 xong — hẹn gặp Tập 5! 👋",
+        "summary": [
+          {
+            "text": "MethodChannel: invokeMethod/invokeMapMethod ↔ setMethodCallHandler + result()",
+            "sentence": 0
+          },
+          {
+            "text": "Tập 5: xây mini Xem phim từ A đến Z bằng công thức 4 bước",
+            "sentence": 1
+          },
+          {
+            "text": "Tag flutter-miniapp-tap-4 = đúng code hôm nay",
+            "sentence": 3
+          }
+        ],
+        "next": "Tập 5/6: xây mini Xem phim từ A đến Z 🎬"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep29/scene-10-0-3c560eb6.wav",
+          "startFrame": 0,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep29/scene-10-1-c9d47454.wav",
+          "startFrame": 241,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep29/scene-10-2-e9423f05.wav",
+          "startFrame": 485,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep29/scene-10-3-9271857c.wav",
+          "startFrame": 719,
+          "durationInFrames": 293
+        },
+        {
+          "file": "audio/ep29/scene-10-4-7dddedf8.wav",
+          "startFrame": 1020,
+          "durationInFrames": 202
+        }
+      ],
+      "durationInFrames": 1240
+    }
+  ]
+}

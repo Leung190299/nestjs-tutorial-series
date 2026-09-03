@@ -28,6 +28,12 @@ import ep22 from './data/ep22.timing.json';
 import ep23 from './data/ep23.timing.json';
 import ep24 from './data/ep24.timing.json';
 import ep25 from './data/ep25.timing.json';
+import ep26 from './data/ep26.timing.json';
+import ep27 from './data/ep27.timing.json';
+import ep28 from './data/ep28.timing.json';
+import ep29 from './data/ep29.timing.json';
+import ep30 from './data/ep30.timing.json';
+import ep31 from './data/ep31.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -56,6 +62,12 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode23', timing: ep23 as unknown as EpisodeTiming},
   {id: 'Episode24', timing: ep24 as unknown as EpisodeTiming},
   {id: 'Episode25', timing: ep25 as unknown as EpisodeTiming},
+  {id: 'Episode26', timing: ep26 as unknown as EpisodeTiming},
+  {id: 'Episode27', timing: ep27 as unknown as EpisodeTiming},
+  {id: 'Episode28', timing: ep28 as unknown as EpisodeTiming},
+  {id: 'Episode29', timing: ep29 as unknown as EpisodeTiming},
+  {id: 'Episode30', timing: ep30 as unknown as EpisodeTiming},
+  {id: 'Episode31', timing: ep31 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -345,6 +357,84 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       image: 'screens/ep25/topup-success.png',
       badgeEmoji: '📱',
       seriesTag: 'Mini-App từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb26',
+    props: {
+      badge: 'FLUTTER MINI-APP 1',
+      line1: 'FLUTTER',
+      line2: 'APP THẬT',
+      subtitle: 'Module · Engine riêng · MethodChannel',
+      variant: 'shot',
+      image: 'screens/ep26/standalone-food-cart.png',
+      badgeEmoji: '🍜',
+      seriesTag: 'Mini-App với Flutter 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb27',
+    props: {
+      badge: 'FLUTTER MINI-APP 2',
+      line1: 'SWIFTUI',
+      line2: 'ĐÃ SỐNG',
+      subtitle: 'XcodeGen · FlutterEngineGroup · gotcha thật',
+      variant: 'shot',
+      image: 'screens/ep27/mini-food-embedded.png',
+      badgeEmoji: '🏗️',
+      seriesTag: 'Mini-App với Flutter 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb28',
+    props: {
+      badge: 'FLUTTER MINI-APP 3',
+      line1: 'GẦN NHƯ',
+      line2: 'MIỄN PHÍ',
+      subtitle: 'FlutterEngineGroup · thêm mini = 1 dòng Swift',
+      variant: 'shot',
+      image: 'screens/ep28/mini-wallet-open.png',
+      badgeEmoji: '👛',
+      seriesTag: 'Mini-App với Flutter 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb29',
+    props: {
+      badge: 'FLUTTER MINI-APP 4',
+      line1: 'MỞ HỘP ĐEN',
+      line2: 'METHODCHANNEL',
+      subtitle: 'Mini hỏi · Swift trả lời · 1 code 2 bối cảnh',
+      variant: 'shot',
+      image: 'screens/ep29/mini-wallet-from-host.png',
+      badgeEmoji: '📞',
+      seriesTag: 'Mini-App với Flutter 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb30',
+    props: {
+      badge: 'FLUTTER MINI-APP 5',
+      line1: 'CÔNG THỨC',
+      line2: '4 BƯỚC',
+      subtitle: 'Viết phòng · mở cửa · báo lễ tân · rebuild',
+      variant: 'shot',
+      image: 'screens/ep30/mini-cinema-ticket.png',
+      badgeEmoji: '🎬',
+      seriesTag: 'Mini-App với Flutter 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb31',
+    props: {
+      badge: 'FLUTTER MINI-APP 6/6',
+      line1: 'TẬP CUỐI',
+      line2: 'SO GĂNG RN',
+      subtitle: 'Chạy lẻ · bẫy FLUTTER_TARGET · vs React Native',
+      variant: 'shot',
+      image: 'screens/ep31/host-grid-final.png',
+      badgeEmoji: '🏆',
+      seriesTag: 'Mini-App với Flutter 🇻🇳',
     },
   },
 ];

@@ -1,0 +1,612 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tập 1, mini Đồ ăn Flutter đã chạy mượt — nhưng đứng một mình, chưa chạm app nào. Tập 2 hôm nay: xây app chủ ViệtSuper bằng SwiftUI từ số 0.",
+      "Khán giả chưa biết một dòng Swift nào vẫn theo kịp: 60 giây tới, dịch nhanh SwiftUI sang đúng ngôn ngữ Flutter bạn đã quen.",
+      "Rồi cắm CĂN HỘ FLUTTER ĐẦU TIÊN vào chính tòa nhà đó — không copy dán, mà dùng FlutterEngine và FlutterViewController thật.",
+      "Và một gotcha CÓ THẬT từng làm mini trắng trơn ngay lần build đầu tiên — kể chi tiết cách bắt lỗi, không giấu diếm điều gì.",
+      "6 tập, hôm nay Tập 2 trên 6: host SwiftUI dựng xong, căn hộ Flutter đầu tiên chính thức có địa chỉ trong tòa nhà."
+    ],
+    "visual": {
+      "title": "Host SwiftUI từ số 0 — cắm căn hộ Flutter đầu tiên",
+      "subtitle": "Mini-App với Flutter · Tập 2/6 · SwiftUI + FlutterEngine",
+      "badge": "Series Mini-App với Flutter · Tập 2"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "60 giây dịch nhanh SwiftUI sang tiếng Flutter, vì tập này khán giả chưa cần biết Swift từ trước.",
+      "View trong SwiftUI gần như Widget trong Flutter: một struct MÔ TẢ giao diện, không phải chính giao diện đã vẽ ra.",
+      "body là property bắt buộc của View, trả về nội dung cần vẽ — đóng đúng vai trò hàm build() của StatelessWidget hay State.",
+      "@State là property wrapper đánh dấu biến CÓ THỂ đổi và khiến SwiftUI vẽ lại — giống hệt việc bọc setState quanh một biến trong Flutter.",
+      "Ba cặp cần nhớ: View giống Widget, body giống build(), còn @State giống setState — đủ để đọc trôi mọi file Swift trong tập này."
+    ],
+    "visual": {
+      "title": "SwiftUI trong 60 giây, cho người biết Flutter",
+      "bullets": [
+        {
+          "icon": "⏱️",
+          "text": "60s dịch nhanh: SwiftUI cho người biết Flutter",
+          "sentence": 0
+        },
+        {
+          "icon": "🧱",
+          "text": "View ≈ Widget: struct mô tả giao diện",
+          "sentence": 1
+        },
+        {
+          "icon": "🏗️",
+          "text": "body ≈ build(): trả về nội dung cần vẽ",
+          "sentence": 2
+        },
+        {
+          "icon": "🔄",
+          "text": "@State ≈ setState: đổi là vẽ lại",
+          "sentence": 3
+        },
+        {
+          "icon": "✅",
+          "text": "3 cặp nhớ: View/body/@State ≈ Widget/build/setState",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Thay vì mở Xcode bấm File → New Project qua GUI, ta dùng XcodeGen: viết một file YAML mô tả project rồi sinh .xcodeproj bằng lệnh xcodegen generate.",
+      "name VietSuper là tên project; bundleIdPrefix com.vietsuper là tiền tố chung cho mọi bundle identifier bên dưới nó.",
+      "targets khai đúng một target VietSuper: type application, platform iOS, deploymentTarget 16.0 — máy chạy dưới iOS 16 sẽ không cài được.",
+      "sources trỏ vào thư mục VietSuper chứa toàn bộ code Swift; PRODUCT_BUNDLE_IDENTIFIER com.vietsuper.host là định danh app chủ trên máy.",
+      "Nếu quen dùng Xcode GUI, bạn vẫn tạo project bình thường được — file này chỉ giúp TÁI TẠO y hệt bằng một lệnh, tiện cho ai học theo repo."
+    ],
+    "visual": {
+      "filename": "vietsuper_ios/project.yml — XcodeGen thay GUI",
+      "language": "yaml",
+      "code": "name: VietSuper\noptions:\n  bundleIdPrefix: com.vietsuper\ntargets:\n  VietSuper:\n    type: application\n    platform: iOS\n    deploymentTarget: \"16.0\"\n    sources: [VietSuper]\n    settings:\n      base:\n        GENERATE_INFOPLIST_FILE: YES\n        INFOPLIST_KEY_UILaunchScreen_Generation: YES\n        INFOPLIST_KEY_CFBundleDisplayName: ViệtSuper\n        PRODUCT_BUNDLE_IDENTIFIER: com.vietsuper.host\n        SWIFT_VERSION: \"5.9\"\n        TARGETED_DEVICE_FAMILY: \"1\"",
+      "steps": [
+        {
+          "from": 1,
+          "to": 17,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 4,
+          "to": 9,
+          "sentence": 2
+        },
+        {
+          "from": 9,
+          "to": 15,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 17,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "File nhỏ nhất nhưng là cửa ngõ: VietSuperApp.swift — nơi app THỰC SỰ khởi động.",
+      "@main đánh dấu struct VietSuperApp là điểm bắt đầu của cả app — giống hàm main() bên Flutter nhưng gắn thẳng vào struct.",
+      "App là protocol bắt buộc có body kiểu Scene; WindowGroup là loại Scene tạo ra một cửa sổ chứa toàn bộ giao diện app.",
+      "Bên trong WindowGroup chỉ có đúng ContentView(): view gốc của toàn app, tương đương widget gốc mà runApp() bọc bên Flutter."
+    ],
+    "visual": {
+      "filename": "VietSuper/VietSuperApp.swift — TOÀN BỘ FILE",
+      "language": "swift",
+      "code": "import SwiftUI\n\n@main\nstruct VietSuperApp: App {\n  var body: some Scene {\n    WindowGroup { ContentView() }\n  }\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 4,
+          "to": 6,
+          "sentence": 2
+        },
+        {
+          "from": 6,
+          "to": 8,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Toàn bộ màn hình chính: ContentView.swift — nơi vẽ lưới mini-app và mở chúng lên khi bấm vào.",
+      "@State private var selected: MiniApp? là biến nhớ mini nào đang được chọn — nil nghĩa là chưa mở mini nào cả.",
+      "LazyVGrid với hai GridItem.flexible() dựng lưới 2 cột co giãn đều nhau, spacing 16 là khoảng cách giữa các ô.",
+      "ForEach(miniApps) lặp qua TỪNG mini trong mảng miniApps ta sắp khai ở file kế tiếp; bấm Button thì selected = app — gán mini vừa bấm vào @State.",
+      "Mỗi ô hiện emoji cỡ lớn, tên mini, bo góc 16 và nền secondarySystemBackground — y hệt card lưới dịch vụ bên series React Native."
+    ],
+    "visual": {
+      "filename": "VietSuper/ContentView.swift (1/2 — lưới mini-app)",
+      "language": "swift",
+      "code": "import SwiftUI\n\nstruct ContentView: View {\n  @State private var selected: MiniApp?\n\n  var body: some View {\n    NavigationStack {\n      ScrollView {\n        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())],\n                  spacing: 16) {\n          ForEach(miniApps) { app in\n            Button { selected = app } label: {\n              VStack(spacing: 8) {\n                Text(app.emoji).font(.system(size: 44))\n                Text(app.name).font(.headline).foregroundStyle(.primary)\n              }\n              .frame(maxWidth: .infinity)\n              .padding(.vertical, 24)\n              .background(Color(.secondarySystemBackground))\n              .clipShape(RoundedRectangle(cornerRadius: 16))\n            }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 21,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 9,
+          "to": 10,
+          "sentence": 2
+        },
+        {
+          "from": 11,
+          "to": 12,
+          "sentence": 3
+        },
+        {
+          "from": 13,
+          "to": 21,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Phần đuôi của ContentView: đóng khung lưới, đặt tiêu đề, rồi tới dòng quan trọng nhất — fullScreenCover.",
+      "navigationTitle(\"ViệtSuper 🇻🇳\") đặt tên header cho NavigationStack — dòng chữ to bạn thấy trên đầu màn hình chính.",
+      "fullScreenCover(item: $selected): hễ selected KHÁC nil, SwiftUI tự dựng MiniAppView(library:) toàn màn hình — đúng mini vừa bấm.",
+      "onClose truyền vào là { selected = nil }: đóng mini chỉ đơn giản là gán lại biến @State về nil, SwiftUI tự dọn dẹp phần còn lại."
+    ],
+    "visual": {
+      "filename": "VietSuper/ContentView.swift (2/2 — fullScreenCover)",
+      "language": "swift",
+      "code": "          }\n        }\n        .padding()\n      }\n      .navigationTitle(\"ViệtSuper 🇻🇳\")\n    }\n    .fullScreenCover(item: $selected) { app in\n      MiniAppView(library: app.library) { selected = nil }\n        .ignoresSafeArea()\n    }\n  }\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 12,
+          "sentence": 0
+        },
+        {
+          "from": 5,
+          "to": 5,
+          "sentence": 1
+        },
+        {
+          "from": 7,
+          "to": 9,
+          "sentence": 2
+        },
+        {
+          "from": 8,
+          "to": 12,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "MiniApp.swift: sổ địa chỉ của mọi mini-app — struct MiniApp có bốn field id, name, emoji và library.",
+      "library là field quan trọng nhất: đường dẫn Dart tới ĐÚNG cửa vào của mini đó — kiểu package:mini_flutter/main_food.dart.",
+      "Coi library như địa chỉ căn hộ: app chủ không cần biết bên trong Flutter có gì, chỉ cần đúng địa chỉ này để gõ cửa.",
+      "Mảng miniApps hiện có ĐÚNG một phần tử: mini Đồ ăn — id food, tên 'Đồ ăn', trỏ tới main_food.dart ta đã xây ở Tập 1."
+    ],
+    "visual": {
+      "filename": "VietSuper/MiniApp.swift — TOÀN BỘ FILE",
+      "language": "swift",
+      "code": "import Foundation\n\nstruct MiniApp: Identifiable {\n  let id: String\n  let name: String\n  let emoji: String\n  /// File Dart chứa hàm main của mini này.\n  let library: String\n}\n\nlet miniApps: [MiniApp] = [\n  MiniApp(id: \"food\", name: \"Đồ ăn\", emoji: \"🍜\",\n          library: \"package:mini_flutter/main_food.dart\"),\n]",
+      "steps": [
+        {
+          "from": 1,
+          "to": 14,
+          "sentence": 0
+        },
+        {
+          "from": 7,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 7,
+          "to": 8,
+          "sentence": 2
+        },
+        {
+          "from": 11,
+          "to": 14,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Podfile của app chủ — nơi CocoaPods biết cách kéo Flutter vào project Swift qua một 'hợp đồng lắp ghép' tên podhelper.",
+      "platform :ios, '16.0' khớp đúng deploymentTarget đã khai trong project.yml — hai file này luôn phải đồng bộ.",
+      "load File.join(...podhelper.rb): nạp một file Ruby CÓ SẴN trong module Flutter, chứa toàn bộ logic gắn Flutter vào Xcode.",
+      "install_all_flutter_pods(flutter_application_path) bên trong target VietSuper: dòng NGẮN GỌN này kéo hết dependency Flutter cần.",
+      "post_install gọi flutter_post_install: bước dọn dẹp cuối cùng CocoaPods cần để mọi thứ build đúng kiến trúc chip máy thật."
+    ],
+    "visual": {
+      "filename": "vietsuper_ios/Podfile — TOÀN BỘ FILE",
+      "language": "clike",
+      "code": "platform :ios, '16.0'\n\nflutter_application_path = '../mini_flutter'\nload File.join(flutter_application_path, '.ios', 'Flutter', 'podhelper.rb')\n\ntarget 'VietSuper' do\n  install_all_flutter_pods(flutter_application_path)\nend\n\npost_install do |installer|\n  flutter_post_install(installer) if defined?(flutter_post_install)\nend",
+      "steps": [
+        {
+          "from": 1,
+          "to": 12,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 1
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "sentence": 2
+        },
+        {
+          "from": 6,
+          "to": 8,
+          "sentence": 3
+        },
+        {
+          "from": 10,
+          "to": 12,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "code",
+    "narration": [
+      "Trái tim của việc nhúng Flutter: MiniAppLauncher.swift — nơi một app Swift THỰC SỰ dựng lên một engine Dart.",
+      "Nhớ ẩn dụ tập trước: engine là đồng hồ điện nước riêng của mỗi căn hộ — còn FlutterEngineGroup là nhà máy lắp đồng hồ dùng chung, mở mini thứ hai gần như miễn phí RAM.",
+      "makeMiniViewController nhận library — đúng địa chỉ căn hộ từ MiniApp.swift — và closure onClose để gọi khi mini muốn đóng lại.",
+      "FlutterEngineGroupOptions với entrypoint 'main' và libraryURI bằng library: đây là chỗ Swift 'gõ cửa' đúng file Dart, rồi engines.makeEngine dựng THẬT một FlutterEngine mới."
+    ],
+    "visual": {
+      "filename": "VietSuper/MiniAppLauncher.swift (1/2 — engine)",
+      "language": "swift",
+      "code": "import Flutter\n\nfinal class MiniAppLauncher {\n  static let shared = MiniAppLauncher()\n\n  /// Một \"nhà máy engine\" dùng chung: các engine sinh ra chia sẻ tài nguyên,\n  /// mở mini thứ hai gần như miễn phí RAM.\n  private let engines = FlutterEngineGroup(name: \"vietsuper\", project: nil)\n\n  func makeMiniViewController(\n    library: String,\n    onClose: @escaping () -> Void\n  ) -> FlutterViewController {\n    let options = FlutterEngineGroupOptions()\n    options.entrypoint = \"main\"\n    options.libraryURI = library\n    let engine = engines.makeEngine(with: options)\n\n    let controller = FlutterViewController(engine: engine, nibName: nil, bundle: nil)",
+      "steps": [
+        {
+          "from": 1,
+          "to": 19,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 10,
+          "to": 13,
+          "sentence": 2
+        },
+        {
+          "from": 14,
+          "to": 19,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "code",
+    "narration": [
+      "Phần còn lại tạo đường dây liên lạc: FlutterMethodChannel tên 'vietsuper/host' — đúng tên kênh mini_shell.dart đã khai ở Tập 1 — nối liền Swift và Dart.",
+      "setMethodCallHandler lắng nghe lệnh Dart gửi lên và trả lời qua result(): tạm biết nó TỒN TẠI ở đây thôi, Tập 4 mới mổ xẻ từng dòng switch bên trong.",
+      "return controller: hàm trả về FlutterViewController đã có đủ engine và channel — đây chính là thứ MiniAppView sắp bọc vào SwiftUI."
+    ],
+    "visual": {
+      "filename": "VietSuper/MiniAppLauncher.swift (2/2 — channel)",
+      "language": "swift",
+      "code": "    let channel = FlutterMethodChannel(\n      name: \"vietsuper/host\",\n      binaryMessenger: controller.binaryMessenger\n    )\n    channel.setMethodCallHandler { call, result in\n      switch call.method {\n      case \"getUserInfo\":\n        result([\"name\": \"Lee\", \"balance\": 1_250_000])\n      case \"close\":\n        onClose()\n        result(nil)\n      default:\n        result(FlutterMethodNotImplemented)\n      }\n    }\n    return controller\n  }\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 0
+        },
+        {
+          "from": 5,
+          "to": 15,
+          "sentence": 1
+        },
+        {
+          "from": 16,
+          "to": 18,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "code",
+    "narration": [
+      "Ổ cắm nối SwiftUI với UIKit: MiniAppView.swift — vì FlutterViewController là UIKit, không phải SwiftUI, cần một cầu nối.",
+      "UIViewControllerRepresentable là protocol CHUYÊN DÙNG để bọc một UIKit view controller thành một View SwiftUI dùng được bình thường.",
+      "makeUIViewController gọi thẳng MiniAppLauncher.shared.makeMiniViewController: giao library và onClose xuống, nhận về FlutterViewController thật.",
+      "updateUIViewController để trống: mini không cần SwiftUI cập nhật gì thêm sau khi đã dựng — dựng một lần, sống độc lập bên trong."
+    ],
+    "visual": {
+      "filename": "VietSuper/MiniAppView.swift — TOÀN BỘ FILE",
+      "language": "swift",
+      "code": "import Flutter\nimport SwiftUI\n\nstruct MiniAppView: UIViewControllerRepresentable {\n  let library: String\n  let onClose: () -> Void\n\n  func makeUIViewController(context: Context) -> FlutterViewController {\n    MiniAppLauncher.shared.makeMiniViewController(library: library, onClose: onClose)\n  }\n\n  func updateUIViewController(_ controller: FlutterViewController, context: Context) {}\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 13,
+          "sentence": 0
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 9,
+          "sentence": 2
+        },
+        {
+          "from": 12,
+          "to": 13,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "terminal",
+    "narration": [
+      "Đây là chuyện THẬT đã xảy ra khi build lần đầu: bấm nút Đồ ăn trên host, mini mở lên nhưng TRẮNG TRƠN, không một dòng chữ.",
+      "Mở Console log trên Xcode, dòng lỗi hiện rõ: Dart_LookupLibrary — package:mini_flutter/main_food.dart — not found.",
+      "Nguyên nhân: kernel debug của Flutter chỉ ĐÓNG GÓI code mà nó REACHABLE được — tức là tới được — từ đúng một cửa lib/main.dart.",
+      "main_food.dart tồn tại trên ổ đĩa, nhưng không được main.dart IMPORT tới, nên trình biên dịch coi nó chết, cắt bỏ khỏi bản build.",
+      "Vá lỗi này không cần sửa MiniAppLauncher hay ContentView — chỉ cần thêm đúng vài dòng import vào lib/main.dart, xem ngay sau đây."
+    ],
+    "visual": {
+      "title": "Gotcha thật: mini trắng trơn lần build đầu",
+      "commands": [
+        {
+          "cmd": "# Bấm nút Đồ ăn trên host → màn hình mini TRẮNG TRƠN",
+          "output": "flutter: Unhandled Exception: Invalid argument(s): Dart_LookupLibrary\n  'package:mini_flutter/main_food.dart' not found in kernel snapshot",
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-13",
+    "type": "code",
+    "narration": [
+      "Mở lại lib/main.dart bên module mini_flutter — đây chính là cửa mà kernel debug DÒ theo để biết gói code nào.",
+      "Ba import đầu quen thuộc: cinema_screen, food_screen, wallet_screen — những CĂN PHÒNG UI của cả series, không riêng gì Đồ ăn.",
+      "Ba dòng dưới comment mới là chìa khóa: import main_cinema, main_food, main_wallet.dart — chuẩn bị sẵn cả ba cửa, dù host Swift hôm nay mới biết mỗi Đồ ăn.",
+      "// ignore_for_file: unused_import ngay phía trên: dặn trình phân tích đừng cảnh báo 'import thừa', vì ta cố tình kéo chúng vào chỉ để KERNEL THẤY.",
+      "Chỉ cần TỒN TẠI trong cây import từ main.dart, dù chẳng gọi trực tiếp, kernel debug vẫn đóng gói đủ — mini Đồ ăn hết trắng trơn ngay sau rebuild."
+    ],
+    "visual": {
+      "filename": "mini_flutter/lib/main.dart (khối import — gotcha fix)",
+      "language": "clike",
+      "code": "import 'package:flutter/material.dart';\n\nimport 'cinema_screen.dart';\nimport 'food_screen.dart';\nimport 'wallet_screen.dart';\n\n// Kéo các entrypoint vào bản build debug để app chủ tìm thấy qua libraryURI.\n// ignore_for_file: unused_import\nimport 'main_cinema.dart';\nimport 'main_food.dart';\nimport 'main_wallet.dart';\n\nvoid main() => runApp(const DebugMenuApp());",
+      "steps": [
+        {
+          "from": 1,
+          "to": 13,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 5,
+          "sentence": 1
+        },
+        {
+          "from": 9,
+          "to": 11,
+          "sentence": 2
+        },
+        {
+          "from": 7,
+          "to": 8,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 13,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-14",
+    "type": "terminal",
+    "narration": [
+      "Sau khi sửa main.dart, cần build lại module Flutter rồi rebuild app chủ — hai lệnh, đúng thứ tự.",
+      "cd vietsuper_ios && pod install: CocoaPods đọc lại Podfile, kéo bản Flutter.podspec MỚI đã có đủ ba entrypoint vào project Xcode.",
+      "xcodegen generate lại project.yml nếu có đổi cấu hình, rồi xcodebuild build chạy đúng target VietSuper trên simulator.",
+      "Lần này log sạch, không còn Dart_LookupLibrary — bấm nút Đồ ăn trên host, mini hiện đúng ba món, không còn trắng trơn nữa."
+    ],
+    "visual": {
+      "title": "Vá xong: pod install + xcodebuild rebuild",
+      "commands": [
+        {
+          "cmd": "cd vietsuper_ios && pod install",
+          "output": "Analyzing dependencies\nInstalling Flutter (1.0.0)\nPod installation complete!",
+          "sentence": 1
+        },
+        {
+          "cmd": "xcodebuild -workspace VietSuper.xcworkspace -scheme VietSuper -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build",
+          "output": "** BUILD SUCCEEDED **",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-15",
+    "type": "phone",
+    "narration": [
+      "Nghiệm thu trên simulator: màn hình chính ViệtSuper giờ có đúng MỘT card lưới — Đồ ăn — vì host Swift hôm nay mới khai một mini.",
+      "Bấm vào card: mini Đồ ăn hiện lên FULL SCREEN, nền hồng nhạt đúng theme, tiêu đề 'Đồ ăn ViệtSuper' và nút X đóng ở góc trái.",
+      "Bấm Thêm ở Phở bò: nút hóa xanh 'Đã thêm ✓', Tổng nhảy lên 45.000đ — game y hệt bản chạy lẻ Tập 1, chỉ khác là giờ SỐNG BÊN TRONG app chủ.",
+      "Bấm nút X: _close() gọi hostChannel.invokeMethod('close') — lần này CÓ NGƯỜI lắng nghe thật, MiniAppLauncher đóng fullScreenCover, quay về lưới."
+    ],
+    "visual": {
+      "title": "Nghiệm thu: mini đã cắm điện 🏗️",
+      "screens": [
+        {
+          "src": "screens/ep27/host-grid-food-only.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/ep27/mini-food-embedded.png",
+          "sentence": 1
+        },
+        {
+          "src": "screens/ep27/mini-food-embedded-cart.png",
+          "sentence": 2
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🏠",
+          "text": "Host: 1 card lưới — Đồ ăn",
+          "sentence": 0
+        },
+        {
+          "icon": "🍜",
+          "text": "Mini full-screen, nền hồng, nút X",
+          "sentence": 1
+        },
+        {
+          "icon": "✅",
+          "text": "Thêm → Đã thêm ✓, Tổng 45.000đ",
+          "sentence": 2
+        },
+        {
+          "icon": "🔌",
+          "text": "X → invokeMethod('close') → host lắng nghe thật",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-16",
+    "type": "concept",
+    "narration": [
+      "Chốt lại Tập 2: host SwiftUI dựng bằng XcodeGen, có ContentView vẽ lưới và fullScreenCover mở mini.",
+      "MiniAppLauncher là trái tim: FlutterEngineGroup tạo engine, FlutterViewController hiển thị nó, MethodChannel nối hai thế giới — chi tiết channel để dành Tập 4.",
+      "Gotcha lớn nhất: kernel debug chỉ đóng gói code REACHABLE từ lib/main.dart — quên import một entrypoint là màn TRẮNG TRƠN, không lỗi biên dịch nào báo trước.",
+      "Ẩn dụ cập nhật: tòa nhà bê tông giờ có ĐÚNG một căn hộ đã cắm điện nước — MiniApp.swift là sổ địa chỉ, MiniAppView là ổ cắm.",
+      "Công thức cắm căn hộ dần lộ diện: khai địa chỉ trong MiniApp.swift, đảm bảo main.dart import tới cửa đó — chỉ vậy, chưa cần đụng MiniAppLauncher."
+    ],
+    "visual": {
+      "title": "Tổng kết Tập 2: căn hộ đầu tiên đã cắm điện",
+      "bullets": [
+        {
+          "icon": "🏗️",
+          "text": "XcodeGen + ContentView (LazyVGrid + fullScreenCover)",
+          "sentence": 0
+        },
+        {
+          "icon": "⚙️",
+          "text": "MiniAppLauncher: EngineGroup + ViewController + Channel",
+          "sentence": 1
+        },
+        {
+          "icon": "🐛",
+          "text": "Gotcha: kernel chỉ gói code reachable từ main.dart",
+          "sentence": 2
+        },
+        {
+          "icon": "🏢",
+          "text": "1 căn hộ đã cắm điện — sổ địa chỉ MiniApp.swift",
+          "sentence": 3
+        },
+        {
+          "icon": "🧩",
+          "text": "Công thức: khai địa chỉ + import tới cửa, chưa đụng lõi",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-17",
+    "type": "outro",
+    "narration": [
+      "Một căn hộ đã chính thức vào tòa nhà: host SwiftUI, FlutterEngineGroup và mini Đồ ăn giờ sống chung, gõ cửa lẫn nhau qua MethodChannel.",
+      "Tập sau, cắm căn hộ THỨ HAI — mini Ví — chỉ bằng VÀI DÒNG: gần như miễn phí nhờ chính FlutterEngineGroup ta vừa dựng hôm nay.",
+      "Sẽ có một câu hỏi treo lơ lửng khi Ví hiện số dư có sẵn — dữ liệu đó từ đâu ra, khi Flutter không hề biết ai tên gì?",
+      "Repo có tag flutter-miniapp-tap-2 đúng trạng thái hôm nay: checkout là thấy đúng code trong video, kể cả gotcha Dart_LookupLibrary vừa sửa.",
+      "Cảm ơn bạn đã xem Tập 2 trên 6: comment nếu bạn từng gặp lỗi entry point tương tự, và hẹn gặp lại ở Tập 3!"
+    ],
+    "visual": {
+      "title": "Tập 2/6 xong — hẹn gặp Tập 3! 👋",
+      "summary": [
+        {
+          "text": "Host SwiftUI xong: ContentView vẽ lưới, MiniAppLauncher dựng engine, mini Đồ ăn cắm thật",
+          "sentence": 0
+        },
+        {
+          "text": "Tập 3: cắm mini Ví chỉ bằng vài dòng nhờ FlutterEngineGroup",
+          "sentence": 1
+        },
+        {
+          "text": "Tag flutter-miniapp-tap-2 = đúng code hôm nay, kể cả gotcha Dart_LookupLibrary",
+          "sentence": 3
+        }
+      ],
+      "next": "Tập 3/6: FlutterEngineGroup — thêm mini gần như miễn phí 🔌"
+    }
+  }
+]

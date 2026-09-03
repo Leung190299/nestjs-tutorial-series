@@ -1,0 +1,261 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tập 5 khép lại với một lời hứa: \"tập sau — chạy lẻ, bẫy thực chiến và so găng với React Native\" — hôm nay đúng lời hứa đó.",
+      "5 tập qua đã cắm đủ 3 mini — Đồ ăn, Ví, Xem phim — cùng sống chung trong một app chủ SwiftUI.",
+      "Hôm nay làm ba việc: chạy lẻ từng mini bằng cờ -t, đối mặt một bẫy thực chiến từng gặp khi làm demo này, rồi so găng công thức Flutter với series React Native cũ.",
+      "Đây là Tập 6 trên 6 — tập cuối cùng của series Mini-App với Flutter.",
+      "6 tập, hôm nay Tập 6 trên 6: chạy lẻ, bẫy FLUTTER_TARGET, và so găng với bản React Native."
+    ],
+    "visual": {
+      "title": "Chạy lẻ, bẫy thực chiến, so găng React Native",
+      "subtitle": "Mini-App với Flutter · Tập 6/6 · Tập cuối",
+      "badge": "Series Mini-App với Flutter · Tập 6"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Trước khi vào tập cuối, nhắc đủ 4 mảnh ẩn dụ: tòa nhà bê tông (app chủ), căn hộ lắp ghép (module Flutter), đồng hồ điện nước (engine), lễ tân (MethodChannel).",
+      "Từ Tập 3, FlutterEngineGroup cho 3 mini dùng chung một trạm biến áp — mỗi mini vẫn có đồng hồ điện nước riêng nhưng gần như miễn phí RAM.",
+      "Từ Tập 4, lễ tân MethodChannel đã biết trả lời — Ví lấy đúng \"Lee / 1.250.000đ\" khi có app chủ, tự dùng dữ liệu mẫu khi chạy lẻ.",
+      "Từ Tập 5, công thức 4 bước đã chạy trọn: viết phòng, mở cửa vào, báo lễ tân, rebuild — không đụng một dòng lõi nào.",
+      "Việc đầu tiên hôm nay: đứng hẳn bên trong CĂN HỘ, chạy lẻ từng mini mà không cần cả TÒA NHÀ đứng cạnh.",
+      "Việc thứ hai: một bẫy thực chiến từng xảy ra THẬT khi làm demo này — chạy lẻ xong, quay lại build app chủ, cả app trắng trơn.",
+      "Việc thứ ba: đặt công thức Flutter add-to-app lên bàn cân, so trực tiếp với công thức series React Native workspace đã làm trước đó."
+    ],
+    "visual": {
+      "title": "Tập cuối: 3 việc — chạy lẻ, bẫy, so găng",
+      "bullets": [
+        {"icon": "🏢", "text": "4 mảnh cũ: tòa nhà · căn hộ · đồng hồ · lễ tân", "sentence": 0},
+        {"icon": "💧", "text": "EngineGroup: 3 engine, gần như miễn phí RAM", "sentence": 1},
+        {"icon": "📞", "text": "MethodChannel: Ví đã biết hỏi–đáp thật", "sentence": 2},
+        {"icon": "🧩", "text": "Công thức 4 bước: viết phòng → rebuild", "sentence": 3},
+        {"icon": "1️⃣", "text": "Chạy lẻ từng mini, không cần app chủ", "sentence": 4},
+        {"icon": "2️⃣", "text": "Bẫy thực chiến: build lại app chủ trắng trơn", "sentence": 5},
+        {"icon": "3️⃣", "text": "So găng: Flutter add-to-app vs React Native", "sentence": 6}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "terminal",
+    "narration": [
+      "Chạy lẻ nghĩa là đứng hẳn trong module mini_flutter, gọi thẳng một entrypoint bằng cờ -t, không cần biết app chủ Swift có tồn tại hay không.",
+      "fvm flutter run -t lib/main_food.dart mở thẳng mini Đồ ăn — không có host, không có lễ tân, mini vẫn chạy đầy đủ.",
+      "Đổi -t sang lib/main_wallet.dart: mini Ví tự rơi vào nhánh fallback đã học ở Tập 4 — hiện \"Khách chạy lẻ / 500.000đ\".",
+      "Đổi -t sang lib/main_cinema.dart: mini Xem phim mở thẳng màn đặt vé — 3 phim, Tổng 0đ, y hệt khi được nhúng.",
+      "Ba entrypoint, ba lần chạy lẻ, ba mini độc lập — module Flutter chưa từng cần app chủ để tự đứng vững."
+    ],
+    "visual": {
+      "title": "Chạy lẻ từng mini bằng cờ -t",
+      "commands": [
+        {"cmd": "fvm flutter run -t lib/main_food.dart", "output": "Launching lib/main_food.dart on iPhone 17 Pro...\n\nFlutter run key commands.", "sentence": 1},
+        {"cmd": "fvm flutter run -t lib/main_wallet.dart", "output": "Launching lib/main_wallet.dart on iPhone 17 Pro...\n\nFlutter run key commands.", "sentence": 2},
+        {"cmd": "fvm flutter run -t lib/main_cinema.dart", "output": "Launching lib/main_cinema.dart on iPhone 17 Pro...\n\nFlutter run key commands.", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "phone",
+    "narration": [
+      "Đây chính là màn Xem phim vừa chạy lẻ bằng -t lib/main_cinema.dart — không đi qua app chủ SwiftUI một bước nào.",
+      "Vẫn đủ 3 phim: Đào, Phở và Piano 90.000đ, Mắt Biếc 85.000đ, Bố Già 95.000đ — đúng const movies đã đọc ở Tập 5.",
+      "Tổng: 0đ ở trạng thái ban đầu — logic Set và fold vẫn chạy y hệt dù không có ai lắng nghe MethodChannel phía bên kia.",
+      "Bằng chứng: một module Flutter viết đúng công thức có thể chạy độc lập hoàn toàn, không phụ thuộc app chủ tồn tại hay không."
+    ],
+    "visual": {
+      "title": "Nghiệm thu chạy lẻ 🎬",
+      "screens": [
+        {"src": "screens/ep31/mini-cinema-standalone.png", "sentence": 0}
+      ],
+      "bullets": [
+        {"icon": "🎬", "text": "Chạy lẻ bằng -t lib/main_cinema.dart", "sentence": 0},
+        {"icon": "🎟️", "text": "3 phim đúng const movies Tập 5", "sentence": 1},
+        {"icon": "🧮", "text": "Set + fold vẫn chạy dù không có host", "sentence": 2},
+        {"icon": "✅", "text": "Module tự đứng vững, không cần app chủ", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Đây là chuyện có THẬT khi làm demo tập này — ghi lại nguyên văn trong README, không phải kịch bản dựng sẵn cho video.",
+      "Nguyên nhân: chạy flutter run -t lib/main_xxx.dart khiến file generated Generated.xcconfig ghim cứng biến FLUTTER_TARGET vào đúng entrypoint đó.",
+      "Hậu quả: lần build tiếp theo của app chủ chỉ đóng gói kernel của RIÊNG entrypoint bị ghim — các mini còn lại lỗi runtime Dart_LookupLibrary not found.",
+      "Cái bẫy thật sự: chạy lại fvm flutter pub get KHÔNG tự sửa việc này — đây chính là chỗ dễ mất cả buổi tối để tìm ra nguyên nhân.",
+      "Cách sửa thật: chạy một lệnh Flutter trỏ lại lib/main.dart, hoặc build lại xcodebuild sau khi đã chạy lẻ -t lib/main.dart một lần."
+    ],
+    "visual": {
+      "title": "Bẫy thực chiến: FLUTTER_TARGET bị ghim",
+      "bullets": [
+        {"icon": "📖", "text": "Chuyện thật, ghi trong README — không dựng kịch bản", "sentence": 0},
+        {"icon": "📌", "text": "flutter run -t ghim FLUTTER_TARGET vào Generated.xcconfig", "sentence": 1},
+        {"icon": "💥", "text": "Build lại: chỉ đóng gói đúng 1 entrypoint bị ghim", "sentence": 2},
+        {"icon": "🚫", "text": "pub get KHÔNG tự sửa — dễ mất cả buổi tối", "sentence": 3},
+        {"icon": "🔧", "text": "Fix: chạy lại -t lib/main.dart rồi rebuild host", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "terminal",
+    "narration": [
+      "Kịch bản: vừa chạy fvm flutter run -t lib/main_wallet.dart xong, giờ build lại app chủ bằng xcodebuild y hệt mọi lần trước.",
+      "Simulator mở lên: card Ví bấm vào vẫn ổn — nhưng card Đồ ăn và Xem phim giờ mở ra MÀN HÌNH TRẮNG TRƠN, không một dòng chữ.",
+      "Log Xcode in đúng dòng đã đọc ở README: Dart_LookupLibrary not found — kernel giờ chỉ còn gói main_wallet.dart.",
+      "Cách sửa: chạy fvm flutter run -t lib/main.dart một lần để nạp lại kernel đầy đủ 3 entrypoint, rồi rebuild host bằng xcodebuild.",
+      "Build lần hai: cả 3 card lại mở đúng, không còn màn trắng — bẫy FLUTTER_TARGET đã được xử lý gọn gàng."
+    ],
+    "visual": {
+      "title": "Tái hiện bẫy: build lại → màn trắng",
+      "commands": [
+        {"cmd": "xcodebuild -workspace VietSuper.xcworkspace -scheme VietSuper -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build", "output": "** BUILD SUCCEEDED **\n(nhưng card Đồ ăn & Xem phim: màn hình trắng)", "sentence": 1},
+        {"cmd": "# Xem log Xcode:", "output": "Dart_LookupLibrary: library 'package:mini_flutter/main_food.dart' not found\n# Nguyên nhân: Generated.xcconfig vẫn ghim FLUTTER_TARGET=lib/main_wallet.dart", "sentence": 2},
+        {"cmd": "fvm flutter run -t lib/main.dart", "output": "Launching lib/main.dart on iPhone 17 Pro...\n(nạp lại kernel đủ 3 entrypoint)", "sentence": 3},
+        {"cmd": "xcodebuild -workspace VietSuper.xcworkspace -scheme VietSuper -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build", "output": "** BUILD SUCCEEDED ** — cả 3 card mở đúng", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "phone",
+    "narration": [
+      "Nghiệm thu cuối: lưới ViệtSuper sau khi fix — vẫn đủ 3 card Đồ ăn, Ví, Xem phim, bấm card nào cũng mở đúng, không còn màn trắng.",
+      "Đây là bằng chứng bẫy FLUTTER_TARGET đã được xử lý triệt để, không phải né tránh hay giả lập trên video.",
+      "Toàn bộ 6 tập cộng lại: 3 mini, 1 app chủ, 1 FlutterEngineGroup, 1 MethodChannel — đúng kiến trúc add-to-app hoàn chỉnh.",
+      "Card cuối cùng trên lưới, Xem phim, chính là mini vừa được cứu khỏi màn trắng trong scene trước."
+    ],
+    "visual": {
+      "title": "Nghiệm thu: đã sửa bẫy 🏆",
+      "screens": [
+        {"src": "screens/ep31/host-grid-final.png", "sentence": 0}
+      ],
+      "bullets": [
+        {"icon": "🏠", "text": "3 card lại mở đúng, không còn màn trắng", "sentence": 0},
+        {"icon": "🔧", "text": "Bẫy FLUTTER_TARGET đã xử lý triệt để", "sentence": 1},
+        {"icon": "🧩", "text": "3 mini · 1 app chủ · 1 EngineGroup · 1 channel", "sentence": 2},
+        {"icon": "🎬", "text": "Xem phim: mini vừa được cứu khỏi màn trắng", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "diagram",
+    "narration": [
+      "Toàn bộ kiến trúc 6 tập gói gọn trong một dây chuyền 4 ô: App chủ SwiftUI, FlutterEngineGroup, Engine, rồi tới Mini.",
+      "App chủ SwiftUI tạo đúng MỘT FlutterEngineGroup dùng chung — trạm biến áp học từ Tập 3.",
+      "EngineGroup sinh ra 3 Engine riêng — mỗi engine là đồng hồ điện nước của đúng một mini, gần như miễn phí RAM.",
+      "Mỗi Engine chạy đúng một Mini qua entrypoint riêng — Đồ ăn, Ví, hoặc Xem phim, tuỳ libraryURI khai trong MiniApp.swift.",
+      "Và mỗi Mini vẫn giữ một sợi dây MethodChannel nối ngược về app chủ — lễ tân học từ Tập 4, để hỏi dữ liệu hoặc xin đóng lại."
+    ],
+    "visual": {
+      "title": "Tổng kiến trúc: Host → Group → Engine → Mini",
+      "boxes": [
+        {"id": "host", "label": "App SwiftUI", "emoji": "🏢"},
+        {"id": "group", "label": "EngineGroup", "emoji": "💧"},
+        {"id": "engine", "label": "3 Engine", "emoji": "⚙️"},
+        {"id": "mini", "label": "3 Mini", "emoji": "📱"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "tạo chung", "sentence": 1},
+        {"from": 1, "to": 2, "label": "sinh 3 engine", "sentence": 2},
+        {"from": 2, "to": 3, "label": "1 entrypoint/engine", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "concept",
+    "narration": [
+      "Series React Native cũ dùng npm workspaces: toàn bộ app chỉ là MỘT dự án JavaScript duy nhất.",
+      "Mỗi mini-app là một PACKAGE trong cùng dự án đó — package export đúng một component màn hình.",
+      "Gộp lại xảy ra lúc BUILD: metro bundler gom hết các package thành một bundle JS duy nhất trước khi chạy.",
+      "Không có khái niệm \"engine riêng\": mọi package chạy chung một JS runtime, một cây component React duy nhất.",
+      "Thêm mini mới = thêm một package, import component vào router — không cần build lại native code.",
+      "Ưu điểm: cực đơn giản khi KHÔNG có sẵn app native nào — viết mới từ đầu bằng đúng một ngôn ngữ."
+    ],
+    "visual": {
+      "title": "So găng #1: series React Native — workspace",
+      "bullets": [
+        {"icon": "📦", "text": "1 dự án JS duy nhất — npm workspaces", "sentence": 0},
+        {"icon": "🧩", "text": "Mini-app = 1 package, export 1 component", "sentence": 1},
+        {"icon": "🔨", "text": "Gộp lúc BUILD: metro bundler gom thành 1 bundle", "sentence": 2},
+        {"icon": "🚫", "text": "Không có engine riêng — chung 1 JS runtime", "sentence": 3},
+        {"icon": "➕", "text": "Thêm mini = thêm package + import router", "sentence": 4},
+        {"icon": "✅", "text": "Ưu điểm: đơn giản khi xây MỚI từ đầu", "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "concept",
+    "narration": [
+      "Series Flutter add-to-app hôm nay hoàn toàn khác: HAI dự án tách biệt — app chủ Swift và module Flutter.",
+      "Mỗi mini là một ENTRYPOINT trong module — một hàm main() riêng, đánh dấu bằng @pragma vm:entry-point.",
+      "Gộp lại xảy ra lúc RUNTIME: app chủ tạo FlutterEngine, nạp đúng entrypoint đó khi người dùng bấm vào card.",
+      "Mỗi mini có ENGINE riêng — đồng hồ điện nước độc lập, tách biệt hoàn toàn với vòng đời SwiftUI.",
+      "Thêm mini mới = thêm 1 entrypoint Dart cộng ĐÚNG 1 phần tử Swift trong MiniApp.swift — không đụng app chủ.",
+      "Ưu điểm: khi ĐÃ có app native chạy thật với hàng triệu người dùng, không cần viết lại từ đầu."
+    ],
+    "visual": {
+      "title": "So găng #2: series Flutter — add-to-app",
+      "bullets": [
+        {"icon": "🏗️", "text": "2 dự án tách biệt: app chủ Swift + module Flutter", "sentence": 0},
+        {"icon": "🚪", "text": "Mini-app = 1 entrypoint @pragma vm:entry-point", "sentence": 1},
+        {"icon": "⚡", "text": "Gộp lúc RUNTIME: FlutterEngine nạp khi bấm card", "sentence": 2},
+        {"icon": "💧", "text": "Mỗi mini 1 engine riêng — độc lập SwiftUI", "sentence": 3},
+        {"icon": "➕", "text": "Thêm mini = 1 entrypoint + 1 dòng MiniApp.swift", "sentence": 4},
+        {"icon": "✅", "text": "Ưu điểm: giữ app native triệu người dùng đã có", "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "concept",
+    "narration": [
+      "Có sẵn app native đang chạy thật, chỉ muốn nhúng thêm vài tính năng nhỏ: chọn Flutter add-to-app như 6 tập vừa làm.",
+      "Xây mới hoàn toàn từ con số 0, chưa có app nào cả: chọn workspace kiểu React Native — đơn giản hơn, một ngôn ngữ, một bundle.",
+      "add-to-app trả giá bằng độ phức tạp: hai dự án, hai ngôn ngữ, phải hiểu cả Swift lẫn Dart để debug khi có lỗi như bẫy FLUTTER_TARGET.",
+      "workspace trả giá ngược lại: nếu sau này cần hiệu năng native thật sự hoặc tận dụng code Swift có sẵn, sẽ phải viết lại từ đầu.",
+      "Series React Native đầy đủ đang có sẵn trên kênh — xem lại nếu muốn so sánh trực tiếp cả hai công thức."
+    ],
+    "visual": {
+      "title": "Chọn công thức nào?",
+      "bullets": [
+        {"icon": "🏢", "text": "Có app native sẵn → Flutter add-to-app", "sentence": 0},
+        {"icon": "🆕", "text": "Xây mới từ 0 → workspace kiểu React Native", "sentence": 1},
+        {"icon": "⚖️", "text": "add-to-app: phức tạp hơn, 2 ngôn ngữ song song", "sentence": 2},
+        {"icon": "⚖️", "text": "workspace: đơn giản hơn, nhưng khó tận dụng native", "sentence": 3},
+        {"icon": "🔗", "text": "Series React Native: xem lại trên kênh để so sánh", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "outro",
+    "narration": [
+      "6 tập, một hành trình trọn vẹn: từ module Flutter đơn độc ở Tập 1, tới app chủ SwiftUI hoàn chỉnh với 3 mini sống chung hôm nay.",
+      "Công thức đã học: --template=module, @pragma vm:entry-point, FlutterEngineGroup, MethodChannel, và công thức 4 bước lặp lại cho mọi mini mới.",
+      "Toàn bộ mã nguồn nằm ở repo github.com/Leung190299/nestjs-tutorial-series, thư mục demo-flutter-miniapp, với tag flutter-miniapp-tap-1 tới tap-6 — mỗi tag đúng một tập.",
+      "Nếu nhiều bạn comment muốn xem thêm, sẽ làm tiếp bản Kotlin — add-to-app phía Android, cùng công thức nhưng khác ngôn ngữ.",
+      "Vote series tiếp theo ở phần bình luận: bản Kotlin add-to-app, hay một chủ đề Flutter khác — số comment sẽ quyết định.",
+      "Cảm ơn bạn đã đi trọn cả 6 tập — từ mini Đồ ăn đơn độc tới cả một hệ sinh thái mini-app sống chung trong một app chủ.",
+      "Hẹn gặp lại ở series tiếp theo — và đừng quên vote bên dưới!"
+    ],
+    "visual": {
+      "title": "Series 6/6 hoàn tất — cảm ơn bạn! 🏆",
+      "summary": [
+        {"text": "6 tập: module đơn độc → app chủ hoàn chỉnh 3 mini", "sentence": 0},
+        {"text": "Công thức: module → entrypoint → EngineGroup → channel → 4 bước", "sentence": 1},
+        {"text": "Repo + tag flutter-miniapp-tap-1..6 = đúng code từng tập", "sentence": 2}
+      ],
+      "next": "Vote: bản Kotlin add-to-app, hay chủ đề Flutter khác? 🗳️"
+    }
+  }
+]

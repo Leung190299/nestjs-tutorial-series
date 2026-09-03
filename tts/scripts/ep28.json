@@ -1,0 +1,391 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tập 2 khép lại với một căn hộ Flutter đã cắm điện trong tòa nhà SwiftUI. Tập 3 hôm nay: cắm căn hộ THỨ HAI — mini Ví — chỉ bằng một phần tử Swift.",
+      "Bí quyết nằm ở FlutterEngineGroup: một 'trạm biến áp' dùng chung khiến engine thứ hai gần như MIỄN PHÍ RAM so với dựng một engine độc lập từ đầu.",
+      "Nhưng nói ngay để không hiểu lầm: hai mini KHÔNG chạy song song — chúng THAY NHAU chiếm màn hình, đúng như fullScreenCover chỉ mở một cái một lúc.",
+      "Và một câu hỏi sẽ treo lơ lửng tới cuối tập: mini Ví hiện tên 'Lee', số dư 1.250.000đ — dữ liệu đó Flutter lấy từ đâu, khi không hề định nghĩa user nào?",
+      "6 tập, hôm nay Tập 3 trên 6: engine thứ hai gần miễn phí, và một bí ẩn nhỏ dành cho Tập 4."
+    ],
+    "visual": {
+      "title": "FlutterEngineGroup — thêm mini gần như miễn phí",
+      "subtitle": "Mini-App với Flutter · Tập 3/6 · FlutterEngineGroup + 1 dòng Swift",
+      "badge": "Series Mini-App với Flutter · Tập 3"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Nhắc ẩn dụ cũ: mỗi FlutterEngine là đồng hồ điện nước riêng của một căn hộ — đo đếm tài nguyên độc lập, không chia sẻ với căn khác.",
+      "FlutterEngineGroup thêm một tầng mới: coi nó như trạm biến áp chung của cả tòa nhà — các đồng hồ điện nước khác nhau vẫn cắm chung một nguồn.",
+      "Về kỹ thuật: các engine trong cùng group chia sẻ tài nguyên nền, nên tạo engine thứ hai tốn ít RAM hơn HẲN so với dựng một engine độc lập.",
+      "Ở Tập 2, MiniAppLauncher đã tạo đúng MỘT FlutterEngineGroup dùng chung cho toàn app — hôm nay ta chỉ cần THÊM một entrypoint gọi vào group đó.",
+      "Nhớ kỹ: gần miễn phí không có nghĩa là chạy cùng lúc — đó vẫn là hai engine riêng biệt, chỉ THAY NHAU được hiển thị trên màn hình.",
+      "Bài học Tập này không nằm ở SwiftUI nữa — nó nằm ở đúng MỘT phần tử trong MiniApp.swift, xem ngay sau khi đọc xong file Dart mới."
+    ],
+    "visual": {
+      "title": "FlutterEngineGroup: trạm biến áp dùng chung",
+      "bullets": [
+        {
+          "icon": "💧",
+          "text": "Engine = đồng hồ điện nước riêng (nhắc lại)",
+          "sentence": 0
+        },
+        {
+          "icon": "🔌",
+          "text": "EngineGroup = trạm biến áp chung cả tòa nhà",
+          "sentence": 1
+        },
+        {
+          "icon": "💾",
+          "text": "Chia sẻ tài nguyên nền → engine 2 rẻ hơn hẳn",
+          "sentence": 2
+        },
+        {
+          "icon": "⚙️",
+          "text": "1 EngineGroup dựng ở Tập 2 — nay thêm 1 entrypoint",
+          "sentence": 3
+        },
+        {
+          "icon": "🔁",
+          "text": "Gần miễn phí ≠ chạy song song — vẫn thay nhau",
+          "sentence": 4
+        },
+        {
+          "icon": "👉",
+          "text": "Trọng tâm hôm nay: đúng 1 phần tử Swift mới",
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Cửa vào thứ hai của module: lib/main_wallet.dart — tám dòng, đúng công thức đã học ở Tập 1, chỉ đổi tên.",
+      "Hai import: mini_shell.dart cho cái vỏ chung, wallet_screen.dart cho căn phòng UI Ví — y hệt cấu trúc main_food.dart.",
+      "@pragma('vm:entry-point') lại xuất hiện: đúng biển 'cửa vào hợp lệ' đã học, thiếu nó AOT sẽ cắt hàm main này khỏi bản build.",
+      "runApp bọc WalletScreen trong MiniAppShell, title 'Ví ViệtSuper' — chạy xong dòng này, cửa thứ hai đã tồn tại trên đĩa.",
+      "Công thức lặp y nguyên: mỗi mini mới chỉ cần một file main_X.dart tám–chín dòng như thế này — phần khó nằm ở MiniAppLauncher từ Tập 2."
+    ],
+    "visual": {
+      "filename": "mini_flutter/lib/main_wallet.dart — TOÀN BỘ FILE",
+      "language": "clike",
+      "code": "import 'package:flutter/material.dart';\n\nimport 'mini_shell.dart';\nimport 'wallet_screen.dart';\n\n@pragma('vm:entry-point')\nvoid main() =>\n    runApp(const MiniAppShell(title: 'Ví ViệtSuper', child: WalletScreen()));",
+      "steps": [
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 6,
+          "to": 6,
+          "sentence": 2
+        },
+        {
+          "from": 7,
+          "to": 8,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "diagram",
+    "narration": [
+      "Nhắc lại ẩn dụ: mỗi FlutterEngine là một đồng hồ điện nước riêng — nhưng đồng hồ nào cũng cắm vào cùng một trạm biến áp.",
+      "FlutterEngineGroup chính là trạm biến áp đó: các engine sinh ra từ cùng một group chia sẻ tài nguyên nền, không phải dựng lại từ số 0.",
+      "mini_flutter giờ có HAI cửa vào: main_food.dart từ Tập 1, main_wallet.dart vừa viết — cả hai đều gọi qua đúng một EngineGroup.",
+      "engines.makeEngine dựng engine thứ hai gần như MIỄN PHÍ về RAM so với dựng một engine hoàn toàn độc lập — vì tài nguyên nền đã có sẵn.",
+      "Nhưng KHÔNG phải hai engine chạy song song: fullScreenCover chỉ mở một mini tại một thời điểm — chúng THAY NHAU chạy, không sống cùng lúc."
+    ],
+    "visual": {
+      "title": "EngineGroup: engine thứ 2 gần như miễn phí",
+      "boxes": [
+        {
+          "id": "module",
+          "label": "mini_flutter",
+          "emoji": "📦"
+        },
+        {
+          "id": "group",
+          "label": "EngineGroup",
+          "emoji": "🔌"
+        },
+        {
+          "id": "engines",
+          "label": "2 Engine",
+          "emoji": "💧"
+        }
+      ],
+      "flows": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "2 cửa vào → 1 EngineGroup",
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "dựng engine gần miễn phí",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Quay lại MiniApp.swift — sổ địa chỉ ta đọc ở Tập 2 — giờ thêm đúng MỘT phần tử mới cho mini Ví.",
+      "Struct MiniApp dòng 3–9 không đổi một ký tự: id, name, emoji, library — bốn field cũ vẫn y nguyên.",
+      "Phần tử food dòng 12–13 giữ nguyên; phần tử wallet dòng 14–15 là TOÀN BỘ thứ cần thêm — một khai báo MiniApp(...) duy nhất.",
+      "library trỏ đúng package:mini_flutter/main_wallet.dart — file 8 dòng vừa xem — app Swift không cần biết gì thêm về bên trong Flutter.",
+      "Đây chính là điểm 'gần như miễn phí': không đụng MiniAppLauncher, không đụng ContentView — thêm mini mới chỉ là một khai báo trong mảng này."
+    ],
+    "visual": {
+      "filename": "VietSuper/MiniApp.swift — TOÀN BỘ FILE (2 mini)",
+      "language": "swift",
+      "code": "import Foundation\n\nstruct MiniApp: Identifiable {\n  let id: String\n  let name: String\n  let emoji: String\n  /// File Dart chứa hàm main của mini này.\n  let library: String\n}\n\nlet miniApps: [MiniApp] = [\n  MiniApp(id: \"food\", name: \"Đồ ăn\", emoji: \"🍜\",\n          library: \"package:mini_flutter/main_food.dart\"),\n  MiniApp(id: \"wallet\", name: \"Ví\", emoji: \"👛\",\n          library: \"package:mini_flutter/main_wallet.dart\"),\n]",
+      "steps": [
+        {
+          "from": 1,
+          "to": 16,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 9,
+          "sentence": 1
+        },
+        {
+          "from": 12,
+          "to": 15,
+          "sentence": 2
+        },
+        {
+          "from": 14,
+          "to": 15,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 16,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "terminal",
+    "narration": [
+      "Chỉ sửa đúng một file Swift — không đụng Podfile, không đụng file Dart nào — nên lần này KHÔNG cần pod install.",
+      "xcodebuild build lại target VietSuper trên simulator: Xcode biên dịch lại MiniApp.swift, mảng miniApps giờ có hai phần tử.",
+      "Build thành công trong vài giây — nhanh hơn hẳn lần đầu ở Tập 2, vì Flutter framework không đổi, chỉ Swift đổi.",
+      "Mở lại simulator: màn hình chính ViệtSuper giờ phải có HAI card lưới, không còn một mình Đồ ăn nữa."
+    ],
+    "visual": {
+      "title": "Rebuild nhanh: không cần pod install lần này",
+      "commands": [
+        {
+          "cmd": "# So với Tập 2: bỏ qua pod install, chỉ rebuild Swift",
+          "output": "— (Podfile không đổi, Flutter framework không đổi)",
+          "sentence": 0
+        },
+        {
+          "cmd": "xcodebuild -workspace VietSuper.xcworkspace -scheme VietSuper -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build",
+          "output": "** BUILD SUCCEEDED **",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "phone",
+    "narration": [
+      "Simulator giờ cho thấy HAI card lưới trên màn chính ViệtSuper: Đồ ăn từ Tập 1, và Ví vừa cắm hôm nay — đúng một phần tử mới trong MiniApp.swift.",
+      "Bấm vào Ví: mini mở full-screen, tiêu đề 'Ví ViệtSuper', y hệt bố cục MiniAppShell chung đã học — không có gì khác về mặt kỹ thuật nhúng.",
+      "Nhưng nhìn kỹ nội dung: tên 'Lee' và số dư 1.250.000đ hiện SẴN, không phải dữ liệu giả — trong khi module Flutter KHÔNG hề định nghĩa user nào tên Lee.",
+      "Bấm Đồ ăn lại: mini Ví đóng, mini Đồ ăn mở — hai mini THAY NHAU chiếm màn hình, không phải hai engine cùng hiển thị song song.",
+      "Không cần chụp thêm ảnh 'song song' — vì nó không tồn tại: đúng lúc này, chỉ một trong hai mini được vẽ lên màn hình."
+    ],
+    "visual": {
+      "title": "Nghiệm thu: 2 card, 1 câu hỏi 👛",
+      "screens": [
+        {
+          "src": "screens/ep28/host-grid-2-cards.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/ep28/mini-wallet-open.png",
+          "sentence": 1
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🏠",
+          "text": "Host: 2 card lưới — Đồ ăn + Ví",
+          "sentence": 0
+        },
+        {
+          "icon": "👛",
+          "text": "Ví ViệtSuper full-screen, cùng MiniAppShell",
+          "sentence": 1
+        },
+        {
+          "icon": "❓",
+          "text": "Lee / 1.250.000đ — Flutter không hề biết ai tên Lee",
+          "sentence": 2
+        },
+        {
+          "icon": "🔁",
+          "text": "Thay nhau chạy — không song song",
+          "sentence": 3
+        },
+        {
+          "icon": "🚫",
+          "text": "Không có ảnh 'song song' — vì nó không tồn tại",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Trích đúng phần Card hiển thị số dư trong wallet_screen.dart — không đụng tới cách _name, _balance được NẠP, chỉ xem cách chúng được VẼ.",
+      "Card nền đỏ 0xffea2845, bên trong Padding rồi Column căn trái — bố cục card thông tin rất quen thuộc với ai từng viết Flutter.",
+      "Text(_name) cỡ chữ 16, màu trắng mờ — dòng tên phía trên; SizedBox cao 8 chỉ để tạo khoảng cách.",
+      "Text(formatVnd(_balance)) cỡ chữ 36 đậm, màu trắng — chính là dòng '1.250.000đ' bạn vừa thấy trên simulator.",
+      "_name và _balance chỉ là hai biến State bình thường — NHƯNG ai gán giá trị cho chúng, và gán TỪ ĐÂU, xin để dành đúng Tập 4."
+    ],
+    "visual": {
+      "filename": "mini_flutter/lib/wallet_screen.dart (Card số dư)",
+      "language": "clike",
+      "code": "          Card(\n            color: const Color(0xffea2845),\n            child: Padding(\n              padding: const EdgeInsets.all(24),\n              child: Column(\n                crossAxisAlignment: CrossAxisAlignment.start,\n                children: [\n                  Text(_name,\n                      style: const TextStyle(color: Colors.white70, fontSize: 16)),\n                  const SizedBox(height: 8),\n                  Text(formatVnd(_balance),\n                      style: const TextStyle(\n                        color: Colors.white,\n                        fontSize: 36,\n                        fontWeight: FontWeight.bold,\n                      )),\n                ],\n              ),\n            ),\n          ),",
+      "steps": [
+        {
+          "from": 1,
+          "to": 20,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 10,
+          "sentence": 2
+        },
+        {
+          "from": 11,
+          "to": 16,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 20,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "concept",
+    "narration": [
+      "Chốt Tập 3: FlutterEngineGroup là trạm biến áp dùng chung — engine thứ hai gần như miễn phí RAM, không cần đụng MiniAppLauncher hay ContentView.",
+      "Thêm mini mới giờ chỉ còn MỘT việc: khai một phần tử trong MiniApp.swift — công thức từ Tập 2 vẫn đúng, càng về sau càng rẻ.",
+      "Nhắc lại cho chắc: hai mini KHÔNG chạy song song — fullScreenCover chỉ mở một cái tại một thời điểm, chúng thay nhau chiếm màn hình.",
+      "Câu hỏi còn treo lơ lửng: Ví hiện tên 'Lee', số dư 1.250.000đ — dữ liệu này ở ĐÂU ra, khi wallet_screen.dart không hề hard-code số nào như vậy?",
+      "Gợi ý duy nhất hôm nay: hostChannel — sợi dây MethodChannel đã treo từ Tập 1, giờ mới bắt đầu có người trả lời ở đầu bên kia.",
+      "Ẩn dụ cập nhật: tòa nhà giờ có hai căn hộ dùng chung một trạm biến áp — càng nhiều căn, chi phí biên càng rẻ, đúng bản chất add-to-app."
+    ],
+    "visual": {
+      "title": "Tổng kết Tập 3: căn hộ thứ hai, gần miễn phí",
+      "bullets": [
+        {
+          "icon": "🔌",
+          "text": "EngineGroup = trạm biến áp, engine 2 gần miễn phí",
+          "sentence": 0
+        },
+        {
+          "icon": "🧩",
+          "text": "Thêm mini mới = 1 phần tử trong MiniApp.swift",
+          "sentence": 1
+        },
+        {
+          "icon": "🔁",
+          "text": "KHÔNG song song — 2 mini thay nhau chạy",
+          "sentence": 2
+        },
+        {
+          "icon": "❓",
+          "text": "Lee / 1.250.000đ từ đâu? Không hard-code trong Dart",
+          "sentence": 3
+        },
+        {
+          "icon": "📡",
+          "text": "Gợi ý: hostChannel đã có người trả lời",
+          "sentence": 4
+        },
+        {
+          "icon": "🏢",
+          "text": "2 căn hộ, 1 trạm biến áp — chi phí biên rẻ dần",
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "outro",
+    "narration": [
+      "Vậy là căn hộ thứ hai đã vào tòa nhà — chỉ bằng một phần tử Swift, nhờ chính FlutterEngineGroup đã dựng ở Tập 2.",
+      "Tập sau, ta mở HỘP ĐEN MethodChannel: vì sao Ví biết tên Lee, vì sao chạy lẻ lại thấy 'Khách chạy lẻ' 500.000đ — cùng một code, hai câu trả lời khác nhau.",
+      "Sẽ đọc từng dòng invokeMapMethod bên Dart và setMethodCallHandler bên Swift — đường ống hai chiều thực sự HOẠT ĐỘNG, không chỉ tồn tại trên giấy.",
+      "Repo có tag flutter-miniapp-tap-3 đúng trạng thái hôm nay: checkout là thấy đúng MiniApp.swift hai phần tử và main_wallet.dart trong video.",
+      "Cảm ơn bạn đã xem Tập 3 trên 6: comment nếu bạn đoán được Lee lấy dữ liệu từ đâu, và hẹn gặp lại ở Tập 4!"
+    ],
+    "visual": {
+      "title": "Tập 3/6 xong — hẹn gặp Tập 4! 👋",
+      "summary": [
+        {
+          "text": "Mini Ví cắm xong: main_wallet.dart 8 dòng + MiniApp.swift thêm 1 phần tử",
+          "sentence": 0
+        },
+        {
+          "text": "Tập 4: mở hộp đen MethodChannel — vì sao Ví biết tên Lee",
+          "sentence": 1
+        },
+        {
+          "text": "Tag flutter-miniapp-tap-3 = đúng code hôm nay",
+          "sentence": 3
+        }
+      ],
+      "next": "Tập 4/6: MethodChannel — mini hỏi, app chủ trả lời 📡"
+    }
+  }
+]

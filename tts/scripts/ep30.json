@@ -1,0 +1,441 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tập 4 khép lại với một lời hứa: \"tập sau xây nguyên mini mới từ A đến Z bằng đúng công thức\" — hôm nay chính là ngày đó.",
+      "Công thức 4 bước bản Flutter: viết căn phòng, mở cửa vào, báo lễ tân, rồi rebuild — lặp lại y hệt cho mọi mini mới, không cần học lại từ đầu.",
+      "Mini thứ ba: Xem phim ViệtSuper — 3 phim Việt CÙNG dữ liệu với series React Native trước đó, khán giả cũ chắc chắn nhận ra ngay.",
+      "Đinh của tập: không sửa MiniAppLauncher, không sửa ContentView — kiến trúc tốt là chỉ THÊM, không đụng vào lõi đã chạy ổn định.",
+      "6 tập, hôm nay Tập 5 trên 6: công thức 4 bước bản Flutter — xây mini Xem phim từ A đến Z."
+    ],
+    "visual": {
+      "title": "Công thức 4 bước — xây mini Xem phim từ A đến Z",
+      "subtitle": "Mini-App với Flutter · Tập 5/6 · Công thức 4 bước",
+      "badge": "Series Mini-App với Flutter · Tập 5"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Nhắc đủ 4 mảnh ẩn dụ đã học: tòa nhà bê tông (app chủ SwiftUI), căn hộ lắp ghép (module Flutter), đồng hồ điện nước riêng (engine), đường dây lễ tân (MethodChannel).",
+      "Hôm nay ráp 4 mảnh đó thành MỘT công thức 4 bước — lặp lại được cho bất kỳ mini mới nào, không riêng gì mini Xem phim.",
+      "Bước 1 — viết căn phòng: một file Dart mới, cinema_screen.dart, chứa toàn bộ UI và state của mini, không đụng file nào khác.",
+      "Bước 2 — mở cửa vào: một entrypoint mới, main_cinema.dart, gắn @pragma('vm:entry-point'), rồi thêm đúng 1 dòng import vào main.dart để debug kernel gói theo.",
+      "Bước 3 — báo lễ tân: thêm ĐÚNG 1 phần tử vào mảng miniApps trong MiniApp.swift — y hệt cách Tập 3 đã thêm mini Ví.",
+      "Bước 4 — rebuild: lần này không cần chạy lại pod install, vì Podfile và framework Flutter không hề đổi, chỉ Swift đổi.",
+      "Quan trọng nhất tập này: cả 4 bước không đụng một dòng nào trong MiniAppLauncher.swift hay ContentView.swift — thêm tính năng mà không sửa lõi."
+    ],
+    "visual": {
+      "title": "Công thức 4 bước: lặp lại cho mọi mini mới",
+      "bullets": [
+        {
+          "icon": "🏢",
+          "text": "4 mảnh cũ: tòa nhà · căn hộ · đồng hồ · lễ tân",
+          "sentence": 0
+        },
+        {
+          "icon": "🧩",
+          "text": "Ráp thành 1 công thức 4 bước lặp lại được",
+          "sentence": 1
+        },
+        {
+          "icon": "1️⃣",
+          "text": "Viết căn phòng: cinema_screen.dart",
+          "sentence": 2
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Mở cửa vào: main_cinema.dart + import main.dart",
+          "sentence": 3
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Báo lễ tân: +1 phần tử trong MiniApp.swift",
+          "sentence": 4
+        },
+        {
+          "icon": "4️⃣",
+          "text": "Rebuild — không cần pod install lại",
+          "sentence": 5
+        },
+        {
+          "icon": "🚫",
+          "text": "KHÔNG sửa MiniAppLauncher, KHÔNG sửa ContentView",
+          "sentence": 6
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là toàn bộ phần dữ liệu và state của cinema_screen.dart — 19 dòng, pattern y hệt food_screen.dart Tập 1: data tĩnh, Set chọn, fold tính tổng.",
+      "Dòng 1–5: const movies — 3 phim Việt Đào, Phở và Piano, Mắt Biếc, Bố Già — CÙNG đúng dữ liệu với series React Native trước đó.",
+      "Dòng 7–12: StatefulWidget CinemaScreen — boilerplate quen thuộc, chỉ ủy quyền sang _CinemaScreenState, không có gì mới để học ở đây.",
+      "Dòng 15: Set<String> _selected — dùng Set thay vì List vì phim đã chọn là duy nhất, y hệt biến _selected trong FoodScreen.",
+      "Dòng 17–19: getter _total lọc phim có trong _selected rồi fold cộng dồn giá — công thức tính tổng lặp lại nguyên xi từ Tập 1."
+    ],
+    "visual": {
+      "filename": "mini_flutter/lib/cinema_screen.dart (data + state)",
+      "language": "clike",
+      "code": "const movies = [\n  Movie(id: 'dao-pho', title: 'Đào, Phở và Piano', emoji: '🎹', price: 90000),\n  Movie(id: 'mat-biec', title: 'Mắt Biếc', emoji: '👁️', price: 85000),\n  Movie(id: 'bo-gia', title: 'Bố Già', emoji: '👨', price: 95000),\n];\n\nclass CinemaScreen extends StatefulWidget {\n  const CinemaScreen({super.key});\n\n  @override\n  State<CinemaScreen> createState() => _CinemaScreenState();\n}\n\nclass _CinemaScreenState extends State<CinemaScreen> {\n  final Set<String> _selected = {};\n\n  int get _total => movies\n      .where((m) => _selected.contains(m.id))\n      .fold(0, (sum, m) => sum + m.price);",
+      "steps": [
+        {
+          "from": 1,
+          "to": 19,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 5,
+          "sentence": 1
+        },
+        {
+          "from": 7,
+          "to": 12,
+          "sentence": 2
+        },
+        {
+          "from": 15,
+          "to": 15,
+          "sentence": 3
+        },
+        {
+          "from": 17,
+          "to": 19,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "Mỗi phim là một Card — itemBuilder dựng lại đúng Card này cho từng phần tử của movies, y hệt bố cục ListTile đã quen từ FoodScreen.",
+      "Dòng 6–9: trailing FilledButton — style đổi màu xanh lá bằng conditional expression khi isSelected là true, giống hệt Tập 1.",
+      "Dòng 10–14: onPressed gọi setState — thêm hoặc bỏ movie.id khỏi Set _selected tùy trạng thái hiện tại, chỉ 1 dòng logic.",
+      "Dòng 15: child Text đổi chữ 'Đặt vé' thành 'Đã đặt ✓' — cùng một nút, hai trạng thái, không cần dựng widget thứ hai.",
+      "Đây chính là 'nút biến hình' nhắc trong công thức — pattern y hệt FoodScreen Tập 1, chỉ đổi tên biến và tên phim."
+    ],
+    "visual": {
+      "filename": "mini_flutter/lib/cinema_screen.dart (nút Đặt vé)",
+      "language": "clike",
+      "code": "              return Card(\n                child: ListTile(\n                  leading: Text(movie.emoji, style: const TextStyle(fontSize: 32)),\n                  title: Text(movie.title),\n                  subtitle: Text(formatVnd(movie.price)),\n                  trailing: FilledButton(\n                    style: isSelected\n                        ? FilledButton.styleFrom(backgroundColor: Colors.green)\n                        : null,\n                    onPressed: () => setState(() {\n                      isSelected\n                          ? _selected.remove(movie.id)\n                          : _selected.add(movie.id);\n                    }),\n                    child: Text(isSelected ? 'Đã đặt ✓' : 'Đặt vé'),\n                  ),\n                ),\n              );",
+      "steps": [
+        {
+          "from": 1,
+          "to": 18,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 9,
+          "sentence": 1
+        },
+        {
+          "from": 10,
+          "to": 14,
+          "sentence": 2
+        },
+        {
+          "from": 15,
+          "to": 15,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 18,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "diagram",
+    "narration": [
+      "Vẽ lại công thức 4 bước thành một dây chuyền: viết phòng, mở cửa vào, báo lễ tân, rebuild — mỗi bước là một ô nối tiếp ô trước.",
+      "Bước 1 sang bước 2: viết xong cinema_screen.dart, bước tiếp theo là tạo cửa vào — entrypoint main_cinema.dart.",
+      "Bước 2 sang bước 3: có cửa vào rồi, bước tiếp theo là báo cho lễ tân biết địa chỉ qua MiniApp.swift.",
+      "Bước 3 sang bước 4: lễ tân đã biết địa chỉ, bước cuối chỉ còn build lại app Swift — không cần pod install lại.",
+      "Bốn bước này lặp lại y hệt cho BẤT KỲ mini mới nào — Đồ ăn, Ví, Xem phim đều đi qua đúng 4 ô này, không thiếu ô nào."
+    ],
+    "visual": {
+      "title": "Công thức 4 bước — 1 dây chuyền lặp lại",
+      "boxes": [
+        {
+          "id": "step1",
+          "label": "1 Viết phòng",
+          "emoji": "🚪"
+        },
+        {
+          "id": "step2",
+          "label": "2 Mở cửa vào",
+          "emoji": "🔑"
+        },
+        {
+          "id": "step3",
+          "label": "3 Báo lễ tân",
+          "emoji": "🧑‍💼"
+        },
+        {
+          "id": "step4",
+          "label": "4 Rebuild",
+          "emoji": "🔨"
+        }
+      ],
+      "flows": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "viết xong",
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "label": "có cửa vào",
+          "sentence": 2
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "label": "đã báo",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "main_cinema.dart — toàn bộ 8 dòng, đúng công thức entrypoint đã học từ Tập 1: import 2 file cần dùng, rồi @pragma cộng void main.",
+      "Dòng 6: @pragma('vm:entry-point') — lại đúng biển báo 'cửa vào hợp lệ' đã giải thích ở Tập 1, giữ AOT compiler không cắt bỏ hàm main này.",
+      "Dòng 7–8: void main gọi runApp bọc MiniAppShell với title 'Xem phim ViệtSuper' và child CinemaScreen — copy công thức từ main_food.dart, chỉ đổi 3 chỗ.",
+      "Bước 2 gần xong: cửa vào đã mở — nhưng còn thiếu đúng 1 dòng nữa để debug kernel nhìn thấy nó, xem ngay ở scene sau."
+    ],
+    "visual": {
+      "filename": "mini_flutter/lib/main_cinema.dart",
+      "language": "clike",
+      "code": "import 'package:flutter/material.dart';\n\nimport 'cinema_screen.dart';\nimport 'mini_shell.dart';\n\n@pragma('vm:entry-point')\nvoid main() =>\n    runApp(const MiniAppShell(title: 'Xem phim ViệtSuper', child: CinemaScreen()));",
+      "steps": [
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 6,
+          "sentence": 1
+        },
+        {
+          "from": 7,
+          "to": 8,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "main.dart — file gộp debug, chạy lẻ toàn bộ module — dòng 9 import 'main_cinema.dart' chính là dòng MỚI cần thêm để hoàn tất bước 2.",
+      "Dòng 3: import 'cinema_screen.dart' — main.dart cần biết màn hình CinemaScreen tồn tại để đưa vào menu debug bên dưới.",
+      "Dòng 7–8: comment giải thích lý do các import 'vô dụng' này tồn tại — kéo entrypoint vào kernel debug — và ignore_for_file tắt cảnh báo linter.",
+      "Dòng 13: void main của file DEBUG này — chạy fvm flutter run -t lib/main.dart sẽ mở menu 3 mini, không mở thẳng Xem phim."
+    ],
+    "visual": {
+      "filename": "mini_flutter/lib/main.dart",
+      "language": "clike",
+      "code": "import 'package:flutter/material.dart';\n\nimport 'cinema_screen.dart';\nimport 'food_screen.dart';\nimport 'wallet_screen.dart';\n\n// Kéo các entrypoint vào bản build debug để app chủ tìm thấy qua libraryURI.\n// ignore_for_file: unused_import\nimport 'main_cinema.dart';\nimport 'main_food.dart';\nimport 'main_wallet.dart';\n\nvoid main() => runApp(const DebugMenuApp());",
+      "steps": [
+        {
+          "from": 1,
+          "to": 13,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 7,
+          "to": 8,
+          "sentence": 2
+        },
+        {
+          "from": 13,
+          "to": 13,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "MiniApp.swift — toàn bộ 18 dòng: struct MiniApp định nghĩa 4 field, mảng miniApps liệt kê từng mini theo đúng thứ tự hiện trên lưới.",
+      "Dòng 3–9: struct MiniApp — id, name, emoji, library — library là địa chỉ chính xác file Dart mà lễ tân sẽ gọi tới qua libraryURI.",
+      "Dòng 12–15: hai phần tử ĐÃ CÓ từ Tập 2 và Tập 3 — food và wallet — giữ nguyên, không đụng tới một ký tự nào.",
+      "Bước 3 — báo lễ tân: THÊM ĐÚNG 2 dòng 16–17 — id 'cinema', tên 'Xem phim', emoji 🎬, library trỏ đúng main_cinema.dart vừa viết.",
+      "Đây là điểm wow của công thức: thêm một mini hoàn toàn mới vào app chủ chỉ tốn ĐÚNG 2 dòng Swift, không hơn một chữ nào."
+    ],
+    "visual": {
+      "filename": "VietSuper/MiniApp.swift",
+      "language": "swift",
+      "code": "import Foundation\n\nstruct MiniApp: Identifiable {\n  let id: String\n  let name: String\n  let emoji: String\n  /// File Dart chứa hàm main của mini này.\n  let library: String\n}\n\nlet miniApps: [MiniApp] = [\n  MiniApp(id: \"food\", name: \"Đồ ăn\", emoji: \"🍜\",\n          library: \"package:mini_flutter/main_food.dart\"),\n  MiniApp(id: \"wallet\", name: \"Ví\", emoji: \"👛\",\n          library: \"package:mini_flutter/main_wallet.dart\"),\n  MiniApp(id: \"cinema\", name: \"Xem phim\", emoji: \"🎬\",\n          library: \"package:mini_flutter/main_cinema.dart\"),\n]",
+      "steps": [
+        {
+          "from": 1,
+          "to": 18,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 9,
+          "sentence": 1
+        },
+        {
+          "from": 12,
+          "to": 15,
+          "sentence": 2
+        },
+        {
+          "from": 16,
+          "to": 17,
+          "sentence": 3
+        },
+        {
+          "from": 16,
+          "to": 17,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "terminal",
+    "narration": [
+      "Bước 4 — bước cuối cùng: rebuild app Swift, KHÔNG cần chạy lại pod install vì Podfile và framework Flutter không hề đổi.",
+      "Lệnh xcodebuild y hệt Tập 2 và Tập 3 — build lại target VietSuper, cài lên simulator, không có bước Xcode thủ công nào khác.",
+      "Vì FlutterEngineGroup đã tồn tại từ Tập 3, tạo engine thứ ba cho mini Xem phim gần như miễn phí RAM — y hệt engine thứ hai.",
+      "Chờ build xong: lưới ViệtSuper giờ phải có đủ 3 card — Đồ ăn, Ví, Xem phim — công thức 4 bước đã chạy trọn vẹn."
+    ],
+    "visual": {
+      "title": "Bước 4: rebuild — không cần pod install",
+      "commands": [
+        {
+          "cmd": "# So với Tập 2: bỏ qua pod install, chỉ rebuild Swift",
+          "output": "— (Podfile không đổi, Flutter framework không đổi)",
+          "sentence": 0
+        },
+        {
+          "cmd": "xcodebuild -workspace VietSuper.xcworkspace -scheme VietSuper -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build",
+          "output": "** BUILD SUCCEEDED **",
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "phone",
+    "narration": [
+      "Simulator giờ cho thấy BA card lưới trên màn chính ViệtSuper: Đồ ăn, Ví, và Xem phim vừa cắm hôm nay — đúng 1 phần tử mới trong MiniApp.swift.",
+      "Bấm Xem phim: mini mở full-screen, tiêu đề 'Xem phim ViệtSuper', liệt kê đúng 3 phim Đào Phở và Piano, Mắt Biếc, Bố Già — y hệt dữ liệu series React Native.",
+      "Nút 'Đặt vé' của Đào, Phở và Piano còn nguyên màu, Tổng: 0đ — giống hệt trạng thái ban đầu của FoodScreen ở Tập 1.",
+      "Bấm nút: chuyển màu xanh 'Đã đặt ✓', Tổng cập nhật thành 90.000đ — đúng giá trong const movies vừa đọc ở scene trước.",
+      "Ba ảnh này là bằng chứng sống cho công thức 4 bước: viết phòng, mở cửa, báo lễ tân, rebuild — ra đúng một mini hoạt động đầy đủ.",
+      "Và tuyệt đối không một dòng nào trong MiniAppLauncher.swift hay ContentView.swift bị đụng tới để có được kết quả này."
+    ],
+    "visual": {
+      "title": "Nghiệm thu: 3 card, 1 vé 🎬",
+      "screens": [
+        {
+          "src": "screens/ep30/host-grid-3-cards.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/ep30/mini-cinema-embedded.png",
+          "sentence": 1
+        },
+        {
+          "src": "screens/ep30/mini-cinema-ticket.png",
+          "sentence": 3
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🏠",
+          "text": "Host: 3 card lưới — Đồ ăn, Ví, Xem phim",
+          "sentence": 0
+        },
+        {
+          "icon": "🎬",
+          "text": "Xem phim ViệtSuper — 3 phim, cùng data RN",
+          "sentence": 1
+        },
+        {
+          "icon": "🎫",
+          "text": "Đặt vé: Tổng 0đ → 90.000đ khi bấm nút",
+          "sentence": 3
+        },
+        {
+          "icon": "🧩",
+          "text": "Bằng chứng sống: công thức 4 bước hoạt động",
+          "sentence": 4
+        },
+        {
+          "icon": "🚫",
+          "text": "Không đụng MiniAppLauncher, không đụng ContentView",
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "outro",
+    "narration": [
+      "Công thức 4 bước bản Flutter đã chạy trọn vẹn: viết phòng cinema_screen.dart, mở cửa vào main_cinema.dart cộng import, báo lễ tân MiniApp.swift, rồi rebuild.",
+      "Không một dòng nào trong MiniAppLauncher.swift hay ContentView.swift bị sửa — kiến trúc add-to-app tốt là vậy: chỉ thêm, không đụng lõi.",
+      "Ba mini giờ sống chung trong một app chủ: Đồ ăn, Ví, Xem phim — mỗi mini một entrypoint, thay nhau chiếm engine khi cần dùng.",
+      "Tập cuối, Tập 6 trên 6: chạy lẻ từng mini bằng cờ -t, một bẫy thực chiến với FLUTTER_TARGET, và so găng công thức Flutter add-to-app với bản React Native workspace.",
+      "Repo có tag flutter-miniapp-tap-5 đúng trạng thái hôm nay: checkout là thấy đúng cinema_screen.dart và MiniApp.swift 3 phần tử trong video.",
+      "Cảm ơn bạn đã xem Tập 5 trên 6 — comment nếu bạn đoán được vì sao 3 phim này TRÙNG dữ liệu với series React Native, và hẹn gặp lại ở Tập 6!"
+    ],
+    "visual": {
+      "title": "Tập 5/6 xong — hẹn gặp Tập 6! 👋",
+      "summary": [
+        {
+          "text": "Công thức 4 bước: viết phòng → mở cửa → báo lễ tân → rebuild",
+          "sentence": 0
+        },
+        {
+          "text": "Không sửa MiniAppLauncher, không sửa ContentView",
+          "sentence": 1
+        },
+        {
+          "text": "Tag flutter-miniapp-tap-5 = đúng code hôm nay",
+          "sentence": 4
+        }
+      ],
+      "next": "Tập 6/6: chạy lẻ, bẫy FLUTTER_TARGET, so găng với React Native 🥊"
+    }
+  }
+]
