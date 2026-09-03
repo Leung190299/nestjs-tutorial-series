@@ -13,4 +13,6 @@ let miniApps: [MiniApp] = [
           library: "package:mini_flutter/main_food.dart"),
   MiniApp(id: "wallet", name: "Ví", emoji: "👛",
           library: "package:mini_flutter/main_wallet.dart"),
+  MiniApp(id: "cinema", name: "Xem phim", emoji: "🎬",
+          library: "package:mini_flutter/main_cinema.dart"),
 ]
