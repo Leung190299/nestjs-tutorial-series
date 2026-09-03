@@ -88,17 +88,17 @@
           "durationInFrames": 276
         },
         {
-          "file": "audio/ep26/scene-02-3-3f794f39.wav",
+          "file": "audio/ep26/scene-02-3-18d55608.wav",
           "startFrame": 843,
-          "durationInFrames": 219
+          "durationInFrames": 238
         },
         {
           "file": "audio/ep26/scene-02-4-7432176e.wav",
-          "startFrame": 1070,
+          "startFrame": 1089,
           "durationInFrames": 281
         }
       ],
-      "durationInFrames": 1369
+      "durationInFrames": 1388
     },
     {
       "id": "scene-03",
@@ -179,7 +179,7 @@
           },
           {
             "cmd": "cat mini_flutter/pubspec.yaml | tail -5",
-            "output": "  module:\n    androidX: true\n    androidPackage: com.vietsuper.mini_flutter\n    iosBundleIdentifier: com.vietsuper.miniFlutter",
+            "output": "# identifiers, which may be completely independent or the same as these.\n  module:\n    androidX: true\n    androidPackage: com.vietsuper.mini_flutter\n    iosBundleIdentifier: com.vietsuper.miniFlutter",
             "sentence": 2
           }
         ]

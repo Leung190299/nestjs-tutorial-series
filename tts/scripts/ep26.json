@@ -22,7 +22,7 @@
       "Series RN trước, mỗi mini-app là một PACKAGE trong cùng một dự án JS, gộp lại lúc BUILD bằng npm workspaces — một cách gộp ở tầng mã nguồn.",
       "Flutter add-to-app gộp ở tầng khác hẳn: lúc RUNTIME, app native và app Flutter là hai dự án tách biệt hoàn toàn, chỉ gặp nhau khi máy đang CHẠY.",
       "Vì vậy lệnh tạo dự án cũng khác: không phải flutter create bình thường, mà flutter create --template=module — sinh ra một MODULE, không phải một APP.",
-      "Module không có icon, không tự chạy độc lập trên máy người dùng: nó là một gói mã nguồn CHỜ được app khác nhúng vào, giống tấm bê tông đúc sẵn chờ lắp.",
+      "Module không có icon, không tự chạy độc lập trên máy người dùng: nó là một gói mã nguồn CHỜ được app khác nhúng vào, giống một căn hộ lắp ghép chờ đưa vào tòa nhà.",
       "Khi bị nhúng, mỗi module chạy trong một FLUTTER ENGINE riêng — coi đó là đồng hồ điện nước riêng của căn hộ: đo đếm tài nguyên độc lập với tòa nhà chính."
     ],
     "visual": {
@@ -72,7 +72,7 @@
       "title": "Một dòng lệnh: sinh module Flutter",
       "commands": [
         {"cmd": "fvm flutter create --template=module mini_flutter", "output": "Creating project mini_flutter...\nWrote 68 files.\n\nAll done!", "sentence": 1},
-        {"cmd": "cat mini_flutter/pubspec.yaml | tail -5", "output": "  module:\n    androidX: true\n    androidPackage: com.vietsuper.mini_flutter\n    iosBundleIdentifier: com.vietsuper.miniFlutter", "sentence": 2}
+        {"cmd": "cat mini_flutter/pubspec.yaml | tail -5", "output": "# identifiers, which may be completely independent or the same as these.\n  module:\n    androidX: true\n    androidPackage: com.vietsuper.mini_flutter\n    iosBundleIdentifier: com.vietsuper.miniFlutter", "sentence": 2}
       ]
     }
   },
