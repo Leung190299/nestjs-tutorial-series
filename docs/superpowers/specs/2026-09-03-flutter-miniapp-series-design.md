@@ -51,7 +51,7 @@ Môi trường máy: FVM Flutter 3.38.10 stable, Xcode 26.3, CocoaPods 1.16.2, i
 |---|---|---|
 | 1 (ep26) | Add-to-app là gì? `flutter create --template=module` + chạy mini Đồ ăn độc lập | module ≠ app; khái niệm engine |
 | 2 (ep27) | Host SwiftUI từ số 0 + nhúng engine đầu tiên qua CocoaPods, bấm card mở mini Đồ ăn | SwiftUI cơ bản; podhelper; FlutterViewController |
-| 3 (ep28) | `FlutterEngineGroup`: thêm mini Ví bằng entrypoint thứ hai, 2 mini sống cùng lúc | entrypoint; engine group; tiết kiệm RAM |
+| 3 (ep28) | `FlutterEngineGroup`: thêm mini Ví bằng entrypoint thứ hai, hai mini thay nhau chạy mượt (engine tạo từ group gần như miễn phí — KHÔNG dạy "2 engine sống song song", demo không chứng minh điều đó) | entrypoint; engine group; tiết kiệm RAM |
 | 4 (ep29) | Platform channel: mini Ví hỏi host tên/số dư | MethodChannel 2 chiều Swift↔Dart |
 | 5 (ep30) | Chữa công thức: xây mini Xem phim từ A-Z (entrypoint mới + card mới + channel) | công thức N bước lặp lại |
 | 6 (ep31) | Chạy lẻ từng mini + tổng kết kiến trúc, so sánh với bản React Native | bức tranh toàn cảnh; release build |
