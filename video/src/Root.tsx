@@ -29,6 +29,7 @@ import ep23 from './data/ep23.timing.json';
 import ep24 from './data/ep24.timing.json';
 import ep25 from './data/ep25.timing.json';
 import ep26 from './data/ep26.timing.json';
+import ep27 from './data/ep27.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -58,6 +59,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode24', timing: ep24 as unknown as EpisodeTiming},
   {id: 'Episode25', timing: ep25 as unknown as EpisodeTiming},
   {id: 'Episode26', timing: ep26 as unknown as EpisodeTiming},
+  {id: 'Episode27', timing: ep27 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -359,6 +361,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/ep26/standalone-food-cart.png',
       badgeEmoji: '🍜',
+      seriesTag: 'Mini-App với Flutter 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb27',
+    props: {
+      badge: 'FLUTTER MINI-APP 2',
+      line1: 'SWIFTUI',
+      line2: 'ĐÃ SỐNG',
+      subtitle: 'XcodeGen · FlutterEngineGroup · gotcha thật',
+      variant: 'shot',
+      image: 'screens/ep27/mini-food-embedded.png',
+      badgeEmoji: '🏗️',
       seriesTag: 'Mini-App với Flutter 🇻🇳',
     },
   },
