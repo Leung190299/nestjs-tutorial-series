@@ -11,4 +11,6 @@ struct MiniApp: Identifiable {
 let miniApps: [MiniApp] = [
   MiniApp(id: "food", name: "Đồ ăn", emoji: "🍜",
           library: "package:mini_flutter/main_food.dart"),
+  MiniApp(id: "wallet", name: "Ví", emoji: "👛",
+          library: "package:mini_flutter/main_wallet.dart"),
 ]
