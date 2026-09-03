@@ -1,0 +1,679 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Công thức 4 bước — xây mini Xem phim từ A đến Z",
+        "subtitle": "Mini-App với Flutter · Tập 5/6 · Công thức 4 bước",
+        "badge": "Series Mini-App với Flutter · Tập 5"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep30/scene-01-0-3ba6a478.wav",
+          "startFrame": 0,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep30/scene-01-1-130eea71.wav",
+          "startFrame": 198,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep30/scene-01-2-264b00fd.wav",
+          "startFrame": 444,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep30/scene-01-3-74cbf6dc.wav",
+          "startFrame": 661,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep30/scene-01-4-8b1e58cc.wav",
+          "startFrame": 854,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 1016
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Công thức 4 bước: lặp lại cho mọi mini mới",
+        "bullets": [
+          {
+            "icon": "🏢",
+            "text": "4 mảnh cũ: tòa nhà · căn hộ · đồng hồ · lễ tân",
+            "sentence": 0
+          },
+          {
+            "icon": "🧩",
+            "text": "Ráp thành 1 công thức 4 bước lặp lại được",
+            "sentence": 1
+          },
+          {
+            "icon": "1️⃣",
+            "text": "Viết căn phòng: cinema_screen.dart",
+            "sentence": 2
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Mở cửa vào: main_cinema.dart + import main.dart",
+            "sentence": 3
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Báo lễ tân: +1 phần tử trong MiniApp.swift",
+            "sentence": 4
+          },
+          {
+            "icon": "4️⃣",
+            "text": "Rebuild — không cần pod install lại",
+            "sentence": 5
+          },
+          {
+            "icon": "🚫",
+            "text": "KHÔNG sửa MiniAppLauncher, KHÔNG sửa ContentView",
+            "sentence": 6
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep30/scene-02-0-83d6814a.wav",
+          "startFrame": 0,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep30/scene-02-1-6db8d602.wav",
+          "startFrame": 260,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep30/scene-02-2-7cea2671.wav",
+          "startFrame": 439,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep30/scene-02-3-ddc81f03.wav",
+          "startFrame": 661,
+          "durationInFrames": 298
+        },
+        {
+          "file": "audio/ep30/scene-02-4-197f1224.wav",
+          "startFrame": 967,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep30/scene-02-5-a611e103.wav",
+          "startFrame": 1151,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep30/scene-02-6-bd62cc7d.wav",
+          "startFrame": 1371,
+          "durationInFrames": 221
+        }
+      ],
+      "durationInFrames": 1610
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "mini_flutter/lib/cinema_screen.dart (data + state)",
+        "language": "clike",
+        "code": "const movies = [\n  Movie(id: 'dao-pho', title: 'Đào, Phở và Piano', emoji: '🎹', price: 90000),\n  Movie(id: 'mat-biec', title: 'Mắt Biếc', emoji: '👁️', price: 85000),\n  Movie(id: 'bo-gia', title: 'Bố Già', emoji: '👨', price: 95000),\n];\n\nclass CinemaScreen extends StatefulWidget {\n  const CinemaScreen({super.key});\n\n  @override\n  State<CinemaScreen> createState() => _CinemaScreenState();\n}\n\nclass _CinemaScreenState extends State<CinemaScreen> {\n  final Set<String> _selected = {};\n\n  int get _total => movies\n      .where((m) => _selected.contains(m.id))\n      .fold(0, (sum, m) => sum + m.price);",
+        "steps": [
+          {
+            "from": 1,
+            "to": 19,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 5,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 12,
+            "sentence": 2
+          },
+          {
+            "from": 15,
+            "to": 15,
+            "sentence": 3
+          },
+          {
+            "from": 17,
+            "to": 19,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep30/scene-03-0-d25e8339.wav",
+          "startFrame": 0,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep30/scene-03-1-45cfa55f.wav",
+          "startFrame": 282,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep30/scene-03-2-c4bcf574.wav",
+          "startFrame": 511,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep30/scene-03-3-45dd32c0.wav",
+          "startFrame": 757,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep30/scene-03-4-6a5d7f0d.wav",
+          "startFrame": 993,
+          "durationInFrames": 221
+        }
+      ],
+      "durationInFrames": 1232
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "mini_flutter/lib/cinema_screen.dart (nút Đặt vé)",
+        "language": "clike",
+        "code": "              return Card(\n                child: ListTile(\n                  leading: Text(movie.emoji, style: const TextStyle(fontSize: 32)),\n                  title: Text(movie.title),\n                  subtitle: Text(formatVnd(movie.price)),\n                  trailing: FilledButton(\n                    style: isSelected\n                        ? FilledButton.styleFrom(backgroundColor: Colors.green)\n                        : null,\n                    onPressed: () => setState(() {\n                      isSelected\n                          ? _selected.remove(movie.id)\n                          : _selected.add(movie.id);\n                    }),\n                    child: Text(isSelected ? 'Đã đặt ✓' : 'Đặt vé'),\n                  ),\n                ),\n              );",
+        "steps": [
+          {
+            "from": 1,
+            "to": 18,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 9,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 14,
+            "sentence": 2
+          },
+          {
+            "from": 15,
+            "to": 15,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 18,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep30/scene-04-0-d52657c7.wav",
+          "startFrame": 0,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep30/scene-04-1-5c6acad5.wav",
+          "startFrame": 205,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep30/scene-04-2-8e0cca86.wav",
+          "startFrame": 432,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep30/scene-04-3-007a465b.wav",
+          "startFrame": 666,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep30/scene-04-4-6970977a.wav",
+          "startFrame": 838,
+          "durationInFrames": 168
+        }
+      ],
+      "durationInFrames": 1024
+    },
+    {
+      "id": "scene-05",
+      "type": "diagram",
+      "visual": {
+        "title": "Công thức 4 bước — 1 dây chuyền lặp lại",
+        "boxes": [
+          {
+            "id": "step1",
+            "label": "1 Viết phòng",
+            "emoji": "🚪"
+          },
+          {
+            "id": "step2",
+            "label": "2 Mở cửa vào",
+            "emoji": "🔑"
+          },
+          {
+            "id": "step3",
+            "label": "3 Báo lễ tân",
+            "emoji": "🧑‍💼"
+          },
+          {
+            "id": "step4",
+            "label": "4 Rebuild",
+            "emoji": "🔨"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "viết xong",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "có cửa vào",
+            "sentence": 2
+          },
+          {
+            "from": 2,
+            "to": 3,
+            "label": "đã báo",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep30/scene-05-0-dfa4e21f.wav",
+          "startFrame": 0,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep30/scene-05-1-b03fe72d.wav",
+          "startFrame": 205,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep30/scene-05-2-0e6dbef2.wav",
+          "startFrame": 427,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep30/scene-05-3-fc1f914b.wav",
+          "startFrame": 603,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep30/scene-05-4-193eff94.wav",
+          "startFrame": 784,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 992
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "mini_flutter/lib/main_cinema.dart",
+        "language": "clike",
+        "code": "import 'package:flutter/material.dart';\n\nimport 'cinema_screen.dart';\nimport 'mini_shell.dart';\n\n@pragma('vm:entry-point')\nvoid main() =>\n    runApp(const MiniAppShell(title: 'Xem phim ViệtSuper', child: CinemaScreen()));",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep30/scene-06-0-09ac4668.wav",
+          "startFrame": 0,
+          "durationInFrames": 279
+        },
+        {
+          "file": "audio/ep30/scene-06-1-2bbf46b0.wav",
+          "startFrame": 287,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep30/scene-06-2-a99df073.wav",
+          "startFrame": 545,
+          "durationInFrames": 286
+        },
+        {
+          "file": "audio/ep30/scene-06-3-bc9b7b53.wav",
+          "startFrame": 839,
+          "durationInFrames": 185
+        }
+      ],
+      "durationInFrames": 1042
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "mini_flutter/lib/main.dart",
+        "language": "clike",
+        "code": "import 'package:flutter/material.dart';\n\nimport 'cinema_screen.dart';\nimport 'food_screen.dart';\nimport 'wallet_screen.dart';\n\n// Kéo các entrypoint vào bản build debug để app chủ tìm thấy qua libraryURI.\n// ignore_for_file: unused_import\nimport 'main_cinema.dart';\nimport 'main_food.dart';\nimport 'main_wallet.dart';\n\nvoid main() => runApp(const DebugMenuApp());",
+        "steps": [
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 13,
+            "to": 13,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep30/scene-07-0-f23646d2.wav",
+          "startFrame": 0,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep30/scene-07-1-cb26e5fb.wav",
+          "startFrame": 244,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep30/scene-07-2-1400f243.wav",
+          "startFrame": 466,
+          "durationInFrames": 272
+        },
+        {
+          "file": "audio/ep30/scene-07-3-42147cec.wav",
+          "startFrame": 746,
+          "durationInFrames": 233
+        }
+      ],
+      "durationInFrames": 997
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "VietSuper/MiniApp.swift",
+        "language": "swift",
+        "code": "import Foundation\n\nstruct MiniApp: Identifiable {\n  let id: String\n  let name: String\n  let emoji: String\n  /// File Dart chứa hàm main của mini này.\n  let library: String\n}\n\nlet miniApps: [MiniApp] = [\n  MiniApp(id: \"food\", name: \"Đồ ăn\", emoji: \"🍜\",\n          library: \"package:mini_flutter/main_food.dart\"),\n  MiniApp(id: \"wallet\", name: \"Ví\", emoji: \"👛\",\n          library: \"package:mini_flutter/main_wallet.dart\"),\n  MiniApp(id: \"cinema\", name: \"Xem phim\", emoji: \"🎬\",\n          library: \"package:mini_flutter/main_cinema.dart\"),\n]",
+        "steps": [
+          {
+            "from": 1,
+            "to": 18,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 9,
+            "sentence": 1
+          },
+          {
+            "from": 12,
+            "to": 15,
+            "sentence": 2
+          },
+          {
+            "from": 16,
+            "to": 17,
+            "sentence": 3
+          },
+          {
+            "from": 16,
+            "to": 17,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep30/scene-08-0-abb29439.wav",
+          "startFrame": 0,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep30/scene-08-1-6d2f7607.wav",
+          "startFrame": 227,
+          "durationInFrames": 281
+        },
+        {
+          "file": "audio/ep30/scene-08-2-21bbe746.wav",
+          "startFrame": 516,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep30/scene-08-3-f9d858fa.wav",
+          "startFrame": 700,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep30/scene-08-4-6bbd44e0.wav",
+          "startFrame": 968,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 1166
+    },
+    {
+      "id": "scene-09",
+      "type": "terminal",
+      "visual": {
+        "title": "Bước 4: rebuild — không cần pod install",
+        "commands": [
+          {
+            "cmd": "# So với Tập 2: bỏ qua pod install, chỉ rebuild Swift",
+            "output": "— (Podfile không đổi, Flutter framework không đổi)",
+            "sentence": 0
+          },
+          {
+            "cmd": "xcodebuild -workspace VietSuper.xcworkspace -scheme VietSuper -destination 'platform=iOS Simulator,name=iPhone 16 Pro' build",
+            "output": "** BUILD SUCCEEDED **",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep30/scene-09-0-c816e06e.wav",
+          "startFrame": 0,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep30/scene-09-1-68b702dd.wav",
+          "startFrame": 188,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep30/scene-09-2-8cb9d9bf.wav",
+          "startFrame": 410,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep30/scene-09-3-12bd9a08.wav",
+          "startFrame": 613,
+          "durationInFrames": 173
+        }
+      ],
+      "durationInFrames": 804
+    },
+    {
+      "id": "scene-10",
+      "type": "phone",
+      "visual": {
+        "title": "Nghiệm thu: 3 card, 1 vé 🎬",
+        "screens": [
+          {
+            "src": "screens/ep30/host-grid-3-cards.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep30/mini-cinema-embedded.png",
+            "sentence": 1
+          },
+          {
+            "src": "screens/ep30/mini-cinema-ticket.png",
+            "sentence": 3
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🏠",
+            "text": "Host: 3 card lưới — Đồ ăn, Ví, Xem phim",
+            "sentence": 0
+          },
+          {
+            "icon": "🎬",
+            "text": "Xem phim ViệtSuper — 3 phim, cùng data RN",
+            "sentence": 1
+          },
+          {
+            "icon": "🎫",
+            "text": "Đặt vé: Tổng 0đ → 90.000đ khi bấm nút",
+            "sentence": 3
+          },
+          {
+            "icon": "🧩",
+            "text": "Bằng chứng sống: công thức 4 bước hoạt động",
+            "sentence": 4
+          },
+          {
+            "icon": "🚫",
+            "text": "Không đụng MiniAppLauncher, không đụng ContentView",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep30/scene-10-0-2adc38a8.wav",
+          "startFrame": 0,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep30/scene-10-1-1197ad39.wav",
+          "startFrame": 236,
+          "durationInFrames": 257
+        },
+        {
+          "file": "audio/ep30/scene-10-2-9b742df9.wav",
+          "startFrame": 501,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep30/scene-10-3-1245cc81.wav",
+          "startFrame": 687,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep30/scene-10-4-c3de1f43.wav",
+          "startFrame": 868,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep30/scene-10-5-5c988d87.wav",
+          "startFrame": 1114,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 1322
+    },
+    {
+      "id": "scene-11",
+      "type": "outro",
+      "visual": {
+        "title": "Tập 5/6 xong — hẹn gặp Tập 6! 👋",
+        "summary": [
+          {
+            "text": "Công thức 4 bước: viết phòng → mở cửa → báo lễ tân → rebuild",
+            "sentence": 0
+          },
+          {
+            "text": "Không sửa MiniAppLauncher, không sửa ContentView",
+            "sentence": 1
+          },
+          {
+            "text": "Tag flutter-miniapp-tap-5 = đúng code hôm nay",
+            "sentence": 4
+          }
+        ],
+        "next": "Tập 6/6: chạy lẻ, bẫy FLUTTER_TARGET, so găng với React Native 🥊"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep30/scene-11-0-ca959c31.wav",
+          "startFrame": 0,
+          "durationInFrames": 303
+        },
+        {
+          "file": "audio/ep30/scene-11-1-4d5ef0fb.wav",
+          "startFrame": 311,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep30/scene-11-2-9206b4ac.wav",
+          "startFrame": 547,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep30/scene-11-3-d4c7f9e3.wav",
+          "startFrame": 759,
+          "durationInFrames": 269
+        },
+        {
+          "file": "audio/ep30/scene-11-4-7d565f06.wav",
+          "startFrame": 1036,
+          "durationInFrames": 310
+        },
+        {
+          "file": "audio/ep30/scene-11-5-b93665b9.wav",
+          "startFrame": 1354,
+          "durationInFrames": 221
+        }
+      ],
+      "durationInFrames": 1593
+    }
+  ]
+}
