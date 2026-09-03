@@ -1109,6 +1109,86 @@ Rồi so găng trực tiếp 2 công thức: series React Native cũ (1 dự án
 
 **Tags:** `flutter vs react native, add-to-app vs workspace, flutter_target xcconfig, flutter generated xcconfig, flutter debugging thực chiến, flutter kiến trúc tổng, react native mini app, flutter add-to-app hoàn chỉnh, so sánh flutter react native, flutter tiếng việt, học flutter, mini app series, super app kiến trúc, flutter dart swift`
 
+---
+
+### Flutter Mini-App Bonus Android #1 — Cùng căn hộ, tòa nhà Android — host Kotlin Compose (7:50)
+
+**Tiêu đề:** Kotlin add-to-app: host Jetpack Compose cắm lại mini Flutter | Bonus 1/2
+
+**Mô tả:**
+```
+Lời hứa ở outro Tập 6 đã thành sự thật: khán giả vote bản Kotlin, bản Kotlin bắt đầu ngay đây. Bonus Android 1/2 dựng NGUYÊN một tòa nhà Android mới bằng Jetpack Compose — và thông điệp vàng ngay từ 30 giây đầu: module Flutter `mini_flutter` giữ nguyên, không sửa MỘT DÒNG Dart nào, chỉ xây thêm một tòa nhà.
+
+Compose trong 60 giây cho người biết Flutter (@Composable ≈ Widget, cùng triết lý declarative — dễ hơn SwiftUI vì không phải học ngôn ngữ tư duy mới). Code (tag `flutter-miniapp-android-1`): `settings.gradle` cắm dãy Flutter bằng include_flutter.groovy, `gradle.properties` với một GOTCHA CÓ THẬT — Java 25 trên máy quá mới khiến Gradle chết, phải trỏ `org.gradle.java.home` về JDK 21. Rồi `MiniApp.kt` (cùng id/name/emoji/library với bản Swift), `MainActivity.kt` (LazyVerticalGrid ≈ LazyVGrid), `MiniAppLauncher.kt` (DartEntrypoint trỏ đúng `package:mini_flutter/main_food.dart` — địa chỉ căn hộ không đổi, chỉ đổi tòa nhà), và `MiniActivity.kt` (FlutterActivity với cached engine, Back Android tự nhiên nhờ là một Activity riêng).
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu Bonus Android 1/2 & Compose trong 60 giây
+1:04 settings.gradle & gradle.properties: gotcha JDK 21
+2:17 build.gradle & MiniApp.kt: cùng module, khác tòa nhà
+3:22 MainActivity.kt: LazyVerticalGrid ≈ LazyVGrid
+4:34 MiniAppLauncher.kt: địa chỉ Dart không đổi
+5:22 MiniActivity.kt: Activity riêng, Back tự nhiên
+6:08 Build thật & nghiệm thu trên máy
+7:06 Tổng kết & hẹn tập cuối
+
+📦 Source code (demo-flutter-miniapp/vietsuper_android/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout flutter-miniapp-android-1 để xem đúng code tập này.
+🔗 Playlist "Mini-App với Flutter 🇻🇳": https://www.youtube.com/playlist?list=PLL5FgtEBrD6g
+⏮️ Tập trước (Tập 6): https://youtu.be/lQAknMo0CB4
+⏭️ Bonus 2/2: [LINK-EP33]
+
+#kotlin #flutter #addtoapp #jetpackcompose #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🤖 Lời hứa outro Tập 6 giữ trọn: bản Kotlin add-to-app đây rồi! Cùng module Flutter, tòa nhà Android cắm bằng Jetpack Compose — không sửa 1 dòng Dart nào. Bonus 2/2 tuần sau: mở hộp lễ tân Kotlin + một bug thật do reviewer bắt được!
+```
+
+**Thumbnail:** badge "FLUTTER MINI-APP BONUS 1/2" · dòng lớn "KOTLIN" / "CẮM LẠI" · phụ đề "Jetpack Compose · cùng module, khác tòa nhà" · badge emoji 🤖 · ảnh nền `screens/ep32/android-mini-food.png`.
+
+**Tags:** `kotlin add-to-app, jetpack compose tutorial, jetpack compose cho người mới, flutterenginegroup android, include_flutter groovy, flutter android bridge, lazyverticalgrid compose, gradle java home jdk21, flutter dart entrypoint, android add to app flutter, methodchannel android, mini app kotlin, super app android, flutter tiếng việt, học kotlin, compose vs swiftui, flutter dart android, kotlin tiếng việt`
+
+---
+
+### Flutter Mini-App Bonus Android #2 (KẾT) — Lễ tân Kotlin, bug double-tap và lời chào 8 video (7:04)
+
+**Tiêu đề:** Kotlin vs Swift add-to-app: bug double-tap, lễ tân & kết 8 video | Bonus 2/2
+
+**Mô tả:**
+```
+Bonus 2/2 khép lại chùm 8 video: mở hộp lễ tân Kotlin (attachHostChannel — setMethodCallHandler switch getUserInfo/close, đối chiếu 1 nhịp với bản Swift: cùng channel, cùng dữ liệu Lee/1.250.000đ), rồi thêm 2 phần tử vào MiniApp.kt — công thức quen: thêm mini = thêm phần tử.
+
+Hai bài học thật không giấu diếm: (1) chip Ví trên Android vẫn ghi "Số dư lấy từ app chủ (Swift)" vì chuỗi hard-code phía Dart — bài học đắt giá: đừng nêu tên nền tảng trong chuỗi UI của mini, mini không biết nó đang ở tòa nhà nào; (2) bug double-tap CÓ THẬT do reviewer bắt được — tap card 2 lần nhanh tạo 2 engine cùng id, engine đầu rò rỉ vĩnh viễn (bản iOS an toàn tự nhiên nhờ fullScreenCover(item:)), fix bằng đúng 2 dòng guard `FlutterEngineCache.contains`. Kết bằng so găng đối xứng Swift vs Kotlin: SwiftUI↔Compose, podhelper↔include_flutter, fullScreenCover↔Activity, cùng module cùng channel — viết mini MỘT lần, cắm HAI tòa nhà.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu Bonus Android 2/2 — tập cuối
+0:38 Mở hộp lễ tân Kotlin: attachHostChannel
+2:12 MiniApp.kt thêm 2 phần tử & nghiệm thu 3 card
+3:09 Thú nhận thật: chip vẫn ghi (Swift)
+3:50 Bug thật double-tap & fix guard 2 dòng
+5:09 So găng cuối: Swift vs Kotlin
+6:02 Tổng kết 8 video & lời cảm ơn
+
+📦 Source code (demo-flutter-miniapp/vietsuper_android/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 Repo có đủ 2 bộ tag: `flutter-miniapp-tap-1..6` (Swift) + `flutter-miniapp-android-1..2` (Kotlin) — git checkout flutter-miniapp-android-2 để xem đúng code tập này.
+🔗 Playlist "Mini-App với Flutter 🇻🇳": https://www.youtube.com/playlist?list=PLL5FgtEBrD6g
+⏮️ Bonus 1/2: [LINK-EP32]
+▶️ Xem từ đầu series: https://youtu.be/5T2J4RGOXxQ
+💬 Vote series tiếp theo: lên store thật, Flutter Web, hay chủ đề khác?
+
+#kotlin #flutter #addtoapp #androiddev #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🏁 8 video khép lại: 1 module Flutter, 2 tòa nhà (Swift + Kotlin), viết mini MỘT lần cắm HAI nơi. Bug double-tap thật ở tập này do chính reviewer bắt được — bạn từng dính bug engine trùng id chưa? Comment vote: series tiếp theo nên lên store thật, làm Flutter Web, hay chủ đề khác?
+```
+
+**Thumbnail:** badge "FLUTTER MINI-APP BONUS 2/2" · dòng lớn "TẬP CUỐI" / "8 VIDEO" · phụ đề "Bug double-tap · kết chùm 8 video" · badge emoji 🏁 · ảnh nền `screens/ep33/android-host-grid-3-cards.png`.
+
+**Tags:** `kotlin methodchannel, flutter double tap bug, flutterenginecache contains, flutter android bridge, swiftui vs jetpack compose, add-to-app flutter kotlin, flutter engine leak fix, flutter vs kotlin add-to-app, flutter android methodchannel, flutter tiếng việt, học kotlin, mini app android, super app flutter, flutter dart swift kotlin, flutter debugging thực chiến, kiến trúc mini app, android jetpack compose, kotlin tiếng việt`
+
 ## Thumbnail
 
 Đã render sẵn tại `video/out/thumbs/ep0X-thumb.png` (1280×720, <2MB, chuẩn YouTube). Muốn sửa chữ/bố cục: sửa mảng `thumbnails` trong `video/src/Root.tsx` hoặc component `video/src/Thumbnail.tsx`, rồi chạy `npx remotion still Thumb0X out/thumbs/ep0X-thumb.png`.
