@@ -72,6 +72,43 @@ gọi channel để đóng và quay về lưới.
 > `Generated.xcconfig`), hoặc đơn giản là build lại từ `xcodebuild` sau khi đã chạy lẻ `-t lib/main.dart`
 > một lần.
 
+## Host Android (vietsuper_android)
+
+Song song với host SwiftUI, `vietsuper_android` là host **Kotlin + Jetpack Compose** nhúng cùng
+`mini_flutter` qua `FlutterEngineGroup` — cùng 3 mini, cùng channel `vietsuper/host`, chỉ khác ngôn
+ngữ/UI toolkit phía chủ.
+
+**Yêu cầu riêng:** JDK **21** — dùng đúng bản JBR đi kèm Android Studio (không cần cài JDK ngoài),
+khai trong `vietsuper_android/gradle.properties`:
+
+```properties
+org.gradle.java.home=/Applications/Android Studio.app/Contents/jbr/Contents/Home
+```
+
+```bash
+# 1. Cài dependency Flutter cho module (giống bước 1 của iOS ở trên, dùng chung)
+cd demo-flutter-miniapp/mini_flutter
+fvm flutter pub get
+
+# 2. Build APK debug
+cd ../vietsuper_android
+./gradlew :app:assembleDebug
+
+# 3. Cài + chạy trên emulator/thiết bị đang kết nối (adb devices thấy máy)
+adb install -r app/build/outputs/apk/debug/app-debug.apk
+adb shell monkey -p com.vietsuper.host -c android.intent.category.LAUNCHER 1
+```
+
+App hiện cùng lưới 3 card 🍜 Ví 👛 Xem phim 🎬 như bản iOS; tap card mở mini full-screen, nút ✕ hoặc
+phím Back của Android đều gọi channel `close` để đóng và quay về lưới.
+
+> **`local.properties`:** file này **không commit** (đã có trong `.gitignore`) vì trỏ đường dẫn cục bộ
+> trên máy — tự tạo `vietsuper_android/local.properties` với 2 dòng:
+> ```properties
+> sdk.dir=<đường dẫn Android SDK, ví dụ ~/Library/Android/sdk>
+> flutter.sdk=<đường dẫn Flutter SDK mà FVM đang pin, ví dụ ~/fvm/versions/3.38.10>
+> ```
+
 ## Chạy lẻ từng mini (không cần host)
 
 Mỗi mini có thể chạy độc lập ngay trong `mini_flutter` bằng cờ `-t`, hữu ích khi phát triển UI mà

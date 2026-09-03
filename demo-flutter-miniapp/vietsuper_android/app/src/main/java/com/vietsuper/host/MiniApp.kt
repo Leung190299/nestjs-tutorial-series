@@ -10,4 +10,6 @@ data class MiniApp(
 
 val miniApps = listOf(
     MiniApp("food", "Đồ ăn", "🍜", "package:mini_flutter/main_food.dart"),
+    MiniApp("wallet", "Ví", "👛", "package:mini_flutter/main_wallet.dart"),
+    MiniApp("cinema", "Xem phim", "🎬", "package:mini_flutter/main_cinema.dart"),
 )
