@@ -1,0 +1,386 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		31F8D6E4D035DF167B84C04E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5127D2F5B5ABA05773B6F033 /* ContentView.swift */; };
+		3C6BFA7292B3C6F929E95013 /* MiniAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6404C806302EF9BE691A1F15 /* MiniAppView.swift */; };
+		7132E761F7DCB79481219F97 /* VietSuperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2BD2C7BA4E6E3594F129F3 /* VietSuperApp.swift */; };
+		7AC2C1CA9D50BDBEE8B6C6E4 /* MiniAppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35CB4244D399E23D13A59B3 /* MiniAppLauncher.swift */; };
+		7F8DF1FEFE6D483C764EC1D7 /* MiniApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824107E553EEFAE27DC60880 /* MiniApp.swift */; };
+		CE2A7885775C0F4ADEA02AF0 /* libPods-VietSuper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 864C04F31F51DDF79231BF41 /* libPods-VietSuper.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0F2333A658A71CCE74930B2F /* Pods-VietSuper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VietSuper.release.xcconfig"; path = "Target Support Files/Pods-VietSuper/Pods-VietSuper.release.xcconfig"; sourceTree = "<group>"; };
+		5127D2F5B5ABA05773B6F033 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6404C806302EF9BE691A1F15 /* MiniAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniAppView.swift; sourceTree = "<group>"; };
+		7B8208431794135465160ED0 /* VietSuper.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = VietSuper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		824107E553EEFAE27DC60880 /* MiniApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniApp.swift; sourceTree = "<group>"; };
+		854544054E7D127813DECA8B /* Pods-VietSuper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VietSuper.debug.xcconfig"; path = "Target Support Files/Pods-VietSuper/Pods-VietSuper.debug.xcconfig"; sourceTree = "<group>"; };
+		864C04F31F51DDF79231BF41 /* libPods-VietSuper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VietSuper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F35CB4244D399E23D13A59B3 /* MiniAppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniAppLauncher.swift; sourceTree = "<group>"; };
+		FC2BD2C7BA4E6E3594F129F3 /* VietSuperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VietSuperApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A0FDD306143D485DD28F544 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE2A7885775C0F4ADEA02AF0 /* libPods-VietSuper.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		12B1EB334029A29DD506B032 /* VietSuper */ = {
+			isa = PBXGroup;
+			children = (
+				5127D2F5B5ABA05773B6F033 /* ContentView.swift */,
+				824107E553EEFAE27DC60880 /* MiniApp.swift */,
+				F35CB4244D399E23D13A59B3 /* MiniAppLauncher.swift */,
+				6404C806302EF9BE691A1F15 /* MiniAppView.swift */,
+				FC2BD2C7BA4E6E3594F129F3 /* VietSuperApp.swift */,
+			);
+			path = VietSuper;
+			sourceTree = "<group>";
+		};
+		75D5D9581CAFBF4E83A9AB31 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7B8208431794135465160ED0 /* VietSuper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		888F28B189578D77D22CB17C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				854544054E7D127813DECA8B /* Pods-VietSuper.debug.xcconfig */,
+				0F2333A658A71CCE74930B2F /* Pods-VietSuper.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D1DA595FC4D1ED4056524827 = {
+			isa = PBXGroup;
+			children = (
+				12B1EB334029A29DD506B032 /* VietSuper */,
+				75D5D9581CAFBF4E83A9AB31 /* Products */,
+				888F28B189578D77D22CB17C /* Pods */,
+				F8587A087DBD2E53BCD57D0B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F8587A087DBD2E53BCD57D0B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				864C04F31F51DDF79231BF41 /* libPods-VietSuper.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		465785489F5B88041B6EFE20 /* VietSuper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF25F0D4AB8E6DAD3BC748A1 /* Build configuration list for PBXNativeTarget "VietSuper" */;
+			buildPhases = (
+				33802BA2074BCA85D8ECCFE6 /* [CP] Check Pods Manifest.lock */,
+				AB7468E6DB1046BBD9F2E69E /* [CP-User] Run Flutter Build mini_flutter Script */,
+				DD3E71D09BD479FD32731F70 /* Sources */,
+				3A0FDD306143D485DD28F544 /* Frameworks */,
+				01F2B90F51E801F0F0D92200 /* [CP-User] Embed Flutter Build mini_flutter Script */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VietSuper;
+			productName = VietSuper;
+			productReference = 7B8208431794135465160ED0 /* VietSuper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		20E2CC0F9EC84F314EA5CE87 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = C7139C95BEA005EF4D804821 /* Build configuration list for PBXProject "VietSuper" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = D1DA595FC4D1ED4056524827;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 75D5D9581CAFBF4E83A9AB31 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				465785489F5B88041B6EFE20 /* VietSuper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		01F2B90F51E801F0F0D92200 /* [CP-User] Embed Flutter Build mini_flutter Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] Embed Flutter Build mini_flutter Script";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset -u\nsource \"${SRCROOT}/../mini_flutter/.ios/Flutter/flutter_export_environment.sh\"\nexport VERBOSE_SCRIPT_LOGGING=1 && \"$FLUTTER_ROOT\"/packages/flutter_tools/bin/xcode_backend.sh embed_and_thin";
+		};
+		33802BA2074BCA85D8ECCFE6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VietSuper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB7468E6DB1046BBD9F2E69E /* [CP-User] Run Flutter Build mini_flutter Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] Run Flutter Build mini_flutter Script";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset -u\nsource \"${SRCROOT}/../mini_flutter/.ios/Flutter/flutter_export_environment.sh\"\nexport VERBOSE_SCRIPT_LOGGING=1 && \"$FLUTTER_ROOT\"/packages/flutter_tools/bin/xcode_backend.sh build";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DD3E71D09BD479FD32731F70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31F8D6E4D035DF167B84C04E /* ContentView.swift in Sources */,
+				7F8DF1FEFE6D483C764EC1D7 /* MiniApp.swift in Sources */,
+				7AC2C1CA9D50BDBEE8B6C6E4 /* MiniAppLauncher.swift in Sources */,
+				3C6BFA7292B3C6F929E95013 /* MiniAppView.swift in Sources */,
+				7132E761F7DCB79481219F97 /* VietSuperApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		29DFEEF71D25EA367BE75D10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		9380E372520B188756154576 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CBCB738E5DFCA4A32A4377C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F2333A658A71CCE74930B2F /* Pods-VietSuper.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "ViệtSuper";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vietsuper.host;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		D385D75F6AFDA6D919EDF442 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 854544054E7D127813DECA8B /* Pods-VietSuper.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "ViệtSuper";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.vietsuper.host;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C7139C95BEA005EF4D804821 /* Build configuration list for PBXProject "VietSuper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9380E372520B188756154576 /* Debug */,
+				29DFEEF71D25EA367BE75D10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CF25F0D4AB8E6DAD3BC748A1 /* Build configuration list for PBXNativeTarget "VietSuper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D385D75F6AFDA6D919EDF442 /* Debug */,
+				CBCB738E5DFCA4A32A4377C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 20E2CC0F9EC84F314EA5CE87 /* Project object */;
+}
