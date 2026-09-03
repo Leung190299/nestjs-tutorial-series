@@ -93,12 +93,12 @@
           "durationInFrames": 231
         },
         {
-          "file": "audio/ep27/scene-02-4-23f0ad74.wav",
+          "file": "audio/ep27/scene-02-4-90dbee44.wav",
           "startFrame": 793,
-          "durationInFrames": 216
+          "durationInFrames": 204
         }
       ],
-      "durationInFrames": 1027
+      "durationInFrames": 1015
     },
     {
       "id": "scene-03",
@@ -491,22 +491,22 @@
           "durationInFrames": 159
         },
         {
-          "file": "audio/ep27/scene-09-1-43f99649.wav",
+          "file": "audio/ep27/scene-09-1-fa38fa71.wav",
           "startFrame": 167,
-          "durationInFrames": 264
+          "durationInFrames": 262
         },
         {
           "file": "audio/ep27/scene-09-2-bd905762.wav",
-          "startFrame": 439,
+          "startFrame": 437,
           "durationInFrames": 212
         },
         {
           "file": "audio/ep27/scene-09-3-c076a4c1.wav",
-          "startFrame": 659,
+          "startFrame": 657,
           "durationInFrames": 300
         }
       ],
-      "durationInFrames": 977
+      "durationInFrames": 975
     },
     {
       "id": "scene-10",
