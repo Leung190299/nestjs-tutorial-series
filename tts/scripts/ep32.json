@@ -3,7 +3,7 @@
     "id": "scene-01",
     "type": "title",
     "narration": [
-      "Cuối Tập 6, có một lời hứa: nếu nhiều bạn comment, sẽ làm tiếp bản Kotlin bản Android. Hôm nay, lời hứa đó thành sự thật.",
+      "Cuối Tập 6, có một lời hứa: nếu nhiều bạn comment, sẽ làm tiếp bản Kotlin — bản Android. Hôm nay, lời hứa đó thành sự thật.",
       "Cảm ơn tất cả các bạn đã vote bản Kotlin ở phần bình luận Tập 6 — đủ đông để bắt tay làm ngay bonus này.",
       "Thông điệp vàng ngay từ đầu: module mini_flutter giữ NGUYÊN, không sửa một dòng Dart nào — hôm nay chỉ xây thêm một tòa nhà mới.",
       "Đây là Bonus Android 1 trên 2, không phải Tập 7 — series 6 tập Flutter đã khép lại trọn vẹn ở Tập 6 rồi.",
@@ -178,7 +178,7 @@
         },
         {
           "from": 3,
-          "to": 5,
+          "to": 6,
           "sentence": 3
         }
       ]
@@ -295,7 +295,7 @@
         },
         {
           "from": 9,
-          "to": 15,
+          "to": 20,
           "sentence": 4
         }
       ]
@@ -344,7 +344,7 @@
         },
         {
           "from": 12,
-          "to": 13,
+          "to": 14,
           "sentence": 5
         }
       ]

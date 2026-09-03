@@ -11,32 +11,32 @@
       },
       "sentences": [
         {
-          "file": "audio/ep32/scene-01-0-bc510338.wav",
+          "file": "audio/ep32/scene-01-0-00684b9d.wav",
           "startFrame": 0,
-          "durationInFrames": 188
+          "durationInFrames": 176
         },
         {
           "file": "audio/ep32/scene-01-1-a7ae722d.wav",
-          "startFrame": 196,
+          "startFrame": 184,
           "durationInFrames": 180
         },
         {
           "file": "audio/ep32/scene-01-2-92436b2a.wav",
-          "startFrame": 384,
+          "startFrame": 372,
           "durationInFrames": 180
         },
         {
           "file": "audio/ep32/scene-01-3-de854c84.wav",
-          "startFrame": 572,
+          "startFrame": 560,
           "durationInFrames": 173
         },
         {
           "file": "audio/ep32/scene-01-4-11cdba2d.wav",
-          "startFrame": 753,
+          "startFrame": 741,
           "durationInFrames": 168
         }
       ],
-      "durationInFrames": 939
+      "durationInFrames": 927
     },
     {
       "id": "scene-02",
@@ -258,7 +258,7 @@
           },
           {
             "from": 3,
-            "to": 5,
+            "to": 6,
             "sentence": 3
           }
         ]
@@ -425,7 +425,7 @@
           },
           {
             "from": 9,
-            "to": 15,
+            "to": 20,
             "sentence": 4
           }
         ]
@@ -494,7 +494,7 @@
           },
           {
             "from": 12,
-            "to": 13,
+            "to": 14,
             "sentence": 5
           }
         ]
