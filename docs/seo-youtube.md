@@ -872,6 +872,8 @@ Cuối tập: khoảnh khắc cả series chờ đợi — trang chủ ViệtSup
 
 Từ khóa chủ lực toàn series: `flutter add-to-app`, `flutter tiếng việt`, `học flutter`, `mini app flutter`, `super app flutter`, `flutterenginegroup`, `methodchannel`, `swiftui tiếng việt`.
 
+<!-- Playlist "Mini-App với Flutter 🇻🇳": https://www.youtube.com/playlist?list=PLL5FgtEBrD6g — cả 6 tập đã đăng công khai 2026-09-03 -->
+
 ### Flutter Mini-App #1 — Add-to-app: mini-app đúng nghĩa đen (7:11)
 
 **Tiêu đề:** Flutter add-to-app: tạo module & Engine riêng cho mini-app đầu tiên | Tập 1/6
@@ -897,7 +899,7 @@ Tập 1: tạo module Flutter bằng flutter create --template=module (không ph
 📦 Source code (demo-flutter-miniapp/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout flutter-miniapp-tap-1 để xem đúng code tập này.
 ▶️ Series RN cũ "Mini-App từ A đến Z": https://www.youtube.com/playlist?list=PLY-i2_1YbKi4
-⏭️ Tập sau: [LINK-EP27]
+⏭️ Tập sau: https://youtu.be/oHk0KPUbOpw
 
 #flutter #addtoapp #miniapp #superapp #laptrinh
 ```
@@ -935,8 +937,8 @@ Có cả một gotcha CÓ THẬT từng làm mini trắng trơn ngay lần build
 
 📦 Source code (demo-flutter-miniapp/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout flutter-miniapp-tap-2 để xem đúng code tập này (kể cả gotcha Dart_LookupLibrary).
-⏮️ Tập trước: [LINK-EP26]
-⏭️ Tập sau: [LINK-EP28]
+⏮️ Tập trước: https://youtu.be/5T2J4RGOXxQ
+⏭️ Tập sau: https://youtu.be/XaoXpN8D63s
 
 #flutter #swiftui #flutterengine #addtoapp #laptrinh
 ```
@@ -973,8 +975,8 @@ Nói ngay để không hiểu lầm: hai mini KHÔNG chạy song song — chúng
 
 📦 Source code (demo-flutter-miniapp/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout flutter-miniapp-tap-3 để xem đúng code tập này.
-⏮️ Tập trước: [LINK-EP27]
-⏭️ Tập sau: [LINK-EP29]
+⏮️ Tập trước: https://youtu.be/oHk0KPUbOpw
+⏭️ Tập sau: https://youtu.be/oKrTFNf8cTU
 
 #flutter #flutterenginegroup #addtoapp #superapp #laptrinh
 ```
@@ -1012,8 +1014,8 @@ Tập 4 trả lời thẳng câu hỏi Tập 3 treo lại: "Lee" và "1.250.000�
 
 📦 Source code (demo-flutter-miniapp/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout flutter-miniapp-tap-4 để xem đúng code tập này.
-⏮️ Tập trước: [LINK-EP28]
-⏭️ Tập sau: [LINK-EP30]
+⏮️ Tập trước: https://youtu.be/XaoXpN8D63s
+⏭️ Tập sau: https://youtu.be/3xi-JxeG9oM
 
 #flutter #methodchannel #addtoapp #swift #laptrinh
 ```
@@ -1051,8 +1053,8 @@ Nhấn mạnh: KHÔNG sửa MiniAppLauncher, KHÔNG sửa ContentView — kiến
 
 📦 Source code (demo-flutter-miniapp/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout flutter-miniapp-tap-5 để xem đúng code tập này.
-⏮️ Tập trước: [LINK-EP29]
-⏭️ Tập sau: [LINK-EP31]
+⏮️ Tập trước: https://youtu.be/oKrTFNf8cTU
+⏭️ Tập sau: https://youtu.be/lQAknMo0CB4
 
 #flutter #miniapp #addtoapp #flutterdev #laptrinh
 ```
@@ -1091,8 +1093,8 @@ Rồi so găng trực tiếp 2 công thức: series React Native cũ (1 dự án
 📦 Source code (demo-flutter-miniapp/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 Repo có tag theo từng tập (flutter-miniapp-tap-1 → tap-6) — checkout tag để xem đúng code của tập đang xem.
 ▶️ Series RN cũ "Mini-App từ A đến Z": https://www.youtube.com/playlist?list=PLY-i2_1YbKi4
-⏮️ Tập trước: [LINK-EP30]
-▶️ Xem từ đầu series Flutter: [LINK-EP26]
+⏮️ Tập trước: https://youtu.be/3xi-JxeG9oM
+▶️ Xem từ đầu series Flutter: https://youtu.be/5T2J4RGOXxQ
 💬 Vote series tiếp theo: bản Kotlin add-to-app hay chủ đề Flutter khác?
 
 #flutter #reactnative #addtoapp #superapp #laptrinh
