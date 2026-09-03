@@ -69,7 +69,7 @@
       "_loadUser trong wallet_screen.dart — toàn bộ 18 dòng — chạy ngay khi mini Ví mở, gọi xuống lễ tân hỏi thông tin chủ tài khoản.",
       "Dòng 3: hostChannel.invokeMapMethod ép kiểu String, Object? gọi 'getUserInfo' — Dart CHỦ ĐỘNG hỏi, không hề biết trước Swift sẽ trả lời gì.",
       "Dòng 6–8: kết quả ép kiểu AN TOÀN từng field bằng 'as String?' và 'as num?' rồi '??' giá trị mặc định — vì Map từ Swift không được Dart tự kiểm tra kiểu.",
-      "Dòng 4 và dòng 11 đều guard 'if (!mounted) return' trước khi setState — nếu mini đã đóng (bấm X quá nhanh) mà vẫn setState sẽ crash, guard chặn đúng ca đó.",
+      "Dòng 4 guard 'if (!mounted) return' trước khi setState — nếu mini đã đóng (bấm X quá nhanh) mà vẫn setState sẽ crash; lát nữa bạn sẽ thấy nhánh catch cũng guard y hệt.",
       "Dòng 10–17: catch on MissingPluginException — khi KHÔNG CÓ ai nghe đầu dây bên kia, Dart tự lùi về 'Khách chạy lẻ' 500.000đ, KHÔNG hề crash."
     ],
     "visual": {
@@ -240,7 +240,7 @@
     "type": "phone",
     "narration": [
       "Ảnh 1: mini Ví mở TỪ app chủ ViệtSuper — tiêu đề vẫn 'Ví ViệtSuper', card đỏ hiện 'Lee' và '1.250.000đ', chip dưới ghi 'Số dư lấy từ app chủ (Swift)'.",
-      "Ảnh 2: CÙNG mini Ví, nhưng chạy LẺ bằng fvm flutter run -t lib/main_wallet.dart — không còn thanh '◀ ViệtSuper' phía trên, vì không có app chủ bọc nó.",
+      "Ảnh 2: CÙNG mini Ví, nhưng chạy LẺ bằng fvm flutter run -t lib/main_wallet.dart — không có app chủ nào bọc ngoài, mini tự đứng như một app trọn vẹn.",
       "Card đỏ giờ hiện 'Khách chạy lẻ' và '500.000đ' — đúng hai giá trị hard-code trong khối catch MissingPluginException vừa đọc.",
       "Chip cũng đổi: '🏕️ Dữ liệu mẫu — đang chạy lẻ' — cùng biến _fromHost, cùng một Chip widget, chỉ giá trị boolean thay đổi theo môi trường chạy.",
       "Đây là bằng chứng sống: MỘT bộ code Dart, chạy trong HAI bối cảnh khác nhau, cho ra HAI kết quả khác nhau — không cần if-else phân biệt platform nào cả."
@@ -265,7 +265,7 @@
         },
         {
           "icon": "🏕️",
-          "text": "Chạy lẻ: không thanh '◀ ViệtSuper' phía trên",
+          "text": "Chạy lẻ: mini tự đứng như một app trọn vẹn",
           "sentence": 1
         },
         {

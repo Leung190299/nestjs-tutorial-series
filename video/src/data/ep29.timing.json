@@ -162,17 +162,17 @@
           "durationInFrames": 224
         },
         {
-          "file": "audio/ep29/scene-03-3-483260be.wav",
+          "file": "audio/ep29/scene-03-3-594fae7f.wav",
           "startFrame": 709,
-          "durationInFrames": 262
+          "durationInFrames": 293
         },
         {
           "file": "audio/ep29/scene-03-4-581eab7d.wav",
-          "startFrame": 979,
+          "startFrame": 1010,
           "durationInFrames": 252
         }
       ],
-      "durationInFrames": 1249
+      "durationInFrames": 1280
     },
     {
       "id": "scene-04",
@@ -394,7 +394,7 @@
           },
           {
             "icon": "🏕️",
-            "text": "Chạy lẻ: không thanh '◀ ViệtSuper' phía trên",
+            "text": "Chạy lẻ: mini tự đứng như một app trọn vẹn",
             "sentence": 1
           },
           {
@@ -421,27 +421,27 @@
           "durationInFrames": 267
         },
         {
-          "file": "audio/ep29/scene-07-1-dcd427f3.wav",
+          "file": "audio/ep29/scene-07-1-59ffccb2.wav",
           "startFrame": 275,
-          "durationInFrames": 260
+          "durationInFrames": 250
         },
         {
           "file": "audio/ep29/scene-07-2-e59cb7fd.wav",
-          "startFrame": 543,
+          "startFrame": 533,
           "durationInFrames": 204
         },
         {
           "file": "audio/ep29/scene-07-3-56ee4bf5.wav",
-          "startFrame": 755,
+          "startFrame": 745,
           "durationInFrames": 188
         },
         {
           "file": "audio/ep29/scene-07-4-e8916760.wav",
-          "startFrame": 951,
+          "startFrame": 941,
           "durationInFrames": 219
         }
       ],
-      "durationInFrames": 1188
+      "durationInFrames": 1178
     },
     {
       "id": "scene-08",
