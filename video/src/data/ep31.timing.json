@@ -1,0 +1,754 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Chạy lẻ, bẫy thực chiến, so găng React Native",
+        "subtitle": "Mini-App với Flutter · Tập 6/6 · Tập cuối",
+        "badge": "Series Mini-App với Flutter · Tập 6"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep31/scene-01-0-34ff1760.wav",
+          "startFrame": 0,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep31/scene-01-1-428f07ef.wav",
+          "startFrame": 198,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep31/scene-01-2-4ee32edb.wav",
+          "startFrame": 367,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep31/scene-01-3-1e531c97.wav",
+          "startFrame": 620,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep31/scene-01-4-b7cbfcb2.wav",
+          "startFrame": 744,
+          "durationInFrames": 161
+        }
+      ],
+      "durationInFrames": 923
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Tập cuối: 3 việc — chạy lẻ, bẫy, so găng",
+        "bullets": [
+          {
+            "icon": "🏢",
+            "text": "4 mảnh cũ: tòa nhà · căn hộ · đồng hồ · lễ tân",
+            "sentence": 0
+          },
+          {
+            "icon": "💧",
+            "text": "EngineGroup: 3 engine, gần như miễn phí RAM",
+            "sentence": 1
+          },
+          {
+            "icon": "📞",
+            "text": "MethodChannel: Ví đã biết hỏi–đáp thật",
+            "sentence": 2
+          },
+          {
+            "icon": "🧩",
+            "text": "Công thức 4 bước: viết phòng → rebuild",
+            "sentence": 3
+          },
+          {
+            "icon": "1️⃣",
+            "text": "Chạy lẻ từng mini, không cần app chủ",
+            "sentence": 4
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Bẫy thực chiến: build lại app chủ trắng trơn",
+            "sentence": 5
+          },
+          {
+            "icon": "3️⃣",
+            "text": "So găng: Flutter add-to-app vs React Native",
+            "sentence": 6
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep31/scene-02-0-c0261091.wav",
+          "startFrame": 0,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep31/scene-02-1-89a7de88.wav",
+          "startFrame": 239,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep31/scene-02-2-754754ed.wav",
+          "startFrame": 471,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep31/scene-02-3-8afaa242.wav",
+          "startFrame": 719,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep31/scene-02-4-1a49f9b6.wav",
+          "startFrame": 910,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep31/scene-02-5-e69f4336.wav",
+          "startFrame": 1065,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep31/scene-02-6-094165ae.wav",
+          "startFrame": 1265,
+          "durationInFrames": 216
+        }
+      ],
+      "durationInFrames": 1499
+    },
+    {
+      "id": "scene-03",
+      "type": "terminal",
+      "visual": {
+        "title": "Chạy lẻ từng mini bằng cờ -t",
+        "commands": [
+          {
+            "cmd": "fvm flutter run -t lib/main_food.dart",
+            "output": "Launching lib/main_food.dart on iPhone 17 Pro...\n\nFlutter run key commands.",
+            "sentence": 1
+          },
+          {
+            "cmd": "fvm flutter run -t lib/main_wallet.dart",
+            "output": "Launching lib/main_wallet.dart on iPhone 17 Pro...\n\nFlutter run key commands.",
+            "sentence": 2
+          },
+          {
+            "cmd": "fvm flutter run -t lib/main_cinema.dart",
+            "output": "Launching lib/main_cinema.dart on iPhone 17 Pro...\n\nFlutter run key commands.",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep31/scene-03-0-e5d13109.wav",
+          "startFrame": 0,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep31/scene-03-1-a574cca7.wav",
+          "startFrame": 227,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep31/scene-03-2-08fbf513.wav",
+          "startFrame": 449,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep31/scene-03-3-873ca505.wav",
+          "startFrame": 669,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep31/scene-03-4-a5abc22a.wav",
+          "startFrame": 884,
+          "durationInFrames": 171
+        }
+      ],
+      "durationInFrames": 1073
+    },
+    {
+      "id": "scene-04",
+      "type": "phone",
+      "visual": {
+        "title": "Nghiệm thu chạy lẻ 🎬",
+        "screens": [
+          {
+            "src": "screens/ep31/mini-cinema-standalone.png",
+            "sentence": 0
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🎬",
+            "text": "Chạy lẻ bằng -t lib/main_cinema.dart",
+            "sentence": 0
+          },
+          {
+            "icon": "🎟️",
+            "text": "3 phim đúng const movies Tập 5",
+            "sentence": 1
+          },
+          {
+            "icon": "🧮",
+            "text": "Set + fold vẫn chạy dù không có host",
+            "sentence": 2
+          },
+          {
+            "icon": "✅",
+            "text": "Module tự đứng vững, không cần app chủ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep31/scene-04-0-3a018036.wav",
+          "startFrame": 0,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep31/scene-04-1-29b2f66a.wav",
+          "startFrame": 220,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep31/scene-04-2-e5954fff.wav",
+          "startFrame": 471,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep31/scene-04-3-b3343f96.wav",
+          "startFrame": 671,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 869
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Bẫy thực chiến: FLUTTER_TARGET bị ghim",
+        "bullets": [
+          {
+            "icon": "📖",
+            "text": "Chuyện thật, ghi trong README — không dựng kịch bản",
+            "sentence": 0
+          },
+          {
+            "icon": "📌",
+            "text": "flutter run -t ghim FLUTTER_TARGET vào Generated.xcconfig",
+            "sentence": 1
+          },
+          {
+            "icon": "💥",
+            "text": "Build lại: chỉ đóng gói đúng 1 entrypoint bị ghim",
+            "sentence": 2
+          },
+          {
+            "icon": "🚫",
+            "text": "pub get KHÔNG tự sửa — dễ mất cả buổi tối",
+            "sentence": 3
+          },
+          {
+            "icon": "🔧",
+            "text": "Fix: chạy lại -t lib/main.dart rồi rebuild host",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep31/scene-05-0-cfcb5e7d.wav",
+          "startFrame": 0,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep31/scene-05-1-1d883ad3.wav",
+          "startFrame": 208,
+          "durationInFrames": 262
+        },
+        {
+          "file": "audio/ep31/scene-05-2-8a2cf480.wav",
+          "startFrame": 478,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep31/scene-05-3-db1d01ef.wav",
+          "startFrame": 726,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep31/scene-05-4-c571313f.wav",
+          "startFrame": 948,
+          "durationInFrames": 209
+        }
+      ],
+      "durationInFrames": 1175
+    },
+    {
+      "id": "scene-06",
+      "type": "terminal",
+      "visual": {
+        "title": "Tái hiện bẫy: build lại → màn trắng",
+        "commands": [
+          {
+            "cmd": "xcodebuild -workspace VietSuper.xcworkspace -scheme VietSuper -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build",
+            "output": "** BUILD SUCCEEDED **\n(nhưng card Đồ ăn & Xem phim: màn hình trắng)",
+            "sentence": 1
+          },
+          {
+            "cmd": "# Xem log Xcode:",
+            "output": "Dart_LookupLibrary: library 'package:mini_flutter/main_food.dart' not found\n# Nguyên nhân: Generated.xcconfig vẫn ghim FLUTTER_TARGET=lib/main_wallet.dart",
+            "sentence": 2
+          },
+          {
+            "cmd": "fvm flutter run -t lib/main.dart",
+            "output": "Launching lib/main.dart on iPhone 17 Pro...\n(nạp lại kernel đủ 3 entrypoint)",
+            "sentence": 3
+          },
+          {
+            "cmd": "xcodebuild -workspace VietSuper.xcworkspace -scheme VietSuper -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build",
+            "output": "** BUILD SUCCEEDED ** — cả 3 card mở đúng",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep31/scene-06-0-ac1a4ff3.wav",
+          "startFrame": 0,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep31/scene-06-1-9e47a39d.wav",
+          "startFrame": 222,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep31/scene-06-2-5d072d88.wav",
+          "startFrame": 420,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep31/scene-06-3-5c7b69f3.wav",
+          "startFrame": 647,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep31/scene-06-4-0dc5c224.wav",
+          "startFrame": 907,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 1069
+    },
+    {
+      "id": "scene-07",
+      "type": "phone",
+      "visual": {
+        "title": "Nghiệm thu: đã sửa bẫy 🏆",
+        "screens": [
+          {
+            "src": "screens/ep31/host-grid-final.png",
+            "sentence": 0
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🏠",
+            "text": "3 card lại mở đúng, không còn màn trắng",
+            "sentence": 0
+          },
+          {
+            "icon": "🔧",
+            "text": "Bẫy FLUTTER_TARGET đã xử lý triệt để",
+            "sentence": 1
+          },
+          {
+            "icon": "🧩",
+            "text": "3 mini · 1 app chủ · 1 EngineGroup · 1 channel",
+            "sentence": 2
+          },
+          {
+            "icon": "🎬",
+            "text": "Xem phim: mini vừa được cứu khỏi màn trắng",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep31/scene-07-0-c238a916.wav",
+          "startFrame": 0,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep31/scene-07-1-d053d4ad.wav",
+          "startFrame": 210,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep31/scene-07-2-ca0c952b.wav",
+          "startFrame": 398,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep31/scene-07-3-f49d37c4.wav",
+          "startFrame": 598,
+          "durationInFrames": 137
+        }
+      ],
+      "durationInFrames": 753
+    },
+    {
+      "id": "scene-08",
+      "type": "diagram",
+      "visual": {
+        "title": "Tổng kiến trúc: Host → Group → Engine → Mini",
+        "boxes": [
+          {
+            "id": "host",
+            "label": "App SwiftUI",
+            "emoji": "🏢"
+          },
+          {
+            "id": "group",
+            "label": "EngineGroup",
+            "emoji": "💧"
+          },
+          {
+            "id": "engine",
+            "label": "3 Engine",
+            "emoji": "⚙️"
+          },
+          {
+            "id": "mini",
+            "label": "3 Mini",
+            "emoji": "📱"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "tạo chung",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "sinh 3 engine",
+            "sentence": 2
+          },
+          {
+            "from": 2,
+            "to": 3,
+            "label": "1 entrypoint/engine",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep31/scene-08-0-d5085cdc.wav",
+          "startFrame": 0,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep31/scene-08-1-fb67db8b.wav",
+          "startFrame": 229,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep31/scene-08-2-35bb10e3.wav",
+          "startFrame": 374,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep31/scene-08-3-3cfeca60.wav",
+          "startFrame": 555,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep31/scene-08-4-8500f943.wav",
+          "startFrame": 767,
+          "durationInFrames": 204
+        }
+      ],
+      "durationInFrames": 989
+    },
+    {
+      "id": "scene-09",
+      "type": "concept",
+      "visual": {
+        "title": "So găng #1: series React Native — workspace",
+        "bullets": [
+          {
+            "icon": "📦",
+            "text": "1 dự án JS duy nhất — npm workspaces",
+            "sentence": 0
+          },
+          {
+            "icon": "🧩",
+            "text": "Mini-app = 1 package, export 1 component",
+            "sentence": 1
+          },
+          {
+            "icon": "🔨",
+            "text": "Gộp lúc BUILD: metro bundler gom thành 1 bundle",
+            "sentence": 2
+          },
+          {
+            "icon": "🚫",
+            "text": "Không có engine riêng — chung 1 JS runtime",
+            "sentence": 3
+          },
+          {
+            "icon": "➕",
+            "text": "Thêm mini = thêm package + import router",
+            "sentence": 4
+          },
+          {
+            "icon": "✅",
+            "text": "Ưu điểm: đơn giản khi xây MỚI từ đầu",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep31/scene-09-0-727a63aa.wav",
+          "startFrame": 0,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep31/scene-09-1-a7f39cad.wav",
+          "startFrame": 191,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep31/scene-09-2-78cb889e.wav",
+          "startFrame": 382,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep31/scene-09-3-78f5c4a7.wav",
+          "startFrame": 585,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep31/scene-09-4-593b87d9.wav",
+          "startFrame": 769,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep31/scene-09-5-4d95c34f.wav",
+          "startFrame": 926,
+          "durationInFrames": 147
+        }
+      ],
+      "durationInFrames": 1091
+    },
+    {
+      "id": "scene-10",
+      "type": "concept",
+      "visual": {
+        "title": "So găng #2: series Flutter — add-to-app",
+        "bullets": [
+          {
+            "icon": "🏗️",
+            "text": "2 dự án tách biệt: app chủ Swift + module Flutter",
+            "sentence": 0
+          },
+          {
+            "icon": "🚪",
+            "text": "Mini-app = 1 entrypoint @pragma vm:entry-point",
+            "sentence": 1
+          },
+          {
+            "icon": "⚡",
+            "text": "Gộp lúc RUNTIME: FlutterEngine nạp khi bấm card",
+            "sentence": 2
+          },
+          {
+            "icon": "💧",
+            "text": "Mỗi mini 1 engine riêng — độc lập SwiftUI",
+            "sentence": 3
+          },
+          {
+            "icon": "➕",
+            "text": "Thêm mini = 1 entrypoint + 1 dòng MiniApp.swift",
+            "sentence": 4
+          },
+          {
+            "icon": "✅",
+            "text": "Ưu điểm: giữ app native triệu người dùng đã có",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep31/scene-10-0-12a216ed.wav",
+          "startFrame": 0,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep31/scene-10-1-ad9f9a91.wav",
+          "startFrame": 169,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep31/scene-10-2-be06b953.wav",
+          "startFrame": 393,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep31/scene-10-3-fd70666f.wav",
+          "startFrame": 591,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep31/scene-10-4-5f043dab.wav",
+          "startFrame": 767,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep31/scene-10-5-7e9272f4.wav",
+          "startFrame": 958,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 1111
+    },
+    {
+      "id": "scene-11",
+      "type": "concept",
+      "visual": {
+        "title": "Chọn công thức nào?",
+        "bullets": [
+          {
+            "icon": "🏢",
+            "text": "Có app native sẵn → Flutter add-to-app",
+            "sentence": 0
+          },
+          {
+            "icon": "🆕",
+            "text": "Xây mới từ 0 → workspace kiểu React Native",
+            "sentence": 1
+          },
+          {
+            "icon": "⚖️",
+            "text": "add-to-app: phức tạp hơn, 2 ngôn ngữ song song",
+            "sentence": 2
+          },
+          {
+            "icon": "⚖️",
+            "text": "workspace: đơn giản hơn, nhưng khó tận dụng native",
+            "sentence": 3
+          },
+          {
+            "icon": "🔗",
+            "text": "Series React Native: xem lại trên kênh để so sánh",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep31/scene-11-0-f5944e69.wav",
+          "startFrame": 0,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep31/scene-11-1-7ff323bd.wav",
+          "startFrame": 174,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep31/scene-11-2-2a84b0a5.wav",
+          "startFrame": 379,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep31/scene-11-3-ad6feae9.wav",
+          "startFrame": 591,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep31/scene-11-4-17c990f9.wav",
+          "startFrame": 806,
+          "durationInFrames": 161
+        }
+      ],
+      "durationInFrames": 985
+    },
+    {
+      "id": "scene-12",
+      "type": "outro",
+      "visual": {
+        "title": "Series 6/6 hoàn tất — cảm ơn bạn! 🏆",
+        "summary": [
+          {
+            "text": "6 tập: module đơn độc → app chủ hoàn chỉnh 3 mini",
+            "sentence": 0
+          },
+          {
+            "text": "Công thức: module → entrypoint → EngineGroup → channel → 4 bước",
+            "sentence": 1
+          },
+          {
+            "text": "Repo + tag flutter-miniapp-tap-1..6 = đúng code từng tập",
+            "sentence": 2
+          }
+        ],
+        "next": "Vote: bản Kotlin add-to-app, hay chủ đề Flutter khác? 🗳️"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep31/scene-12-0-be58d56b.wav",
+          "startFrame": 0,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep31/scene-12-1-6f396ade.wav",
+          "startFrame": 232,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep31/scene-12-2-3fbf9a9d.wav",
+          "startFrame": 514,
+          "durationInFrames": 474
+        },
+        {
+          "file": "audio/ep31/scene-12-3-bdfc9e41.wav",
+          "startFrame": 996,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep31/scene-12-4-2832a8bb.wav",
+          "startFrame": 1204,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep31/scene-12-5-eb9275ee.wav",
+          "startFrame": 1388,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep31/scene-12-6-340ab406.wav",
+          "startFrame": 1581,
+          "durationInFrames": 96
+        }
+      ],
+      "durationInFrames": 1695
+    }
+  ]
+}

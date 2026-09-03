@@ -33,6 +33,7 @@ import ep27 from './data/ep27.timing.json';
 import ep28 from './data/ep28.timing.json';
 import ep29 from './data/ep29.timing.json';
 import ep30 from './data/ep30.timing.json';
+import ep31 from './data/ep31.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -66,6 +67,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode28', timing: ep28 as unknown as EpisodeTiming},
   {id: 'Episode29', timing: ep29 as unknown as EpisodeTiming},
   {id: 'Episode30', timing: ep30 as unknown as EpisodeTiming},
+  {id: 'Episode31', timing: ep31 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -419,6 +421,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/ep30/mini-cinema-ticket.png',
       badgeEmoji: '🎬',
+      seriesTag: 'Mini-App với Flutter 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb31',
+    props: {
+      badge: 'FLUTTER MINI-APP 6/6',
+      line1: 'TẬP CUỐI',
+      line2: 'SO GĂNG RN',
+      subtitle: 'Chạy lẻ · bẫy FLUTTER_TARGET · vs React Native',
+      variant: 'shot',
+      image: 'screens/ep31/host-grid-final.png',
+      badgeEmoji: '🏆',
       seriesTag: 'Mini-App với Flutter 🇻🇳',
     },
   },
