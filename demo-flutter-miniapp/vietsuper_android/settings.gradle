@@ -1,0 +1,9 @@
+rootProject.name = 'vietsuper_android'
+include ':app'
+
+// Cắm dãy căn hộ Flutter vào tòa nhà Android — tương đương podhelper bên iOS.
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+  settingsDir.parentFile,
+  'mini_flutter/.android/include_flutter.groovy'
+))
