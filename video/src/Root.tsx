@@ -34,6 +34,7 @@ import ep28 from './data/ep28.timing.json';
 import ep29 from './data/ep29.timing.json';
 import ep30 from './data/ep30.timing.json';
 import ep31 from './data/ep31.timing.json';
+import ep32 from './data/ep32.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -68,6 +69,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode29', timing: ep29 as unknown as EpisodeTiming},
   {id: 'Episode30', timing: ep30 as unknown as EpisodeTiming},
   {id: 'Episode31', timing: ep31 as unknown as EpisodeTiming},
+  {id: 'Episode32', timing: ep32 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -434,6 +436,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/ep31/host-grid-final.png',
       badgeEmoji: '🏆',
+      seriesTag: 'Mini-App với Flutter 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb32',
+    props: {
+      badge: 'FLUTTER MINI-APP BONUS 1/2',
+      line1: 'KOTLIN',
+      line2: 'CẮM LẠI',
+      subtitle: 'Jetpack Compose · cùng module, khác tòa nhà',
+      variant: 'shot',
+      image: 'screens/ep32/android-mini-food.png',
+      badgeEmoji: '🤖',
       seriesTag: 'Mini-App với Flutter 🇻🇳',
     },
   },

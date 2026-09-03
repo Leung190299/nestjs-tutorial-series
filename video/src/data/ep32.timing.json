@@ -1,0 +1,774 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Cùng căn hộ, tòa nhà Android — host Kotlin Compose",
+        "subtitle": "Mini-App với Flutter · Bonus Android 1/2",
+        "badge": "Bonus Android · Phần 1/2"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep32/scene-01-0-bc510338.wav",
+          "startFrame": 0,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep32/scene-01-1-a7ae722d.wav",
+          "startFrame": 196,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep32/scene-01-2-92436b2a.wav",
+          "startFrame": 384,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep32/scene-01-3-de854c84.wav",
+          "startFrame": 572,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep32/scene-01-4-11cdba2d.wav",
+          "startFrame": 753,
+          "durationInFrames": 168
+        }
+      ],
+      "durationInFrames": 939
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Compose trong 60 giây, cho người biết Flutter",
+        "bullets": [
+          {
+            "icon": "⏱️",
+            "text": "60s dịch nhanh: Compose cho người biết Flutter",
+            "sentence": 0
+          },
+          {
+            "icon": "🧩",
+            "text": "@Composable ≈ Widget: hàm mô tả giao diện",
+            "sentence": 1
+          },
+          {
+            "icon": "🔄",
+            "text": "Declarative: gọi lại khi state đổi, y hệt Flutter",
+            "sentence": 2
+          },
+          {
+            "icon": "✅",
+            "text": "Dễ hơn SwiftUI: Kotlin không cần tư duy mới",
+            "sentence": 3
+          },
+          {
+            "icon": "🏢",
+            "text": "Tòa nhà Android mới — cùng khu đất với bản Swift",
+            "sentence": 4
+          },
+          {
+            "icon": "🔑",
+            "text": "Căn hộ · đồng hồ · lễ tân: ẩn dụ cũ vẫn đúng",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep32/scene-02-0-8a519fe8.wav",
+          "startFrame": 0,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep32/scene-02-1-ae4b285e.wav",
+          "startFrame": 162,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep32/scene-02-2-645bf5b6.wav",
+          "startFrame": 372,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep32/scene-02-3-fc41ae5c.wav",
+          "startFrame": 589,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep32/scene-02-4-1ac626a1.wav",
+          "startFrame": 775,
+          "durationInFrames": 212
+        }
+      ],
+      "durationInFrames": 1005
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "vietsuper_android/settings.gradle — TOÀN BỘ FILE",
+        "language": "clike",
+        "code": "rootProject.name = 'vietsuper_android'\ninclude ':app'\n\n// Cắm dãy căn hộ Flutter vào tòa nhà Android — tương đương podhelper bên iOS.\nsetBinding(new Binding([gradle: this]))\nevaluate(new File(\n  settingsDir.parentFile,\n  'mini_flutter/.android/include_flutter.groovy'\n))",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 9,
+            "sentence": 2
+          },
+          {
+            "from": 6,
+            "to": 9,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep32/scene-03-0-358907cc.wav",
+          "startFrame": 0,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep32/scene-03-1-b2a14eef.wav",
+          "startFrame": 191,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep32/scene-03-2-a1922733.wav",
+          "startFrame": 389,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep32/scene-03-3-fca25e52.wav",
+          "startFrame": 597,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep32/scene-03-4-58fd6925.wav",
+          "startFrame": 783,
+          "durationInFrames": 200
+        }
+      ],
+      "durationInFrames": 1001
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "vietsuper_android/gradle.properties — TOÀN BỘ FILE",
+        "language": "clike",
+        "code": "org.gradle.java.home=/Applications/Android Studio.app/Contents/jbr/Contents/Home\norg.gradle.jvmargs=-Xmx4g\nandroid.useAndroidX=true",
+        "steps": [
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 2
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 3
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep32/scene-04-0-2fb1e630.wav",
+          "startFrame": 0,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep32/scene-04-1-ba4c5e2f.wav",
+          "startFrame": 196,
+          "durationInFrames": 288
+        },
+        {
+          "file": "audio/ep32/scene-04-2-e4b30126.wav",
+          "startFrame": 492,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep32/scene-04-3-27694137.wav",
+          "startFrame": 700,
+          "durationInFrames": 281
+        },
+        {
+          "file": "audio/ep32/scene-04-4-5b08e6c7.wav",
+          "startFrame": 989,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 1204
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "vietsuper_android/app/build.gradle (trích — dependencies)",
+        "language": "clike",
+        "code": "dependencies {\n    implementation project(':flutter')\n    implementation platform('androidx.compose:compose-bom:2024.12.01')\n    implementation 'androidx.activity:activity-compose:1.9.3'\n    implementation 'androidx.compose.material3:material3'\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 2
+          },
+          {
+            "from": 3,
+            "to": 5,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep32/scene-05-0-04821d06.wav",
+          "startFrame": 0,
+          "durationInFrames": 308
+        },
+        {
+          "file": "audio/ep32/scene-05-1-749e9321.wav",
+          "startFrame": 316,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep32/scene-05-2-b35896f5.wav",
+          "startFrame": 507,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep32/scene-05-3-8257a0c4.wav",
+          "startFrame": 734,
+          "durationInFrames": 250
+        }
+      ],
+      "durationInFrames": 1002
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "com/vietsuper/host/MiniApp.kt — TOÀN BỘ FILE",
+        "language": "kotlin",
+        "code": "package com.vietsuper.host\n\ndata class MiniApp(\n    val id: String,\n    val name: String,\n    val emoji: String,\n    /** File Dart chứa hàm main của mini này — cùng địa chỉ với bản iOS. */\n    val library: String,\n)\n\nval miniApps = listOf(\n    MiniApp(\"food\", \"Đồ ăn\", \"🍜\", \"package:mini_flutter/main_food.dart\"),\n)",
+        "steps": [
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 9,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 11,
+            "to": 13,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep32/scene-06-0-5b8a0fe7.wav",
+          "startFrame": 0,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep32/scene-06-1-373631a9.wav",
+          "startFrame": 210,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep32/scene-06-2-8fe1e369.wav",
+          "startFrame": 437,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep32/scene-06-3-497788bd.wav",
+          "startFrame": 678,
+          "durationInFrames": 245
+        }
+      ],
+      "durationInFrames": 941
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "com/vietsuper/host/MainActivity.kt (1/2 — onCreate)",
+        "language": "kotlin",
+        "code": "class MainActivity : ComponentActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContent { MaterialTheme { HomeScreen { MiniAppLauncher.openMini(this, it) } } }\n    }\n}\n\n@Composable\nfun HomeScreen(onOpen: (MiniApp) -> Unit) {\n    Column(Modifier.fillMaxSize().padding(16.dp)) {\n        Text(\"ViệtSuper 🇻🇳\", style = MaterialTheme.typography.headlineMedium)",
+        "steps": [
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 2,
+            "to": 4,
+            "sentence": 2
+          },
+          {
+            "from": 8,
+            "to": 11,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep32/scene-07-0-556ded8c.wav",
+          "startFrame": 0,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep32/scene-07-1-61a213c8.wav",
+          "startFrame": 222,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep32/scene-07-2-91bd8f94.wav",
+          "startFrame": 444,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep32/scene-07-3-6fa88235.wav",
+          "startFrame": 659,
+          "durationInFrames": 231
+        }
+      ],
+      "durationInFrames": 908
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "com/vietsuper/host/MainActivity.kt (2/2 — LazyVerticalGrid)",
+        "language": "kotlin",
+        "code": "        LazyVerticalGrid(\n            columns = GridCells.Fixed(2),\n            verticalArrangement = Arrangement.spacedBy(16.dp),\n            horizontalArrangement = Arrangement.spacedBy(16.dp),\n            modifier = Modifier.padding(top = 16.dp),\n        ) {\n            items(miniApps) { mini ->\n                Card(onClick = { onOpen(mini) }, modifier = Modifier.fillMaxWidth()) {\n                    Column(\n                        Modifier.fillMaxWidth().padding(vertical = 24.dp),\n                        horizontalAlignment = Alignment.CenterHorizontally,\n                    ) {\n                        Text(mini.emoji, fontSize = 44.sp)\n                        Text(mini.name, style = MaterialTheme.typography.titleMedium)\n                    }\n                }\n            }\n        }\n    }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 5,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 2
+          },
+          {
+            "from": 8,
+            "to": 8,
+            "sentence": 3
+          },
+          {
+            "from": 9,
+            "to": 15,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep32/scene-08-0-761a9d2c.wav",
+          "startFrame": 0,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep32/scene-08-1-e5f34726.wav",
+          "startFrame": 234,
+          "durationInFrames": 276
+        },
+        {
+          "file": "audio/ep32/scene-08-2-c0fc1963.wav",
+          "startFrame": 518,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep32/scene-08-3-a064286f.wav",
+          "startFrame": 747,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep32/scene-08-4-b56a4a9b.wav",
+          "startFrame": 986,
+          "durationInFrames": 248
+        }
+      ],
+      "durationInFrames": 1252
+    },
+    {
+      "id": "scene-09",
+      "type": "code",
+      "visual": {
+        "filename": "com/vietsuper/host/MiniAppLauncher.kt (openMini)",
+        "language": "kotlin",
+        "code": "object MiniAppLauncher {\n    /** \"Nhà máy engine\" dùng chung — các engine sinh ra chia sẻ tài nguyên. */\n    private var engines: FlutterEngineGroup? = null\n\n    fun openMini(activity: Activity, mini: MiniApp) {\n        val group = engines\n            ?: FlutterEngineGroup(activity.applicationContext).also { engines = it }\n        val bundle = FlutterInjector.instance().flutterLoader().findAppBundlePath()\n        val entrypoint = DartExecutor.DartEntrypoint(bundle, mini.library, \"main\")\n        val engine = group.createAndRunEngine(activity, entrypoint)\n        attachHostChannel(engine)\n        FlutterEngineCache.getInstance().put(mini.id, engine)\n        activity.startActivity(MiniActivity.intent(activity, mini.id))\n    }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 7,
+            "sentence": 2
+          },
+          {
+            "from": 9,
+            "to": 9,
+            "sentence": 3
+          },
+          {
+            "from": 11,
+            "to": 11,
+            "sentence": 4
+          },
+          {
+            "from": 12,
+            "to": 13,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep32/scene-09-0-2c78dcfa.wav",
+          "startFrame": 0,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep32/scene-09-1-06fc090f.wav",
+          "startFrame": 196,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep32/scene-09-2-4b51d60d.wav",
+          "startFrame": 401,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep32/scene-09-3-ff6f18c5.wav",
+          "startFrame": 625,
+          "durationInFrames": 279
+        },
+        {
+          "file": "audio/ep32/scene-09-4-5b6c84aa.wav",
+          "startFrame": 912,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep32/scene-09-5-b4abb051.wav",
+          "startFrame": 1139,
+          "durationInFrames": 276
+        }
+      ],
+      "durationInFrames": 1433
+    },
+    {
+      "id": "scene-10",
+      "type": "code",
+      "visual": {
+        "filename": "com/vietsuper/host/MiniActivity.kt (class body)",
+        "language": "kotlin",
+        "code": "class MiniActivity : FlutterActivity() {\n    companion object {\n        var current: MiniActivity? = null\n\n        fun intent(context: Context, engineId: String): Intent =\n            CachedEngineIntentBuilder(MiniActivity::class.java, engineId)\n                .destroyEngineWithActivity(true)\n                .build(context)\n    }\n\n    override fun onResume() {\n        super.onResume()\n        current = this\n    }\n\n    override fun onDestroy() {\n        if (current === this) current = null\n        cachedEngineId?.let { FlutterEngineCache.getInstance().remove(it) }\n        super.onDestroy()\n    }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 21,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 3
+          },
+          {
+            "from": 11,
+            "to": 20,
+            "sentence": 4
+          },
+          {
+            "from": 1,
+            "to": 21,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep32/scene-10-0-325100a1.wav",
+          "startFrame": 0,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep32/scene-10-1-dec4d4a4.wav",
+          "startFrame": 234,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep32/scene-10-2-7355f3b2.wav",
+          "startFrame": 430,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep32/scene-10-3-b47ceb99.wav",
+          "startFrame": 678,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep32/scene-10-4-fc67481b.wav",
+          "startFrame": 912,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep32/scene-10-5-813f5171.wav",
+          "startFrame": 1124,
+          "durationInFrames": 226
+        }
+      ],
+      "durationInFrames": 1368
+    },
+    {
+      "id": "scene-11",
+      "type": "terminal",
+      "visual": {
+        "title": "Build & chạy trên Android thật",
+        "commands": [
+          {
+            "cmd": "./gradlew :app:assembleDebug",
+            "output": "> Task :flutter:assembleDebug\n> Task :app:assembleDebug\n\nBUILD SUCCESSFUL in 48s",
+            "sentence": 1
+          },
+          {
+            "cmd": "adb install -r app/build/outputs/apk/debug/app-debug.apk",
+            "output": "Performing Streamed Install\nSuccess",
+            "sentence": 2
+          },
+          {
+            "cmd": "adb shell monkey -p com.vietsuper.host -c android.intent.category.LAUNCHER 1",
+            "output": "Events injected: 1\n## Network stats: elapsed time=...",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep32/scene-11-0-0226017c.wav",
+          "startFrame": 0,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep32/scene-11-1-34eed77b.wav",
+          "startFrame": 217,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep32/scene-11-2-eb6b4e42.wav",
+          "startFrame": 410,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep32/scene-11-3-e3401d38.wav",
+          "startFrame": 618,
+          "durationInFrames": 185
+        }
+      ],
+      "durationInFrames": 821
+    },
+    {
+      "id": "scene-12",
+      "type": "phone",
+      "visual": {
+        "title": "Nghiệm thu tòa nhà Android 🤖",
+        "screens": [
+          {
+            "src": "screens/ep32/android-host-grid-food-only.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/ep32/android-mini-food.png",
+            "sentence": 1
+          },
+          {
+            "src": "screens/ep32/android-mini-food-cart.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🏠",
+            "text": "Host Kotlin: 1 card lưới — Đồ ăn",
+            "sentence": 0
+          },
+          {
+            "icon": "🍜",
+            "text": "Mini full-screen: 3 món, cùng dữ liệu",
+            "sentence": 1
+          },
+          {
+            "icon": "✅",
+            "text": "Thêm → Đã thêm ✓, Tổng 45.000đ",
+            "sentence": 2
+          },
+          {
+            "icon": "🧩",
+            "text": "Cùng module Flutter, 2 tòa nhà khác ngôn ngữ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep32/scene-12-0-4445e24a.wav",
+          "startFrame": 0,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep32/scene-12-1-ebdd0dab.wav",
+          "startFrame": 208,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep32/scene-12-2-879c5130.wav",
+          "startFrame": 461,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep32/scene-12-3-266931aa.wav",
+          "startFrame": 702,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 927
+    },
+    {
+      "id": "scene-13",
+      "type": "outro",
+      "visual": {
+        "title": "Bonus Android 1/2 xong — hẹn tập cuối! 🤖",
+        "summary": [
+          {
+            "text": "Host Kotlin Compose xong: engine thật, mini Đồ ăn cắm đúng địa chỉ",
+            "sentence": 0
+          },
+          {
+            "text": "Module Flutter không đổi 1 dòng Dart — lời hứa giữ trọn",
+            "sentence": 1
+          },
+          {
+            "text": "Tag flutter-miniapp-android-1 = đúng code hôm nay",
+            "sentence": 3
+          }
+        ],
+        "next": "Bonus 2/2: đủ 3 mini, mở hộp lễ tân Kotlin, và một bug thật 🐛"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep32/scene-13-0-b9113fbe.wav",
+          "startFrame": 0,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep32/scene-13-1-5d5678bf.wav",
+          "startFrame": 244,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep32/scene-13-2-3498e85a.wav",
+          "startFrame": 420,
+          "durationInFrames": 339
+        },
+        {
+          "file": "audio/ep32/scene-13-3-f5fc3b59.wav",
+          "startFrame": 767,
+          "durationInFrames": 358
+        },
+        {
+          "file": "audio/ep32/scene-13-4-a0cc2da7.wav",
+          "startFrame": 1133,
+          "durationInFrames": 168
+        }
+      ],
+      "durationInFrames": 1319
+    }
+  ]
+}
