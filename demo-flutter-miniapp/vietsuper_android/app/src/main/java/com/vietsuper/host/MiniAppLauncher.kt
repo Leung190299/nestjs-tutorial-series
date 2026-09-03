@@ -13,6 +13,8 @@ object MiniAppLauncher {
     private var engines: FlutterEngineGroup? = null
 
     fun openMini(activity: Activity, mini: MiniApp) {
+        // Chặn double-tap: mini này đang mở thì không tạo engine thứ hai.
+        if (FlutterEngineCache.getInstance().contains(mini.id)) return
         val group = engines
             ?: FlutterEngineGroup(activity.applicationContext).also { engines = it }
         val bundle = FlutterInjector.instance().flutterLoader().findAppBundlePath()

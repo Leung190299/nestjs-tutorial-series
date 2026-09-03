@@ -99,8 +99,9 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 adb shell monkey -p com.vietsuper.host -c android.intent.category.LAUNCHER 1
 ```
 
-App hiện cùng lưới 3 card 🍜 Ví 👛 Xem phim 🎬 như bản iOS; tap card mở mini full-screen, nút ✕ hoặc
-phím Back của Android đều gọi channel `close` để đóng và quay về lưới.
+App hiện cùng lưới 3 card 🍜 Ví 👛 Xem phim 🎬 như bản iOS; tap card mở mini full-screen.
+Nút ✕ gọi channel `close`; phím Back đóng qua cơ chế back tự nhiên của Android — cả hai đường
+đều dẫn tới `destroyEngineWithActivity` để hủy engine sạch sẽ và quay về lưới.
 
 > **`local.properties`:** file này **không commit** (đã có trong `.gitignore`) vì trỏ đường dẫn cục bộ
 > trên máy — tự tạo `vietsuper_android/local.properties` với 2 dòng:
