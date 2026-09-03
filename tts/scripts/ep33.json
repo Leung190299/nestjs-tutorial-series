@@ -29,12 +29,36 @@
     "visual": {
       "title": "Mở hộp lễ tân Kotlin",
       "bullets": [
-        {"icon": "📞", "text": "Mở hộp lễ tân Kotlin: attachHostChannel", "sentence": 0},
-        {"icon": "🧑‍💼", "text": "Lễ tân = code lắng nghe, trả lời hộ mini", "sentence": 1},
-        {"icon": "🍎", "text": "Swift Tập 4: setMethodCallHandler + switch", "sentence": 2},
-        {"icon": "🤖", "text": "Kotlin: setMethodCallHandler + when(...)", "sentence": 3},
-        {"icon": "🔁", "text": "Lễ tân đổi ngôn ngữ, kịch bản giữ nguyên", "sentence": 4},
-        {"icon": "🪞", "text": "Đối chiếu song song, không dạy lại từ đầu", "sentence": 5}
+        {
+          "icon": "📞",
+          "text": "Mở hộp lễ tân Kotlin: attachHostChannel",
+          "sentence": 0
+        },
+        {
+          "icon": "🧑‍💼",
+          "text": "Lễ tân = code lắng nghe, trả lời hộ mini",
+          "sentence": 1
+        },
+        {
+          "icon": "🍎",
+          "text": "Swift Tập 4: setMethodCallHandler + switch",
+          "sentence": 2
+        },
+        {
+          "icon": "🤖",
+          "text": "Kotlin: setMethodCallHandler + when(...)",
+          "sentence": 3
+        },
+        {
+          "icon": "🔁",
+          "text": "Lễ tân đổi ngôn ngữ, kịch bản giữ nguyên",
+          "sentence": 4
+        },
+        {
+          "icon": "🪞",
+          "text": "Đối chiếu song song, không dạy lại từ đầu",
+          "sentence": 5
+        }
       ]
     }
   },
@@ -53,11 +77,31 @@
       "language": "kotlin",
       "code": "    private fun attachHostChannel(engine: FlutterEngine) {\n        MethodChannel(engine.dartExecutor.binaryMessenger, \"vietsuper/host\")\n            .setMethodCallHandler { call, result ->\n                when (call.method) {\n                    \"getUserInfo\" ->\n                        result.success(mapOf(\"name\" to \"Lee\", \"balance\" to 1_250_000))\n                    \"close\" -> {\n                        MiniActivity.current?.finish()\n                        result.success(null)\n                    }\n                    else -> result.notImplemented()\n                }\n            }\n    }",
       "steps": [
-        {"from": 1, "to": 14, "sentence": 0},
-        {"from": 2, "to": 2, "sentence": 1},
-        {"from": 3, "to": 4, "sentence": 2},
-        {"from": 5, "to": 6, "sentence": 3},
-        {"from": 7, "to": 10, "sentence": 4}
+        {
+          "from": 1,
+          "to": 14,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "sentence": 2
+        },
+        {
+          "from": 5,
+          "to": 6,
+          "sentence": 3
+        },
+        {
+          "from": 7,
+          "to": 14,
+          "sentence": 4
+        }
       ]
     }
   },
@@ -75,10 +119,26 @@
       "language": "kotlin",
       "code": "package com.vietsuper.host\n\ndata class MiniApp(\n    val id: String,\n    val name: String,\n    val emoji: String,\n    /** File Dart chứa hàm main của mini này — cùng địa chỉ với bản iOS. */\n    val library: String,\n)\n\nval miniApps = listOf(\n    MiniApp(\"food\", \"Đồ ăn\", \"🍜\", \"package:mini_flutter/main_food.dart\"),\n    MiniApp(\"wallet\", \"Ví\", \"👛\", \"package:mini_flutter/main_wallet.dart\"),\n    MiniApp(\"cinema\", \"Xem phim\", \"🎬\", \"package:mini_flutter/main_cinema.dart\"),\n)",
       "steps": [
-        {"from": 1, "to": 15, "sentence": 0},
-        {"from": 12, "to": 12, "sentence": 1},
-        {"from": 13, "to": 14, "sentence": 2},
-        {"from": 1, "to": 15, "sentence": 3}
+        {
+          "from": 1,
+          "to": 15,
+          "sentence": 0
+        },
+        {
+          "from": 12,
+          "to": 12,
+          "sentence": 1
+        },
+        {
+          "from": 13,
+          "to": 14,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 15,
+          "sentence": 3
+        }
       ]
     }
   },
@@ -94,15 +154,40 @@
     "visual": {
       "title": "Nghiệm thu tòa nhà Android 🏁",
       "screens": [
-        {"src": "screens/ep33/android-host-grid-3-cards.png", "sentence": 0},
-        {"src": "screens/ep33/android-mini-wallet-from-host.png", "sentence": 1},
-        {"src": "screens/ep33/android-mini-cinema-ticket.png", "sentence": 2}
+        {
+          "src": "screens/ep33/android-host-grid-3-cards.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/ep33/android-mini-wallet-from-host.png",
+          "sentence": 1
+        },
+        {
+          "src": "screens/ep33/android-mini-cinema-ticket.png",
+          "sentence": 2
+        }
       ],
       "bullets": [
-        {"icon": "🏠", "text": "Lưới Android đủ 3 card — Đồ ăn/Ví/Xem phim", "sentence": 0},
-        {"icon": "👛", "text": "Ví: Lee / 1.250.000đ — từ channel Kotlin", "sentence": 1},
-        {"icon": "🎬", "text": "Xem phim: Đã đặt ✓, Tổng 90.000đ", "sentence": 2},
-        {"icon": "🧩", "text": "1 module, 2 tòa nhà, chạy y hệt nhau", "sentence": 3}
+        {
+          "icon": "🏠",
+          "text": "Lưới Android đủ 3 card — Đồ ăn/Ví/Xem phim",
+          "sentence": 0
+        },
+        {
+          "icon": "👛",
+          "text": "Ví: Lee / 1.250.000đ — từ channel Kotlin",
+          "sentence": 1
+        },
+        {
+          "icon": "🎬",
+          "text": "Xem phim: Đã đặt ✓, Tổng 90.000đ",
+          "sentence": 2
+        },
+        {
+          "icon": "🧩",
+          "text": "1 module, 2 tòa nhà, chạy y hệt nhau",
+          "sentence": 3
+        }
       ]
     }
   },
@@ -119,11 +204,31 @@
     "visual": {
       "title": "Thú nhận thật: chip vẫn ghi (Swift)",
       "bullets": [
-        {"icon": "🔍", "text": "Chip Ví trên Android vẫn ghi '(Swift)'", "sentence": 0},
-        {"icon": "🐦", "text": "Chuỗi hard-code trong wallet_screen.dart (Dart)", "sentence": 1},
-        {"icon": "🏢", "text": "Mini không nên biết nó đang ở tòa nhà nào", "sentence": 2},
-        {"icon": "💡", "text": "Bài học: chuỗi UI của mini nên trung lập", "sentence": 3},
-        {"icon": "📝", "text": "Giữ nguyên để đúng byte-match tag android-2", "sentence": 4}
+        {
+          "icon": "🔍",
+          "text": "Chip Ví trên Android vẫn ghi '(Swift)'",
+          "sentence": 0
+        },
+        {
+          "icon": "🐦",
+          "text": "Chuỗi hard-code trong wallet_screen.dart (Dart)",
+          "sentence": 1
+        },
+        {
+          "icon": "🏢",
+          "text": "Mini không nên biết nó đang ở tòa nhà nào",
+          "sentence": 2
+        },
+        {
+          "icon": "💡",
+          "text": "Bài học: chuỗi UI của mini nên trung lập",
+          "sentence": 3
+        },
+        {
+          "icon": "📝",
+          "text": "Giữ nguyên để đúng byte-match tag android-2",
+          "sentence": 4
+        }
       ]
     }
   },
@@ -140,11 +245,31 @@
     "visual": {
       "title": "Bug thật: double-tap và rò rỉ engine",
       "bullets": [
-        {"icon": "🐛", "text": "Bug thật: tap card 2 lần thật nhanh", "sentence": 0},
-        {"icon": "⚙️", "text": "2 lần openMini → 2 engine, cùng 1 id", "sentence": 1},
-        {"icon": "🕳️", "text": "Cache ghi đè: engine đầu rò vĩnh viễn", "sentence": 2},
-        {"icon": "🍎", "text": "iOS an toàn tự nhiên: fullScreenCover(item:)", "sentence": 3},
-        {"icon": "🔧", "text": "Fix: đúng 2 dòng guard", "sentence": 4}
+        {
+          "icon": "🐛",
+          "text": "Bug thật: tap card 2 lần thật nhanh",
+          "sentence": 0
+        },
+        {
+          "icon": "⚙️",
+          "text": "2 lần openMini → 2 engine, cùng 1 id",
+          "sentence": 1
+        },
+        {
+          "icon": "🕳️",
+          "text": "Cache ghi đè: engine đầu rò vĩnh viễn",
+          "sentence": 2
+        },
+        {
+          "icon": "🍎",
+          "text": "iOS an toàn tự nhiên: fullScreenCover(item:)",
+          "sentence": 3
+        },
+        {
+          "icon": "🔧",
+          "text": "Fix: đúng 2 dòng guard",
+          "sentence": 4
+        }
       ]
     }
   },
@@ -163,11 +288,31 @@
       "language": "kotlin",
       "code": "    fun openMini(activity: Activity, mini: MiniApp) {\n        // Chặn double-tap: mini này đang mở thì không tạo engine thứ hai.\n        if (FlutterEngineCache.getInstance().contains(mini.id)) return\n        val group = engines\n            ?: FlutterEngineGroup(activity.applicationContext).also { engines = it }\n        val bundle = FlutterInjector.instance().flutterLoader().findAppBundlePath()\n        val entrypoint = DartExecutor.DartEntrypoint(bundle, mini.library, \"main\")\n        val engine = group.createAndRunEngine(activity, entrypoint)\n        attachHostChannel(engine)\n        FlutterEngineCache.getInstance().put(mini.id, engine)\n        activity.startActivity(MiniActivity.intent(activity, mini.id))\n    }",
       "steps": [
-        {"from": 1, "to": 12, "sentence": 0},
-        {"from": 2, "to": 3, "sentence": 1},
-        {"from": 8, "to": 10, "sentence": 2},
-        {"from": 2, "to": 3, "sentence": 3},
-        {"from": 1, "to": 12, "sentence": 4}
+        {
+          "from": 1,
+          "to": 12,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 10,
+          "sentence": 2
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 12,
+          "sentence": 4
+        }
       ]
     }
   },
@@ -185,12 +330,36 @@
     "visual": {
       "title": "So găng cuối: Swift vs Kotlin",
       "bullets": [
-        {"icon": "🎨", "text": "SwiftUI ↔ Jetpack Compose — cùng declarative", "sentence": 0},
-        {"icon": "🔗", "text": "podhelper.rb ↔ include_flutter.groovy", "sentence": 1},
-        {"icon": "🖼️", "text": "fullScreenCover(item:) ↔ Activity riêng", "sentence": 2},
-        {"icon": "🧩", "text": "Cùng module · cùng channel vietsuper/host", "sentence": 3},
-        {"icon": "🎭", "text": "Khác chỉ ở lớp vỏ, lõi Flutter y hệt", "sentence": 4},
-        {"icon": "🏁", "text": "Viết mini 1 lần, cắm 2 tòa nhà", "sentence": 5}
+        {
+          "icon": "🎨",
+          "text": "SwiftUI ↔ Jetpack Compose — cùng declarative",
+          "sentence": 0
+        },
+        {
+          "icon": "🔗",
+          "text": "podhelper.rb ↔ include_flutter.groovy",
+          "sentence": 1
+        },
+        {
+          "icon": "🖼️",
+          "text": "fullScreenCover(item:) ↔ Activity riêng",
+          "sentence": 2
+        },
+        {
+          "icon": "🧩",
+          "text": "Cùng module · cùng channel vietsuper/host",
+          "sentence": 3
+        },
+        {
+          "icon": "🎭",
+          "text": "Khác chỉ ở lớp vỏ, lõi Flutter y hệt",
+          "sentence": 4
+        },
+        {
+          "icon": "🏁",
+          "text": "Viết mini 1 lần, cắm 2 tòa nhà",
+          "sentence": 5
+        }
       ]
     }
   },
@@ -209,9 +378,18 @@
     "visual": {
       "title": "8 video khép lại — cảm ơn bạn! 🏁",
       "summary": [
-        {"text": "8 video: module đơn độc → 2 tòa nhà cùng cắm 1 module", "sentence": 0},
-        {"text": "Công thức đủ: entrypoint + EngineGroup + channel + guard double-tap", "sentence": 1},
-        {"text": "Repo + 2 bộ tag: tap-1..6 (Swift) + android-1..2 (Kotlin)", "sentence": 2}
+        {
+          "text": "8 video: module đơn độc → 2 tòa nhà cùng cắm 1 module",
+          "sentence": 0
+        },
+        {
+          "text": "Công thức đủ: entrypoint + EngineGroup + channel + guard double-tap",
+          "sentence": 1
+        },
+        {
+          "text": "Repo + 2 bộ tag: tap-1..6 (Swift) + android-1..2 (Kotlin)",
+          "sentence": 2
+        }
       ],
       "next": "Vote: lên store thật, Flutter Web, hay chủ đề khác? 🗳️"
     }
