@@ -1,0 +1,402 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tập 3 khép lại với một câu hỏi treo lơ lửng: mini Ví hiện tên 'Lee', số dư 1.250.000đ — nhưng module Flutter không hề định nghĩa user nào tên Lee.",
+      "Tập 4 hôm nay trả lời thẳng: câu trả lời nằm ở MethodChannel — đường ống hai chiều nối Dart bên trong mini với Swift bên ngoài app chủ.",
+      "Ẩn dụ mới: căn hộ (module Flutter) muốn biết tên chủ tòa nhà phải gọi điện xuống LỄ TÂN (Swift) — MethodChannel chính là đường dây đó.",
+      "Sẽ đọc từng dòng invokeMapMethod bên Dart, setMethodCallHandler bên Swift, và vì sao chạy lẻ lại thấy 'Khách chạy lẻ' 500.000đ thay vì Lee.",
+      "6 tập, hôm nay Tập 4 trên 6: mở hộp đen MethodChannel — mini hỏi, app chủ trả lời."
+    ],
+    "visual": {
+      "title": "MethodChannel — mini hỏi, app chủ trả lời",
+      "subtitle": "Mini-App với Flutter · Tập 4/6 · MethodChannel hai chiều",
+      "badge": "Series Mini-App với Flutter · Tập 4"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Nhắc ẩn dụ cũ: app chủ là tòa nhà bê tông, module Flutter là căn hộ lắp ghép, mỗi FlutterEngine là đồng hồ điện nước riêng của căn hộ đó.",
+      "Hôm nay thêm một vai mới: MethodChannel — giống đường dây điện thoại nội bộ nối căn hộ xuống bàn LỄ TÂN của tòa nhà.",
+      "Lễ tân ở đây chính là code Swift trong MiniAppLauncher — nơi DUY NHẤT biết những thông tin căn hộ Flutter không thể tự có, như tên chủ tài khoản thật.",
+      "Kỹ thuật: MethodChannel là kênh hai chiều — Dart gọi invokeMethod hoặc invokeMapMethod, Swift lắng nghe bằng setMethodCallHandler và trả lời bằng result().",
+      "Cả hai đầu dây đã tồn tại từ Tập 1 và Tập 2 — hostChannel khai trong mini_shell.dart, channel.setMethodCallHandler khai trong MiniAppLauncher.swift.",
+      "Hôm nay ta mới thực sự BẤM SỐ: đọc cách Dart hỏi, cách Swift trả lời, và điều gì xảy ra khi đầu dây bên kia không tồn tại."
+    ],
+    "visual": {
+      "title": "MethodChannel: đường dây xuống lễ tân",
+      "bullets": [
+        {
+          "icon": "🏢",
+          "text": "Tòa nhà bê tông / căn hộ lắp ghép / đồng hồ riêng",
+          "sentence": 0
+        },
+        {
+          "icon": "📞",
+          "text": "MethodChannel = đường dây nội bộ xuống lễ tân",
+          "sentence": 1
+        },
+        {
+          "icon": "🧑‍💼",
+          "text": "Lễ tân = code Swift trong MiniAppLauncher",
+          "sentence": 2
+        },
+        {
+          "icon": "🔀",
+          "text": "Kênh 2 chiều: invokeMethod ↔ setMethodCallHandler",
+          "sentence": 3
+        },
+        {
+          "icon": "🔌",
+          "text": "2 đầu dây đã có sẵn từ Tập 1–2",
+          "sentence": 4
+        },
+        {
+          "icon": "☎️",
+          "text": "Hôm nay: bấm số và nghe lễ tân trả lời",
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "_loadUser trong wallet_screen.dart — toàn bộ 18 dòng — chạy ngay khi mini Ví mở, gọi xuống lễ tân hỏi thông tin chủ tài khoản.",
+      "Dòng 3: hostChannel.invokeMapMethod ép kiểu String, Object? gọi 'getUserInfo' — Dart CHỦ ĐỘNG hỏi, không hề biết trước Swift sẽ trả lời gì.",
+      "Dòng 6–8: kết quả ép kiểu AN TOÀN từng field bằng 'as String?' và 'as num?' rồi '??' giá trị mặc định — vì Map từ Swift không được Dart tự kiểm tra kiểu.",
+      "Dòng 4 và dòng 11 đều guard 'if (!mounted) return' trước khi setState — nếu mini đã đóng (bấm X quá nhanh) mà vẫn setState sẽ crash, guard chặn đúng ca đó.",
+      "Dòng 10–17: catch on MissingPluginException — khi KHÔNG CÓ ai nghe đầu dây bên kia, Dart tự lùi về 'Khách chạy lẻ' 500.000đ, KHÔNG hề crash."
+    ],
+    "visual": {
+      "filename": "mini_flutter/lib/wallet_screen.dart (_loadUser)",
+      "language": "clike",
+      "code": "  Future<void> _loadUser() async {\n    try {\n      final info = await hostChannel.invokeMapMethod<String, Object?>('getUserInfo');\n      if (!mounted) return;\n      setState(() {\n        _name = info?['name'] as String? ?? 'Khách';\n        _balance = (info?['balance'] as num?)?.toInt() ?? 0;\n        _fromHost = true;\n      });\n    } on MissingPluginException {\n      if (!mounted) return;\n      setState(() {\n        _name = 'Khách chạy lẻ';\n        _balance = 500000;\n        _fromHost = false;\n      });\n    }\n  }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 18,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 6,
+          "to": 8,
+          "sentence": 2
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 3
+        },
+        {
+          "from": 10,
+          "to": 17,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "diagram",
+    "narration": [
+      "Vẽ lại đường dây MethodChannel: Dart trong mini Ví gọi invokeMapMethod, Swift trong MiniAppLauncher lắng nghe bằng setMethodCallHandler.",
+      "Dart gửi tên phương thức 'getUserInfo' qua kênh 'vietsuper/host' — giống nhấc điện thoại gọi xuống lễ tân, không biết ai sẽ nghe máy.",
+      "Swift nhận cuộc gọi, chạy đúng nhánh case 'getUserInfo', rồi gọi result(...) — result() chính là hành động 'gửi thư trả lời' ngược lại cho Dart.",
+      "Gói trả về là Map ['name': 'Lee', 'balance': 1_250_000] — encode qua kênh nhị phân, Dart nhận lại đúng dữ liệu này ở dòng invokeMapMethod.",
+      "Toàn bộ vòng đi–về diễn ra trong vài mili-giây — đủ nhanh để _loadUser cập nhật UI ngay khi initState vừa chạy xong."
+    ],
+    "visual": {
+      "title": "MethodChannel: Dart hỏi — Swift trả lời",
+      "boxes": [
+        {
+          "id": "dart",
+          "label": "Dart (mini Ví)",
+          "emoji": "📱"
+        },
+        {
+          "id": "swift",
+          "label": "Swift (lễ tân)",
+          "emoji": "🧑‍💼"
+        }
+      ],
+      "flows": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "invokeMapMethod('getUserInfo')",
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 0,
+          "label": "result({name, balance})",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Đây là phía LỄ TÂN thật: channel.setMethodCallHandler trong MiniAppLauncher.swift — đoạn code DUY NHẤT trả lời mọi cuộc gọi từ mọi mini.",
+      "switch call.method đọc đúng tên phương thức Dart vừa gửi — case 'getUserInfo' khớp với invokeMapMethod('getUserInfo') vừa xem ở scene trước.",
+      "Dòng 4: result trả về Dictionary ['name': 'Lee', 'balance': 1_250_000] — con số 'Lee' này được HARD-CODE ngay trong Swift, không lấy từ đâu khác.",
+      "case 'close' gọi onClose() rồi result(nil) — đây chính là nút X trong mini_shell.dart sẽ gọi tới, xem ngay ở scene sau.",
+      "default: result(FlutterMethodNotImplemented) — nếu Dart gọi một tên phương thức Swift không biết, lễ tân trả lời thẳng 'tôi không hiểu yêu cầu này', không hề crash."
+    ],
+    "visual": {
+      "filename": "VietSuper/MiniAppLauncher.swift (setMethodCallHandler)",
+      "language": "swift",
+      "code": "    channel.setMethodCallHandler { call, result in\n      switch call.method {\n      case \"getUserInfo\":\n        result([\"name\": \"Lee\", \"balance\": 1_250_000])\n      case \"close\":\n        onClose()\n        result(nil)\n      default:\n        result(FlutterMethodNotImplemented)\n      }\n    }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 2
+        },
+        {
+          "from": 5,
+          "to": 7,
+          "sentence": 3
+        },
+        {
+          "from": 8,
+          "to": 9,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "concept",
+    "narration": [
+      "Câu hỏi cliffhanger đã có lời giải: 'Lee' và '1.250.000đ' không đến từ Flutter — chúng được HARD-CODE trong result() của Swift, gửi qua MethodChannel.",
+      "Nhưng nếu chạy mini Ví LẺ (fvm flutter run -t lib/main_wallet.dart), channel 'vietsuper/host' KHÔNG hề tồn tại — không có app Swift nào lắng nghe.",
+      "Lúc đó invokeMapMethod không nhận được result() nào cả — Flutter tự động ném ra MissingPluginException, đúng như khối catch đã đọc ở scene trước.",
+      "Ẩn dụ: gọi điện xuống lễ tân nhưng tòa nhà KHÔNG CÓ lễ tân — không ai bắt máy, cuộc gọi tự động báo lỗi thay vì treo máy vô thời hạn.",
+      "Kết quả: CÙNG một file wallet_screen.dart, CÙNG một đoạn code — nhưng MỘT màn hình cho ra HAI bối cảnh khác nhau, tùy có lễ tân hay không.",
+      "Đây chính là lý do chip trên màn hình đổi chữ: 'Số dư lấy từ app chủ (Swift)' khi nhúng, 'Dữ liệu mẫu — đang chạy lẻ' khi chạy đơn độc."
+    ],
+    "visual": {
+      "title": "Một code, hai bối cảnh — vì sao?",
+      "bullets": [
+        {
+          "icon": "🔍",
+          "text": "'Lee' / 1.250.000đ = hard-code trong result() Swift",
+          "sentence": 0
+        },
+        {
+          "icon": "🏃",
+          "text": "Chạy lẻ: channel 'vietsuper/host' không tồn tại",
+          "sentence": 1
+        },
+        {
+          "icon": "⚠️",
+          "text": "Không có result() → MissingPluginException",
+          "sentence": 2
+        },
+        {
+          "icon": "📵",
+          "text": "Gọi lễ tân nhưng tòa nhà không có lễ tân",
+          "sentence": 3
+        },
+        {
+          "icon": "🪞",
+          "text": "1 file Dart → 2 bối cảnh khác nhau",
+          "sentence": 4
+        },
+        {
+          "icon": "🏷️",
+          "text": "Chip đổi chữ theo _fromHost: nhúng hay chạy lẻ",
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "phone",
+    "narration": [
+      "Ảnh 1: mini Ví mở TỪ app chủ ViệtSuper — tiêu đề vẫn 'Ví ViệtSuper', card đỏ hiện 'Lee' và '1.250.000đ', chip dưới ghi 'Số dư lấy từ app chủ (Swift)'.",
+      "Ảnh 2: CÙNG mini Ví, nhưng chạy LẺ bằng fvm flutter run -t lib/main_wallet.dart — không còn thanh '◀ ViệtSuper' phía trên, vì không có app chủ bọc nó.",
+      "Card đỏ giờ hiện 'Khách chạy lẻ' và '500.000đ' — đúng hai giá trị hard-code trong khối catch MissingPluginException vừa đọc.",
+      "Chip cũng đổi: '🏕️ Dữ liệu mẫu — đang chạy lẻ' — cùng biến _fromHost, cùng một Chip widget, chỉ giá trị boolean thay đổi theo môi trường chạy.",
+      "Đây là bằng chứng sống: MỘT bộ code Dart, chạy trong HAI bối cảnh khác nhau, cho ra HAI kết quả khác nhau — không cần if-else phân biệt platform nào cả."
+    ],
+    "visual": {
+      "title": "Một code, hai bối cảnh 📞",
+      "screens": [
+        {
+          "src": "screens/ep29/mini-wallet-from-host.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/ep29/mini-wallet-standalone-fallback.png",
+          "sentence": 1
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🏢",
+          "text": "Nhúng: Lee / 1.250.000đ — 'từ app chủ (Swift)'",
+          "sentence": 0
+        },
+        {
+          "icon": "🏕️",
+          "text": "Chạy lẻ: không thanh '◀ ViệtSuper' phía trên",
+          "sentence": 1
+        },
+        {
+          "icon": "💸",
+          "text": "Chạy lẻ: Khách chạy lẻ / 500.000đ",
+          "sentence": 2
+        },
+        {
+          "icon": "🏷️",
+          "text": "Chip đổi theo _fromHost — cùng 1 widget",
+          "sentence": 3
+        },
+        {
+          "icon": "🧬",
+          "text": "1 code, 2 bối cảnh, không if-else platform",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Nút X góc trái mọi mini gọi tới _close() trong mini_shell.dart — toàn bộ 7 dòng, dùng lại đúng hostChannel đã khai từ Tập 1.",
+      "Dòng 3: hostChannel.invokeMethod('close') — gửi đúng tên phương thức 'close', khớp case 'close' trong Swift đã xem ở scene trước, kích hoạt onClose().",
+      "Dòng 4–6: catch on MissingPluginException lại xuất hiện — chạy lẻ bấm X thì không ai nghe, Dart lặng lẽ bỏ qua, không crash, không có gì để đóng cả.",
+      "Khi nhúng trong app chủ: onClose() ở phía Swift đóng fullScreenCover — đây là cách một widget Flutter điều khiển ngược lại UI SwiftUI bên ngoài."
+    ],
+    "visual": {
+      "filename": "mini_flutter/lib/mini_shell.dart (_close)",
+      "language": "clike",
+      "code": "  Future<void> _close() async {\n    try {\n      await hostChannel.invokeMethod('close');\n    } on MissingPluginException {\n      // Chạy lẻ: không có host để đóng.\n    }\n  }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 4,
+          "to": 6,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "concept",
+    "narration": [
+      "Chốt Tập 4: MethodChannel là đường dây 2 chiều thật — Dart invokeMethod/invokeMapMethod GỌI, Swift setMethodCallHandler NGHE và result() TRẢ LỜI.",
+      "Ba phương thức đã đủ dùng cho toàn bộ demo: 'getUserInfo' lấy tên và số dư, 'close' đóng mini — default trả FlutterMethodNotImplemented cho mọi tên lạ.",
+      "Fallback MissingPluginException KHÔNG phải lỗi cần sợ — đó là cách Dart tự phát hiện 'không có lễ tân' và lùi về dữ liệu mẫu, một cách graceful.",
+      "Công thức giờ đã đủ 3 mảnh: entrypoint main_X.dart (Tập 1), khai trong MiniApp.swift (Tập 2–3), và channel hỏi–đáp (Tập 4) — không thiếu mảnh nào nữa.",
+      "Ẩn dụ hoàn chỉnh: tòa nhà bê tông (native), căn hộ lắp ghép (module), đồng hồ điện nước riêng (engine), và giờ thêm đường dây lễ tân (MethodChannel).",
+      "Tập sau sẽ dùng ĐỦ 3 mảnh công thức này để xây một mini HOÀN TOÀN MỚI — mini Xem phim — từ số 0 tới lúc chạy trên simulator."
+    ],
+    "visual": {
+      "title": "Tổng kết Tập 4: hộp đen đã mở",
+      "bullets": [
+        {
+          "icon": "🔀",
+          "text": "invokeMethod GỌI — setMethodCallHandler NGHE — result() TRẢ LỜI",
+          "sentence": 0
+        },
+        {
+          "icon": "3️⃣",
+          "text": "3 method: getUserInfo, close, default không hiểu",
+          "sentence": 1
+        },
+        {
+          "icon": "🛟",
+          "text": "MissingPluginException = graceful fallback, không phải lỗi",
+          "sentence": 2
+        },
+        {
+          "icon": "🧩",
+          "text": "Công thức đủ 3 mảnh: entrypoint + khai Swift + channel",
+          "sentence": 3
+        },
+        {
+          "icon": "🏢",
+          "text": "Tòa nhà · căn hộ · đồng hồ riêng · đường dây lễ tân",
+          "sentence": 4
+        },
+        {
+          "icon": "🎬",
+          "text": "Tập sau: xây mini Xem phim từ số 0 bằng đủ 3 mảnh",
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "outro",
+    "narration": [
+      "Vậy là hộp đen MethodChannel đã mở: 'Lee' và 1.250.000đ không phải phép màu — chỉ là một Dictionary Swift hard-code, gửi qua result().",
+      "Tập sau, ta dùng đúng công thức 4 bước để xây mini THỨ BA từ A đến Z: mini Xem phim, cùng dữ liệu 3 phim Việt với series React Native trước đó.",
+      "Lần này sẽ không sửa MiniAppLauncher hay ContentView nữa — chỉ thêm entrypoint, thêm import, thêm một phần tử Swift — kiến trúc tốt là vậy.",
+      "Repo có tag flutter-miniapp-tap-4 đúng trạng thái hôm nay: checkout là thấy đúng wallet_screen.dart và MiniAppLauncher.swift trong video.",
+      "Cảm ơn bạn đã xem Tập 4 trên 6: comment nếu bạn đoán được vì sao 'Khách chạy lẻ' luôn là đúng 500.000đ, và hẹn gặp lại ở Tập 5!"
+    ],
+    "visual": {
+      "title": "Tập 4/6 xong — hẹn gặp Tập 5! 👋",
+      "summary": [
+        {
+          "text": "MethodChannel: invokeMethod/invokeMapMethod ↔ setMethodCallHandler + result()",
+          "sentence": 0
+        },
+        {
+          "text": "Tập 5: xây mini Xem phim từ A đến Z bằng công thức 4 bước",
+          "sentence": 1
+        },
+        {
+          "text": "Tag flutter-miniapp-tap-4 = đúng code hôm nay",
+          "sentence": 3
+        }
+      ],
+      "next": "Tập 5/6: xây mini Xem phim từ A đến Z 🎬"
+    }
+  }
+]

@@ -31,6 +31,7 @@ import ep25 from './data/ep25.timing.json';
 import ep26 from './data/ep26.timing.json';
 import ep27 from './data/ep27.timing.json';
 import ep28 from './data/ep28.timing.json';
+import ep29 from './data/ep29.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -62,6 +63,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode26', timing: ep26 as unknown as EpisodeTiming},
   {id: 'Episode27', timing: ep27 as unknown as EpisodeTiming},
   {id: 'Episode28', timing: ep28 as unknown as EpisodeTiming},
+  {id: 'Episode29', timing: ep29 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -389,6 +391,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/ep28/mini-wallet-open.png',
       badgeEmoji: '👛',
+      seriesTag: 'Mini-App với Flutter 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb29',
+    props: {
+      badge: 'FLUTTER MINI-APP 4',
+      line1: 'MỞ HỘP ĐEN',
+      line2: 'METHODCHANNEL',
+      subtitle: 'Mini hỏi · Swift trả lời · 1 code 2 bối cảnh',
+      variant: 'shot',
+      image: 'screens/ep29/mini-wallet-from-host.png',
+      badgeEmoji: '📞',
       seriesTag: 'Mini-App với Flutter 🇻🇳',
     },
   },
