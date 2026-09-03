@@ -509,7 +509,7 @@
             "sentence": 0
           },
           {
-            "cmd": "xcodebuild -workspace VietSuper.xcworkspace -scheme VietSuper -destination 'platform=iOS Simulator,name=iPhone 16 Pro' build",
+            "cmd": "xcodebuild -workspace VietSuper.xcworkspace -scheme VietSuper -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build",
             "output": "** BUILD SUCCEEDED **",
             "sentence": 1
           }

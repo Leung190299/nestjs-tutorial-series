@@ -948,7 +948,7 @@ Có cả một gotcha CÓ THẬT từng làm mini trắng trơn ngay lần build
 
 **Thumbnail:** badge "FLUTTER MINI-APP 2" · dòng lớn "SWIFTUI" / "ĐÃ SỐNG" · phụ đề "XcodeGen · FlutterEngineGroup · gotcha thật" · badge emoji 🏗️ · ảnh nền `screens/ep27/mini-food-embedded.png`.
 
-**Tags:** `swiftui cho người mới, swiftui là gì, flutterengine ios, fluttervi ewcontroller, xcodegen tutorial, podfile flutter, add-to-app ios, flutter add to app swift, methodchannel, flutter ios native, swiftui flutter, uiviewcontrollerrepresentable, dart lookuplibrary, flutter debugging, mini app flutter, học swiftui, flutter tiếng việt`
+**Tags:** `swiftui cho người mới, swiftui là gì, flutterengine ios, flutterviewcontroller, xcodegen tutorial, podfile flutter, add-to-app ios, flutter add to app swift, methodchannel, flutter ios native, swiftui flutter, uiviewcontrollerrepresentable, dart lookuplibrary, flutter debugging, mini app flutter, học swiftui, flutter tiếng việt`
 
 ---
 

@@ -472,7 +472,7 @@
         "commands": [
           {
             "cmd": "fvm flutter run -t lib/main_food.dart",
-            "output": "Launching lib/main_food.dart on iPhone 16 Pro...\nSyncing files to device iPhone 16 Pro...\n\nFlutter run key commands.",
+            "output": "Launching lib/main_food.dart on iPhone 17 Pro...\nSyncing files to device iPhone 17 Pro...\n\nFlutter run key commands.",
             "sentence": 1
           }
         ]

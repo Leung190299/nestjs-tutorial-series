@@ -180,7 +180,7 @@
     "visual": {
       "title": "Chạy thẳng vào 1 cửa: -t lib/main_food.dart",
       "commands": [
-        {"cmd": "fvm flutter run -t lib/main_food.dart", "output": "Launching lib/main_food.dart on iPhone 16 Pro...\nSyncing files to device iPhone 16 Pro...\n\nFlutter run key commands.", "sentence": 1}
+        {"cmd": "fvm flutter run -t lib/main_food.dart", "output": "Launching lib/main_food.dart on iPhone 17 Pro...\nSyncing files to device iPhone 17 Pro...\n\nFlutter run key commands.", "sentence": 1}
       ]
     }
   },
