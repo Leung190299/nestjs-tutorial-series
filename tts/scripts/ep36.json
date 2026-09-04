@@ -1,0 +1,219 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tập trước ta hứa: 'căn hộ đã có người ở — tập sau cho ra ở riêng' — đúng lời hứa, hôm nay ta thực hiện.",
+      "Concept hôm nay: CÙNG một căn hộ mini_news, nhưng có HAI CỬA ra vào — cửa tab trong ViệtSuper, và cửa mới toanh: chạy độc lập.",
+      "Chạy lẻ không phải trò biểu diễn: đó là quyền lợi kiến trúc thật — đội Tin tức không cần khởi động cả ViệtSuper chỉ để sửa một dòng NewsScreen.",
+      "5 tập, hôm nay Tập 3 trên 5: news_standalone — một app vỏ Flutter chỉ chừng 20 dòng, cho căn hộ ra ở riêng."
+    ],
+    "visual": {
+      "title": "Cùng căn hộ, hai cửa",
+      "subtitle": "Mini-App Flutter thuần · Tập 3/5 · news_standalone",
+      "badge": "Series Mini-App Flutter thuần · Tập 3"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Vì sao phải cho một mini-app chạy riêng? Không phải để khoe, mà đổi hẳn cách một đội ngũ làm việc.",
+      "Thứ nhất: tốc độ. App chủ ViệtSuper càng phình to — thêm Nạp thẻ, thêm Đặt xe — mỗi lần khởi động càng chậm; chạy riêng news_standalone thì nhẹ tênh.",
+      "Thứ hai: độc lập. Đội Tin tức code cả ngày trên vỏ riêng của mình, không đợi đội Nạp thẻ, không sợ code người khác làm sập môi trường chung.",
+      "Thứ ba: kiểm thử. Tester nhận đúng một app nhỏ chỉ chứa NewsScreen — khoanh vùng lỗi dễ hơn hẳn so với dò trong cả siêu ứng dụng.",
+      "Cái giá phải trả gần như bằng không: một app vỏ Flutter mỏng dính, như sắp thấy ngay sau đây.",
+      "Và một lợi ích âm thầm khác: bản build của vỏ nhẹ hơn nhiều so với ViệtSuper đầy đủ — hữu ích khi chỉ cần demo nhanh tính năng Tin tức cho khách hàng xem."
+    ],
+    "visual": {
+      "title": "Chạy lẻ = quyền lợi kiến trúc",
+      "bullets": [
+        {"icon": "⚡", "text": "Nhẹ tênh — không kéo theo cả ViệtSuper", "sentence": 1},
+        {"icon": "👥", "text": "Đội Tin tức dev độc lập, không đợi ai", "sentence": 2},
+        {"icon": "🔍", "text": "Tester nhận đúng 1 app nhỏ để test", "sentence": 3},
+        {"icon": "🪶", "text": "Giá phải trả: một app vỏ mỏng dính", "sentence": 4},
+        {"icon": "📦", "text": "Bonus: bản build vỏ nhẹ hơn app đầy đủ", "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là TOÀN BỘ main.dart của news_standalone — 21 dòng, cả một app vỏ chỉ chừng này.",
+      "Hai dòng import: material.dart như mọi app Flutter, và package:mini_news/mini_news.dart — đúng cửa chính học ở Tập 2, import theo TÊN package chứ không phải đường dẫn tương đối.",
+      "void main chạy runApp với NewsStandaloneApp — một StatelessWidget không state, không logic riêng, chỉ dựng khung MaterialApp.",
+      "Bên trong build: MaterialApp với title 'Tin tức', tắt debug banner, và theme màu đỏ y hệt app chủ ViệtSuper — đúng phong cách dù chạy riêng.",
+      "Scaffold ở đây có AppBar riêng — 'Tin tức ViệtSuper' — thứ mà lúc nằm trong tab app chủ, NewsScreen không cần vì đã có NavigationBar lo phần đó.",
+      "body: const NewsScreen() — đúng CĂN PHÒNG đã xây từ Tập 2, không sửa một dòng bên trong, chỉ đổi cái vỏ bọc ngoài.",
+      "Hết. Vỏ 21 dòng, mọi ruột gan còn lại vẫn nằm nguyên trong package mini_news."
+    ],
+    "visual": {
+      "filename": "apps/news_standalone/lib/main.dart — TOÀN BỘ FILE",
+      "language": "clike",
+      "code": "import 'package:flutter/material.dart';\nimport 'package:mini_news/mini_news.dart';\n\nvoid main() => runApp(const NewsStandaloneApp());\n\nclass NewsStandaloneApp extends StatelessWidget {\n  const NewsStandaloneApp({super.key});\n\n  @override\n  Widget build(BuildContext context) {\n    return MaterialApp(\n      title: 'Tin tức',\n      debugShowCheckedModeBanner: false,\n      theme: ThemeData(colorSchemeSeed: const Color(0xffea2845), useMaterial3: true),\n      home: Scaffold(\n        appBar: AppBar(title: const Text('Tin tức ViệtSuper')),\n        body: const NewsScreen(),\n      ),\n    );\n  }\n}",
+      "steps": [
+        {"from": 1, "to": 21, "sentence": 0},
+        {"from": 1, "to": 2, "sentence": 1},
+        {"from": 4, "to": 7, "sentence": 2},
+        {"from": 11, "to": 14, "sentence": 3},
+        {"from": 15, "to": 16, "sentence": 4},
+        {"from": 17, "to": 17, "sentence": 5},
+        {"from": 1, "to": 21, "sentence": 6}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "pubspec.yaml của news_standalone — trích đoạn quan trọng nhất: từ environment tới dòng mini_news cuối cùng.",
+      "resolution: workspace — đúng câu 'xin gia nhập khu' đã học từ Tập 1, thiếu dòng này app vỏ sẽ tự tải dependency riêng, không dùng chung lockfile.",
+      "Khối comment ngay dưới do flutter create tự sinh ra — bỏ qua, không cần đọc, chuyện thường của mọi project Flutter mới tạo.",
+      "dependencies: chỉ có flutter, cupertino_icons mặc định — và dòng cuối cùng mới là chủ ý thật sự: mini_news: any.",
+      "Đúng ĐINH đã học ở Tập 2: khai TÊN package, không path, không workspace protocol — pub tự dò packages/mini_news nhờ resolution: workspace ở root."
+    ],
+    "visual": {
+      "filename": "apps/news_standalone/pubspec.yaml (trích environment → dependencies)",
+      "language": "yaml",
+      "code": "environment:\n  sdk: ^3.10.9\n\nresolution: workspace\n\n# Dependencies specify other packages that your package needs in order to work.\n# To automatically upgrade your package dependencies to the latest versions\n# consider running `flutter pub upgrade --major-versions`. Alternatively,\n# dependencies can be manually updated by changing the version numbers below to\n# the latest version available on pub.dev. To see which dependencies have newer\n# versions available, run `flutter pub outdated`.\ndependencies:\n  flutter:\n    sdk: flutter\n\n  # The following adds the Cupertino Icons font to your application.\n  # Use with the CupertinoIcons class for iOS style icons.\n  cupertino_icons: ^1.0.8\n  mini_news: any",
+      "steps": [
+        {"from": 1, "to": 19, "sentence": 0},
+        {"from": 4, "to": 4, "sentence": 1},
+        {"from": 6, "to": 11, "sentence": 2},
+        {"from": 12, "to": 19, "sentence": 3},
+        {"from": 18, "to": 19, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Root pubspec.yaml — vẫn TOÀN BỘ, giờ đã 10 dòng, hai dòng dài hơn Tập 1.",
+      "Mảng workspace: liệt kê từng thành viên — apps/vietsuper vẫn ở đầu danh sách, không đổi.",
+      "Dòng mới: apps/news_standalone — thêm căn hộ vỏ này vào sổ đỏ chung, đúng nghĩa đen 'thêm thành viên khu chung cư'.",
+      "packages/mini_news vẫn ở cuối — cả 3 thành viên giờ dùng chung MỘT pubspec.lock, MỘT lần pub get duy nhất."
+    ],
+    "visual": {
+      "filename": "pubspec.yaml (gốc) — TOÀN BỘ FILE",
+      "language": "yaml",
+      "code": "name: vietsuper_workspace\npublish_to: none\n\nenvironment:\n  sdk: ^3.10.0\n\nworkspace:\n  - apps/vietsuper\n  - apps/news_standalone\n  - packages/mini_news",
+      "steps": [
+        {"from": 1, "to": 10, "sentence": 0},
+        {"from": 7, "to": 8, "sentence": 1},
+        {"from": 9, "to": 9, "sentence": 2},
+        {"from": 1, "to": 10, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "terminal",
+    "narration": [
+      "Chạy thử: cd vào apps/news_standalone, gõ đúng fvm flutter run bình thường — không cờ đặc biệt, không FLUTTER_TARGET, không gì khác lạ.",
+      "Launching lib/main.dart on iPhone 17 Pro — main.dart mặc định, vì vỏ chỉ có đúng MỘT entrypoint, không như những app đa module ở series Flutter add-to-app.",
+      "Chờ vài giây, simulator bật lên: đúng app 'Tin tức' một mình, không NavigationBar ba tab, không app chủ ViệtSuper nào đứng sau lưng.",
+      "Cảm giác y hệt bất cứ app Flutter bình thường nào bạn từng chạy — vì với Dart, nó ĐÚNG LÀ một app Flutter bình thường, chỉ mượn UI từ package bên cạnh.",
+      "Không cần cấu hình build gì thêm cho vỏ này — news_standalone tái dùng nguyên chain build Flutter chuẩn, chỉ là một target build bình thường nằm cạnh trong apps/."
+    ],
+    "visual": {
+      "title": "fvm flutter run trong news_standalone",
+      "commands": [
+        {
+          "cmd": "cd apps/news_standalone && fvm flutter run",
+          "output": "Launching lib/main.dart on iPhone 17 Pro...\n\nFlutter run key commands.",
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "diagram",
+    "narration": [
+      "Nhìn lại bức tranh toàn cảnh: một căn hộ, HAI CỬA ra vào.",
+      "NewsScreen sống trong package mini_news — MỘT nguồn code duy nhất, không copy ở đâu khác.",
+      "Cửa thứ nhất: news_standalone bật nó lên thành app độc lập — cho đội Tin tức code và test.",
+      "Cửa thứ hai: app chủ ViệtSuper import và gắn nó vào tab — thành một tính năng của siêu ứng dụng.",
+      "Sửa NewsScreen một lần trong package: CẢ HAI cửa cùng cập nhật — không lệch phiên bản, không quên đồng bộ."
+    ],
+    "visual": {
+      "title": "Một căn hộ — hai cửa",
+      "boxes": [
+        {"id": "standalone", "label": "news_standalone", "emoji": "🚪"},
+        {"id": "mini", "label": "mini_news", "emoji": "📦"},
+        {"id": "host", "label": "ViệtSuper", "emoji": "🏙️"}
+      ],
+      "flows": [
+        {"from": 1, "to": 0, "label": "cửa 1: chạy riêng", "sentence": 2},
+        {"from": 1, "to": 2, "label": "cửa 2: vào tab", "sentence": 3},
+        {"from": 2, "to": 1, "label": "sửa 1 lần — cả 2 cửa nhận", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "phone",
+    "narration": [
+      "Khoảnh khắc sự thật: ảnh chụp thật từ simulator, app news_standalone chạy một mình.",
+      "3 bài báo hiện đủ, AppBar 'Tin tức ViệtSuper' riêng của vỏ — không một mẩu ViệtSuper nào khác xuất hiện trên màn hình.",
+      "Bấm vào bài 'Flutter có pub workspace chính chủ': sheet trượt lên y hệt hành vi đã xây ở Tập 2 — code không đổi một dòng nào.",
+      "Đóng sheet: dòng 'Đã đọc ✓' hiện ra dưới tiêu đề — _read Set hoạt động y hệt, dù giờ đang chạy trong một app hoàn toàn khác."
+    ],
+    "visual": {
+      "title": "news_standalone: chạy solo",
+      "screens": [
+        {"src": "screens/ep36/standalone-news.png", "sentence": 1},
+        {"src": "screens/ep36/standalone-news-read.png", "sentence": 3}
+      ],
+      "bullets": [
+        {"icon": "📱", "text": "App riêng, một mình một cõi — không dấu vết ViệtSuper", "sentence": 1},
+        {"icon": "📄", "text": "Sheet trượt lên y hệt hành vi Tập 2", "sentence": 2},
+        {"icon": "✅", "text": "'Đã đọc ✓' — _read Set hoạt động y hệt", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "concept",
+    "narration": [
+      "Nếu bạn từng xem series Mini-App với React Native trên kênh, nhịp hôm nay quen chưa?",
+      "Tập 22 bên đó: food-standalone — một vỏ Expo mười chín dòng App.tsx, import FoodScreen theo tên, bọc trong SafeAreaView, xong.",
+      "Hôm nay: news_standalone — một vỏ Flutter 21 dòng main.dart, import NewsScreen theo tên, bọc trong MaterialApp cộng Scaffold, xong.",
+      "Khác chất liệu — JavaScript với TypeScript so Dart, npm workspaces so pub workspace — nhưng công thức giống hệt: vỏ mỏng, cửa chính theo tên, mọi ruột gan nằm nguyên trong package.",
+      "Đây chính là lý do học kiến trúc quan trọng hơn học framework: công thức XUYÊN CHẤT LIỆU, đổi ngôn ngữ vẫn dùng lại được nguyên vẹn.",
+      "Nhắc cho ai chưa xem: series Mini-App với React Native đó vẫn còn nguyên trên kênh — nếu thích nhịp hôm nay, ghé xem bản anh em bằng RN cũng rất đáng."
+    ],
+    "visual": {
+      "title": "So 1 nhịp: công thức xuyên chất liệu",
+      "bullets": [
+        {"icon": "🍜", "text": "RN ep22: food-standalone — 19 dòng App.tsx", "sentence": 1},
+        {"icon": "📰", "text": "Flutter thuần: news_standalone — 21 dòng main.dart", "sentence": 2},
+        {"icon": "🔁", "text": "Khác ngôn ngữ, khác workspace tool", "sentence": 3},
+        {"icon": "🧬", "text": "Cùng công thức: vỏ mỏng + cửa theo tên", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "outro",
+    "narration": [
+      "Tổng kết Tập 3: news_standalone — một app vỏ 21 dòng, import mini_news theo tên, bật NewsScreen lên toàn màn hình có AppBar riêng.",
+      "Root pubspec chỉ thêm đúng một dòng thành viên mới — cả khu vẫn chung MỘT pubspec.lock, MỘT lần pub get.",
+      "Quyền lợi kiến trúc: đội Tin tức giờ code, test, chạy hoàn toàn độc lập — không cần khởi động cả app ViệtSuper mỗi lần sửa một dòng.",
+      "Và như đã thấy, công thức này y hệt food-standalone bên series React Native — chỉ đổi chất liệu, không đổi tư duy.",
+      "Nếu bạn dựng team mới hoàn toàn bằng Flutter, đây là công thức nên nhớ: package tự túc cộng vỏ mỏng theo tên — áp dụng được cho bất cứ tính năng nào, không riêng gì Tin tức.",
+      "Tập sau: lặp lại đúng công thức này để xây căn hộ THỨ HAI — mini_topup — từ A đến Z, đi lại cả 4 bước một lần nữa cho khán giả xem trọn vẹn. Hẹn gặp lại ở Tập 4!"
+    ],
+    "visual": {
+      "title": "Tập 3/5 xong — hai cửa, một căn hộ! 🚪",
+      "summary": [
+        {"text": "news_standalone: vỏ 21 dòng + AppBar riêng + NewsScreen", "sentence": 0},
+        {"text": "Root pubspec: thêm 1 dòng thành viên, chung 1 lockfile", "sentence": 1},
+        {"text": "Chạy lẻ = quyền lợi kiến trúc, không đổi 1 dòng NewsScreen", "sentence": 2}
+      ],
+      "next": "Tập 4/5: mini_topup — công thức A-Z lần 2 🧩"
+    }
+  }
+]
