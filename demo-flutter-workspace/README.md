@@ -15,7 +15,7 @@ demo-flutter-workspace/
 │   │   ├── lib/
 │   │   │   ├── main.dart
 │   │   │   ├── home_shell.dart   # NavigationBar 3 tab + Navigator.push Đặt xe
-│   │   │   ├── home_screen.dart  # lưới 4 ô dịch vụ (2 mờ = chưa mở)
+│   │   │   ├── home_screen.dart  # lưới 4 ô dịch vụ (1 ô mờ = "Sắp ra mắt")
 │   │   │   └── under_construction.dart
 │   │   └── pubspec.yaml          # resolution: workspace + dep mini_news/mini_topup/mini_ride
 │   └── news_standalone/          # app riêng — chỉ 1 màn, tái dùng mini_news
@@ -35,9 +35,10 @@ demo-flutter-workspace/
 
 ## Yêu cầu
 
-- **FVM 3.38.10** (đã pin trong `.fvmrc` / `.fvm/fvm_config.json`) — tương ứng
-  **Dart 3.10**, phiên bản đầu tiên có tính năng `pub workspace` (SDK
-  constraint `^3.10.0` trong mọi `pubspec.yaml` của repo).
+- **FVM 3.38.10** (đã pin trong `.fvmrc`) — đi kèm **Dart 3.10**. Tính năng
+  `pub workspace` có từ **Dart 3.5**, không phải 3.10 — bản Dart ở đây chỉ
+  là bản đi kèm Flutter 3.38.10 được pin trong repo (SDK constraint Dart
+  3.10 trong mọi `pubspec.yaml` của repo).
 
 ## Lệnh
 
