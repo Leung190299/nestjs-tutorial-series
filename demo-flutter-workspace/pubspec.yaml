@@ -1,0 +1,12 @@
+name: vietsuper_workspace
+publish_to: none
+
+environment:
+  sdk: ^3.10.0
+
+workspace:
+  - apps/vietsuper
+  - apps/news_standalone
+  - packages/mini_news
+  - packages/mini_topup
+  - packages/mini_ride
