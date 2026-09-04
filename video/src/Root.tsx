@@ -40,6 +40,7 @@ import ep34 from './data/ep34.timing.json';
 import ep35 from './data/ep35.timing.json';
 import ep36 from './data/ep36.timing.json';
 import ep37 from './data/ep37.timing.json';
+import ep38 from './data/ep38.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -80,6 +81,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode35', timing: ep35 as unknown as EpisodeTiming},
   {id: 'Episode36', timing: ep36 as unknown as EpisodeTiming},
   {id: 'Episode37', timing: ep37 as unknown as EpisodeTiming},
+  {id: 'Episode38', timing: ep38 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -524,6 +526,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/ep37/host-tab-topup-success.png',
       badgeEmoji: '📱',
+      seriesTag: 'Mini-App Flutter thuần 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb38',
+    props: {
+      badge: 'FLUTTER THUẦN 5/5',
+      line1: 'MẢNH CUỐI',
+      line2: 'BỘ BA',
+      subtitle: 'mini_ride · cửa đẩy, không tab',
+      variant: 'shot',
+      image: 'screens/ep38/host-grid-3-on.png',
+      badgeEmoji: '🏆',
       seriesTag: 'Mini-App Flutter thuần 🇻🇳',
     },
   },
