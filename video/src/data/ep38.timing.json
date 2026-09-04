@@ -1,0 +1,863 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Cửa đẩy & tổng kết bộ ba",
+        "subtitle": "Mini-App Flutter thuần · Tập 5/5 · TẬP CUỐI",
+        "badge": "Series Mini-App Flutter thuần · Tập 5"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-01-0-cb23c296.wav",
+          "startFrame": 0,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep38/scene-01-1-f4eb3f14.wav",
+          "startFrame": 239,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep38/scene-01-2-533bc271.wav",
+          "startFrame": 406,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep38/scene-01-3-56591886.wav",
+          "startFrame": 647,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep38/scene-01-4-4b3a6085.wav",
+          "startFrame": 790,
+          "durationInFrames": 276
+        }
+      ],
+      "durationInFrames": 1084
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "mini_ride: cửa đẩy, không cửa tab",
+        "bullets": [
+          {
+            "icon": "🚕",
+            "text": "Bảng giá 15k/25k/32k — CÙNG số liệu series React Native",
+            "sentence": 0
+          },
+          {
+            "icon": "🎯",
+            "text": "Cố tình lặp lại — công thức đổi, dữ liệu nghiệp vụ giữ nguyên",
+            "sentence": 1
+          },
+          {
+            "icon": "🚪",
+            "text": "Cửa ĐẨY khác cửa TAB — Navigator.push, không NavigationBar",
+            "sentence": 2
+          },
+          {
+            "icon": "🏢",
+            "text": "Ẩn dụ: sảnh phụ mở TRÊN nóc tòa nhà, có nút back",
+            "sentence": 3
+          },
+          {
+            "icon": "✅",
+            "text": "Không cần package router — MaterialPageRoute có sẵn",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-02-0-3b41e7ff.wav",
+          "startFrame": 0,
+          "durationInFrames": 315
+        },
+        {
+          "file": "audio/ep38/scene-02-1-03ff7e73.wav",
+          "startFrame": 323,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep38/scene-02-2-a17cf785.wav",
+          "startFrame": 533,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep38/scene-02-3-b87b7dd1.wav",
+          "startFrame": 784,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep38/scene-02-4-2c861e31.wav",
+          "startFrame": 1023,
+          "durationInFrames": 224
+        }
+      ],
+      "durationInFrames": 1265
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "packages/mini_ride/pubspec.yaml — TOÀN BỘ FILE",
+        "language": "yaml",
+        "code": "name: mini_ride\npublish_to: none\n\nenvironment:\n  sdk: ^3.10.0\nresolution: workspace\n\ndependencies:\n  flutter:\n    sdk: flutter",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-03-0-25ebe6b4.wav",
+          "startFrame": 0,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep38/scene-03-1-2ee52783.wav",
+          "startFrame": 246,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep38/scene-03-2-d9acdc85.wav",
+          "startFrame": 432,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep38/scene-03-3-22df7e80.wav",
+          "startFrame": 642,
+          "durationInFrames": 236
+        }
+      ],
+      "durationInFrames": 896
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "packages/mini_ride/lib/src/ride_screen.dart (dữ liệu)",
+        "language": "clike",
+        "code": "class Ride {\n  const Ride({\n    required this.id,\n    required this.name,\n    required this.emoji,\n    required this.pricePerKm,\n  });\n\n  final String id;\n  final String name;\n  final String emoji;\n  final int pricePerKm;\n}\n\nconst rides = [\n  Ride(id: 'bike', name: 'Xe máy', emoji: '🛵', pricePerKm: 15000),\n  Ride(id: 'car4', name: 'Ô tô 4 chỗ', emoji: '🚗', pricePerKm: 25000),\n  Ride(id: 'car7', name: 'Ô tô 7 chỗ', emoji: '🚐', pricePerKm: 32000),\n];\n\nString _formatVnd(int amount) {\n  final s = amount.toString().replaceAllMapped(\n        RegExp(r'\\B(?=(\\d{3})+(?!\\d))'),\n        (_) => '.',\n      );\n  return '$sđ';\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 19,
+            "sentence": 0
+          },
+          {
+            "from": 16,
+            "to": 18,
+            "sentence": 1
+          },
+          {
+            "from": 21,
+            "to": 27,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 27,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-04-0-9853f3c2.wav",
+          "startFrame": 0,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep38/scene-04-1-ec221d03.wav",
+          "startFrame": 229,
+          "durationInFrames": 291
+        },
+        {
+          "file": "audio/ep38/scene-04-2-7f7d7d48.wav",
+          "startFrame": 528,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep38/scene-04-3-9f7fcdc5.wav",
+          "startFrame": 767,
+          "durationInFrames": 178
+        }
+      ],
+      "durationInFrames": 963
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "ride_screen.dart (2 state + 2 biến suy ra)",
+        "language": "clike",
+        "code": "class _RideScreenState extends State<RideScreen> {\n  String? _ride;\n  int _km = 5;\n\n  Ride? get _selected => _ride == null ? null : rides.firstWhere((r) => r.id == _ride);\n\n  int get _total => (_selected?.pricePerKm ?? 0) * _km;",
+        "steps": [
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 5,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-05-0-0b4cbb0e.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep38/scene-05-1-ea7f7fc9.wav",
+          "startFrame": 200,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep38/scene-05-2-a9c0b91a.wav",
+          "startFrame": 458,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep38/scene-05-3-a4621e91.wav",
+          "startFrame": 639,
+          "durationInFrames": 286
+        }
+      ],
+      "durationInFrames": 943
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "ride_screen.dart (stepper + tổng tiền)",
+        "language": "clike",
+        "code": "        SafeArea(\n          top: false,\n          child: Padding(\n            padding: const EdgeInsets.all(16),\n            child: Row(\n              children: [\n                IconButton(\n                  onPressed: () => setState(() => _km = (_km - 1).clamp(1, 50)),\n                  icon: const Icon(Icons.remove),\n                ),\n                Text('$_km km', style: Theme.of(context).textTheme.titleMedium),\n                IconButton(\n                  onPressed: () => setState(() => _km = (_km + 1).clamp(1, 50)),\n                  icon: const Icon(Icons.add),\n                ),\n                const Spacer(),\n                Text('Tổng: ${_formatVnd(_total)}',\n                    style: Theme.of(context).textTheme.titleLarge),\n              ],\n            ),\n          ),\n        ),",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 15,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 11,
+            "to": 16,
+            "sentence": 3
+          },
+          {
+            "from": 17,
+            "to": 22,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-06-0-7590edc6.wav",
+          "startFrame": 0,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep38/scene-06-1-3c822402.wav",
+          "startFrame": 212,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep38/scene-06-2-e10dbfaf.wav",
+          "startFrame": 458,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep38/scene-06-3-7fd8a671.wav",
+          "startFrame": 711,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep38/scene-06-4-b738a101.wav",
+          "startFrame": 914,
+          "durationInFrames": 221
+        }
+      ],
+      "durationInFrames": 1153
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "apps/vietsuper/lib/home_screen.dart (Service + services)",
+        "language": "clike",
+        "code": "class Service {\n  const Service({\n    required this.emoji,\n    required this.name,\n    this.tabIndex,\n    this.enabled = true,\n  });\n\n  final String emoji;\n  final String name;\n  /// Dịch vụ sống trên tab nào (null = mở kiểu màn riêng).\n  final int? tabIndex;\n  final bool enabled;\n}\n\nconst services = [\n  Service(emoji: '📰', name: 'Tin tức', tabIndex: 1, enabled: true),\n  Service(emoji: '📱', name: 'Nạp thẻ', tabIndex: 2, enabled: true),\n  Service(emoji: '🛵', name: 'Đặt xe', enabled: true),\n  Service(emoji: '🎁', name: 'Sắp ra mắt', enabled: false),\n];",
+        "steps": [
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 0
+          },
+          {
+            "from": 17,
+            "to": 18,
+            "sentence": 1
+          },
+          {
+            "from": 19,
+            "to": 19,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 21,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-07-0-59266d1a.wav",
+          "startFrame": 0,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep38/scene-07-1-664eca3a.wav",
+          "startFrame": 208,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep38/scene-07-2-879665ee.wav",
+          "startFrame": 456,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep38/scene-07-3-1bea8fa6.wav",
+          "startFrame": 652,
+          "durationInFrames": 171
+        }
+      ],
+      "durationInFrames": 841
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "apps/vietsuper/lib/home_shell.dart (onOpenRide — cửa đẩy)",
+        "language": "clike",
+        "code": "    final screens = <Widget>[\n      HomeScreen(\n        onOpenTab: (i) => setState(() => _tab = i),\n        onOpenRide: () => Navigator.of(context).push(\n          MaterialPageRoute(\n            builder: (_) => Scaffold(\n              appBar: AppBar(title: const Text('Đặt xe ViệtSuper')),\n              body: const RideScreen(),\n            ),\n          ),\n        ),\n      ),\n      const NewsScreen(),\n      const TopupScreen(),\n    ];",
+        "steps": [
+          {
+            "from": 1,
+            "to": 2,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 9,
+            "sentence": 2
+          },
+          {
+            "from": 4,
+            "to": 11,
+            "sentence": 3
+          },
+          {
+            "from": 13,
+            "to": 15,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-08-0-8eeab37d.wav",
+          "startFrame": 0,
+          "durationInFrames": 279
+        },
+        {
+          "file": "audio/ep38/scene-08-1-71013cfe.wav",
+          "startFrame": 287,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep38/scene-08-2-150e07f2.wav",
+          "startFrame": 514,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep38/scene-08-3-2f36bbd8.wav",
+          "startFrame": 755,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep38/scene-08-4-a815ce01.wav",
+          "startFrame": 1008,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 1216
+    },
+    {
+      "id": "scene-09",
+      "type": "terminal",
+      "visual": {
+        "title": "fvm flutter pub get + run",
+        "commands": [
+          {
+            "cmd": "fvm flutter pub get",
+            "output": "Resolving dependencies in demo-flutter-workspace...\n\nGot dependencies!",
+            "sentence": 1
+          },
+          {
+            "cmd": "cd apps/vietsuper && fvm flutter run",
+            "output": "Launching lib/main.dart on iPhone 17 Pro...\n\nFlutter run key commands.",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-09-0-a584f832.wav",
+          "startFrame": 0,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep38/scene-09-1-f065aea2.wav",
+          "startFrame": 236,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep38/scene-09-2-c8b0cdaa.wav",
+          "startFrame": 468,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep38/scene-09-3-cf69ea32.wav",
+          "startFrame": 709,
+          "durationInFrames": 200
+        }
+      ],
+      "durationInFrames": 927
+    },
+    {
+      "id": "scene-10",
+      "type": "phone",
+      "visual": {
+        "title": "Nghiệm thu mini_ride",
+        "screens": [
+          {
+            "src": "screens/ep38/host-grid-3-on.png",
+            "sentence": 1
+          },
+          {
+            "src": "screens/ep38/ride-pushed.png",
+            "sentence": 2
+          },
+          {
+            "src": "screens/ep38/ride-selected-total.png",
+            "sentence": 3
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🏠",
+            "text": "Trang chủ: 3 ô sáng, NavigationBar vẫn chỉ 3 tab",
+            "sentence": 1
+          },
+          {
+            "icon": "🚪",
+            "text": "Đặt xe: trang mới đẩy lên, có nút back, Tổng 0đ",
+            "sentence": 2
+          },
+          {
+            "icon": "✅",
+            "text": "Xe máy · 6km → Tổng: 90.000đ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-10-0-cfc41c0b.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep38/scene-10-1-dd623063.wav",
+          "startFrame": 107,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep38/scene-10-2-c5b12642.wav",
+          "startFrame": 339,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep38/scene-10-3-bbdb29ac.wav",
+          "startFrame": 592,
+          "durationInFrames": 195
+        }
+      ],
+      "durationInFrames": 805
+    },
+    {
+      "id": "scene-11",
+      "type": "diagram",
+      "visual": {
+        "title": "Tổng khu chung cư: root → package → app",
+        "boxes": [
+          {
+            "id": "root",
+            "label": "Root pubspec",
+            "emoji": "📋"
+          },
+          {
+            "id": "packages",
+            "label": "3 package",
+            "emoji": "📦"
+          },
+          {
+            "id": "apps",
+            "label": "2 app",
+            "emoji": "🏢"
+          }
+        ],
+        "flows": [
+          {
+            "from": 0,
+            "to": 1,
+            "label": "workspace: 5 dòng",
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "import theo tên",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-11-0-e6aa19cb.wav",
+          "startFrame": 0,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep38/scene-11-1-0a935d1c.wav",
+          "startFrame": 164,
+          "durationInFrames": 267
+        },
+        {
+          "file": "audio/ep38/scene-11-2-def801b5.wav",
+          "startFrame": 439,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep38/scene-11-3-e15e103d.wav",
+          "startFrame": 642,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep38/scene-11-4-e8325b10.wav",
+          "startFrame": 866,
+          "durationInFrames": 236
+        }
+      ],
+      "durationInFrames": 1120
+    },
+    {
+      "id": "scene-12",
+      "type": "concept",
+      "visual": {
+        "title": "Bộ ba #1: React Native — workspace",
+        "bullets": [
+          {
+            "icon": "📦",
+            "text": "1 dự án JS duy nhất — npm workspaces",
+            "sentence": 0
+          },
+          {
+            "icon": "🧩",
+            "text": "Mini-app = 1 package, export 1 component",
+            "sentence": 1
+          },
+          {
+            "icon": "🔨",
+            "text": "Gộp lúc BUILD: Metro bundler gom thành 1 bundle",
+            "sentence": 2
+          },
+          {
+            "icon": "🚫",
+            "text": "Không engine riêng — chung 1 JS runtime",
+            "sentence": 3
+          },
+          {
+            "icon": "✅",
+            "text": "Ưu điểm: đơn giản khi xây MỚI từ đầu",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-12-0-35e7a30e.wav",
+          "startFrame": 0,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep38/scene-12-1-b2495f81.wav",
+          "startFrame": 176,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep38/scene-12-2-1104077b.wav",
+          "startFrame": 384,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep38/scene-12-3-4728005a.wav",
+          "startFrame": 582,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep38/scene-12-4-e77a8ecb.wav",
+          "startFrame": 751,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 957
+    },
+    {
+      "id": "scene-13",
+      "type": "concept",
+      "visual": {
+        "title": "Bộ ba #2: Flutter thuần — pub workspace",
+        "bullets": [
+          {
+            "icon": "📦",
+            "text": "1 dự án Dart duy nhất — pub workspace",
+            "sentence": 0
+          },
+          {
+            "icon": "🧩",
+            "text": "Mini-app = 1 package trong packages/",
+            "sentence": 1
+          },
+          {
+            "icon": "🔨",
+            "text": "Gộp lúc BUILD: pub get + Dart compiler chung binary",
+            "sentence": 2
+          },
+          {
+            "icon": "🎯",
+            "text": "Một ngôn ngữ Dart — không cầu nối JS-native",
+            "sentence": 3
+          },
+          {
+            "icon": "✅",
+            "text": "Ưu điểm: gọn NHẤT khi đội ngũ đã quen Dart",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-13-0-a4bee44e.wav",
+          "startFrame": 0,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep38/scene-13-1-ba01b185.wav",
+          "startFrame": 131,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep38/scene-13-2-701ddb99.wav",
+          "startFrame": 336,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep38/scene-13-3-fc403929.wav",
+          "startFrame": 551,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep38/scene-13-4-ab562ae5.wav",
+          "startFrame": 744,
+          "durationInFrames": 221
+        }
+      ],
+      "durationInFrames": 983
+    },
+    {
+      "id": "scene-14",
+      "type": "concept",
+      "visual": {
+        "title": "Bộ ba #3: Flutter add-to-app",
+        "bullets": [
+          {
+            "icon": "🏗️",
+            "text": "2 dự án tách biệt — app chủ native + module Flutter",
+            "sentence": 1
+          },
+          {
+            "icon": "⚡",
+            "text": "Gộp lúc RUNTIME: FlutterEngine nạp khi bấm vào",
+            "sentence": 2
+          },
+          {
+            "icon": "💧",
+            "text": "Mỗi mini 1 engine riêng — tách biệt app chủ",
+            "sentence": 3
+          },
+          {
+            "icon": "⚖️",
+            "text": "Đánh đổi: phải hiểu CẢ HAI ngôn ngữ để debug",
+            "sentence": 3
+          },
+          {
+            "icon": "✅",
+            "text": "Ưu điểm: giữ app native triệu người dùng đã có",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-14-0-828b95fc.wav",
+          "startFrame": 0,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep38/scene-14-1-a5fb54c6.wav",
+          "startFrame": 133,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep38/scene-14-2-ab125061.wav",
+          "startFrame": 281,
+          "durationInFrames": 279
+        },
+        {
+          "file": "audio/ep38/scene-14-3-ba1ca02c.wav",
+          "startFrame": 568,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep38/scene-14-4-bb3d03f9.wav",
+          "startFrame": 783,
+          "durationInFrames": 185
+        }
+      ],
+      "durationInFrames": 986
+    },
+    {
+      "id": "scene-15",
+      "type": "outro",
+      "visual": {
+        "title": "Series Flutter thuần 5/5 hoàn tất — cảm ơn! 🏆",
+        "summary": [
+          {
+            "text": "mini_ride: cửa đẩy Navigator.push, dữ liệu trùng series RN",
+            "sentence": 2
+          },
+          {
+            "text": "5 tập: pub workspace, cửa chính, tấm biển, sổ đỏ chung",
+            "sentence": 3
+          },
+          {
+            "text": "Repo + tag flutter-workspace-tap-1..5 = đúng code từng tập",
+            "sentence": 4
+          }
+        ],
+        "next": "Vote series tiếp theo ở bình luận 🗳️"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep38/scene-15-0-d7ef2703.wav",
+          "startFrame": 0,
+          "durationInFrames": 267
+        },
+        {
+          "file": "audio/ep38/scene-15-1-bb946896.wav",
+          "startFrame": 275,
+          "durationInFrames": 269
+        },
+        {
+          "file": "audio/ep38/scene-15-2-c5c7c88e.wav",
+          "startFrame": 552,
+          "durationInFrames": 276
+        },
+        {
+          "file": "audio/ep38/scene-15-3-a9162b45.wav",
+          "startFrame": 836,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep38/scene-15-4-b9f30f5f.wav",
+          "startFrame": 1118,
+          "durationInFrames": 435
+        },
+        {
+          "file": "audio/ep38/scene-15-5-acefa4f4.wav",
+          "startFrame": 1561,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep38/scene-15-6-c20a8403.wav",
+          "startFrame": 1795,
+          "durationInFrames": 243
+        }
+      ],
+      "durationInFrames": 2056
+    }
+  ]
+}

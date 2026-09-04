@@ -1191,6 +1191,222 @@ Hai bài học thật không giấu diếm: (1) chip Ví trên Android vẫn ghi
 
 **Tags:** `kotlin methodchannel, flutter double tap bug, flutterenginecache contains, flutter android bridge, swiftui vs jetpack compose, add-to-app flutter kotlin, flutter engine leak fix, flutter vs kotlin add-to-app, flutter android methodchannel, flutter tiếng việt, học kotlin, mini app android, super app flutter, flutter dart swift kotlin, flutter debugging thực chiến, kiến trúc mini app, android jetpack compose, kotlin tiếng việt`
 
+---
+
+## SERIES MINI-APP FLUTTER THUẦN — "Mini-App Flutter thuần 🇻🇳" (Pub Workspace, 5 tập)
+
+> Playlist đích: **"Mini-App Flutter thuần 🇻🇳"** — sẽ tạo khi đăng tập đầu tiên, thêm dần từng tập vào. Mảnh cuối cùng của bộ ba cách làm mini-app trên kênh: không một dòng code native, toàn bộ từ trên xuống dưới chỉ MỘT ngôn ngữ Dart, gộp nhiều mini-app bằng **pub workspace** (có từ Dart 3.5) — trái ngược có chủ đích với FlutterEngine runtime của series add-to-app, nhưng cùng triết lý với npm workspaces của series React Native. Code: `demo-flutter-workspace/` (repo `nestjs-tutorial-series`), mỗi tập có tag riêng `flutter-workspace-tap-N` — `git checkout flutter-workspace-tap-N` để xem đúng code của tập đang xem. Ẩn dụ xuyên suốt: khu chung cư THUẦN Flutter — tòa nhà và từng căn hộ CÙNG một chất liệu, cả khu chỉ MỘT đồng hồ tổng (1 Flutter Engine duy nhất, khác hẳn "mỗi căn hộ 1 đồng hồ riêng" của series add-to-app).
+
+Từ khóa chủ lực toàn series: `pub workspace`, `flutter monorepo`, `mini app flutter`, `dart workspace`, `flutter package`, `flutter tiếng việt`, `học flutter`, `super app flutter`.
+
+<!-- Playlist "Mini-App Flutter thuần 🇻🇳" chưa tạo — 5 tập chờ lệnh đăng -->
+
+### Flutter Thuần #1 — Pub workspace: sổ đỏ chung cho cả khu chung cư Flutter (7:22)
+
+**Tiêu đề:** Pub workspace Flutter thuần: sổ đỏ chung cho cả khu mini-app | Tập 1/5
+
+**Mô tả:**
+```
+Kênh đã có bộ đôi: series React Native dùng npm workspaces, và series Flutter add-to-app nhúng vào app native — hôm nay mở mảnh cuối của bộ ba. Series MỚI "Mini-App Flutter thuần": không một dòng code native, không SwiftUI, không Kotlin — tất cả từ trên xuống dưới chỉ MỘT ngôn ngữ Dart. Ai đã xem series React Native workspace sẽ thấy công thức quen, chỉ đổi chất liệu.
+
+Tập 1: pub workspace là gì — có từ Dart 3.5 (không phải bản mới ra), hiểu đơn giản là "npm workspaces bản Dart", nhiều package chia sẻ đúng MỘT pubspec.lock. Đọc TOÀN BỘ root pubspec.yaml (8 dòng: workspace: — apps/vietsuper) và resolution: workspace trong app con — dòng "xin gia nhập khu". Terminal: flutter create app chủ rồi pub get Ở GỐC, dòng Resolving dependencies in demo-flutter-workspace là bằng chứng resolve cả khu cùng lúc. Dựng home_shell.dart (NavigationBar 3 tab), home_screen.dart (class Service + lưới 4 ô "chờ khai trương" mờ 35%) và under_construction.dart dùng chung cho mọi tab chưa có tính năng thật.
+
+Ẩn dụ xuyên suốt series mới: khu chung cư THUẦN Flutter — tòa nhà và căn hộ CÙNG một chất liệu, cả khu chỉ MỘT đồng hồ tổng, khác hẳn "mỗi căn hộ một đồng hồ riêng" của series add-to-app.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu series Mini-App Flutter thuần
+0:38 Pub workspace là gì — "npm workspaces bản Dart"
+1:31 pubspec.yaml gốc & app: workspace + resolution
+2:28 Terminal: tạo app chủ + pub get ở gốc
+3:04 home_shell.dart & home_screen.dart: 3 tab, lưới 4 ô mờ
+5:38 Ẩn dụ: khu THUẦN Flutter — 1 đồng hồ tổng
+6:15 Nghiệm thu trên simulator
+6:45 Tổng kết Tập 1 & hẹn Tập 2
+
+📦 Source code (demo-flutter-workspace/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout flutter-workspace-tap-1 để xem đúng code tập này.
+▶️ Series RN cũ "Mini-App từ A đến Z": https://www.youtube.com/playlist?list=PLY-i2_1YbKi4
+▶️ Series Flutter add-to-app "Mini-App với Flutter 🇻🇳": https://www.youtube.com/playlist?list=PLL5FgtEBrD6g
+⏭️ Tập sau: [LINK-EP35]
+
+#flutter #pubworkspace #miniapp #dart #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🧱 Sự thật ít ai để ý: pub workspace có từ Dart 3.5, không phải bản mới toanh — chỉ là SDK demo hôm nay ghi 3.10.9 vì đó là bản Dart đi kèm Flutter mới nhất. Bạn đã dùng pub workspace trong dự án thật chưa? Comment kể trải nghiệm nhé!
+```
+
+**Thumbnail:** badge "FLUTTER THUẦN 1/5" · dòng lớn "SỔ ĐỎ" / "CHUNG KHU" · phụ đề "Pub workspace · từ Dart 3.5" · badge emoji 🧱 · ảnh nền `screens/ep34/host-home-grid.png`.
+
+**Tags:** `pub workspace, flutter monorepo, dart workspace, mini app flutter, flutter package, resolution workspace, pubspec.lock, flutter create, super app flutter, flutter tiếng việt, học flutter, npm workspaces vs dart, flutter cho người mới, dart 3.5, kiến trúc mini app, flutter dart, mini app tiếng việt`
+
+---
+
+### Flutter Thuần #2 — Căn hộ đầu tiên: mini_news và cú pháp 3 dòng gắn tab (6:54)
+
+**Tiêu đề:** Flutter package mini_news: gắn mini-app vào tab chỉ 3 dòng | Tập 2/5
+
+**Mô tả:**
+```
+Tập trước ta hứa xây CĂN HỘ ĐẦU TIÊN — đúng lời hứa, hôm nay căn hộ đó tên là mini_news. Một căn hộ Flutter thuần trong pub workspace cần đúng BA thứ: SỔ ĐỎ (pubspec.yaml với resolution: workspace), CỬA CHÍNH (lib/mini_news.dart chỉ export) và CĂN PHÒNG (NewsScreen tự túc data lẫn logic) — công thức quen từ series React Native, chỉ đổi chất liệu.
+
+Đọc TOÀN BỘ pubspec.yaml của mini_news (đúng 10 dòng) — và một điểm reviewer hay bắt lỗi nhất: package KHÔNG khai flutter_test riêng mà test vẫn chạy được, nhờ cả khu dùng CHUNG một pubspec.lock (tách package ra ngoài thì phải tự khai lại). Rồi NewsScreen: class Article, 3 bài báo (một bài tự giới thiệu chính pub workspace, một bài nháy mắt "ViệtSuper sắp mở Đặt xe"), _read Set đánh dấu đã đọc, showModalBottomSheet trượt lên khi bấm vào bài.
+
+Cú pháp ĐINH của tập: gắn vào app chủ chỉ cần dep mini_news: any THEO TÊN — không path, không workspace protocol, pub tự dò trong packages/. So 1 nhịp: bên React Native, package.json phải khai rõ "main" trỏ file; ở Flutter workspace thì không cần.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu Tập 2 — căn hộ đầu tiên mini_news
+0:27 Giải phẫu 1 căn hộ Flutter thuần: sổ đỏ, cửa chính, căn phòng
+1:00 pubspec.yaml mini_news — vì sao không cần khai flutter_test
+1:45 Cửa chính lib/mini_news.dart — 1 dòng export
+2:10 NewsScreen: Article, 3 bài báo, sheet + đánh dấu Đã đọc
+4:06 Gắn vào app chủ: mini_news: any + import + tab
+5:53 Nghiệm thu trên simulator
+6:19 Tổng kết Tập 2 & hẹn Tập 3
+
+📦 Source code (demo-flutter-workspace/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout flutter-workspace-tap-2 để xem đúng code tập này.
+⏮️ Tập trước: [LINK-EP34]
+⏭️ Tập sau: [LINK-EP36]
+
+#flutter #dartpackage #miniapp #flutterdev #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🔒 Điểm reviewer hay hỏi nhất tập này: mini_news KHÔNG khai flutter_test riêng nhưng test vẫn chạy — vì cả khu dùng CHUNG một pubspec.lock. Tách package ra khỏi workspace thì phải tự khai lại đấy! Bạn đoán được vì sao trước khi xem chưa? Comment thử nhé.
+```
+
+**Thumbnail:** badge "FLUTTER THUẦN 2/5" · dòng lớn "CĂN HỘ" / "ĐẦU TIÊN" · phụ đề "mini_news · gắn tab 3 dòng" · badge emoji 📰 · ảnh nền `screens/ep35/host-tab-news.png`.
+
+**Tags:** `flutter package, mini app flutter, pub workspace, dart export, resolution workspace, flutter_test, showmodalbottomsheet, flutter set, flutter tiếng việt, học flutter, dart workspace, flutter monorepo, flutter cho người mới, mini app tiếng việt, super app flutter, flutter dependency, package pub.dev`
+
+---
+
+### Flutter Thuần #3 — Cùng căn hộ, hai cửa: news_standalone ra ở riêng (5:57)
+
+**Tiêu đề:** Chạy lẻ mini-app Flutter: cùng 1 package, hai cửa ra vào | Tập 3/5
+
+**Mô tả:**
+```
+Tập trước ta hứa "căn hộ đã có người ở — tập sau cho ra ở riêng" — đúng lời hứa. Hôm nay: CÙNG một căn hộ mini_news, nhưng có HAI CỬA ra vào — cửa tab trong ViệtSuper, và cửa mới toanh: chạy độc lập. Chạy lẻ không phải trò biểu diễn — đó là quyền lợi kiến trúc thật: đội Tin tức không cần khởi động cả ViệtSuper chỉ để sửa một dòng NewsScreen; tốc độ, độc lập giữa các đội, và kiểm thử dễ khoanh vùng hơn.
+
+Đọc TOÀN BỘ main.dart của news_standalone — đúng 21 dòng, một app vỏ Flutter mỏng dính: import package:mini_news/mini_news.dart theo TÊN, MaterialApp + Scaffold riêng, body: const NewsScreen() không sửa một dòng bên trong package. pubspec.yaml app vỏ vẫn resolution: workspace + mini_news: any, root pubspec chỉ thêm một dòng thành viên mới. Chạy fvm flutter run bình thường trong apps/news_standalone — không cờ đặc biệt, không FLUTTER_TARGET.
+
+So 1 nhịp với series React Native: giống hệt triết lý food-standalone (Tập 22 bên đó) — vỏ mỏng, cửa chính theo tên, mọi ruột gan nằm nguyên trong package. Công thức XUYÊN CHẤT LIỆU, đổi ngôn ngữ vẫn dùng lại được nguyên vẹn.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu Tập 3 — cùng căn hộ, hai cửa
+0:25 Vì sao cho mini-app chạy lẻ — quyền lợi kiến trúc
+1:04 main.dart news_standalone — toàn bộ 21 dòng
+1:56 pubspec.yaml app vỏ + root pubspec thêm thành viên
+2:56 Terminal chạy lẻ + sơ đồ một căn hộ hai cửa
+4:02 Nghiệm thu: chạy solo trên simulator
+4:25 So 1 nhịp với food-standalone (series React Native)
+5:12 Tổng kết Tập 3 & hẹn Tập 4
+
+📦 Source code (demo-flutter-workspace/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout flutter-workspace-tap-3 để xem đúng code tập này.
+⏮️ Tập trước: [LINK-EP35]
+⏭️ Tập sau: [LINK-EP37]
+
+#flutter #standalone #miniapp #dart #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🚪 Cùng một package mini_news, hai cửa ra vào: tab trong ViệtSuper, hoặc chạy lẻ news_standalone — sửa NewsScreen một lần, cả hai cửa cùng cập nhật. Y hệt triết lý food-standalone bên series React Native (Tập 22) — bạn còn nhớ tập đó không? Comment nhé!
+```
+
+**Thumbnail:** badge "FLUTTER THUẦN 3/5" · dòng lớn "HAI CỬA" / "MỘT MÃ" · phụ đề "news_standalone · ra ở riêng" · badge emoji 🚪 · ảnh nền `screens/ep36/standalone-news.png`.
+
+**Tags:** `flutter standalone app, mini app flutter, pub workspace, flutter monorepo, chạy lẻ mini app, dart workspace, flutter run, flutter tiếng việt, học flutter, flutter package, kiến trúc mini app, super app flutter, flutter cho người mới, food standalone, react native vs flutter, flutter dart, mini app tiếng việt`
+
+---
+
+### Flutter Thuần #4 — Công thức lặp lại: mini_topup từ A đến Z (7:01)
+
+**Tiêu đề:** Công thức lặp lại flutter monorepo: mini_topup từ A-Z | Tập 4/5
+
+**Mô tả:**
+```
+Tập trước ta hứa lặp lại đúng công thức để xây căn hộ THỨ HAI — đúng lời hứa, hôm nay đi lại cả 4 bước một lần nữa. Đây không phải bài học kiến thức mới, đây là bài KIỂM CHỨNG: công thức có thật sự lặp lại được, hay chỉ đúng cho mỗi mini_news? Căn hộ mới: mini_topup — Nạp thẻ điện thoại, ba nhà mạng, ba mệnh giá. Luật chơi riêng của tập: KHÔNG sửa mini_news, KHÔNG sửa HomeShell ngoài đúng một chỗ.
+
+Bước 1: packages/mini_topup — pubspec.yaml y hệt mini_news, chỉ đổi tên. Bước 2: topup_screen.dart — 3 state (_carrier, _amount, _done) và một biến SUY RA _canPay (đúng nguyên tắc derived đã học ở series React Native Tập 25); khối if (_done) early-return chuyển MỘT widget thành HAI bộ mặt: form ChoiceChip và màn cảm ơn, nút "Nạp thêm" reset ĐỦ BA state. Bước 3: tấm biển — thêm dep + 1 phần tử tab, không đụng mini_news. Bước 4: root pub get + chạy.
+
+30 giây cuối: thú thật một hành vi có thật trong demo — chuyển tab rồi quay lại Nạp thẻ, form MẤT TRẮNG vì body: screens[_tab] dựng lại State mỗi lần đổi tab. Giải pháp chỉ tốn 1 dòng: IndexedStack(index: _tab, children: screens) — để bạn tự làm bài tập, KHÔNG sửa sẵn trong demo.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu Tập 4 — công thức lặp lại
+0:37 Bước 1: packages/mini_topup — pubspec y hệt mini_news
+1:10 topup_screen.dart: data + 3 state + màn cảm ơn (early return)
+2:24 Form: ChoiceChip Nhà mạng + Mệnh giá + nút Nạp thẻ
+3:13 Bước 3 & 4: tấm biển dependency + tab + sổ đỏ chung
+4:34 Chạy thử + nghiệm thu: 3 ảnh thật
+5:26 Bài tập: 1 dòng IndexedStack giữ tab sống
+6:12 Tổng kết Tập 4 & hẹn Tập 5
+
+📦 Source code (demo-flutter-workspace/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout flutter-workspace-tap-4 để xem đúng code tập này.
+⏮️ Tập trước: [LINK-EP36]
+⏭️ Tập sau: [LINK-EP38]
+
+#flutter #flutterworkspace #miniapp #dart #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🧨 Thú thật ở cuối tập: chuyển tab rồi quay lại Nạp thẻ, form hiện đang MẤT TRẮNG (body: screens[_tab] dựng lại State mỗi lần đổi tab). 1 dòng IndexedStack(index: _tab, children: screens) là lời giải — bạn tự sửa trong home_shell.dart thử chưa? Comment kết quả nhé!
+```
+
+**Thumbnail:** badge "FLUTTER THUẦN 4/5" · dòng lớn "CÔNG THỨC" / "LẶP LẠI" · phụ đề "mini_topup · công thức lần 2" · badge emoji 📱 · ảnh nền `screens/ep37/host-tab-topup-success.png`.
+
+**Tags:** `flutter monorepo, mini app flutter, pub workspace, choicechip flutter, flutter derived state, indexedstack flutter, flutter early return, dart workspace, flutter tiếng việt, học flutter, flutter package, super app flutter, flutter cho người mới, flutter statefulwidget, kiến trúc mini app, flutter dart, nạp thẻ app flutter`
+
+---
+
+### Flutter Thuần #5 (CUỐI) — mini_ride màn ngoài tab & tổng kết BỘ BA cách làm mini-app (8:59)
+
+**Tiêu đề:** Mini-app Flutter thuần: cửa đẩy Navigator.push & tổng kết bộ ba | Tập 5/5
+
+**Mô tả:**
+```
+Tập trước khép lại bằng lời hứa "tập cuối — căn hộ mở bằng CỬA ĐẨY, và một tổng kết lớn: BỘ BA cách làm mini-app trên kênh" — hôm nay trả đúng cả hai. Căn hộ cuối cùng: mini_ride — đặt xe, bảng giá 15.000/25.000/32.000đ mỗi km CÙNG số liệu với series React Native (cố tình lặp lại: công thức đổi, dữ liệu nghiệp vụ không đổi). Khác 3 căn hộ trước, mini_ride không đứng trong NavigationBar — nó mở bằng Navigator.push, một cửa ĐẨY như sảnh phụ trên nóc tòa nhà, có nút back tự nhiên, không cần thêm package router nào.
+
+Đọc packages/mini_ride: class Ride + _selected/_total là biến SUY RA (derived, không phải state), stepper km dùng .clamp(1, 50). Tấm biển: Service.tabIndex giờ nullable — null nghĩa là "mở kiểu màn riêng"; onOpenRide gọi Navigator.of(context).push(MaterialPageRoute(...)) ngay trong HomeScreen, không đụng NavigationBar, không đụng mini_news hay mini_topup.
+
+Rồi TỔNG KẾT BỘ BA cách làm mini-app trên kênh: (1) React Native — npm workspaces, gộp lúc BUILD bằng Metro bundler; (2) Flutter thuần — pub workspace, gộp lúc BUILD bằng Dart compiler, chính là series 5 tập vừa đi qua; (3) Flutter add-to-app — 2 dự án tách biệt, gộp lúc RUNTIME qua FlutterEngine. Xây MỚI hoàn toàn → chọn workspace (đơn giản nhất); đã có app native triệu người dùng → add-to-app.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu Tập 5 — cửa đẩy & tổng kết bộ ba
+0:36 mini_ride: cửa đẩy khác cửa tab, giá trùng series RN
+1:18 Data + state: Ride, _selected, _total (derived)
+2:51 Stepper km + tổng tiền
+3:30 Tấm biển: tabIndex null + Navigator.push
+4:38 Chạy thử + nghiệm thu mini_ride
+5:36 Sơ đồ tổng khu + tổng kết BỘ BA cách làm mini-app
+7:51 Lời kết series 5/5 & cảm ơn
+
+📦 Source code (demo-flutter-workspace/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 Repo có tag theo từng tập (flutter-workspace-tap-1 → tap-5) — git checkout flutter-workspace-tap-5 để xem đúng code tập này.
+⏮️ Tập trước: [LINK-EP37]
+▶️ Series RN cũ "Mini-App từ A đến Z": https://www.youtube.com/playlist?list=PLY-i2_1YbKi4
+▶️ Series Flutter add-to-app "Mini-App với Flutter 🇻🇳": https://www.youtube.com/playlist?list=PLL5FgtEBrD6g
+💬 Vote series tiếp theo trong phần bình luận!
+
+#flutter #navigator #miniapp #superapp #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🏆 Bộ ba cách làm mini-app đã trọn: React Native (npm workspaces, gộp lúc build), Flutter thuần (pub workspace, gộp lúc build — 5 tập vừa xong), Flutter add-to-app (2 dự án, gộp lúc runtime). Xây mới hoàn toàn thì chọn workspace, đã có app native thì chọn add-to-app. Comment vote series tiếp theo nên làm gì nhé — cảm ơn đã đi trọn cả 5 tập!
+```
+
+**Thumbnail:** badge "FLUTTER THUẦN 5/5" · dòng lớn "MẢNH CUỐI" / "BỘ BA" · phụ đề "mini_ride · cửa đẩy, không tab" · badge emoji 🏆 · ảnh nền `screens/ep38/host-grid-3-on.png`.
+
+**Tags:** `flutter navigator push, materialpageroute, mini app flutter, pub workspace, flutter monorepo, dart workspace, flutter vs react native, flutter add-to-app vs workspace, so sánh mini app, flutter tiếng việt, học flutter, flutter package, super app flutter, flutter cho người mới, flutter derived state, kiến trúc mini app, flutter dart, đặt xe app flutter`
+
 ## Thumbnail
 
 Đã render sẵn tại `video/out/thumbs/ep0X-thumb.png` (1280×720, <2MB, chuẩn YouTube). Muốn sửa chữ/bố cục: sửa mảng `thumbnails` trong `video/src/Root.tsx` hoặc component `video/src/Thumbnail.tsx`, rồi chạy `npx remotion still Thumb0X out/thumbs/ep0X-thumb.png`.

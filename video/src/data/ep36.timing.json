@@ -1,0 +1,594 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Cùng căn hộ, hai cửa",
+        "subtitle": "Mini-App Flutter thuần · Tập 3/5 · news_standalone",
+        "badge": "Series Mini-App Flutter thuần · Tập 3"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep36/scene-01-0-574c70f6.wav",
+          "startFrame": 0,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep36/scene-01-1-d738f8d8.wav",
+          "startFrame": 152,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep36/scene-01-2-9d8b4fb0.wav",
+          "startFrame": 338,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep36/scene-01-3-ce8fbe22.wav",
+          "startFrame": 565,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 763
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Chạy lẻ = quyền lợi kiến trúc",
+        "bullets": [
+          {
+            "icon": "⚡",
+            "text": "Nhẹ tênh — không kéo theo cả ViệtSuper",
+            "sentence": 1
+          },
+          {
+            "icon": "👥",
+            "text": "Đội Tin tức dev độc lập, không đợi ai",
+            "sentence": 2
+          },
+          {
+            "icon": "🔍",
+            "text": "Tester nhận đúng 1 app nhỏ để test",
+            "sentence": 3
+          },
+          {
+            "icon": "🪶",
+            "text": "Giá phải trả: một app vỏ mỏng dính",
+            "sentence": 4
+          },
+          {
+            "icon": "📦",
+            "text": "Bonus: bản build vỏ nhẹ hơn app đầy đủ",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep36/scene-02-0-52a908a6.wav",
+          "startFrame": 0,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep36/scene-02-1-649a2c04.wav",
+          "startFrame": 152,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep36/scene-02-2-ccdffd33.wav",
+          "startFrame": 381,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep36/scene-02-3-08d78805.wav",
+          "startFrame": 593,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep36/scene-02-4-ef162c5c.wav",
+          "startFrame": 791,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep36/scene-02-5-b64e83f1.wav",
+          "startFrame": 931,
+          "durationInFrames": 228
+        }
+      ],
+      "durationInFrames": 1177
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "apps/news_standalone/lib/main.dart — TOÀN BỘ FILE",
+        "language": "clike",
+        "code": "import 'package:flutter/material.dart';\nimport 'package:mini_news/mini_news.dart';\n\nvoid main() => runApp(const NewsStandaloneApp());\n\nclass NewsStandaloneApp extends StatelessWidget {\n  const NewsStandaloneApp({super.key});\n\n  @override\n  Widget build(BuildContext context) {\n    return MaterialApp(\n      title: 'Tin tức',\n      debugShowCheckedModeBanner: false,\n      theme: ThemeData(colorSchemeSeed: const Color(0xffea2845), useMaterial3: true),\n      home: Scaffold(\n        appBar: AppBar(title: const Text('Tin tức ViệtSuper')),\n        body: const NewsScreen(),\n      ),\n    );\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 21,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 7,
+            "sentence": 2
+          },
+          {
+            "from": 11,
+            "to": 14,
+            "sentence": 3
+          },
+          {
+            "from": 15,
+            "to": 16,
+            "sentence": 4
+          },
+          {
+            "from": 17,
+            "to": 17,
+            "sentence": 5
+          },
+          {
+            "from": 1,
+            "to": 21,
+            "sentence": 6
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep36/scene-03-0-6a47ac3d.wav",
+          "startFrame": 0,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep36/scene-03-1-184f075f.wav",
+          "startFrame": 152,
+          "durationInFrames": 344
+        },
+        {
+          "file": "audio/ep36/scene-03-2-1e02db6f.wav",
+          "startFrame": 504,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep36/scene-03-3-80926cb1.wav",
+          "startFrame": 731,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep36/scene-03-4-f0242051.wav",
+          "startFrame": 958,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep36/scene-03-5-9ddf24bb.wav",
+          "startFrame": 1206,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep36/scene-03-6-60fc207f.wav",
+          "startFrame": 1397,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 1559
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "apps/news_standalone/pubspec.yaml (trích environment → dependencies)",
+        "language": "yaml",
+        "code": "environment:\n  sdk: ^3.10.9\n\nresolution: workspace\n\n# Dependencies specify other packages that your package needs in order to work.\n# To automatically upgrade your package dependencies to the latest versions\n# consider running `flutter pub upgrade --major-versions`. Alternatively,\n# dependencies can be manually updated by changing the version numbers below to\n# the latest version available on pub.dev. To see which dependencies have newer\n# versions available, run `flutter pub outdated`.\ndependencies:\n  flutter:\n    sdk: flutter\n\n  # The following adds the Cupertino Icons font to your application.\n  # Use with the CupertinoIcons class for iOS style icons.\n  cupertino_icons: ^1.0.8\n  mini_news: any",
+        "steps": [
+          {
+            "from": 1,
+            "to": 19,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 6,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 12,
+            "to": 19,
+            "sentence": 3
+          },
+          {
+            "from": 18,
+            "to": 19,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep36/scene-04-0-4656ed8a.wav",
+          "startFrame": 0,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep36/scene-04-1-5056e22c.wav",
+          "startFrame": 188,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep36/scene-04-2-8b2f633c.wav",
+          "startFrame": 439,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep36/scene-04-3-7abee083.wav",
+          "startFrame": 630,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep36/scene-04-4-d596164a.wav",
+          "startFrame": 835,
+          "durationInFrames": 267
+        }
+      ],
+      "durationInFrames": 1120
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "pubspec.yaml (gốc) — TOÀN BỘ FILE",
+        "language": "yaml",
+        "code": "name: vietsuper_workspace\npublish_to: none\n\nenvironment:\n  sdk: ^3.10.0\n\nworkspace:\n  - apps/vietsuper\n  - apps/news_standalone\n  - packages/mini_news",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 9,
+            "to": 9,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep36/scene-05-0-a641d082.wav",
+          "startFrame": 0,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep36/scene-05-1-8dd3dc15.wav",
+          "startFrame": 140,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep36/scene-05-2-8218093b.wav",
+          "startFrame": 300,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep36/scene-05-3-c76d055c.wav",
+          "startFrame": 484,
+          "durationInFrames": 176
+        }
+      ],
+      "durationInFrames": 678
+    },
+    {
+      "id": "scene-06",
+      "type": "terminal",
+      "visual": {
+        "title": "fvm flutter run trong news_standalone",
+        "commands": [
+          {
+            "cmd": "cd apps/news_standalone && fvm flutter run",
+            "output": "Launching lib/main.dart on iPhone 17 Pro...\n\nFlutter run key commands.",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep36/scene-06-0-abe33225.wav",
+          "startFrame": 0,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep36/scene-06-1-0f8e273b.wav",
+          "startFrame": 229,
+          "durationInFrames": 288
+        },
+        {
+          "file": "audio/ep36/scene-06-2-5e537c92.wav",
+          "startFrame": 525,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep36/scene-06-3-e335476b.wav",
+          "startFrame": 742,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep36/scene-06-4-52c1e9c2.wav",
+          "startFrame": 976,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 1232
+    },
+    {
+      "id": "scene-07",
+      "type": "diagram",
+      "visual": {
+        "title": "Một căn hộ — hai cửa",
+        "boxes": [
+          {
+            "id": "standalone",
+            "label": "news_standalone",
+            "emoji": "🚪"
+          },
+          {
+            "id": "mini",
+            "label": "mini_news",
+            "emoji": "📦"
+          },
+          {
+            "id": "host",
+            "label": "ViệtSuper",
+            "emoji": "🏙️"
+          }
+        ],
+        "flows": [
+          {
+            "from": 1,
+            "to": 0,
+            "label": "cửa 1: chạy riêng",
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "label": "cửa 2: vào tab",
+            "sentence": 3
+          },
+          {
+            "from": 2,
+            "to": 1,
+            "label": "sửa 1 lần — cả 2 cửa nhận",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep36/scene-07-0-6b1040c9.wav",
+          "startFrame": 0,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep36/scene-07-1-38f67083.wav",
+          "startFrame": 102,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep36/scene-07-2-8a034e70.wav",
+          "startFrame": 259,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep36/scene-07-3-fc6c52af.wav",
+          "startFrame": 407,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep36/scene-07-4-9651469f.wav",
+          "startFrame": 555,
+          "durationInFrames": 159
+        }
+      ],
+      "durationInFrames": 732
+    },
+    {
+      "id": "scene-08",
+      "type": "phone",
+      "visual": {
+        "title": "news_standalone: chạy solo",
+        "screens": [
+          {
+            "src": "screens/ep36/standalone-news.png",
+            "sentence": 1
+          },
+          {
+            "src": "screens/ep36/standalone-news-read.png",
+            "sentence": 3
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "📱",
+            "text": "App riêng, một mình một cõi — không dấu vết ViệtSuper",
+            "sentence": 1
+          },
+          {
+            "icon": "📄",
+            "text": "Sheet trượt lên y hệt hành vi Tập 2",
+            "sentence": 2
+          },
+          {
+            "icon": "✅",
+            "text": "'Đã đọc ✓' — _read Set hoạt động y hệt",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep36/scene-08-0-5d30d2f4.wav",
+          "startFrame": 0,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep36/scene-08-1-ab8e1941.wav",
+          "startFrame": 143,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep36/scene-08-2-b1269630.wav",
+          "startFrame": 319,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep36/scene-08-3-9f0cdec5.wav",
+          "startFrame": 529,
+          "durationInFrames": 168
+        }
+      ],
+      "durationInFrames": 715
+    },
+    {
+      "id": "scene-09",
+      "type": "concept",
+      "visual": {
+        "title": "So 1 nhịp: công thức xuyên chất liệu",
+        "bullets": [
+          {
+            "icon": "🍜",
+            "text": "RN ep22: food-standalone — 19 dòng App.tsx",
+            "sentence": 1
+          },
+          {
+            "icon": "📰",
+            "text": "Flutter thuần: news_standalone — 21 dòng main.dart",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "Khác ngôn ngữ, khác workspace tool",
+            "sentence": 3
+          },
+          {
+            "icon": "🧬",
+            "text": "Cùng công thức: vỏ mỏng + cửa theo tên",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep36/scene-09-0-00b12dcf.wav",
+          "startFrame": 0,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep36/scene-09-1-ff9175b8.wav",
+          "startFrame": 150,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep36/scene-09-2-26b8d2cc.wav",
+          "startFrame": 379,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep36/scene-09-3-b14fedf9.wav",
+          "startFrame": 615,
+          "durationInFrames": 293
+        },
+        {
+          "file": "audio/ep36/scene-09-4-cdce54b9.wav",
+          "startFrame": 916,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep36/scene-09-5-8d823243.wav",
+          "startFrame": 1112,
+          "durationInFrames": 255
+        }
+      ],
+      "durationInFrames": 1385
+    },
+    {
+      "id": "scene-10",
+      "type": "outro",
+      "visual": {
+        "title": "Tập 3/5 xong — hai cửa, một căn hộ! 🚪",
+        "summary": [
+          {
+            "text": "news_standalone: vỏ 21 dòng + AppBar riêng + NewsScreen",
+            "sentence": 0
+          },
+          {
+            "text": "Root pubspec: thêm 1 dòng thành viên, chung 1 lockfile",
+            "sentence": 1
+          },
+          {
+            "text": "Chạy lẻ = quyền lợi kiến trúc, không đổi 1 dòng NewsScreen",
+            "sentence": 2
+          }
+        ],
+        "next": "Tập 4/5: mini_topup — công thức A-Z lần 2 🧩"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep36/scene-10-0-0db68bc0.wav",
+          "startFrame": 0,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep36/scene-10-1-03da056c.wav",
+          "startFrame": 217,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep36/scene-10-2-3afc5e9d.wav",
+          "startFrame": 403,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep36/scene-10-3-b868a024.wav",
+          "startFrame": 603,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep36/scene-10-4-7657b814.wav",
+          "startFrame": 813,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep36/scene-10-5-64fee963.wav",
+          "startFrame": 1073,
+          "durationInFrames": 267
+        }
+      ],
+      "durationInFrames": 1358
+    }
+  ]
+}

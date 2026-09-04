@@ -1,0 +1,506 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tập trước ta hứa: 'tập sau lặp lại đúng công thức này để xây căn hộ THỨ HAI — mini_topup — từ A đến Z' — đúng lời hứa, hôm nay ta đi lại cả 4 bước một lần nữa.",
+      "Đây không phải bài học kiến thức mới — đây là bài KIỂM CHỨNG: công thức 4 bước ở Tập 1 tới Tập 3 có thật sự lặp lại được, hay chỉ đúng cho mỗi mini_news?",
+      "Căn hộ mới: mini_topup — Nạp thẻ điện thoại, ba nhà mạng, ba mệnh giá, một màn hình mang hai bộ mặt: form và lời cảm ơn.",
+      "5 tập, hôm nay Tập 4 trên 5 — và một luật chơi riêng của tập này: KHÔNG sửa mini_news, KHÔNG sửa HomeShell ngoài đúng một chỗ.",
+      "Nếu bạn đã xem đủ 3 tập trước, phần lớn hôm nay sẽ là những cái 'à, quen rồi' — và đó chính xác là điểm của một công thức tốt."
+    ],
+    "visual": {
+      "title": "Công thức lặp lại",
+      "subtitle": "Mini-App Flutter thuần · Tập 4/5 · mini_topup",
+      "badge": "Series Mini-App Flutter thuần · Tập 4"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "code",
+    "narration": [
+      "Bước 1 của công thức quen thuộc: xây căn hộ mới — packages/mini_topup.",
+      "pubspec.yaml đây, TOÀN BỘ 10 dòng — và nếu để ý, nó chính là bản y hệt mini_news ở Tập 2, chỉ đổi đúng một chữ: name.",
+      "resolution: workspace vẫn nguyên vẹn — câu 'xin gia nhập khu' bắt buộc, thiếu dòng này căn hộ sẽ tự tải dependency riêng.",
+      "dependencies chỉ một dòng flutter sdk — căn hộ trần trụi nhất có thể, y hệt mọi package con khác trong khu.",
+      "Và cửa chính mini_topup.dart: đúng một dòng export 'src/topup_screen.dart' — công thức Tập 2 áp lại y nguyên, không đổi một ký tự."
+    ],
+    "visual": {
+      "filename": "packages/mini_topup/pubspec.yaml — TOÀN BỘ FILE",
+      "language": "yaml",
+      "code": "name: mini_topup\npublish_to: none\n\nenvironment:\n  sdk: ^3.10.0\nresolution: workspace\n\ndependencies:\n  flutter:\n    sdk: flutter",
+      "steps": [
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 6,
+          "to": 6,
+          "sentence": 2
+        },
+        {
+          "from": 8,
+          "to": 10,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đầu file topup_screen.dart: hai hằng dữ liệu và một tiện ích định dạng tiền — gọn nhất series.",
+      "carriers ba nhà mạng, amounts ba mệnh giá — cả hai chỉ là mảng thuần, không cần định nghĩa model riêng.",
+      "_formatVnd chèn dấu chấm hàng nghìn bằng RegExp — tiện ích nhỏ, gọi lại nhiều lần bên dưới."
+    ],
+    "visual": {
+      "filename": "packages/mini_topup/lib/src/topup_screen.dart (dữ liệu)",
+      "language": "clike",
+      "code": "import 'package:flutter/material.dart';\n\nconst carriers = ['Viettel', 'MobiFone', 'VinaPhone'];\nconst amounts = [50000, 100000, 200000];\n\nString _formatVnd(int amount) {\n  final s = amount.toString().replaceAllMapped(\n        RegExp(r'\\B(?=(\\d{3})+(?!\\d))'),\n        (_) => '.',\n      );\n  return '$sđ';\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 12,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 6,
+          "to": 12,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "Bỏ qua khung StatefulWidget quen thuộc, đi thẳng vào bộ não thật sự: ba biến state trong _TopupScreenState.",
+      "_carrier và _amount kiểu chọn-một, khởi đầu null — bài quen thuộc; _done là công tắc bật tắt màn cảm ơn.",
+      "Và _canPay: KHÔNG phải state — nó SUY RA từ hai biến kia, đúng nguyên tắc derived đã học từ bản React Native Tập 25: cả hai khác null mới đủ điều kiện nạp."
+    ],
+    "visual": {
+      "filename": "topup_screen.dart (3 state + 1 biến suy ra)",
+      "language": "clike",
+      "code": "class _TopupScreenState extends State<TopupScreen> {\n  String? _carrier;\n  int? _amount;\n  bool _done = false;\n\n  bool get _canPay => _carrier != null && _amount != null;",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 6,
+          "to": 6,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Điểm nhấn thật sự của bước này: khối if (_done) quyết định màn hình đang mặc form hay áo cảm ơn.",
+      "if (_done) return Center(...) — early return y hệt pattern bản React Native Tập 25: MỘT component, HAI bộ mặt, chuyển bằng if.",
+      "Column giữa màn: dấu tích xanh, dòng 'Nạp thành công!', và chi tiết nhà mạng cộng số tiền đã định dạng sẵn.",
+      "Nút 'Nạp thêm' là chỗ dễ quên nhất: reset ĐỦ BA state — _carrier, _amount, _done — thiếu một cái, form cũ vẫn còn dính lựa chọn.",
+      "Đúng discipline đã học ở tập RN: reset toàn bộ state khi quay lại trạng thái ban đầu, không chừa sót cái nào.",
+      "Không thư viện điều hướng, không route mới — chỉ một chữ if làm hai bộ mặt cho cùng một widget."
+    ],
+    "visual": {
+      "filename": "topup_screen.dart (màn cảm ơn — early return)",
+      "language": "clike",
+      "code": "    if (_done) {\n      return Center(\n        child: Column(\n          mainAxisAlignment: MainAxisAlignment.center,\n          children: [\n            const Text('✅', style: TextStyle(fontSize: 64)),\n            const SizedBox(height: 12),\n            Text('Nạp thành công!', style: Theme.of(context).textTheme.headlineSmall),\n            const SizedBox(height: 8),\n            Text('$_carrier — ${_formatVnd(_amount!)}'),\n            const SizedBox(height: 24),\n            FilledButton(\n              onPressed: () => setState(() {\n                _carrier = null;\n                _amount = null;\n                _done = false;\n              }),\n              child: const Text('Nạp thêm'),\n            ),\n          ],\n        ),\n      );\n    }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 23,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 5,
+          "to": 10,
+          "sentence": 2
+        },
+        {
+          "from": 12,
+          "to": 19,
+          "sentence": 3
+        },
+        {
+          "from": 13,
+          "to": 17,
+          "sentence": 4
+        },
+        {
+          "from": 1,
+          "to": 23,
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Phần form: return ListView bọc toàn bộ giao diện chọn lựa — cuộn được nếu màn nhỏ.",
+      "Nhóm Nhà mạng: tiêu đề rồi Wrap bọc vòng lặp for sinh ChoiceChip cho từng carrier trong mảng.",
+      "selected: _carrier == c — so sánh trực tiếp, chip nào khớp state hiện tại thì hiện viền chọn.",
+      "Bấm chip nào, onSelected gọi setState đổi _carrier — một dòng, không dispatcher, không reducer."
+    ],
+    "visual": {
+      "filename": "topup_screen.dart (form — Nhà mạng ChoiceChip)",
+      "language": "clike",
+      "code": "    return ListView(\n      padding: const EdgeInsets.all(16),\n      children: [\n        Text('Nhà mạng', style: Theme.of(context).textTheme.titleMedium),\n        const SizedBox(height: 8),\n        Wrap(\n          spacing: 8,\n          children: [\n            for (final c in carriers)\n              ChoiceChip(\n                label: Text(c),\n                selected: _carrier == c,\n                onSelected: (_) => setState(() => _carrier = c),\n              ),\n          ],\n        ),",
+      "steps": [
+        {
+          "from": 1,
+          "to": 3,
+          "sentence": 0
+        },
+        {
+          "from": 4,
+          "to": 10,
+          "sentence": 1
+        },
+        {
+          "from": 11,
+          "to": 13,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 16,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Nhóm Mệnh giá lặp lại y hệt cấu trúc Nhà mạng — Wrap bọc for-loop, chỉ đổi biến từ carriers sang amounts.",
+      "_formatVnd(a) định dạng số tiền ngay trong label chip — 50.000đ, 100.000đ, 200.000đ, không hardcode chuỗi nào.",
+      "Và đây, thanh dưới cùng: FilledButton Nạp thẻ.",
+      "onPressed: _canPay ? ... : null — nút chỉ bấm được khi CẢ HAI đã chọn, còn không thì vô hiệu hẳn, không chỉ đổi màu xám giả vờ.",
+      "Bấm được thì setState bật _done true — build() chạy lại, if (_done) ở trên bắt được ngay, màn cảm ơn hiện ra."
+    ],
+    "visual": {
+      "filename": "topup_screen.dart (form — Mệnh giá + nút Nạp thẻ)",
+      "language": "clike",
+      "code": "        const SizedBox(height: 20),\n        Text('Mệnh giá', style: Theme.of(context).textTheme.titleMedium),\n        const SizedBox(height: 8),\n        Wrap(\n          spacing: 8,\n          children: [\n            for (final a in amounts)\n              ChoiceChip(\n                label: Text(_formatVnd(a)),\n                selected: _amount == a,\n                onSelected: (_) => setState(() => _amount = a),\n              ),\n          ],\n        ),\n        const SizedBox(height: 28),\n        FilledButton(\n          onPressed: _canPay ? () => setState(() => _done = true) : null,\n          child: const Text('Nạp thẻ'),\n        ),\n      ],\n    );\n  }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 14,
+          "sentence": 0
+        },
+        {
+          "from": 7,
+          "to": 11,
+          "sentence": 1
+        },
+        {
+          "from": 16,
+          "to": 19,
+          "sentence": 2
+        },
+        {
+          "from": 17,
+          "to": 17,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Bước 3: tấm biển — trước tiên là tấm biển dependency trong pubspec.yaml của app chủ.",
+      "dependencies: flutter với cupertino_icons mặc định, rồi dòng mini_news: any đã có từ Tập 2 — vẫn nguyên, không đụng tới.",
+      "Và dòng mới toanh, dòng chín: mini_topup: any — đúng ĐINH cũ, khai THEO TÊN, resolution: workspace ở trên đã lo phần dò đường.",
+      "Một dòng duy nhất thêm vào — không sửa dòng mini_news nào, không đụng gì khác trong file."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/pubspec.yaml (trích dependencies)",
+      "language": "yaml",
+      "code": "dependencies:\n  flutter:\n    sdk: flutter\n\n  # The following adds the Cupertino Icons font to your application.\n  # Use with the CupertinoIcons class for iOS style icons.\n  cupertino_icons: ^1.0.8\n  mini_news: any\n  mini_topup: any",
+      "steps": [
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 9,
+          "to": 9,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "code",
+    "narration": [
+      "Bước 3 tiếp theo: tấm biển thật sự — home_shell.dart, đúng chỗ được phép sửa.",
+      "Phía trên file — không chiếu lại — có thêm đúng một dòng import package:mini_topup/mini_topup.dart, y hệt cú pháp import mini_news học ở Tập 2.",
+      "Mảng screens: NewsScreen ở giữa vẫn nguyên xi, không đụng tới — chỉ thêm const TopupScreen() làm phần tử thứ ba.",
+      "NavigationBar thêm đúng một NavigationDestination — icon 📱, label 'Nạp thẻ' — hai tab cũ 🏠 và 📰 không đổi một ký tự.",
+      "Tổng cộng: một dòng import, một dòng trong mảng screens, một NavigationDestination — ba chỗ nhỏ, không phá vỡ gì đã có."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/lib/home_shell.dart (screens + tab mới)",
+      "language": "clike",
+      "code": "    final screens = <Widget>[\n      HomeScreen(onOpenTab: (i) => setState(() => _tab = i)),\n      const NewsScreen(),\n      const TopupScreen(),\n    ];\n    return Scaffold(\n      appBar: AppBar(title: const Text('ViệtSuper 🇻🇳')),\n      body: screens[_tab],\n      bottomNavigationBar: NavigationBar(\n        selectedIndex: _tab,\n        onDestinationSelected: (i) => setState(() => _tab = i),\n        destinations: const [\n          NavigationDestination(icon: Text('🏠', style: TextStyle(fontSize: 24)), label: 'Trang chủ'),\n          NavigationDestination(icon: Text('📰', style: TextStyle(fontSize: 24)), label: 'Tin tức'),\n          NavigationDestination(icon: Text('📱', style: TextStyle(fontSize: 24)), label: 'Nạp thẻ'),\n        ],",
+      "steps": [
+        {
+          "from": 1,
+          "to": 16,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 2
+        },
+        {
+          "from": 9,
+          "to": 16,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 16,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "code",
+    "narration": [
+      "Bước 4: sổ đỏ chung — root pubspec.yaml, giờ đã 11 dòng.",
+      "Mảng workspace: apps/vietsuper, apps/news_standalone, packages/mini_news — cả ba dòng cũ nguyên vẹn, không đảo thứ tự.",
+      "Dòng cuối cùng, dòng mới toanh: packages/mini_topup — thêm thành viên thứ tư vào sổ đỏ chung.",
+      "Bốn thành viên, vẫn đúng MỘT pubspec.lock, MỘT lần pub get — công thức Tập 1 chưa đổi một chữ."
+    ],
+    "visual": {
+      "filename": "pubspec.yaml (gốc) — TOÀN BỘ FILE",
+      "language": "yaml",
+      "code": "name: vietsuper_workspace\npublish_to: none\n\nenvironment:\n  sdk: ^3.10.0\n\nworkspace:\n  - apps/vietsuper\n  - apps/news_standalone\n  - packages/mini_news\n  - packages/mini_topup",
+      "steps": [
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 0
+        },
+        {
+          "from": 7,
+          "to": 10,
+          "sentence": 1
+        },
+        {
+          "from": 11,
+          "to": 11,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "terminal",
+    "narration": [
+      "Bước 4 phần chạy: về thư mục gốc, gõ đúng fvm flutter pub get một lần duy nhất.",
+      "Resolving dependencies in demo-flutter-workspace — dòng quen thuộc từ Tập 1, bằng chứng resolve CẢ BỐN thành viên cùng lúc, không riêng ai.",
+      "Xong, chạy fvm flutter run như bình thường trong apps/vietsuper — không cờ đặc biệt, không bước dựng lại gì thêm.",
+      "Căn hộ mới đã có mặt trong app chủ, chỉ sau đúng một lần pub get."
+    ],
+    "visual": {
+      "title": "fvm flutter pub get + run",
+      "commands": [
+        {
+          "cmd": "fvm flutter pub get",
+          "output": "Resolving dependencies in demo-flutter-workspace...\n\nGot dependencies!",
+          "sentence": 0
+        },
+        {
+          "cmd": "cd apps/vietsuper && fvm flutter run",
+          "output": "Launching lib/main.dart on iPhone 17 Pro...\n\nFlutter run key commands.",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "phone",
+    "narration": [
+      "Khoảnh khắc sự thật: 3 ảnh chụp thật từ simulator.",
+      "Trang chủ: ô Nạp thẻ giờ đã SÁNG — hết mờ 0.35, hết dấu 'Sắp ra mắt', bấm được như Tin tức.",
+      "Vào tab Nạp thẻ: chọn Viettel, chọn 100.000đ — cả hai viền hồng chọn, nút Nạp thẻ đỏ hiện đúng hẹn dưới đáy.",
+      "Bấm Nạp thẻ: form biến mất, màn cảm ơn hiện ra — dấu tích xanh, 'Nạp thành công!', dòng chi tiết 'Viettel — 100.000đ'.",
+      "Đúng pattern quen: hai trạng thái giao diện, chuyển bằng if — y hệt màn topup bên bản React Native Tập 25 các bạn đã xem."
+    ],
+    "visual": {
+      "title": "Nghiệm thu mini_topup",
+      "screens": [
+        {
+          "src": "screens/ep37/host-grid-2-on.png",
+          "sentence": 1
+        },
+        {
+          "src": "screens/ep37/host-tab-topup-form.png",
+          "sentence": 2
+        },
+        {
+          "src": "screens/ep37/host-tab-topup-success.png",
+          "sentence": 3
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🏠",
+          "text": "Trang chủ: ô Nạp thẻ đã sáng, bấm được",
+          "sentence": 1
+        },
+        {
+          "icon": "📱",
+          "text": "Viettel + 100.000đ → nút Nạp thẻ hiện",
+          "sentence": 2
+        },
+        {
+          "icon": "✅",
+          "text": "Nạp thành công! Viettel — 100.000đ",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-13",
+    "type": "concept",
+    "narration": [
+      "Thú thật trước khi qua tập cuối: bấm sang tab Tin tức rồi quay lại Nạp thẻ — mọi lựa chọn bạn vừa chọn BIẾN MẤT, form về trắng tinh.",
+      "Vì sao? body: screens[_tab] — mỗi lần đổi _tab, Scaffold DỰNG LẠI TopupScreen từ đầu, State mới thì _carrier và _amount đều null lại.",
+      "Cách sửa chỉ tốn đúng MỘT dòng: bọc cả ba màn trong IndexedStack(index: _tab, children: screens) thay vì screens[_tab] — cả ba State cùng sống, chỉ ẩn hiện chứ không dựng lại.",
+      "Bài tập cho bạn: tự tay đổi dòng đó trong home_shell.dart, chạy thử, xem cả 3 tab giữ nguyên trạng thái khi chuyển qua lại.",
+      "Demo hôm nay CỐ TÌNH giữ nguyên body: screens[_tab] — để bạn tự sửa và tự cảm nhận sự khác biệt, không làm hộ hết mọi thứ.",
+      "Nhìn xa hơn bài tập: đây chính là bài học lifecycle của Flutter — dựng lại widget nghĩa là dựng lại State, quan trọng hơn cả cú pháp IndexedStack."
+    ],
+    "visual": {
+      "title": "Bài tập: giữ tab sống",
+      "bullets": [
+        {
+          "icon": "😅",
+          "text": "Chuyển tab rồi quay lại: form biến mất trắng tinh",
+          "sentence": 0
+        },
+        {
+          "icon": "🧨",
+          "text": "body: screens[_tab] — dựng lại State mỗi lần đổi tab",
+          "sentence": 1
+        },
+        {
+          "icon": "💡",
+          "text": "1 dòng sửa: IndexedStack(index: _tab, children: screens)",
+          "sentence": 2
+        },
+        {
+          "icon": "📝",
+          "text": "Bài tập: tự sửa trong home_shell.dart, tự kiểm chứng",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-14",
+    "type": "outro",
+    "narration": [
+      "Tổng kết Tập 4: công thức 4 bước lặp lại lần thứ hai, thành công trọn vẹn — packages/mini_topup, tấm biển 2 chỗ, sổ đỏ chung 4 thành viên.",
+      "Suốt cả tập, mini_news không bị đụng một dòng, HomeShell chỉ thêm đúng 3 chỗ nhỏ — thêm căn hộ mới không phá căn hộ cũ, đúng lời hứa kiến trúc workspace.",
+      "Và bài học phụ nhưng quan trọng: chuyển tab hiện đang làm mất form — một dòng IndexedStack là lời giải, dành làm bài tập cho bạn.",
+      "Nếu bạn theo dõi từ Tập 1: đây là lần THỨ HAI công thức chạy trọn vẹn — packages/, cửa export, tấm biển, sổ đỏ — không còn gì bí ẩn.",
+      "Tập sau, Tập cuối cùng: căn hộ mở bằng CỬA ĐẨY thay vì tab — mini_ride, Navigator.push thay vì NavigationBar.",
+      "Và một tổng kết lớn: BỘ BA cách làm mini-app trên kênh — React Native workspace, Flutter thuần workspace, Flutter add-to-app — chọn cách nào cho hoàn cảnh nào. Hẹn gặp lại ở Tập 5!"
+    ],
+    "visual": {
+      "title": "Tập 4/5 xong — lặp lại thành công! 🧩",
+      "summary": [
+        {
+          "text": "packages/mini_topup: pubspec + cửa chính + topup_screen.dart",
+          "sentence": 0
+        },
+        {
+          "text": "mini_news nguyên vẹn — HomeShell chỉ thêm 3 chỗ nhỏ",
+          "sentence": 1
+        },
+        {
+          "text": "Bài tập: IndexedStack giữ tab sống khi chuyển qua lại",
+          "sentence": 2
+        }
+      ],
+      "next": "Tập 5/5: mini_ride + tổng kết BỘ BA 🚪🏆"
+    }
+  }
+]

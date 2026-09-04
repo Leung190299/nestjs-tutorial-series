@@ -36,6 +36,11 @@ import ep30 from './data/ep30.timing.json';
 import ep31 from './data/ep31.timing.json';
 import ep32 from './data/ep32.timing.json';
 import ep33 from './data/ep33.timing.json';
+import ep34 from './data/ep34.timing.json';
+import ep35 from './data/ep35.timing.json';
+import ep36 from './data/ep36.timing.json';
+import ep37 from './data/ep37.timing.json';
+import ep38 from './data/ep38.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -72,6 +77,11 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode31', timing: ep31 as unknown as EpisodeTiming},
   {id: 'Episode32', timing: ep32 as unknown as EpisodeTiming},
   {id: 'Episode33', timing: ep33 as unknown as EpisodeTiming},
+  {id: 'Episode34', timing: ep34 as unknown as EpisodeTiming},
+  {id: 'Episode35', timing: ep35 as unknown as EpisodeTiming},
+  {id: 'Episode36', timing: ep36 as unknown as EpisodeTiming},
+  {id: 'Episode37', timing: ep37 as unknown as EpisodeTiming},
+  {id: 'Episode38', timing: ep38 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -465,6 +475,71 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       image: 'screens/ep33/android-host-grid-3-cards.png',
       badgeEmoji: '🏁',
       seriesTag: 'Mini-App với Flutter 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb34',
+    props: {
+      badge: 'FLUTTER THUẦN 1/5',
+      line1: 'SỔ ĐỎ',
+      line2: 'CHUNG KHU',
+      subtitle: 'Pub workspace · từ Dart 3.5',
+      variant: 'shot',
+      image: 'screens/ep34/host-home-grid.png',
+      badgeEmoji: '🧱',
+      seriesTag: 'Mini-App Flutter thuần 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb35',
+    props: {
+      badge: 'FLUTTER THUẦN 2/5',
+      line1: 'CĂN HỘ',
+      line2: 'ĐẦU TIÊN',
+      subtitle: 'mini_news · gắn tab 3 dòng',
+      variant: 'shot',
+      image: 'screens/ep35/host-tab-news.png',
+      badgeEmoji: '📰',
+      seriesTag: 'Mini-App Flutter thuần 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb36',
+    props: {
+      badge: 'FLUTTER THUẦN 3/5',
+      line1: 'HAI CỬA',
+      line2: 'MỘT MÃ',
+      subtitle: 'news_standalone · ra ở riêng',
+      variant: 'shot',
+      image: 'screens/ep36/standalone-news.png',
+      badgeEmoji: '🚪',
+      seriesTag: 'Mini-App Flutter thuần 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb37',
+    props: {
+      badge: 'FLUTTER THUẦN 4/5',
+      line1: 'CÔNG THỨC',
+      line2: 'LẶP LẠI',
+      subtitle: 'mini_topup · công thức lần 2',
+      variant: 'shot',
+      image: 'screens/ep37/host-tab-topup-success.png',
+      badgeEmoji: '📱',
+      seriesTag: 'Mini-App Flutter thuần 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb38',
+    props: {
+      badge: 'FLUTTER THUẦN 5/5',
+      line1: 'MẢNH CUỐI',
+      line2: 'BỘ BA',
+      subtitle: 'mini_ride · cửa đẩy, không tab',
+      variant: 'shot',
+      image: 'screens/ep38/host-grid-3-on.png',
+      badgeEmoji: '🏆',
+      seriesTag: 'Mini-App Flutter thuần 🇻🇳',
     },
   },
 ];

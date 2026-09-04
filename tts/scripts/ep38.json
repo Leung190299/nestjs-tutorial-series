@@ -1,0 +1,317 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tập trước khép lại bằng một lời hứa: 'tập cuối — căn hộ mở bằng CỬA ĐẨY, và một tổng kết lớn: BỘ BA cách làm mini-app trên kênh' — hôm nay ta trả đúng cả hai.",
+      "Căn hộ cuối cùng của khu: mini_ride — đặt xe, ba loại phương tiện, một bộ đếm số ki-lô-mét, một dòng tổng tiền.",
+      "Nhưng khác 3 căn hộ trước, mini_ride không đứng trong NavigationBar — nó mở bằng một cửa ĐẨY, kiểu sảnh phụ trên nóc tòa nhà, có nút back tự nhiên.",
+      "5 tập, hôm nay Tập 5 trên 5 — TẬP CUỐI CÙNG của series Mini-App Flutter thuần.",
+      "Và sau căn hộ cuối, một tổng kết lớn: đặt cạnh nhau BA cách làm mini-app đã dạy trên kênh — React Native, Flutter thuần, Flutter add-to-app — chọn cách nào cho hoàn cảnh nào."
+    ],
+    "visual": {
+      "title": "Cửa đẩy & tổng kết bộ ba",
+      "subtitle": "Mini-App Flutter thuần · Tập 5/5 · TẬP CUỐI",
+      "badge": "Series Mini-App Flutter thuần · Tập 5"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Trước khi vào code, một điểm ĐẶC BIỆT: bảng giá mini_ride hôm nay — 15.000, 25.000, 32.000 mỗi ki-lô-mét — chính là ba con số y hệt series React Native đã dùng cho màn Đặt xe.",
+      "Đây KHÔNG phải trùng hợp — cố tình lặp lại để khán giả theo dõi cả hai series nhận ra ngay: công thức đổi, dữ liệu nghiệp vụ không đổi.",
+      "Điểm khác biệt lớn nhất tập này: 3 căn hộ trước sống trong NavigationBar, còn mini_ride mở bằng Navigator.push — một cửa ĐẨY, không phải cửa TAB.",
+      "Ẩn dụ: nếu 3 tab là 3 cửa chính cùng một tầng, thì cửa đẩy là một sảnh phụ mở THÊM TRÊN NÓC tòa nhà — có nút back đưa người dùng quay lại đúng chỗ vừa đứng.",
+      "Và tin vui: làm được điều này KHÔNG cần thêm bất kỳ package router nào — MaterialPageRoute có sẵn trong Flutter, chỉ một khối code chèn vào một callback."
+    ],
+    "visual": {
+      "title": "mini_ride: cửa đẩy, không cửa tab",
+      "bullets": [
+        {"icon": "🚕", "text": "Bảng giá 15k/25k/32k — CÙNG số liệu series React Native", "sentence": 0},
+        {"icon": "🎯", "text": "Cố tình lặp lại — công thức đổi, dữ liệu nghiệp vụ giữ nguyên", "sentence": 1},
+        {"icon": "🚪", "text": "Cửa ĐẨY khác cửa TAB — Navigator.push, không NavigationBar", "sentence": 2},
+        {"icon": "🏢", "text": "Ẩn dụ: sảnh phụ mở TRÊN nóc tòa nhà, có nút back", "sentence": 3},
+        {"icon": "✅", "text": "Không cần package router — MaterialPageRoute có sẵn", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Bước quen thuộc: căn hộ CUỐI CÙNG — packages/mini_ride, và pubspec.yaml TOÀN BỘ 10 dòng, công thức không đổi một chữ so với 3 lần trước.",
+      "resolution: workspace vẫn nguyên — thiếu dòng này, mini_ride sẽ đi tải dependency riêng, tách khỏi sổ đỏ chung.",
+      "dependencies chỉ một dòng flutter sdk — trần trụi như mọi package con khác, không phụ thuộc mini_news hay mini_topup nào cả.",
+      "Cửa chính mini_ride.dart cũng đúng một dòng export 'src/ride_screen.dart' — công thức Tập 2 áp lại lần thứ ba, không cần xem lại."
+    ],
+    "visual": {
+      "filename": "packages/mini_ride/pubspec.yaml — TOÀN BỘ FILE",
+      "language": "yaml",
+      "code": "name: mini_ride\npublish_to: none\n\nenvironment:\n  sdk: ^3.10.0\nresolution: workspace\n\ndependencies:\n  flutter:\n    sdk: flutter",
+      "steps": [
+        {"from": 1, "to": 10, "sentence": 0},
+        {"from": 6, "to": 6, "sentence": 1},
+        {"from": 8, "to": 10, "sentence": 2},
+        {"from": 1, "to": 10, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "Đây, dữ liệu cốt lõi: class Ride với 4 trường — id, name, emoji, pricePerKm — và const rides, ba loại phương tiện.",
+      "15.000 cho Xe máy, 25.000 cho Ô tô 4 chỗ, 32.000 cho Ô tô 7 chỗ mỗi ki-lô-mét — đúng ba con số đã nhắc ở đầu tập, đối chiếu 1-1 với bản React Native.",
+      "_formatVnd phía dưới — chèn dấu chấm hàng nghìn bằng RegExp — chính là hàm y hệt Tập 4 đã dạy, copy nguyên xi sang căn hộ mới, không viết lại.",
+      "Không model phức tạp, không enum riêng — chỉ một class thuần và một mảng const, đúng phong cách gọn của cả series."
+    ],
+    "visual": {
+      "filename": "packages/mini_ride/lib/src/ride_screen.dart (dữ liệu)",
+      "language": "clike",
+      "code": "class Ride {\n  const Ride({\n    required this.id,\n    required this.name,\n    required this.emoji,\n    required this.pricePerKm,\n  });\n\n  final String id;\n  final String name;\n  final String emoji;\n  final int pricePerKm;\n}\n\nconst rides = [\n  Ride(id: 'bike', name: 'Xe máy', emoji: '🛵', pricePerKm: 15000),\n  Ride(id: 'car4', name: 'Ô tô 4 chỗ', emoji: '🚗', pricePerKm: 25000),\n  Ride(id: 'car7', name: 'Ô tô 7 chỗ', emoji: '🚐', pricePerKm: 32000),\n];\n\nString _formatVnd(int amount) {\n  final s = amount.toString().replaceAllMapped(\n        RegExp(r'\\B(?=(\\d{3})+(?!\\d))'),\n        (_) => '.',\n      );\n  return '$sđ';\n}",
+      "steps": [
+        {"from": 1, "to": 19, "sentence": 0},
+        {"from": 16, "to": 18, "sentence": 1},
+        {"from": 21, "to": 27, "sentence": 2},
+        {"from": 1, "to": 27, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Bộ não của mini_ride: đúng hai biến state trong _RideScreenState — _ride kiểu String? và _km kiểu int khởi đầu 5.",
+      "Điểm đối chiếu quan trọng: mini_news dùng Set để đánh dấu NHIỀU bài đã đọc cùng lúc — còn mini_ride dùng String? đơn lẻ, vì chỉ được chọn ĐÚNG MỘT loại xe tại một thời điểm.",
+      "_selected là getter suy ra: null nếu chưa chọn xe nào, ngược lại tìm đúng Ride khớp _ride bằng firstWhere.",
+      "_total cũng là getter suy ra, không phải state — nhân đơn giá của xe đã chọn với _km, y hệt nguyên tắc derived đã học từ bản React Native Tập 25 và nhắc lại ở Tập 4."
+    ],
+    "visual": {
+      "filename": "ride_screen.dart (2 state + 2 biến suy ra)",
+      "language": "clike",
+      "code": "class _RideScreenState extends State<RideScreen> {\n  String? _ride;\n  int _km = 5;\n\n  Ride? get _selected => _ride == null ? null : rides.firstWhere((r) => r.id == _ride);\n\n  int get _total => (_selected?.pricePerKm ?? 0) * _km;",
+      "steps": [
+        {"from": 1, "to": 3, "sentence": 0},
+        {"from": 2, "to": 2, "sentence": 1},
+        {"from": 5, "to": 5, "sentence": 2},
+        {"from": 7, "to": 7, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Phần cuối màn hình: SafeArea bọc một Padding rồi một Row — thanh điều khiển số ki-lô-mét và tổng tiền, đứng cố định dưới đáy màn.",
+      "Hai IconButton đối xứng: dấu trừ giảm _km, dấu cộng tăng _km — cả hai đều gọi .clamp(1, 50), khoá cứng khoảng 1 tới 50 ki-lô-mét.",
+      "clamp nghĩa là: bấm trừ liên tục ở km bằng 1 thì dừng lại đúng 1, không tụt xuống 0 hay số âm — logic clamp phía bên kia cũng chặn trần ở 50.",
+      "Ở giữa: Text hiển thị '$_km km' đổi theo state ngay khi bấm — Spacer đẩy phần tổng tiền dạt hẳn sang phải.",
+      "Cuối cùng: Text 'Tổng: ' cộng _formatVnd(_total) — con số này tự động nhảy theo CẢ hai state, chọn xe khác hay đổi km đều cập nhật ngay lập tức."
+    ],
+    "visual": {
+      "filename": "ride_screen.dart (stepper + tổng tiền)",
+      "language": "clike",
+      "code": "        SafeArea(\n          top: false,\n          child: Padding(\n            padding: const EdgeInsets.all(16),\n            child: Row(\n              children: [\n                IconButton(\n                  onPressed: () => setState(() => _km = (_km - 1).clamp(1, 50)),\n                  icon: const Icon(Icons.remove),\n                ),\n                Text('$_km km', style: Theme.of(context).textTheme.titleMedium),\n                IconButton(\n                  onPressed: () => setState(() => _km = (_km + 1).clamp(1, 50)),\n                  icon: const Icon(Icons.add),\n                ),\n                const Spacer(),\n                Text('Tổng: ${_formatVnd(_total)}',\n                    style: Theme.of(context).textTheme.titleLarge),\n              ],\n            ),\n          ),\n        ),",
+      "steps": [
+        {"from": 1, "to": 6, "sentence": 0},
+        {"from": 7, "to": 15, "sentence": 1},
+        {"from": 8, "to": 8, "sentence": 2},
+        {"from": 11, "to": 16, "sentence": 3},
+        {"from": 17, "to": 22, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Tấm biển đầu tiên: class Service thêm một trường mới — tabIndex kiểu int?, nullable, với comment giải thích rõ 'null nghĩa là mở kiểu màn riêng'.",
+      "Nhìn xuống mảng services: ô Tin tức có tabIndex 1, ô Nạp thẻ có tabIndex 2 — hai ô cũ vẫn sống trên tab như trước, không đụng gì.",
+      "Ô Đặt xe: enabled: true, nhưng KHÔNG có tabIndex — chính giá trị null đó là tín hiệu 'mở bằng cửa đẩy, không phải cửa tab'.",
+      "Một trường nullable, một dòng dữ liệu đổi — đủ để tấm biển phân biệt được ô nào vào tab, ô nào bật cửa đẩy."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/lib/home_screen.dart (Service + services)",
+      "language": "clike",
+      "code": "class Service {\n  const Service({\n    required this.emoji,\n    required this.name,\n    this.tabIndex,\n    this.enabled = true,\n  });\n\n  final String emoji;\n  final String name;\n  /// Dịch vụ sống trên tab nào (null = mở kiểu màn riêng).\n  final int? tabIndex;\n  final bool enabled;\n}\n\nconst services = [\n  Service(emoji: '📰', name: 'Tin tức', tabIndex: 1, enabled: true),\n  Service(emoji: '📱', name: 'Nạp thẻ', tabIndex: 2, enabled: true),\n  Service(emoji: '🛵', name: 'Đặt xe', enabled: true),\n  Service(emoji: '🎁', name: 'Sắp ra mắt', enabled: false),\n];",
+      "steps": [
+        {"from": 1, "to": 14, "sentence": 0},
+        {"from": 17, "to": 18, "sentence": 1},
+        {"from": 19, "to": 19, "sentence": 2},
+        {"from": 1, "to": 21, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Tấm biển thật sự: home_shell.dart — phía trên có thêm đúng một dòng import package:mini_ride/mini_ride.dart, không chiếu lại, y hệt công thức 2 lần trước.",
+      "Đây, chỗ quan trọng nhất tập: onOpenRide — một callback mới trong HomeScreen, gọi Navigator.of(context).push với MaterialPageRoute.",
+      "Bên trong route: một Scaffold mới toanh, AppBar riêng 'Đặt xe ViệtSuper', body là const RideScreen() — một MÀN HÌNH ĐỘC LẬP, không sống trong mảng screens[_tab].",
+      "Đây chính là cửa ĐẨY: push thêm một trang lên trên ngăn xếp điều hướng, Flutter tự vẽ nút back, không cần setState đổi _tab, không cần sửa NavigationBar.",
+      "NewsScreen và TopupScreen bên dưới vẫn nguyên xi trong mảng screens — mini_ride không đụng một dòng nào của hai căn hộ cũ."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/lib/home_shell.dart (onOpenRide — cửa đẩy)",
+      "language": "clike",
+      "code": "    final screens = <Widget>[\n      HomeScreen(\n        onOpenTab: (i) => setState(() => _tab = i),\n        onOpenRide: () => Navigator.of(context).push(\n          MaterialPageRoute(\n            builder: (_) => Scaffold(\n              appBar: AppBar(title: const Text('Đặt xe ViệtSuper')),\n              body: const RideScreen(),\n            ),\n          ),\n        ),\n      ),\n      const NewsScreen(),\n      const TopupScreen(),\n    ];",
+      "steps": [
+        {"from": 1, "to": 2, "sentence": 0},
+        {"from": 4, "to": 4, "sentence": 1},
+        {"from": 5, "to": 9, "sentence": 2},
+        {"from": 4, "to": 11, "sentence": 3},
+        {"from": 13, "to": 15, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "terminal",
+    "narration": [
+      "Bước cuối: về thư mục gốc, gõ fvm flutter pub get một lần duy nhất — sổ đỏ chung giờ đã 5 thành viên, thêm packages/mini_ride.",
+      "Resolving dependencies in demo-flutter-workspace — dòng quen thuộc lặp lại lần thứ tư, bằng chứng resolve TRỌN VẸN cả 5 thành viên cùng lúc.",
+      "pubspec.yaml của app chủ cũng thêm đúng một dòng mini_ride: any — công thức 'khai THEO TÊN' học từ Tập 2, không cần path, không cần cấu hình gì đặc biệt.",
+      "Chạy fvm flutter run như bình thường trong apps/vietsuper — căn hộ cuối cùng đã có mặt, chỉ sau đúng một lần pub get."
+    ],
+    "visual": {
+      "title": "fvm flutter pub get + run",
+      "commands": [
+        {"cmd": "fvm flutter pub get", "output": "Resolving dependencies in demo-flutter-workspace...\n\nGot dependencies!", "sentence": 1},
+        {"cmd": "cd apps/vietsuper && fvm flutter run", "output": "Launching lib/main.dart on iPhone 17 Pro...\n\nFlutter run key commands.", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "phone",
+    "narration": [
+      "Khoảnh khắc sự thật cuối cùng: 3 ảnh chụp thật từ simulator.",
+      "Trang chủ: cả ba ô Tin tức, Nạp thẻ, Đặt xe đều đã sáng, bấm được — NavigationBar dưới đáy vẫn chỉ 3 tab, KHÔNG có tab Đặt xe nào cả.",
+      "Bấm Đặt xe: một trang MỚI đẩy lên hẳn — AppBar riêng 'Đặt xe ViệtSuper', góc trái có mũi tên back Flutter tự vẽ, chưa chọn xe nào thì Tổng: 0đ.",
+      "Chọn Xe máy, chỉnh lên 6 km: nút chuyển xanh 'Đang chọn ✓', Tổng nhảy đúng 90.000đ — khớp chằn chặn 15.000 nhân 6."
+    ],
+    "visual": {
+      "title": "Nghiệm thu mini_ride",
+      "screens": [
+        {"src": "screens/ep38/host-grid-3-on.png", "sentence": 1},
+        {"src": "screens/ep38/ride-pushed.png", "sentence": 2},
+        {"src": "screens/ep38/ride-selected-total.png", "sentence": 3}
+      ],
+      "bullets": [
+        {"icon": "🏠", "text": "Trang chủ: 3 ô sáng, NavigationBar vẫn chỉ 3 tab", "sentence": 1},
+        {"icon": "🚪", "text": "Đặt xe: trang mới đẩy lên, có nút back, Tổng 0đ", "sentence": 2},
+        {"icon": "✅", "text": "Xe máy · 6km → Tổng: 90.000đ", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "diagram",
+    "narration": [
+      "Toàn bộ khu chung cư giờ gói gọn trong một sơ đồ 3 ô: Root pubspec, rồi 3 package, rồi 2 app.",
+      "Root pubspec.yaml — sổ đỏ chung — liệt kê workspace: 5 dòng, trỏ tới đúng 3 package packages/mini_news, mini_topup, mini_ride.",
+      "3 package chính là 3 căn hộ độc lập — mỗi package chỉ export đúng một cửa chính, không package nào biết tới package kia.",
+      "Và 2 app — apps/vietsuper và apps/news_standalone — mỗi app tự chọn import package nào mình cần, không bắt buộc phải dùng đủ cả 3.",
+      "Một pubspec.lock DUY NHẤT cho cả 6 thành viên — 1 root, 3 package, 2 app — đây chính là lời hứa 'sổ đỏ chung' từ Tập 1, giữ nguyên tới tận tập cuối."
+    ],
+    "visual": {
+      "title": "Tổng khu chung cư: root → package → app",
+      "boxes": [
+        {"id": "root", "label": "Root pubspec", "emoji": "📋"},
+        {"id": "packages", "label": "3 package", "emoji": "📦"},
+        {"id": "apps", "label": "2 app", "emoji": "🏢"}
+      ],
+      "flows": [
+        {"from": 0, "to": 1, "label": "workspace: 5 dòng", "sentence": 1},
+        {"from": 1, "to": 2, "label": "import theo tên", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "concept",
+    "narration": [
+      "Tổng kết BỘ BA bắt đầu: cách thứ NHẤT, series React Native đã làm trước đây — npm workspaces.",
+      "Toàn bộ hệ thống chỉ là MỘT dự án JavaScript duy nhất — mỗi mini-app chỉ là một package export đúng một component màn hình.",
+      "Gộp lại xảy ra lúc BUILD: Metro bundler gom hết các package thành một bundle JS duy nhất trước khi máy chạy.",
+      "Không khái niệm 'engine riêng' — mọi package chạy chung một JS runtime, một cây component React duy nhất.",
+      "Ưu điểm lớn nhất: cực đơn giản khi xây MỚI hoàn toàn từ đầu, chưa có app nào cả — một ngôn ngữ, một bundle, một lần build."
+    ],
+    "visual": {
+      "title": "Bộ ba #1: React Native — workspace",
+      "bullets": [
+        {"icon": "📦", "text": "1 dự án JS duy nhất — npm workspaces", "sentence": 0},
+        {"icon": "🧩", "text": "Mini-app = 1 package, export 1 component", "sentence": 1},
+        {"icon": "🔨", "text": "Gộp lúc BUILD: Metro bundler gom thành 1 bundle", "sentence": 2},
+        {"icon": "🚫", "text": "Không engine riêng — chung 1 JS runtime", "sentence": 3},
+        {"icon": "✅", "text": "Ưu điểm: đơn giản khi xây MỚI từ đầu", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-13",
+    "type": "concept",
+    "narration": [
+      "Cách thứ HAI, chính là 5 tập vừa đi qua hôm nay: Flutter thuần — pub workspace.",
+      "Cũng một dự án Dart duy nhất — mỗi mini-app là một package trong packages/, gộp bằng resolution: workspace.",
+      "Gộp lại cũng xảy ra lúc BUILD — pub get resolve trọn một pubspec.lock, Dart compiler biên dịch chung một binary duy nhất.",
+      "Khác React Native ở một điểm: ngôn ngữ Dart thuần cho CẢ giao diện lẫn logic, không cần cầu nối JS-native nào.",
+      "Ưu điểm: cũng cực đơn giản khi xây MỚI từ đầu bằng Flutter — nếu đội ngũ đã quen Dart, đây là cách GỌN NHẤT trong cả ba, đúng như 5 tập vừa làm."
+    ],
+    "visual": {
+      "title": "Bộ ba #2: Flutter thuần — pub workspace",
+      "bullets": [
+        {"icon": "📦", "text": "1 dự án Dart duy nhất — pub workspace", "sentence": 0},
+        {"icon": "🧩", "text": "Mini-app = 1 package trong packages/", "sentence": 1},
+        {"icon": "🔨", "text": "Gộp lúc BUILD: pub get + Dart compiler chung binary", "sentence": 2},
+        {"icon": "🎯", "text": "Một ngôn ngữ Dart — không cầu nối JS-native", "sentence": 3},
+        {"icon": "✅", "text": "Ưu điểm: gọn NHẤT khi đội ngũ đã quen Dart", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-14",
+    "type": "concept",
+    "narration": [
+      "Cách thứ BA: Flutter add-to-app — series 6 tập khác đã có sẵn trên kênh.",
+      "Hoàn toàn khác hai cách trên: HAI dự án tách biệt — app chủ native và một module Flutter riêng.",
+      "Gộp lại xảy ra lúc RUNTIME, không phải lúc build — app chủ tự tạo FlutterEngine, nạp đúng entrypoint khi người dùng bấm vào, chứ không đóng gói sẵn một bundle.",
+      "Mỗi mini có ENGINE riêng, tách biệt hoàn toàn vòng đời app chủ — đánh đổi là phải hiểu CẢ HAI ngôn ngữ để debug khi có lỗi.",
+      "Ưu điểm đúng lúc app native đã chạy thật, hàng triệu người dùng — không cần viết lại từ đầu, chỉ nhúng thêm tính năng mới bằng Flutter."
+    ],
+    "visual": {
+      "title": "Bộ ba #3: Flutter add-to-app",
+      "bullets": [
+        {"icon": "🏗️", "text": "2 dự án tách biệt — app chủ native + module Flutter", "sentence": 1},
+        {"icon": "⚡", "text": "Gộp lúc RUNTIME: FlutterEngine nạp khi bấm vào", "sentence": 2},
+        {"icon": "💧", "text": "Mỗi mini 1 engine riêng — tách biệt app chủ", "sentence": 3},
+        {"icon": "⚖️", "text": "Đánh đổi: phải hiểu CẢ HAI ngôn ngữ để debug", "sentence": 3},
+        {"icon": "✅", "text": "Ưu điểm: giữ app native triệu người dùng đã có", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-15",
+    "type": "outro",
+    "narration": [
+      "Chọn cách nào? Xây MỚI hoàn toàn, chưa có app nào: chọn workspace — React Native nếu team quen JS, Flutter thuần nếu team quen Dart, cả hai đều gộp lúc build, đơn giản nhất.",
+      "Đã có app native chạy thật, chỉ muốn nhúng thêm vài tính năng nhỏ: chọn Flutter add-to-app — gộp lúc runtime, giữ nguyên code cũ, trả giá bằng việc phải rành cả hai ngôn ngữ.",
+      "Tổng kết Tập 5: mini_ride hoàn tất — cửa đẩy Navigator.push, dữ liệu trùng series React Native, và tấm biển chỉ đổi đúng 2 file nhỏ, không đụng 3 căn hộ trước.",
+      "5 tập, đúng lời hứa Tập 1: pub workspace, cửa chính export, tấm biển dependency theo tên, sổ đỏ chung MỘT pubspec.lock — công thức chạy trọn vẹn cho 3 mini-app khác nhau.",
+      "Mã nguồn nằm ở repo github.com/Leung190299/nestjs-tutorial-series, thư mục demo-flutter-workspace, tag flutter-workspace-tap-1 tới tap-5 — mỗi tag một tập.",
+      "Hai mảnh kia của bộ ba — React Native workspace và Flutter add-to-app — đã có playlist riêng trên kênh, xem lại để so sánh cả ba công thức.",
+      "Vote series tiếp theo ở phần bình luận — và cảm ơn bạn đã đi trọn cả BỘ BA cách làm mini-app, từ tập đầu tiên tới tận dòng code cuối cùng hôm nay. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Series Flutter thuần 5/5 hoàn tất — cảm ơn! 🏆",
+      "summary": [
+        {"text": "mini_ride: cửa đẩy Navigator.push, dữ liệu trùng series RN", "sentence": 2},
+        {"text": "5 tập: pub workspace, cửa chính, tấm biển, sổ đỏ chung", "sentence": 3},
+        {"text": "Repo + tag flutter-workspace-tap-1..5 = đúng code từng tập", "sentence": 4}
+      ],
+      "next": "Vote series tiếp theo ở bình luận 🗳️"
+    }
+  }
+]
