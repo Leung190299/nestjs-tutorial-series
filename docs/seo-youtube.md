@@ -1201,6 +1201,8 @@ Từ khóa chủ lực toàn series: `pub workspace`, `flutter monorepo`, `mini 
 
 <!-- Playlist "Mini-App Flutter thuần 🇻🇳" chưa tạo — 5 tập chờ lệnh đăng -->
 
+<!-- 5 tập đã đăng 2026-09-04, playlist "Mini-App Flutter thuần 🇻🇳": https://www.youtube.com/playlist?list=PLOjCSg9O8bRM -->
+
 ### Flutter Thuần #1 — Pub workspace: sổ đỏ chung cho cả khu chung cư Flutter (7:22)
 
 **Tiêu đề:** Pub workspace Flutter thuần: sổ đỏ chung cho cả khu mini-app | Tập 1/5
@@ -1227,7 +1229,7 @@ Tập 1: pub workspace là gì — có từ Dart 3.5 (không phải bản mới 
 💡 git checkout flutter-workspace-tap-1 để xem đúng code tập này.
 ▶️ Series RN cũ "Mini-App từ A đến Z": https://www.youtube.com/playlist?list=PLY-i2_1YbKi4
 ▶️ Series Flutter add-to-app "Mini-App với Flutter 🇻🇳": https://www.youtube.com/playlist?list=PLL5FgtEBrD6g
-⏭️ Tập sau: [LINK-EP35]
+⏭️ Tập sau: https://youtu.be/xj8lQHm53sM
 
 #flutter #pubworkspace #miniapp #dart #laptrinh
 ```
@@ -1267,8 +1269,8 @@ Cú pháp ĐINH của tập: gắn vào app chủ chỉ cần dep mini_news: any
 
 📦 Source code (demo-flutter-workspace/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout flutter-workspace-tap-2 để xem đúng code tập này.
-⏮️ Tập trước: [LINK-EP34]
-⏭️ Tập sau: [LINK-EP36]
+⏮️ Tập trước: https://youtu.be/r50_ppA-Mgg
+⏭️ Tập sau: https://youtu.be/1LW4a68HrVs
 
 #flutter #dartpackage #miniapp #flutterdev #laptrinh
 ```
@@ -1308,8 +1310,8 @@ So 1 nhịp với series React Native: giống hệt triết lý food-standalone
 
 📦 Source code (demo-flutter-workspace/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout flutter-workspace-tap-3 để xem đúng code tập này.
-⏮️ Tập trước: [LINK-EP35]
-⏭️ Tập sau: [LINK-EP37]
+⏮️ Tập trước: https://youtu.be/xj8lQHm53sM
+⏭️ Tập sau: https://youtu.be/n3E4QnWu2nk
 
 #flutter #standalone #miniapp #dart #laptrinh
 ```
@@ -1349,8 +1351,8 @@ Bước 1: packages/mini_topup — pubspec.yaml y hệt mini_news, chỉ đổi 
 
 📦 Source code (demo-flutter-workspace/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout flutter-workspace-tap-4 để xem đúng code tập này.
-⏮️ Tập trước: [LINK-EP36]
-⏭️ Tập sau: [LINK-EP38]
+⏮️ Tập trước: https://youtu.be/1LW4a68HrVs
+⏭️ Tập sau: https://youtu.be/4jKNpIxPSTY
 
 #flutter #flutterworkspace #miniapp #dart #laptrinh
 ```
@@ -1390,7 +1392,7 @@ Rồi TỔNG KẾT BỘ BA cách làm mini-app trên kênh: (1) React Native —
 
 📦 Source code (demo-flutter-workspace/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 Repo có tag theo từng tập (flutter-workspace-tap-1 → tap-5) — git checkout flutter-workspace-tap-5 để xem đúng code tập này.
-⏮️ Tập trước: [LINK-EP37]
+⏮️ Tập trước: https://youtu.be/n3E4QnWu2nk
 ▶️ Series RN cũ "Mini-App từ A đến Z": https://www.youtube.com/playlist?list=PLY-i2_1YbKi4
 ▶️ Series Flutter add-to-app "Mini-App với Flutter 🇻🇳": https://www.youtube.com/playlist?list=PLL5FgtEBrD6g
 💬 Vote series tiếp theo trong phần bình luận!
