@@ -53,11 +53,26 @@ Series MỚI nhất, đào sâu **add-to-app**: nhúng mini-app Flutter vào m�
 
 Demo: [`demo-flutter-miniapp/`](demo-flutter-miniapp/) (app chủ SwiftUI `vietsuper_ios/` + module Flutter `mini_flutter/` + app chủ Kotlin `vietsuper_android/`). Mỗi tập đóng băng bằng một git tag riêng — `git checkout flutter-miniapp-tap-N` (Swift, tập 1-6) hoặc `git checkout flutter-miniapp-android-N` (Kotlin, bonus 1-2) để xem đúng code xuất hiện trong tập tương ứng.
 
+## Series "Mini-App Flutter thuần" — Pub Workspace (ep34–ep38)
+
+Mảnh cuối của bộ ba cách làm mini-app trên kênh: không một dòng code native, toàn bộ từ trên xuống dưới chỉ **một ngôn ngữ Dart**, gộp nhiều mini-app bằng **pub workspace** (có từ Dart 3.5) — trái ngược có chủ đích với `FlutterEngine` runtime của series add-to-app, nhưng cùng triết lý với npm workspaces của series React Native. Cả khu chỉ dùng chung đúng MỘT `pubspec.lock`.
+
+| Tập | Nội dung | Tag code tương ứng |
+|-----|----------|---------------------|
+| 1 | Pub workspace là gì — sổ đỏ chung cả khu, root pubspec + resolution: workspace | `flutter-workspace-tap-1` |
+| 2 | Căn hộ đầu tiên: package mini_news, gắn vào tab chỉ 3 dòng | `flutter-workspace-tap-2` |
+| 3 | Cùng căn hộ, hai cửa: news_standalone chạy lẻ không cần app chủ | `flutter-workspace-tap-3` |
+| 4 | Công thức lặp lại: mini_topup từ A đến Z + bài tập IndexedStack | `flutter-workspace-tap-4` |
+| 5 (CUỐI) | mini_ride mở bằng Navigator.push + tổng kết BỘ BA cách làm mini-app | `flutter-workspace-tap-5` |
+
+Demo: [`demo-flutter-workspace/`](demo-flutter-workspace/) (root pub workspace, `apps/vietsuper` + `apps/news_standalone`, `packages/mini_news` + `packages/mini_topup` + `packages/mini_ride`). Mỗi tập đóng băng bằng một git tag riêng — `git checkout flutter-workspace-tap-N` để xem đúng code xuất hiện trong tập tương ứng.
+
 ## Cấu trúc repo
 
 - `demo-*/` — code NestJS thật xuất hiện trong video (chạy được, đã test).
 - `demo-miniapps/` — code series Mini-App React Native (monorepo npm workspaces).
 - `demo-flutter-miniapp/` — code series Mini-App với Flutter (add-to-app: app chủ SwiftUI + module Flutter, + bonus app chủ Kotlin/Jetpack Compose).
+- `demo-flutter-workspace/` — code series Mini-App Flutter thuần (pub workspace: app chủ + app vỏ standalone + 3 package mini-app, một pubspec.lock chung).
 - `video/` — project [Remotion](https://remotion.dev) render toàn bộ video và thumbnail.
 - `tts/` — pipeline thuyết minh tiếng Việt bằng [VieNeu-TTS](https://github.com/pnnbao97/VieNeu-TTS): kịch bản JSON → audio + timing → Remotion.
 - `docs/` — kịch bản thiết kế, kế hoạch và bộ SEO YouTube.
