@@ -1,0 +1,8 @@
+name: vietsuper_workspace
+publish_to: none
+
+environment:
+  sdk: ^3.10.0
+
+workspace:
+  - apps/vietsuper
