@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vietsuper/home_shell.dart';
 
 void main() {
-  testWidgets('3 tab chuyển được, tab Tin tức đã có mini-app, tab chưa xây hiện Đang xây',
+  testWidgets('3 tab chuyển được, tab Tin tức và tab Nạp thẻ đã có mini-app',
       (tester) async {
     await tester.pumpWidget(const MaterialApp(home: HomeShell()));
     expect(find.text('ViệtSuper 🇻🇳'), findsOneWidget);
@@ -15,6 +15,6 @@ void main() {
 
     await tester.tap(find.text('Nạp thẻ').last); // nút trên NavigationBar
     await tester.pumpAndSettle();
-    expect(find.text('Đang xây — quay lại tập sau nhé!'), findsOneWidget);
+    expect(find.text('Nhà mạng'), findsOneWidget);
   });
 }

@@ -8,3 +8,4 @@ workspace:
   - apps/vietsuper
   - apps/news_standalone
   - packages/mini_news
+  - packages/mini_topup

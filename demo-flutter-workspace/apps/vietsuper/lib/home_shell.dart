@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mini_news/mini_news.dart';
+import 'package:mini_topup/mini_topup.dart';
 
 import 'home_screen.dart';
-import 'under_construction.dart';
 
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
@@ -19,7 +19,7 @@ class _HomeShellState extends State<HomeShell> {
     final screens = <Widget>[
       HomeScreen(onOpenTab: (i) => setState(() => _tab = i)),
       const NewsScreen(),
-      const UnderConstruction(title: 'Nạp thẻ'),
+      const TopupScreen(),
     ];
     return Scaffold(
       appBar: AppBar(title: const Text('ViệtSuper 🇻🇳')),
