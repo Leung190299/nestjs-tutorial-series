@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_news/mini_news.dart';
+import 'package:mini_ride/mini_ride.dart';
 import 'package:mini_topup/mini_topup.dart';
 
 import 'home_screen.dart';
@@ -17,7 +18,17 @@ class _HomeShellState extends State<HomeShell> {
   @override
   Widget build(BuildContext context) {
     final screens = <Widget>[
-      HomeScreen(onOpenTab: (i) => setState(() => _tab = i)),
+      HomeScreen(
+        onOpenTab: (i) => setState(() => _tab = i),
+        onOpenRide: () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => Scaffold(
+              appBar: AppBar(title: const Text('Đặt xe ViệtSuper')),
+              body: const RideScreen(),
+            ),
+          ),
+        ),
+      ),
       const NewsScreen(),
       const TopupScreen(),
     ];

@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   mini_news: any
   mini_topup: any
+  mini_ride: any
 
 dev_dependencies:
   flutter_test:

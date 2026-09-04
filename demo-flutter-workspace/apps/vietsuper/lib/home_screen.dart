@@ -18,7 +18,7 @@ class Service {
 const services = [
   Service(emoji: '📰', name: 'Tin tức', tabIndex: 1, enabled: true),
   Service(emoji: '📱', name: 'Nạp thẻ', tabIndex: 2, enabled: true),
-  Service(emoji: '🛵', name: 'Đặt xe', enabled: false),
+  Service(emoji: '🛵', name: 'Đặt xe', enabled: true),
   Service(emoji: '🎁', name: 'Sắp ra mắt', enabled: false),
 ];
 
