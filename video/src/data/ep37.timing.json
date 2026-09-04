@@ -1,0 +1,783 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Công thức lặp lại",
+        "subtitle": "Mini-App Flutter thuần · Tập 4/5 · mini_topup",
+        "badge": "Series Mini-App Flutter thuần · Tập 4"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-01-0-b55e5c9e.wav",
+          "startFrame": 0,
+          "durationInFrames": 257
+        },
+        {
+          "file": "audio/ep37/scene-01-1-3f07f74a.wav",
+          "startFrame": 265,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep37/scene-01-2-d171d02b.wav",
+          "startFrame": 509,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep37/scene-01-3-fb643856.wav",
+          "startFrame": 705,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep37/scene-01-4-b2f1d984.wav",
+          "startFrame": 905,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 1120
+    },
+    {
+      "id": "scene-02",
+      "type": "code",
+      "visual": {
+        "filename": "packages/mini_topup/pubspec.yaml — TOÀN BỘ FILE",
+        "language": "yaml",
+        "code": "name: mini_topup\npublish_to: none\n\nenvironment:\n  sdk: ^3.10.0\nresolution: workspace\n\ndependencies:\n  flutter:\n    sdk: flutter",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 8,
+            "to": 10,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-02-0-e1ee9864.wav",
+          "startFrame": 0,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep37/scene-02-1-c0e378ab.wav",
+          "startFrame": 138,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep37/scene-02-2-3c455b00.wav",
+          "startFrame": 343,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep37/scene-02-3-ff9c2f3b.wav",
+          "startFrame": 539,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep37/scene-02-4-07db7edc.wav",
+          "startFrame": 730,
+          "durationInFrames": 257
+        }
+      ],
+      "durationInFrames": 1005
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "packages/mini_topup/lib/src/topup_screen.dart (dữ liệu)",
+        "language": "clike",
+        "code": "import 'package:flutter/material.dart';\n\nconst carriers = ['Viettel', 'MobiFone', 'VinaPhone'];\nconst amounts = [50000, 100000, 200000];\n\nString _formatVnd(int amount) {\n  final s = amount.toString().replaceAllMapped(\n        RegExp(r'\\B(?=(\\d{3})+(?!\\d))'),\n        (_) => '.',\n      );\n  return '$sđ';\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 6,
+            "to": 12,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-03-0-a99d31e0.wav",
+          "startFrame": 0,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep37/scene-03-1-53c4c922.wav",
+          "startFrame": 176,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep37/scene-03-2-c88adc14.wav",
+          "startFrame": 336,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 489
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "topup_screen.dart (3 state + 1 biến suy ra)",
+        "language": "clike",
+        "code": "class _TopupScreenState extends State<TopupScreen> {\n  String? _carrier;\n  int? _amount;\n  bool _done = false;\n\n  bool get _canPay => _carrier != null && _amount != null;",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-04-0-15fdfef6.wav",
+          "startFrame": 0,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep37/scene-04-1-b62958ed.wav",
+          "startFrame": 191,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep37/scene-04-2-a702c9a6.wav",
+          "startFrame": 351,
+          "durationInFrames": 255
+        }
+      ],
+      "durationInFrames": 624
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "topup_screen.dart (màn cảm ơn — early return)",
+        "language": "clike",
+        "code": "    if (_done) {\n      return Center(\n        child: Column(\n          mainAxisAlignment: MainAxisAlignment.center,\n          children: [\n            const Text('✅', style: TextStyle(fontSize: 64)),\n            const SizedBox(height: 12),\n            Text('Nạp thành công!', style: Theme.of(context).textTheme.headlineSmall),\n            const SizedBox(height: 8),\n            Text('$_carrier — ${_formatVnd(_amount!)}'),\n            const SizedBox(height: 24),\n            FilledButton(\n              onPressed: () => setState(() {\n                _carrier = null;\n                _amount = null;\n                _done = false;\n              }),\n              child: const Text('Nạp thêm'),\n            ),\n          ],\n        ),\n      );\n    }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 23,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 12,
+            "to": 19,
+            "sentence": 3
+          },
+          {
+            "from": 13,
+            "to": 17,
+            "sentence": 4
+          },
+          {
+            "from": 1,
+            "to": 23,
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-05-0-8c42f01c.wav",
+          "startFrame": 0,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep37/scene-05-1-25092d38.wav",
+          "startFrame": 155,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep37/scene-05-2-2b5cb9f5.wav",
+          "startFrame": 384,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep37/scene-05-3-38432e07.wav",
+          "startFrame": 565,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep37/scene-05-4-68ee0b3e.wav",
+          "startFrame": 758,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep37/scene-05-5-c8dc0efd.wav",
+          "startFrame": 937,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 1087
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "topup_screen.dart (form — Nhà mạng ChoiceChip)",
+        "language": "clike",
+        "code": "    return ListView(\n      padding: const EdgeInsets.all(16),\n      children: [\n        Text('Nhà mạng', style: Theme.of(context).textTheme.titleMedium),\n        const SizedBox(height: 8),\n        Wrap(\n          spacing: 8,\n          children: [\n            for (final c in carriers)\n              ChoiceChip(\n                label: Text(c),\n                selected: _carrier == c,\n                onSelected: (_) => setState(() => _carrier = c),\n              ),\n          ],\n        ),",
+        "steps": [
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 10,
+            "sentence": 1
+          },
+          {
+            "from": 11,
+            "to": 13,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 16,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-06-0-9d2c41cd.wav",
+          "startFrame": 0,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep37/scene-06-1-570e65de.wav",
+          "startFrame": 143,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep37/scene-06-2-cc7030f2.wav",
+          "startFrame": 295,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep37/scene-06-3-67f8f735.wav",
+          "startFrame": 467,
+          "durationInFrames": 156
+        }
+      ],
+      "durationInFrames": 641
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "topup_screen.dart (form — Mệnh giá + nút Nạp thẻ)",
+        "language": "clike",
+        "code": "        const SizedBox(height: 20),\n        Text('Mệnh giá', style: Theme.of(context).textTheme.titleMedium),\n        const SizedBox(height: 8),\n        Wrap(\n          spacing: 8,\n          children: [\n            for (final a in amounts)\n              ChoiceChip(\n                label: Text(_formatVnd(a)),\n                selected: _amount == a,\n                onSelected: (_) => setState(() => _amount = a),\n              ),\n          ],\n        ),\n        const SizedBox(height: 28),\n        FilledButton(\n          onPressed: _canPay ? () => setState(() => _done = true) : null,\n          child: const Text('Nạp thẻ'),\n        ),\n      ],\n    );\n  }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 11,
+            "sentence": 1
+          },
+          {
+            "from": 16,
+            "to": 19,
+            "sentence": 2
+          },
+          {
+            "from": 17,
+            "to": 17,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-07-0-efe38390.wav",
+          "startFrame": 0,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep37/scene-07-1-568d512f.wav",
+          "startFrame": 176,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep37/scene-07-2-a6ca2cbc.wav",
+          "startFrame": 388,
+          "durationInFrames": 75
+        },
+        {
+          "file": "audio/ep37/scene-07-3-5bbd5c1f.wav",
+          "startFrame": 471,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep37/scene-07-4-ed7ac1cd.wav",
+          "startFrame": 671,
+          "durationInFrames": 156
+        }
+      ],
+      "durationInFrames": 845
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "apps/vietsuper/pubspec.yaml (trích dependencies)",
+        "language": "yaml",
+        "code": "dependencies:\n  flutter:\n    sdk: flutter\n\n  # The following adds the Cupertino Icons font to your application.\n  # Use with the CupertinoIcons class for iOS style icons.\n  cupertino_icons: ^1.0.8\n  mini_news: any\n  mini_topup: any",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 9,
+            "to": 9,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-08-0-813e4576.wav",
+          "startFrame": 0,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep37/scene-08-1-f75dab88.wav",
+          "startFrame": 157,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep37/scene-08-2-f1527012.wav",
+          "startFrame": 369,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep37/scene-08-3-7d4a9b32.wav",
+          "startFrame": 586,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 727
+    },
+    {
+      "id": "scene-09",
+      "type": "code",
+      "visual": {
+        "filename": "apps/vietsuper/lib/home_shell.dart (screens + tab mới)",
+        "language": "clike",
+        "code": "    final screens = <Widget>[\n      HomeScreen(onOpenTab: (i) => setState(() => _tab = i)),\n      const NewsScreen(),\n      const TopupScreen(),\n    ];\n    return Scaffold(\n      appBar: AppBar(title: const Text('ViệtSuper 🇻🇳')),\n      body: screens[_tab],\n      bottomNavigationBar: NavigationBar(\n        selectedIndex: _tab,\n        onDestinationSelected: (i) => setState(() => _tab = i),\n        destinations: const [\n          NavigationDestination(icon: Text('🏠', style: TextStyle(fontSize: 24)), label: 'Trang chủ'),\n          NavigationDestination(icon: Text('📰', style: TextStyle(fontSize: 24)), label: 'Tin tức'),\n          NavigationDestination(icon: Text('📱', style: TextStyle(fontSize: 24)), label: 'Nạp thẻ'),\n        ],",
+        "steps": [
+          {
+            "from": 1,
+            "to": 16,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 2
+          },
+          {
+            "from": 9,
+            "to": 16,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 16,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-09-0-d62fba92.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep37/scene-09-1-94c00ce7.wav",
+          "startFrame": 145,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep37/scene-09-2-106e8bf8.wav",
+          "startFrame": 405,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep37/scene-09-3-7e264473.wav",
+          "startFrame": 586,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep37/scene-09-4-4b00d3b6.wav",
+          "startFrame": 791,
+          "durationInFrames": 204
+        }
+      ],
+      "durationInFrames": 1013
+    },
+    {
+      "id": "scene-10",
+      "type": "code",
+      "visual": {
+        "filename": "pubspec.yaml (gốc) — TOÀN BỘ FILE",
+        "language": "yaml",
+        "code": "name: vietsuper_workspace\npublish_to: none\n\nenvironment:\n  sdk: ^3.10.0\n\nworkspace:\n  - apps/vietsuper\n  - apps/news_standalone\n  - packages/mini_news\n  - packages/mini_topup",
+        "steps": [
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 10,
+            "sentence": 1
+          },
+          {
+            "from": 11,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-10-0-59686fe2.wav",
+          "startFrame": 0,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep37/scene-10-1-59c037de.wav",
+          "startFrame": 128,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep37/scene-10-2-a265e6ac.wav",
+          "startFrame": 343,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep37/scene-10-3-87c782b5.wav",
+          "startFrame": 500,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 682
+    },
+    {
+      "id": "scene-11",
+      "type": "terminal",
+      "visual": {
+        "title": "fvm flutter pub get + run",
+        "commands": [
+          {
+            "cmd": "fvm flutter pub get",
+            "output": "Resolving dependencies in demo-flutter-workspace...\n\nGot dependencies!",
+            "sentence": 0
+          },
+          {
+            "cmd": "cd apps/vietsuper && fvm flutter run",
+            "output": "Launching lib/main.dart on iPhone 17 Pro...\n\nFlutter run key commands.",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-11-0-0c542bc7.wav",
+          "startFrame": 0,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep37/scene-11-1-ac8b74b3.wav",
+          "startFrame": 138,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep37/scene-11-2-0d7da612.wav",
+          "startFrame": 370,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep37/scene-11-3-4cd6d2e5.wav",
+          "startFrame": 561,
+          "durationInFrames": 108
+        }
+      ],
+      "durationInFrames": 687
+    },
+    {
+      "id": "scene-12",
+      "type": "phone",
+      "visual": {
+        "title": "Nghiệm thu mini_topup",
+        "screens": [
+          {
+            "src": "screens/ep37/host-grid-2-on.png",
+            "sentence": 1
+          },
+          {
+            "src": "screens/ep37/host-tab-topup-form.png",
+            "sentence": 2
+          },
+          {
+            "src": "screens/ep37/host-tab-topup-success.png",
+            "sentence": 3
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🏠",
+            "text": "Trang chủ: ô Nạp thẻ đã sáng, bấm được",
+            "sentence": 1
+          },
+          {
+            "icon": "📱",
+            "text": "Viettel + 100.000đ → nút Nạp thẻ hiện",
+            "sentence": 2
+          },
+          {
+            "icon": "✅",
+            "text": "Nạp thành công! Viettel — 100.000đ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-12-0-8920f000.wav",
+          "startFrame": 0,
+          "durationInFrames": 84
+        },
+        {
+          "file": "audio/ep37/scene-12-1-b4289529.wav",
+          "startFrame": 92,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep37/scene-12-2-ede22de8.wav",
+          "startFrame": 261,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep37/scene-12-3-3cd419bd.wav",
+          "startFrame": 454,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep37/scene-12-4-81dfdcb1.wav",
+          "startFrame": 642,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 867
+    },
+    {
+      "id": "scene-13",
+      "type": "concept",
+      "visual": {
+        "title": "Bài tập: giữ tab sống",
+        "bullets": [
+          {
+            "icon": "😅",
+            "text": "Chuyển tab rồi quay lại: form biến mất trắng tinh",
+            "sentence": 0
+          },
+          {
+            "icon": "🧨",
+            "text": "body: screens[_tab] — dựng lại State mỗi lần đổi tab",
+            "sentence": 1
+          },
+          {
+            "icon": "💡",
+            "text": "1 dòng sửa: IndexedStack(index: _tab, children: screens)",
+            "sentence": 2
+          },
+          {
+            "icon": "📝",
+            "text": "Bài tập: tự sửa trong home_shell.dart, tự kiểm chứng",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-13-0-aa6bd253.wav",
+          "startFrame": 0,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep37/scene-13-1-bec835b7.wav",
+          "startFrame": 208,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep37/scene-13-2-04d10e86.wav",
+          "startFrame": 416,
+          "durationInFrames": 312
+        },
+        {
+          "file": "audio/ep37/scene-13-3-46c4bb40.wav",
+          "startFrame": 736,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep37/scene-13-4-3c7e6448.wav",
+          "startFrame": 951,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep37/scene-13-5-9e98010f.wav",
+          "startFrame": 1149,
+          "durationInFrames": 231
+        }
+      ],
+      "durationInFrames": 1398
+    },
+    {
+      "id": "scene-14",
+      "type": "outro",
+      "visual": {
+        "title": "Tập 4/5 xong — lặp lại thành công! 🧩",
+        "summary": [
+          {
+            "text": "packages/mini_topup: pubspec + cửa chính + topup_screen.dart",
+            "sentence": 0
+          },
+          {
+            "text": "mini_news nguyên vẹn — HomeShell chỉ thêm 3 chỗ nhỏ",
+            "sentence": 1
+          },
+          {
+            "text": "Bài tập: IndexedStack giữ tab sống khi chuyển qua lại",
+            "sentence": 2
+          }
+        ],
+        "next": "Tập 5/5: mini_ride + tổng kết BỘ BA 🚪🏆"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep37/scene-14-0-d4f0bb33.wav",
+          "startFrame": 0,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep37/scene-14-1-61a0cb7c.wav",
+          "startFrame": 251,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep37/scene-14-2-e58d143f.wav",
+          "startFrame": 492,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep37/scene-14-3-ede2eb91.wav",
+          "startFrame": 700,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep37/scene-14-4-b91983e4.wav",
+          "startFrame": 924,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep37/scene-14-5-33fea9db.wav",
+          "startFrame": 1124,
+          "durationInFrames": 303
+        }
+      ],
+      "durationInFrames": 1445
+    }
+  ]
+}
