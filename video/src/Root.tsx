@@ -37,6 +37,7 @@ import ep31 from './data/ep31.timing.json';
 import ep32 from './data/ep32.timing.json';
 import ep33 from './data/ep33.timing.json';
 import ep34 from './data/ep34.timing.json';
+import ep35 from './data/ep35.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -74,6 +75,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode32', timing: ep32 as unknown as EpisodeTiming},
   {id: 'Episode33', timing: ep33 as unknown as EpisodeTiming},
   {id: 'Episode34', timing: ep34 as unknown as EpisodeTiming},
+  {id: 'Episode35', timing: ep35 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -479,6 +481,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/ep34/host-home-grid.png',
       badgeEmoji: '🧱',
+      seriesTag: 'Mini-App Flutter thuần 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb35',
+    props: {
+      badge: 'FLUTTER THUẦN 2/5',
+      line1: 'CĂN HỘ',
+      line2: 'ĐẦU TIÊN',
+      subtitle: 'mini_news · gắn tab 3 dòng',
+      variant: 'shot',
+      image: 'screens/ep35/host-tab-news.png',
+      badgeEmoji: '📰',
       seriesTag: 'Mini-App Flutter thuần 🇻🇳',
     },
   },

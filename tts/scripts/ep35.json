@@ -1,0 +1,523 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tập trước ta hứa: tập này xây CĂN HỘ ĐẦU TIÊN — đúng lời hứa, hôm nay căn hộ đó tên là mini_news.",
+      "Nhắc nhanh cho ai xem từ đầu: pub workspace là 'sổ đỏ chung cả khu' — hôm nay khu chung cư mọc thêm căn hộ tính năng thứ nhất.",
+      "Ai đã xem series mini-food bên React Native workspace sẽ thấy nhịp hôm nay rất quen: sổ đỏ, cửa chính, căn phòng — chỉ đổi chất liệu sang Flutter thuần.",
+      "5 tập, hôm nay Tập 2 trên 5: mini_news — một package Flutter nhỏ, gắn thẳng vào tab Tin tức chỉ bằng vài dòng cú pháp."
+    ],
+    "visual": {
+      "title": "Căn hộ đầu tiên: mini_news",
+      "subtitle": "Mini-App Flutter thuần · Tập 2/5 · mini_news",
+      "badge": "Series Mini-App Flutter thuần · Tập 2"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Một căn hộ Flutter thuần trong pub workspace cần đúng BA thứ, y hệt công thức từ series RN — chỉ đổi chất liệu.",
+      "Thứ nhất: SỔ ĐỎ — pubspec.yaml khai danh tính package, quan trọng nhất là dòng resolution: workspace.",
+      "Thứ hai: CỬA CHÍNH — một file lib/<tên>.dart chỉ để export, người ngoài chỉ thấy đúng những gì được export ở đây.",
+      "Thứ ba: CĂN PHÒNG — code màn hình thật, ở đây là NewsScreen, tự túc cả data lẫn logic bên trong.",
+      "Khác biệt lớn với RN: không cần khai peerDependencies cho flutter như React — cả khu dùng chung một pubspec.lock, workspace tự lo phần chia sẻ."
+    ],
+    "visual": {
+      "title": "Giải phẫu một căn hộ Flutter thuần",
+      "bullets": [
+        {
+          "icon": "📋",
+          "text": "Sổ đỏ — pubspec.yaml: resolution: workspace",
+          "sentence": 1
+        },
+        {
+          "icon": "🚪",
+          "text": "Cửa chính — lib/mini_news.dart: chỉ export",
+          "sentence": 2
+        },
+        {
+          "icon": "🛋️",
+          "text": "Căn phòng — NewsScreen: tự túc data + logic",
+          "sentence": 3
+        },
+        {
+          "icon": "🔗",
+          "text": "Không peerDependencies — chung 1 pubspec.lock",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là TOÀN BỘ pubspec.yaml của mini_news — đúng 10 dòng, ngắn hơn cả app chủ ở tập trước.",
+      "name: mini_news đặt tên căn hộ, publish_to: none khóa cứng không bao giờ publish lên pub.dev — y hệt quy tắc ở root.",
+      "Dòng ngôi sao: resolution: workspace — đúng câu 'xin gia nhập khu' đã học Tập 1, thiếu dòng này package sẽ tự tải dependency riêng.",
+      "Để ý khối dependencies: package KHÔNG khai flutter_test trong dev_dependencies — nhưng test của package này vẫn chạy được bình thường.",
+      "Vì sao chạy được? Vì cả khu dùng CHUNG một pubspec.lock — package con trong workspace được thừa hưởng flutter_test từ lockfile chung, không cần tự khai lại.",
+      "Nhưng nhớ kỹ: nếu tách package này ra khỏi workspace, đứng một mình, nó BẮT BUỘC phải tự khai flutter_test — đây chính là điểm reviewer hay bắt lỗi nhất."
+    ],
+    "visual": {
+      "filename": "packages/mini_news/pubspec.yaml — TOÀN BỘ FILE",
+      "language": "yaml",
+      "code": "name: mini_news\npublish_to: none\n\nenvironment:\n  sdk: ^3.10.0\nresolution: workspace\n\ndependencies:\n  flutter:\n    sdk: flutter",
+      "steps": [
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 6,
+          "to": 6,
+          "sentence": 2
+        },
+        {
+          "from": 8,
+          "to": 10,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 4
+        },
+        {
+          "from": 8,
+          "to": 10,
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "Cửa chính của căn hộ: lib/mini_news.dart — chuẩn bị tinh thần, đúng MỘT dòng.",
+      "export 'src/news_screen.dart' — hết, không hơn không kém.",
+      "Một dòng này mang triết lý cũ từ series RN: người ngoài chỉ thấy những gì được export ở đây, mọi thứ khác trong src/ là chuyện nội bộ.",
+      "App chủ chỉ cần import 'package:mini_news/mini_news.dart' — không bao giờ đào sâu vào src/ bên trong."
+    ],
+    "visual": {
+      "filename": "packages/mini_news/lib/mini_news.dart — TOÀN BỘ FILE",
+      "language": "clike",
+      "code": "export 'src/news_screen.dart';",
+      "steps": [
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Vào căn phòng NewsScreen — phần một: class Article, mô tả MỘT bài báo.",
+      "4 field: id để nhận diện, title là tiêu đề, emoji minh họa, và summary là nội dung tóm tắt.",
+      "const constructor với required cho cả 4 field — Dart bắt buộc truyền đủ, không thiếu field nào khi tạo Article mới.",
+      "Class dữ liệu thuần, không có logic — y hệt phong cách MenuItem bên series RN, chỉ đổi tên field cho hợp ngữ cảnh tin tức."
+    ],
+    "visual": {
+      "filename": "packages/mini_news/lib/src/news_screen.dart (1/4 — class Article)",
+      "language": "clike",
+      "code": "class Article {\n  const Article({\n    required this.id,\n    required this.title,\n    required this.emoji,\n    required this.summary,\n  });\n\n  final String id;\n  final String title;\n  final String emoji;\n  final String summary;\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 13,
+          "sentence": 0
+        },
+        {
+          "from": 9,
+          "to": 12,
+          "sentence": 1
+        },
+        {
+          "from": 2,
+          "to": 7,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 13,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Phần hai: danh sách articles — đúng 3 bài báo mẫu, nhưng nội dung không hề ngẫu nhiên.",
+      "Bài đầu 🧱 tự giới thiệu chính công nghệ đang dùng: 'Flutter có pub workspace chính chủ' — package tự nói về nền móng của chính nó.",
+      "Bài hai 🚪 nói thẳng khái niệm mini-app: 'mỗi tính năng một căn hộ' — tóm tắt luôn ẩn dụ xuyên suốt series.",
+      "Bài ba 🛵 là cái nháy mắt cho khán giả tinh ý: 'ViệtSuper sắp mở dịch vụ Đặt xe' — đúng những gì các tập cuối series sẽ xây.",
+      "3 bài báo, 3 field summary, không có gì phức tạp — nhưng đủ để NewsScreen có nội dung thật để hiển thị."
+    ],
+    "visual": {
+      "filename": "packages/mini_news/lib/src/news_screen.dart (2/4 — const articles)",
+      "language": "clike",
+      "code": "const articles = [\n  Article(\n    id: 'workspace',\n    title: 'Flutter có pub workspace chính chủ',\n    emoji: '🧱',\n    summary:\n        'Từ Dart 3.5, cả khu chung cư dùng chung một lần pub get — hết cảnh mỗi package một kiểu version.',\n  ),\n  Article(\n    id: 'mini-app',\n    title: 'Mini-app: mỗi tính năng một căn hộ',\n    emoji: '🚪',\n    summary:\n        'Các super-app lớn tách tính năng thành module riêng để hàng chục team làm việc không giẫm chân nhau.',\n  ),\n  Article(\n    id: 'dat-xe',\n    title: 'ViệtSuper sắp mở dịch vụ Đặt xe',\n    emoji: '🛵',\n    summary:\n        'Sau Tin tức và Nạp thẻ, ViệtSuper sẽ trình làng dịch vụ thứ ba — vẫn hoàn toàn bằng Flutter.',\n  ),\n];",
+      "steps": [
+        {
+          "from": 1,
+          "to": 23,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 9,
+          "to": 15,
+          "sentence": 2
+        },
+        {
+          "from": 16,
+          "to": 22,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 23,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Phần ba: state và hành vi. _read là một Set<String> — tập hợp id các bài đã mở, khởi đầu rỗng.",
+      "_open nhận vào một Article, việc đầu tiên nó làm là gọi showModalBottomSheet — tấm phiếu trượt lên từ đáy màn hình.",
+      "Bên trong sheet: Column canh trái, hiện emoji cộng tiêu đề ở trên, rồi tới summary — đúng nội dung Article vừa đọc ở phần hai.",
+      "Chờ người dùng đóng sheet xong, dòng cuối mới chạy: setState(() => _read.add(article.id)) — đánh dấu bài đó là Đã đọc.",
+      "Set tự động không cho trùng: bấm lại bài đã đọc, add lần hai cũng chẳng sao, Set vẫn chỉ có đúng một bản ghi."
+    ],
+    "visual": {
+      "filename": "packages/mini_news/lib/src/news_screen.dart (3/4 — _read + _open + sheet)",
+      "language": "clike",
+      "code": "  final Set<String> _read = {};\n\n  Future<void> _open(Article article) async {\n    await showModalBottomSheet<void>(\n      context: context,\n      builder: (_) => Padding(\n        padding: const EdgeInsets.all(24),\n        child: Column(\n          mainAxisSize: MainAxisSize.min,\n          crossAxisAlignment: CrossAxisAlignment.start,\n          children: [\n            Text('${article.emoji}  ${article.title}',\n                style: Theme.of(context).textTheme.titleLarge),\n            const SizedBox(height: 12),\n            Text(article.summary, style: Theme.of(context).textTheme.bodyLarge),\n          ],\n        ),\n      ),\n    );\n    setState(() => _read.add(article.id));\n  }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 19,
+          "sentence": 1
+        },
+        {
+          "from": 6,
+          "to": 17,
+          "sentence": 2
+        },
+        {
+          "from": 20,
+          "to": 21,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Phần bốn, cũng là phần cuối: build dùng ListView.separated thay vì ListView thường.",
+      "separatorBuilder chèn SizedBox cao 12 giữa mỗi dòng — danh sách bài báo có khoảng cách đều, không cần Divider thủ công.",
+      "Mỗi item: đọc read = _read.contains(article.id) — true nếu bài này đã từng mở sheet.",
+      "ListTile hiển thị subtitle 'Đã đọc ✓' CHỈ khi read true, còn không thì null — không có dòng phụ nào cả.",
+      "onTap: () => _open(article) — bấm vào bài nào, sheet của đúng bài đó trượt lên, đọc xong tự đánh dấu."
+    ],
+    "visual": {
+      "filename": "packages/mini_news/lib/src/news_screen.dart (4/4 — build ListView)",
+      "language": "clike",
+      "code": "  @override\n  Widget build(BuildContext context) {\n    return ListView.separated(\n      padding: const EdgeInsets.all(16),\n      itemCount: articles.length,\n      separatorBuilder: (_, _) => const SizedBox(height: 12),\n      itemBuilder: (context, index) {\n        final article = articles[index];\n        final read = _read.contains(article.id);\n        return Card(\n          child: ListTile(\n            leading: Text(article.emoji, style: const TextStyle(fontSize: 32)),\n            title: Text(article.title),\n            subtitle: read ? const Text('Đã đọc ✓') : null,\n            onTap: () => _open(article),\n          ),\n        );\n      },\n    );\n  }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 20,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 6,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 9,
+          "sentence": 2
+        },
+        {
+          "from": 14,
+          "to": 14,
+          "sentence": 3
+        },
+        {
+          "from": 15,
+          "to": 15,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "code",
+    "narration": [
+      "Giờ tới cú pháp ĐINH của cả tập: gắn mini_news vào app chủ chỉ cần thêm ĐÚNG một dòng trong pubspec.yaml của vietsuper.",
+      "dependencies: đã có sẵn flutter và cupertino_icons — dòng cuối cùng thêm mới: mini_news: any.",
+      "So một nhịp với series RN: bên mini-food, package.json phải khai rõ main: 'src/index.ts' để node biết cửa chính nằm ở đâu.",
+      "Ở Flutter workspace, pubspec.yaml của mini_news KHÔNG cần khai path cửa chính nào cả — pub tự hiểu lib/mini_news.dart là cửa chính theo đúng TÊN package.",
+      "Và app chủ cũng chỉ cần khai TÊN: mini_news: any — không path, không workspace protocol, pub tự dò trong packages/ nhờ dòng resolution: workspace đã khai từ Tập 1."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/pubspec.yaml (trích dependencies)",
+      "language": "yaml",
+      "code": "dependencies:\n  flutter:\n    sdk: flutter\n\n  # The following adds the Cupertino Icons font to your application.\n  # Use with the CupertinoIcons class for iOS style icons.\n  cupertino_icons: ^1.0.8\n  mini_news: any",
+      "steps": [
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 0
+        },
+        {
+          "from": 7,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 8,
+          "sentence": 2
+        },
+        {
+          "from": 8,
+          "to": 8,
+          "sentence": 3
+        },
+        {
+          "from": 8,
+          "to": 8,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "code",
+    "narration": [
+      "Mở home_shell.dart — chỉ cần thêm ĐÚNG một dòng import mới ở đầu file.",
+      "import 'package:mini_news/mini_news.dart' — chú ý: import theo TÊN package, giống hệt cách import flutter/material.dart, không phải đường dẫn tương đối.",
+      "Đây chính là lợi ích của workspace: package con được coi như một package pub.dev thật, dù thực ra chỉ nằm cạnh trong packages/."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/lib/home_shell.dart (1/2 — thêm import)",
+      "language": "clike",
+      "code": "import 'package:flutter/material.dart';\nimport 'package:mini_news/mini_news.dart';\n\nimport 'home_screen.dart';\nimport 'under_construction.dart';",
+      "steps": [
+        {
+          "from": 1,
+          "to": 5,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "code",
+    "narration": [
+      "Bước gắn tab thật sự: trong mảng screens, thay UnderConstruction(title: 'Tin tức') bằng const NewsScreen() — đúng MỘT dòng đổi.",
+      "Vị trí không đổi: NewsScreen vẫn nằm ở index 1, khớp tabIndex: 1 đã khai trong Service của home_screen.dart.",
+      "Nạp thẻ ở index 2 vẫn giữ nguyên UnderConstruction — tập này CHƯA đụng tới, đúng tinh thần 'thêm căn hộ không đụng căn khác'."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/lib/home_shell.dart (2/2 — gắn NewsScreen vào tab)",
+      "language": "clike",
+      "code": "    final screens = <Widget>[\n      HomeScreen(onOpenTab: (i) => setState(() => _tab = i)),\n      const NewsScreen(),\n      const UnderConstruction(title: 'Nạp thẻ'),\n    ];",
+      "steps": [
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "code",
+    "narration": [
+      "Còn một công tắc cuối trong home_screen.dart: services đổi enabled: false thành enabled: true cho đúng ô Tin tức.",
+      "Chỉ một chữ false thành true — Opacity 0.35 'chờ khai trương' tuần trước giờ biến mất, ô Tin tức sáng 100%.",
+      "3 ô còn lại — Nạp thẻ, Đặt xe, Sắp ra mắt — vẫn enabled: false, vẫn mờ, đúng lịch những tập còn lại của series."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/lib/home_screen.dart (trích const services)",
+      "language": "clike",
+      "code": "const services = [\n  Service(emoji: '📰', name: 'Tin tức', tabIndex: 1, enabled: true),\n  Service(emoji: '📱', name: 'Nạp thẻ', tabIndex: 2, enabled: false),\n  Service(emoji: '🛵', name: 'Đặt xe', enabled: false),\n  Service(emoji: '🎁', name: 'Sắp ra mắt', enabled: false),\n];",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 3,
+          "to": 5,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-13",
+    "type": "phone",
+    "narration": [
+      "Chạy thử trên simulator: trang chủ ViệtSuper giờ đây ô Tin tức sáng rõ, không còn mờ 35% như tập trước.",
+      "Bấm tab Tin tức: NewsScreen hiện đúng 3 bài báo — bài về workspace, về mini-app, và bài 'nháy mắt' Đặt xe sắp ra mắt.",
+      "Bấm vào một bài: sheet trượt lên từ đáy, hiện emoji, tiêu đề, và tóm tắt đầy đủ — đúng nội dung Article đã đọc code.",
+      "Đóng sheet lại: bài vừa đọc hiện dòng 'Đã đọc ✓' màu xám bên dưới tiêu đề — _read Set đã hoạt động đúng như thiết kế."
+    ],
+    "visual": {
+      "title": "mini_news: 3 bài + sheet + đã đọc",
+      "screens": [
+        {
+          "src": "screens/ep35/host-grid-news-on.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/ep35/host-tab-news.png",
+          "sentence": 1
+        },
+        {
+          "src": "screens/ep35/mini-news-sheet.png",
+          "sentence": 2
+        },
+        {
+          "src": "screens/ep35/mini-news-read.png",
+          "sentence": 3
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🏠",
+          "text": "Ô Tin tức sáng 100% — hết mờ chờ khai trương",
+          "sentence": 0
+        },
+        {
+          "icon": "📰",
+          "text": "3 bài báo thật, bài 3 nháy mắt series",
+          "sentence": 1
+        },
+        {
+          "icon": "📄",
+          "text": "Sheet trượt lên đúng nội dung Article",
+          "sentence": 2
+        },
+        {
+          "icon": "✅",
+          "text": "Đóng sheet → 'Đã đọc ✓' — _read hoạt động",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-14",
+    "type": "outro",
+    "narration": [
+      "Tổng kết Tập 2: mini_news đúng 3 thứ — sổ đỏ 10 dòng, cửa chính 1 dòng export, căn phòng NewsScreen tự túc data và logic.",
+      "Điểm reviewer hay hỏi nhất: package con KHÔNG cần tự khai flutter_test nhờ workspace chung lockfile — nhưng tách ra khỏi khu thì phải tự khai lại, nhớ kỹ.",
+      "Gắn vào app chủ chỉ 3 dòng: mini_news: any theo TÊN trong pubspec, import theo tên, và thay một phần tử trong mảng screens.",
+      "Căn hộ đầu tiên đã có người ở — tab Tin tức không còn mờ, không còn cảnh 'đang xây'.",
+      "Tập sau: cho căn hộ này RA Ở RIÊNG — mini_news chạy một mình không cần app chủ, y hệt tinh thần standalone bên series RN. Hẹn gặp lại ở Tập 3!"
+    ],
+    "visual": {
+      "title": "Tập 2/5 xong — căn hộ có người ở! 🎉",
+      "summary": [
+        {
+          "text": "mini_news: sổ đỏ 10 dòng + cửa chính 1 dòng + NewsScreen",
+          "sentence": 0
+        },
+        {
+          "text": "flutter_test không tự khai — nhờ lockfile chung workspace",
+          "sentence": 1
+        },
+        {
+          "text": "Gắn tab: mini_news: any + import + 1 dòng screens",
+          "sentence": 2
+        }
+      ],
+      "next": "Tập 3/5: mini_news ra ở riêng 🚪"
+    }
+  }
+]
