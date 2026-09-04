@@ -1111,6 +1111,8 @@ Rồi so găng trực tiếp 2 công thức: series React Native cũ (1 dự án
 
 ---
 
+<!-- 2 tập bonus đã đăng 2026-09-04, nối playlist PLL5FgtEBrD6g; mô tả Tập 6 đã thêm dòng Bonus -->
+
 ### Flutter Mini-App Bonus Android #1 — Cùng căn hộ, tòa nhà Android — host Kotlin Compose (7:50)
 
 **Tiêu đề:** Kotlin add-to-app: host Jetpack Compose cắm lại mini Flutter | Bonus 1/2
@@ -1135,7 +1137,7 @@ Compose trong 60 giây cho người biết Flutter (@Composable ≈ Widget, cùn
 💡 git checkout flutter-miniapp-android-1 để xem đúng code tập này.
 🔗 Playlist "Mini-App với Flutter 🇻🇳": https://www.youtube.com/playlist?list=PLL5FgtEBrD6g
 ⏮️ Tập trước (Tập 6): https://youtu.be/lQAknMo0CB4
-⏭️ Bonus 2/2: [LINK-EP33]
+⏭️ Bonus 2/2: https://youtu.be/MzO--hC1pU0
 
 #kotlin #flutter #addtoapp #jetpackcompose #laptrinh
 ```
@@ -1173,7 +1175,7 @@ Hai bài học thật không giấu diếm: (1) chip Ví trên Android vẫn ghi
 📦 Source code (demo-flutter-miniapp/vietsuper_android/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 Repo có đủ 2 bộ tag: `flutter-miniapp-tap-1..6` (Swift) + `flutter-miniapp-android-1..2` (Kotlin) — git checkout flutter-miniapp-android-2 để xem đúng code tập này.
 🔗 Playlist "Mini-App với Flutter 🇻🇳": https://www.youtube.com/playlist?list=PLL5FgtEBrD6g
-⏮️ Bonus 1/2: [LINK-EP32]
+⏮️ Bonus 1/2: https://youtu.be/7YZZg7yVjYg
 ▶️ Xem từ đầu series: https://youtu.be/5T2J4RGOXxQ
 💬 Vote series tiếp theo: lên store thật, Flutter Web, hay chủ đề khác?
 
