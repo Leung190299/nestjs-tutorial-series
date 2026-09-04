@@ -1,0 +1,520 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Kênh mình đã có bộ đôi: series React Native dùng workspace, và series Flutter add-to-app nhúng vào app native — hôm nay mở mảnh cuối cùng của bộ ba.",
+      "Series mới: Mini-App Flutter thuần — không một dòng code native, không SwiftUI, không Kotlin, tất cả từ trên xuống dưới chỉ MỘT ngôn ngữ: Dart.",
+      "Ai đã xem series React Native workspace sẽ thấy công thức quen: gộp nhiều mini-app vào một khu chung cư — nhưng lần này chất liệu đổi hoàn toàn sang Flutter.",
+      "5 tập, mỗi tập cắm thêm một mảnh: hôm nay Tập 1 trên 5, ta học nền móng — pub workspace, sổ đỏ chung cho cả khu.",
+      "Giữ ẩn dụ quen thuộc từ series cũ: căn hộ, sổ đỏ, cửa chính — nhưng lần này tòa nhà và căn hộ CÙNG một chất liệu Flutter."
+    ],
+    "visual": {
+      "title": "Pub workspace: sổ đỏ chung cả khu",
+      "subtitle": "Mini-App Flutter thuần · Tập 1/5 · Nền móng workspace",
+      "badge": "Series Mini-App Flutter thuần · Tập 1"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Pub workspace là tính năng CÓ SẴN trong Dart, ra mắt từ Dart 3.5 — không phải bản 3.10 mới có, chỉ là SDK cho demo hôm nay ghi 3.10.9 vì đó là bản Flutter mới nhất.",
+      "Hiểu đơn giản: đây là bản dịch của npm workspaces sang thế giới Dart — 'npm workspaces bản Dart', cùng ý tưởng, khác hệ sinh thái.",
+      "Cốt lõi: nhiều package Dart/Flutter sống chung một thư mục gốc, nhưng CHIA SẺ đúng một file khóa phiên bản — một pubspec.lock cho cả khu, không phải mỗi package một bản riêng.",
+      "Mỗi package trong khu chỉ cần khai resolution: workspace, và pub sẽ tự nhìn thấy nhau — không cần đường dẫn tương đối chấm chấm xẹt nào cả."
+    ],
+    "visual": {
+      "title": "Pub workspace = npm workspaces bản Dart",
+      "bullets": [
+        {
+          "icon": "🗓️",
+          "text": "Có từ Dart 3.5 — không phải bản mới ra",
+          "sentence": 0
+        },
+        {
+          "icon": "📦",
+          "text": "'npm workspaces bản Dart' — cùng ý tưởng",
+          "sentence": 1
+        },
+        {
+          "icon": "🔒",
+          "text": "1 pubspec.lock DUY NHẤT cho cả khu",
+          "sentence": 2
+        },
+        {
+          "icon": "🔗",
+          "text": "Khai resolution: workspace — hết cảnh path tay",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "diagram",
+    "narration": [
+      "Cấu trúc demo-flutter-workspace hôm nay: một pubspec.yaml gốc, và thư mục apps chứa app chủ vietsuper.",
+      "Gốc là 'ban quản lý': khai workspace: rồi liệt kê từng thành viên — hôm nay chỉ có đúng một, apps/vietsuper.",
+      "Từ tập sau, khu sẽ mọc thêm packages/*: những căn hộ tính năng nhỏ — hôm nay ta mới dựng xong tòa nhà chính."
+    ],
+    "visual": {
+      "title": "Khu demo-flutter-workspace hôm nay",
+      "boxes": [
+        {
+          "id": "root",
+          "label": "pubspec.yaml gốc",
+          "emoji": "📋"
+        },
+        {
+          "id": "apps",
+          "label": "apps/vietsuper",
+          "emoji": "📱"
+        },
+        {
+          "id": "packages",
+          "label": "packages/* (tập sau)",
+          "emoji": "📦"
+        }
+      ],
+      "flows": [
+        {
+          "from": 0,
+          "to": 1,
+          "label": "quản lý",
+          "sentence": 1
+        },
+        {
+          "from": 0,
+          "to": 2,
+          "label": "tập sau",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "Đây là TOÀN BỘ pubspec.yaml ở gốc — đúng 8 dòng, ngắn gọn bất ngờ cho một hệ thống 'sổ đỏ chung cả khu'.",
+      "name: vietsuper_workspace chỉ để đặt tên khu, publish_to: none khóa cứng: gốc không bao giờ được publish lên pub.dev.",
+      "environment sdk: ^3.10.0 khai phiên bản Dart tối thiểu — bắt buộc từ 3.5 trở lên vì pub workspace chỉ tồn tại từ đó.",
+      "Ngôi sao của file: workspace: rồi - apps/vietsuper — đúng lời tuyên bố 'tòa nhà này có những căn hộ nào', 8 dòng là xong hạ tầng gốc."
+    ],
+    "visual": {
+      "filename": "pubspec.yaml (gốc demo-flutter-workspace) — TOÀN BỘ FILE",
+      "language": "yaml",
+      "code": "name: vietsuper_workspace\npublish_to: none\n\nenvironment:\n  sdk: ^3.10.0\n\nworkspace:\n  - apps/vietsuper",
+      "steps": [
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "sentence": 2
+        },
+        {
+          "from": 7,
+          "to": 8,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Giờ nhảy sang pubspec.yaml của chính app vietsuper — trích đúng đoạn quan trọng nhất, environment và resolution.",
+      "environment sdk: ^3.10.9: bản Dart mà app này yêu cầu, luôn phải nằm trong khoảng SDK gốc cho phép.",
+      "Dòng chốt: resolution: workspace — chính là câu 'xin gia nhập khu': thiếu dòng này app sẽ tự tải dependency RIÊNG, không dùng chung pubspec.lock của khu.",
+      "Một dòng duy nhất biến một app Flutter bình thường thành thành viên của workspace — không cần sửa gì thêm."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/pubspec.yaml (trích environment + resolution)",
+      "language": "yaml",
+      "code": "version: 1.0.0+1\n\nenvironment:\n  sdk: ^3.10.9\n\nresolution: workspace",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 6,
+          "to": 6,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "terminal",
+    "narration": [
+      "Bắt tay dựng app chủ bằng một lệnh flutter create bình thường — chưa có gì đặc biệt ở bước này.",
+      "fvm flutter create --org com.vietsuper --platforms ios --project-name vietsuper apps/vietsuper: tạo app vào ĐÚNG thư mục apps/vietsuper mà root pubspec vừa khai.",
+      "Bằng chứng thật của workspace nằm ở đây: chạy fvm flutter pub get Ở GỐC, dòng đầu hiện Resolving dependencies in demo-flutter-workspace — TÊN THƯ MỤC GỐC, không phải tên app.",
+      "Nghĩa là pub đang resolve dependency cho CẢ khu trong một lần chạy, rồi ghi xuống đúng MỘT pubspec.lock dùng chung — như npm install một lần ở gốc."
+    ],
+    "visual": {
+      "title": "Tạo app chủ + pub get ở GỐC",
+      "commands": [
+        {
+          "cmd": "fvm flutter create --org com.vietsuper --platforms ios --project-name vietsuper apps/vietsuper",
+          "output": "Creating project apps/vietsuper...\nResolving dependencies in apps/vietsuper...\n+ cupertino_icons 1.0.8\n+ flutter_lints 6.0.0\nWrote 127 files.\n\nAll done!",
+          "sentence": 1
+        },
+        {
+          "cmd": "fvm flutter pub get",
+          "output": "Resolving dependencies in demo-flutter-workspace...\n  cupertino_icons 1.0.8\n  flutter_lints 6.0.0\nGot dependencies in apps/vietsuper!\nGot dependencies in demo-flutter-workspace!",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "home_shell.dart là bộ khung chính của app chủ — import cả home_screen và under_construction, hai màn nó sẽ điều phối.",
+      "HomeShell là StatefulWidget rỗng, chỉ việc tạo ra State — không có gì để giữ ở tầng widget này.",
+      "_HomeShellState giữ đúng MỘT biến state: int _tab = 0 — chỉ số tab đang chọn, mặc định là tab đầu tiên.",
+      "Cấu trúc quen thuộc với ai từng làm bottom navigation: một biến int, đổi giá trị là đổi màn hình."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/lib/home_shell.dart (1/2 — imports + state)",
+      "language": "clike",
+      "code": "import 'package:flutter/material.dart';\n\nimport 'home_screen.dart';\nimport 'under_construction.dart';\n\nclass HomeShell extends StatefulWidget {\n  const HomeShell({super.key});\n\n  @override\n  State<HomeShell> createState() => _HomeShellState();\n}\n\nclass _HomeShellState extends State<HomeShell> {\n  int _tab = 0;",
+      "steps": [
+        {
+          "from": 1,
+          "to": 14,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 11,
+          "sentence": 1
+        },
+        {
+          "from": 13,
+          "to": 14,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 14,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "code",
+    "narration": [
+      "Trong hàm build, mảng screens liệt kê đúng thứ tự 3 tab: HomeScreen ở vị trí 0, rồi hai UnderConstruction cho Tin tức và Nạp thẻ.",
+      "HomeScreen nhận callback onOpenTab: bấm một ô dịch vụ trên trang chủ có thể tự nhảy sang tab tương ứng — cơ chế này dùng tới ở tập 2.",
+      "body: screens[_tab] — Scaffold chỉ hiển thị ĐÚNG MỘT màn trong mảng theo _tab hiện tại, y hệt logic index quen thuộc.",
+      "NavigationBar phía dưới có 3 destination, mỗi cái một emoji làm icon — bấm vào gọi onDestinationSelected, setState đổi _tab, Scaffold build lại."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/lib/home_shell.dart (2/2 — build + NavigationBar)",
+      "language": "clike",
+      "code": "\n  @override\n  Widget build(BuildContext context) {\n    final screens = <Widget>[\n      HomeScreen(onOpenTab: (i) => setState(() => _tab = i)),\n      const UnderConstruction(title: 'Tin tức'),\n      const UnderConstruction(title: 'Nạp thẻ'),\n    ];\n    return Scaffold(\n      appBar: AppBar(title: const Text('ViệtSuper 🇻🇳')),\n      body: screens[_tab],\n      bottomNavigationBar: NavigationBar(\n        selectedIndex: _tab,\n        onDestinationSelected: (i) => setState(() => _tab = i),\n        destinations: const [\n          NavigationDestination(icon: Text('🏠', style: TextStyle(fontSize: 24)), label: 'Trang chủ'),\n          NavigationDestination(icon: Text('📰', style: TextStyle(fontSize: 24)), label: 'Tin tức'),\n          NavigationDestination(icon: Text('📱', style: TextStyle(fontSize: 24)), label: 'Nạp thẻ'),\n        ],\n      ),\n    );\n  }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 0
+        },
+        {
+          "from": 4,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 9,
+          "to": 11,
+          "sentence": 2
+        },
+        {
+          "from": 12,
+          "to": 19,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "code",
+    "narration": [
+      "home_screen.dart mở đầu bằng một class dữ liệu thuần: Service — mô tả MỘT ô dịch vụ trên lưới trang chủ.",
+      "4 field: emoji để hiển thị icon, name là tên dịch vụ, tabIndex là tab sẽ mở khi bấm — và enabled quyết định ô đó đã 'khai trương' hay chưa.",
+      "tabIndex kiểu int? — có thể null: dịch vụ nào không gắn tab (như Đặt xe ở tập sau) sẽ mở kiểu màn riêng thay vì đổi tab.",
+      "enabled mặc định true, nhưng danh sách dịch vụ sắp đọc sẽ ghi đè false cho cả 4 ô — biển hiệu 'chờ khai trương' bắt đầu từ đây."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/lib/home_screen.dart (1/3 — class Service)",
+      "language": "clike",
+      "code": "import 'package:flutter/material.dart';\n\nclass Service {\n  const Service({\n    required this.emoji,\n    required this.name,\n    this.tabIndex,\n    this.enabled = true,\n  });\n\n  final String emoji;\n  final String name;\n  /// Dịch vụ sống trên tab nào (null = mở kiểu màn riêng).\n  final int? tabIndex;\n  final bool enabled;\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 16,
+          "sentence": 0
+        },
+        {
+          "from": 11,
+          "to": 15,
+          "sentence": 1
+        },
+        {
+          "from": 13,
+          "to": 14,
+          "sentence": 2
+        },
+        {
+          "from": 8,
+          "to": 15,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "code",
+    "narration": [
+      "Danh sách services có đúng 4 phần tử — 5 tập tới sẽ lần lượt bật từng ô một.",
+      "Tin tức gắn tabIndex 1, Nạp thẻ gắn tabIndex 2 — khớp đúng thứ tự trong mảng screens ở home_shell.dart vừa đọc.",
+      "enabled: false trên CẢ 4 dòng: đây chính là 'biển hiệu chờ khai trương' — giao diện có sẵn, chỉ chờ tập sau bật công tắc."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/lib/home_screen.dart (2/3 — const services)",
+      "language": "clike",
+      "code": "const services = [\n  Service(emoji: '📰', name: 'Tin tức', tabIndex: 1, enabled: false),\n  Service(emoji: '📱', name: 'Nạp thẻ', tabIndex: 2, enabled: false),\n  Service(emoji: '🛵', name: 'Đặt xe', enabled: false),\n  Service(emoji: '🎁', name: 'Sắp ra mắt', enabled: false),\n];",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "code",
+    "narration": [
+      "Lưới 4 ô dùng GridView.count với crossAxisCount: 2 — đúng 2 cột, khớp ảnh chụp bạn thấy trên điện thoại.",
+      "shrinkWrap true và NeverScrollableScrollPhysics: lưới này nằm lồng trong một ListView cha, nên tự co theo nội dung, không tự cuộn riêng.",
+      "for (final s in services) lặp qua cả 4 Service, mỗi cái bọc trong một Opacity.",
+      "Đây là dòng làm nên 'biển hiệu chờ khai trương': opacity: s.enabled ? 1 : 0.35 — enabled false thì cả ô mờ còn 35%, vẫn thấy nhưng biết ngay là chưa dùng được."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/lib/home_screen.dart (3/3 — GridView + Opacity)",
+      "language": "clike",
+      "code": "        GridView.count(\n          crossAxisCount: 2,\n          shrinkWrap: true,\n          physics: const NeverScrollableScrollPhysics(),\n          mainAxisSpacing: 12,\n          crossAxisSpacing: 12,\n          children: [\n            for (final s in services)\n              Opacity(\n                opacity: s.enabled ? 1 : 0.35,\n                child: Card(",
+      "steps": [
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 8,
+          "sentence": 2
+        },
+        {
+          "from": 9,
+          "to": 10,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "code",
+    "narration": [
+      "under_construction.dart là màn 'đang xây' dùng chung cho MỌI tab chưa có tính năng thật — chỉ nhận một tham số: title.",
+      "UI đơn giản: Column canh giữa, emoji cần cẩu, rồi tới title được truyền vào — ở home_shell.dart đó là 'Tin tức' hoặc 'Nạp thẻ'.",
+      "Dòng cuối cố định cho mọi tab: 'Đang xây — quay lại tập sau nhé!' — 22 dòng cho một widget dùng lại được N lần."
+    ],
+    "visual": {
+      "filename": "apps/vietsuper/lib/under_construction.dart — TOÀN BỘ FILE",
+      "language": "clike",
+      "code": "import 'package:flutter/material.dart';\n\nclass UnderConstruction extends StatelessWidget {\n  const UnderConstruction({super.key, required this.title});\n\n  final String title;\n\n  @override\n  Widget build(BuildContext context) {\n    return Center(\n      child: Column(\n        mainAxisAlignment: MainAxisAlignment.center,\n        children: [\n          const Text('🏗️', style: TextStyle(fontSize: 64)),\n          const SizedBox(height: 12),\n          Text(title, style: Theme.of(context).textTheme.headlineSmall),\n          const SizedBox(height: 8),\n          const Text('Đang xây — quay lại tập sau nhé!'),\n        ],\n      ),\n    );\n  }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 0
+        },
+        {
+          "from": 10,
+          "to": 17,
+          "sentence": 1
+        },
+        {
+          "from": 18,
+          "to": 18,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-13",
+    "type": "concept",
+    "narration": [
+      "Ẩn dụ xuyên suốt series mới: khu chung cư THUẦN FLUTTER — tòa nhà và từng căn hộ CÙNG một chất liệu, khác hẳn add-to-app.",
+      "Ở series add-to-app trước, mỗi căn hộ có ĐỒNG HỒ ĐIỆN NƯỚC riêng — một Flutter Engine riêng cho từng mini, đo đếm tài nguyên độc lập.",
+      "Ở khu pub workspace này, CẢ TÒA NHÀ chỉ có MỘT đồng hồ tổng — một Flutter Engine DUY NHẤT chạy toàn bộ app, dù thêm bao nhiêu căn hộ.",
+      "Đơn giản hơn nhiều, đổi lại: các căn hộ không tách biệt runtime như add-to-app — chúng gộp chung ngay lúc BUILD, không phải lúc app đang chạy.",
+      "Nếu bạn đã xem series add-to-app trên kênh, đây là lựa chọn NGƯỢC LẠI: xây mới từ đầu, không cần app native sẵn có, workspace đơn giản hơn hẳn."
+    ],
+    "visual": {
+      "title": "Khu THUẦN Flutter — 1 đồng hồ tổng",
+      "bullets": [
+        {
+          "icon": "🏢",
+          "text": "Tòa nhà & căn hộ CÙNG một chất liệu Flutter",
+          "sentence": 0
+        },
+        {
+          "icon": "💧",
+          "text": "Add-to-app: mỗi căn hộ 1 đồng hồ điện nước riêng",
+          "sentence": 1
+        },
+        {
+          "icon": "⏱️",
+          "text": "Workspace: CẢ khu 1 đồng hồ tổng — 1 Engine duy nhất",
+          "sentence": 2
+        },
+        {
+          "icon": "🏗️",
+          "text": "Gộp lúc BUILD, không phải lúc app đang CHẠY",
+          "sentence": 3
+        },
+        {
+          "icon": "🔀",
+          "text": "Xây mới → workspace · đã có app native → add-to-app",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-14",
+    "type": "phone",
+    "narration": [
+      "Chạy thử trên simulator: trang chủ ViệtSuper hiện lưới 4 ô — Tin tức, Nạp thẻ, Đặt xe, Sắp ra mắt — tất cả đều MỜ đúng như code enabled: false vừa đọc.",
+      "Opacity 0.35 làm việc thật: chữ và icon vẫn đọc được nhưng nhạt hẳn — mắt người dùng hiểu ngay 'chưa bấm được' mà không cần đọc dòng chữ nào.",
+      "Bấm tab Tin tức dưới bottom bar: màn UnderConstruction hiện ra với cần cẩu và dòng 'Đang xây — quay lại tập sau nhé!'.",
+      "Đúng những gì code đã hứa: NavigationBar đổi _tab, Scaffold build lại, và title 'Tin tức' được truyền đúng vào UnderConstruction."
+    ],
+    "visual": {
+      "title": "Lưới 4 ô mờ + tab đang xây",
+      "screens": [
+        {
+          "src": "screens/ep34/host-home-grid.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/ep34/host-tab-under-construction.png",
+          "sentence": 2
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🏠",
+          "text": "4 ô mờ 35% — enabled: false đúng như code",
+          "sentence": 0
+        },
+        {
+          "icon": "🔍",
+          "text": "Vẫn đọc được, biết ngay 'chưa bấm được'",
+          "sentence": 1
+        },
+        {
+          "icon": "🏗️",
+          "text": "Tab Tin tức → UnderConstruction + cần cẩu",
+          "sentence": 2
+        },
+        {
+          "icon": "✅",
+          "text": "_tab đổi, Scaffold build lại, title đúng",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-15",
+    "type": "outro",
+    "narration": [
+      "Tổng kết Tập 1: pub workspace có từ Dart 3.5, một pubspec.lock cho cả khu, và chỉ một dòng resolution: workspace là app xin gia nhập thành công.",
+      "App chủ ViệtSuper đã có khung 3 tab, lưới 4 dịch vụ đang chờ khai trương, và màn 'đang xây' dùng chung — nền móng xong, nhưng CHƯA có căn hộ tính năng nào thật.",
+      "Tập sau: xây CĂN HỘ ĐẦU TIÊN đúng nghĩa — package mini_news, chỉ vài dòng cú pháp để gắn thẳng vào tab Tin tức, thay hẳn màn 'đang xây' hôm nay.",
+      "Repo có tag flutter-workspace-tap-1 đúng trạng thái hôm nay: checkout là thấy đúng code trong video, không sai một dòng.",
+      "Cảm ơn bạn đã xem Tập 1 trên 5 của Mini-App Flutter thuần — hẹn gặp lại ở Tập 2!"
+    ],
+    "visual": {
+      "title": "Tập 1/5 xong — hẹn gặp Tập 2! 👋",
+      "summary": [
+        {
+          "text": "Pub workspace từ Dart 3.5 — 1 pubspec.lock cho cả khu",
+          "sentence": 0
+        },
+        {
+          "text": "App chủ: 3 tab, lưới 4 dịch vụ chờ khai trương",
+          "sentence": 1
+        },
+        {
+          "text": "Tag flutter-workspace-tap-1 = đúng code hôm nay",
+          "sentence": 3
+        }
+      ],
+      "next": "Tập 2/5: mini_news — căn hộ đầu tiên 📰"
+    }
+  }
+]
