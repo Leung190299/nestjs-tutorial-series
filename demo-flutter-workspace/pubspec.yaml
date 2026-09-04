@@ -6,3 +6,4 @@ environment:
 
 workspace:
   - apps/vietsuper
+  - packages/mini_news

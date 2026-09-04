@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_news/mini_news.dart';
 
 import 'home_screen.dart';
 import 'under_construction.dart';
@@ -17,7 +18,7 @@ class _HomeShellState extends State<HomeShell> {
   Widget build(BuildContext context) {
     final screens = <Widget>[
       HomeScreen(onOpenTab: (i) => setState(() => _tab = i)),
-      const UnderConstruction(title: 'Tin tức'),
+      const NewsScreen(),
       const UnderConstruction(title: 'Nạp thẻ'),
     ];
     return Scaffold(
