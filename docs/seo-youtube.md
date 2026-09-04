@@ -1234,7 +1234,7 @@ Tập 1: pub workspace là gì — có từ Dart 3.5 (không phải bản mới 
 
 **Comment ghim gợi ý:**
 ```
-🧱 Sự thật ít ai để ý: pub workspace có từ Dart 3.5, không phải bản mới toanh — chỉ là SDK demo hôm nay ghi 3.10.9 vì đó là bản Flutter mới nhất. Bạn đã dùng pub workspace trong dự án thật chưa? Comment kể trải nghiệm nhé!
+🧱 Sự thật ít ai để ý: pub workspace có từ Dart 3.5, không phải bản mới toanh — chỉ là SDK demo hôm nay ghi 3.10.9 vì đó là bản Dart đi kèm Flutter mới nhất. Bạn đã dùng pub workspace trong dự án thật chưa? Comment kể trải nghiệm nhé!
 ```
 
 **Thumbnail:** badge "FLUTTER THUẦN 1/5" · dòng lớn "SỔ ĐỎ" / "CHUNG KHU" · phụ đề "Pub workspace · từ Dart 3.5" · badge emoji 🧱 · ảnh nền `screens/ep34/host-home-grid.png`.
