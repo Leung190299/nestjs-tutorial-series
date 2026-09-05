@@ -1,0 +1,10 @@
+/*
+ * CSS entrypoint cho @stylexjs/unplugin.
+ * Không cần nội dung gì đặc biệt (không phải comment marker) — plugin
+ * @stylexjs/unplugin sẽ tự "aggregate" CSS đã compile từ mọi file dùng
+ * stylex.create()/defineVars() và APPEND vào file .css asset đầu tiên
+ * mà Vite build ra. Vì đây là file .css duy nhất được import trong app,
+ * nó sẽ được chọn làm target injection (xem README @stylexjs/unplugin,
+ * hàm pickCssAssetFromRollupBundle — ưu tiên index.css/style.css, nếu
+ * không có thì lấy asset .css đầu tiên).
+ */
