@@ -1,5 +1,6 @@
 import type React from 'react';
 import type {SceneProps} from '../data/types';
+import {BrowserScene} from './BrowserScene';
 import {CodeScene} from './CodeScene';
 import {ConceptScene} from './ConceptScene';
 import {DiagramScene} from './DiagramScene';
@@ -13,6 +14,7 @@ export const sceneRegistry: Record<string, React.FC<SceneProps>> = {
   concept: ConceptScene,
   diagram: DiagramScene,
   phone: PhoneScene,
+  browser: BrowserScene,
   outro: OutroScene,
   code: CodeScene,
   terminal: TerminalScene,
