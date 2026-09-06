@@ -67,12 +67,28 @@ Mảnh cuối của bộ ba cách làm mini-app trên kênh: không một dòng 
 
 Demo: [`demo-flutter-workspace/`](demo-flutter-workspace/) (root pub workspace, `apps/vietsuper` + `apps/news_standalone`, `packages/mini_news` + `packages/mini_topup` + `packages/mini_ride`). Mỗi tập đóng băng bằng một git tag riêng — `git checkout flutter-workspace-tap-N` để xem đúng code xuất hiện trong tập tương ứng.
 
+## Series "StyleX từ A đến Z" — so găng Tailwind (ep39–ep44)
+
+Series web ĐẦU TIÊN của kênh (vertical), sau 3 series mobile Flutter/React Native ở trên. Học **StyleX** — thư viện style CSS-in-JS **compile-time** của Meta (chạy thật trên facebook.com, Instagram), từ setup Vite tới theming, mỗi tập đều so găng trực diện với **Tailwind CSS**. Ẩn dụ xuyên suốt: style = đồng phục, `stylex.create()` = xưởng may đo (may sẵn lúc build), Tailwind = tủ đồ may sẵn ghép tem.
+
+| Tập | Nội dung | Tag code tương ứng |
+|-----|----------|---------------------|
+| 1 | StyleX của Meta: may đo CSS lúc build, setup Vite không vấp lỗi exports map | `stylex-tap-1` |
+| 2 | create() sâu: hover, media query & luật "default" bắt buộc | `stylex-tap-2` |
+| 3 | props() và luật LAST-WINS: thứ tự gọi quyết định tất cả | `stylex-tap-3` |
+| 4 | Component mở cửa cho style ngoài: cross-file style prop & bảng giá | `stylex-tap-4` |
+| 5 | Theming: token thương hiệu, dark mode trong token & theme Tết | `stylex-tap-5` |
+| 6 (CUỐI) | So găng trực diện Tailwind vs StyleX — chọn gì cho dự án của bạn | `stylex-tap-6` |
+
+Demo: [`demo-stylex/`](demo-stylex/) (`vietsuper-web/` viết bằng StyleX + `compare-tailwind/` đối chứng Tailwind CSS v4, dùng ở Tập 6). Mỗi tập đóng băng bằng một git tag riêng — `git checkout stylex-tap-N` để xem đúng code xuất hiện trong tập tương ứng.
+
 ## Cấu trúc repo
 
 - `demo-*/` — code NestJS thật xuất hiện trong video (chạy được, đã test).
 - `demo-miniapps/` — code series Mini-App React Native (monorepo npm workspaces).
 - `demo-flutter-miniapp/` — code series Mini-App với Flutter (add-to-app: app chủ SwiftUI + module Flutter, + bonus app chủ Kotlin/Jetpack Compose).
 - `demo-flutter-workspace/` — code series Mini-App Flutter thuần (pub workspace: app chủ + app vỏ standalone + 3 package mini-app, một pubspec.lock chung).
+- `demo-stylex/` — code series StyleX từ A đến Z (`vietsuper-web/` dùng StyleX + `compare-tailwind/` đối chứng Tailwind CSS v4).
 - `video/` — project [Remotion](https://remotion.dev) render toàn bộ video và thumbnail.
 - `tts/` — pipeline thuyết minh tiếng Việt bằng [VieNeu-TTS](https://github.com/pnnbao97/VieNeu-TTS): kịch bản JSON → audio + timing → Remotion.
 - `docs/` — kịch bản thiết kế, kế hoạch và bộ SEO YouTube.

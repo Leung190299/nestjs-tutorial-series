@@ -1421,3 +1421,244 @@ Rồi TỔNG KẾT BỘ BA cách làm mini-app trên kênh: (1) React Native —
 4. Ghim comment đầu tiên ở mỗi video: link source code + mục lục chapters.
 5. Bật phụ đề tự động tiếng Việt và rà lại các thuật ngữ (NestJS, Controller...) trong trình sửa phụ đề của YouTube.
 6. End screen 20 giây cuối: thẻ "video tiếp theo" trỏ sang tập kế + thẻ subscribe.
+
+## SERIES STYLEX — "StyleX từ A đến Z 🇻🇳" (so găng Tailwind, 6 tập)
+
+> Playlist đích MỚI: **"StyleX từ A đến Z 🇻🇳"** — tạo khi đăng tập đầu tiên, thêm dần từng tập. Series web ĐẦU TIÊN của kênh (vertical), sau khi đã xong 3 series mobile Flutter/React Native. Học StyleX — thư viện style CSS-in-JS COMPILE-TIME của Meta (chạy thật trên facebook.com, Instagram), từ setup tới theming, mỗi tập ĐỀU so găng trực diện với Tailwind CSS. Ẩn dụ xuyên suốt: style = ĐỒNG PHỤC, `stylex.create()` = XƯỞNG MAY ĐO (may sẵn lúc build), Tailwind = TỦ ĐỒ may sẵn ghép tem, `defineVars` = bảng màu thương hiệu, theme = bộ sưu tập theo mùa. Code: `demo-stylex/` (repo `nestjs-tutorial-series`) — `vietsuper-web/` (StyleX) + `compare-tailwind/` (đối chứng Tailwind, dùng ở Tập 6). Mỗi tập có tag riêng `stylex-tap-N` — `git checkout stylex-tap-N` để xem đúng code của tập đang xem. Lưu ý xuyên suốt: bản dùng là StyleX v0.19, còn 0.x trên semver dù Meta đã chạy production quy mô khổng lồ.
+
+<!-- Playlist "StyleX từ A đến Z 🇻🇳" chưa tạo — 6 tập chờ lệnh đăng -->
+
+Từ khóa chủ lực toàn series: `stylex`, `stylex vs tailwind`, `css in js`, `atomic css`, `meta stylex`, `học tailwind`, `react styling`, `stylex tiếng việt`.
+
+### StyleX #1 — StyleX của Meta: may đo lúc build, setup Vite không vấp lỗi exports map (7:54)
+
+**Tiêu đề:** StyleX của Meta: may đo CSS lúc build, setup Vite không vấp lỗi | StyleX từ A đến Z #1/6
+
+**Mô tả:**
+```
+Kênh vừa xong 3 series mobile Flutter + React Native — hôm nay mở sang một hướng hoàn toàn mới: web, bằng chính thư viện style Meta dùng cho facebook.com và Instagram THẬT, không phải demo. StyleX là CSS-in-JS nhưng biên dịch ngay lúc BUILD — khác hẳn styled-components/Emotion chạy lúc RUNTIME trong trình duyệt. Nói thẳng: bản dùng là v0.19, vẫn 0.x trên semver dù Meta đã chạy production quy mô khổng lồ.
+
+Ẩn dụ mở màn cho cả 6 tập: style là ĐỒNG PHỤC, stylex.create() là XƯỞNG MAY ĐO — may sẵn lúc build, không may tại chỗ; Tailwind là TỦ ĐỒ may sẵn, ghép nhiều tem thành 1 bộ. Setup thật từ Vite + React + TypeScript có sẵn, vấp và vượt qua 2 GOTCHA có thật: (1) làm đúng tài liệu stylex.vite(...) báo lỗi TypeScript vì package exports map sắp sai thứ tự — fix bằng import subpath '@stylexjs/unplugin/vite' + moduleResolution: bundler, StyleX plugin phải đứng TRƯỚC react(); (2) quên CSS entrypoint thủ công là build xong mà KHÔNG RA style nào. Rồi tokens.stylex.ts (nhắc nhẹ, chi tiết dành Tập 5) và Hero.tsx — create() + props() đầu tiên, chạy thật trên trình duyệt.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu series StyleX từ A đến Z
+0:37 StyleX là gì — CSS-in-JS compile-time
+1:19 Atomic CSS: 1 rule, 1 thuộc tính
+2:02 Cài đặt & GOTCHA 1: exports map sai thứ tự
+3:14 Code: vite.config.ts, CSS entrypoint, tokens, Hero.tsx
+5:52 Trang đầu tiên chạy StyleX thật
+6:23 So găng #2: gõ sai class thì sao?
+7:04 Tổng kết Tập 1 & hẹn Tập 2
+
+📦 Source code (demo-stylex/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout stylex-tap-1 để xem đúng code tập này.
+⏭️ Tập sau: [LINK-EP40]
+▶️ 3 series mobile khác trên kênh: "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM)
+
+#stylex #tailwind #cssinjs #react #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🧵 2 gotcha THẬT đã vấp trong tập này: exports map sai thứ tự làm stylex.vite(...) không type-check (fix: import subpath '/vite' + moduleResolution: bundler), và quên CSS entrypoint là mất trắng style. Bạn dùng StyleX hay Tailwind cho dự án hiện tại? Comment cho mình biết nhé!
+```
+
+**Thumbnail:** badge "STYLEX 1/6" · dòng lớn "STYLEX" / "CỦA META" · phụ đề "Setup Vite không vấp — style may đo lúc build" · badge emoji 🧵 · ảnh nền `screens/ep39/web-hero-first-style.png`.
+
+**Tags:** `stylex, stylex tiếng việt, học stylex, css in js, atomic css, meta stylex, stylex vs tailwind, tailwind vs stylex, stylex vite, stylex setup, react styling, css in js compile time, styled components vs stylex, exports map typescript, học tailwind, react tiếng việt, học react, web development tiếng việt`
+
+---
+
+### StyleX #2 — create() sâu: hover, media query và luật 'default' bắt buộc (6:43)
+
+**Tiêu đề:** create() sâu: hover, media query & luật 'default' bắt buộc | StyleX từ A đến Z #2/6
+
+**Mô tả:**
+```
+Tập 1 hứa hover, media query, và luật 'default bắt buộc' — Tập 2 mở đúng 3 thứ đó, đào sâu stylex.create(). Ẩn dụ vẫn vậy: style là ĐỒNG PHỤC, create() là XƯỞNG MAY ĐO — hôm nay may thêm bản 'khi chạm tay vào' và 'khi phòng đổi kích thước', ngay trong object, không cần file CSS riêng.
+
+Code lấy từ Hero.tsx và ServiceGrid.tsx đã có ở Tập 1: nút CTA đổi backgroundColor {default, ':hover'} — pseudo-class là OBJECT chứ không phải selector viết tay; lưới dịch vụ đổi gridTemplateColumns {default, '@media (max-width: 720px)'} — responsive không viết 1 dòng CSS nào; card dịch vụ nhấc lên 4px lúc hover bằng boxShadow/transform. Luật quan trọng nhất tập: property có nhánh điều kiện BẮT BUỘC có key 'default' — quên là lỗi compile ngay, không đợi chạy thử. So găng: Tailwind dùng PREFIX (hover:bg-…, md:grid-cols-3) — ngắn gọn hơn nhưng gõ sai vẫn im lặng; StyleX object có kiểu, TypeScript báo lỗi ngay lúc gõ.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu Tập 2
+0:33 Pseudo-class: object, không phải selector
+1:39 Media query responsive + code ServiceGrid & card hover
+3:29 Luật: 'default' bắt buộc khi lồng điều kiện
+4:00 So găng #3: prefix vs object có kiểu
+4:46 Demo: responsive desktop ↔ mobile
+5:19 Tổng kết: responsive không viết CSS
+5:55 Tổng kết Tập 2 & hẹn Tập 3
+
+📦 Source code (demo-stylex/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout stylex-tap-2 để xem đúng code tập này.
+⏮️ Tập trước: [LINK-EP39]
+⏭️ Tập sau: [LINK-EP41]
+
+#stylex #tailwind #css #responsive #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+📐 Luật dễ quên nhất tập này: property nào có nhánh điều kiện (:hover, @media) đều BẮT BUỘC có key 'default' — quên là StyleX từ chối biên dịch ngay, không đợi chạy thử mới biết. Bạn đã từng quên default khi lồng điều kiện chưa? Comment kể lỗi bạn gặp nhé!
+```
+
+**Thumbnail:** badge "STYLEX 2/6" · dòng lớn "HOVER &" / "MEDIA QUERY" · phụ đề "default bắt buộc khi lồng điều kiện" · badge emoji 📐 · ảnh nền `screens/ep40/web-responsive-desktop.png`.
+
+**Tags:** `stylex hover, stylex media query, stylex create, pseudo class object, responsive css in js, stylex vs tailwind, atomic css, css in js, tailwind prefix, stylex default key, meta stylex, học stylex, stylex tiếng việt, react styling, css responsive tiếng việt, học tailwind, học react`
+
+---
+
+### StyleX #3 — props() và luật LAST-WINS: thứ tự gọi quyết định tất cả (6:50)
+
+**Tiêu đề:** props() và luật LAST-WINS: thứ tự gọi quyết định tất cả | StyleX từ A đến Z #3/6
+
+**Mô tả:**
+```
+Tập 2 kết ở lời hứa: luật quan trọng nhất StyleX là last-wins — tập này giải đúng luật đó bằng bằng chứng THỊ GIÁC. MergeDemo.tsx: cùng 2 style grey/brand, chỉ đảo THỨ TỰ tham số trong props() — dòng trên chữ ĐỎ (brand đứng sau thắng), dòng dưới chữ XÁM (grey đứng sau thắng). Không sửa 1 ký tự CSS, không đổi thứ tự file — chỉ đổi VỊ TRÍ tham số, kết quả đổi hẳn.
+
+Giải thích rõ: đây KHÔNG phải CSS specificity, KHÔNG phải thứ tự file CSS sinh ra — chỉ là thứ tự bạn liệt kê tham số trong props(), style đứng SAU luôn thắng khi trùng property. Rồi conditional && và ternary (props tự bỏ giá trị falsy), và Button.tsx — 3 biến thể primary/ghost/danger tra bằng styles[variant], object key hợp lệ TypeScript. So găng: bên Tailwind ghép class điều kiện bằng clsx dễ ra 2 class xung đột cùng lúc — ai thắng tùy thứ tự Tailwind SINH file CSS, khó đoán; StyleX deterministic, luôn đứng sau trong props() thắng.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu: luật last-wins
+0:29 props(): ghép style, ai thắng? + code MergeDemo
+1:37 Demo: đổi màu, đổi thứ tự — bằng chứng sống
+2:06 Vì sao KHÔNG phải specificity + conditional && / ternary
+3:17 Code: Button.tsx — base, primary, ghost, danger
+4:51 Demo: 3 biến thể, 1 hàm Button
+5:22 So găng #4: shorthand & clsx
+6:02 Tổng kết Tập 3 & hẹn Tập 4
+
+📦 Source code (demo-stylex/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout stylex-tap-3 để xem đúng code tập này.
+⏮️ Tập trước: [LINK-EP40]
+⏭️ Tập sau: [LINK-EP42]
+
+#stylex #tailwind #cssinjs #reactjs #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🥇 Đố vui last-wins: nếu viết stylex.props(styles.grey, styles.brand, styles.grey) — 3 style, grey xuất hiện CẢ ĐẦU LẪN CUỐI — chữ sẽ ra màu gì? Comment đáp án của bạn trước, đúng luật last-wins mình dạy trong tập là biết ngay ai thắng!
+```
+
+**Thumbnail:** badge "STYLEX 3/6" · dòng lớn "AI ĐỨNG SAU" / "NGƯỜI ĐÓ THẮNG" · phụ đề "props() và luật last-wins" · badge emoji 🥇 · ảnh nền `screens/ep41/web-merge-thumbcrop.png`.
+
+**Tags:** `stylex props, last wins css, stylex last-wins, stylex vs tailwind, clsx conflict, css in js, atomic css, deterministic css, stylex button variant, stylex tiếng việt, học stylex, meta stylex, react styling, css specificity, học tailwind, học react, javascript ternary`
+
+---
+
+### StyleX #4 — Component mở cửa cho style ngoài: cross-file và bảng giá (6:39)
+
+**Tiêu đề:** Component mở cửa cho style ngoài: cross-file style prop | StyleX từ A đến Z #4/6
+
+**Mô tả:**
+```
+Tập 3 khép lại với lời hứa: Button sẽ mở cửa nhận style TỪ NGOÀI qua tham số cuối cùng — Tập 4 giữ đúng lời hứa. Button.tsx nhận prop style?: StyleXStyles — 1 type import thật từ '@stylexjs/stylex', khác hẳn nhận className: string tùy ý của React thường: TypeScript chỉ chấp nhận ĐÚNG kết quả từ stylex.create(), truyền nhầm là báo lỗi ngay lúc gõ code.
+
+Bối cảnh sống: Pricing.tsx — bảng giá 3 gói, gói Ở GIỮA nổi bật cần nút bấm rộng hết cỡ khung. Chỉ 1 dòng style={styles.fullWidth} truyền từ Pricing sang Button — KHÔNG sửa 1 chữ nào trong Button.tsx. style đứng CUỐI trong props() nên style ngoài luôn thắng khi trùng property — thiết kế có chủ đích: người DÙNG component luôn thắng người VIẾT component. Kèm khái niệm local zero-cost (cùng file) vs cross-file minimal-cost (qua prop) của StyleX. So găng: Tailwind mở cửa bằng className: string — bất kỳ chuỗi nào cũng lọt qua, người viết component không kiểm soát được người dùng ghi đè gì; StyleX có TYPE + last-wins rõ ràng theo vị trí.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu: style prop mở cửa
+0:34 style prop: cửa có KHUNG + code type Props
+1:42 Vị trí CUỐI = người dùng luôn thắng + code Button/Pricing
+3:57 Demo: bảng giá — fullWidth thấy rõ bằng mắt
+4:28 Fact: local zero-cost vs cross-file minimal-cost
+5:10 So găng #5: className tự do vs style có TYPE
+5:48 Tổng kết Tập 4 & hẹn Tập 5
+
+📦 Source code (demo-stylex/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout stylex-tap-4 để xem đúng code tập này.
+⏮️ Tập trước: [LINK-EP41]
+⏭️ Tập sau: [LINK-EP43]
+
+#stylex #tailwind #reactcomponent #typescript #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🎟️ Điểm hay nhất tập này: style đứng CUỐI trong props() không phải tình cờ — là thiết kế CHỦ ĐÍCH để người DÙNG component luôn thắng người VIẾT component. Bạn có nghĩ đây là cách hay hơn className string tự do của Tailwind không? Comment quan điểm nhé!
+```
+
+**Thumbnail:** badge "STYLEX 4/6" · dòng lớn "STYLE TỪ" / "BÊN NGOÀI" · phụ đề "cross-file style prop & bảng giá" · badge emoji 🎟️ · ảnh nền `screens/ep42/web-pricing.png`.
+
+**Tags:** `stylex style prop, stylexstyles type, cross file styling, stylex vs tailwind classname, css in js component, atomic css, stylex zero cost, react component styling, stylex pricing table, stylex tiếng việt, học stylex, meta stylex, typescript styling, học tailwind, react styling tiếng việt, học react, css architecture`
+
+---
+
+### StyleX #5 — Theming: token thương hiệu, dark mode trong token và theme Tết (7:47)
+
+**Tiêu đề:** Theming StyleX: token thương hiệu, dark mode & theme Tết | StyleX từ A đến Z #5/6
+
+**Mô tả:**
+```
+Tập 4 khép lại với lời hứa Tập 5 học theming — hôm nay tô màu cho cả cái xưởng, không may thêm áo nào mới. tokens.stylex.ts: defineVars() định nghĩa TOÀN BỘ bảng màu thương hiệu ở đúng 1 chỗ, dark mode nằm SẴN trong token bằng {default, [DARK]} — không cần sửa 1 dòng nào ở Hero, Button hay Pricing để có dark mode. themes.ts: createTheme() tạo theme Tết chỉ override 4 biến (bg vàng kem, brand đỏ gạch...) — text/textMuted KHÔNG override thì tự FALLBACK về giá trị gốc trong defineVars.
+
+BEAT quan trọng nhất tập: override PHẲNG trong theme thắng TUYỆT ĐỐI cả @media gốc trong token — theme Tết LUÔN sáng bất kể hệ điều hành đang dark hay light, đây là hành vi CHỦ ĐÍCH chứ không phải lỗi. 3 ảnh browser đối chiếu: mặc định → ?theme=tet → dark mode thật (chụp qua Chrome DevTools Protocol — Emulation.setEmulatedMedia, không phải ảnh giả lập). So găng: Tailwind rải prefix dark: khắp mọi component; StyleX chỉ khai [DARK] ĐÚNG 1 LẦN trong token, mọi component tự động có dark mode.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu: theming
+0:32 defineVars: bảng màu thương hiệu + code tokens.stylex.ts
+1:45 Trang mặc định — điểm xuất phát
+2:10 Code: App.tsx đọc theme, theme Tết & fallback
+4:33 Demo: ?theme=tet — 1 theme đổi cả trang
+5:05 Beat: override phẳng thắng cả @media gốc
+5:41 Dark mode thật — chụp qua DevTools Protocol
+6:19 So găng #6 & Tổng kết Tập 5
+
+📦 Source code (demo-stylex/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout stylex-tap-5 để xem đúng code tập này.
+⏮️ Tập trước: [LINK-EP42]
+⏭️ Tập sau: [LINK-EP44]
+
+#stylex #tailwind #darkmode #theming #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🧧 Câu hỏi hay nhất tập này: bật dark mode hệ điều hành trong lúc đang xem theme Tết, trang có đổi tối không? KHÔNG — theme Tết luôn sáng vì override PHẲNG thắng tuyệt đối @media gốc, đây là chủ đích chứ không phải bug. Bạn đoán đúng trước khi xem chưa? Comment nhé!
+```
+
+**Thumbnail:** badge "STYLEX 5/6" · dòng lớn "TOKEN, DARK MODE" / "VÀ THEME TẾT" · phụ đề "defineVars, createTheme & flat-override" · badge emoji 🧧 · ảnh nền `screens/ep43/web-theme-tet.png`.
+
+**Tags:** `stylex theming, definevars stylex, createtheme stylex, stylex dark mode, css variables theming, stylex vs tailwind dark, atomic css, stylex tiếng việt, học stylex, meta stylex, dark mode tailwind vs stylex, css in js theme, react dark mode, học tailwind, react styling, theme tet app, học react`
+
+---
+
+### StyleX #6 (CUỐI) — So găng trực diện Tailwind vs StyleX: chọn gì cho dự án của bạn (7:35)
+
+**Tiêu đề:** So găng trực diện Tailwind vs StyleX: 187 ký tự vs object có kiểu | StyleX #6/6
+
+**Mô tả:**
+```
+Tập cuối: đặt 2 trình duyệt cạnh nhau — trái vietsuper-web (StyleX), phải compare-tailwind (Tailwind CSS v4) — CÙNG một Button, nhìn gần như y hệt nhau. Khác biệt không nằm ở giao diện, nằm ở CÁCH VIẾT: bên StyleX, style có kiểu StyleXStyles, gõ sai variant là đỏ gạch ngay trong editor; bên Tailwind, className chỉ khai kiểu string, gõ sai class vẫn compile bình thường, chỉ lộ ra khi chạy thật.
+
+Đo THẬT trên demo nhỏ này (khung: không phải kết luận tổng quát cho mọi dự án): className dài nhất render ra DOM (nút Ghost) dài 187 ký tự bên Tailwind, còn StyleX chỉ ra vài atomic class hash ngắn ~8-9 ký tự; build production đo được CSS StyleX 4.41 kB vs Tailwind 12.26 kB — chênh chủ yếu do phần preflight CSS reset, Tailwind v4 tree-shake vốn đã rất tốt. Đối xứng 3 nhịp: Tailwind thắng khi cần prototype nhanh, ecosystem khổng lồ, không cần build-step; StyleX thắng khi cần type-safe thật, codebase lớn nhiều người viết, dedup triệt để, theming token built-in. Cả hai đều atomic CSS về bản chất — khác nhau ở cách viết và mức kiểm soát compiler. Kết series: repo đủ 6 tag stylex-tap-1 → stylex-tap-6, cảm ơn đã đi trọn hành trình.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu: so găng trực diện
+0:26 Demo: cùng 1 Button, hai cách viết
+1:06 Code: type Props — StyleXStyles vs className string
+2:31 Code: 3 variants — object lồng vs ternary chuỗi
+3:30 CSS bundle: đo thật 4.41 kB vs 12.26 kB (demo nhỏ)
+4:06 Giá trị động (CSS Variable) & debug className hash
+5:04 Khi nào chọn Tailwind, khi nào chọn StyleX
+6:09 Cả hai đều atomic — lời kết series 6/6
+
+📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series (demo-stylex/vietsuper-web/ + demo-stylex/compare-tailwind/)
+💡 Repo có tag theo từng tập (stylex-tap-1 → stylex-tap-6) — git checkout stylex-tap-6 để xem đúng code tập này.
+⏮️ Tập trước: [LINK-EP43]
+▶️ Xem từ đầu series: [LINK-EP39]
+▶️ 3 series mobile khác trên kênh: "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM)
+💬 Vote series tiếp theo: Next.js kết hợp StyleX cho Server Components, hay một chủ đề web hoàn toàn khác?
+
+#stylex #tailwind #cssinjs #webdev #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🥊 Số đo trên demo nhỏ này: 187 ký tự className (Tailwind) vs vài atomic hash ngắn (StyleX), CSS 4.41 kB vs 12.26 kB — KHÔNG phải kết luận tổng quát, dự án lớn hơn tỉ lệ có thể đổi khác. Series tiếp theo mình làm Next.js + StyleX cho Server Components, hay bạn muốn chủ đề web khác? Comment vote — càng nhiều comment, series mới lên sóng càng nhanh. Cảm ơn đã đi trọn 6 tập!
+```
+
+**Thumbnail:** badge "STYLEX 6/6" · dòng lớn "TAILWIND" / "HAY STYLEX" · phụ đề "So găng trực diện + tổng kết series" · badge emoji 🥊 · ảnh nền `screens/ep44/web-stylex-vs-tailwind-thumb.png`.
+
+**Tags:** `stylex vs tailwind, tailwind vs stylex, css bundle size, atomic css comparison, css in js vs tailwind, stylex tailwind so sanh, meta stylex, stylex tiếng việt, học stylex, tailwind tiếng việt, học tailwind, react styling, css architecture, type safe css, web development tiếng việt, học react, so sánh framework css`
