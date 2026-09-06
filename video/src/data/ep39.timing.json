@@ -11,32 +11,32 @@
       },
       "sentences": [
         {
-          "file": "audio/ep39/scene-01-0-5b2cb3ef.wav",
+          "file": "audio/ep39/scene-01-0-10484059.wav",
           "startFrame": 0,
-          "durationInFrames": 238
+          "durationInFrames": 231
         },
         {
           "file": "audio/ep39/scene-01-1-6b9f78f7.wav",
-          "startFrame": 246,
+          "startFrame": 239,
           "durationInFrames": 221
         },
         {
           "file": "audio/ep39/scene-01-2-ab8a1d9d.wav",
-          "startFrame": 475,
+          "startFrame": 468,
           "durationInFrames": 260
         },
         {
           "file": "audio/ep39/scene-01-3-19cf275d.wav",
-          "startFrame": 743,
+          "startFrame": 736,
           "durationInFrames": 190
         },
         {
           "file": "audio/ep39/scene-01-4-1cfd26c5.wav",
-          "startFrame": 941,
+          "startFrame": 934,
           "durationInFrames": 180
         }
       ],
-      "durationInFrames": 1139
+      "durationInFrames": 1132
     },
     {
       "id": "scene-02",

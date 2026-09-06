@@ -1624,7 +1624,7 @@ BEAT quan trọng nhất tập: override PHẲNG trong theme thắng TUYỆT Đ�
 
 ---
 
-### StyleX #6 (CUỐI) — So găng trực diện Tailwind vs StyleX: chọn gì cho dự án của bạn (7:35)
+### StyleX #6 (CUỐI) — So găng trực diện Tailwind vs StyleX: chọn gì cho dự án của bạn (7:38)
 
 **Tiêu đề:** So găng trực diện Tailwind vs StyleX: 187 ký tự vs object có kiểu | StyleX #6/6
 
@@ -1637,12 +1637,12 @@ Tập cuối: đặt 2 trình duyệt cạnh nhau — trái vietsuper-web (Style
 ⏱️ NỘI DUNG:
 0:00 Giới thiệu: so găng trực diện
 0:26 Demo: cùng 1 Button, hai cách viết
-1:06 Code: type Props — StyleXStyles vs className string
-2:31 Code: 3 variants — object lồng vs ternary chuỗi
-3:30 CSS bundle: đo thật 4.41 kB vs 12.26 kB (demo nhỏ)
-4:06 Giá trị động (CSS Variable) & debug className hash
-5:04 Khi nào chọn Tailwind, khi nào chọn StyleX
-6:09 Cả hai đều atomic — lời kết series 6/6
+1:09 Code: type Props — StyleXStyles vs className string
+2:34 Code: 3 variants — object lồng vs ternary chuỗi
+3:33 CSS bundle: đo thật 4.41 kB vs 12.26 kB (demo nhỏ)
+4:09 Giá trị động (CSS Variable) & debug className hash
+5:07 Khi nào chọn Tailwind, khi nào chọn StyleX
+6:11 Cả hai đều atomic — lời kết series 6/6
 
 📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series (demo-stylex/vietsuper-web/ + demo-stylex/compare-tailwind/)
 💡 Repo có tag theo từng tập (stylex-tap-1 → stylex-tap-6) — git checkout stylex-tap-6 để xem đúng code tập này.

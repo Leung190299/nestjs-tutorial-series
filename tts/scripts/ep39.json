@@ -3,7 +3,7 @@
     "id": "scene-01",
     "type": "title",
     "narration": [
-      "Kênh này vừa xong 5 series mobile — Flutter, React Native — hôm nay mở sang một hướng hoàn toàn mới: web, và bằng một thư viện style của chính Meta.",
+      "Kênh này vừa xong 3 series mobile — Flutter, React Native — hôm nay mở sang một hướng hoàn toàn mới: web, và bằng một thư viện style của chính Meta.",
       "StyleX — thứ Meta dùng để tạo giao diện thật cho facebook.com và Instagram, không phải demo, không phải proof-of-concept.",
       "Nó là CSS-in-JS nhưng biên dịch ngay lúc BUILD, khác hẳn styled-components hay Emotion chạy lúc RUNTIME trong trình duyệt.",
       "Nói thẳng luôn: bản dùng hôm nay là v0.19, vẫn 0.x trên semver dù Meta đã chạy production quy mô khổng lồ.",
@@ -28,11 +28,31 @@
     "visual": {
       "title": "StyleX là gì — và khác gì runtime CSS-in-JS",
       "bullets": [
-        {"icon": "🧩", "text": "Inline dễ đọc nhưng chậm; CSS tĩnh nhanh nhưng ở xa, khó trace", "sentence": 0},
-        {"icon": "🐢", "text": "styled-components/Emotion: inject CSS lúc RUNTIME, tốn CPU", "sentence": 1},
-        {"icon": "🏗️", "text": "StyleX: biên dịch lúc BUILD — trình duyệt chỉ nhận CSS tĩnh", "sentence": 2},
-        {"icon": "🧵", "text": "Ẩn dụ series: style = ĐỒNG PHỤC, create() = XƯỞNG MAY ĐO", "sentence": 3},
-        {"icon": "👕", "text": "Tailwind = TỦ ĐỒ may sẵn, ghép tem — khác ai may, may lúc nào", "sentence": 4}
+        {
+          "icon": "🧩",
+          "text": "Inline dễ đọc nhưng chậm; CSS tĩnh nhanh nhưng ở xa, khó trace",
+          "sentence": 0
+        },
+        {
+          "icon": "🐢",
+          "text": "styled-components/Emotion: inject CSS lúc RUNTIME, tốn CPU",
+          "sentence": 1
+        },
+        {
+          "icon": "🏗️",
+          "text": "StyleX: biên dịch lúc BUILD — trình duyệt chỉ nhận CSS tĩnh",
+          "sentence": 2
+        },
+        {
+          "icon": "🧵",
+          "text": "Ẩn dụ series: style = ĐỒNG PHỤC, create() = XƯỞNG MAY ĐO",
+          "sentence": 3
+        },
+        {
+          "icon": "👕",
+          "text": "Tailwind = TỦ ĐỒ may sẵn, ghép tem — khác ai may, may lúc nào",
+          "sentence": 4
+        }
       ]
     }
   },
@@ -49,11 +69,31 @@
     "visual": {
       "title": "Atomic CSS: 1 rule, 1 thuộc tính",
       "bullets": [
-        {"icon": "🔬", "text": "1 rule CSS = ĐÚNG 1 thuộc tính (color:red riêng, padding riêng)", "sentence": 0},
-        {"icon": "♻️", "text": "10 component cùng color:red → chỉ 1 class dùng chung", "sentence": 1},
-        {"icon": "📉", "text": "CSS bundle đạt mức TRẦN — không phình theo số component", "sentence": 2},
-        {"icon": "🛡️", "text": "StyleX: object + create() — TypeScript soi từng thuộc tính", "sentence": 3},
-        {"icon": "⚔️", "text": "So găng #1: Tailwind string className vs object có kiểu", "sentence": 4}
+        {
+          "icon": "🔬",
+          "text": "1 rule CSS = ĐÚNG 1 thuộc tính (color:red riêng, padding riêng)",
+          "sentence": 0
+        },
+        {
+          "icon": "♻️",
+          "text": "10 component cùng color:red → chỉ 1 class dùng chung",
+          "sentence": 1
+        },
+        {
+          "icon": "📉",
+          "text": "CSS bundle đạt mức TRẦN — không phình theo số component",
+          "sentence": 2
+        },
+        {
+          "icon": "🛡️",
+          "text": "StyleX: object + create() — TypeScript soi từng thuộc tính",
+          "sentence": 3
+        },
+        {
+          "icon": "⚔️",
+          "text": "So găng #1: Tailwind string className vs object có kiểu",
+          "sentence": 4
+        }
       ]
     }
   },
@@ -68,8 +108,16 @@
     "visual": {
       "title": "npm install 2 gói StyleX",
       "commands": [
-        {"cmd": "npm install --save @stylexjs/stylex", "output": "added 1 package in 0.9s", "sentence": 0},
-        {"cmd": "npm install --save-dev @stylexjs/unplugin", "output": "added 1 package in 1.1s", "sentence": 1}
+        {
+          "cmd": "npm install --save @stylexjs/stylex",
+          "output": "added 1 package in 0.9s",
+          "sentence": 0
+        },
+        {
+          "cmd": "npm install --save-dev @stylexjs/unplugin",
+          "output": "added 1 package in 1.1s",
+          "sentence": 1
+        }
       ]
     }
   },
@@ -86,8 +134,16 @@
     "visual": {
       "title": "GOTCHA 1: tsc -b báo đỏ",
       "commands": [
-        {"cmd": "npx tsc -b", "output": "vite.config.ts(9,12): error TS2339: Property 'vite' does not exist on type\n  'typeof import(\".../@stylexjs/unplugin/lib/index\")'.", "sentence": 0},
-        {"cmd": "npx tsc -b", "output": "vite.config.ts(9,5): error TS2349: This expression is not callable.\n  Type 'typeof import(\".../@stylexjs/unplugin/lib/vite\")' has no call signatures.", "sentence": 1}
+        {
+          "cmd": "npx tsc -b",
+          "output": "vite.config.ts(9,12): error TS2339: Property 'vite' does not exist on type\n  'typeof import(\".../@stylexjs/unplugin/lib/index\")'.",
+          "sentence": 0
+        },
+        {
+          "cmd": "npx tsc -b",
+          "output": "vite.config.ts(9,5): error TS2349: This expression is not callable.\n  Type 'typeof import(\".../@stylexjs/unplugin/lib/vite\")' has no call signatures.",
+          "sentence": 1
+        }
       ]
     }
   },
@@ -106,11 +162,31 @@
       "language": "tsx",
       "code": "import { defineConfig } from 'vite'\nimport react from '@vitejs/plugin-react'\nimport stylexVite from '@stylexjs/unplugin/vite'\n\n// https://vite.dev/config/\nexport default defineConfig({\n  plugins: [\n    // StyleX plugin PHẢI đứng TRƯỚC react() trong mảng plugins.\n    stylexVite({\n      useCSSLayers: true,\n      dev: process.env.NODE_ENV === 'development',\n      runtimeInjection: false,\n    }),\n    react(),\n  ],\n})",
       "steps": [
-        {"from": 1, "to": 16, "sentence": 0},
-        {"from": 3, "to": 3, "sentence": 1},
-        {"from": 7, "to": 15, "sentence": 2},
-        {"from": 10, "to": 12, "sentence": 3},
-        {"from": 1, "to": 16, "sentence": 4}
+        {
+          "from": 1,
+          "to": 16,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 7,
+          "to": 15,
+          "sentence": 2
+        },
+        {
+          "from": 10,
+          "to": 12,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 16,
+          "sentence": 4
+        }
       ]
     }
   },
@@ -128,10 +204,26 @@
       "language": "css",
       "code": "/*\n * CSS entrypoint cho @stylexjs/unplugin.\n * Không cần nội dung gì đặc biệt (không phải comment marker) — plugin\n * @stylexjs/unplugin sẽ tự \"aggregate\" CSS đã compile từ mọi file dùng\n * stylex.create()/defineVars() và APPEND vào file .css asset đầu tiên\n * mà Vite build ra. Vì đây là file .css duy nhất được import trong app,\n * nó sẽ được chọn làm target injection (xem README @stylexjs/unplugin,\n * hàm pickCssAssetFromRollupBundle — ưu tiên index.css/style.css, nếu\n * không có thì lấy asset .css đầu tiên).\n */",
       "steps": [
-        {"from": 1, "to": 10, "sentence": 0},
-        {"from": 2, "to": 9, "sentence": 1},
-        {"from": 1, "to": 10, "sentence": 2},
-        {"from": 1, "to": 10, "sentence": 3}
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 9,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 3
+        }
       ]
     }
   },
@@ -149,10 +241,26 @@
       "language": "tsx",
       "code": "import * as stylex from '@stylexjs/stylex'\n\n// Lưu ý: file định nghĩa biến (defineVars) BẮT BUỘC có đuôi .stylex.ts\n// (hoặc .stylex.js) — đây là quy ước thật của @stylexjs/babel-plugin, không\n// tuân theo sẽ lỗi compile \"Could not resolve the path to the imported\n// file... Please ensure that the theme file has a .stylex.js or .stylex.ts\n// extension\" khi file khác import `tokens` này.\nconst DARK = '@media (prefers-color-scheme: dark)'\n\nexport const tokens = stylex.defineVars({\n  brand: '#ea2845',",
       "steps": [
-        {"from": 1, "to": 11, "sentence": 0},
-        {"from": 3, "to": 7, "sentence": 1},
-        {"from": 10, "to": 11, "sentence": 2},
-        {"from": 1, "to": 11, "sentence": 3}
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 7,
+          "sentence": 1
+        },
+        {
+          "from": 10,
+          "to": 11,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 3
+        }
       ]
     }
   },
@@ -170,10 +278,26 @@
       "language": "tsx",
       "code": "import * as stylex from '@stylexjs/stylex'\nimport { tokens } from '../tokens.stylex'\n\nconst styles = stylex.create({\n  hero: {\n    padding: { default: '96px 48px', '@media (max-width: 720px)': '56px 20px' },\n    textAlign: 'center',\n  },\n  title: {\n    fontSize: { default: 56, '@media (max-width: 720px)': 36 },\n    fontWeight: 900,\n    margin: 0,\n    color: tokens.text,\n  },\n  brand: { color: tokens.brand },\n  tagline: { fontSize: 20, color: tokens.textMuted, marginTop: 16 },",
       "steps": [
-        {"from": 1, "to": 16, "sentence": 0},
-        {"from": 6, "to": 6, "sentence": 1},
-        {"from": 13, "to": 15, "sentence": 2},
-        {"from": 1, "to": 16, "sentence": 3}
+        {
+          "from": 1,
+          "to": 16,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 6,
+          "sentence": 1
+        },
+        {
+          "from": 13,
+          "to": 15,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 16,
+          "sentence": 3
+        }
       ]
     }
   },
@@ -190,9 +314,21 @@
       "language": "tsx",
       "code": "export function Hero() {\n  return (\n    <header {...stylex.props(styles.hero)}>\n      <h1 {...stylex.props(styles.title)}>\n        Việt<span {...stylex.props(styles.brand)}>Super</span> 🇻🇳\n      </h1>\n      <p {...stylex.props(styles.tagline)}>Một app, mọi dịch vụ — giờ có mặt trên web.</p>\n      <button {...stylex.props(styles.cta)}>Dùng thử miễn phí</button>\n    </header>\n  )\n}",
       "steps": [
-        {"from": 1, "to": 11, "sentence": 0},
-        {"from": 3, "to": 8, "sentence": 1},
-        {"from": 1, "to": 11, "sentence": 2}
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 2
+        }
       ]
     }
   },
@@ -208,11 +344,22 @@
     "visual": {
       "title": "Trang đầu tiên chạy StyleX",
       "shots": [
-        {"src": "screens/ep39/web-hero-first-style.png", "sentence": 0}
+        {
+          "src": "screens/ep39/web-hero-first-style.png",
+          "sentence": 0
+        }
       ],
       "bullets": [
-        {"icon": "🎨", "text": "Nền + 2 màu chữ — từ tokens.bg / tokens.text / tokens.brand", "sentence": 1},
-        {"icon": "🔘", "text": "Nút CTA — styles.cta build thành class atomic", "sentence": 2}
+        {
+          "icon": "🎨",
+          "text": "Nền + 2 màu chữ — từ tokens.bg / tokens.text / tokens.brand",
+          "sentence": 1
+        },
+        {
+          "icon": "🔘",
+          "text": "Nút CTA — styles.cta build thành class atomic",
+          "sentence": 2
+        }
       ]
     }
   },
@@ -229,11 +376,31 @@
     "visual": {
       "title": "So găng #2: gõ sai thì sao?",
       "bullets": [
-        {"icon": "🔤", "text": "Tailwind: className='bg-brand text-white rounded-full px-9 py-3.5'", "sentence": 0},
-        {"icon": "🤫", "text": "Gõ sai 'px-9' → 'px-90': im lặng, không báo lỗi, chỉ lệch giao diện", "sentence": 1},
-        {"icon": "🛡️", "text": "StyleX: object có TS soi — sai tên/kiểu, gạch đỏ NGAY lúc gõ", "sentence": 2},
-        {"icon": "⚙️", "text": "Đổi lại: StyleX cần build-step + đọc lỗi TypeScript như vừa gặp", "sentence": 3},
-        {"icon": "⚖️", "text": "Không bên nào tuyệt đối đúng — 6 tập để tự chọn cho dự án của bạn", "sentence": 4}
+        {
+          "icon": "🔤",
+          "text": "Tailwind: className='bg-brand text-white rounded-full px-9 py-3.5'",
+          "sentence": 0
+        },
+        {
+          "icon": "🤫",
+          "text": "Gõ sai 'px-9' → 'px-90': im lặng, không báo lỗi, chỉ lệch giao diện",
+          "sentence": 1
+        },
+        {
+          "icon": "🛡️",
+          "text": "StyleX: object có TS soi — sai tên/kiểu, gạch đỏ NGAY lúc gõ",
+          "sentence": 2
+        },
+        {
+          "icon": "⚙️",
+          "text": "Đổi lại: StyleX cần build-step + đọc lỗi TypeScript như vừa gặp",
+          "sentence": 3
+        },
+        {
+          "icon": "⚖️",
+          "text": "Không bên nào tuyệt đối đúng — 6 tập để tự chọn cho dự án của bạn",
+          "sentence": 4
+        }
       ]
     }
   },
@@ -251,9 +418,18 @@
     "visual": {
       "title": "StyleX Tập 1/6 xong — 2 gotcha đã vượt qua 🧵",
       "summary": [
-        {"text": "StyleX = CSS-in-JS compile-time của Meta, atomic CSS dedup thật", "sentence": 0},
-        {"text": "Ẩn dụ series: style = ĐỒNG PHỤC, create() = XƯỞNG MAY ĐO", "sentence": 1},
-        {"text": "Repo + tag stylex-tap-1 = đúng code tập này", "sentence": 3}
+        {
+          "text": "StyleX = CSS-in-JS compile-time của Meta, atomic CSS dedup thật",
+          "sentence": 0
+        },
+        {
+          "text": "Ẩn dụ series: style = ĐỒNG PHỤC, create() = XƯỞNG MAY ĐO",
+          "sentence": 1
+        },
+        {
+          "text": "Repo + tag stylex-tap-1 = đúng code tập này",
+          "sentence": 3
+        }
       ],
       "next": "Tập 2: hover, media query, luật 'default' bắt buộc"
     }
