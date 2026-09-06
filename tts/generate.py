@@ -76,6 +76,9 @@ def validate_script(script: list[dict]) -> list[str]:
                     label = shot.get("label")
                     if label is not None and not isinstance(label, str):
                         errors.append(f"{scene['id']}: shot {i} label phải là str")
+                    url = shot.get("url")
+                    if url is not None and not isinstance(url, str):
+                        errors.append(f"{scene['id']}: shot {i} url phải là str")
         if "code" in visual and "steps" in visual:
             code_lines = len(visual["code"].split("\n"))
             for step in visual["steps"]:

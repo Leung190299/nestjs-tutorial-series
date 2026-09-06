@@ -8,11 +8,11 @@ import type {SceneProps} from '../data/types';
 export type BrowserVisual = {
   title: string;
   // Ảnh chụp browser thật 1280×800; 1 shot = cửa sổ lớn, 2 shots = so găng cạnh nhau
-  shots: {src: string; sentence: number; label?: string}[];
+  shots: {src: string; sentence: number; label?: string; url?: string}[];
   bullets?: {icon?: string; text: string; sentence: number}[];
 };
 
-const Window: React.FC<{src: string; label?: string; width: number; p: number}> = ({src, label, width, p}) => (
+const Window: React.FC<{src: string; label?: string; url?: string; width: number; p: number}> = ({src, label, url, width, p}) => (
   <div style={{width, opacity: 0.35 + p * 0.65, transform: `scale(${0.97 + p * 0.03})`}}>
     {label ? (
       <div style={{fontSize: 30, fontWeight: 700, color: theme.text, marginBottom: 12, textAlign: 'center'}}>
@@ -25,7 +25,7 @@ const Window: React.FC<{src: string; label?: string; width: number; p: number}> 
         <span style={{width: 14, height: 14, borderRadius: 7, backgroundColor: '#febc2e'}} />
         <span style={{width: 14, height: 14, borderRadius: 7, backgroundColor: '#28c840'}} />
         <div style={{flex: 1, marginLeft: 12, backgroundColor: '#0f172a', borderRadius: 8, padding: '6px 14px', color: '#94a3b8', fontSize: 20, fontFamily: theme.fontMono}}>
-          localhost:5199 — ViệtSuper
+          {url ?? 'localhost:5199 — ViệtSuper'}
         </div>
       </div>
       <Img src={staticFile(src)} style={{width: '100%', display: 'block'}} />
@@ -66,7 +66,7 @@ export const BrowserScene: React.FC<SceneProps> = ({visual, sentences}) => {
         <div style={{display: 'flex', gap: 36, flex: 1, justifyContent: 'center'}}>
           {current.map((s, i) => (
             <Appear key={i} at={sentenceStart(sentences, s.sentence)}>
-              <Window src={s.src} label={s.label} width={sideBySide ? 830 : 1120} p={p} />
+              <Window src={s.src} label={s.label} url={s.url} width={sideBySide ? 830 : 1120} p={p} />
             </Appear>
           ))}
         </div>
