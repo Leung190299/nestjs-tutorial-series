@@ -584,7 +584,7 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       line2: 'NGƯỜI ĐÓ THẮNG',
       subtitle: 'props() và luật last-wins',
       variant: 'shot',
-      image: 'screens/ep41/web-merge-lastwins.png',
+      image: 'screens/ep41/web-merge-thumbcrop.png',
       badgeEmoji: '🥇',
       seriesTag: 'StyleX từ A đến Z 🇻🇳',
     },
