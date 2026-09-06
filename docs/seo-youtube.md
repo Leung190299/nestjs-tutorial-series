@@ -1430,6 +1430,8 @@ Rồi TỔNG KẾT BỘ BA cách làm mini-app trên kênh: (1) React Native —
 
 Từ khóa chủ lực toàn series: `stylex`, `stylex vs tailwind`, `css in js`, `atomic css`, `meta stylex`, `học tailwind`, `react styling`, `stylex tiếng việt`.
 
+<!-- 6 tập đã đăng 2026-09-06, playlist "StyleX từ A đến Z 🇻🇳": https://www.youtube.com/playlist?list=PLONwK58GbR_M -->
+
 ### StyleX #1 — StyleX của Meta: may đo lúc build, setup Vite không vấp lỗi exports map (7:54)
 
 **Tiêu đề:** StyleX của Meta: may đo CSS lúc build, setup Vite không vấp lỗi | StyleX từ A đến Z #1/6
@@ -1452,7 +1454,7 @@ Kênh vừa xong 3 series mobile Flutter + React Native — hôm nay mở sang m
 
 📦 Source code (demo-stylex/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout stylex-tap-1 để xem đúng code tập này.
-⏭️ Tập sau: [LINK-EP40]
+⏭️ Tập sau: https://youtu.be/rkWd_UpU7UM
 ▶️ 3 series mobile khác trên kênh: "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM)
 
 #stylex #tailwind #cssinjs #react #laptrinh
@@ -1491,8 +1493,8 @@ Code lấy từ Hero.tsx và ServiceGrid.tsx đã có ở Tập 1: nút CTA đ�
 
 📦 Source code (demo-stylex/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout stylex-tap-2 để xem đúng code tập này.
-⏮️ Tập trước: [LINK-EP39]
-⏭️ Tập sau: [LINK-EP41]
+⏮️ Tập trước: https://youtu.be/J3PNg-rfqJQ
+⏭️ Tập sau: https://youtu.be/fe17bxgY4Is
 
 #stylex #tailwind #css #responsive #laptrinh
 ```
@@ -1530,8 +1532,8 @@ Giải thích rõ: đây KHÔNG phải CSS specificity, KHÔNG phải thứ tự
 
 📦 Source code (demo-stylex/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout stylex-tap-3 để xem đúng code tập này.
-⏮️ Tập trước: [LINK-EP40]
-⏭️ Tập sau: [LINK-EP42]
+⏮️ Tập trước: https://youtu.be/rkWd_UpU7UM
+⏭️ Tập sau: https://youtu.be/DtyJl4cXgTQ
 
 #stylex #tailwind #cssinjs #reactjs #laptrinh
 ```
@@ -1568,8 +1570,8 @@ Bối cảnh sống: Pricing.tsx — bảng giá 3 gói, gói Ở GIỮA nổi b
 
 📦 Source code (demo-stylex/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout stylex-tap-4 để xem đúng code tập này.
-⏮️ Tập trước: [LINK-EP41]
-⏭️ Tập sau: [LINK-EP43]
+⏮️ Tập trước: https://youtu.be/fe17bxgY4Is
+⏭️ Tập sau: https://youtu.be/7sURhHrKmaQ
 
 #stylex #tailwind #reactcomponent #typescript #laptrinh
 ```
@@ -1607,8 +1609,8 @@ BEAT quan trọng nhất tập: override PHẲNG trong theme thắng TUYỆT Đ�
 
 📦 Source code (demo-stylex/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout stylex-tap-5 để xem đúng code tập này.
-⏮️ Tập trước: [LINK-EP42]
-⏭️ Tập sau: [LINK-EP44]
+⏮️ Tập trước: https://youtu.be/DtyJl4cXgTQ
+⏭️ Tập sau: https://youtu.be/7Q_YzL-o__8
 
 #stylex #tailwind #darkmode #theming #laptrinh
 ```
@@ -1646,8 +1648,8 @@ Tập cuối: đặt 2 trình duyệt cạnh nhau — trái vietsuper-web (Style
 
 📦 Source code: https://github.com/Leung190299/nestjs-tutorial-series (demo-stylex/vietsuper-web/ + demo-stylex/compare-tailwind/)
 💡 Repo có tag theo từng tập (stylex-tap-1 → stylex-tap-6) — git checkout stylex-tap-6 để xem đúng code tập này.
-⏮️ Tập trước: [LINK-EP43]
-▶️ Xem từ đầu series: [LINK-EP39]
+⏮️ Tập trước: https://youtu.be/7sURhHrKmaQ
+▶️ Xem từ đầu series: https://youtu.be/J3PNg-rfqJQ
 ▶️ 3 series mobile khác trên kênh: "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM)
 💬 Vote series tiếp theo: Next.js kết hợp StyleX cho Server Components, hay một chủ đề web hoàn toàn khác?
 
