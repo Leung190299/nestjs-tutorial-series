@@ -1,0 +1,669 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Style từ ngoài: cross-file & bảng giá",
+        "subtitle": "StyleX từ A đến Z · Tập 4/6",
+        "badge": "Series StyleX · style prop & cross-file"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep42/scene-01-0-d7e63131.wav",
+          "startFrame": 0,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep42/scene-01-1-b1f5e96a.wav",
+          "startFrame": 196,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep42/scene-01-2-e9ee4630.wav",
+          "startFrame": 408,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep42/scene-01-3-217926cf.wav",
+          "startFrame": 632,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep42/scene-01-4-867cf1c7.wav",
+          "startFrame": 804,
+          "durationInFrames": 212
+        }
+      ],
+      "durationInFrames": 1034
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "style prop: cửa có KHUNG, không phải string tự do",
+        "bullets": [
+          {
+            "icon": "🔓",
+            "text": "React thường: className: string — ai truyền gì cũng được",
+            "sentence": 0
+          },
+          {
+            "icon": "🏷️",
+            "text": "StyleX: prop style kiểu StyleXStyles, import từ @stylexjs/stylex",
+            "sentence": 1
+          },
+          {
+            "icon": "✅",
+            "text": "Chỉ nhận ĐÚNG kết quả create() — sai kiểu, TypeScript báo lỗi ngay",
+            "sentence": 2
+          },
+          {
+            "icon": "🚪",
+            "text": "Cửa có KHUNG rõ ràng — không phải chuỗi tuỳ ý nào cũng lọt qua",
+            "sentence": 3
+          },
+          {
+            "icon": "⚖️",
+            "text": "Khác biệt cốt lõi với className — đối chiếu kỹ ở cuối tập",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep42/scene-02-0-fa6b5429.wav",
+          "startFrame": 0,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep42/scene-02-1-bd7c3224.wav",
+          "startFrame": 186,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep42/scene-02-2-d8eeda5a.wav",
+          "startFrame": 439,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep42/scene-02-3-5822e876.wav",
+          "startFrame": 680,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep42/scene-02-4-bdd89f4b.wav",
+          "startFrame": 866,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 1064
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "src/components/Button.tsx (type Props)",
+        "language": "tsx",
+        "code": "type Props = {\n  variant?: 'primary' | 'ghost' | 'danger';\n  size?: 'md' | 'lg';\n  style?: StyleXStyles;\n  children: React.ReactNode;\n};",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 2
+          },
+          {
+            "from": 5,
+            "to": 5,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep42/scene-03-0-7d5b92dd.wav",
+          "startFrame": 0,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep42/scene-03-1-30f056bd.wav",
+          "startFrame": 184,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep42/scene-03-2-638cb34c.wav",
+          "startFrame": 432,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep42/scene-03-3-fb5898a0.wav",
+          "startFrame": 628,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep42/scene-03-4-76656afa.wav",
+          "startFrame": 788,
+          "durationInFrames": 183
+        }
+      ],
+      "durationInFrames": 989
+    },
+    {
+      "id": "scene-04",
+      "type": "concept",
+      "visual": {
+        "title": "Vị trí CUỐI = người dùng luôn thắng",
+        "bullets": [
+          {
+            "icon": "🥇",
+            "text": "Last-wins Tập 3: đứng SAU trong props() thắng khi trùng property",
+            "sentence": 0
+          },
+          {
+            "icon": "📍",
+            "text": "props(base, styles[size], styles[variant], style) — style CUỐI CÙNG",
+            "sentence": 1
+          },
+          {
+            "icon": "🏆",
+            "text": "Trùng property với base/size/variant — style ngoài LUÔN thắng",
+            "sentence": 2
+          },
+          {
+            "icon": "🎯",
+            "text": "KHÔNG tình cờ — THIẾT KẾ CÓ CHỦ ĐÍCH của người viết Button",
+            "sentence": 3
+          },
+          {
+            "icon": "🚪",
+            "text": "Người DÙNG component thắng người VIẾT component — cửa có kiểm soát",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep42/scene-04-0-359aed60.wav",
+          "startFrame": 0,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep42/scene-04-1-120b071b.wav",
+          "startFrame": 205,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep42/scene-04-2-b2b135bd.wav",
+          "startFrame": 396,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep42/scene-04-3-573ecd51.wav",
+          "startFrame": 582,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep42/scene-04-4-90daf974.wav",
+          "startFrame": 749,
+          "durationInFrames": 202
+        }
+      ],
+      "durationInFrames": 969
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "src/components/Button.tsx (hàm Button)",
+        "language": "tsx",
+        "code": "export function Button({variant = 'primary', size = 'md', style, children}: Props) {\n  return (\n    <button {...stylex.props(styles.base, styles[size], styles[variant], style)}>\n      {children}\n    </button>\n  );\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 1,
+            "sentence": 1
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 2
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep42/scene-05-0-7bfda14e.wav",
+          "startFrame": 0,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep42/scene-05-1-4566e179.wav",
+          "startFrame": 227,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep42/scene-05-2-8b8b5859.wav",
+          "startFrame": 427,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep42/scene-05-3-8faba5f7.wav",
+          "startFrame": 615,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep42/scene-05-4-900a5f0b.wav",
+          "startFrame": 803,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 987
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "src/components/Pricing.tsx (fullWidth)",
+        "language": "tsx",
+        "code": "  name: {fontSize: 20, fontWeight: 800, color: tokens.text},\n  price: {fontSize: 36, fontWeight: 900, color: tokens.text, marginTop: 12},\n  unit: {fontSize: 15, fontWeight: 400, color: tokens.textMuted},\n  desc: {fontSize: 15, color: tokens.textMuted, marginTop: 8, marginBottom: 24},\n  // Style ngoài truyền vào Button qua prop `style` (ep42 — chất liệu cross-file):\n  fullWidth: {width: '100%'},\n});",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 5,
+            "sentence": 2
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep42/scene-06-0-6861a9d4.wav",
+          "startFrame": 0,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep42/scene-06-1-81932df6.wav",
+          "startFrame": 196,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep42/scene-06-2-a5136c91.wav",
+          "startFrame": 384,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep42/scene-06-3-0f350692.wav",
+          "startFrame": 587,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep42/scene-06-4-40fc59d2.wav",
+          "startFrame": 792,
+          "durationInFrames": 183
+        }
+      ],
+      "durationInFrames": 993
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "src/components/Pricing.tsx (render Button)",
+        "language": "tsx",
+        "code": "            {p.featured ? (\n              <Button variant=\"primary\" size=\"lg\" style={styles.fullWidth}>\n                Chọn {p.name}\n              </Button>\n            ) : (\n              <Button variant=\"ghost\" size=\"md\">\n                Chọn {p.name}\n              </Button>\n            )}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep42/scene-07-0-06f16d06.wav",
+          "startFrame": 0,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep42/scene-07-1-9c759033.wav",
+          "startFrame": 217,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep42/scene-07-2-e1b3eabd.wav",
+          "startFrame": 439,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep42/scene-07-3-2022ed22.wav",
+          "startFrame": 639,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep42/scene-07-4-e2b15b82.wav",
+          "startFrame": 856,
+          "durationInFrames": 219
+        }
+      ],
+      "durationInFrames": 1093
+    },
+    {
+      "id": "scene-08",
+      "type": "browser",
+      "visual": {
+        "title": "Bảng giá: fullWidth thấy rõ bằng mắt",
+        "shots": [
+          {
+            "src": "screens/ep42/web-pricing.png",
+            "sentence": 0
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🖥️",
+            "text": "Bảng giá chạy thật — đúng 3 gói, đúng code vừa xem",
+            "sentence": 0
+          },
+          {
+            "icon": "🎟️",
+            "text": "Gói Plus: nút 'Chọn Plus' rộng HẾT CỠ thẻ — đúng fullWidth",
+            "sentence": 1
+          },
+          {
+            "icon": "➖",
+            "text": "2 nút còn lại chỉ rộng bằng chữ — Button không nhận style",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "Cùng 1 hàm Button — khác đúng 1 prop style ở 1 lần gọi",
+            "sentence": 3
+          },
+          {
+            "icon": "🧾",
+            "text": "Bằng chứng cross-file: style từ Pricing áp lên Button khác file",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep42/scene-08-0-70d199d6.wav",
+          "startFrame": 0,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep42/scene-08-1-764c3fab.wav",
+          "startFrame": 155,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep42/scene-08-2-a41db9ce.wav",
+          "startFrame": 331,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep42/scene-08-3-6254ee14.wav",
+          "startFrame": 498,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep42/scene-08-4-be212b35.wav",
+          "startFrame": 682,
+          "durationInFrames": 219
+        }
+      ],
+      "durationInFrames": 919
+    },
+    {
+      "id": "scene-09",
+      "type": "concept",
+      "visual": {
+        "title": "Fact sheet: local zero-cost vs cross-file minimal-cost",
+        "bullets": [
+          {
+            "icon": "⚡",
+            "text": "Local (cùng file create()) — ZERO runtime cost, compiler inline sẵn",
+            "sentence": 0
+          },
+          {
+            "icon": "🧬",
+            "text": "props(styles.red) → {className: 'x1e2n...'} tĩnh ngay lúc build",
+            "sentence": 1
+          },
+          {
+            "icon": "📦",
+            "text": "Cross-file qua prop — compiler giữ object mapping key → className",
+            "sentence": 2
+          },
+          {
+            "icon": "⏱️",
+            "text": "Resolve lúc RUNTIME — nhỏ hơn hẳn CSS-in-JS truyền thống",
+            "sentence": 3
+          },
+          {
+            "icon": "🤝",
+            "text": "Đánh đổi hợp lý: 'minimal cost', không phải 'no cost'",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep42/scene-09-0-2df8a976.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep42/scene-09-1-51080379.wav",
+          "startFrame": 200,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep42/scene-09-2-84369f22.wav",
+          "startFrame": 468,
+          "durationInFrames": 264
+        },
+        {
+          "file": "audio/ep42/scene-09-3-ed8a1abc.wav",
+          "startFrame": 740,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep42/scene-09-4-b5a4e0c9.wav",
+          "startFrame": 1022,
+          "durationInFrames": 219
+        }
+      ],
+      "durationInFrames": 1259
+    },
+    {
+      "id": "scene-10",
+      "type": "concept",
+      "visual": {
+        "title": "So găng #5: className tự do vs style có TYPE",
+        "bullets": [
+          {
+            "icon": "🧵",
+            "text": "Tailwind: className: string, nối bằng template literal / clsx",
+            "sentence": 0
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bất kỳ class nào cũng lọt — TypeScript không cản được",
+            "sentence": 1
+          },
+          {
+            "icon": "🎲",
+            "text": "Người viết component KHÔNG kiểm soát người dùng ghi đè gì",
+            "sentence": 2
+          },
+          {
+            "icon": "🔒",
+            "text": "StyleX: chỉ nhận StyleXStyles thật từ create(), không nhét chuỗi tuỳ ý",
+            "sentence": 3
+          },
+          {
+            "icon": "⚖️",
+            "text": "StyleX: có TYPE + last-wins rõ — Tailwind hơn tự do, kém kiểm soát",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep42/scene-10-0-ecd592d4.wav",
+          "startFrame": 0,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep42/scene-10-1-e5ee9284.wav",
+          "startFrame": 220,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep42/scene-10-2-d24a0336.wav",
+          "startFrame": 464,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep42/scene-10-3-74855acf.wav",
+          "startFrame": 657,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep42/scene-10-4-f4b6571e.wav",
+          "startFrame": 881,
+          "durationInFrames": 260
+        }
+      ],
+      "durationInFrames": 1159
+    },
+    {
+      "id": "scene-11",
+      "type": "outro",
+      "visual": {
+        "title": "StyleX Tập 4/6 xong — style ngoài đã có cửa riêng 🎟️",
+        "summary": [
+          {
+            "text": "style?: StyleXStyles đặt CUỐI props() — người dùng component luôn thắng",
+            "sentence": 0
+          },
+          {
+            "text": "Pricing truyền styles.fullWidth vào Button — ví dụ cross-file sống",
+            "sentence": 1
+          },
+          {
+            "text": "Local zero-cost, cross-file minimal-cost; StyleX có TYPE hơn className",
+            "sentence": 2
+          }
+        ],
+        "next": "Tập 5: theming — token thương hiệu và theme Tết"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep42/scene-11-0-4c272fee.wav",
+          "startFrame": 0,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep42/scene-11-1-93580830.wav",
+          "startFrame": 212,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep42/scene-11-2-72d739c8.wav",
+          "startFrame": 427,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep42/scene-11-3-2a11bf18.wav",
+          "startFrame": 627,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep42/scene-11-4-7f9c51ad.wav",
+          "startFrame": 861,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep42/scene-11-5-72d60c92.wav",
+          "startFrame": 1059,
+          "durationInFrames": 442
+        }
+      ],
+      "durationInFrames": 1519
+    }
+  ]
+}
