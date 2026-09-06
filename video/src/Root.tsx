@@ -41,6 +41,7 @@ import ep35 from './data/ep35.timing.json';
 import ep36 from './data/ep36.timing.json';
 import ep37 from './data/ep37.timing.json';
 import ep38 from './data/ep38.timing.json';
+import ep39 from './data/ep39.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -82,6 +83,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode36', timing: ep36 as unknown as EpisodeTiming},
   {id: 'Episode37', timing: ep37 as unknown as EpisodeTiming},
   {id: 'Episode38', timing: ep38 as unknown as EpisodeTiming},
+  {id: 'Episode39', timing: ep39 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -540,6 +542,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       image: 'screens/ep38/host-grid-3-on.png',
       badgeEmoji: '🏆',
       seriesTag: 'Mini-App Flutter thuần 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb39',
+    props: {
+      badge: 'STYLEX 1/6',
+      line1: 'STYLEX',
+      line2: 'CỦA META',
+      subtitle: 'Setup Vite không vấp — style may đo lúc build',
+      variant: 'shot',
+      image: 'screens/ep39/web-hero-first-style.png',
+      badgeEmoji: '🧵',
+      seriesTag: 'StyleX từ A đến Z 🇻🇳',
     },
   },
 ];
