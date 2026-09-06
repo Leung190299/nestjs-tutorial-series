@@ -1,464 +1,464 @@
 [
- {
-  "id": "scene-01",
-  "type": "title",
-  "narration": [
-   "Tập 5 hứa hôm nay so găng trực diện: cùng một cái nút, hai cách viết, đặt cạnh nhau xem khác nhau chỗ nào.",
-   "Ẩn dụ khép lại series: StyleX là xưởng may đo — cắt đúng số đo lúc build; Tailwind là tủ đồ may sẵn — chọn nhanh, mặc vừa luôn.",
-   "Hai app Vite độc lập, cùng dựng lại y hệt một Button — vietsuper-web dùng StyleX, compare-tailwind dùng Tailwind CSS v4.",
-   "Tập cuối không học API mới — chỉ đối chiếu công bằng: code, className, kích thước CSS, và khi nào nên chọn bên nào."
-  ],
-  "visual": {
-   "title": "So găng trực diện: Tailwind vs StyleX",
-   "subtitle": "StyleX từ A đến Z · Tập 6/6",
-   "badge": "Series StyleX · Tập cuối"
-  }
- },
- {
-  "id": "scene-02",
-  "type": "browser",
-  "narration": [
-   "Mở màn: đặt 2 trình duyệt cạnh nhau — trái là vietsuper-web dùng StyleX, phải là compare-tailwind dùng Tailwind CSS v4.",
-   "Bên trái, cổng 5199: ba nút Primary — Ghost — Danger, đúng màu brand đỏ ea2845, viết bằng stylex.create() và stylex.props().",
-   "Bên phải, cổng 5198 — Tailwind: cùng ba nút, cùng màu, cùng bo góc — viết bằng className ghép chuỗi ngay trong JSX.",
-   "Nhìn bằng mắt: hai bộ nút gần như y hệt nhau — khác biệt không nằm ở giao diện, mà nằm ở cách VIẾT ra nó.",
-   "URL khai rõ từng bên: localhost 5199 — ViệtSuper cho StyleX, localhost 5198 — Tailwind cho bản đối chứng — không suy đoán, xem là biết ngay app nào."
-  ],
-  "visual": {
-   "title": "Cùng một Button — hai cách viết",
-   "shots": [
-    {
-     "src": "screens/ep44/web-stylex-side.png",
-     "sentence": 1,
-     "label": "StyleX"
-    },
-    {
-     "src": "screens/ep44/web-tailwind-side.png",
-     "sentence": 2,
-     "label": "Tailwind",
-     "url": "localhost:5198 — Tailwind"
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tập 5 hứa hôm nay so găng trực diện: cùng một cái nút, hai cách viết, đặt cạnh nhau xem khác nhau chỗ nào.",
+      "Ẩn dụ khép lại series: StyleX là xưởng may đo — cắt đúng số đo lúc build; Tailwind là tủ đồ may sẵn — chọn nhanh, mặc vừa luôn.",
+      "Hai app Vite độc lập, cùng dựng lại y hệt một Button — vietsuper-web dùng StyleX, compare-tailwind dùng Tailwind CSS v4.",
+      "Tập cuối không học API mới — chỉ đối chiếu công bằng: code, className, kích thước CSS, và khi nào nên chọn bên nào."
+    ],
+    "visual": {
+      "title": "So găng trực diện: Tailwind vs StyleX",
+      "subtitle": "StyleX từ A đến Z · Tập 6/6",
+      "badge": "Series StyleX · Tập cuối"
     }
-   ]
-  }
- },
- {
-  "id": "scene-03",
-  "type": "code",
-  "narration": [
-   "Bên StyleX, Button nhận props qua type khai rõ ràng.",
-   "style có kiểu StyleXStyles — TypeScript biết chính xác đây phải là kết quả từ stylex.create(), không phải object CSS tuỳ tiện.",
-   "Truyền nhầm một object thường hay một chuỗi CSS, compiler báo lỗi ngay lúc code, chưa cần chạy thử.",
-   "variant và size cũng union type đóng — gõ sai 'ghots' thay vì 'ghost' là đỏ gạch ngay trong editor."
-  ],
-  "visual": {
-   "filename": "vietsuper-web/src/components/Button.tsx",
-   "language": "tsx",
-   "code": "type Props = {\n  variant?: 'primary' | 'ghost' | 'danger';\n  size?: 'md' | 'lg';\n  style?: StyleXStyles;\n  children: React.ReactNode;\n};",
-   "steps": [
-    {
-     "from": 1,
-     "to": 6,
-     "sentence": 0
-    },
-    {
-     "from": 4,
-     "to": 4,
-     "sentence": 1
-    },
-    {
-     "from": 4,
-     "to": 4,
-     "sentence": 2
-    },
-    {
-     "from": 2,
-     "to": 3,
-     "sentence": 3
-    },
-    {
-     "from": 1,
-     "to": 6,
-     "sentence": 3
+  },
+  {
+    "id": "scene-02",
+    "type": "browser",
+    "narration": [
+      "Mở màn: đặt 2 trình duyệt cạnh nhau — trái là vietsuper-web dùng StyleX, phải là compare-tailwind dùng Tailwind CSS v4.",
+      "Bên trái, cổng 5199: ba nút Primary — Ghost — Danger, Primary và Ghost mang màu brand đỏ ea2845, viết bằng stylex.create() và stylex.props().",
+      "Bên phải, cổng 5198 — Tailwind: cùng ba nút, cùng màu, cùng bo góc — viết bằng className ghép chuỗi ngay trong JSX.",
+      "Nhìn bằng mắt: hai bộ nút gần như y hệt nhau — khác biệt không nằm ở giao diện, mà nằm ở cách VIẾT ra nó.",
+      "URL khai rõ từng bên: localhost 5199 — ViệtSuper cho StyleX, localhost 5198 — Tailwind cho bản đối chứng — không suy đoán, xem là biết ngay app nào."
+    ],
+    "visual": {
+      "title": "Cùng một Button — hai cách viết",
+      "shots": [
+        {
+          "src": "screens/ep44/web-stylex-side.png",
+          "sentence": 1,
+          "label": "StyleX"
+        },
+        {
+          "src": "screens/ep44/web-tailwind-side.png",
+          "sentence": 2,
+          "label": "Tailwind",
+          "url": "localhost:5198 — Tailwind"
+        }
+      ]
     }
-   ]
-  }
- },
- {
-  "id": "scene-04",
-  "type": "code",
-  "narration": [
-   "Bên Tailwind, Button cũng có type Props — nhìn qua tưởng giống hệt.",
-   "Nhưng className chỉ khai kiểu string thường — bất kỳ chuỗi nào cũng hợp lệ, kể cả gõ sai tên class Tailwind.",
-   "TypeScript không soi được nội dung chuỗi đó — sai 'bg-[#ea2845]' thành 'bg-[#ea2485]' vẫn compile bình thường, chỉ sai màu khi chạy thật.",
-   "Đây đúng là khác biệt cốt lõi: style-as-string vs style-as-typed-object, cùng xuất phát từ một prop tên gần giống nhau."
-  ],
-  "visual": {
-   "filename": "compare-tailwind/src/Button.tsx",
-   "language": "tsx",
-   "code": "type Props = {\n  variant?: 'primary' | 'ghost' | 'danger'\n  size?: 'md' | 'lg'\n  className?: string\n  children: React.ReactNode\n}",
-   "steps": [
-    {
-     "from": 1,
-     "to": 6,
-     "sentence": 0
-    },
-    {
-     "from": 4,
-     "to": 4,
-     "sentence": 1
-    },
-    {
-     "from": 4,
-     "to": 4,
-     "sentence": 2
-    },
-    {
-     "from": 1,
-     "to": 6,
-     "sentence": 3
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Bên StyleX, Button nhận props qua type khai rõ ràng.",
+      "style có kiểu StyleXStyles — TypeScript biết chính xác đây phải là kết quả từ stylex.create(), không phải object CSS tuỳ tiện.",
+      "Truyền nhầm một object thường hay một chuỗi CSS, compiler báo lỗi ngay lúc code, chưa cần chạy thử.",
+      "variant và size cũng union type đóng — gõ sai 'ghots' thay vì 'ghost' là đỏ gạch ngay trong editor."
+    ],
+    "visual": {
+      "filename": "vietsuper-web/src/components/Button.tsx",
+      "language": "tsx",
+      "code": "type Props = {\n  variant?: 'primary' | 'ghost' | 'danger';\n  size?: 'md' | 'lg';\n  style?: StyleXStyles;\n  children: React.ReactNode;\n};",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 2
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 3
+        }
+      ]
     }
-   ]
-  }
- },
- {
-  "id": "scene-05",
-  "type": "concept",
-  "narration": [
-   "Đo thật trên demo này: className dài nhất render ra DOM ở nút Ghost cỡ md bên Tailwind — 187 ký tự.",
-   "Cùng nút đó bên StyleX chỉ ra vài atomic class hash ngắn, kiểu x1yc3n3b, mỗi class tầm 8 đến 9 ký tự.",
-   "Đây là số đo trên đúng cái demo nhỏ này — không phải kết luận tổng quát cho mọi dự án Tailwind hay StyleX khác.",
-   "Nhưng nó cho thấy rõ một điều: 1 property StyleX luôn ra đúng 1 class atomic, còn Tailwind ghép nhiều utility lại thành 1 chuỗi dài trong className.",
-   "Cả hai đều là atomic CSS về bản chất — chỉ khác nơi 'atomic' đó lộ ra: trong className (Tailwind) hay ẩn sau compiler (StyleX)."
-  ],
-  "visual": {
-   "title": "className: chuỗi dài vs object có kiểu",
-   "bullets": [
-    {
-     "icon": "🔤",
-     "text": "Tailwind — className dài nhất đo được: 187 ký tự (nút Ghost, size md)",
-     "sentence": 0
-    },
-    {
-     "icon": "🧩",
-     "text": "StyleX — cùng nút, vài atomic class hash ngắn (~8-9 ký tự/class)",
-     "sentence": 1
-    },
-    {
-     "icon": "🔬",
-     "text": "Số đo trên demo nhỏ này — không phải kết luận chung cho mọi dự án",
-     "sentence": 2
-    },
-    {
-     "icon": "⚖️",
-     "text": "Cả hai đều atomic CSS — khác ở nơi 'lộ ra': className hay compiler",
-     "sentence": 4
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "Bên Tailwind, Button cũng có type Props — nhìn qua tưởng giống hệt.",
+      "Nhưng className chỉ khai kiểu string thường — bất kỳ chuỗi nào cũng hợp lệ, kể cả gõ sai tên class Tailwind.",
+      "TypeScript không soi được nội dung chuỗi đó — sai 'bg-[#ea2845]' thành 'bg-[#ea2485]' vẫn compile bình thường, chỉ sai màu khi chạy thật.",
+      "Đây đúng là khác biệt cốt lõi: style-as-string vs style-as-typed-object, cùng xuất phát từ một prop tên gần giống nhau."
+    ],
+    "visual": {
+      "filename": "compare-tailwind/src/Button.tsx",
+      "language": "tsx",
+      "code": "type Props = {\n  variant?: 'primary' | 'ghost' | 'danger'\n  size?: 'md' | 'lg'\n  className?: string\n  children: React.ReactNode\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 3
+        }
+      ]
     }
-   ]
-  }
- },
- {
-  "id": "scene-06",
-  "type": "code",
-  "narration": [
-   "Ba variant StyleX viết bằng object lồng nhau trong stylex.create().",
-   "primary đọc màu từ tokens.brand — đổi thương hiệu chỉ cần sửa token, không đụng Button.",
-   "ghost dùng borderStyle, borderWidth, borderColor tách riêng ba property — deterministic, không gộp shorthand.",
-   "danger hardcode màu đỏ đậm — không qua token vì đây là màu cảnh báo dùng chung toàn hệ thống, không theo brand.",
-   "Ba variant, ba object lồng nhau — không object nào 'biết' Tailwind hay CSS thường tồn tại, thuần TypeScript từ đầu tới cuối."
-  ],
-  "visual": {
-   "filename": "vietsuper-web/src/components/Button.tsx",
-   "language": "tsx",
-   "code": "  primary: {\n    color: 'white',\n    backgroundColor: {default: tokens.brand, ':hover': tokens.brandDark},\n  },\n  ghost: {\n    color: tokens.brand,\n    backgroundColor: {default: 'transparent', ':hover': 'rgba(234,40,69,0.08)'},\n    borderStyle: 'solid',\n    borderWidth: 2,\n    borderColor: tokens.brand,\n  },\n  danger: {\n    color: 'white',\n    backgroundColor: {default: '#b91c1c', ':hover': '#7f1d1d'},\n  },",
-   "steps": [
-    {
-     "from": 1,
-     "to": 15,
-     "sentence": 0
-    },
-    {
-     "from": 1,
-     "to": 4,
-     "sentence": 1
-    },
-    {
-     "from": 5,
-     "to": 11,
-     "sentence": 2
-    },
-    {
-     "from": 12,
-     "to": 15,
-     "sentence": 3
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Đo thật trên demo này: className dài nhất render ra DOM ở nút Ghost cỡ md bên Tailwind — 187 ký tự.",
+      "Cùng nút đó bên StyleX chỉ ra vài atomic class hash ngắn, kiểu x1yc3n3b, mỗi class tầm 8 đến 9 ký tự.",
+      "Đây là số đo trên đúng cái demo nhỏ này — không phải kết luận tổng quát cho mọi dự án Tailwind hay StyleX khác.",
+      "Nhưng nó cho thấy rõ một điều: 1 property StyleX luôn ra đúng 1 class atomic, còn Tailwind ghép nhiều utility lại thành 1 chuỗi dài trong className.",
+      "Cả hai đều là atomic CSS về bản chất — chỉ khác nơi 'atomic' đó lộ ra: trong className (Tailwind) hay ẩn sau compiler (StyleX)."
+    ],
+    "visual": {
+      "title": "className: chuỗi dài vs object có kiểu",
+      "bullets": [
+        {
+          "icon": "🔤",
+          "text": "Tailwind — className dài nhất đo được: 187 ký tự (nút Ghost, size md)",
+          "sentence": 0
+        },
+        {
+          "icon": "🧩",
+          "text": "StyleX — cùng nút, vài atomic class hash ngắn (~8-9 ký tự/class)",
+          "sentence": 1
+        },
+        {
+          "icon": "🔬",
+          "text": "Số đo trên demo nhỏ này — không phải kết luận chung cho mọi dự án",
+          "sentence": 2
+        },
+        {
+          "icon": "⚖️",
+          "text": "Cả hai đều atomic CSS — khác ở nơi 'lộ ra': className hay compiler",
+          "sentence": 4
+        }
+      ]
     }
-   ]
-  }
- },
- {
-  "id": "scene-07",
-  "type": "code",
-  "narration": [
-   "Bên Tailwind, ba variant viết bằng ternary lồng nhau, mỗi nhánh trả về một chuỗi utility class.",
-   "primary: 'text-white bg-[#ea2845] hover:bg-[#c81e3a]' — đúng màu, nhưng là chuỗi tự do, gõ sai ký tự vẫn qua được compiler.",
-   "ghost dài nhất — bốn utility class nối liền, chính là nhánh tạo ra chuỗi 187 ký tự khi ghép đủ base, size, variant.",
-   "Dòng return ghép cả bốn: base, sizeClass, variantClass, className ngoài truyền vào — đúng 1 dòng string interpolation."
-  ],
-  "visual": {
-   "filename": "compare-tailwind/src/Button.tsx",
-   "language": "tsx",
-   "code": "  const variantClass =\n    variant === 'primary'\n      ? 'text-white bg-[#ea2845] hover:bg-[#c81e3a]'\n      : variant === 'ghost'\n        ? 'text-[#ea2845] bg-transparent hover:bg-[#ea2845]/10 border-2 border-solid border-[#ea2845]'\n        : 'text-white bg-[#b91c1c] hover:bg-[#7f1d1d]'\n\n  return (\n    <button className={`${base} ${sizeClass} ${variantClass} ${className}`.trim()}>\n      {children}",
-   "steps": [
-    {
-     "from": 1,
-     "to": 10,
-     "sentence": 0
-    },
-    {
-     "from": 2,
-     "to": 3,
-     "sentence": 1
-    },
-    {
-     "from": 4,
-     "to": 6,
-     "sentence": 2
-    },
-    {
-     "from": 8,
-     "to": 9,
-     "sentence": 3
-    },
-    {
-     "from": 1,
-     "to": 10,
-     "sentence": 3
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Ba variant StyleX viết bằng object lồng nhau trong stylex.create().",
+      "primary đọc màu từ tokens.brand — đổi thương hiệu chỉ cần sửa token, không đụng Button.",
+      "ghost dùng borderStyle, borderWidth, borderColor tách riêng ba property — deterministic, không gộp shorthand.",
+      "danger hardcode màu đỏ đậm — không qua token vì đây là màu cảnh báo dùng chung toàn hệ thống, không theo brand.",
+      "Ba variant, ba object lồng nhau — không object nào 'biết' Tailwind hay CSS thường tồn tại, thuần TypeScript từ đầu tới cuối."
+    ],
+    "visual": {
+      "filename": "vietsuper-web/src/components/Button.tsx",
+      "language": "tsx",
+      "code": "  primary: {\n    color: 'white',\n    backgroundColor: {default: tokens.brand, ':hover': tokens.brandDark},\n  },\n  ghost: {\n    color: tokens.brand,\n    backgroundColor: {default: 'transparent', ':hover': 'rgba(234,40,69,0.08)'},\n    borderStyle: 'solid',\n    borderWidth: 2,\n    borderColor: tokens.brand,\n  },\n  danger: {\n    color: 'white',\n    backgroundColor: {default: '#b91c1c', ':hover': '#7f1d1d'},\n  },",
+      "steps": [
+        {
+          "from": 1,
+          "to": 15,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 5,
+          "to": 11,
+          "sentence": 2
+        },
+        {
+          "from": 12,
+          "to": 15,
+          "sentence": 3
+        }
+      ]
     }
-   ]
-  }
- },
- {
-  "id": "scene-08",
-  "type": "concept",
-  "narration": [
-   "Build production cả hai app, đo file CSS thật sinh ra: StyleX 4.41 kB, Tailwind 12.26 kB.",
-   "Đóng khung ngay: đây là demo nhỏ, chênh lệch chủ yếu tới từ phần preflight — CSS reset mà Tailwind tự thêm vào mọi trang.",
-   "Tailwind v4 tree-shake rất tốt — chỉ giữ đúng utility class thực sự dùng tới, không phải toàn bộ framework.",
-   "Không kết luận tổng quát 'StyleX luôn nhẹ hơn Tailwind' — dự án lớn hơn, nhiều component share style hơn, tỉ lệ có thể đổi khác.",
-   "Điều chắc chắn hơn: CSS bundle StyleX có xu hướng đạt mức chuẩn (plateau) khi số component tăng, nhờ dedup atomic triệt để."
-  ],
-  "visual": {
-   "title": "CSS bundle: đo thật trên demo nhỏ",
-   "bullets": [
-    {
-     "icon": "📦",
-     "text": "StyleX 4.41 kB vs Tailwind 12.26 kB — CSS production thật",
-     "sentence": 0
-    },
-    {
-     "icon": "🧯",
-     "text": "Chênh lệch chủ yếu do preflight — CSS reset Tailwind tự thêm",
-     "sentence": 1
-    },
-    {
-     "icon": "🌳",
-     "text": "Tailwind v4 tree-shake tốt — không phải cả framework bung ra",
-     "sentence": 2
-    },
-    {
-     "icon": "🔬",
-     "text": "Demo nhỏ, không phải kết luận tổng quát cho mọi project",
-     "sentence": 3
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Bên Tailwind, ba variant viết bằng ternary lồng nhau, mỗi nhánh trả về một chuỗi utility class.",
+      "primary: 'text-white bg-[#ea2845] hover:bg-[#c81e3a]' — đúng màu, nhưng là chuỗi tự do, gõ sai ký tự vẫn qua được compiler.",
+      "ghost dài nhất — bốn utility class nối liền, chính là nhánh tạo ra chuỗi 187 ký tự khi ghép đủ base, size, variant.",
+      "Dòng return ghép cả bốn: base, sizeClass, variantClass, className ngoài truyền vào — đúng 1 dòng string interpolation."
+    ],
+    "visual": {
+      "filename": "compare-tailwind/src/Button.tsx",
+      "language": "tsx",
+      "code": "  const variantClass =\n    variant === 'primary'\n      ? 'text-white bg-[#ea2845] hover:bg-[#c81e3a]'\n      : variant === 'ghost'\n        ? 'text-[#ea2845] bg-transparent hover:bg-[#ea2845]/10 border-2 border-solid border-[#ea2845]'\n        : 'text-white bg-[#b91c1c] hover:bg-[#7f1d1d]'\n\n  return (\n    <button className={`${base} ${sizeClass} ${variantClass} ${className}`.trim()}>\n      {children}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 4,
+          "to": 6,
+          "sentence": 2
+        },
+        {
+          "from": 8,
+          "to": 9,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 3
+        }
+      ]
     }
-   ]
-  }
- },
- {
-  "id": "scene-09",
-  "type": "concept",
-  "narration": [
-   "Một câu hỏi hay gặp: giá trị động theo state, ví dụ width đổi theo props số, StyleX xử lý sao vì create() chỉ nhận giá trị tĩnh?",
-   "Trả lời ngắn: compiler tạo sẵn một CSS Variable cho style đó — className vẫn tĩnh, chỉ giá trị biến CSS được set qua inline style lúc runtime.",
-   "Triết lý StyleX: pattern phổ biến (style tĩnh) tốn 0 chi phí runtime; pattern nâng cao (giá trị động) vẫn hỗ trợ, chỉ tốn chi phí nhỏ nhất có thể.",
-   "Demo trong series này không dùng dynamic style — đây chỉ là fact cần biết trước khi đưa StyleX vào dự án có nhiều giá trị runtime."
-  ],
-  "visual": {
-   "title": "Giá trị động: CSS Variable, không phải ngoại lệ",
-   "bullets": [
-    {
-     "icon": "🎛️",
-     "text": "width/props số động → compiler tạo CSS Variable, không phá vỡ static",
-     "sentence": 1
-    },
-    {
-     "icon": "⚡",
-     "text": "Style tĩnh: 0 chi phí runtime. Style động: chi phí nhỏ nhất có thể",
-     "sentence": 2
-    },
-    {
-     "icon": "📌",
-     "text": "Series này không demo dynamic style — ghi nhận fact để dùng khi cần",
-     "sentence": 3
+  },
+  {
+    "id": "scene-08",
+    "type": "concept",
+    "narration": [
+      "Build production cả hai app, đo file CSS thật sinh ra: StyleX 4.41 kB, Tailwind 12.26 kB.",
+      "Đóng khung ngay: đây là demo nhỏ, chênh lệch chủ yếu tới từ phần preflight — CSS reset mà Tailwind tự thêm vào mọi trang.",
+      "Tailwind v4 tree-shake rất tốt — chỉ giữ đúng utility class thực sự dùng tới, không phải toàn bộ framework.",
+      "Không kết luận tổng quát 'StyleX luôn nhẹ hơn Tailwind' — dự án lớn hơn, nhiều component share style hơn, tỉ lệ có thể đổi khác.",
+      "Điều chắc chắn hơn: CSS bundle StyleX có xu hướng đạt mức chuẩn (plateau) khi số component tăng, nhờ dedup atomic triệt để."
+    ],
+    "visual": {
+      "title": "CSS bundle: đo thật trên demo nhỏ",
+      "bullets": [
+        {
+          "icon": "📦",
+          "text": "StyleX 4.41 kB vs Tailwind 12.26 kB — CSS production thật",
+          "sentence": 0
+        },
+        {
+          "icon": "🧯",
+          "text": "Chênh lệch chủ yếu do preflight — CSS reset Tailwind tự thêm",
+          "sentence": 1
+        },
+        {
+          "icon": "🌳",
+          "text": "Tailwind v4 tree-shake tốt — không phải cả framework bung ra",
+          "sentence": 2
+        },
+        {
+          "icon": "🔬",
+          "text": "Demo nhỏ, không phải kết luận tổng quát cho mọi project",
+          "sentence": 3
+        }
+      ]
     }
-   ]
-  }
- },
- {
-  "id": "scene-10",
-  "type": "concept",
-  "narration": [
-   "Gotcha thật khi debug: mở DevTools, className StyleX không đọc được bằng mắt như CSS thường.",
-   "Ví dụ compiler sinh ra x1e2nbdu cho color: red — nhìn chuỗi này không đoán được style gốc là gì.",
-   "Cách đúng: dùng React DevTools xem prop style trước khi qua stylex.props(), hoặc source map StyleX để trace ngược về file gốc.",
-   "Tailwind ngược lại — className đọc trực tiếp ra ý nghĩa như bg-red-500, nhưng đổi lại chuỗi dài hơn nhiều trong DOM."
-  ],
-  "visual": {
-   "title": "Debug: className hash cần devtools",
-   "bullets": [
-    {
-     "icon": "🔍",
-     "text": "StyleX: className kiểu x1e2nbdu — không đọc được ý nghĩa bằng mắt",
-     "sentence": 1
-    },
-    {
-     "icon": "🧭",
-     "text": "Cần React DevTools hoặc source map StyleX để trace về style gốc",
-     "sentence": 2
-    },
-    {
-     "icon": "📖",
-     "text": "Tailwind: className đọc ra nghĩa ngay (bg-red-500) — đổi lại dài hơn",
-     "sentence": 3
+  },
+  {
+    "id": "scene-09",
+    "type": "concept",
+    "narration": [
+      "Một câu hỏi hay gặp: giá trị động theo state, ví dụ width đổi theo props số, StyleX xử lý sao vì create() chỉ nhận giá trị tĩnh?",
+      "Trả lời ngắn: compiler tạo sẵn một CSS Variable cho style đó — className vẫn tĩnh, chỉ giá trị biến CSS được set qua inline style lúc runtime.",
+      "Triết lý StyleX: pattern phổ biến (style tĩnh) tốn 0 chi phí runtime; pattern nâng cao (giá trị động) vẫn hỗ trợ, chỉ tốn chi phí nhỏ nhất có thể.",
+      "Demo trong series này không dùng dynamic style — đây chỉ là fact cần biết trước khi đưa StyleX vào dự án có nhiều giá trị runtime."
+    ],
+    "visual": {
+      "title": "Giá trị động: CSS Variable, không phải ngoại lệ",
+      "bullets": [
+        {
+          "icon": "🎛️",
+          "text": "width/props số động → compiler tạo CSS Variable, không phá vỡ static",
+          "sentence": 1
+        },
+        {
+          "icon": "⚡",
+          "text": "Style tĩnh: 0 chi phí runtime. Style động: chi phí nhỏ nhất có thể",
+          "sentence": 2
+        },
+        {
+          "icon": "📌",
+          "text": "Series này không demo dynamic style — ghi nhận fact để dùng khi cần",
+          "sentence": 3
+        }
+      ]
     }
-   ]
-  }
- },
- {
-  "id": "scene-11",
-  "type": "concept",
-  "narration": [
-   "Vậy khi nào chọn Tailwind? Ba trường hợp thắng rõ.",
-   "Prototype nhanh — viết className ngay trong JSX, không cần định nghĩa style riêng ở file khác, tốc độ ra giao diện rất cao.",
-   "Ecosystem khổng lồ — plugin, template, component library có sẵn, cộng đồng đông, câu hỏi nào cũng có người trả lời rồi.",
-   "Không cần build-step phức tạp — chỉ 1 import CSS, không cần hiểu compiler transform code lúc build như StyleX.",
-   "Không phải Tailwind yếu — chỉ là ưu tiên khác: tốc độ ra sản phẩm được đặt cao hơn mức kiểm soát chặt chẽ lúc compile."
-  ],
-  "visual": {
-   "title": "Tailwind thắng khi nào",
-   "bullets": [
-    {
-     "icon": "⚡",
-     "text": "Prototype nhanh — className ngay trong JSX, không tách file style",
-     "sentence": 1
-    },
-    {
-     "icon": "🌍",
-     "text": "Ecosystem khổng lồ — plugin, template, cộng đồng đông đảo",
-     "sentence": 2
-    },
-    {
-     "icon": "🧯",
-     "text": "Không cần build-step phức tạp — chỉ 1 dòng import CSS",
-     "sentence": 3
+  },
+  {
+    "id": "scene-10",
+    "type": "concept",
+    "narration": [
+      "Gotcha thật khi debug: mở DevTools, className StyleX không đọc được bằng mắt như CSS thường.",
+      "Ví dụ compiler sinh ra x1e2nbdu cho color: red — nhìn chuỗi này không đoán được style gốc là gì.",
+      "Cách đúng: dùng React DevTools xem prop style trước khi qua stylex.props(), hoặc source map StyleX để trace ngược về file gốc.",
+      "Tailwind ngược lại — className đọc trực tiếp ra ý nghĩa như bg-red-500, nhưng đổi lại chuỗi dài hơn nhiều trong DOM."
+    ],
+    "visual": {
+      "title": "Debug: className hash cần devtools",
+      "bullets": [
+        {
+          "icon": "🔍",
+          "text": "StyleX: className kiểu x1e2nbdu — không đọc được ý nghĩa bằng mắt",
+          "sentence": 1
+        },
+        {
+          "icon": "🧭",
+          "text": "Cần React DevTools hoặc source map StyleX để trace về style gốc",
+          "sentence": 2
+        },
+        {
+          "icon": "📖",
+          "text": "Tailwind: className đọc ra nghĩa ngay (bg-red-500) — đổi lại dài hơn",
+          "sentence": 3
+        }
+      ]
     }
-   ]
-  }
- },
- {
-  "id": "scene-12",
-  "type": "concept",
-  "narration": [
-   "Ngược lại, StyleX thắng rõ ở bốn trường hợp khác.",
-   "Type-safe thật — object JS được TypeScript soi từng thuộc tính, không phải string class name có thể gõ sai âm thầm.",
-   "Codebase lớn, nhiều người viết cùng lúc — deterministic resolution tránh xung đột style khó lường giữa các file.",
-   "Dedup triệt để — CSS bundle có xu hướng đạt plateau khi số component tăng, không phình vô hạn.",
-   "Theming built-in mạnh — defineVars và createTheme xử lý cả dark mode lẫn theme thương hiệu chỉ trong vài file token.",
-   "Đổi lại, StyleX bắt buộc build-step và còn ở version 0.x — cái giá phải trả cho mức kiểm soát chặt chẽ đó."
-  ],
-  "visual": {
-   "title": "StyleX thắng khi nào",
-   "bullets": [
-    {
-     "icon": "🛡️",
-     "text": "Type-safe thật — TypeScript soi object, không phải string tự do",
-     "sentence": 1
-    },
-    {
-     "icon": "🏗️",
-     "text": "Codebase lớn, nhiều người viết — deterministic, tránh xung đột style",
-     "sentence": 2
-    },
-    {
-     "icon": "📉",
-     "text": "Dedup triệt để — CSS bundle có xu hướng đạt plateau, không phình mãi",
-     "sentence": 3
-    },
-    {
-     "icon": "🎨",
-     "text": "Theming built-in mạnh — defineVars/createTheme xử lý cả dark + brand",
-     "sentence": 4
+  },
+  {
+    "id": "scene-11",
+    "type": "concept",
+    "narration": [
+      "Vậy khi nào chọn Tailwind? Ba trường hợp thắng rõ.",
+      "Prototype nhanh — viết className ngay trong JSX, không cần định nghĩa style riêng ở file khác, tốc độ ra giao diện rất cao.",
+      "Ecosystem khổng lồ — plugin, template, component library có sẵn, cộng đồng đông, câu hỏi nào cũng có người trả lời rồi.",
+      "Không cần build-step phức tạp — chỉ 1 import CSS, không cần hiểu compiler transform code lúc build như StyleX.",
+      "Không phải Tailwind yếu — chỉ là ưu tiên khác: tốc độ ra sản phẩm được đặt cao hơn mức kiểm soát chặt chẽ lúc compile."
+    ],
+    "visual": {
+      "title": "Tailwind thắng khi nào",
+      "bullets": [
+        {
+          "icon": "⚡",
+          "text": "Prototype nhanh — className ngay trong JSX, không tách file style",
+          "sentence": 1
+        },
+        {
+          "icon": "🌍",
+          "text": "Ecosystem khổng lồ — plugin, template, cộng đồng đông đảo",
+          "sentence": 2
+        },
+        {
+          "icon": "🧯",
+          "text": "Không cần build-step phức tạp — chỉ 1 dòng import CSS",
+          "sentence": 3
+        }
+      ]
     }
-   ]
-  }
- },
- {
-  "id": "scene-13",
-  "type": "concept",
-  "narration": [
-   "Chốt lại toàn series: cả Tailwind lẫn StyleX đều sinh ra atomic CSS — đây KHÔNG phải cuộc chiến 'atomic hay không atomic'.",
-   "Khác biệt thật nằm ở CÁCH VIẾT — string class trong JSX (Tailwind) hay object có kiểu qua compiler (StyleX) — và mức kiểm soát compiler đặt lên style của bạn.",
-   "Nhắc lại từ Tập 1: bản dùng suốt series này là v0.19, vẫn 0.x trên semver dù Meta đã chạy production quy mô khổng lồ.",
-   "API StyleX có thể còn đổi trước khi ra v1.0 chính thức — cân nhắc điều này khi quyết định đưa vào dự án dài hạn."
-  ],
-  "visual": {
-   "title": "Cả hai đều atomic — khác ở cách viết",
-   "bullets": [
-    {
-     "icon": "⚛️",
-     "text": "Tailwind và StyleX đều atomic CSS — không phải 'atomic vs không'",
-     "sentence": 0
-    },
-    {
-     "icon": "✍️",
-     "text": "Khác ở CÁCH VIẾT + mức kiểm soát compiler, không phải công nghệ nền",
-     "sentence": 1
-    },
-    {
-     "icon": "🔢",
-     "text": "Vẫn v0.19, còn 0.x trên semver — dù Meta đã dùng production quy mô lớn",
-     "sentence": 2
+  },
+  {
+    "id": "scene-12",
+    "type": "concept",
+    "narration": [
+      "Ngược lại, StyleX thắng rõ ở bốn trường hợp khác.",
+      "Type-safe thật — object JS được TypeScript soi từng thuộc tính, không phải string class name có thể gõ sai âm thầm.",
+      "Codebase lớn, nhiều người viết cùng lúc — deterministic resolution tránh xung đột style khó lường giữa các file.",
+      "Dedup triệt để — CSS bundle có xu hướng đạt plateau khi số component tăng, không phình vô hạn.",
+      "Theming built-in mạnh — defineVars và createTheme xử lý cả dark mode lẫn theme thương hiệu chỉ trong vài file token.",
+      "Đổi lại, StyleX bắt buộc build-step và còn ở version 0.x — cái giá phải trả cho mức kiểm soát chặt chẽ đó."
+    ],
+    "visual": {
+      "title": "StyleX thắng khi nào",
+      "bullets": [
+        {
+          "icon": "🛡️",
+          "text": "Type-safe thật — TypeScript soi object, không phải string tự do",
+          "sentence": 1
+        },
+        {
+          "icon": "🏗️",
+          "text": "Codebase lớn, nhiều người viết — deterministic, tránh xung đột style",
+          "sentence": 2
+        },
+        {
+          "icon": "📉",
+          "text": "Dedup triệt để — CSS bundle có xu hướng đạt plateau, không phình mãi",
+          "sentence": 3
+        },
+        {
+          "icon": "🎨",
+          "text": "Theming built-in mạnh — defineVars/createTheme xử lý cả dark + brand",
+          "sentence": 4
+        }
+      ]
     }
-   ]
-  }
- },
- {
-  "id": "scene-14",
-  "type": "outro",
-  "narration": [
-   "Vậy là series StyleX từ A đến Z khép lại TRỌN VẸN: từ setup Vite ở Tập 1, tới so găng trực diện với Tailwind hôm nay.",
-   "Đã học đủ lõi: stylex.create() và props(), luật last-wins, style prop cross-file, theming với defineVars/createTheme, và giờ là so sánh công bằng với Tailwind.",
-   "Mã nguồn ở repo github.com/Leung190299/nestjs-tutorial-series, thư mục demo-stylex, tag stylex-tap-1 tới stylex-tap-6 — mỗi tag đúng một tập.",
-   "Kênh này đã có 3 series mobile hoàn chỉnh khác — Flutter và React Native — xem lại trong playlist trên kênh.",
-   "Series tiếp theo chưa chốt — vote ở phần bình luận: đi tiếp Next.js kết hợp StyleX cho Server Components, hay một chủ đề web hoàn toàn khác?",
-   "Số comment sẽ quyết định — vote càng nhiều, series tiếp theo lên sóng càng nhanh.",
-   "Cảm ơn bạn đã đi trọn cả 6 tập — từ dòng stylex.create() đầu tiên tới phép so găng cuối cùng hôm nay. Hẹn gặp lại!"
-  ],
-  "visual": {
-   "title": "StyleX 6/6 hoàn tất — cảm ơn bạn! 🏆",
-   "summary": [
-    {
-     "text": "6 tập: setup Vite → create/props → last-wins → cross-file → theming → so găng",
-     "sentence": 1
-    },
-    {
-     "text": "Repo + tag stylex-tap-1..6 = đúng code từng tập, checkout là thấy ngay",
-     "sentence": 2
-    },
-    {
-     "text": "3 series mobile khác đã có sẵn playlist trên kênh",
-     "sentence": 3
+  },
+  {
+    "id": "scene-13",
+    "type": "concept",
+    "narration": [
+      "Chốt lại toàn series: cả Tailwind lẫn StyleX đều sinh ra atomic CSS — đây KHÔNG phải cuộc chiến 'atomic hay không atomic'.",
+      "Khác biệt thật nằm ở CÁCH VIẾT — string class trong JSX (Tailwind) hay object có kiểu qua compiler (StyleX) — và mức kiểm soát compiler đặt lên style của bạn.",
+      "Nhắc lại từ Tập 1: bản dùng suốt series này là v0.19, vẫn 0.x trên semver dù Meta đã chạy production quy mô khổng lồ.",
+      "API StyleX có thể còn đổi trước khi ra v1.0 chính thức — cân nhắc điều này khi quyết định đưa vào dự án dài hạn."
+    ],
+    "visual": {
+      "title": "Cả hai đều atomic — khác ở cách viết",
+      "bullets": [
+        {
+          "icon": "⚛️",
+          "text": "Tailwind và StyleX đều atomic CSS — không phải 'atomic vs không'",
+          "sentence": 0
+        },
+        {
+          "icon": "✍️",
+          "text": "Khác ở CÁCH VIẾT + mức kiểm soát compiler, không phải công nghệ nền",
+          "sentence": 1
+        },
+        {
+          "icon": "🔢",
+          "text": "Vẫn v0.19, còn 0.x trên semver — dù Meta đã dùng production quy mô lớn",
+          "sentence": 2
+        }
+      ]
     }
-   ],
-   "next": "Vote: Next.js + StyleX, hay chủ đề web khác? 🗳️"
+  },
+  {
+    "id": "scene-14",
+    "type": "outro",
+    "narration": [
+      "Vậy là series StyleX từ A đến Z khép lại TRỌN VẸN: từ setup Vite ở Tập 1, tới so găng trực diện với Tailwind hôm nay.",
+      "Đã học đủ lõi: stylex.create() và props(), luật last-wins, style prop cross-file, theming với defineVars/createTheme, và giờ là so sánh công bằng với Tailwind.",
+      "Mã nguồn ở repo github.com/Leung190299/nestjs-tutorial-series, thư mục demo-stylex, tag stylex-tap-1 tới stylex-tap-6 — mỗi tag đúng một tập.",
+      "Kênh này đã có 3 series mobile hoàn chỉnh khác — Flutter và React Native — xem lại trong playlist trên kênh.",
+      "Series tiếp theo chưa chốt — vote ở phần bình luận: đi tiếp Next.js kết hợp StyleX cho Server Components, hay một chủ đề web hoàn toàn khác?",
+      "Số comment sẽ quyết định — vote càng nhiều, series tiếp theo lên sóng càng nhanh.",
+      "Cảm ơn bạn đã đi trọn cả 6 tập — từ dòng stylex.create() đầu tiên tới phép so găng cuối cùng hôm nay. Hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "StyleX 6/6 hoàn tất — cảm ơn bạn! 🏆",
+      "summary": [
+        {
+          "text": "6 tập: setup Vite → create/props → last-wins → cross-file → theming → so găng",
+          "sentence": 1
+        },
+        {
+          "text": "Repo + tag stylex-tap-1..6 = đúng code từng tập, checkout là thấy ngay",
+          "sentence": 2
+        },
+        {
+          "text": "3 series mobile khác đã có sẵn playlist trên kênh",
+          "sentence": 3
+        }
+      ],
+      "next": "Vote: Next.js + StyleX, hay chủ đề web khác? 🗳️"
+    }
   }
- }
 ]

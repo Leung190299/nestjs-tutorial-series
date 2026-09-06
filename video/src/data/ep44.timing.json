@@ -59,27 +59,27 @@
           "durationInFrames": 202
         },
         {
-          "file": "audio/ep44/scene-02-1-dd25e057.wav",
+          "file": "audio/ep44/scene-02-1-e9254d38.wav",
           "startFrame": 210,
-          "durationInFrames": 252
+          "durationInFrames": 339
         },
         {
           "file": "audio/ep44/scene-02-2-4c81f469.wav",
-          "startFrame": 470,
+          "startFrame": 557,
           "durationInFrames": 202
         },
         {
           "file": "audio/ep44/scene-02-3-8a64c266.wav",
-          "startFrame": 680,
+          "startFrame": 767,
           "durationInFrames": 164
         },
         {
           "file": "audio/ep44/scene-02-4-e9a6f43b.wav",
-          "startFrame": 852,
+          "startFrame": 939,
           "durationInFrames": 332
         }
       ],
-      "durationInFrames": 1202
+      "durationInFrames": 1289
     },
     {
       "id": "scene-03",
