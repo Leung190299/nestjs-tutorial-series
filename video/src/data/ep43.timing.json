@@ -1,0 +1,795 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Theming: token thương hiệu và theme Tết",
+        "subtitle": "StyleX từ A đến Z · Tập 5/6",
+        "badge": "Series StyleX · defineVars & createTheme"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep43/scene-01-0-06ff8e11.wav",
+          "startFrame": 0,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep43/scene-01-1-424d328b.wav",
+          "startFrame": 176,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep43/scene-01-2-77967ec3.wav",
+          "startFrame": 396,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep43/scene-01-3-19b9dc14.wav",
+          "startFrame": 613,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep43/scene-01-4-7e9917c8.wav",
+          "startFrame": 799,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 983
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "defineVars: bảng màu thương hiệu ở 1 chỗ",
+        "bullets": [
+          {
+            "icon": "🎨",
+            "text": "1 chỗ duy nhất định nghĩa toàn bộ bảng màu thương hiệu",
+            "sentence": 0
+          },
+          {
+            "icon": "🔗",
+            "text": "Mọi component import chung — đổi 1 chỗ, đổi khắp app",
+            "sentence": 1
+          },
+          {
+            "icon": "📛",
+            "text": "Gotcha: file token BẮT BUỘC đuôi .stylex.ts/.stylex.js",
+            "sentence": 2
+          },
+          {
+            "icon": "🧵",
+            "text": "Ẩn dụ: xưởng may đo có 1 bảng màu chuẩn cho mọi đồng phục",
+            "sentence": 3
+          },
+          {
+            "icon": "📄",
+            "text": "tokens.stylex.ts thật của ViệtSuper — chỉ 17 dòng, xem ngay",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep43/scene-02-0-078c2151.wav",
+          "startFrame": 0,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep43/scene-02-1-8688a076.wav",
+          "startFrame": 176,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep43/scene-02-2-7a530ca6.wav",
+          "startFrame": 444,
+          "durationInFrames": 312
+        },
+        {
+          "file": "audio/ep43/scene-02-3-a9e53ed9.wav",
+          "startFrame": 764,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep43/scene-02-4-5627e2bf.wav",
+          "startFrame": 960,
+          "durationInFrames": 176
+        }
+      ],
+      "durationInFrames": 1154
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "src/tokens.stylex.ts",
+        "language": "typescript",
+        "code": "import * as stylex from '@stylexjs/stylex'\n\n// Lưu ý: file định nghĩa biến (defineVars) BẮT BUỘC có đuôi .stylex.ts\n// (hoặc .stylex.js) — đây là quy ước thật của @stylexjs/babel-plugin, không\n// tuân theo sẽ lỗi compile \"Could not resolve the path to the imported\n// file... Please ensure that the theme file has a .stylex.js or .stylex.ts\n// extension\" khi file khác import `tokens` này.\nconst DARK = '@media (prefers-color-scheme: dark)'\n\nexport const tokens = stylex.defineVars({\n  brand: '#ea2845',\n  brandDark: '#c81e3a',\n  bg: { default: '#fff7f5', [DARK]: '#0f172a' },\n  surface: { default: '#ffffff', [DARK]: '#1e293b' },\n  text: { default: '#111827', [DARK]: '#f1f5f9' },\n  textMuted: { default: '#6b7280', [DARK]: '#94a3b8' },\n})",
+        "steps": [
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 11,
+            "to": 12,
+            "sentence": 2
+          },
+          {
+            "from": 8,
+            "to": 16,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep43/scene-03-0-4fb2ff78.wav",
+          "startFrame": 0,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep43/scene-03-1-0027449c.wav",
+          "startFrame": 246,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep43/scene-03-2-724d5f69.wav",
+          "startFrame": 437,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep43/scene-03-3-c691cd07.wav",
+          "startFrame": 573,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep43/scene-03-4-2c0df75b.wav",
+          "startFrame": 814,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 1022
+    },
+    {
+      "id": "scene-04",
+      "type": "browser",
+      "visual": {
+        "title": "Trang mặc định — điểm xuất phát",
+        "shots": [
+          {
+            "src": "screens/ep43/web-theme-default.png",
+            "sentence": 0
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🖥️",
+            "text": "Trang ta vẫn thấy từ đầu series — chưa theme, chưa dark",
+            "sentence": 0
+          },
+          {
+            "icon": "🎨",
+            "text": "Nền hồng nhạt, 'Super' đỏ brand — đọc từ tokens.bg/brand",
+            "sentence": 1
+          },
+          {
+            "icon": "🚦",
+            "text": "Điểm xuất phát để so sánh với Tết và dark ngay sau đây",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "2 ảnh tiếp theo đổi màu hoàn toàn — không sửa component",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep43/scene-04-0-ef5601de.wav",
+          "startFrame": 0,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep43/scene-04-1-435a9fbb.wav",
+          "startFrame": 150,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep43/scene-04-2-646d6a5b.wav",
+          "startFrame": 398,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep43/scene-04-3-5182116f.wav",
+          "startFrame": 570,
+          "durationInFrames": 168
+        }
+      ],
+      "durationInFrames": 756
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "src/App.tsx (styles.page)",
+        "language": "tsx",
+        "code": "const styles = stylex.create({\n  page: {\n    minHeight: '100vh',\n    backgroundColor: tokens.bg,\n    color: tokens.text,\n    fontFamily: 'system-ui, sans-serif',\n  },",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 5,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep43/scene-05-0-03fe5638.wav",
+          "startFrame": 0,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep43/scene-05-1-22b5bd97.wav",
+          "startFrame": 232,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep43/scene-05-2-54b9749a.wav",
+          "startFrame": 478,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep43/scene-05-3-2a204ecd.wav",
+          "startFrame": 700,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep43/scene-05-4-f2d8222f.wav",
+          "startFrame": 908,
+          "durationInFrames": 224
+        }
+      ],
+      "durationInFrames": 1150
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "src/App.tsx (themeParam)",
+        "language": "tsx",
+        "code": "export default function App() {\n  const themeParam = new URLSearchParams(window.location.search).get('theme')\n  return (\n    <div {...stylex.props(themeParam === 'tet' && tet, styles.page)}>",
+        "steps": [
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 2
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep43/scene-06-0-87dd8da7.wav",
+          "startFrame": 0,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep43/scene-06-1-facbfade.wav",
+          "startFrame": 193,
+          "durationInFrames": 286
+        },
+        {
+          "file": "audio/ep43/scene-06-2-e9cf021e.wav",
+          "startFrame": 487,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep43/scene-06-3-a58e850a.wav",
+          "startFrame": 707,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep43/scene-06-4-74dee1c7.wav",
+          "startFrame": 965,
+          "durationInFrames": 209
+        }
+      ],
+      "durationInFrames": 1192
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "src/themes.ts",
+        "language": "typescript",
+        "code": "import * as stylex from '@stylexjs/stylex'\nimport { tokens } from './tokens.stylex'\n\n// Theme Tết: nền vàng kem, brand đỏ gạch — không override text/textMuted,\n// fallback về giá trị mặc định trong defineVars (điểm dạy ep43).\nexport const tet = stylex.createTheme(tokens, {\n  bg: '#fff8e1',\n  surface: '#fffdf5',\n  brand: '#d4380d',\n  brandDark: '#ad2102',\n})",
+        "steps": [
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 10,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 3
+          },
+          {
+            "from": 6,
+            "to": 11,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep43/scene-07-0-e47020f6.wav",
+          "startFrame": 0,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep43/scene-07-1-7f7e94f1.wav",
+          "startFrame": 131,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep43/scene-07-2-e0206b7d.wav",
+          "startFrame": 293,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep43/scene-07-3-fac0aa0e.wav",
+          "startFrame": 561,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep43/scene-07-4-0e245535.wav",
+          "startFrame": 745,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 917
+    },
+    {
+      "id": "scene-08",
+      "type": "concept",
+      "visual": {
+        "title": "Fallback: không override = giữ nguyên defineVars",
+        "bullets": [
+          {
+            "icon": "↩️",
+            "text": "text/textMuted không có trong theme Tết → fallback về defineVars",
+            "sentence": 0
+          },
+          {
+            "icon": "🌗",
+            "text": "text vẫn {default: đen, DARK: trắng} như tokens gốc, không đổi",
+            "sentence": 1
+          },
+          {
+            "icon": "✂️",
+            "text": "Theme mới chỉ liệt kê ĐIỂM KHÁC — phần giống tự kế thừa",
+            "sentence": 2
+          },
+          {
+            "icon": "🗂️",
+            "text": "Không có token: phải sửa từng file; có token: 1 file 10 dòng",
+            "sentence": 3
+          },
+          {
+            "icon": "🧵",
+            "text": "Bộ sưu tập theo mùa: chỉ đổi mảnh vải cần đổi, không may lại hết",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep43/scene-08-0-2c9ad3bd.wav",
+          "startFrame": 0,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep43/scene-08-1-285bcdc6.wav",
+          "startFrame": 260,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep43/scene-08-2-0d87defc.wav",
+          "startFrame": 465,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep43/scene-08-3-d062855e.wav",
+          "startFrame": 653,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep43/scene-08-4-71daa8ed.wav",
+          "startFrame": 873,
+          "durationInFrames": 147
+        }
+      ],
+      "durationInFrames": 1038
+    },
+    {
+      "id": "scene-09",
+      "type": "browser",
+      "visual": {
+        "title": "?theme=tet — 1 theme, đổi cả trang",
+        "shots": [
+          {
+            "src": "screens/ep43/web-theme-tet.png",
+            "sentence": 0
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🧧",
+            "text": "?theme=tet — không sửa component nào, chỉ đổi theme",
+            "sentence": 0
+          },
+          {
+            "icon": "🎨",
+            "text": "Nền vàng kem, 'Super' và CTA đổi sang đỏ gạch — đúng 4 biến",
+            "sentence": 1
+          },
+          {
+            "icon": "🃏",
+            "text": "Card trắng ngà (surface) khác sắc với nền — đúng theme Tết",
+            "sentence": 2
+          },
+          {
+            "icon": "⚫",
+            "text": "Text vẫn đen — không bị override, đúng fallback vừa học",
+            "sentence": 3
+          },
+          {
+            "icon": "💪",
+            "text": "1 theme, 4 biến, đổi cả trang — sức mạnh của token hoá màu",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep43/scene-09-0-128ea2b3.wav",
+          "startFrame": 0,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep43/scene-09-1-031819d8.wav",
+          "startFrame": 184,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep43/scene-09-2-5f7ea4c0.wav",
+          "startFrame": 394,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep43/scene-09-3-e1640bac.wav",
+          "startFrame": 585,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep43/scene-09-4-a1f719b8.wav",
+          "startFrame": 790,
+          "durationInFrames": 156
+        }
+      ],
+      "durationInFrames": 964
+    },
+    {
+      "id": "scene-10",
+      "type": "concept",
+      "visual": {
+        "title": "Beat: override phẳng thắng cả @media gốc",
+        "bullets": [
+          {
+            "icon": "❓",
+            "text": "Bật dark mode lúc đang xem theme Tết — trang có tối theo không?",
+            "sentence": 0
+          },
+          {
+            "icon": "🚫",
+            "text": "KHÔNG — theme Tết luôn sáng, hành vi CHỦ ĐÍCH không phải lỗi",
+            "sentence": 1
+          },
+          {
+            "icon": "🏳️",
+            "text": "Giá trị phẳng không nhánh DARK — thắng tuyệt đối @media gốc",
+            "sentence": 2
+          },
+          {
+            "icon": "🔧",
+            "text": "Muốn theo dark: phải tự khai {default, [DARK]} trong createTheme",
+            "sentence": 3
+          },
+          {
+            "icon": "🎊",
+            "text": "Tết là 'mùa cố định sắc thái' — text/textMuted vẫn đổi dark bình thường",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep43/scene-10-0-c5a6e8bb.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep43/scene-10-1-72b5d9f2.wav",
+          "startFrame": 181,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep43/scene-10-2-c368a92e.wav",
+          "startFrame": 357,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep43/scene-10-3-1820d52e.wav",
+          "startFrame": 608,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep43/scene-10-4-a87fb400.wav",
+          "startFrame": 804,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 1060
+    },
+    {
+      "id": "scene-11",
+      "type": "browser",
+      "visual": {
+        "title": "Dark mode thật — chụp qua DevTools Protocol",
+        "shots": [
+          {
+            "src": "screens/ep43/web-dark-tokens.png",
+            "sentence": 0
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🌙",
+            "text": "Trình duyệt THẬT đánh giá dark — không phải ảnh giả lập",
+            "sentence": 0
+          },
+          {
+            "icon": "🛠️",
+            "text": "Chụp bằng CDP Emulation.setEmulatedMedia — chuẩn Puppeteer/Playwright",
+            "sentence": 1
+          },
+          {
+            "icon": "🎨",
+            "text": "Nền navy, card slate tối, 'Việt' đổi trắng — đúng nhánh DARK",
+            "sentence": 2
+          },
+          {
+            "icon": "🔴",
+            "text": "'Super' vẫn đỏ — brand không có nhánh dark, giữ nguyên",
+            "sentence": 3
+          },
+          {
+            "icon": "🧧",
+            "text": "Không phải ảnh Tết — bật cả 2 cùng lúc, nền vẫn vàng kem",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep43/scene-11-0-14059757.wav",
+          "startFrame": 0,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep43/scene-11-1-393869d5.wav",
+          "startFrame": 186,
+          "durationInFrames": 267
+        },
+        {
+          "file": "audio/ep43/scene-11-2-ded876bf.wav",
+          "startFrame": 461,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep43/scene-11-3-471c14a7.wav",
+          "startFrame": 729,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep43/scene-11-4-50e74156.wav",
+          "startFrame": 917,
+          "durationInFrames": 200
+        }
+      ],
+      "durationInFrames": 1135
+    },
+    {
+      "id": "scene-12",
+      "type": "concept",
+      "visual": {
+        "title": "So găng #6: dark: rải khắp vs 1 chỗ trong token",
+        "bullets": [
+          {
+            "icon": "🧩",
+            "text": "Tailwind: prefix dark: rải khắp mọi component dùng đến",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "StyleX: khai [DARK] đúng 1 lần trong token, mọi nơi tự có",
+            "sentence": 1
+          },
+          {
+            "icon": "🧱",
+            "text": "Theme runtime kiểu Tết ở Tailwind: phải tự dựng CSS var/config",
+            "sentence": 2
+          },
+          {
+            "icon": "⚙️",
+            "text": "Tailwind không cần build riêng cho token; StyleX cần compile lại",
+            "sentence": 3
+          },
+          {
+            "icon": "⚖️",
+            "text": "StyleX gói dark+theme vào 2 file nhỏ, có kiểu, last-wins rõ",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep43/scene-12-0-01cbac17.wav",
+          "startFrame": 0,
+          "durationInFrames": 272
+        },
+        {
+          "file": "audio/ep43/scene-12-1-f61337e3.wav",
+          "startFrame": 280,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep43/scene-12-2-ad7ca9b1.wav",
+          "startFrame": 519,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep43/scene-12-3-6e403d64.wav",
+          "startFrame": 755,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep43/scene-12-4-cd5527b3.wav",
+          "startFrame": 946,
+          "durationInFrames": 202
+        }
+      ],
+      "durationInFrames": 1166
+    },
+    {
+      "id": "scene-13",
+      "type": "outro",
+      "visual": {
+        "title": "StyleX Tập 5/6 xong — cả xưởng đã có màu riêng 🧧",
+        "summary": [
+          {
+            "text": "tokens.stylex.ts: bảng màu duy nhất, dark mode sẵn trong token",
+            "sentence": 0
+          },
+          {
+            "text": "themes.ts: theme Tết override 4 biến, còn lại fallback defineVars",
+            "sentence": 1
+          },
+          {
+            "text": "Override phẳng thắng @media gốc — theme Tết luôn sáng, chủ đích",
+            "sentence": 2
+          }
+        ],
+        "next": "Tập 6: so găng trực diện Tailwind vs StyleX"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep43/scene-13-0-be12aa32.wav",
+          "startFrame": 0,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep43/scene-13-1-1c2416c3.wav",
+          "startFrame": 212,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep43/scene-13-2-b8d8bf18.wav",
+          "startFrame": 456,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep43/scene-13-3-afeb7f4a.wav",
+          "startFrame": 661,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep43/scene-13-4-15017b6f.wav",
+          "startFrame": 897,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep43/scene-13-5-922eef35.wav",
+          "startFrame": 1088,
+          "durationInFrames": 382
+        }
+      ],
+      "durationInFrames": 1488
+    }
+  ]
+}

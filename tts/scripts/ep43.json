@@ -1,0 +1,519 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tập 4 khép lại với lời hứa Tập 5 học theming — hôm nay ta tô màu cho cả cái xưởng, không may thêm áo nào mới.",
+      "Nhân vật chính: 2 file tokens.stylex.ts (bảng màu thương hiệu) và themes.ts (bộ sưu tập theo mùa) — đúng ẩn dụ series.",
+      "defineVars định nghĩa màu sắc dùng chung toàn app; createTheme tạo ra một bộ sưu tập màu khác, đổi cả xưởng chỉ bằng 1 import.",
+      "Điểm đặc biệt tập này: dark mode nằm SẴN trong token — không cần sửa 1 dòng nào ở Hero, Button hay Pricing.",
+      "Và có cả theme Tết — đổi màu toàn bộ app sang vàng kem, đỏ gạch chỉ bằng 1 theme mới, xem ngay sau đây."
+    ],
+    "visual": {
+      "title": "Theming: token thương hiệu và theme Tết",
+      "subtitle": "StyleX từ A đến Z · Tập 5/6",
+      "badge": "Series StyleX · defineVars & createTheme"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "defineVars() định nghĩa toàn bộ bảng màu thương hiệu ở đúng 1 chỗ — không rải màu hex khắp các file component như trước.",
+      "Trước đây Hero, Button, Pricing mỗi file có thể tự viết màu riêng — giờ tất cả import chung từ tokens.stylex.ts, đổi 1 chỗ là đổi khắp app.",
+      "Gotcha thật: file định nghĩa token BẮT BUỘC có đuôi .stylex.ts hoặc .stylex.js — quy ước riêng của @stylexjs/babel-plugin, sai là lỗi compile ngay.",
+      "Đây chính là 'bảng màu thương hiệu' trong ẩn dụ series: xưởng may đo giờ có 1 bảng màu chuẩn, mọi đồng phục đều lấy màu từ đó.",
+      "Xem file thật ngay sau đây — tokens.stylex.ts của ViệtSuper, toàn bộ chỉ 17 dòng."
+    ],
+    "visual": {
+      "title": "defineVars: bảng màu thương hiệu ở 1 chỗ",
+      "bullets": [
+        {
+          "icon": "🎨",
+          "text": "1 chỗ duy nhất định nghĩa toàn bộ bảng màu thương hiệu",
+          "sentence": 0
+        },
+        {
+          "icon": "🔗",
+          "text": "Mọi component import chung — đổi 1 chỗ, đổi khắp app",
+          "sentence": 1
+        },
+        {
+          "icon": "📛",
+          "text": "Gotcha: file token BẮT BUỘC đuôi .stylex.ts/.stylex.js",
+          "sentence": 2
+        },
+        {
+          "icon": "🧵",
+          "text": "Ẩn dụ: xưởng may đo có 1 bảng màu chuẩn cho mọi đồng phục",
+          "sentence": 3
+        },
+        {
+          "icon": "📄",
+          "text": "tokens.stylex.ts thật của ViệtSuper — chỉ 17 dòng, xem ngay",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là tokens.stylex.ts toàn bộ file — 6 biến brand, brandDark, bg, surface, text, textMuted, định nghĩa bằng stylex.defineVars().",
+      "Comment đầu file nhắc đúng gotcha vừa nói: đuôi .stylex.ts là bắt buộc, không phải tùy chọn đặt tên cho đẹp.",
+      "brand và brandDark là giá trị ĐƠN — 1 màu cho mọi hoàn cảnh, không đổi theo sáng tối.",
+      "bg, surface, text, textMuted lại có dạng {default, [DARK]} — 2 giá trị cho 2 chế độ, DARK là hằng số '@media (prefers-color-scheme: dark)'.",
+      "Đây chính là điểm quan trọng nhất tập này: dark mode nằm ngay trong token, không phải thêm class dark ở từng component."
+    ],
+    "visual": {
+      "filename": "src/tokens.stylex.ts",
+      "language": "typescript",
+      "code": "import * as stylex from '@stylexjs/stylex'\n\n// Lưu ý: file định nghĩa biến (defineVars) BẮT BUỘC có đuôi .stylex.ts\n// (hoặc .stylex.js) — đây là quy ước thật của @stylexjs/babel-plugin, không\n// tuân theo sẽ lỗi compile \"Could not resolve the path to the imported\n// file... Please ensure that the theme file has a .stylex.js or .stylex.ts\n// extension\" khi file khác import `tokens` này.\nconst DARK = '@media (prefers-color-scheme: dark)'\n\nexport const tokens = stylex.defineVars({\n  brand: '#ea2845',\n  brandDark: '#c81e3a',\n  bg: { default: '#fff7f5', [DARK]: '#0f172a' },\n  surface: { default: '#ffffff', [DARK]: '#1e293b' },\n  text: { default: '#111827', [DARK]: '#f1f5f9' },\n  textMuted: { default: '#6b7280', [DARK]: '#94a3b8' },\n})",
+      "steps": [
+        {
+          "from": 1,
+          "to": 17,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 7,
+          "sentence": 1
+        },
+        {
+          "from": 11,
+          "to": 12,
+          "sentence": 2
+        },
+        {
+          "from": 8,
+          "to": 16,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 17,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "browser",
+    "narration": [
+      "Đây là trang mặc định — trang ta vẫn thấy từ đầu series, chưa áp theme nào, chưa bật dark mode.",
+      "Nền hồng nhạt, chữ 'Super' đỏ brand — toàn bộ màu ở đây đọc thẳng từ token bg, brand vừa xem trong tokens.stylex.ts.",
+      "Chưa có gì đổi ở bước này — đây là điểm xuất phát để so sánh với theme Tết và dark mode ngay sau đây.",
+      "Giữ hình ảnh này trong đầu — 2 ảnh tiếp theo sẽ đổi màu hoàn toàn chỉ bằng token và theme, không sửa component nào."
+    ],
+    "visual": {
+      "title": "Trang mặc định — điểm xuất phát",
+      "shots": [
+        {
+          "src": "screens/ep43/web-theme-default.png",
+          "sentence": 0
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🖥️",
+          "text": "Trang ta vẫn thấy từ đầu series — chưa theme, chưa dark",
+          "sentence": 0
+        },
+        {
+          "icon": "🎨",
+          "text": "Nền hồng nhạt, 'Super' đỏ brand — đọc từ tokens.bg/brand",
+          "sentence": 1
+        },
+        {
+          "icon": "🚦",
+          "text": "Điểm xuất phát để so sánh với Tết và dark ngay sau đây",
+          "sentence": 2
+        },
+        {
+          "icon": "🔁",
+          "text": "2 ảnh tiếp theo đổi màu hoàn toàn — không sửa component",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "App.tsx định nghĩa styles.page — page đọc màu từ tokens.bg và tokens.text, không viết hex trực tiếp trong component.",
+      "minHeight 100vh, backgroundColor tokens.bg, color tokens.text, fontFamily hệ thống — đúng 4 dòng, không có gì phức tạp.",
+      "Vì page dùng tokens.bg thay vì hex cứng, khi hệ điều hành bật dark mode, biến CSS đổi giá trị — page tự đổi màu theo.",
+      "Đây là hệ quả trực tiếp của việc để dark mode nằm trong token — component chỉ cần tham chiếu đúng biến, phần còn lại token lo hết.",
+      "Không 1 dòng nào trong Hero, Button hay Pricing phải viết lại để có dark mode — tất cả đã tự động nhờ tokens.stylex.ts."
+    ],
+    "visual": {
+      "filename": "src/App.tsx (styles.page)",
+      "language": "tsx",
+      "code": "const styles = stylex.create({\n  page: {\n    minHeight: '100vh',\n    backgroundColor: tokens.bg,\n    color: tokens.text,\n    fontFamily: 'system-ui, sans-serif',\n  },",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 6,
+          "sentence": 1
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Đây là nơi App.tsx đọc theme từ URL — themeParam lấy tham số ?theme= trên thanh địa chỉ, ví dụ ?theme=tet.",
+      "stylex.props(themeParam === 'tet' && tet, styles.page) — đúng cú pháp conditional && đã học Tập 3, tet là falsy khi không phải trang Tết.",
+      "tet đứng TRƯỚC styles.page trong props() — nhưng tet là 1 THEME, không phải style thường, nên cơ chế hoạt động hơi khác 1 chút.",
+      "Theme ghi đè GIÁ TRỊ BIẾN cho toàn bộ phần tử con — không ghi đè property CSS trực tiếp như style thường, nhưng vẫn theo luật last-wins nếu áp nhiều theme.",
+      "Chỉ 1 dòng code này quyết định cả trang đổi màu theo Tết hay giữ nguyên mặc định — xem themes.ts để biết theme Tết override gì."
+    ],
+    "visual": {
+      "filename": "src/App.tsx (themeParam)",
+      "language": "tsx",
+      "code": "export default function App() {\n  const themeParam = new URLSearchParams(window.location.search).get('theme')\n  return (\n    <div {...stylex.props(themeParam === 'tet' && tet, styles.page)}>",
+      "steps": [
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 0
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 2
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Đây là themes.ts toàn bộ file — createTheme(tokens, {...}) tạo ra 1 theme tên là tet.",
+      "Chỉ override ĐÚNG 4 biến: bg vàng kem, surface trắng ngà, brand đỏ gạch, brandDark đỏ đậm hơn.",
+      "Chú ý: bg vốn có dạng {default, [DARK]} trong tokens.stylex.ts, nhưng ở đây override bằng 1 GIÁ TRỊ PHẲNG — không cần khai lại default/DARK.",
+      "text và textMuted KHÔNG xuất hiện trong theme Tết — đây là điểm dạy quan trọng nhất tập này, xem tiếp ngay sau.",
+      "createTheme không bắt buộc override đủ mọi biến — biến nào bỏ qua sẽ dùng nguyên giá trị gốc từ defineVars."
+    ],
+    "visual": {
+      "filename": "src/themes.ts",
+      "language": "typescript",
+      "code": "import * as stylex from '@stylexjs/stylex'\nimport { tokens } from './tokens.stylex'\n\n// Theme Tết: nền vàng kem, brand đỏ gạch — không override text/textMuted,\n// fallback về giá trị mặc định trong defineVars (điểm dạy ep43).\nexport const tet = stylex.createTheme(tokens, {\n  bg: '#fff8e1',\n  surface: '#fffdf5',\n  brand: '#d4380d',\n  brandDark: '#ad2102',\n})",
+      "steps": [
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 0
+        },
+        {
+          "from": 7,
+          "to": 10,
+          "sentence": 1
+        },
+        {
+          "from": 7,
+          "to": 7,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 3
+        },
+        {
+          "from": 6,
+          "to": 11,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "concept",
+    "narration": [
+      "text và textMuted không có trong theme Tết — nghĩa là chúng FALLBACK về đúng giá trị mặc định khai trong tokens.stylex.ts.",
+      "Cụ thể: text vẫn là {default: đen, DARK: trắng} như tokens gốc — theme Tết không đụng vào, không cần override thứ không muốn đổi.",
+      "Đây là lợi ích thật của việc tách bảng màu thành 1 nơi: viết theme mới chỉ cần liệt kê ĐIỂM KHÁC, phần giống nhau tự kế thừa.",
+      "Nếu dùng hex rải rác ở từng component như trước khi có token, muốn làm theme Tết phải sửa lại từng file — giờ chỉ cần 1 file 10 dòng.",
+      "Ẩn dụ: bộ sưu tập theo mùa không may lại toàn bộ đồng phục — chỉ đổi đúng những mảnh vải cần đổi màu."
+    ],
+    "visual": {
+      "title": "Fallback: không override = giữ nguyên defineVars",
+      "bullets": [
+        {
+          "icon": "↩️",
+          "text": "text/textMuted không có trong theme Tết → fallback về defineVars",
+          "sentence": 0
+        },
+        {
+          "icon": "🌗",
+          "text": "text vẫn {default: đen, DARK: trắng} như tokens gốc, không đổi",
+          "sentence": 1
+        },
+        {
+          "icon": "✂️",
+          "text": "Theme mới chỉ liệt kê ĐIỂM KHÁC — phần giống tự kế thừa",
+          "sentence": 2
+        },
+        {
+          "icon": "🗂️",
+          "text": "Không có token: phải sửa từng file; có token: 1 file 10 dòng",
+          "sentence": 3
+        },
+        {
+          "icon": "🧵",
+          "text": "Bộ sưu tập theo mùa: chỉ đổi mảnh vải cần đổi, không may lại hết",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "browser",
+    "narration": [
+      "Đây là trang khi thêm ?theme=tet vào URL — cùng 1 trang App.tsx, không sửa component nào, chỉ đổi theme.",
+      "Nền đổi từ hồng nhạt sang VÀNG KEM, chữ 'Super' và nút CTA đổi từ đỏ hồng sang ĐỎ GẠCH — đúng 4 biến vừa override.",
+      "Card vẫn nền trắng ngà hơi khác sắc với nền — đúng giá trị surface trong theme Tết, không phải trắng tinh của tokens gốc.",
+      "Chữ 'Việt' và toàn bộ text mô tả vẫn giữ nguyên màu đen — vì text không bị theme Tết override, đúng dự đoán fallback vừa học.",
+      "1 theme, 4 biến, đổi cả trang — đây là sức mạnh thật của việc tách bảng màu thành token ngay từ đầu series."
+    ],
+    "visual": {
+      "title": "?theme=tet — 1 theme, đổi cả trang",
+      "shots": [
+        {
+          "src": "screens/ep43/web-theme-tet.png",
+          "sentence": 0
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🧧",
+          "text": "?theme=tet — không sửa component nào, chỉ đổi theme",
+          "sentence": 0
+        },
+        {
+          "icon": "🎨",
+          "text": "Nền vàng kem, 'Super' và CTA đổi sang đỏ gạch — đúng 4 biến",
+          "sentence": 1
+        },
+        {
+          "icon": "🃏",
+          "text": "Card trắng ngà (surface) khác sắc với nền — đúng theme Tết",
+          "sentence": 2
+        },
+        {
+          "icon": "⚫",
+          "text": "Text vẫn đen — không bị override, đúng fallback vừa học",
+          "sentence": 3
+        },
+        {
+          "icon": "💪",
+          "text": "1 theme, 4 biến, đổi cả trang — sức mạnh của token hoá màu",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "concept",
+    "narration": [
+      "Câu hỏi quan trọng: nếu bật dark mode hệ điều hành TRONG LÚC đang xem theme Tết, trang có đổi sang tối không?",
+      "Câu trả lời: KHÔNG — theme Tết LUÔN sáng, bất kể system đang dark hay light, đây là hành vi CHỦ ĐÍCH, không phải thiếu sót.",
+      "Lý do: tet override bg/brand bằng GIÁ TRỊ PHẲNG, không có nhánh DARK riêng — giá trị phẳng này THẮNG TUYỆT ĐỐI so với @media gốc trong token.",
+      "Muốn theme Tết cũng đổi theo dark, phải tự khai {default, [DARK]} ngay trong createTheme — mặc định phẳng sẽ luôn thắng @media gốc.",
+      "Thiết kế demo cố ý để Tết là 'mùa cố định sắc thái' — không theo system dark — nhưng text/textMuted không bị override thì vẫn đổi theo dark bình thường."
+    ],
+    "visual": {
+      "title": "Beat: override phẳng thắng cả @media gốc",
+      "bullets": [
+        {
+          "icon": "❓",
+          "text": "Bật dark mode lúc đang xem theme Tết — trang có tối theo không?",
+          "sentence": 0
+        },
+        {
+          "icon": "🚫",
+          "text": "KHÔNG — theme Tết luôn sáng, hành vi CHỦ ĐÍCH không phải lỗi",
+          "sentence": 1
+        },
+        {
+          "icon": "🏳️",
+          "text": "Giá trị phẳng không nhánh DARK — thắng tuyệt đối @media gốc",
+          "sentence": 2
+        },
+        {
+          "icon": "🔧",
+          "text": "Muốn theo dark: phải tự khai {default, [DARK]} trong createTheme",
+          "sentence": 3
+        },
+        {
+          "icon": "🎊",
+          "text": "Tết là 'mùa cố định sắc thái' — text/textMuted vẫn đổi dark bình thường",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "browser",
+    "narration": [
+      "Đây là trang khi trình duyệt THẬT SỰ đánh giá prefers-color-scheme là dark — không phải ảnh vẽ minh hoạ hay giả lập.",
+      "Cách chụp: ép thẳng qua Chrome DevTools Protocol, gọi Emulation.setEmulatedMedia trước khi tải trang — đúng cơ chế Puppeteer/Playwright dùng để test dark mode.",
+      "Nền chuyển navy đậm, card slate tối, chữ 'Việt' đổi sang TRẮNG — đúng nhánh DARK khai trong tokens.stylex.ts cho bg/surface/text.",
+      "Chữ 'Super' vẫn giữ màu ĐỎ — vì brand không có nhánh dark trong token gốc, y hệt cả sáng lẫn tối, đúng thiết kế ban đầu.",
+      "Đây KHÔNG phải ảnh chụp lúc bật theme Tết — nếu bật cả Tết lẫn dark cùng lúc, nền vẫn vàng kem như ảnh trước, đúng beat flat-override vừa học."
+    ],
+    "visual": {
+      "title": "Dark mode thật — chụp qua DevTools Protocol",
+      "shots": [
+        {
+          "src": "screens/ep43/web-dark-tokens.png",
+          "sentence": 0
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🌙",
+          "text": "Trình duyệt THẬT đánh giá dark — không phải ảnh giả lập",
+          "sentence": 0
+        },
+        {
+          "icon": "🛠️",
+          "text": "Chụp bằng CDP Emulation.setEmulatedMedia — chuẩn Puppeteer/Playwright",
+          "sentence": 1
+        },
+        {
+          "icon": "🎨",
+          "text": "Nền navy, card slate tối, 'Việt' đổi trắng — đúng nhánh DARK",
+          "sentence": 2
+        },
+        {
+          "icon": "🔴",
+          "text": "'Super' vẫn đỏ — brand không có nhánh dark, giữ nguyên",
+          "sentence": 3
+        },
+        {
+          "icon": "🧧",
+          "text": "Không phải ảnh Tết — bật cả 2 cùng lúc, nền vẫn vàng kem",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-12",
+    "type": "concept",
+    "narration": [
+      "Bên Tailwind, dark mode viết bằng prefix dark: rải khắp mọi component — dark:bg-slate-900, dark:text-white lặp lại ở từng file dùng đến.",
+      "StyleX chỉ cần khai [DARK] ĐÚNG 1 LẦN trong tokens.stylex.ts — mọi component đọc token đều tự động có dark, không lặp code.",
+      "Muốn theme runtime kiểu Tết trong Tailwind, phải tự dựng CSS variable riêng hoặc cấu hình theme phức tạp — Tailwind không có createTheme built-in.",
+      "Đổi lại, Tailwind không cần build-step riêng cho token — sửa file config là thấy ngay, StyleX cần compile lại mỗi lần đổi token.",
+      "Cả hai đều làm được theming — khác nhau ở chỗ StyleX gói gọn dark mode và theme vào đúng 2 file nhỏ, có kiểu, có luật last-wins rõ ràng."
+    ],
+    "visual": {
+      "title": "So găng #6: dark: rải khắp vs 1 chỗ trong token",
+      "bullets": [
+        {
+          "icon": "🧩",
+          "text": "Tailwind: prefix dark: rải khắp mọi component dùng đến",
+          "sentence": 0
+        },
+        {
+          "icon": "1️⃣",
+          "text": "StyleX: khai [DARK] đúng 1 lần trong token, mọi nơi tự có",
+          "sentence": 1
+        },
+        {
+          "icon": "🧱",
+          "text": "Theme runtime kiểu Tết ở Tailwind: phải tự dựng CSS var/config",
+          "sentence": 2
+        },
+        {
+          "icon": "⚙️",
+          "text": "Tailwind không cần build riêng cho token; StyleX cần compile lại",
+          "sentence": 3
+        },
+        {
+          "icon": "⚖️",
+          "text": "StyleX gói dark+theme vào 2 file nhỏ, có kiểu, last-wins rõ",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-13",
+    "type": "outro",
+    "narration": [
+      "Tổng kết Tập 5: tokens.stylex.ts là bảng màu thương hiệu duy nhất, dark mode nằm sẵn trong token nhờ {default, [DARK]}.",
+      "themes.ts tạo theme Tết chỉ override 4 biến — text/textMuted fallback về defineVars, áp bằng đúng 1 dòng props(tet, styles.page).",
+      "Đã học beat quan trọng: override phẳng trong theme thắng tuyệt đối @media gốc — theme Tết luôn sáng, chủ đích chứ không phải lỗi.",
+      "So Tailwind: dark: prefix rải khắp component vs 1 chỗ trong token; theme runtime Tailwind cần tự dựng, StyleX có createTheme built-in.",
+      "Tập 6 — tập cuối: so găng trực diện Tailwind vs StyleX, cùng 1 Button, cùng 1 giao diện, đo cả kích thước CSS thật.",
+      "Mã nguồn ở repo github.com/Leung190299/nestjs-tutorial-series — thư mục demo-stylex, tag stylex-tap-5. Cảm ơn đã xem hết Tập 5, hẹn gặp lại Tập 6."
+    ],
+    "visual": {
+      "title": "StyleX Tập 5/6 xong — cả xưởng đã có màu riêng 🧧",
+      "summary": [
+        {
+          "text": "tokens.stylex.ts: bảng màu duy nhất, dark mode sẵn trong token",
+          "sentence": 0
+        },
+        {
+          "text": "themes.ts: theme Tết override 4 biến, còn lại fallback defineVars",
+          "sentence": 1
+        },
+        {
+          "text": "Override phẳng thắng @media gốc — theme Tết luôn sáng, chủ đích",
+          "sentence": 2
+        }
+      ],
+      "next": "Tập 6: so găng trực diện Tailwind vs StyleX"
+    }
+  }
+]

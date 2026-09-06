@@ -45,6 +45,7 @@ import ep39 from './data/ep39.timing.json';
 import ep40 from './data/ep40.timing.json';
 import ep41 from './data/ep41.timing.json';
 import ep42 from './data/ep42.timing.json';
+import ep43 from './data/ep43.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -90,6 +91,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode40', timing: ep40 as unknown as EpisodeTiming},
   {id: 'Episode41', timing: ep41 as unknown as EpisodeTiming},
   {id: 'Episode42', timing: ep42 as unknown as EpisodeTiming},
+  {id: 'Episode43', timing: ep43 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -599,6 +601,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/ep42/web-pricing.png',
       badgeEmoji: '🎟️',
+      seriesTag: 'StyleX từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb43',
+    props: {
+      badge: 'STYLEX 5/6',
+      line1: 'TOKEN, DARK MODE',
+      line2: 'VÀ THEME TẾT',
+      subtitle: 'defineVars, createTheme & flat-override',
+      variant: 'shot',
+      image: 'screens/ep43/web-theme-tet.png',
+      badgeEmoji: '🧧',
       seriesTag: 'StyleX từ A đến Z 🇻🇳',
     },
   },
