@@ -1,0 +1,745 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "So găng trực diện: Tailwind vs StyleX",
+        "subtitle": "StyleX từ A đến Z · Tập 6/6",
+        "badge": "Series StyleX · Tập cuối"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-01-0-ac893555.wav",
+          "startFrame": 0,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep44/scene-01-1-1b0e41c7.wav",
+          "startFrame": 160,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep44/scene-01-2-146bf54c.wav",
+          "startFrame": 360,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep44/scene-01-3-0ce11853.wav",
+          "startFrame": 565,
+          "durationInFrames": 204
+        }
+      ],
+      "durationInFrames": 787
+    },
+    {
+      "id": "scene-02",
+      "type": "browser",
+      "visual": {
+        "title": "Cùng một Button — hai cách viết",
+        "shots": [
+          {
+            "src": "screens/ep44/web-stylex-side.png",
+            "sentence": 1,
+            "label": "StyleX"
+          },
+          {
+            "src": "screens/ep44/web-tailwind-side.png",
+            "sentence": 2,
+            "label": "Tailwind",
+            "url": "localhost:5198 — Tailwind"
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-02-0-cc64b931.wav",
+          "startFrame": 0,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep44/scene-02-1-e9254d38.wav",
+          "startFrame": 210,
+          "durationInFrames": 339
+        },
+        {
+          "file": "audio/ep44/scene-02-2-4c81f469.wav",
+          "startFrame": 557,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep44/scene-02-3-8a64c266.wav",
+          "startFrame": 767,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep44/scene-02-4-e9a6f43b.wav",
+          "startFrame": 939,
+          "durationInFrames": 332
+        }
+      ],
+      "durationInFrames": 1289
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "vietsuper-web/src/components/Button.tsx",
+        "language": "tsx",
+        "code": "type Props = {\n  variant?: 'primary' | 'ghost' | 'danger';\n  size?: 'md' | 'lg';\n  style?: StyleXStyles;\n  children: React.ReactNode;\n};",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 2
+          },
+          {
+            "from": 2,
+            "to": 3,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-03-0-19cc747f.wav",
+          "startFrame": 0,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep44/scene-03-1-33a088ec.wav",
+          "startFrame": 100,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep44/scene-03-2-13467cdf.wav",
+          "startFrame": 344,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep44/scene-03-3-2ce743e5.wav",
+          "startFrame": 504,
+          "durationInFrames": 159
+        }
+      ],
+      "durationInFrames": 681
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "compare-tailwind/src/Button.tsx",
+        "language": "tsx",
+        "code": "type Props = {\n  variant?: 'primary' | 'ghost' | 'danger'\n  size?: 'md' | 'lg'\n  className?: string\n  children: React.ReactNode\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 4,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-04-0-4a36d690.wav",
+          "startFrame": 0,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep44/scene-04-1-4ce3c093.wav",
+          "startFrame": 121,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep44/scene-04-2-a75014bc.wav",
+          "startFrame": 295,
+          "durationInFrames": 279
+        },
+        {
+          "file": "audio/ep44/scene-04-3-e79cd8ca.wav",
+          "startFrame": 582,
+          "durationInFrames": 176
+        }
+      ],
+      "durationInFrames": 776
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "className: chuỗi dài vs object có kiểu",
+        "bullets": [
+          {
+            "icon": "🔤",
+            "text": "Tailwind — className dài nhất đo được: 187 ký tự (nút Ghost, size md)",
+            "sentence": 0
+          },
+          {
+            "icon": "🧩",
+            "text": "StyleX — cùng nút, vài atomic class hash ngắn (~8-9 ký tự/class)",
+            "sentence": 1
+          },
+          {
+            "icon": "🔬",
+            "text": "Số đo trên demo nhỏ này — không phải kết luận chung cho mọi dự án",
+            "sentence": 2
+          },
+          {
+            "icon": "⚖️",
+            "text": "Cả hai đều atomic CSS — khác ở nơi 'lộ ra': className hay compiler",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-05-0-8eee8b2f.wav",
+          "startFrame": 0,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep44/scene-05-1-832d0088.wav",
+          "startFrame": 198,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep44/scene-05-2-443752d2.wav",
+          "startFrame": 406,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep44/scene-05-3-29ef6972.wav",
+          "startFrame": 599,
+          "durationInFrames": 257
+        },
+        {
+          "file": "audio/ep44/scene-05-4-9fbcca70.wav",
+          "startFrame": 864,
+          "durationInFrames": 216
+        }
+      ],
+      "durationInFrames": 1098
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "vietsuper-web/src/components/Button.tsx",
+        "language": "tsx",
+        "code": "  primary: {\n    color: 'white',\n    backgroundColor: {default: tokens.brand, ':hover': tokens.brandDark},\n  },\n  ghost: {\n    color: tokens.brand,\n    backgroundColor: {default: 'transparent', ':hover': 'rgba(234,40,69,0.08)'},\n    borderStyle: 'solid',\n    borderWidth: 2,\n    borderColor: tokens.brand,\n  },\n  danger: {\n    color: 'white',\n    backgroundColor: {default: '#b91c1c', ':hover': '#7f1d1d'},\n  },",
+        "steps": [
+          {
+            "from": 1,
+            "to": 15,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 12,
+            "to": 15,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-06-0-5b3118c8.wav",
+          "startFrame": 0,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep44/scene-06-1-fdc34cdb.wav",
+          "startFrame": 131,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep44/scene-06-2-b892b3d8.wav",
+          "startFrame": 279,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep44/scene-06-3-65c00e63.wav",
+          "startFrame": 475,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep44/scene-06-4-4ffd75a7.wav",
+          "startFrame": 661,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 876
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "compare-tailwind/src/Button.tsx",
+        "language": "tsx",
+        "code": "  const variantClass =\n    variant === 'primary'\n      ? 'text-white bg-[#ea2845] hover:bg-[#c81e3a]'\n      : variant === 'ghost'\n        ? 'text-[#ea2845] bg-transparent hover:bg-[#ea2845]/10 border-2 border-solid border-[#ea2845]'\n        : 'text-white bg-[#b91c1c] hover:bg-[#7f1d1d]'\n\n  return (\n    <button className={`${base} ${sizeClass} ${variantClass} ${className}`.trim()}>\n      {children}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 8,
+            "to": 9,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-07-0-e782f881.wav",
+          "startFrame": 0,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep44/scene-07-1-4d90ecff.wav",
+          "startFrame": 160,
+          "durationInFrames": 300
+        },
+        {
+          "file": "audio/ep44/scene-07-2-8790dec7.wav",
+          "startFrame": 468,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep44/scene-07-3-88a2411d.wav",
+          "startFrame": 695,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 901
+    },
+    {
+      "id": "scene-08",
+      "type": "concept",
+      "visual": {
+        "title": "CSS bundle: đo thật trên demo nhỏ",
+        "bullets": [
+          {
+            "icon": "📦",
+            "text": "StyleX 4.41 kB vs Tailwind 12.26 kB — CSS production thật",
+            "sentence": 0
+          },
+          {
+            "icon": "🧯",
+            "text": "Chênh lệch chủ yếu do preflight — CSS reset Tailwind tự thêm",
+            "sentence": 1
+          },
+          {
+            "icon": "🌳",
+            "text": "Tailwind v4 tree-shake tốt — không phải cả framework bung ra",
+            "sentence": 2
+          },
+          {
+            "icon": "🔬",
+            "text": "Demo nhỏ, không phải kết luận tổng quát cho mọi project",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-08-0-0ab5921a.wav",
+          "startFrame": 0,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep44/scene-08-1-a26105fa.wav",
+          "startFrame": 234,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep44/scene-08-2-fafcf500.wav",
+          "startFrame": 444,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep44/scene-08-3-3be8eb74.wav",
+          "startFrame": 620,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep44/scene-08-4-aa2f3bde.wav",
+          "startFrame": 825,
+          "durationInFrames": 236
+        }
+      ],
+      "durationInFrames": 1079
+    },
+    {
+      "id": "scene-09",
+      "type": "concept",
+      "visual": {
+        "title": "Giá trị động: CSS Variable, không phải ngoại lệ",
+        "bullets": [
+          {
+            "icon": "🎛️",
+            "text": "width/props số động → compiler tạo CSS Variable, không phá vỡ static",
+            "sentence": 1
+          },
+          {
+            "icon": "⚡",
+            "text": "Style tĩnh: 0 chi phí runtime. Style động: chi phí nhỏ nhất có thể",
+            "sentence": 2
+          },
+          {
+            "icon": "📌",
+            "text": "Series này không demo dynamic style — ghi nhận fact để dùng khi cần",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-09-0-b1a06d0c.wav",
+          "startFrame": 0,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep44/scene-09-1-e74ac58a.wav",
+          "startFrame": 222,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep44/scene-09-2-aa21480f.wav",
+          "startFrame": 475,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep44/scene-09-3-3bc57136.wav",
+          "startFrame": 707,
+          "durationInFrames": 209
+        }
+      ],
+      "durationInFrames": 934
+    },
+    {
+      "id": "scene-10",
+      "type": "concept",
+      "visual": {
+        "title": "Debug: className hash cần devtools",
+        "bullets": [
+          {
+            "icon": "🔍",
+            "text": "StyleX: className kiểu x1e2nbdu — không đọc được ý nghĩa bằng mắt",
+            "sentence": 1
+          },
+          {
+            "icon": "🧭",
+            "text": "Cần React DevTools hoặc source map StyleX để trace về style gốc",
+            "sentence": 2
+          },
+          {
+            "icon": "📖",
+            "text": "Tailwind: className đọc ra nghĩa ngay (bg-red-500) — đổi lại dài hơn",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-10-0-9bbb21d0.wav",
+          "startFrame": 0,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep44/scene-10-1-86901f29.wav",
+          "startFrame": 169,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep44/scene-10-2-89114260.wav",
+          "startFrame": 367,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep44/scene-10-3-3277d1ab.wav",
+          "startFrame": 570,
+          "durationInFrames": 214
+        }
+      ],
+      "durationInFrames": 802
+    },
+    {
+      "id": "scene-11",
+      "type": "concept",
+      "visual": {
+        "title": "Tailwind thắng khi nào",
+        "bullets": [
+          {
+            "icon": "⚡",
+            "text": "Prototype nhanh — className ngay trong JSX, không tách file style",
+            "sentence": 1
+          },
+          {
+            "icon": "🌍",
+            "text": "Ecosystem khổng lồ — plugin, template, cộng đồng đông đảo",
+            "sentence": 2
+          },
+          {
+            "icon": "🧯",
+            "text": "Không cần build-step phức tạp — chỉ 1 dòng import CSS",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-11-0-4134879a.wav",
+          "startFrame": 0,
+          "durationInFrames": 82
+        },
+        {
+          "file": "audio/ep44/scene-11-1-422ff06b.wav",
+          "startFrame": 90,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep44/scene-11-2-6964c716.wav",
+          "startFrame": 307,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep44/scene-11-3-04c3e755.wav",
+          "startFrame": 510,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep44/scene-11-4-28079a17.wav",
+          "startFrame": 708,
+          "durationInFrames": 183
+        }
+      ],
+      "durationInFrames": 909
+    },
+    {
+      "id": "scene-12",
+      "type": "concept",
+      "visual": {
+        "title": "StyleX thắng khi nào",
+        "bullets": [
+          {
+            "icon": "🛡️",
+            "text": "Type-safe thật — TypeScript soi object, không phải string tự do",
+            "sentence": 1
+          },
+          {
+            "icon": "🏗️",
+            "text": "Codebase lớn, nhiều người viết — deterministic, tránh xung đột style",
+            "sentence": 2
+          },
+          {
+            "icon": "📉",
+            "text": "Dedup triệt để — CSS bundle có xu hướng đạt plateau, không phình mãi",
+            "sentence": 3
+          },
+          {
+            "icon": "🎨",
+            "text": "Theming built-in mạnh — defineVars/createTheme xử lý cả dark + brand",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-12-0-abd90124.wav",
+          "startFrame": 0,
+          "durationInFrames": 82
+        },
+        {
+          "file": "audio/ep44/scene-12-1-5d3994a4.wav",
+          "startFrame": 90,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep44/scene-12-2-6cd01980.wav",
+          "startFrame": 290,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep44/scene-12-3-d3a11acd.wav",
+          "startFrame": 469,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep44/scene-12-4-bea75fd7.wav",
+          "startFrame": 648,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep44/scene-12-5-0307afb2.wav",
+          "startFrame": 824,
+          "durationInFrames": 183
+        }
+      ],
+      "durationInFrames": 1025
+    },
+    {
+      "id": "scene-13",
+      "type": "concept",
+      "visual": {
+        "title": "Cả hai đều atomic — khác ở cách viết",
+        "bullets": [
+          {
+            "icon": "⚛️",
+            "text": "Tailwind và StyleX đều atomic CSS — không phải 'atomic vs không'",
+            "sentence": 0
+          },
+          {
+            "icon": "✍️",
+            "text": "Khác ở CÁCH VIẾT + mức kiểm soát compiler, không phải công nghệ nền",
+            "sentence": 1
+          },
+          {
+            "icon": "🔢",
+            "text": "Vẫn v0.19, còn 0.x trên semver — dù Meta đã dùng production quy mô lớn",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-13-0-c2e7ea7e.wav",
+          "startFrame": 0,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep44/scene-13-1-acca988f.wav",
+          "startFrame": 253,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep44/scene-13-2-6f0d854a.wav",
+          "startFrame": 506,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep44/scene-13-3-ce246b6c.wav",
+          "startFrame": 726,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 932
+    },
+    {
+      "id": "scene-14",
+      "type": "outro",
+      "visual": {
+        "title": "StyleX 6/6 hoàn tất — cảm ơn bạn! 🏆",
+        "summary": [
+          {
+            "text": "6 tập: setup Vite → create/props → last-wins → cross-file → theming → so găng",
+            "sentence": 1
+          },
+          {
+            "text": "Repo + tag stylex-tap-1..6 = đúng code từng tập, checkout là thấy ngay",
+            "sentence": 2
+          },
+          {
+            "text": "3 series mobile khác đã có sẵn playlist trên kênh",
+            "sentence": 3
+          }
+        ],
+        "next": "Vote: Next.js + StyleX, hay chủ đề web khác? 🗳️"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep44/scene-14-0-b018359d.wav",
+          "startFrame": 0,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep44/scene-14-1-50464e32.wav",
+          "startFrame": 205,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep44/scene-14-2-54a7506b.wav",
+          "startFrame": 468,
+          "durationInFrames": 444
+        },
+        {
+          "file": "audio/ep44/scene-14-3-fce1d3a4.wav",
+          "startFrame": 920,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep44/scene-14-4-470cc5a7.wav",
+          "startFrame": 1087,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep44/scene-14-5-9ac64fca.wav",
+          "startFrame": 1328,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep44/scene-14-6-6b3d71e4.wav",
+          "startFrame": 1471,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 1669
+    }
+  ]
+}

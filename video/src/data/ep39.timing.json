@@ -1,0 +1,685 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "StyleX: đồ Meta may đo lúc build",
+        "subtitle": "StyleX từ A đến Z · Tập 1/6",
+        "badge": "Series MỚI · Vertical Web"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep39/scene-01-0-10484059.wav",
+          "startFrame": 0,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep39/scene-01-1-6b9f78f7.wav",
+          "startFrame": 239,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep39/scene-01-2-ab8a1d9d.wav",
+          "startFrame": 468,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep39/scene-01-3-19cf275d.wav",
+          "startFrame": 736,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep39/scene-01-4-1cfd26c5.wav",
+          "startFrame": 934,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 1132
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "StyleX là gì — và khác gì runtime CSS-in-JS",
+        "bullets": [
+          {
+            "icon": "🧩",
+            "text": "Inline dễ đọc nhưng chậm; CSS tĩnh nhanh nhưng ở xa, khó trace",
+            "sentence": 0
+          },
+          {
+            "icon": "🐢",
+            "text": "styled-components/Emotion: inject CSS lúc RUNTIME, tốn CPU",
+            "sentence": 1
+          },
+          {
+            "icon": "🏗️",
+            "text": "StyleX: biên dịch lúc BUILD — trình duyệt chỉ nhận CSS tĩnh",
+            "sentence": 2
+          },
+          {
+            "icon": "🧵",
+            "text": "Ẩn dụ series: style = ĐỒNG PHỤC, create() = XƯỞNG MAY ĐO",
+            "sentence": 3
+          },
+          {
+            "icon": "👕",
+            "text": "Tailwind = TỦ ĐỒ may sẵn, ghép tem — khác ai may, may lúc nào",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep39/scene-02-0-d937962f.wav",
+          "startFrame": 0,
+          "durationInFrames": 257
+        },
+        {
+          "file": "audio/ep39/scene-02-1-7ff8bc3f.wav",
+          "startFrame": 265,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep39/scene-02-2-9465a8f9.wav",
+          "startFrame": 509,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep39/scene-02-3-480b52db.wav",
+          "startFrame": 760,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/ep39/scene-02-4-c3ae1503.wav",
+          "startFrame": 1016,
+          "durationInFrames": 216
+        }
+      ],
+      "durationInFrames": 1250
+    },
+    {
+      "id": "scene-03",
+      "type": "concept",
+      "visual": {
+        "title": "Atomic CSS: 1 rule, 1 thuộc tính",
+        "bullets": [
+          {
+            "icon": "🔬",
+            "text": "1 rule CSS = ĐÚNG 1 thuộc tính (color:red riêng, padding riêng)",
+            "sentence": 0
+          },
+          {
+            "icon": "♻️",
+            "text": "10 component cùng color:red → chỉ 1 class dùng chung",
+            "sentence": 1
+          },
+          {
+            "icon": "📉",
+            "text": "CSS bundle đạt mức TRẦN — không phình theo số component",
+            "sentence": 2
+          },
+          {
+            "icon": "🛡️",
+            "text": "StyleX: object + create() — TypeScript soi từng thuộc tính",
+            "sentence": 3
+          },
+          {
+            "icon": "⚔️",
+            "text": "So găng #1: Tailwind string className vs object có kiểu",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep39/scene-03-0-ac6d5c83.wav",
+          "startFrame": 0,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep39/scene-03-1-43d4c3c4.wav",
+          "startFrame": 263,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep39/scene-03-2-e4035456.wav",
+          "startFrame": 504,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep39/scene-03-3-8048e5a8.wav",
+          "startFrame": 762,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep39/scene-03-4-021019e5.wav",
+          "startFrame": 998,
+          "durationInFrames": 279
+        }
+      ],
+      "durationInFrames": 1295
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "npm install 2 gói StyleX",
+        "commands": [
+          {
+            "cmd": "npm install --save @stylexjs/stylex",
+            "output": "added 1 package in 0.9s",
+            "sentence": 0
+          },
+          {
+            "cmd": "npm install --save-dev @stylexjs/unplugin",
+            "output": "added 1 package in 1.1s",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep39/scene-04-0-1079cc1b.wav",
+          "startFrame": 0,
+          "durationInFrames": 286
+        },
+        {
+          "file": "audio/ep39/scene-04-1-0001a64d.wav",
+          "startFrame": 294,
+          "durationInFrames": 305
+        },
+        {
+          "file": "audio/ep39/scene-04-2-fa982c4b.wav",
+          "startFrame": 607,
+          "durationInFrames": 245
+        }
+      ],
+      "durationInFrames": 870
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "GOTCHA 1: tsc -b báo đỏ",
+        "commands": [
+          {
+            "cmd": "npx tsc -b",
+            "output": "vite.config.ts(9,12): error TS2339: Property 'vite' does not exist on type\n  'typeof import(\".../@stylexjs/unplugin/lib/index\")'.",
+            "sentence": 0
+          },
+          {
+            "cmd": "npx tsc -b",
+            "output": "vite.config.ts(9,5): error TS2349: This expression is not callable.\n  Type 'typeof import(\".../@stylexjs/unplugin/lib/vite\")' has no call signatures.",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep39/scene-05-0-5c448ecd.wav",
+          "startFrame": 0,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep39/scene-05-1-65328d03.wav",
+          "startFrame": 282,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep39/scene-05-2-fbe6c57d.wav",
+          "startFrame": 545,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep39/scene-05-3-4930d137.wav",
+          "startFrame": 793,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep39/scene-05-4-b523f0bd.wav",
+          "startFrame": 1032,
+          "durationInFrames": 221
+        }
+      ],
+      "durationInFrames": 1271
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "vite.config.ts — TOÀN BỘ FILE",
+        "language": "tsx",
+        "code": "import { defineConfig } from 'vite'\nimport react from '@vitejs/plugin-react'\nimport stylexVite from '@stylexjs/unplugin/vite'\n\n// https://vite.dev/config/\nexport default defineConfig({\n  plugins: [\n    // StyleX plugin PHẢI đứng TRƯỚC react() trong mảng plugins.\n    stylexVite({\n      useCSSLayers: true,\n      dev: process.env.NODE_ENV === 'development',\n      runtimeInjection: false,\n    }),\n    react(),\n  ],\n})",
+        "steps": [
+          {
+            "from": 1,
+            "to": 16,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 15,
+            "sentence": 2
+          },
+          {
+            "from": 10,
+            "to": 12,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 16,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep39/scene-06-0-e5383cf9.wav",
+          "startFrame": 0,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep39/scene-06-1-5fcdccb6.wav",
+          "startFrame": 253,
+          "durationInFrames": 341
+        },
+        {
+          "file": "audio/ep39/scene-06-2-d963ef2a.wav",
+          "startFrame": 602,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep39/scene-06-3-64a21681.wav",
+          "startFrame": 802,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/ep39/scene-06-4-e6be461a.wav",
+          "startFrame": 1058,
+          "durationInFrames": 183
+        }
+      ],
+      "durationInFrames": 1259
+    },
+    {
+      "id": "scene-07",
+      "type": "code",
+      "visual": {
+        "filename": "src/stylex.css — TOÀN BỘ FILE",
+        "language": "css",
+        "code": "/*\n * CSS entrypoint cho @stylexjs/unplugin.\n * Không cần nội dung gì đặc biệt (không phải comment marker) — plugin\n * @stylexjs/unplugin sẽ tự \"aggregate\" CSS đã compile từ mọi file dùng\n * stylex.create()/defineVars() và APPEND vào file .css asset đầu tiên\n * mà Vite build ra. Vì đây là file .css duy nhất được import trong app,\n * nó sẽ được chọn làm target injection (xem README @stylexjs/unplugin,\n * hàm pickCssAssetFromRollupBundle — ưu tiên index.css/style.css, nếu\n * không có thì lấy asset .css đầu tiên).\n */",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 9,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep39/scene-07-0-4bc56d75.wav",
+          "startFrame": 0,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep39/scene-07-1-94cef53d.wav",
+          "startFrame": 236,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep39/scene-07-2-11b46fcd.wav",
+          "startFrame": 480,
+          "durationInFrames": 264
+        },
+        {
+          "file": "audio/ep39/scene-07-3-8ca78901.wav",
+          "startFrame": 752,
+          "durationInFrames": 178
+        }
+      ],
+      "durationInFrames": 948
+    },
+    {
+      "id": "scene-08",
+      "type": "code",
+      "visual": {
+        "filename": "src/tokens.stylex.ts (trích)",
+        "language": "tsx",
+        "code": "import * as stylex from '@stylexjs/stylex'\n\n// Lưu ý: file định nghĩa biến (defineVars) BẮT BUỘC có đuôi .stylex.ts\n// (hoặc .stylex.js) — đây là quy ước thật của @stylexjs/babel-plugin, không\n// tuân theo sẽ lỗi compile \"Could not resolve the path to the imported\n// file... Please ensure that the theme file has a .stylex.js or .stylex.ts\n// extension\" khi file khác import `tokens` này.\nconst DARK = '@media (prefers-color-scheme: dark)'\n\nexport const tokens = stylex.defineVars({\n  brand: '#ea2845',",
+        "steps": [
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep39/scene-08-0-f1a70251.wav",
+          "startFrame": 0,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep39/scene-08-1-6b0cb350.wav",
+          "startFrame": 263,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep39/scene-08-2-fabe304a.wav",
+          "startFrame": 495,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep39/scene-08-3-bca33dfd.wav",
+          "startFrame": 755,
+          "durationInFrames": 142
+        }
+      ],
+      "durationInFrames": 915
+    },
+    {
+      "id": "scene-09",
+      "type": "code",
+      "visual": {
+        "filename": "src/components/Hero.tsx (create)",
+        "language": "tsx",
+        "code": "import * as stylex from '@stylexjs/stylex'\nimport { tokens } from '../tokens.stylex'\n\nconst styles = stylex.create({\n  hero: {\n    padding: { default: '96px 48px', '@media (max-width: 720px)': '56px 20px' },\n    textAlign: 'center',\n  },\n  title: {\n    fontSize: { default: 56, '@media (max-width: 720px)': 36 },\n    fontWeight: 900,\n    margin: 0,\n    color: tokens.text,\n  },\n  brand: { color: tokens.brand },\n  tagline: { fontSize: 20, color: tokens.textMuted, marginTop: 16 },",
+        "steps": [
+          {
+            "from": 1,
+            "to": 16,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 13,
+            "to": 15,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 16,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep39/scene-09-0-680a3764.wav",
+          "startFrame": 0,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep39/scene-09-1-ee509693.wav",
+          "startFrame": 236,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep39/scene-09-2-ef1e32e3.wav",
+          "startFrame": 477,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep39/scene-09-3-05781419.wav",
+          "startFrame": 740,
+          "durationInFrames": 216
+        }
+      ],
+      "durationInFrames": 974
+    },
+    {
+      "id": "scene-10",
+      "type": "code",
+      "visual": {
+        "filename": "src/components/Hero.tsx (props)",
+        "language": "tsx",
+        "code": "export function Hero() {\n  return (\n    <header {...stylex.props(styles.hero)}>\n      <h1 {...stylex.props(styles.title)}>\n        Việt<span {...stylex.props(styles.brand)}>Super</span> 🇻🇳\n      </h1>\n      <p {...stylex.props(styles.tagline)}>Một app, mọi dịch vụ — giờ có mặt trên web.</p>\n      <button {...stylex.props(styles.cta)}>Dùng thử miễn phí</button>\n    </header>\n  )\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep39/scene-10-0-04722fa4.wav",
+          "startFrame": 0,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep39/scene-10-1-b92f01fe.wav",
+          "startFrame": 229,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep39/scene-10-2-ad8432d5.wav",
+          "startFrame": 427,
+          "durationInFrames": 219
+        }
+      ],
+      "durationInFrames": 664
+    },
+    {
+      "id": "scene-11",
+      "type": "browser",
+      "visual": {
+        "title": "Trang đầu tiên chạy StyleX",
+        "shots": [
+          {
+            "src": "screens/ep39/web-hero-first-style.png",
+            "sentence": 0
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🎨",
+            "text": "Nền + 2 màu chữ — từ tokens.bg / tokens.text / tokens.brand",
+            "sentence": 1
+          },
+          {
+            "icon": "🔘",
+            "text": "Nút CTA — styles.cta build thành class atomic",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep39/scene-11-0-923fe622.wav",
+          "startFrame": 0,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep39/scene-11-1-b2e77c22.wav",
+          "startFrame": 234,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep39/scene-11-2-cd826841.wav",
+          "startFrame": 442,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep39/scene-11-3-f0c1a98f.wav",
+          "startFrame": 710,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 918
+    },
+    {
+      "id": "scene-12",
+      "type": "concept",
+      "visual": {
+        "title": "So găng #2: gõ sai thì sao?",
+        "bullets": [
+          {
+            "icon": "🔤",
+            "text": "Tailwind: className='bg-brand text-white rounded-full px-9 py-3.5'",
+            "sentence": 0
+          },
+          {
+            "icon": "🤫",
+            "text": "Gõ sai 'px-9' → 'px-90': im lặng, không báo lỗi, chỉ lệch giao diện",
+            "sentence": 1
+          },
+          {
+            "icon": "🛡️",
+            "text": "StyleX: object có TS soi — sai tên/kiểu, gạch đỏ NGAY lúc gõ",
+            "sentence": 2
+          },
+          {
+            "icon": "⚙️",
+            "text": "Đổi lại: StyleX cần build-step + đọc lỗi TypeScript như vừa gặp",
+            "sentence": 3
+          },
+          {
+            "icon": "⚖️",
+            "text": "Không bên nào tuyệt đối đúng — 6 tập để tự chọn cho dự án của bạn",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep39/scene-12-0-0c33752e.wav",
+          "startFrame": 0,
+          "durationInFrames": 272
+        },
+        {
+          "file": "audio/ep39/scene-12-1-b05b436e.wav",
+          "startFrame": 280,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep39/scene-12-2-467969ee.wav",
+          "startFrame": 531,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep39/scene-12-3-56da027b.wav",
+          "startFrame": 777,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep39/scene-12-4-931976a1.wav",
+          "startFrame": 1011,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 1236
+    },
+    {
+      "id": "scene-13",
+      "type": "outro",
+      "visual": {
+        "title": "StyleX Tập 1/6 xong — 2 gotcha đã vượt qua 🧵",
+        "summary": [
+          {
+            "text": "StyleX = CSS-in-JS compile-time của Meta, atomic CSS dedup thật",
+            "sentence": 0
+          },
+          {
+            "text": "Ẩn dụ series: style = ĐỒNG PHỤC, create() = XƯỞNG MAY ĐO",
+            "sentence": 1
+          },
+          {
+            "text": "Repo + tag stylex-tap-1 = đúng code tập này",
+            "sentence": 3
+          }
+        ],
+        "next": "Tập 2: hover, media query, luật 'default' bắt buộc"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep39/scene-13-0-a7b83b07.wav",
+          "startFrame": 0,
+          "durationInFrames": 344
+        },
+        {
+          "file": "audio/ep39/scene-13-1-0f6b8bb2.wav",
+          "startFrame": 352,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep39/scene-13-2-ce2d7169.wav",
+          "startFrame": 591,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep39/scene-13-3-6f9ff5e6.wav",
+          "startFrame": 827,
+          "durationInFrames": 344
+        },
+        {
+          "file": "audio/ep39/scene-13-4-d843f608.wav",
+          "startFrame": 1179,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep39/scene-13-5-d0c7dc00.wav",
+          "startFrame": 1317,
+          "durationInFrames": 156
+        }
+      ],
+      "durationInFrames": 1491
+    }
+  ]
+}

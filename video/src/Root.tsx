@@ -41,6 +41,12 @@ import ep35 from './data/ep35.timing.json';
 import ep36 from './data/ep36.timing.json';
 import ep37 from './data/ep37.timing.json';
 import ep38 from './data/ep38.timing.json';
+import ep39 from './data/ep39.timing.json';
+import ep40 from './data/ep40.timing.json';
+import ep41 from './data/ep41.timing.json';
+import ep42 from './data/ep42.timing.json';
+import ep43 from './data/ep43.timing.json';
+import ep44 from './data/ep44.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -82,6 +88,12 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode36', timing: ep36 as unknown as EpisodeTiming},
   {id: 'Episode37', timing: ep37 as unknown as EpisodeTiming},
   {id: 'Episode38', timing: ep38 as unknown as EpisodeTiming},
+  {id: 'Episode39', timing: ep39 as unknown as EpisodeTiming},
+  {id: 'Episode40', timing: ep40 as unknown as EpisodeTiming},
+  {id: 'Episode41', timing: ep41 as unknown as EpisodeTiming},
+  {id: 'Episode42', timing: ep42 as unknown as EpisodeTiming},
+  {id: 'Episode43', timing: ep43 as unknown as EpisodeTiming},
+  {id: 'Episode44', timing: ep44 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -540,6 +552,84 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       image: 'screens/ep38/host-grid-3-on.png',
       badgeEmoji: '🏆',
       seriesTag: 'Mini-App Flutter thuần 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb39',
+    props: {
+      badge: 'STYLEX 1/6',
+      line1: 'STYLEX',
+      line2: 'CỦA META',
+      subtitle: 'Setup Vite không vấp — style may đo lúc build',
+      variant: 'shot',
+      image: 'screens/ep39/web-hero-first-style.png',
+      badgeEmoji: '🧵',
+      seriesTag: 'StyleX từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb40',
+    props: {
+      badge: 'STYLEX 2/6',
+      line1: 'HOVER &',
+      line2: 'MEDIA QUERY',
+      subtitle: 'default bắt buộc khi lồng điều kiện',
+      variant: 'shot',
+      image: 'screens/ep40/web-responsive-desktop.png',
+      badgeEmoji: '📐',
+      seriesTag: 'StyleX từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb41',
+    props: {
+      badge: 'STYLEX 3/6',
+      line1: 'AI ĐỨNG SAU',
+      line2: 'NGƯỜI ĐÓ THẮNG',
+      subtitle: 'props() và luật last-wins',
+      variant: 'shot',
+      image: 'screens/ep41/web-merge-thumbcrop.png',
+      badgeEmoji: '🥇',
+      seriesTag: 'StyleX từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb42',
+    props: {
+      badge: 'STYLEX 4/6',
+      line1: 'STYLE TỪ',
+      line2: 'BÊN NGOÀI',
+      subtitle: 'cross-file style prop & bảng giá',
+      variant: 'shot',
+      image: 'screens/ep42/web-pricing.png',
+      badgeEmoji: '🎟️',
+      seriesTag: 'StyleX từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb43',
+    props: {
+      badge: 'STYLEX 5/6',
+      line1: 'TOKEN, DARK MODE',
+      line2: 'VÀ THEME TẾT',
+      subtitle: 'defineVars, createTheme & flat-override',
+      variant: 'shot',
+      image: 'screens/ep43/web-theme-tet.png',
+      badgeEmoji: '🧧',
+      seriesTag: 'StyleX từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb44',
+    props: {
+      badge: 'STYLEX 6/6',
+      line1: 'TAILWIND',
+      line2: 'HAY STYLEX',
+      subtitle: 'So găng trực diện + tổng kết series',
+      variant: 'shot',
+      image: 'screens/ep44/web-stylex-vs-tailwind-thumb.png',
+      badgeEmoji: '🥊',
+      seriesTag: 'StyleX từ A đến Z 🇻🇳',
     },
   },
 ];

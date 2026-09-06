@@ -1,0 +1,231 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tập 1 hứa hover, media query, và luật 'default bắt buộc' — Tập 2 mở đúng 3 thứ đó, đào sâu stylex.create().",
+      "Ẩn dụ vẫn vậy: style là ĐỒNG PHỤC, create() là XƯỞNG MAY ĐO — hôm nay may thêm bản 'khi chạm tay vào' và 'khi phòng đổi kích thước'.",
+      "Hai thứ đó là pseudo-class (:hover, :active...) và media query — viết ngay trong object create(), không cần file CSS riêng.",
+      "Code hôm nay lấy từ Hero.tsx và ServiceGrid.tsx đã có ở Tập 1 — chỉ thêm nhánh điều kiện vào property quen mặt.",
+      "Và một luật: quên nó là ăn lỗi compile ngay — property nào có nhánh điều kiện đều bắt buộc key 'default'."
+    ],
+    "visual": {
+      "title": "create() sâu: hover, media query",
+      "subtitle": "StyleX từ A đến Z · Tập 2/6",
+      "badge": "Series StyleX · create() sâu"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "CSS thường viết hover bằng selector riêng: .cta:hover { background: ... } — tách hẳn khỏi rule mặc định.",
+      "StyleX không có dòng CSS nào — pseudo-class là OBJECT lồng trong property, có key 'default' và key ':hover'.",
+      "Cú pháp thật: backgroundColor: { default: tokens.brand, ':hover': tokens.brandDark } — TypeScript soi đúng kiểu, không phải string tuỳ tiện.",
+      "Ẩn dụ xưởng may: cùng bộ đồ, may sẵn thêm bản đậm màu hơn cho lúc khách 'chạm tay vào' — có sẵn từ lúc build, không may lúc đó.",
+      "Runtime chỉ còn 2 class atomic tĩnh, một cho mặc định một cho :hover — trình duyệt tự chuyển, không cần JS bắt sự kiện."
+    ],
+    "visual": {
+      "title": "Pseudo-class: object, không phải selector",
+      "bullets": [
+        {"icon": "🎯", "text": "CSS thường: .cta:hover{...} — selector riêng, tách khỏi mặc định", "sentence": 0},
+        {"icon": "📦", "text": "StyleX: pseudo-class là OBJECT lồng trong property, có 'default'/':hover'", "sentence": 1},
+        {"icon": "🔤", "text": "backgroundColor:{default,':hover'} — TypeScript soi đúng kiểu", "sentence": 2},
+        {"icon": "🧵", "text": "Ẩn dụ: may sẵn bản đậm màu hơn cho lúc khách 'chạm tay vào'", "sentence": 3},
+        {"icon": "⚡", "text": "Runtime: 2 class atomic tĩnh, trình duyệt tự chuyển khi hover", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là khối cta trong Hero.tsx — thay đổi duy nhất so với Tập 1 nằm ở đúng 1 dòng: backgroundColor.",
+      "backgroundColor: { default: tokens.brand, ':hover': tokens.brandDark } — brand là đỏ thường, brandDark đậm hơn, cả hai đều token.",
+      "borderStyle: 'none' thay vì border: 'none' — StyleX tách riêng từng thuộc tính con của border, không gộp shorthand.",
+      "cursor: 'pointer' đổi hình con trỏ khi rê chuột — độc lập với phần đổi màu nền lúc hover, dù cùng nằm 1 object.",
+      "Không thêm import, không thêm hàm nào khác — chỉ 1 property đổi từ giá trị đơn sang default/:hover."
+    ],
+    "visual": {
+      "filename": "src/components/Hero.tsx (cta)",
+      "language": "tsx",
+      "code": "  cta: {\n    display: 'inline-block',\n    marginTop: 32,\n    padding: '14px 36px',\n    borderRadius: 999,\n    fontSize: 18,\n    fontWeight: 700,\n    color: 'white',\n    backgroundColor: { default: tokens.brand, ':hover': tokens.brandDark },\n    cursor: 'pointer',\n    borderStyle: 'none',\n  },",
+      "steps": [
+        {"from": 1, "to": 12, "sentence": 0},
+        {"from": 9, "to": 9, "sentence": 1},
+        {"from": 11, "to": 11, "sentence": 2},
+        {"from": 10, "to": 10, "sentence": 3},
+        {"from": 1, "to": 12, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "concept",
+    "narration": [
+      "Media query theo đúng công thức cũ: default + key khác — chỉ đổi ':hover' thành chuỗi '@media (...)' đầy đủ.",
+      "gridTemplateColumns: { default: 'repeat(3, 1fr)', '@media (max-width: 720px)': '1fr' } — cùng 1 chỗ, TypeScript soi cả 2 nhánh.",
+      "Không cần biết @media nằm đâu trong CSS cuối cùng — compiler tự gom, người viết chỉ khai điều kiện và giá trị.",
+      "Vẫn ẩn dụ xưởng may: may thêm bản 'phòng thử đồ chật hơn' — dưới 720px đổi từ lưới 3 cột về 1 cột, không viết CSS tay.",
+      "Không dừng ở 1 tầng — có thể lồng pseudo-class trong media hoặc ngược lại, miễn mỗi tầng đều có default, xem ngay sau đây."
+    ],
+    "visual": {
+      "title": "Media query: cùng cú pháp, khác key",
+      "bullets": [
+        {"icon": "🧭", "text": "Media query cùng công thức: default + key '@media (...)'", "sentence": 0},
+        {"icon": "📐", "text": "gridTemplateColumns:{default,'@media (max-width:720px)'} — 1 chỗ, TS soi cả 2", "sentence": 1},
+        {"icon": "⚙️", "text": "Compiler tự gom @media — chỉ khai điều kiện và giá trị", "sentence": 2},
+        {"icon": "🧵", "text": "Ẩn dụ: may bản 'phòng thử đồ chật hơn' — dưới 720px đổi 3 cột thành 1", "sentence": 3},
+        {"icon": "🪆", "text": "Lồng được: pseudo-class trong media hoặc ngược lại — mỗi tầng đều cần default", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Sang ServiceGrid.tsx — lưới 6 dịch vụ Tập 1 mới 3 cột cố định, chưa responsive; hôm nay thêm đúng 1 dòng để đổi điều đó.",
+      "grid: { display: 'grid', gridTemplateColumns: {...}, gap: 24 } — display và gap vẫn giá trị đơn, chỉ gridTemplateColumns có điều kiện.",
+      "default: 'repeat(3, 1fr)' là ba cột đều trên desktop; '@media (max-width: 720px)': '1fr' là một cột khi màn hình hẹp hơn điện thoại ngang.",
+      "section phía trên chỉ padding/maxWidth/margin bình thường — không phải property nào cũng cần object, chỉ property THỰC SỰ đổi mới cần.",
+      "Kết quả: đúng 1 property đổi, cả bố cục responsive chạy ngay — không viết thêm dòng CSS @media thủ công nào."
+    ],
+    "visual": {
+      "filename": "src/components/ServiceGrid.tsx (grid)",
+      "language": "tsx",
+      "code": "const styles = stylex.create({\n  section: { padding: '24px 48px 96px', maxWidth: 1080, margin: '0 auto' },\n  grid: {\n    display: 'grid',\n    gridTemplateColumns: { default: 'repeat(3, 1fr)', '@media (max-width: 720px)': '1fr' },\n    gap: 24,\n  },",
+      "steps": [
+        {"from": 1, "to": 7, "sentence": 0},
+        {"from": 3, "to": 7, "sentence": 1},
+        {"from": 5, "to": 5, "sentence": 2},
+        {"from": 2, "to": 2, "sentence": 3},
+        {"from": 1, "to": 7, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Card dịch vụ có 2 property cùng đổi lúc hover: boxShadow và transform — cùng công thức default/:hover.",
+      "boxShadow default là bóng mờ nhẹ; lúc hover đổi thành bóng to hơn, ngả sang màu đỏ thương hiệu rgba(234,40,69,0.18).",
+      "transform default 'translateY(0)' rồi ':hover': 'translateY(-4px)' — card nhấc lên 4 pixel khi rê chuột vào.",
+      "transitionProperty và transitionDuration là CSS chuyển động bình thường, không điều kiện — làm cú nhấc mượt trong 200 mili giây.",
+      "Hai property cùng trigger :hover — đây chính là chỗ luật 'default bắt buộc' phát huy tác dụng khi lồng thêm điều kiện."
+    ],
+    "visual": {
+      "filename": "src/components/ServiceGrid.tsx (card)",
+      "language": "tsx",
+      "code": "  card: {\n    backgroundColor: tokens.surface,\n    borderRadius: 20,\n    padding: 28,\n    boxShadow: { default: '0 1px 4px rgba(0,0,0,0.08)', ':hover': '0 12px 32px rgba(234,40,69,0.18)' },\n    transform: { default: 'translateY(0)', ':hover': 'translateY(-4px)' },\n    transitionProperty: 'transform, box-shadow',\n    transitionDuration: '200ms',\n  },",
+      "steps": [
+        {"from": 1, "to": 9, "sentence": 0},
+        {"from": 5, "to": 5, "sentence": 1},
+        {"from": 6, "to": 6, "sentence": 2},
+        {"from": 7, "to": 8, "sentence": 3},
+        {"from": 1, "to": 9, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "concept",
+    "narration": [
+      "Luật quan trọng nhất tập này: property có nhánh điều kiện — pseudo-class hoặc media query — bắt buộc có key 'default'.",
+      "Tài liệu StyleX nói thẳng: 'The default case is required when authoring contextual styles' — không phải khuyến nghị, là yêu cầu cứng.",
+      "Ví dụ lồng sâu từ chính tài liệu: ':hover': { default: null, '@media (hover: hover)': 'scale(1.1)' } — cả 2 tầng đều có default.",
+      "Quên default ở BẤT KỲ tầng nào — compiler StyleX từ chối biên dịch, báo lỗi ngay, không đợi chạy thử mới phát hiện.",
+      "Nhớ đơn giản: hễ mở { } bên trong 1 property để thêm điều kiện, việc đầu tiên luôn là gõ 'default:' trước."
+    ],
+    "visual": {
+      "title": "Luật: 'default' bắt buộc khi lồng",
+      "bullets": [
+        {"icon": "❗", "text": "Property có điều kiện — bắt buộc có key 'default'", "sentence": 0},
+        {"icon": "📖", "text": "Docs: 'The default case is required when authoring contextual styles'", "sentence": 1},
+        {"icon": "🪆", "text": "Lồng sâu: ':hover':{default:null,'@media (hover:hover)':...} — cả 2 tầng đều default", "sentence": 2},
+        {"icon": "🚫", "text": "Quên default ở tầng nào — compiler từ chối biên dịch ngay", "sentence": 3},
+        {"icon": "✅", "text": "Nhớ: mở { } thêm điều kiện, việc đầu tiên luôn là gõ 'default:'", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "concept",
+    "narration": [
+      "Tailwind làm 2 việc này bằng PREFIX trong chuỗi class: hover:bg-red-700 cho hover, md:grid-cols-3 cho responsive.",
+      "className='bg-brand hover:bg-red-700 grid grid-cols-1 md:grid-cols-3' — đọc ngay biết có hover và breakpoint, không cần mở object nào.",
+      "Nhưng gõ sai 'md:grid-clos-3' — Tailwind vẫn im lặng như case Tập 1, responsive không chạy, lỗi khó thấy bằng mắt.",
+      "StyleX thì object có kiểu — key ':hover' hay '@media (...)' gõ sai, TypeScript báo lỗi ngay, không đợi build.",
+      "So găng #3: prefix chuỗi ngắn gọn học nhanh — đổi lại object StyleX dài hơn nhưng compiler đứng gác toàn bộ, không prefix nào lọt qua sai."
+    ],
+    "visual": {
+      "title": "So găng #3: prefix vs object có kiểu",
+      "bullets": [
+        {"icon": "🏷️", "text": "Tailwind: hover:bg-red-700, md:grid-cols-3 — prefix trong chuỗi class", "sentence": 0},
+        {"icon": "📝", "text": "className dài đọc được ngay có hover/breakpoint, không cần mở object", "sentence": 1},
+        {"icon": "🤫", "text": "Gõ sai 'md:grid-clos-3' — Tailwind im lặng, responsive không chạy", "sentence": 2},
+        {"icon": "🛡️", "text": "StyleX: gõ sai key — TypeScript báo lỗi ngay, không đợi build", "sentence": 3},
+        {"icon": "⚖️", "text": "So găng #3: prefix gọn nhanh vs object có compiler đứng gác", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "browser",
+    "narration": [
+      "npm run dev, resize trình duyệt xuống 420px — cùng 1 trang, không đổi dòng code nào ngoài gridTemplateColumns vừa xem.",
+      "Bên trái: desktop, lưới 3 cột đúng default 'repeat(3, 1fr)' — 6 dịch vụ chia đều 2 hàng 3 cột.",
+      "Bên phải: mobile 420px, lưới xếp dọc 1 cột đúng nhánh '@media (max-width: 720px)': '1fr' — không viết media query tay.",
+      "Nút CTA bên desktop đang ở trạng thái default, chưa hover — phần đổi màu khi rê chuột chỉ thấy lúc tương tác thật.",
+      "Cả 2 ảnh chụp thẳng từ cùng 1 component ServiceGrid — không dựng 2 bản demo riêng, chỉ đổi viewport trình duyệt."
+    ],
+    "visual": {
+      "title": "Responsive: desktop ↔ mobile",
+      "shots": [
+        {"src": "screens/ep40/web-responsive-desktop.png", "sentence": 1, "label": "Desktop"},
+        {"src": "screens/ep40/web-responsive-mobile.png", "sentence": 2, "label": "Mobile 420px"}
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "concept",
+    "narration": [
+      "Tổng kết responsive kiểu StyleX: không file .css nào cho @media, không class riêng nào cho hover — tất cả trong object create().",
+      "Logic responsive và style mặc định luôn đứng cạnh nhau trong code — đọc 1 chỗ biết đủ cả bình thường lẫn lúc hover, lúc màn hình nhỏ.",
+      "Cái giá phải trả đúng luật vừa học: nhiều nhánh điều kiện thì object lồng sâu hơn, default luôn phải có mặt mọi tầng, không ngoại lệ.",
+      "Card, cta, grid — cả 3 chỗ đổi trong tập này đều đúng công thức default + điều kiện, không chỗ nào rơi ra ngoài luật.",
+      "Ẩn dụ xưởng may đo tổng kết: một bộ đồng phục, may sẵn nhiều phiên bản — nhưng luôn phải may sẵn bản GỐC trước khi may thêm biến thể."
+    ],
+    "visual": {
+      "title": "Tổng kết: responsive không viết CSS",
+      "bullets": [
+        {"icon": "📂", "text": "Không file .css cho @media, không class riêng cho hover", "sentence": 0},
+        {"icon": "🔗", "text": "Logic responsive + style mặc định đứng cạnh nhau trong code", "sentence": 1},
+        {"icon": "🪆", "text": "Nhiều điều kiện = object lồng sâu hơn, default luôn bắt buộc mọi tầng", "sentence": 2},
+        {"icon": "✅", "text": "Card, cta, grid — cả 3 chỗ đúng công thức default + điều kiện", "sentence": 3},
+        {"icon": "🧵", "text": "Ẩn dụ: may nhiều phiên bản — nhưng luôn phải may bản GỐC trước", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "outro",
+    "narration": [
+      "Tổng kết Tập 2: pseudo-class và media query đều là OBJECT có key 'default' cộng điều kiện — không phải selector, không phải file CSS riêng.",
+      "Luật quan trọng nhất đã học: 'default' bắt buộc khi lồng điều kiện — quên là lỗi compile ngay, không đợi chạy thử.",
+      "Đã xem 3 chỗ dùng thật: cta hover đổi màu, grid responsive đổi cột, card hover nhấc lên bằng boxShadow và transform.",
+      "Tập 3: luật còn quan trọng hơn cả default — 'last-wins', thứ tự tham số trong props() quyết định style nào thắng, không liên quan CSS specificity.",
+      "Mã nguồn ở repo github.com/Leung190299/nestjs-tutorial-series — thư mục demo-stylex, tag stylex-tap-2.",
+      "Cảm ơn đã xem hết Tập 2 — hẹn gặp lại ở Tập 3, nơi luật last-wins sẽ giải thích vì sao thứ tự gọi hàm quan trọng hơn CSS specificity."
+    ],
+    "visual": {
+      "title": "StyleX Tập 2/6 xong — luật default đã rõ 📐",
+      "summary": [
+        {"text": "Pseudo-class & media query = OBJECT có 'default' + điều kiện", "sentence": 0},
+        {"text": "Luật bắt buộc: 'default' khi lồng điều kiện — quên là lỗi compile", "sentence": 1},
+        {"text": "3 ví dụ thật: cta hover, grid responsive, card hover nhấc lên", "sentence": 2}
+      ],
+      "next": "Tập 3: luật last-wins — thứ tự gọi props() quyết định tất cả"
+    }
+  }
+]

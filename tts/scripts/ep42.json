@@ -1,0 +1,431 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tập 3 khép lại với lời hứa: Button sẽ mở cửa nhận style TỪ NGOÀI qua tham số cuối cùng — Tập 4 giữ đúng lời hứa đó.",
+      "Nhân vật chính hôm nay là 2 file KHÁC NHAU: Button.tsx may sẵn, Pricing.tsx là nơi DÙNG Button và truyền style riêng vào.",
+      "Khác hẳn nhận className string tùy ý — Button nhận style qua 1 prop có TYPE thật, TypeScript kiểm tra được ngay lúc gõ code.",
+      "Bối cảnh sống: bảng giá 3 gói, gói Ở GIỮA nổi bật cần nút bấm rộng hết cỡ khung, 2 gói còn lại thì không.",
+      "Chỉ 1 dòng style={styles.fullWidth} truyền từ Pricing sang Button — không sửa 1 chữ nào trong Button.tsx, xem ngay sau đây."
+    ],
+    "visual": {
+      "title": "Style từ ngoài: cross-file & bảng giá",
+      "subtitle": "StyleX từ A đến Z · Tập 4/6",
+      "badge": "Series StyleX · style prop & cross-file"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Trong React thường, 1 component 'mở cửa' cho style ngoài bằng cách nhận prop className: string — ai truyền gì cũng được.",
+      "StyleX làm khác: Button nhận prop style với kiểu StyleXStyles — 1 type import thẳng từ '@stylexjs/stylex', không phải string.",
+      "StyleXStyles chỉ chấp nhận đúng kết quả từ stylex.create() — truyền nhầm 1 object CSS tay hay chuỗi thường, TypeScript báo lỗi ngay.",
+      "Nói cách khác: 'cửa' StyleX mở ra có KHUNG rõ ràng — chỉ style hợp lệ mới lọt qua, không phải bất kỳ chuỗi nào cũng nhận.",
+      "Đây là khác biệt cốt lõi so với className string — Tập này sẽ đối chiếu kỹ hơn ở cuối, ngay sau ví dụ Pricing."
+    ],
+    "visual": {
+      "title": "style prop: cửa có KHUNG, không phải string tự do",
+      "bullets": [
+        {
+          "icon": "🔓",
+          "text": "React thường: className: string — ai truyền gì cũng được",
+          "sentence": 0
+        },
+        {
+          "icon": "🏷️",
+          "text": "StyleX: prop style kiểu StyleXStyles, import từ @stylexjs/stylex",
+          "sentence": 1
+        },
+        {
+          "icon": "✅",
+          "text": "Chỉ nhận ĐÚNG kết quả create() — sai kiểu, TypeScript báo lỗi ngay",
+          "sentence": 2
+        },
+        {
+          "icon": "🚪",
+          "text": "Cửa có KHUNG rõ ràng — không phải chuỗi tuỳ ý nào cũng lọt qua",
+          "sentence": 3
+        },
+        {
+          "icon": "⚖️",
+          "text": "Khác biệt cốt lõi với className — đối chiếu kỹ ở cuối tập",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là type Props của Button — variant và size đã quen từ Tập 3, dòng MỚI là style?: StyleXStyles.",
+      "StyleXStyles import từ '@stylexjs/stylex' ở đầu file — kiểu này đại diện cho ĐÚNG kết quả của stylex.create(), không gì khác.",
+      "Dấu ? sau style nghĩa là OPTIONAL — không truyền cũng được, Button vẫn chạy bình thường với style mặc định của biến thể.",
+      "children: React.ReactNode đứng cuối type — không liên quan style, chỉ là nội dung hiển thị bên trong nút.",
+      "Chỉ thêm đúng 1 dòng type, Button đã có thể nhận style từ bất kỳ file nào khác import nó — đây là bước 'mở cửa' thật sự."
+    ],
+    "visual": {
+      "filename": "src/components/Button.tsx (type Props)",
+      "language": "tsx",
+      "code": "type Props = {\n  variant?: 'primary' | 'ghost' | 'danger';\n  size?: 'md' | 'lg';\n  style?: StyleXStyles;\n  children: React.ReactNode;\n};",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 4,
+          "to": 4,
+          "sentence": 2
+        },
+        {
+          "from": 5,
+          "to": 5,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "concept",
+    "narration": [
+      "Nhớ lại luật last-wins Tập 3: style đứng SAU trong props() thắng khi trùng property — Button áp đúng luật này cho style ngoài.",
+      "props(base, styles[size], styles[variant], style) — style nằm ở VỊ TRÍ CUỐI CÙNG, sau cả biến thể và kích cỡ.",
+      "Nghĩa là style TỪ NGOÀI truyền vào luôn đứng sau cùng — nếu trùng property với base/size/variant, style ngoài LUÔN thắng.",
+      "Đây KHÔNG phải tình cờ — là THIẾT KẾ CÓ CHỦ ĐÍCH: người viết Button quyết định ai được quyền ghi đè cuối cùng.",
+      "Người DÙNG component (Pricing.tsx) luôn thắng người VIẾT component (Button.tsx) — đúng triết lý 'mở cửa có kiểm soát'."
+    ],
+    "visual": {
+      "title": "Vị trí CUỐI = người dùng luôn thắng",
+      "bullets": [
+        {
+          "icon": "🥇",
+          "text": "Last-wins Tập 3: đứng SAU trong props() thắng khi trùng property",
+          "sentence": 0
+        },
+        {
+          "icon": "📍",
+          "text": "props(base, styles[size], styles[variant], style) — style CUỐI CÙNG",
+          "sentence": 1
+        },
+        {
+          "icon": "🏆",
+          "text": "Trùng property với base/size/variant — style ngoài LUÔN thắng",
+          "sentence": 2
+        },
+        {
+          "icon": "🎯",
+          "text": "KHÔNG tình cờ — THIẾT KẾ CÓ CHỦ ĐÍCH của người viết Button",
+          "sentence": 3
+        },
+        {
+          "icon": "🚪",
+          "text": "Người DÙNG component thắng người VIẾT component — cửa có kiểm soát",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "code",
+    "narration": [
+      "Xem lại chính hàm Button đã học ở Tập 3 — giờ đọc dưới góc nhìn CROSS-FILE: style đến từ file NGOÀI Button.tsx.",
+      "Tham số style destructure thẳng từ Props, không có giá trị mặc định — nếu Pricing không truyền, nó là undefined.",
+      "props() tự bỏ falsy như đã học — style undefined thì props() coi như không có, Button vẫn chạy bình thường.",
+      "Nếu Pricing CÓ truyền style, nó nằm cuối props() — ghi đè bất kỳ property nào trùng với base/size/variant.",
+      "1 hàm Button, 1 dòng code — nhưng đã đủ để bất kỳ file nào trong dự án tùy biến layout riêng cho từng chỗ dùng."
+    ],
+    "visual": {
+      "filename": "src/components/Button.tsx (hàm Button)",
+      "language": "tsx",
+      "code": "export function Button({variant = 'primary', size = 'md', style, children}: Props) {\n  return (\n    <button {...stylex.props(styles.base, styles[size], styles[variant], style)}>\n      {children}\n    </button>\n  );\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 1,
+          "sentence": 1
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 2
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "code",
+    "narration": [
+      "Sang Pricing.tsx — file NGOÀI Button.tsx, cũng tự stylex.create() riêng cho phần chữ tên gói, giá, mô tả.",
+      "name, price, unit, desc là style riêng của Pricing — không đụng gì tới Button, đây là style CỦA CHÍNH Pricing.",
+      "Dòng comment nói rõ ý đồ: fullWidth sinh ra ĐỂ truyền vào Button qua prop style — không dùng cho phần tử nào của Pricing.",
+      "fullWidth chỉ có đúng 1 property: width 100% — style tối giản, chỉ làm đúng 1 việc, không lẫn style nào của Button.",
+      "Đóng ngoặc create() — fullWidth giờ là 1 style hợp lệ, đúng kiểu StyleXStyles, sẵn sàng bay sang Button.tsx."
+    ],
+    "visual": {
+      "filename": "src/components/Pricing.tsx (fullWidth)",
+      "language": "tsx",
+      "code": "  name: {fontSize: 20, fontWeight: 800, color: tokens.text},\n  price: {fontSize: 36, fontWeight: 900, color: tokens.text, marginTop: 12},\n  unit: {fontSize: 15, fontWeight: 400, color: tokens.textMuted},\n  desc: {fontSize: 15, color: tokens.textMuted, marginTop: 8, marginBottom: 24},\n  // Style ngoài truyền vào Button qua prop `style` (ep42 — chất liệu cross-file):\n  fullWidth: {width: '100%'},\n});",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 5,
+          "to": 5,
+          "sentence": 2
+        },
+        {
+          "from": 6,
+          "to": 6,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "code",
+    "narration": [
+      "Đây là chỗ QUYẾT ĐỊNH: gói featured (Plus) render Button với style={styles.fullWidth} — style TỪ Pricing bay sang Button.",
+      "variant='primary' size='lg' vẫn y hệt Tập 3 — chỉ THÊM đúng 1 prop style, không đổi gì trong cách gọi Button trước đó.",
+      "2 gói còn lại render Button variant='ghost' size='md' — KHÔNG truyền style, Button dùng đúng width mặc định của biến thể.",
+      "Cùng 1 hàm Button, cùng file Button.tsx — nhưng 1 lần render full-width, 2 lần còn lại giữ nguyên, chỉ nhờ prop style khác nhau.",
+      "Đây chính là ví dụ SỐNG của cross-file: Pricing.tsx quyết định layout riêng cho Button mà không cần sửa Button.tsx."
+    ],
+    "visual": {
+      "filename": "src/components/Pricing.tsx (render Button)",
+      "language": "tsx",
+      "code": "            {p.featured ? (\n              <Button variant=\"primary\" size=\"lg\" style={styles.fullWidth}>\n                Chọn {p.name}\n              </Button>\n            ) : (\n              <Button variant=\"ghost\" size=\"md\">\n                Chọn {p.name}\n              </Button>\n            )}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 6,
+          "to": 6,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "browser",
+    "narration": [
+      "Đây là bảng giá chạy thật — đúng 3 gói, đúng đoạn code vừa xem, không phải hình vẽ minh hoạ.",
+      "Gói Plus ở giữa có nút 'Chọn Plus' kéo dài HẾT CHIỀU RỘNG thẻ — đúng styles.fullWidth vừa truyền vào Button.",
+      "2 nút 'Chọn' còn lại (Miễn phí, Doanh nghiệp) chỉ rộng bằng chữ bên trong — Button KHÔNG nhận style, giữ mặc định.",
+      "Cùng 1 hàm Button y hệt Tập 3 — chỉ khác đúng 1 prop style ở đúng 1 lần gọi, tạo ra khác biệt thấy rõ bằng mắt.",
+      "Đây là bằng chứng cross-file: style sinh ra ở Pricing.tsx, áp dụng thành công lên component định nghĩa ở file khác — Button.tsx."
+    ],
+    "visual": {
+      "title": "Bảng giá: fullWidth thấy rõ bằng mắt",
+      "shots": [
+        {
+          "src": "screens/ep42/web-pricing.png",
+          "sentence": 0
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🖥️",
+          "text": "Bảng giá chạy thật — đúng 3 gói, đúng code vừa xem",
+          "sentence": 0
+        },
+        {
+          "icon": "🎟️",
+          "text": "Gói Plus: nút 'Chọn Plus' rộng HẾT CỠ thẻ — đúng fullWidth",
+          "sentence": 1
+        },
+        {
+          "icon": "➖",
+          "text": "2 nút còn lại chỉ rộng bằng chữ — Button không nhận style",
+          "sentence": 2
+        },
+        {
+          "icon": "🔁",
+          "text": "Cùng 1 hàm Button — khác đúng 1 prop style ở 1 lần gọi",
+          "sentence": 3
+        },
+        {
+          "icon": "🧾",
+          "text": "Bằng chứng cross-file: style từ Pricing áp lên Button khác file",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-09",
+    "type": "concept",
+    "narration": [
+      "Một lưu ý kỹ thuật ngắn gọn: props() gọi CÙNG FILE nơi create() được định nghĩa — local — hoàn toàn ZERO runtime cost.",
+      "Compiler StyleX biết trước hết mọi giá trị, INLINE thẳng thành className tĩnh — props(styles.red) hoá thành {className: 'x1e2n...'}.",
+      "props() nhận style truyền qua PROP như Button vừa xem — CROSS-FILE — compiler không biết trước style nào sẽ tới, phải giữ object mapping.",
+      "props() lúc đó RESOLVE lúc runtime, tốn chi phí NHỎ hơn hẳn CSS-in-JS runtime truyền thống, nhưng không còn zero cost tuyệt đối như local.",
+      "Đánh đổi hợp lý: đổi 1 chút chi phí runtime tối thiểu để lấy khả năng mở cửa tuỳ biến — StyleX gọi đây là 'minimal cost', không phải 'no cost'."
+    ],
+    "visual": {
+      "title": "Fact sheet: local zero-cost vs cross-file minimal-cost",
+      "bullets": [
+        {
+          "icon": "⚡",
+          "text": "Local (cùng file create()) — ZERO runtime cost, compiler inline sẵn",
+          "sentence": 0
+        },
+        {
+          "icon": "🧬",
+          "text": "props(styles.red) → {className: 'x1e2n...'} tĩnh ngay lúc build",
+          "sentence": 1
+        },
+        {
+          "icon": "📦",
+          "text": "Cross-file qua prop — compiler giữ object mapping key → className",
+          "sentence": 2
+        },
+        {
+          "icon": "⏱️",
+          "text": "Resolve lúc RUNTIME — nhỏ hơn hẳn CSS-in-JS truyền thống",
+          "sentence": 3
+        },
+        {
+          "icon": "🤝",
+          "text": "Đánh đổi hợp lý: 'minimal cost', không phải 'no cost'",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-10",
+    "type": "concept",
+    "narration": [
+      "So găng #5: bên Tailwind, mở cửa style ngoài thường qua prop className: string, rồi nối bằng template literal hoặc clsx.",
+      "Vấn đề: bất kỳ class Tailwind nào cũng lọt qua className string — bg-red-500 hay display: none đều được, TypeScript không cản.",
+      "Người viết component KHÔNG kiểm soát được người dùng ghi đè gì — muốn hay không muốn, class nào cũng chui vào được qua chuỗi tự do.",
+      "StyleX ngược lại: style phải là StyleXStyles thật, chỉ ra từ create() — không thể nhét 1 chuỗi CSS tuỳ ý qua prop này.",
+      "Cộng thêm last-wins đã học Tập 3: style ngoài StyleX vừa CÓ TYPE, vừa THẮNG rõ ràng theo vị trí — Tailwind className chỉ hơn ở tự do, kém ở kiểm soát."
+    ],
+    "visual": {
+      "title": "So găng #5: className tự do vs style có TYPE",
+      "bullets": [
+        {
+          "icon": "🧵",
+          "text": "Tailwind: className: string, nối bằng template literal / clsx",
+          "sentence": 0
+        },
+        {
+          "icon": "⚠️",
+          "text": "Bất kỳ class nào cũng lọt — TypeScript không cản được",
+          "sentence": 1
+        },
+        {
+          "icon": "🎲",
+          "text": "Người viết component KHÔNG kiểm soát người dùng ghi đè gì",
+          "sentence": 2
+        },
+        {
+          "icon": "🔒",
+          "text": "StyleX: chỉ nhận StyleXStyles thật từ create(), không nhét chuỗi tuỳ ý",
+          "sentence": 3
+        },
+        {
+          "icon": "⚖️",
+          "text": "StyleX: có TYPE + last-wins rõ — Tailwind hơn tự do, kém kiểm soát",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-11",
+    "type": "outro",
+    "narration": [
+      "Tổng kết Tập 4: Button mở cửa nhận style qua prop style?: StyleXStyles — đặt CUỐI props() nên style ngoài luôn thắng, có chủ đích.",
+      "Pricing.tsx là ví dụ sống: styles.fullWidth truyền sang Button, đúng 1 gói featured có nút full-width, 2 gói còn lại giữ nguyên.",
+      "Đã học thêm: local props() zero cost, cross-file qua prop tốn minimal cost — đổi lấy khả năng tuỳ biến giữa các file.",
+      "So với Tailwind className string: StyleX có TYPE kiểm tra được, last-wins rõ theo vị trí — kiểm soát chặt hơn, không mất tự do cần thiết.",
+      "Tập 5: theming — token thương hiệu, dark mode trong token, và cả theme Tết đổi màu toàn bộ app chỉ bằng 1 theme mới.",
+      "Mã nguồn ở repo github.com/Leung190299/nestjs-tutorial-series — thư mục demo-stylex, tag stylex-tap-4. Cảm ơn đã xem hết Tập 4, hẹn gặp lại Tập 5."
+    ],
+    "visual": {
+      "title": "StyleX Tập 4/6 xong — style ngoài đã có cửa riêng 🎟️",
+      "summary": [
+        {
+          "text": "style?: StyleXStyles đặt CUỐI props() — người dùng component luôn thắng",
+          "sentence": 0
+        },
+        {
+          "text": "Pricing truyền styles.fullWidth vào Button — ví dụ cross-file sống",
+          "sentence": 1
+        },
+        {
+          "text": "Local zero-cost, cross-file minimal-cost; StyleX có TYPE hơn className",
+          "sentence": 2
+        }
+      ],
+      "next": "Tập 5: theming — token thương hiệu và theme Tết"
+    }
+  }
+]
