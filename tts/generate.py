@@ -54,11 +54,31 @@ def validate_script(script: list[dict]) -> list[str]:
                 errors.append(f"{scene['id']} câu {i}: {len(s)} > {MAX_SENTENCE_CHARS} ký tự")
         visual = scene.get("visual", {})
         refs = []
-        for key in ("bullets", "steps", "commands", "flows", "summary", "screens"):
+        for key in ("bullets", "steps", "commands", "flows", "summary", "screens", "shots"):
             refs += [item.get("sentence") for item in visual.get(key, [])]
         for r in refs:
             if r is not None and r >= len(sentences):
                 errors.append(f"{scene['id']}: sentence index {r} >= số câu {len(sentences)}")
+        if scene.get("type") == "browser":
+            title = visual.get("title")
+            if not isinstance(title, str) or not title:
+                errors.append(f"{scene['id']}: browser thiếu title (str)")
+            shots = visual.get("shots")
+            if not isinstance(shots, list) or not (1 <= len(shots) <= 2):
+                n = len(shots) if isinstance(shots, list) else 0
+                errors.append(f"{scene['id']}: browser cần 1-2 shots, có {n}")
+            else:
+                for i, shot in enumerate(shots):
+                    if not isinstance(shot.get("src"), str) or not shot.get("src"):
+                        errors.append(f"{scene['id']}: shot {i} thiếu src (str)")
+                    if not isinstance(shot.get("sentence"), int):
+                        errors.append(f"{scene['id']}: shot {i} thiếu sentence (int)")
+                    label = shot.get("label")
+                    if label is not None and not isinstance(label, str):
+                        errors.append(f"{scene['id']}: shot {i} label phải là str")
+                    url = shot.get("url")
+                    if url is not None and not isinstance(url, str):
+                        errors.append(f"{scene['id']}: shot {i} url phải là str")
         if "code" in visual and "steps" in visual:
             code_lines = len(visual["code"].split("\n"))
             for step in visual["steps"]:
