@@ -5,6 +5,7 @@ import { Button } from './components/Button'
 import { MergeDemo } from './components/MergeDemo'
 import { Pricing } from './components/Pricing'
 import { tokens } from './tokens.stylex'
+import { tet } from './themes'
 
 const styles = stylex.create({
   page: {
@@ -19,8 +20,9 @@ const styles = stylex.create({
 })
 
 export default function App() {
+  const themeParam = new URLSearchParams(window.location.search).get('theme')
   return (
-    <div {...stylex.props(styles.page)}>
+    <div {...stylex.props(themeParam === 'tet' && tet, styles.page)}>
       <Hero />
       <ServiceGrid />
       <section {...stylex.props(styles.demoSection)} id="buttons">
