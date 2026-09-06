@@ -1,0 +1,646 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "create() sâu: hover, media query",
+        "subtitle": "StyleX từ A đến Z · Tập 2/6",
+        "badge": "Series StyleX · create() sâu"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep40/scene-01-0-2fe0b95d.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep40/scene-01-1-ccedc50b.wav",
+          "startFrame": 181,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep40/scene-01-2-7bc140bc.wav",
+          "startFrame": 374,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep40/scene-01-3-31edf0bb.wav",
+          "startFrame": 594,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep40/scene-01-4-3c7f144b.wav",
+          "startFrame": 814,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 998
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Pseudo-class: object, không phải selector",
+        "bullets": [
+          {
+            "icon": "🎯",
+            "text": "CSS thường: .cta:hover{...} — selector riêng, tách khỏi mặc định",
+            "sentence": 0
+          },
+          {
+            "icon": "📦",
+            "text": "StyleX: pseudo-class là OBJECT lồng trong property, có 'default'/':hover'",
+            "sentence": 1
+          },
+          {
+            "icon": "🔤",
+            "text": "backgroundColor:{default,':hover'} — TypeScript soi đúng kiểu",
+            "sentence": 2
+          },
+          {
+            "icon": "🧵",
+            "text": "Ẩn dụ: may sẵn bản đậm màu hơn cho lúc khách 'chạm tay vào'",
+            "sentence": 3
+          },
+          {
+            "icon": "⚡",
+            "text": "Runtime: 2 class atomic tĩnh, trình duyệt tự chuyển khi hover",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep40/scene-02-0-3d8128ec.wav",
+          "startFrame": 0,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep40/scene-02-1-74a583b8.wav",
+          "startFrame": 169,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep40/scene-02-2-02ef9362.wav",
+          "startFrame": 398,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep40/scene-02-3-779f52fe.wav",
+          "startFrame": 639,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep40/scene-02-4-5fc4af25.wav",
+          "startFrame": 823,
+          "durationInFrames": 192
+        }
+      ],
+      "durationInFrames": 1033
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "src/components/Hero.tsx (cta)",
+        "language": "tsx",
+        "code": "  cta: {\n    display: 'inline-block',\n    marginTop: 32,\n    padding: '14px 36px',\n    borderRadius: 999,\n    fontSize: 18,\n    fontWeight: 700,\n    color: 'white',\n    backgroundColor: { default: tokens.brand, ':hover': tokens.brandDark },\n    cursor: 'pointer',\n    borderStyle: 'none',\n  },",
+        "steps": [
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 0
+          },
+          {
+            "from": 9,
+            "to": 9,
+            "sentence": 1
+          },
+          {
+            "from": 11,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 10,
+            "to": 10,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep40/scene-03-0-7f5d4191.wav",
+          "startFrame": 0,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep40/scene-03-1-d17a75c6.wav",
+          "startFrame": 193,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep40/scene-03-2-adc89fa8.wav",
+          "startFrame": 396,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep40/scene-03-3-cae9520f.wav",
+          "startFrame": 584,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep40/scene-03-4-df563ac8.wav",
+          "startFrame": 772,
+          "durationInFrames": 161
+        }
+      ],
+      "durationInFrames": 951
+    },
+    {
+      "id": "scene-04",
+      "type": "concept",
+      "visual": {
+        "title": "Media query: cùng cú pháp, khác key",
+        "bullets": [
+          {
+            "icon": "🧭",
+            "text": "Media query cùng công thức: default + key '@media (...)'",
+            "sentence": 0
+          },
+          {
+            "icon": "📐",
+            "text": "gridTemplateColumns:{default,'@media (max-width:720px)'} — 1 chỗ, TS soi cả 2",
+            "sentence": 1
+          },
+          {
+            "icon": "⚙️",
+            "text": "Compiler tự gom @media — chỉ khai điều kiện và giá trị",
+            "sentence": 2
+          },
+          {
+            "icon": "🧵",
+            "text": "Ẩn dụ: may bản 'phòng thử đồ chật hơn' — dưới 720px đổi 3 cột thành 1",
+            "sentence": 3
+          },
+          {
+            "icon": "🪆",
+            "text": "Lồng được: pseudo-class trong media hoặc ngược lại — mỗi tầng đều cần default",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep40/scene-04-0-99db1262.wav",
+          "startFrame": 0,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep40/scene-04-1-785291d8.wav",
+          "startFrame": 176,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep40/scene-04-2-d838aa7c.wav",
+          "startFrame": 422,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep40/scene-04-3-5ac7e407.wav",
+          "startFrame": 613,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep40/scene-04-4-8b940d26.wav",
+          "startFrame": 840,
+          "durationInFrames": 183
+        }
+      ],
+      "durationInFrames": 1041
+    },
+    {
+      "id": "scene-05",
+      "type": "code",
+      "visual": {
+        "filename": "src/components/ServiceGrid.tsx (grid)",
+        "language": "tsx",
+        "code": "const styles = stylex.create({\n  section: { padding: '24px 48px 96px', maxWidth: 1080, margin: '0 auto' },\n  grid: {\n    display: 'grid',\n    gridTemplateColumns: { default: 'repeat(3, 1fr)', '@media (max-width: 720px)': '1fr' },\n    gap: 24,\n  },",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 5,
+            "sentence": 2
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep40/scene-05-0-ab02f1b2.wav",
+          "startFrame": 0,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep40/scene-05-1-659260f6.wav",
+          "startFrame": 244,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep40/scene-05-2-7eea2796.wav",
+          "startFrame": 456,
+          "durationInFrames": 257
+        },
+        {
+          "file": "audio/ep40/scene-05-3-f9f12fae.wav",
+          "startFrame": 721,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep40/scene-05-4-48ca0872.wav",
+          "startFrame": 967,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 1173
+    },
+    {
+      "id": "scene-06",
+      "type": "code",
+      "visual": {
+        "filename": "src/components/ServiceGrid.tsx (card)",
+        "language": "tsx",
+        "code": "  card: {\n    backgroundColor: tokens.surface,\n    borderRadius: 20,\n    padding: 28,\n    boxShadow: { default: '0 1px 4px rgba(0,0,0,0.08)', ':hover': '0 12px 32px rgba(234,40,69,0.18)' },\n    transform: { default: 'translateY(0)', ':hover': 'translateY(-4px)' },\n    transitionProperty: 'transform, box-shadow',\n    transitionDuration: '200ms',\n  },",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 5,
+            "sentence": 1
+          },
+          {
+            "from": 6,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 8,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep40/scene-06-0-8c52b216.wav",
+          "startFrame": 0,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep40/scene-06-1-52590e17.wav",
+          "startFrame": 186,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep40/scene-06-2-79f09bd5.wav",
+          "startFrame": 446,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep40/scene-06-3-425f6109.wav",
+          "startFrame": 649,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep40/scene-06-4-7f1504a8.wav",
+          "startFrame": 890,
+          "durationInFrames": 173
+        }
+      ],
+      "durationInFrames": 1081
+    },
+    {
+      "id": "scene-07",
+      "type": "concept",
+      "visual": {
+        "title": "Luật: 'default' bắt buộc khi lồng",
+        "bullets": [
+          {
+            "icon": "❗",
+            "text": "Property có điều kiện — bắt buộc có key 'default'",
+            "sentence": 0
+          },
+          {
+            "icon": "📖",
+            "text": "Docs: 'The default case is required when authoring contextual styles'",
+            "sentence": 1
+          },
+          {
+            "icon": "🪆",
+            "text": "Lồng sâu: ':hover':{default:null,'@media (hover:hover)':...} — cả 2 tầng đều default",
+            "sentence": 2
+          },
+          {
+            "icon": "🚫",
+            "text": "Quên default ở tầng nào — compiler từ chối biên dịch ngay",
+            "sentence": 3
+          },
+          {
+            "icon": "✅",
+            "text": "Nhớ: mở { } thêm điều kiện, việc đầu tiên luôn là gõ 'default:'",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep40/scene-07-0-18a6401e.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep40/scene-07-1-18227354.wav",
+          "startFrame": 181,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep40/scene-07-2-ce12fbbf.wav",
+          "startFrame": 386,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep40/scene-07-3-fc2b86ef.wav",
+          "startFrame": 584,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep40/scene-07-4-f68f9f35.wav",
+          "startFrame": 760,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 942
+    },
+    {
+      "id": "scene-08",
+      "type": "concept",
+      "visual": {
+        "title": "So găng #3: prefix vs object có kiểu",
+        "bullets": [
+          {
+            "icon": "🏷️",
+            "text": "Tailwind: hover:bg-red-700, md:grid-cols-3 — prefix trong chuỗi class",
+            "sentence": 0
+          },
+          {
+            "icon": "📝",
+            "text": "className dài đọc được ngay có hover/breakpoint, không cần mở object",
+            "sentence": 1
+          },
+          {
+            "icon": "🤫",
+            "text": "Gõ sai 'md:grid-clos-3' — Tailwind im lặng, responsive không chạy",
+            "sentence": 2
+          },
+          {
+            "icon": "🛡️",
+            "text": "StyleX: gõ sai key — TypeScript báo lỗi ngay, không đợi build",
+            "sentence": 3
+          },
+          {
+            "icon": "⚖️",
+            "text": "So găng #3: prefix gọn nhanh vs object có compiler đứng gác",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep40/scene-08-0-b445e54e.wav",
+          "startFrame": 0,
+          "durationInFrames": 332
+        },
+        {
+          "file": "audio/ep40/scene-08-1-2a9b6da2.wav",
+          "startFrame": 340,
+          "durationInFrames": 336
+        },
+        {
+          "file": "audio/ep40/scene-08-2-5719a074.wav",
+          "startFrame": 684,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep40/scene-08-3-b5fb5952.wav",
+          "startFrame": 911,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep40/scene-08-4-43fc73a9.wav",
+          "startFrame": 1097,
+          "durationInFrames": 248
+        }
+      ],
+      "durationInFrames": 1363
+    },
+    {
+      "id": "scene-09",
+      "type": "browser",
+      "visual": {
+        "title": "Responsive: desktop ↔ mobile",
+        "shots": [
+          {
+            "src": "screens/ep40/web-responsive-desktop.png",
+            "sentence": 1,
+            "label": "Desktop"
+          },
+          {
+            "src": "screens/ep40/web-responsive-mobile.png",
+            "sentence": 2,
+            "label": "Mobile 420px"
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep40/scene-09-0-71e73d62.wav",
+          "startFrame": 0,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep40/scene-09-1-e1824a78.wav",
+          "startFrame": 215,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep40/scene-09-2-3fdf7ff9.wav",
+          "startFrame": 391,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep40/scene-09-3-170813f2.wav",
+          "startFrame": 644,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep40/scene-09-4-3cf2fa7c.wav",
+          "startFrame": 816,
+          "durationInFrames": 171
+        }
+      ],
+      "durationInFrames": 1005
+    },
+    {
+      "id": "scene-10",
+      "type": "concept",
+      "visual": {
+        "title": "Tổng kết: responsive không viết CSS",
+        "bullets": [
+          {
+            "icon": "📂",
+            "text": "Không file .css cho @media, không class riêng cho hover",
+            "sentence": 0
+          },
+          {
+            "icon": "🔗",
+            "text": "Logic responsive + style mặc định đứng cạnh nhau trong code",
+            "sentence": 1
+          },
+          {
+            "icon": "🪆",
+            "text": "Nhiều điều kiện = object lồng sâu hơn, default luôn bắt buộc mọi tầng",
+            "sentence": 2
+          },
+          {
+            "icon": "✅",
+            "text": "Card, cta, grid — cả 3 chỗ đúng công thức default + điều kiện",
+            "sentence": 3
+          },
+          {
+            "icon": "🧵",
+            "text": "Ẩn dụ: may nhiều phiên bản — nhưng luôn phải may bản GỐC trước",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep40/scene-10-0-1d7b8bba.wav",
+          "startFrame": 0,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep40/scene-10-1-58cf7600.wav",
+          "startFrame": 248,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep40/scene-10-2-e1dffac9.wav",
+          "startFrame": 468,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep40/scene-10-3-c384e168.wav",
+          "startFrame": 661,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep40/scene-10-4-2bc5b0d7.wav",
+          "startFrame": 857,
+          "durationInFrames": 195
+        }
+      ],
+      "durationInFrames": 1070
+    },
+    {
+      "id": "scene-11",
+      "type": "outro",
+      "visual": {
+        "title": "StyleX Tập 2/6 xong — luật default đã rõ 📐",
+        "summary": [
+          {
+            "text": "Pseudo-class & media query = OBJECT có 'default' + điều kiện",
+            "sentence": 0
+          },
+          {
+            "text": "Luật bắt buộc: 'default' khi lồng điều kiện — quên là lỗi compile",
+            "sentence": 1
+          },
+          {
+            "text": "3 ví dụ thật: cta hover, grid responsive, card hover nhấc lên",
+            "sentence": 2
+          }
+        ],
+        "next": "Tập 3: luật last-wins — thứ tự gọi props() quyết định tất cả"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep40/scene-11-0-7b690c3f.wav",
+          "startFrame": 0,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep40/scene-11-1-22965c9a.wav",
+          "startFrame": 263,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep40/scene-11-2-bae35796.wav",
+          "startFrame": 420,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep40/scene-11-3-0298c8bd.wav",
+          "startFrame": 625,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep40/scene-11-4-9668c2f7.wav",
+          "startFrame": 866,
+          "durationInFrames": 341
+        },
+        {
+          "file": "audio/ep40/scene-11-5-852d7b68.wav",
+          "startFrame": 1215,
+          "durationInFrames": 224
+        }
+      ],
+      "durationInFrames": 1457
+    }
+  ]
+}
