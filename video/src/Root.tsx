@@ -43,6 +43,7 @@ import ep37 from './data/ep37.timing.json';
 import ep38 from './data/ep38.timing.json';
 import ep39 from './data/ep39.timing.json';
 import ep40 from './data/ep40.timing.json';
+import ep41 from './data/ep41.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -86,6 +87,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode38', timing: ep38 as unknown as EpisodeTiming},
   {id: 'Episode39', timing: ep39 as unknown as EpisodeTiming},
   {id: 'Episode40', timing: ep40 as unknown as EpisodeTiming},
+  {id: 'Episode41', timing: ep41 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -569,6 +571,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/ep40/web-responsive-desktop.png',
       badgeEmoji: '📐',
+      seriesTag: 'StyleX từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb41',
+    props: {
+      badge: 'STYLEX 3/6',
+      line1: 'AI ĐỨNG SAU',
+      line2: 'NGƯỜI ĐÓ THẮNG',
+      subtitle: 'props() và luật last-wins',
+      variant: 'shot',
+      image: 'screens/ep41/web-merge-lastwins.png',
+      badgeEmoji: '🥇',
       seriesTag: 'StyleX từ A đến Z 🇻🇳',
     },
   },
