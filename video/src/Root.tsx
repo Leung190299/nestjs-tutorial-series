@@ -46,6 +46,7 @@ import ep40 from './data/ep40.timing.json';
 import ep41 from './data/ep41.timing.json';
 import ep42 from './data/ep42.timing.json';
 import ep43 from './data/ep43.timing.json';
+import ep44 from './data/ep44.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -92,6 +93,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode41', timing: ep41 as unknown as EpisodeTiming},
   {id: 'Episode42', timing: ep42 as unknown as EpisodeTiming},
   {id: 'Episode43', timing: ep43 as unknown as EpisodeTiming},
+  {id: 'Episode44', timing: ep44 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -614,6 +616,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/ep43/web-theme-tet.png',
       badgeEmoji: '🧧',
+      seriesTag: 'StyleX từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb44',
+    props: {
+      badge: 'STYLEX 6/6',
+      line1: 'TAILWIND',
+      line2: 'HAY STYLEX',
+      subtitle: 'So găng trực diện + tổng kết series',
+      variant: 'shot',
+      image: 'screens/ep44/web-stylex-vs-tailwind-thumb.png',
+      badgeEmoji: '🥊',
       seriesTag: 'StyleX từ A đến Z 🇻🇳',
     },
   },
