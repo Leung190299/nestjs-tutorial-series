@@ -28,6 +28,7 @@ Finding final review demo: ảnh vert 420×840 (1:2) vs khung 1080×1920 (9:16) 
 2. Viết kịch bản NGANG epXX.json (validator pass) → Root.tsx entry + Thumb → render + still → verify 3-4 frame.
 3. Viết kịch bản SHORTS s<id>.json (<60s — kiểm tổng timing ≤1800 frames; validator pass) → Root.tsx mục shorts → render Short<ID> → verify 2-3 frame (khung dọc, vshot đẹp).
 4. Commit 1 lần/câu: `feat: câu R3 — ep47 (ngang) + sr3 (Shorts): vì sao list cần key`.
+- Verify frame: với scene dùng Appear (concept/browser/vanswer), extract frame GẦN CUỐI scene (end−1.5s) để mọi phần tử đã hiện đủ — không chụp giữa scene.
 
 ## Task 13 (sau 12 câu): SEO + chờ lệnh đăng
 
