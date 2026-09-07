@@ -1,0 +1,321 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #11: :key trong v-for — vì sao không dùng index?",
+        "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 11/12",
+        "badge": "Câu 11"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep55/scene-01-0-a48bcd9f.wav",
+          "startFrame": 0,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep55/scene-01-1-32dd4cfd.wav",
+          "startFrame": 155,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep55/scene-01-2-c3fca2b5.wav",
+          "startFrame": 351,
+          "durationInFrames": 178
+        }
+      ],
+      "durationInFrames": 547
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": ":key trong v-for là gì, tại sao quan trọng",
+        "bullets": [
+          {
+            "icon": "🪪",
+            "text": ":key = 'chứng minh thư' của phần tử — Vue cũng diff cây cũ/mới, y hệt React",
+            "sentence": 0
+          },
+          {
+            "icon": "🔍",
+            "text": "Vue patch theo VỊ TRÍ (in-place) nếu thiếu key ổn định — dễ nhận nhầm node",
+            "sentence": 1
+          },
+          {
+            "icon": "🔀",
+            "text": ":key=\"index\": đổi theo VỊ TRÍ — thêm/xóa/sắp xếp lại là gắn nhầm, giống bẫy React",
+            "sentence": 2
+          },
+          {
+            "icon": "⚠️",
+            "text": "Hậu quả: DOM node và state con (như giá trị input) bị tái sử dụng SAI chỗ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep55/scene-02-0-0ec2541a.wav",
+          "startFrame": 0,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep55/scene-02-1-9f3ea840.wav",
+          "startFrame": 150,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep55/scene-02-2-789904aa.wav",
+          "startFrame": 379,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep55/scene-02-3-6dce967d.wav",
+          "startFrame": 618,
+          "durationInFrames": 202
+        }
+      ],
+      "durationInFrames": 838
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "V5KeyVFor.vue (template)",
+        "language": "markup",
+        "code": "  <div style=\"display: flex; gap: 16px; flex-wrap: wrap;\">\n    <div style=\"border: 1px solid #ddd; border-radius: 8px; padding: 16px; flex: 1;\">\n      <b>:key=\"index\" — SAI</b>\n      <div v-for=\"(item, i) in itemsIndex\" :key=\"i\" style=\"display: flex; gap: 8px; margin-top: 8px;\">\n        <span style=\"width: 90px;\">{{ item }}</span>\n        <input placeholder=\"ghi chú...\" />\n        <button @click=\"xoaIndex(item)\">Xóa</button>\n      </div>\n    </div>\n    <div style=\"border: 1px solid #ddd; border-radius: 8px; padding: 16px; flex: 1;\">\n      <b>:key=\"item\" — ĐÚNG</b>\n      <div v-for=\"item in itemsKey\" :key=\"item\" style=\"display: flex; gap: 8px; margin-top: 8px;\">\n        <span style=\"width: 90px;\">{{ item }}</span>\n        <input placeholder=\"ghi chú...\" />\n        <button @click=\"xoaKey(item)\">Xóa</button>\n      </div>\n    </div>\n  </div>",
+        "steps": [
+          {
+            "from": 1,
+            "to": 18,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 9,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 17,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 18,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 18,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep55/scene-03-0-fff16ec4.wav",
+          "startFrame": 0,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep55/scene-03-1-fd0396a3.wav",
+          "startFrame": 176,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep55/scene-03-2-107b6ad1.wav",
+          "startFrame": 319,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep55/scene-03-3-96866039.wav",
+          "startFrame": 450,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep55/scene-03-4-469b2c88.wav",
+          "startFrame": 646,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 818
+    },
+    {
+      "id": "scene-04",
+      "type": "browser",
+      "visual": {
+        "title": "Demo thật: xóa 1 dòng, ghi chú nhảy sai chỗ — y hệt bẫy R3",
+        "shots": [
+          {
+            "src": "screens/feqa/v5-before.png",
+            "sentence": 0,
+            "label": "TRƯỚC khi xóa — cả hai bên đều đúng",
+            "url": "localhost:5196 — Vue QA"
+          },
+          {
+            "src": "screens/feqa/v5-bug.png",
+            "sentence": 1,
+            "label": "SAU khi xóa 'Phở bò'",
+            "url": "localhost:5196 — Vue QA"
+          }
+        ],
+        "sequential": true,
+        "bullets": [
+          {
+            "icon": "❌",
+            "text": ":key=\"index\": 'Bánh mì' → ghi chú 'phở', 'Cơm tấm' → ghi chú 'bánh' — SAI, y hệt bẫy R3",
+            "sentence": 2
+          },
+          {
+            "icon": "✅",
+            "text": ":key=\"item\": 'Bánh mì' → 'bánh', 'Cơm tấm' → 'cơm' — vẫn ĐÚNG, không xáo trộn",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep55/scene-04-0-30b1f895.wav",
+          "startFrame": 0,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep55/scene-04-1-77361cf7.wav",
+          "startFrame": 234,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep55/scene-04-2-b4dca189.wav",
+          "startFrame": 394,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep55/scene-04-3-9be35e7d.wav",
+          "startFrame": 606,
+          "durationInFrames": 142
+        }
+      ],
+      "durationInFrames": 766
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "🎤",
+            "text": "Chốt gọn 3 câu — học thuộc luôn được",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": ":key: giúp Vue nhận diện phần tử nào giữ nguyên/thêm/xóa/di chuyển — cùng luật với React",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": ":key=\"index\": chỉ tạm chấp nhận khi list TĨNH — không thêm/xóa/sắp xếp lại",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Cách đúng: dùng giá trị ổn định, duy nhất của chính phần tử (id, tên) làm key",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: cùng một luật cả 2 framework — học 1 lần dùng 2 nơi; đừng key=index khi list thêm/xóa/sort",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep55/scene-05-0-32ac7d8d.wav",
+          "startFrame": 0,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep55/scene-05-1-d596b558.wav",
+          "startFrame": 104,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep55/scene-05-2-9cea1ff3.wav",
+          "startFrame": 316,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep55/scene-05-3-300a1fd5.wav",
+          "startFrame": 473,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep55/scene-05-4-28d1d88c.wav",
+          "startFrame": 649,
+          "durationInFrames": 252
+        }
+      ],
+      "durationInFrames": 919
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 5/6 phần Vue hoàn tất — hẹn gặp lại câu 6!",
+        "summary": [
+          {
+            "text": "key = chứng minh thư của phần tử — cùng luật cả 2 framework",
+            "sentence": 0
+          },
+          {
+            "text": "key=index chỉ ổn với list TĨNH, không thêm/xóa/sắp xếp",
+            "sentence": 1
+          },
+          {
+            "text": "Câu sau (cuối lô 1 Vue): Props xuống, Emit lên",
+            "sentence": 2
+          },
+          {
+            "text": "Có bản Shorts 60 giây — ôn nhanh trước phỏng vấn",
+            "sentence": 3
+          }
+        ],
+        "next": "Câu 6/6 phần Vue: Props & Emit hoạt động thế nào? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep55/scene-06-0-6e32d4b2.wav",
+          "startFrame": 0,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep55/scene-06-1-f0a669c2.wav",
+          "startFrame": 203,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep55/scene-06-2-78f58b3e.wav",
+          "startFrame": 425,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep55/scene-06-3-67a4a22f.wav",
+          "startFrame": 611,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep55/scene-06-4-72ed940f.wav",
+          "startFrame": 780,
+          "durationInFrames": 219
+        }
+      ],
+      "durationInFrames": 1017
+    }
+  ]
+}

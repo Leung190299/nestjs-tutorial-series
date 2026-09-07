@@ -1,0 +1,325 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #2: useState và useEffect khác nhau thế nào?",
+        "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 2/12",
+        "badge": "Câu 2"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep46/scene-01-0-71f339e3.wav",
+          "startFrame": 0,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep46/scene-01-1-157ed65f.wav",
+          "startFrame": 186,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep46/scene-01-2-49e67614.wav",
+          "startFrame": 415,
+          "durationInFrames": 216
+        }
+      ],
+      "durationInFrames": 649
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "useState vs useEffect",
+        "bullets": [
+          {
+            "icon": "🗃️",
+            "text": "useState: giữ state nội bộ — gọi hàm set → React lên lịch re-render",
+            "sentence": 0
+          },
+          {
+            "icon": "⏱️",
+            "text": "useEffect: đồng bộ thứ NGOÀI React, sau render — KHÔNG dùng để derive giá trị",
+            "sentence": 1
+          },
+          {
+            "icon": "🧹",
+            "text": "Cleanup (return trong effect): chạy TRƯỚC effect kế tiếp, và khi unmount",
+            "sentence": 2
+          },
+          {
+            "icon": "📋",
+            "text": "Dependency array: đổi giá trị nào trong mảng, effect chạy lại đúng lúc đó",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep46/scene-02-0-b89aa8e7.wav",
+          "startFrame": 0,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep46/scene-02-1-2f604219.wav",
+          "startFrame": 157,
+          "durationInFrames": 291
+        },
+        {
+          "file": "audio/ep46/scene-02-2-634c5d0f.wav",
+          "startFrame": 456,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep46/scene-02-3-93d35d42.wav",
+          "startFrame": 628,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 826
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "R2Effects.tsx",
+        "language": "tsx",
+        "code": "import {useCallback, useEffect, useState} from 'react';\n\nfunction Child({count, log}: {count: number; log: (line: string) => void}) {\n  useEffect(() => {\n    log(`effect chạy — count = ${count}`);\n    return () => log(`cleanup chạy (trước lần sau / khi unmount) — count = ${count}`);\n  }, [count, log]);\n  return <p>Con đang mount, count = {count}</p>;\n}\n\nexport function R2Effects() {\n  const [count, setCount] = useState(0);\n  const [mounted, setMounted] = useState(true);\n  const [lines, setLines] = useState<string[]>([]);\n  const log = useCallback((line: string) => setLines((prev) => [...prev, line]), []);\n\n  return (\n    <div style={{border: '1px solid #ddd', borderRadius: 8, padding: 16}}>\n      <button onClick={() => setCount((c) => c + 1)}>Tăng count (= {count})</button>{' '}\n      <button onClick={() => setMounted((m) => !m)}>{mounted ? 'Tắt component con' : 'Bật component con'}</button>{' '}\n      <button onClick={() => setLines([])}>Xóa log</button>\n      <div style={{marginTop: 12}}>{mounted && <Child count={count} log={log} />}</div>",
+        "steps": [
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 4,
+            "to": 7,
+            "sentence": 2
+          },
+          {
+            "from": 11,
+            "to": 14,
+            "sentence": 3
+          },
+          {
+            "from": 19,
+            "to": 22,
+            "sentence": 4
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep46/scene-03-0-c63231c9.wav",
+          "startFrame": 0,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep46/scene-03-1-b4e8e602.wav",
+          "startFrame": 169,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep46/scene-03-2-b55fd6bf.wav",
+          "startFrame": 317,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep46/scene-03-3-ecbe73e6.wav",
+          "startFrame": 493,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep46/scene-03-4-b1b73f12.wav",
+          "startFrame": 674,
+          "durationInFrames": 214
+        }
+      ],
+      "durationInFrames": 906
+    },
+    {
+      "id": "scene-04",
+      "type": "browser",
+      "visual": {
+        "title": "Demo thật: log effect và cleanup đúng thứ tự",
+        "shots": [
+          {
+            "src": "screens/feqa/r2-main.png",
+            "sentence": 0,
+            "label": "React QA — R2 useState vs useEffect",
+            "url": "localhost:5197 — React QA"
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🟢",
+            "text": "Tăng count → log: 'effect chạy — count = 0'",
+            "sentence": 1
+          },
+          {
+            "icon": "🧹",
+            "text": "Ngay sau: 'cleanup chạy (trước lần sau) — count = 0'",
+            "sentence": 1
+          },
+          {
+            "icon": "🔁",
+            "text": "Thứ tự luôn là: cleanup CŨ trước → effect MỚI sau — không chạy trước render",
+            "sentence": 2
+          },
+          {
+            "icon": "🔌",
+            "text": "Tắt component con → dòng cleanup cuối xuất hiện khi unmount",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep46/scene-04-0-a58f7bc2.wav",
+          "startFrame": 0,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep46/scene-04-1-eada4414.wav",
+          "startFrame": 128,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep46/scene-04-2-e420957c.wav",
+          "startFrame": 307,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep46/scene-04-3-1c33f790.wav",
+          "startFrame": 481,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 665
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "🎤",
+            "text": "Chốt gọn 3 câu — học thuộc luôn được",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "useState: giữ state nội bộ — gọi hàm set → component re-render",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "useEffect: đồng bộ ngoài React — luôn chạy SAU khi render xong",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Cleanup: chạy TRƯỚC mỗi effect kế tiếp, không chỉ khi unmount",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: effect KHÔNG chạy trước render; cleanup chạy trước MỌI effect kế, không chỉ unmount",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep46/scene-05-0-32ac7d8d.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep46/scene-05-1-76740ee1.wav",
+          "startFrame": 107,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep46/scene-05-2-fdc2481b.wav",
+          "startFrame": 250,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep46/scene-05-3-0d0a462f.wav",
+          "startFrame": 450,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep46/scene-05-4-92b95bce.wav",
+          "startFrame": 612,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 837
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 2/12 hoàn tất — hẹn gặp câu 3!",
+        "summary": [
+          {
+            "text": "useState = state nội bộ; useEffect = đồng bộ ngoài React, luôn chạy SAU render",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: vì sao list cần key — bẫy dùng index làm key",
+            "sentence": 2
+          },
+          {
+            "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+            "sentence": 3
+          }
+        ],
+        "next": "Câu 3/12: Vì sao list cần `key`? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep46/scene-06-0-c7185c36.wav",
+          "startFrame": 0,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep46/scene-06-1-b727bcd3.wav",
+          "startFrame": 205,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep46/scene-06-2-f6debcca.wav",
+          "startFrame": 381,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep46/scene-06-3-67a4a22f.wav",
+          "startFrame": 574,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep46/scene-06-4-db9e20ec.wav",
+          "startFrame": 738,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 850
+    }
+  ]
+}

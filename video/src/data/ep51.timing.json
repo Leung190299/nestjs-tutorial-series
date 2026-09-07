@@ -1,0 +1,321 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #7: Ref và reactive khác nhau thế nào?",
+        "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 7/12",
+        "badge": "Câu 7"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep51/scene-01-0-06e66192.wav",
+          "startFrame": 0,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep51/scene-01-1-9cab34cb.wav",
+          "startFrame": 215,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep51/scene-01-2-afd014f9.wav",
+          "startFrame": 466,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 691
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "ref vs reactive",
+        "bullets": [
+          {
+            "icon": "📦",
+            "text": "ref bọc MỌI kiểu giá trị trong object có .value — template tự unwrap, không cần .value ở đó",
+            "sentence": 0
+          },
+          {
+            "icon": "🪞",
+            "text": "reactive chỉ nhận object/array, tạo Proxy SÂU — truy cập trực tiếp property, không có .value",
+            "sentence": 1
+          },
+          {
+            "icon": "⚠️",
+            "text": "Luật: destructure khỏi reactive = LẤY GIÁ TRỊ, MẤT liên kết Proxy — biến local không còn được track",
+            "sentence": 2
+          },
+          {
+            "icon": "🔧",
+            "text": "Né bẫy: dùng toRefs(state) để tách property thành ref riêng, giữ nguyên khả năng track khi destructure",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep51/scene-02-0-e642af7f.wav",
+          "startFrame": 0,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep51/scene-02-1-bc5f02fa.wav",
+          "startFrame": 251,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep51/scene-02-2-dabcb955.wav",
+          "startFrame": 478,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep51/scene-02-3-f6f44f35.wav",
+          "startFrame": 731,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 987
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "V1RefReactive.vue (script setup)",
+        "language": "typescript",
+        "code": "import {reactive, ref} from 'vue';\n\nconst state = reactive({count: 0});\n// BẪY: destructure từ reactive → biến thường, MẤT reactivity\nlet {count: broken} = state;\n\n// So sánh thêm: ref (qua .value) không dính bẫy destructure kiểu này\nconst counterRef = ref(0);\n\nfunction tangReactive() {\n  state.count++;\n}\n\nfunction tangBroken() {\n  broken++; // tăng thật, nhưng Vue không track được nên không tự re-render\n}\n\nfunction tangRef() {\n  counterRef.value++;\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 20,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 5,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 8,
+            "sentence": 2
+          },
+          {
+            "from": 10,
+            "to": 16,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 20,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep51/scene-03-0-9f9bd4be.wav",
+          "startFrame": 0,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep51/scene-03-1-556c16f7.wav",
+          "startFrame": 179,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep51/scene-03-2-27e38e81.wav",
+          "startFrame": 432,
+          "durationInFrames": 262
+        },
+        {
+          "file": "audio/ep51/scene-03-3-a1ed2492.wav",
+          "startFrame": 702,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep51/scene-03-4-b73ab74b.wav",
+          "startFrame": 950,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 1062
+    },
+    {
+      "id": "scene-04",
+      "type": "browser",
+      "visual": {
+        "title": "Demo thật: bấm destructure đứng im — bấm reactive lộ giá trị ngầm",
+        "shots": [
+          {
+            "src": "screens/feqa/v1-frozen.png",
+            "sentence": 0,
+            "label": "Vue QA — sau 3 lần bấm \"Tăng bản destructure\"",
+            "url": "localhost:5196 — Vue QA"
+          },
+          {
+            "src": "screens/feqa/v1-main.png",
+            "sentence": 3,
+            "label": "Vue QA — sau 1 lần bấm \"Tăng reactive.count\"",
+            "url": "localhost:5196 — Vue QA"
+          }
+        ],
+        "sequential": true,
+        "bullets": [
+          {
+            "icon": "⏸️",
+            "text": "3 lần 'Tăng bản destructure' → reactive.count: 0, biến destructure: 0 — ĐỨNG IM HOÀN TOÀN",
+            "sentence": 2
+          },
+          {
+            "icon": "💥",
+            "text": "1 lần 'Tăng reactive.count' → reactive.count: 1, biến destructure: 3 — LỘ GIÁ TRỊ NGẦM!",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep51/scene-04-0-3b8f23b5.wav",
+          "startFrame": 0,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep51/scene-04-1-b00e95d9.wav",
+          "startFrame": 191,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep51/scene-04-2-6c637dd1.wav",
+          "startFrame": 322,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep51/scene-04-3-c7dc4be9.wav",
+          "startFrame": 558,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep51/scene-04-4-b8858dcb.wav",
+          "startFrame": 756,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 954
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "🎤",
+            "text": "Chốt gọn — học thuộc luôn được",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "ref qua .value; reactive là Proxy sâu cho object, truy cập trực tiếp property",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Destructure reactive = lấy giá trị tại thời điểm đó, MẤT liên kết Proxy",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Giá trị vẫn tăng thật trong closure — chỉ ẩn tới khi có render khác kích hoạt, KHÔNG đứng yên mãi mãi",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: destructure an toàn thì dùng toRefs(state) (hoặc storeToRefs(store) với Pinia)",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep51/scene-05-0-e69ab072.wav",
+          "startFrame": 0,
+          "durationInFrames": 89
+        },
+        {
+          "file": "audio/ep51/scene-05-1-8c09119d.wav",
+          "startFrame": 97,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep51/scene-05-2-b92d5969.wav",
+          "startFrame": 281,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep51/scene-05-3-4a777d44.wav",
+          "startFrame": 508,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep51/scene-05-4-5be8c128.wav",
+          "startFrame": 713,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 919
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 1/6 phần Vue hoàn tất — hẹn gặp lại câu 2!",
+        "summary": [
+          {
+            "text": "ref bọc giá trị qua .value; reactive tạo Proxy sâu cho object, không có .value",
+            "sentence": 0
+          },
+          {
+            "text": "Destructure khỏi reactive = mất liên kết Proxy — dữ liệu vẫn đổi ngầm, chỉ ẩn tới khi có render khác lộ ra; an toàn thì dùng toRefs(state)",
+            "sentence": 1
+          },
+          {
+            "text": "Phần Vue đã có câu 1/6 — tiếp theo: Options API vs Composition API",
+            "sentence": 2
+          },
+          {
+            "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+            "sentence": 3
+          }
+        ],
+        "next": "Câu 2/12 phần Vue: Composition API vs Options API khác nhau thế nào? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep51/scene-06-0-b5235731.wav",
+          "startFrame": 0,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep51/scene-06-1-4a1f8892.wav",
+          "startFrame": 179,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep51/scene-06-2-69a80172.wav",
+          "startFrame": 403,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep51/scene-06-3-dbb1149e.wav",
+          "startFrame": 615,
+          "durationInFrames": 140
+        }
+      ],
+      "durationInFrames": 773
+    }
+  ]
+}

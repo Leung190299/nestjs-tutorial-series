@@ -1,0 +1,208 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu tiếp theo phần Vue: vì sao v-for cần :key, và vì sao KHÔNG nên dùng index của mảng làm key?",
+      "Nếu bạn đã xem câu ba phần React — key trong danh sách — thì xin chào mừng gặp lại người quen: bẫy này giống hệt, chỉ đổi framework.",
+      "Nghe thì đơn giản, nhưng đây là bẫy gây bug âm thầm nhiều nhất — demo ngay sau đây sẽ chứng minh Vue cũng dính y hệt."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #11: :key trong v-for — vì sao không dùng index?",
+      "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 11/12",
+      "badge": "Câu 11"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      ":key trong v-for cũng là 'chứng minh thư' của mỗi phần tử — y hệt vai trò của key bên React.",
+      "Vue mặc định patch danh sách theo kiểu 'tại chỗ' dựa trên VỊ TRÍ; :key giúp Vue nhận diện đúng node để reuse hay tạo mới thay vì đoán nhầm.",
+      ":key=\"index\" nghĩa là chứng minh thư đổi theo VỊ TRÍ chứ không theo phần tử — thêm, xóa, sắp xếp lại là gắn nhầm người, giống hệt bẫy bên React.",
+      "Hậu quả: DOM node và state gắn trên nó, như giá trị input, bị tái sử dụng SAI chỗ — trông như lỗi ngẫu nhiên nhưng rất có quy luật."
+    ],
+    "visual": {
+      "title": ":key trong v-for là gì, tại sao quan trọng",
+      "bullets": [
+        {
+          "icon": "🪪",
+          "text": ":key = 'chứng minh thư' của phần tử — Vue cũng diff cây cũ/mới, y hệt React",
+          "sentence": 0
+        },
+        {
+          "icon": "🔍",
+          "text": "Vue patch theo VỊ TRÍ (in-place) nếu thiếu key ổn định — dễ nhận nhầm node",
+          "sentence": 1
+        },
+        {
+          "icon": "🔀",
+          "text": ":key=\"index\": đổi theo VỊ TRÍ — thêm/xóa/sắp xếp lại là gắn nhầm, giống bẫy React",
+          "sentence": 2
+        },
+        {
+          "icon": "⚠️",
+          "text": "Hậu quả: DOM node và state con (như giá trị input) bị tái sử dụng SAI chỗ",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là component demo thật — V5KeyVFor.vue — cũng dựng hai list giống hệt nhau, chỉ khác cách đặt key.",
+      "Khối bên trái dùng v-for với :key=\"i\" — chỉ số vị trí trong mảng itemsIndex.",
+      "Khối bên phải dùng :key=\"item\" — chính giá trị của phần tử, không phụ thuộc vị trí.",
+      "Mỗi dòng đều có ô input ghi chú và nút Xóa gọi filter bỏ phần tử khỏi mảng — cấu trúc giống hệt bên React ở câu R3.",
+      "Bấm Xóa, hai list này sẽ phản ứng hoàn toàn khác nhau — xem ngay ở demo trình duyệt tiếp theo."
+    ],
+    "visual": {
+      "filename": "V5KeyVFor.vue (template)",
+      "language": "markup",
+      "code": "  <div style=\"display: flex; gap: 16px; flex-wrap: wrap;\">\n    <div style=\"border: 1px solid #ddd; border-radius: 8px; padding: 16px; flex: 1;\">\n      <b>:key=\"index\" — SAI</b>\n      <div v-for=\"(item, i) in itemsIndex\" :key=\"i\" style=\"display: flex; gap: 8px; margin-top: 8px;\">\n        <span style=\"width: 90px;\">{{ item }}</span>\n        <input placeholder=\"ghi chú...\" />\n        <button @click=\"xoaIndex(item)\">Xóa</button>\n      </div>\n    </div>\n    <div style=\"border: 1px solid #ddd; border-radius: 8px; padding: 16px; flex: 1;\">\n      <b>:key=\"item\" — ĐÚNG</b>\n      <div v-for=\"item in itemsKey\" :key=\"item\" style=\"display: flex; gap: 8px; margin-top: 8px;\">\n        <span style=\"width: 90px;\">{{ item }}</span>\n        <input placeholder=\"ghi chú...\" />\n        <button @click=\"xoaKey(item)\">Xóa</button>\n      </div>\n    </div>\n  </div>",
+      "steps": [
+        {
+          "from": 1,
+          "to": 18,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 9,
+          "sentence": 1
+        },
+        {
+          "from": 10,
+          "to": 17,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 18,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 18,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "browser",
+    "narration": [
+      "Đây là app demo thật — vue-qa cổng 5196, câu v5: mỗi dòng có ô ghi chú, đã gõ sẵn phở, bánh, cơm, khớp đúng từng món.",
+      "Giờ bấm Xóa dòng 'Phở bò' ở CẢ HAI bên — xem điều gì xảy ra với ghi chú của các dòng còn lại.",
+      "Bên trái, :key=\"index\": ghi chú NHẢY SAI dòng — 'Bánh mì' hiện ghi chú 'phở', 'Cơm tấm' hiện 'bánh' — y hệt bẫy bên React ở câu R3.",
+      "Bên phải, :key=\"item\": ghi chú vẫn đúng — 'Bánh mì' giữ 'bánh', 'Cơm tấm' giữ 'cơm', không hề xáo trộn."
+    ],
+    "visual": {
+      "title": "Demo thật: xóa 1 dòng, ghi chú nhảy sai chỗ — y hệt bẫy R3",
+      "shots": [
+        {
+          "src": "screens/feqa/v5-before.png",
+          "sentence": 0,
+          "label": "TRƯỚC khi xóa — cả hai bên đều đúng",
+          "url": "localhost:5196 — Vue QA"
+        },
+        {
+          "src": "screens/feqa/v5-bug.png",
+          "sentence": 1,
+          "label": "SAU khi xóa 'Phở bò'",
+          "url": "localhost:5196 — Vue QA"
+        }
+      ],
+      "sequential": true,
+      "bullets": [
+        {
+          "icon": "❌",
+          "text": ":key=\"index\": 'Bánh mì' → ghi chú 'phở', 'Cơm tấm' → ghi chú 'bánh' — SAI, y hệt bẫy R3",
+          "sentence": 2
+        },
+        {
+          "icon": "✅",
+          "text": ":key=\"item\": 'Bánh mì' → 'bánh', 'Cơm tấm' → 'cơm' — vẫn ĐÚNG, không xáo trộn",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — chốt gọn trong ba câu, học thuộc luôn được.",
+      "Câu một: :key giúp Vue nhận diện phần tử nào giữ nguyên, thêm mới, xóa hay bị di chuyển giữa các lần render — cùng một luật với React.",
+      "Câu hai: :key=\"index\" chỉ AN TOÀN khi list KHÔNG BAO GIỜ thêm, xóa hay sắp xếp lại — tức là list tĩnh.",
+      "Câu ba: cách đúng là dùng một giá trị ổn định và duy nhất của chính phần tử — như id hoặc tên món — làm key.",
+      "Bẫy chốt của cả series: cùng một luật cho cả hai framework — học một lần, dùng được hai nơi; đừng bao giờ dùng key=index khi list có thêm, xóa hoặc sắp xếp lại."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "🎤",
+          "text": "Chốt gọn 3 câu — học thuộc luôn được",
+          "sentence": 0
+        },
+        {
+          "icon": "1️⃣",
+          "text": ":key: giúp Vue nhận diện phần tử nào giữ nguyên/thêm/xóa/di chuyển — cùng luật với React",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": ":key=\"index\": chỉ tạm chấp nhận khi list TĨNH — không thêm/xóa/sắp xếp lại",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Cách đúng: dùng giá trị ổn định, duy nhất của chính phần tử (id, tên) làm key",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "Bẫy: cùng một luật cả 2 framework — học 1 lần dùng 2 nơi; đừng key=index khi list thêm/xóa/sort",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu năm phần Vue — :key chính là chứng minh thư giúp Vue nhận diện đúng phần tử giữa các lần render, cùng một luật với React.",
+      "Nhớ đúng ranh giới: :key=\"index\" chỉ tạm ổn với list tĩnh; hễ list có thêm, xóa hay sắp xếp lại là phải đổi sang key ổn định của phần tử.",
+      "Câu tiếp theo cũng là câu cuối cùng của lô một phía Vue: Props truyền xuống, Emit bắn lên — giao tiếp cha con hoạt động thế nào.",
+      "Video này cũng có bản Shorts 60 giây — cùng câu hỏi, rút gọn lại để ôn nhanh trước khi vào phỏng vấn.",
+      "Và nhắc lại: nếu câu này làm bạn nhớ tới bẫy key={index} bên React ở câu ba — đúng vậy, học một lần, áp dụng được cả hai nơi."
+    ],
+    "visual": {
+      "title": "Câu 5/6 phần Vue hoàn tất — hẹn gặp lại câu 6!",
+      "summary": [
+        {
+          "text": "key = chứng minh thư của phần tử — cùng luật cả 2 framework",
+          "sentence": 0
+        },
+        {
+          "text": "key=index chỉ ổn với list TĨNH, không thêm/xóa/sắp xếp",
+          "sentence": 1
+        },
+        {
+          "text": "Câu sau (cuối lô 1 Vue): Props xuống, Emit lên",
+          "sentence": 2
+        },
+        {
+          "text": "Có bản Shorts 60 giây — ôn nhanh trước phỏng vấn",
+          "sentence": 3
+        }
+      ],
+      "next": "Câu 6/6 phần Vue: Props & Emit hoạt động thế nào? 🎤"
+    }
+  }
+]

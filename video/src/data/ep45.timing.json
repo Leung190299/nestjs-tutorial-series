@@ -1,0 +1,325 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #1: Virtual DOM là gì?",
+        "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 1/12",
+        "badge": "Series mới · Câu 1"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep45/scene-01-0-a94e7ccd.wav",
+          "startFrame": 0,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep45/scene-01-1-2b07fc9d.wav",
+          "startFrame": 164,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep45/scene-01-2-e548ed94.wav",
+          "startFrame": 292,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep45/scene-01-3-f64966fa.wav",
+          "startFrame": 550,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 775
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Virtual DOM là gì?",
+        "bullets": [
+          {
+            "icon": "🧠",
+            "text": "Bản sao NHẸ của DOM thật — sống trong bộ nhớ JavaScript",
+            "sentence": 0
+          },
+          {
+            "icon": "🔍",
+            "text": "State đổi → dựng cây mới → diff với cây cũ để tìm khác biệt",
+            "sentence": 1
+          },
+          {
+            "icon": "⚙️",
+            "text": "Reconciliation = thuật toán diff — quyết định giữ, vá, xóa hay thêm node",
+            "sentence": 2
+          },
+          {
+            "icon": "🩹",
+            "text": "Chỉ vá đúng phần thật sự đổi vào DOM thật — không render lại toàn bộ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep45/scene-02-0-5d3a42c0.wav",
+          "startFrame": 0,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep45/scene-02-1-ffb1275e.wav",
+          "startFrame": 191,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep45/scene-02-2-9be64780.wav",
+          "startFrame": 382,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep45/scene-02-3-63de7684.wav",
+          "startFrame": 585,
+          "durationInFrames": 173
+        }
+      ],
+      "durationInFrames": 776
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "R1VirtualDom.tsx",
+        "language": "tsx",
+        "code": "import {useRef, useState} from 'react';\n\nexport function R1VirtualDom() {\n  const [count, setCount] = useState(0);\n  const staticRef = useRef<HTMLSpanElement>(null);\n  const mountedAt = useRef<number | null>(null);\n\n  if (mountedAt.current === null) {\n    mountedAt.current = performance.now();\n  }\n\n  return (\n    <div style={{border: '1px solid #ddd', borderRadius: 8, padding: 16}}>\n      <button onClick={() => setCount((c) => c + 1)}>Re-render (count = {count})</button>\n      <div style={{display: 'flex', gap: 16, marginTop: 16, flexWrap: 'wrap'}}>\n        <div style={{border: '1px dashed #aaa', borderRadius: 8, padding: 12, flex: 1}}>\n          <b>Ô tĩnh — DOM node KHÔNG đổi</b>\n          <p>\n            Mounted lúc: <span ref={staticRef}>{mountedAt.current.toFixed(2)}</span> ms\n          </p>\n          <p style={{color: '#666', fontSize: 13}}>\n            Con số này không đổi qua mỗi lần re-render — chứng tỏ React không hủy/tạo lại node,",
+        "steps": [
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 10,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 10,
+            "sentence": 2
+          },
+          {
+            "from": 16,
+            "to": 19,
+            "sentence": 3
+          },
+          {
+            "from": 21,
+            "to": 22,
+            "sentence": 4
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep45/scene-03-0-aee0fb06.wav",
+          "startFrame": 0,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep45/scene-03-1-0a90da43.wav",
+          "startFrame": 109,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep45/scene-03-2-e3ca4452.wav",
+          "startFrame": 348,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep45/scene-03-3-0aeaf9c3.wav",
+          "startFrame": 534,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep45/scene-03-4-01f882cb.wav",
+          "startFrame": 739,
+          "durationInFrames": 192
+        }
+      ],
+      "durationInFrames": 949
+    },
+    {
+      "id": "scene-04",
+      "type": "browser",
+      "visual": {
+        "title": "Demo thật: DOM node tĩnh không remount",
+        "shots": [
+          {
+            "src": "screens/feqa/r1-main.png",
+            "sentence": 0,
+            "label": "React QA — R1 Virtual DOM",
+            "url": "localhost:5197 — React QA"
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🟢",
+            "text": "Ô trái — 'Mounted lúc' đứng yên qua mọi lần re-render",
+            "sentence": 1
+          },
+          {
+            "icon": "🔵",
+            "text": "Ô phải — chỉ số 'count' đổi theo mỗi lần bấm nút",
+            "sentence": 1
+          },
+          {
+            "icon": "🔁",
+            "text": "Bấm 20 lần: mốc thời gian không nhích — DOM node không bị hủy/tạo lại",
+            "sentence": 2
+          },
+          {
+            "icon": "✅",
+            "text": "Bằng chứng reconciliation: vá đúng chỗ, không đập lại toàn bộ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep45/scene-04-0-a58f7bc2.wav",
+          "startFrame": 0,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep45/scene-04-1-4a2b4654.wav",
+          "startFrame": 128,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep45/scene-04-2-2a50e502.wav",
+          "startFrame": 292,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep45/scene-04-3-9629e1fc.wav",
+          "startFrame": 495,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 677
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "🎤",
+            "text": "Chốt gọn 3 câu — học thuộc luôn được",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "Virtual DOM: bản sao nhẹ của DOM thật, sống trong bộ nhớ JS",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Reconciliation: thuật toán diff so cây cũ với cây mới",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Vá tối thiểu vào DOM thật — tránh thao tác DOM tốn kém không cần thiết",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: KHÔNG phải lúc nào cũng nhanh hơn DOM thật — đây là CHIẾN LƯỢC tránh thao tác thừa, không phải phép màu tốc độ",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep45/scene-05-0-32ac7d8d.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep45/scene-05-1-9ff64894.wav",
+          "startFrame": 107,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep45/scene-05-2-5888d1ab.wav",
+          "startFrame": 238,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep45/scene-05-3-c718e85a.wav",
+          "startFrame": 405,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep45/scene-05-4-e5e2a73d.wav",
+          "startFrame": 569,
+          "durationInFrames": 284
+        }
+      ],
+      "durationInFrames": 871
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 1/12 hoàn tất — hẹn gặp câu 2!",
+        "summary": [
+          {
+            "text": "Virtual DOM = bản sao nhẹ + diff + vá tối thiểu, không phải 'luôn nhanh hơn'",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: useState vs useEffect — bẫy dùng effect để tính toán lại",
+            "sentence": 1
+          },
+          {
+            "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 2/12: useState vs useEffect — khi nào dùng gì? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep45/scene-06-0-3180a25d.wav",
+          "startFrame": 0,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep45/scene-06-1-5e5677bd.wav",
+          "startFrame": 239,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep45/scene-06-2-f778b988.wav",
+          "startFrame": 485,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep45/scene-06-3-12cffa03.wav",
+          "startFrame": 659,
+          "durationInFrames": 89
+        }
+      ],
+      "durationInFrames": 766
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "useState và useEffect khác nhau thế nào? Câu hỏi React hay gặp nhất.",
+      "Trả lời chuẩn trong 60 giây."
+    ],
+    "visual": {
+      "question": "useState và useEffect khác nhau thế nào?",
+      "framework": "react"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "useEffect chạy SAU render — hàm return bên trong chính là cleanup.",
+      "Mỗi lần count đổi, effect log ra giá trị mới sau khi render xong.",
+      "Cleanup chạy TRƯỚC effect kế tiếp — không phải chỉ khi unmount."
+    ],
+    "visual": {
+      "filename": "R2Effects.tsx",
+      "language": "tsx",
+      "code": "useEffect(() => {\n  log(`effect: count=${count}`);\n  return () => {\n    log(`cleanup: count=${count}`);\n  };\n}, [count]);",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 3,
+          "to": 6,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Demo thật — log hiện đúng thứ tự: effect rồi cleanup.",
+      "Tắt component con: dòng cleanup cuối xuất hiện khi unmount."
+    ],
+    "visual": {
+      "src": "screens/feqa/r2-vert.png",
+      "caption": "Log: effect → cleanup → effect tiếp theo"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "useState giữ state nội bộ — gọi hàm set khiến component re-render.",
+      "useEffect đồng bộ với thứ ngoài React, luôn chạy SAU render — không phải trước.",
+      "Bẫy: cleanup chạy trước MỖI effect kế tiếp, không chỉ khi unmount."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "✅",
+          "text": "useState: state nội bộ — gọi set → component re-render",
+          "sentence": 0
+        },
+        {
+          "icon": "⏱️",
+          "text": "useEffect: đồng bộ ngoài React, luôn chạy SAU render",
+          "sentence": 1
+        }
+      ],
+      "trap": "Cleanup chạy trước MỖI effect kế, không chỉ khi unmount"
+    }
+  }
+]

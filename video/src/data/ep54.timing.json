@@ -1,0 +1,299 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #10: v-if và v-show khác nhau thế nào?",
+        "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 10/12",
+        "badge": "Câu 10"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep54/scene-01-0-2ce5f0fe.wav",
+          "startFrame": 0,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep54/scene-01-1-3a093917.wav",
+          "startFrame": 174,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep54/scene-01-2-d00c0de9.wav",
+          "startFrame": 334,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 504
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "v-if vs v-show",
+        "bullets": [
+          {
+            "icon": "🔀",
+            "text": "v-if: thêm/xóa HẲN khỏi DOM — ẩn là unmount thật, state con (chữ đã gõ) bị hủy",
+            "sentence": 0
+          },
+          {
+            "icon": "💸",
+            "text": "v-if: chi phí TOGGLE cao (tạo lại mỗi lần), nhưng lazy — hỗ trợ v-else/v-else-if",
+            "sentence": 1
+          },
+          {
+            "icon": "👁️",
+            "text": "v-show: LUÔN render, tồn tại sẵn trong DOM — toggle chỉ đổi CSS display, state giữ nguyên",
+            "sentence": 2
+          },
+          {
+            "icon": "⚡",
+            "text": "v-show: render ban đầu tốn hơn chút, nhưng TOGGLE mỗi lần rất RẺ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep54/scene-02-0-0bc8b289.wav",
+          "startFrame": 0,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep54/scene-02-1-7cc66355.wav",
+          "startFrame": 205,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep54/scene-02-2-b7b8cd69.wav",
+          "startFrame": 465,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep54/scene-02-3-8d05674f.wav",
+          "startFrame": 663,
+          "durationInFrames": 219
+        }
+      ],
+      "durationInFrames": 900
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "V4IfShow.vue (template)",
+        "language": "markup",
+        "code": "  <p style=\"color: #666;\">\n    Gõ chữ vào cả 2 ô rồi bấm toggle: v-if MẤT chữ (unmount thật), v-show GIỮ chữ (chỉ ẩn CSS).\n  </p>\n  <div style=\"display: flex; gap: 16px; flex-wrap: wrap;\">\n    <div style=\"border: 1px solid #ddd; border-radius: 8px; padding: 16px; flex: 1;\">\n      <b>v-if</b>\n      <button @click=\"showIf = !showIf\">{{ showIf ? 'Ẩn (unmount)' : 'Hiện (mount lại)' }}</button>\n      <div v-if=\"showIf\" style=\"margin-top: 8px;\">\n        <input placeholder=\"gõ gì đó...\" />\n      </div>\n      <p v-else style=\"margin-top: 8px; color: #999;\">(đã unmount khỏi DOM)</p>\n    </div>\n    <div style=\"border: 1px solid #ddd; border-radius: 8px; padding: 16px; flex: 1;\">\n      <b>v-show</b>\n      <button @click=\"showShow = !showShow\">{{ showShow ? 'Ẩn (display:none)' : 'Hiện lại' }}</button>\n      <div v-show=\"showShow\" style=\"margin-top: 8px;\">\n        <input placeholder=\"gõ gì đó...\" />\n      </div>\n    </div>\n  </div>",
+        "steps": [
+          {
+            "from": 1,
+            "to": 20,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 11,
+            "sentence": 1
+          },
+          {
+            "from": 13,
+            "to": 19,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 20,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep54/scene-03-0-f1c3f8a6.wav",
+          "startFrame": 0,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep54/scene-03-1-468ea7d3.wav",
+          "startFrame": 138,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep54/scene-03-2-64ee1fb7.wav",
+          "startFrame": 365,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep54/scene-03-3-b442559b.wav",
+          "startFrame": 565,
+          "durationInFrames": 200
+        }
+      ],
+      "durationInFrames": 783
+    },
+    {
+      "id": "scene-04",
+      "type": "browser",
+      "visual": {
+        "title": "Demo thật: v-if mất chữ, v-show giữ chữ",
+        "shots": [
+          {
+            "src": "screens/feqa/v4-main.png",
+            "sentence": 0,
+            "label": "Vue QA — v-if vs v-show: gõ chữ rồi toggle",
+            "url": "localhost:5196 — Vue QA"
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🔴",
+            "text": "Bấm hiện lại: ô v-if TRỐNG TRƠN — chữ vừa gõ đã mất vì phần tử vừa unmount rồi mount lại",
+            "sentence": 2
+          },
+          {
+            "icon": "🟢",
+            "text": "Ô v-show vẫn giữ nguyên chữ — phần tử KHÔNG hề bị hủy, chỉ CSS display:none che đi",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep54/scene-04-0-ae2adc5c.wav",
+          "startFrame": 0,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep54/scene-04-1-6da94d0c.wav",
+          "startFrame": 179,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep54/scene-04-2-c42a17c2.wav",
+          "startFrame": 303,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep54/scene-04-3-d937e229.wav",
+          "startFrame": 482,
+          "durationInFrames": 200
+        }
+      ],
+      "durationInFrames": 700
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "🎤",
+            "text": "Chốt gọn — học thuộc luôn được",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "v-if: unmount thật, mất state con — nhưng lazy, hỗ trợ v-else/v-else-if",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "v-show: luôn render, chỉ toggle CSS display — state con giữ nguyên, toggle RẺ",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Quy tắc: toggle THƯỜNG XUYÊN → v-show; điều kiện ít đổi/nặng → v-if (lazy-init)",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: v-show KHÔNG dùng được với v-else, KHÔNG áp dụng trên <template>",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep54/scene-05-0-e69ab072.wav",
+          "startFrame": 0,
+          "durationInFrames": 82
+        },
+        {
+          "file": "audio/ep54/scene-05-1-a430f108.wav",
+          "startFrame": 90,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep54/scene-05-2-00429f14.wav",
+          "startFrame": 288,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep54/scene-05-3-2b7e82d3.wav",
+          "startFrame": 455,
+          "durationInFrames": 257
+        },
+        {
+          "file": "audio/ep54/scene-05-4-dfc95455.wav",
+          "startFrame": 720,
+          "durationInFrames": 178
+        }
+      ],
+      "durationInFrames": 916
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 4/6 phần Vue hoàn tất — hẹn gặp lại câu 5!",
+        "summary": [
+          {
+            "text": "v-if: unmount thật — mất state con, lazy render",
+            "sentence": 0
+          },
+          {
+            "text": "v-show: luôn render, chỉ toggle CSS — state giữ nguyên",
+            "sentence": 1
+          },
+          {
+            "text": "Toggle nhiều → v-show; điều kiện nặng/ít đổi → v-if",
+            "sentence": 2
+          },
+          {
+            "text": "Câu 4/6 xong — tiếp theo: key trong v-for (giống bẫy R3!)",
+            "sentence": 3
+          }
+        ],
+        "next": "Câu 5/12 phần Vue: :key trong v-for vì sao không dùng index? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep54/scene-06-0-3c1ea0b9.wav",
+          "startFrame": 0,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep54/scene-06-1-492f06e3.wav",
+          "startFrame": 191,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep54/scene-06-2-6dd52a72.wav",
+          "startFrame": 396,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep54/scene-06-3-d04f7a50.wav",
+          "startFrame": 601,
+          "durationInFrames": 82
+        }
+      ],
+      "durationInFrames": 701
+    }
+  ]
+}

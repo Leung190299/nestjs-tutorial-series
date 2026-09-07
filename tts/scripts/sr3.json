@@ -1,0 +1,87 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Vì sao list cần key? Và vì sao dùng index làm key lại là bẫy hay gặp nhất.",
+      "Trả lời chuẩn trong 60 giây."
+    ],
+    "visual": {
+      "question": "Vì sao list cần key? Bẫy key=index",
+      "framework": "react"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Dòng key này quyết định React nhận diện đúng hay sai phần tử trong danh sách.",
+      "key={useIndex ? i : item} — dùng chỉ số i là SAI, dùng chính item mới ĐÚNG.",
+      "Xóa một dòng ở giữa, index của các dòng SAU sẽ đổi — kéo theo state bị gắn nhầm."
+    ],
+    "visual": {
+      "filename": "R3KeyProp.tsx",
+      "language": "tsx",
+      "code": "items.map((item, i) => (\n  <div\n    key={useIndex ? i : item}\n  >\n    <input />\n    <button onClick={() =>\n      setItems(items.filter(\n        (x) => x !== item\n      ))\n    }>Xóa</button>\n  </div>\n))",
+      "steps": [
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 6,
+          "to": 9,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 12,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Xóa dòng đầu tiên — bên trái dùng key=index, ghi chú các dòng sau bị NHẢY SAI.",
+      "Bên phải dùng key=item, ghi chú vẫn đúng — không hề bị xáo trộn."
+    ],
+    "visual": {
+      "src": "screens/feqa/r3-vert.png",
+      "caption": "Ghi chú nhảy sai dòng vì key=index"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "key giúp React nhận diện đúng phần tử — giữ nguyên, thêm, xóa hay di chuyển.",
+      "Cách đúng: dùng giá trị ổn định của chính phần tử — như id hay tên — làm key.",
+      "Bẫy: key=index cộng với thêm, xóa hoặc sắp xếp lại danh sách là state đi lạc ngay."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "✅",
+          "text": "key: giúp React nhận diện đúng phần tử giữa các lần render",
+          "sentence": 0
+        },
+        {
+          "icon": "🪪",
+          "text": "Cách đúng: dùng giá trị ổn định của phần tử (id, tên) làm key",
+          "sentence": 1
+        }
+      ],
+      "trap": "key=index + thêm/xóa/sort = state đi lạc"
+    }
+  }
+]

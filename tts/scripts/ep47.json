@@ -1,0 +1,204 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu hỏi tiếp theo trong buổi phỏng vấn Frontend: vì sao React cần `key` khi render một danh sách?",
+      "Và câu hỏi vặn kinh điển đi kèm: tại sao KHÔNG nên dùng index của mảng làm key?",
+      "Nghe thì đơn giản, nhưng đây là một trong những bẫy gây bug âm thầm nhiều nhất — demo ngay sau đây sẽ lộ rõ."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #3: Vì sao list cần key? Bẫy key=index",
+      "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 3/12",
+      "badge": "Câu 3"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "key là 'chứng minh thư' của mỗi phần tử trong list — nhờ đó React biết phần tử nào là NÓ, dù thứ tự thay đổi.",
+      "Khi list re-render, React so sánh key cũ và key mới để quyết định: giữ nguyên DOM node, tạo mới, hay xóa đi.",
+      "key={index} nghĩa là chứng minh thư đổi theo VỊ TRÍ chứ không theo phần tử — thêm, xóa, sắp xếp lại là gắn nhầm người.",
+      "Hậu quả: DOM node và state gắn trên nó, như giá trị input, bị tái sử dụng SAI chỗ — trông như lỗi ngẫu nhiên nhưng rất có quy luật."
+    ],
+    "visual": {
+      "title": "key là gì, tại sao quan trọng",
+      "bullets": [
+        {
+          "icon": "🪪",
+          "text": "key = 'chứng minh thư' của phần tử — giúp React nhận diện xuyên suốt các lần render",
+          "sentence": 0
+        },
+        {
+          "icon": "🔍",
+          "text": "React so sánh key cũ/mới để quyết định: giữ nguyên, tạo mới hay xóa DOM node",
+          "sentence": 1
+        },
+        {
+          "icon": "🔀",
+          "text": "key={index}: chứng minh thư đổi theo VỊ TRÍ — thêm/xóa/sắp xếp là gắn nhầm",
+          "sentence": 2
+        },
+        {
+          "icon": "⚠️",
+          "text": "Hậu quả: DOM node và state (như giá trị input) bị tái sử dụng SAI chỗ",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là component demo thật — R3KeyProp.tsx — dựng hai list giống hệt nhau, chỉ khác cách đặt key.",
+      "Component `List` nhận prop `useIndex`; state `items` khởi tạo từ mảng `initial` gồm ba món ăn.",
+      "Đây chính là dòng ĐINH của cả câu hỏi: `key={useIndex ? i : item}` — bên trái dùng chỉ số `i`, bên phải dùng chính `item`.",
+      "Mỗi dòng còn có ô input để gõ ghi chú, và nút Xóa gọi `filter` để bỏ phần tử đó khỏi mảng `items`.",
+      "Khi bấm Xóa, hai list này sẽ phản ứng hoàn toàn khác nhau — xem ngay ở demo trình duyệt tiếp theo."
+    ],
+    "visual": {
+      "filename": "R3KeyProp.tsx",
+      "language": "tsx",
+      "code": "import {useState} from 'react';\n\nconst initial = ['Phở bò', 'Bánh mì', 'Cơm tấm'];\n\nfunction List({useIndex}: {useIndex: boolean}) {\n  const [items, setItems] = useState(initial);\n  return (\n    <div style={{border: '1px solid #ddd', borderRadius: 8, padding: 16, flex: 1}}>\n      <b>{useIndex ? 'key={index} — SAI' : 'key={item} — ĐÚNG'}</b>\n      {items.map((item, i) => (\n        <div key={useIndex ? i : item} style={{display: 'flex', gap: 8, marginTop: 8}}>\n          <span style={{width: 90}}>{item}</span>\n          <input placeholder=\"ghi chú...\" />\n          <button onClick={() => setItems(items.filter((x) => x !== item))}>Xóa</button>\n        </div>\n      ))}\n    </div>\n  );\n}\n\nexport function R3KeyProp() {\n  return (",
+      "steps": [
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 1
+        },
+        {
+          "from": 11,
+          "to": 11,
+          "sentence": 2
+        },
+        {
+          "from": 12,
+          "to": 14,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "browser",
+    "narration": [
+      "Đây là app demo thật — react-qa cổng 5197 — mỗi dòng có ô ghi chú, đã gõ sẵn: phở, bánh, cơm, khớp đúng từng món.",
+      "Giờ bấm Xóa dòng 'Phở bò' ở CẢ HAI bên — xem điều gì xảy ra với ghi chú của các dòng còn lại.",
+      "Bên trái, key={index}: ghi chú NHẢY SAI dòng — 'Bánh mì' hiện ghi chú 'phở', 'Cơm tấm' hiện 'bánh'.",
+      "Bên phải, key={item}: ghi chú vẫn đúng — 'Bánh mì' giữ 'bánh', 'Cơm tấm' giữ 'cơm', không hề xáo trộn."
+    ],
+    "visual": {
+      "title": "Demo thật: xóa 1 dòng, ghi chú nhảy sai chỗ",
+      "shots": [
+        {
+          "src": "screens/feqa/r3-before.png",
+          "sentence": 0,
+          "label": "TRƯỚC khi xóa — cả hai bên đều đúng",
+          "url": "localhost:5197 — React QA"
+        },
+        {
+          "src": "screens/feqa/r3-bug.png",
+          "sentence": 1,
+          "label": "SAU khi xóa 'Phở bò'",
+          "url": "localhost:5197 — React QA"
+        }
+      ],
+      "sequential": true,
+      "bullets": [
+        {
+          "icon": "❌",
+          "text": "key={index}: 'Bánh mì' → ghi chú 'phở', 'Cơm tấm' → ghi chú 'bánh' — SAI",
+          "sentence": 2
+        },
+        {
+          "icon": "✅",
+          "text": "key={item}: 'Bánh mì' → 'bánh', 'Cơm tấm' → 'cơm' — vẫn ĐÚNG, không xáo trộn",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — chốt gọn trong ba câu, học thuộc luôn được.",
+      "Câu một: key giúp React nhận diện phần tử nào giữ nguyên, thêm mới, xóa hay bị di chuyển giữa các lần render.",
+      "Câu hai: key={index} chỉ AN TOÀN khi list KHÔNG BAO GIỜ thêm, xóa hay sắp xếp lại — tức là list tĩnh.",
+      "Câu ba: cách đúng là dùng một giá trị ổn định và duy nhất của chính phần tử — như id hoặc tên món — làm key.",
+      "Bẫy nhà tuyển dụng hay gài: đừng bao giờ dùng Math.random() làm key — key đổi mỗi lần render khiến React re-mount toàn bộ và mất luôn state."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "🎤",
+          "text": "Chốt gọn 3 câu — học thuộc luôn được",
+          "sentence": 0
+        },
+        {
+          "icon": "1️⃣",
+          "text": "key: giúp React nhận diện phần tử nào giữ nguyên/thêm/xóa/di chuyển giữa các lần render",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "key={index}: chỉ tạm chấp nhận khi list TĨNH — không thêm/xóa/sắp xếp lại",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Cách đúng: dùng giá trị ổn định, duy nhất của chính phần tử (id, tên) làm key",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "Bẫy: đừng dùng Math.random() làm key — đổi mỗi render, React re-mount toàn bộ, mất state",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu 3 trên 12 — key chính là chứng minh thư giúp React nhận diện đúng phần tử giữa các lần render.",
+      "Nhớ đúng ranh giới: key={index} chỉ tạm ổn với list tĩnh; hễ list có thêm, xóa hay sắp xếp lại là phải đổi sang key ổn định của phần tử.",
+      "Câu tiếp theo trong series: Controlled và Uncontrolled component khác nhau ra sao, và vì sao một nút bấm chỉ tác động một trong hai.",
+      "Video này cũng có bản Shorts 60 giây — cùng câu hỏi, rút gọn lại để ôn nhanh trước khi vào phỏng vấn.",
+      "Và nhắc thêm: bên Vue cũng có bẫy y hệt với `:key` trong `v-for` — chờ câu V5 của series để xem tiếp."
+    ],
+    "visual": {
+      "title": "Câu 3/12 hoàn tất — hẹn gặp câu 4!",
+      "summary": [
+        {
+          "text": "key = chứng minh thư của phần tử; key={index} chỉ ổn với list TĨNH",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: Controlled vs Uncontrolled component",
+          "sentence": 2
+        },
+        {
+          "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+          "sentence": 3
+        }
+      ],
+      "next": "Câu 4/12: Controlled vs Uncontrolled? 🎤"
+    }
+  }
+]

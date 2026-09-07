@@ -1,0 +1,201 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu hỏi cuối cùng của phần React trong series: Custom hook là gì, và viết một custom hook đúng cách như thế nào?",
+      "Nhiều bạn nghĩ custom hook là một loại component đặc biệt — nhưng nó hoàn toàn không trả về JSX, chỉ trả về dữ liệu hoặc hàm.",
+      "Demo ngay sau đây: một custom hook debounce input — gõ liên tục nhưng giá trị debounce chỉ cập nhật sau khi ngừng gõ 500 mili giây."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #6: Custom Hook là gì, viết thế nào?",
+      "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 6/12",
+      "badge": "Câu 6"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Custom hook là một hàm JavaScript bình thường, chỉ khác ở quy ước: tên PHẢI bắt đầu bằng chữ 'use'.",
+      "Bên trong, nó được phép gọi các hook có sẵn — useState, useEffect... — để gói logic có state lại một chỗ, dùng lại ở nhiều nơi.",
+      "Điểm dễ nhầm nhất: custom hook KHÔNG phải component — nó không trả về JSX, mà trả về dữ liệu, hàm, hoặc object bất kỳ.",
+      "Và mỗi component gọi custom hook sẽ có một bản state HOÀN TOÀN RIÊNG — không phải một kho state dùng chung."
+    ],
+    "visual": {
+      "title": "Custom hook là gì",
+      "bullets": [
+        {
+          "icon": "🏷️",
+          "text": "Custom hook = hàm JS thường, quy ước bắt buộc: tên bắt đầu bằng 'use'",
+          "sentence": 0
+        },
+        {
+          "icon": "🧩",
+          "text": "Bên trong gọi hook có sẵn (useState, useEffect...) để gói logic stateful, tái dùng nhiều nơi",
+          "sentence": 1
+        },
+        {
+          "icon": "🚫",
+          "text": "KHÔNG phải component — không trả JSX, chỉ trả data/hàm/object",
+          "sentence": 2
+        },
+        {
+          "icon": "🧍",
+          "text": "Mỗi component gọi hook có state RIÊNG — không phải kho state dùng chung",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là hook thật trong demo — useDebouncedValue: tên bắt đầu bằng 'use', bên trong vẫn dùng useState và useEffect bình thường.",
+      "State debounced được khởi tạo bằng chính giá trị đầu vào, rồi cập nhật dần theo thời gian.",
+      "Trong useEffect, mỗi khi value đổi, hook đặt một setTimeout mới để cập nhật debounced sau delayMs mili giây.",
+      "Dòng cleanup — return, rồi clearTimeout(timer) — chính là kiến thức cleanup đã học ở tập trước: hủy timer cũ trước khi effect chạy lại.",
+      "Component gọi hook y như gọi useState — chỉ một dòng useDebouncedValue(value, 500) là có ngay giá trị debounce, logic ẩn hết bên trong."
+    ],
+    "visual": {
+      "filename": "R6CustomHook.tsx",
+      "language": "tsx",
+      "code": "import {useEffect, useState} from 'react';\n\nfunction useDebouncedValue<T>(value: T, delayMs: number): T {\n  const [debounced, setDebounced] = useState(value);\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delayMs);\n    return () => clearTimeout(timer);\n  }, [value, delayMs]);\n  return debounced;\n}\n\nexport function R6CustomHook() {\n  const [value, setValue] = useState('');\n  const debounced = useDebouncedValue(value, 500);",
+      "steps": [
+        {
+          "from": 1,
+          "to": 14,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 5,
+          "to": 6,
+          "sentence": 2
+        },
+        {
+          "from": 7,
+          "to": 7,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 14,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "browser",
+    "narration": [
+      "App demo thật — react-qa cổng 5197, câu r6: một input gõ liên tục, hai giá trị hiển thị ngay bên dưới.",
+      "Vừa gõ xong 'React debounce demo' — giá trị tức thời cập nhật ngay lập tức, hiển thị đúng những gì vừa gõ.",
+      "Nhưng giá trị debounce vẫn còn để trống — vì chưa đủ 500 mili giây kể từ ký tự cuối cùng vừa gõ.",
+      "Đây chính là bằng chứng: hook không chặn UI, chỉ trì hoãn đúng một giá trị debounce — logic tách biệt hoàn toàn khỏi component."
+    ],
+    "visual": {
+      "title": "Demo thật: giá trị tức thời đổi ngay, debounce chờ 500ms",
+      "shots": [
+        {
+          "src": "screens/feqa/r6-main.png",
+          "sentence": 0,
+          "label": "React QA — R6 Custom Hook useDebouncedValue",
+          "url": "localhost:5197 — React QA"
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "⚡",
+          "text": "Giá trị tức thời: \"React debounce demo\" — cập nhật ngay khi gõ",
+          "sentence": 1
+        },
+        {
+          "icon": "⏳",
+          "text": "Giá trị debounce: \"\" — vẫn rỗng vì chưa đủ 500ms từ lần gõ cuối",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — chốt gọn, học thuộc luôn được.",
+      "Câu một: Custom hook là hàm JS bắt đầu bằng 'use', bên trong gọi hook có sẵn để gói và tái sử dụng logic có state.",
+      "Câu hai: Nó không phải component — không trả JSX, mà trả về data hoặc hàm, dùng được ở bất kỳ component nào cần logic đó.",
+      "Câu ba: Ví dụ thực tế — useFetch(url), useDebouncedValue(value, delay) — cùng một hook, gọi ở nhiều component khác nhau.",
+      "Bẫy nhà tuyển dụng hay gài: custom hook KHÔNG chia sẻ STATE giữa các component — nó chỉ chia sẻ LOGIC; mỗi lần gọi là một state độc lập, muốn share state thật sự phải dùng Context hoặc store ngoài."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "🎤",
+          "text": "Chốt gọn — học thuộc luôn được",
+          "sentence": 0
+        },
+        {
+          "icon": "1️⃣",
+          "text": "Hàm JS bắt đầu bằng 'use', gọi hook có sẵn để gói và tái sử dụng logic có state",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "KHÔNG phải component — không trả JSX, trả về data/hàm dùng lại ở nhiều nơi",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Ví dụ: useFetch(url), useDebouncedValue(value, delay) — gọi lại ở nhiều component",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "Bẫy: custom hook KHÔNG share STATE giữa components — chỉ share LOGIC; share state thật cần Context/store",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong toàn bộ sáu câu phần React trong series — Virtual DOM, useEffect, key trong list, controlled/uncontrolled, memo, và custom hook.",
+      "Custom hook không phải phép màu — nó chỉ là cách gói logic có state lại, chia sẻ CÁCH LÀM chứ không chia sẻ STATE giữa các component.",
+      "Từ tập sau, series chuyển sang phần Vue — câu hỏi số một: ref và reactive khác nhau thế nào, và bẫy destructure mất reactivity.",
+      "Dù bạn theo React hay Vue, cứ ở lại xem hết phần Vue — đi phỏng vấn tự tin cả hai framework luôn là lợi thế lớn.",
+      "Video này cũng có bản Shorts 60 giây — hẹn gặp lại ở câu hỏi Vue đầu tiên!"
+    ],
+    "visual": {
+      "title": "Phần React hoàn tất 6/6 — chuyển sang Vue!",
+      "summary": [
+        {
+          "text": "Custom hook = hàm bắt đầu bằng 'use', gói và tái sử dụng LOGIC có state — không chia sẻ STATE giữa components",
+          "sentence": 0
+        },
+        {
+          "text": "Muốn share state thật sự giữa nhiều component phải dùng Context hoặc store ngoài, không phải custom hook",
+          "sentence": 1
+        },
+        {
+          "text": "Phần React đã xong 6/6 câu — tiếp theo chuyển sang Vue, bắt đầu từ ref vs reactive",
+          "sentence": 2
+        },
+        {
+          "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+          "sentence": 3
+        }
+      ],
+      "next": "Câu 1/12 phần Vue: ref vs reactive khác nhau thế nào? 🎤"
+    }
+  }
+]

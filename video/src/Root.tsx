@@ -47,6 +47,30 @@ import ep41 from './data/ep41.timing.json';
 import ep42 from './data/ep42.timing.json';
 import ep43 from './data/ep43.timing.json';
 import ep44 from './data/ep44.timing.json';
+import ep45 from './data/ep45.timing.json';
+import ep46 from './data/ep46.timing.json';
+import ep47 from './data/ep47.timing.json';
+import ep48 from './data/ep48.timing.json';
+import ep49 from './data/ep49.timing.json';
+import ep50 from './data/ep50.timing.json';
+import ep51 from './data/ep51.timing.json';
+import ep52 from './data/ep52.timing.json';
+import ep53 from './data/ep53.timing.json';
+import ep54 from './data/ep54.timing.json';
+import ep55 from './data/ep55.timing.json';
+import ep56 from './data/ep56.timing.json';
+import sr1 from './data/sr1.timing.json';
+import sr2 from './data/sr2.timing.json';
+import sr3 from './data/sr3.timing.json';
+import sr4 from './data/sr4.timing.json';
+import sr5 from './data/sr5.timing.json';
+import sr6 from './data/sr6.timing.json';
+import sv1 from './data/sv1.timing.json';
+import sv2 from './data/sv2.timing.json';
+import sv3 from './data/sv3.timing.json';
+import sv4 from './data/sv4.timing.json';
+import sv5 from './data/sv5.timing.json';
+import sv6 from './data/sv6.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -94,13 +118,38 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode42', timing: ep42 as unknown as EpisodeTiming},
   {id: 'Episode43', timing: ep43 as unknown as EpisodeTiming},
   {id: 'Episode44', timing: ep44 as unknown as EpisodeTiming},
+  {id: 'Episode45', timing: ep45 as unknown as EpisodeTiming},
+  {id: 'Episode46', timing: ep46 as unknown as EpisodeTiming},
+  {id: 'Episode47', timing: ep47 as unknown as EpisodeTiming},
+  {id: 'Episode48', timing: ep48 as unknown as EpisodeTiming},
+  {id: 'Episode49', timing: ep49 as unknown as EpisodeTiming},
+  {id: 'Episode50', timing: ep50 as unknown as EpisodeTiming},
+  {id: 'Episode51', timing: ep51 as unknown as EpisodeTiming},
+  {id: 'Episode52', timing: ep52 as unknown as EpisodeTiming},
+  {id: 'Episode53', timing: ep53 as unknown as EpisodeTiming},
+  {id: 'Episode54', timing: ep54 as unknown as EpisodeTiming},
+  {id: 'Episode55', timing: ep55 as unknown as EpisodeTiming},
+  {id: 'Episode56', timing: ep56 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
 // Shorts dọc (1080×1920) — kịch bản phỏng vấn FE, id dạng Short<ID> (vd ShortR3),
 // đọc video/src/data/s<id>.timing.json (sinh bởi tts/generate.py, cùng cơ chế totalDuration
 // như episodes). Thêm entry tại đây (kèm import json ở trên) khi có tập mới.
-const shorts: {id: string; timing: EpisodeTiming}[] = [];
+const shorts: {id: string; timing: EpisodeTiming}[] = [
+  {id: 'ShortR1', timing: sr1 as unknown as EpisodeTiming},
+  {id: 'ShortR2', timing: sr2 as unknown as EpisodeTiming},
+  {id: 'ShortR3', timing: sr3 as unknown as EpisodeTiming},
+  {id: 'ShortR4', timing: sr4 as unknown as EpisodeTiming},
+  {id: 'ShortR5', timing: sr5 as unknown as EpisodeTiming},
+  {id: 'ShortR6', timing: sr6 as unknown as EpisodeTiming},
+  {id: 'ShortV1', timing: sv1 as unknown as EpisodeTiming},
+  {id: 'ShortV2', timing: sv2 as unknown as EpisodeTiming},
+  {id: 'ShortV3', timing: sv3 as unknown as EpisodeTiming},
+  {id: 'ShortV4', timing: sv4 as unknown as EpisodeTiming},
+  {id: 'ShortV5', timing: sv5 as unknown as EpisodeTiming},
+  {id: 'ShortV6', timing: sv6 as unknown as EpisodeTiming},
+];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
   {
@@ -635,6 +684,162 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       image: 'screens/ep44/web-stylex-vs-tailwind-thumb.png',
       badgeEmoji: '🥊',
       seriesTag: 'StyleX từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb45',
+    props: {
+      badge: 'PV FE #1',
+      line1: 'VIRTUAL DOM',
+      line2: 'LÀ GÌ?',
+      subtitle: 'Phỏng vấn Frontend · Câu 1/12',
+      variant: 'shot',
+      image: 'screens/feqa/r1-thumbcrop.png',
+      badgeEmoji: '🎤',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb46',
+    props: {
+      badge: 'PV FE #2',
+      line1: 'USESTATE VÀ',
+      line2: 'USEEFFECT',
+      subtitle: 'Phỏng vấn Frontend · Câu 2/12',
+      variant: 'shot',
+      image: 'screens/feqa/r2-thumbcrop.png',
+      badgeEmoji: '🎤',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb47',
+    props: {
+      badge: 'PV FE #3',
+      line1: 'ĐỪNG DÙNG',
+      line2: 'INDEX LÀM KEY',
+      subtitle: 'Phỏng vấn Frontend · Câu 3/12',
+      variant: 'shot',
+      image: 'screens/feqa/r3-thumbcrop.png',
+      badgeEmoji: '🔑',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb48',
+    props: {
+      badge: 'PV FE #4',
+      line1: 'CONTROLLED VS',
+      line2: 'UNCONTROLLED',
+      subtitle: 'Phỏng vấn Frontend · Câu 4/12',
+      variant: 'shot',
+      image: 'screens/feqa/r4-thumbcrop.png',
+      badgeEmoji: '🎛️',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb49',
+    props: {
+      badge: 'PV FE #5',
+      line1: 'REACT.MEMO',
+      line2: 'CÓ THẬT SỰ ĂN?',
+      subtitle: 'Phỏng vấn Frontend · Câu 5/12',
+      variant: 'shot',
+      image: 'screens/feqa/r5-thumbcrop.png',
+      badgeEmoji: '🧠',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb50',
+    props: {
+      badge: 'PV FE #6',
+      line1: 'CUSTOM HOOK',
+      line2: 'LÀ GÌ?',
+      subtitle: 'Phỏng vấn Frontend · Câu 6/12',
+      variant: 'shot',
+      image: 'screens/feqa/r6-thumbcrop.png',
+      badgeEmoji: '🪝',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb51',
+    props: {
+      badge: 'PV FE #7',
+      line1: 'REF VS',
+      line2: 'REACTIVE',
+      subtitle: 'Phỏng vấn Frontend · Câu 7/12',
+      variant: 'shot',
+      image: 'screens/feqa/v1-thumbcrop.png',
+      badgeEmoji: '💚',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb52',
+    props: {
+      badge: 'PV FE #8',
+      line1: 'OPTIONS VS',
+      line2: 'COMPOSITION',
+      subtitle: 'Phỏng vấn Frontend · Câu 8/12',
+      variant: 'shot',
+      image: 'screens/feqa/v2-thumbcrop.png',
+      badgeEmoji: '🧩',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb53',
+    props: {
+      badge: 'PV FE #9',
+      line1: 'COMPUTED VS',
+      line2: 'WATCH',
+      subtitle: 'Phỏng vấn Frontend · Câu 9/12',
+      variant: 'shot',
+      image: 'screens/feqa/v3-thumbcrop.png',
+      badgeEmoji: '🔁',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb54',
+    props: {
+      badge: 'PV FE #10',
+      line1: 'V-IF VS',
+      line2: 'V-SHOW',
+      subtitle: 'Phỏng vấn Frontend · Câu 10/12',
+      variant: 'shot',
+      image: 'screens/feqa/v4-thumbcrop.png',
+      badgeEmoji: '🎭',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb55',
+    props: {
+      badge: 'PV FE #11',
+      line1: ':KEY TRONG',
+      line2: 'V-FOR',
+      subtitle: 'Phỏng vấn Frontend · Câu 11/12',
+      variant: 'shot',
+      image: 'screens/feqa/v5-thumbcrop.png',
+      badgeEmoji: '🗝️',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb56',
+    props: {
+      badge: 'PV FE #12',
+      line1: 'PROPS &',
+      line2: 'EMIT',
+      subtitle: 'Phỏng vấn Frontend · Câu 12/12',
+      variant: 'shot',
+      image: 'screens/feqa/v6-thumbcrop.png',
+      badgeEmoji: '📮',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },
 ];

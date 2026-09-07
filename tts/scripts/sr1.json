@@ -1,0 +1,63 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Virtual DOM là gì? Câu hỏi React kinh điển nhất.",
+      "Trả lời chuẩn trong 60 giây."
+    ],
+    "visual": {
+      "question": "Virtual DOM là gì?",
+      "framework": "react"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "mountedAt là useRef — chỉ gán một lần lúc mount.",
+      "Bấm nút re-render bao nhiêu lần, dòng Mounted vẫn đứng yên.",
+      "Chỉ dòng Count đổi — đúng phần DOM thật bị vá."
+    ],
+    "visual": {
+      "filename": "R1VirtualDom.tsx",
+      "language": "tsx",
+      "code": "const mountedAt = useRef(null);\nif (!mountedAt.current) {\n  mountedAt.current = Date.now();\n}\n\nreturn (\n  <>\n  <p>Mounted: {mountedAt.current}</p>\n  <p>Count: {count}</p>\n  </>\n);",
+      "steps": [
+        {"from": 1, "to": 11, "sentence": 0},
+        {"from": 1, "to": 4, "sentence": 1},
+        {"from": 8, "to": 9, "sentence": 2},
+        {"from": 1, "to": 11, "sentence": 2}
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Demo thật — ô trái đứng im, ô phải nhảy số.",
+      "Đây là bằng chứng: React không remount, chỉ vá đúng chỗ."
+    ],
+    "visual": {
+      "src": "screens/feqa/r1-vert.png",
+      "caption": "Ô tĩnh đứng yên — ô động đổi theo count"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Câu trả lời chuẩn: Virtual DOM là bản sao nhẹ, diff rồi vá tối thiểu.",
+      "Reconciliation chọn đúng node cần thay, không đụng phần còn lại.",
+      "Bẫy: không phải lúc nào cũng nhanh hơn DOM thật — đây là chiến lược tránh thao tác thừa."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {"icon": "✅", "text": "Bản sao nhẹ của DOM thật, sống trong bộ nhớ JS", "sentence": 0},
+        {"icon": "⚙️", "text": "Diff cây cũ/mới rồi vá tối thiểu vào DOM thật", "sentence": 1}
+      ],
+      "trap": "Không phải lúc nào cũng nhanh hơn DOM thật"
+    }
+  }
+]

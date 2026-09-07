@@ -8,8 +8,11 @@ import type {SceneProps} from '../data/types';
 export type BrowserVisual = {
   title: string;
   // Ảnh chụp browser thật 1280×800; 1 shot = cửa sổ lớn, 2 shots = so găng cạnh nhau
+  // (mặc định); đặt sequential:true để 2 shots hiển thị NỐI TIẾP theo thời gian
+  // (trước/sau, vd demo bẫy key=index) thay vì cạnh nhau — vẫn giữ bullets cạnh ảnh.
   shots: {src: string; sentence: number; label?: string; url?: string}[];
   bullets?: {icon?: string; text: string; sentence: number}[];
+  sequential?: boolean;
 };
 
 const Window: React.FC<{src: string; label?: string; url?: string; width: number; p: number}> = ({src, label, url, width, p}) => (
@@ -39,7 +42,7 @@ export const BrowserScene: React.FC<SceneProps> = ({visual, sentences}) => {
   const {fps} = useVideoConfig();
   const idx = useSentenceIndex(sentences);
   const active = v.shots.filter((s) => s.sentence <= idx);
-  const sideBySide = v.shots.length === 2;
+  const sideBySide = !v.sequential && v.shots.length === 2;
   const current = sideBySide ? v.shots : [active[active.length - 1] ?? v.shots[0]];
   const switchedAt = sentenceStart(sentences, (sideBySide ? v.shots[0] : current[0]).sentence);
   const p = spring({frame: frame - switchedAt, fps, config: {damping: 200}});

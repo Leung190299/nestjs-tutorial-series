@@ -1,0 +1,201 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu hỏi tiếp theo trong buổi phỏng vấn Frontend: Controlled và Uncontrolled component khác nhau ra sao?",
+      "Nghe có vẻ lý thuyết, nhưng nhà tuyển dụng hay hỏi vặn thêm: bấm một nút có tác động lên CẢ HAI input hay chỉ một bên?",
+      "Demo ngay sau đây sẽ lộ rõ — chỉ một bên phản ứng, và đó chính là chìa khóa của câu trả lời."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #4: Controlled vs Uncontrolled component",
+      "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 4/12",
+      "badge": "Câu 4"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Controlled nghĩa là React giữ giá trị input trong state — input chỉ hiển thị lại đúng những gì state đang có.",
+      "Cơ chế: `value` lấy từ state, `onChange` cập nhật state — mỗi lần gõ là một vòng render mới, React luôn biết giá trị hiện tại.",
+      "Uncontrolled thì ngược lại: DOM tự giữ giá trị của chính nó, React không theo dõi từng ký tự gõ vào.",
+      "Muốn lấy giá trị uncontrolled, phải chủ động dùng `ref` để đọc trực tiếp từ DOM — chỉ đọc khi cần, không phải lúc nào cũng đồng bộ."
+    ],
+    "visual": {
+      "title": "Controlled vs Uncontrolled là gì",
+      "bullets": [
+        {
+          "icon": "🎛️",
+          "text": "Controlled: React state giữ giá trị — input chỉ hiển thị đúng state",
+          "sentence": 0
+        },
+        {
+          "icon": "🔄",
+          "text": "value + onChange: mỗi lần gõ là một vòng render, React luôn biết giá trị hiện tại",
+          "sentence": 1
+        },
+        {
+          "icon": "🗄️",
+          "text": "Uncontrolled: DOM tự giữ giá trị — React không theo dõi từng ký tự gõ",
+          "sentence": 2
+        },
+        {
+          "icon": "🔍",
+          "text": "Đọc giá trị qua `ref` khi cần — không tự động đồng bộ theo từng lần gõ",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là component demo thật — R4Controlled.tsx — dựng cạnh nhau hai cách quản lý input: controlled và uncontrolled.",
+      "Bên trái là input CONTROLLED: `value` lấy từ state `controlledValue`, gõ vào là gọi `onChange` để `setControlledValue`.",
+      "Nút UPPERCASE gọi thẳng `setControlledValue` để đổi state — input đọc value từ state nên chữ trên màn hình đổi ngay lập tức.",
+      "Bên phải là input UNCONTROLLED: không có `value`, chỉ có `defaultValue` và `ref` — DOM tự giữ giá trị, React không hề hay biết.",
+      "Muốn đọc giá trị uncontrolled, phải chủ động bấm nút để gọi `uncontrolledRef.current?.value` — chỉ đọc khi cần, không tự động."
+    ],
+    "visual": {
+      "filename": "R4Controlled.tsx",
+      "language": "tsx",
+      "code": "    <div style={{display: 'flex', gap: 16, flexWrap: 'wrap'}}>\n      <div style={{border: '1px solid #ddd', borderRadius: 8, padding: 16, flex: 1}}>\n        <b>Controlled — value + onChange</b>\n        <p>\n          <input\n            value={controlledValue}\n            onChange={(e) => setControlledValue(e.target.value)}\n            placeholder=\"gõ vào đây...\"\n          />\n        </p>\n        <p>State hiện tại (live): \"{controlledValue}\"</p>\n        <button onClick={() => setControlledValue((v) => v.toUpperCase())}>UPPERCASE</button>\n      </div>\n      <div style={{border: '1px solid #ddd', borderRadius: 8, padding: 16, flex: 1}}>\n        <b>Uncontrolled — defaultValue + ref</b>\n        <p>\n          <input ref={uncontrolledRef} defaultValue=\"\" placeholder=\"gõ vào đây...\" />\n        </p>\n        <p>Giá trị đã đọc: \"{uncontrolledRead}\"</p>\n        <button onClick={() => setUncontrolledRead(uncontrolledRef.current?.value ?? '')}>\n          Lấy giá trị\n        </button>",
+      "steps": [
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 12,
+          "sentence": 1
+        },
+        {
+          "from": 12,
+          "to": 12,
+          "sentence": 2
+        },
+        {
+          "from": 14,
+          "to": 18,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "browser",
+    "narration": [
+      "Đây là app demo thật — react-qa cổng 5197 — đã gõ 'Xin chao' vào input controlled bên trái và 'khong doi' vào input uncontrolled bên phải.",
+      "Giờ bấm nút UPPERCASE ở card controlled — chỉ card này có nút đổi chữ hoa, và nó đổi thẳng vào state.",
+      "Kết quả: input controlled lập tức hiện 'XIN CHAO' — vì input đọc value từ state, state đổi là input đổi theo ngay.",
+      "Input uncontrolled bên phải hoàn toàn đứng yên 'khong doi' — DOM tự giữ giá trị của nó, không hề nghe theo state nào của React."
+    ],
+    "visual": {
+      "title": "Demo thật: UPPERCASE chỉ ăn một bên",
+      "shots": [
+        {
+          "src": "screens/feqa/r4-main.png",
+          "sentence": 0,
+          "label": "React QA — R4 Controlled vs Uncontrolled",
+          "url": "localhost:5197 — React QA"
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "✅",
+          "text": "Controlled: bấm UPPERCASE → state đổi → input hiện 'XIN CHAO' ngay lập tức",
+          "sentence": 2
+        },
+        {
+          "icon": "🧊",
+          "text": "Uncontrolled: không có nút đổi hoa — input giữ nguyên 'khong doi', DOM tự quản",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — chốt gọn trong ba câu, học thuộc luôn được.",
+      "Câu một: Controlled là React giữ giá trị qua `value` và `onChange` — state là nguồn sự thật duy nhất.",
+      "Câu hai: Uncontrolled là DOM tự giữ giá trị — muốn đọc thì dùng `ref`, chỉ đọc khi cần chứ không đồng bộ theo từng lần gõ.",
+      "Câu ba: chọn controlled khi cần validate, disable nút hay đồng bộ nhiều field theo thời gian thực; chọn uncontrolled khi chỉ cần đọc giá trị lúc submit.",
+      "Bẫy nhà tuyển dụng hay gài: đổi input từ không có `value` sang có `value` giữa chừng — React sẽ cảnh báo chuyển từ uncontrolled sang controlled."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "🎤",
+          "text": "Chốt gọn 3 câu — học thuộc luôn được",
+          "sentence": 0
+        },
+        {
+          "icon": "1️⃣",
+          "text": "Controlled: React giữ giá trị qua value+onChange — state là nguồn sự thật duy nhất",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Uncontrolled: DOM tự giữ giá trị — đọc qua ref khi cần, không đồng bộ liên tục",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Chọn controlled khi cần validate/disable realtime; uncontrolled khi chỉ đọc lúc submit",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "Bẫy: đổi value từ undefined sang có giá trị giữa chừng → warning 'chuyển sang controlled'",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu 4 trên 12 — controlled là React giữ giá trị qua state, uncontrolled là DOM tự giữ và chỉ đọc qua ref khi cần.",
+      "Nhớ thêm ý thực tế: form lớn không cần ép TẤT CẢ input đều controlled — uncontrolled kết hợp `FormData` lúc submit vẫn là cách hợp lệ, nhẹ hơn.",
+      "Câu tiếp theo trong series: React.memo với prop object — vì sao memo hoá component con mà vẫn re-render đều đều.",
+      "Video này cũng có bản Shorts 60 giây — cùng câu hỏi, rút gọn lại để ôn nhanh trước khi vào phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu hỏi số 5!"
+    ],
+    "visual": {
+      "title": "Câu 4/12 hoàn tất — hẹn gặp câu 5!",
+      "summary": [
+        {
+          "text": "Controlled = state giữ giá trị (value+onChange); Uncontrolled = DOM tự giữ, đọc qua ref",
+          "sentence": 0
+        },
+        {
+          "text": "Form lớn không cần ép controlled hết — uncontrolled + FormData vẫn hợp lệ",
+          "sentence": 1
+        },
+        {
+          "text": "Câu sau: React.memo với prop object — vì sao memo vẫn re-render đều đều",
+          "sentence": 2
+        },
+        {
+          "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+          "sentence": 3
+        }
+      ],
+      "next": "Câu 5/12: React.memo có thật sự hiệu quả? 🎤"
+    }
+  }
+]

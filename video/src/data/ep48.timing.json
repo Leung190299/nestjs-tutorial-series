@@ -1,0 +1,314 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #4: Controlled vs Uncontrolled component",
+        "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 4/12",
+        "badge": "Câu 4"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep48/scene-01-0-0f28f011.wav",
+          "startFrame": 0,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep48/scene-01-1-abfbd409.wav",
+          "startFrame": 176,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep48/scene-01-2-827eb3b5.wav",
+          "startFrame": 367,
+          "durationInFrames": 147
+        }
+      ],
+      "durationInFrames": 532
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Controlled vs Uncontrolled là gì",
+        "bullets": [
+          {
+            "icon": "🎛️",
+            "text": "Controlled: React state giữ giá trị — input chỉ hiển thị đúng state",
+            "sentence": 0
+          },
+          {
+            "icon": "🔄",
+            "text": "value + onChange: mỗi lần gõ là một vòng render, React luôn biết giá trị hiện tại",
+            "sentence": 1
+          },
+          {
+            "icon": "🗄️",
+            "text": "Uncontrolled: DOM tự giữ giá trị — React không theo dõi từng ký tự gõ",
+            "sentence": 2
+          },
+          {
+            "icon": "🔍",
+            "text": "Đọc giá trị qua `ref` khi cần — không tự động đồng bộ theo từng lần gõ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep48/scene-02-0-eeb730ff.wav",
+          "startFrame": 0,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep48/scene-02-1-9848b9e1.wav",
+          "startFrame": 167,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep48/scene-02-2-e0be72ec.wav",
+          "startFrame": 367,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep48/scene-02-3-291ed0a2.wav",
+          "startFrame": 534,
+          "durationInFrames": 202
+        }
+      ],
+      "durationInFrames": 754
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "R4Controlled.tsx",
+        "language": "tsx",
+        "code": "    <div style={{display: 'flex', gap: 16, flexWrap: 'wrap'}}>\n      <div style={{border: '1px solid #ddd', borderRadius: 8, padding: 16, flex: 1}}>\n        <b>Controlled — value + onChange</b>\n        <p>\n          <input\n            value={controlledValue}\n            onChange={(e) => setControlledValue(e.target.value)}\n            placeholder=\"gõ vào đây...\"\n          />\n        </p>\n        <p>State hiện tại (live): \"{controlledValue}\"</p>\n        <button onClick={() => setControlledValue((v) => v.toUpperCase())}>UPPERCASE</button>\n      </div>\n      <div style={{border: '1px solid #ddd', borderRadius: 8, padding: 16, flex: 1}}>\n        <b>Uncontrolled — defaultValue + ref</b>\n        <p>\n          <input ref={uncontrolledRef} defaultValue=\"\" placeholder=\"gõ vào đây...\" />\n        </p>\n        <p>Giá trị đã đọc: \"{uncontrolledRead}\"</p>\n        <button onClick={() => setUncontrolledRead(uncontrolledRef.current?.value ?? '')}>\n          Lấy giá trị\n        </button>",
+        "steps": [
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 12,
+            "sentence": 1
+          },
+          {
+            "from": 12,
+            "to": 12,
+            "sentence": 2
+          },
+          {
+            "from": 14,
+            "to": 18,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep48/scene-03-0-ab66bea1.wav",
+          "startFrame": 0,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep48/scene-03-1-807e46b0.wav",
+          "startFrame": 203,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep48/scene-03-2-7bdfe7b4.wav",
+          "startFrame": 439,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep48/scene-03-3-30626a42.wav",
+          "startFrame": 690,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep48/scene-03-4-05943c71.wav",
+          "startFrame": 934,
+          "durationInFrames": 212
+        }
+      ],
+      "durationInFrames": 1164
+    },
+    {
+      "id": "scene-04",
+      "type": "browser",
+      "visual": {
+        "title": "Demo thật: UPPERCASE chỉ ăn một bên",
+        "shots": [
+          {
+            "src": "screens/feqa/r4-main.png",
+            "sentence": 0,
+            "label": "React QA — R4 Controlled vs Uncontrolled",
+            "url": "localhost:5197 — React QA"
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "✅",
+            "text": "Controlled: bấm UPPERCASE → state đổi → input hiện 'XIN CHAO' ngay lập tức",
+            "sentence": 2
+          },
+          {
+            "icon": "🧊",
+            "text": "Uncontrolled: không có nút đổi hoa — input giữ nguyên 'khong doi', DOM tự quản",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep48/scene-04-0-474126ad.wav",
+          "startFrame": 0,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep48/scene-04-1-2f0b64b8.wav",
+          "startFrame": 248,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep48/scene-04-2-fe618c70.wav",
+          "startFrame": 465,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep48/scene-04-3-9f02255c.wav",
+          "startFrame": 661,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 867
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "🎤",
+            "text": "Chốt gọn 3 câu — học thuộc luôn được",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "Controlled: React giữ giá trị qua value+onChange — state là nguồn sự thật duy nhất",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Uncontrolled: DOM tự giữ giá trị — đọc qua ref khi cần, không đồng bộ liên tục",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Chọn controlled khi cần validate/disable realtime; uncontrolled khi chỉ đọc lúc submit",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: đổi value từ undefined sang có giá trị giữa chừng → warning 'chuyển sang controlled'",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep48/scene-05-0-32ac7d8d.wav",
+          "startFrame": 0,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep48/scene-05-1-ea8bc682.wav",
+          "startFrame": 104,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep48/scene-05-2-addf7834.wav",
+          "startFrame": 266,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep48/scene-05-3-0f7989d0.wav",
+          "startFrame": 457,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep48/scene-05-4-3c9bfd45.wav",
+          "startFrame": 691,
+          "durationInFrames": 212
+        }
+      ],
+      "durationInFrames": 921
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 4/12 hoàn tất — hẹn gặp câu 5!",
+        "summary": [
+          {
+            "text": "Controlled = state giữ giá trị (value+onChange); Uncontrolled = DOM tự giữ, đọc qua ref",
+            "sentence": 0
+          },
+          {
+            "text": "Form lớn không cần ép controlled hết — uncontrolled + FormData vẫn hợp lệ",
+            "sentence": 1
+          },
+          {
+            "text": "Câu sau: React.memo với prop object — vì sao memo vẫn re-render đều đều",
+            "sentence": 2
+          },
+          {
+            "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+            "sentence": 3
+          }
+        ],
+        "next": "Câu 5/12: React.memo có thật sự hiệu quả? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep48/scene-06-0-b1498f20.wav",
+          "startFrame": 0,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep48/scene-06-1-6f811cd0.wav",
+          "startFrame": 220,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep48/scene-06-2-39bad34d.wav",
+          "startFrame": 447,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep48/scene-06-3-67a4a22f.wav",
+          "startFrame": 645,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep48/scene-06-4-aa6f7428.wav",
+          "startFrame": 817,
+          "durationInFrames": 96
+        }
+      ],
+      "durationInFrames": 931
+    }
+  ]
+}

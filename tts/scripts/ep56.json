@@ -1,0 +1,201 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu cuối lô đầu tiên — mười hai trên mười hai: Props truyền xuống, Emit bắn lên hoạt động thế nào giữa cha và con trong Vue?",
+      "Đây là câu hỏi nền tảng nhất về giao tiếp giữa component — nắm chắc, bug dữ liệu cha con đều dễ soi ra.",
+      "Demo ngay sau đây: bấm nút ở component con, xem cha nhận sự kiện và ghi log đúng thứ tự đã bấm."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #12: Props xuống, Emit lên hoạt động thế nào?",
+      "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 12/12",
+      "badge": "Câu 12"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Props xuống, Emit lên — luật giao tiếp cơ bản nhất giữa cha con trong Vue, cùng tinh thần với React.",
+      "Props: cha truyền dữ liệu XUỐNG con; con chỉ được ĐỌC — không tự ý sửa trực tiếp giá trị nhận vào.",
+      "Emit: con muốn báo tin LÊN cha thì phát ra sự kiện; cha là người duy nhất quyết định xử lý ra sao.",
+      "Kết quả là luồng dữ liệu MỘT CHIỀU: props luôn đi xuống, sự kiện luôn đi lên — không bao giờ ngược lại."
+    ],
+    "visual": {
+      "title": "Props xuống, Emit lên là gì, vì sao quan trọng",
+      "bullets": [
+        {
+          "icon": "🤝",
+          "text": "Props xuống, Emit lên — luật giao tiếp cơ bản cha-con, cùng tinh thần React",
+          "sentence": 0
+        },
+        {
+          "icon": "🔽",
+          "text": "Props: cha truyền dữ liệu XUỐNG con — con chỉ ĐỌC, không sửa trực tiếp",
+          "sentence": 1
+        },
+        {
+          "icon": "🔼",
+          "text": "Emit: con phát sự kiện LÊN cha — cha tự quyết định xử lý ra sao",
+          "sentence": 2
+        },
+        {
+          "icon": "🔁",
+          "text": "Luồng dữ liệu MỘT CHIỀU: props xuống, sự kiện lên — không bao giờ ngược lại",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là component con thật — NutDatHang.vue — chỉ nhận một prop và emit một sự kiện, không hơn không kém.",
+      "defineProps khai báo prop mon kiểu string — cha truyền gì, con nhận đúng cái đó, CHỈ ĐỌC qua props.mon.",
+      "defineEmits khai báo sự kiện dat mang theo chuỗi mon — 'hợp đồng' con công bố cho cha biết mình báo được gì.",
+      "Hàm datHang chỉ gọi emit('dat', props.mon) — bắn lên trên; cha lắng nghe qua @dat=\"nhanDon\" rồi tự quyết định.",
+      "Con không tự sửa props.mon hay giữ state riêng — mọi quyết định đều đẩy ngược lên cha qua emit."
+    ],
+    "visual": {
+      "filename": "NutDatHang.vue (script setup)",
+      "language": "typescript",
+      "code": "// Component con: nhận prop `mon` từ cha, emit sự kiện `dat` lên cha khi bấm nút.\nconst props = defineProps<{mon: string}>();\nconst emit = defineEmits<{dat: [mon: string]}>();\n\nfunction datHang() {\n  emit('dat', props.mon);\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 2,
+          "to": 2,
+          "sentence": 1
+        },
+        {
+          "from": 3,
+          "to": 3,
+          "sentence": 2
+        },
+        {
+          "from": 5,
+          "to": 7,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "browser",
+    "narration": [
+      "App demo thật — vue-qa cổng 5196, câu v6: ba nút Đặt món — Phở bò, Bánh mì, Cơm tấm — mỗi nút là một component con.",
+      "Tôi bấm lần lượt: Phở bò, Bánh mì, Bánh mì, rồi Cơm tấm — bốn lần bấm, không theo thứ tự cố định.",
+      "Log đơn hàng: Đơn #1 Phở bò, #2 Bánh mì, #3 Bánh mì, #4 Cơm tấm — khớp CHÍNH XÁC thứ tự đã bấm.",
+      "Ba nút con không hề biết mảng donHang tồn tại — chỉ emit tên món; cha là nơi quyết định ghi log."
+    ],
+    "visual": {
+      "title": "Demo thật: bấm nút con, cha ghi log đúng thứ tự",
+      "shots": [
+        {
+          "src": "screens/feqa/v6-main.png",
+          "sentence": 0,
+          "label": "Vue QA — V6 Props/Emit: 3 nút con NutDatHang",
+          "url": "localhost:5196 — Vue QA"
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "✅",
+          "text": "Log đúng thứ tự bấm: #1 Phở bò, #2 Bánh mì, #3 Bánh mì, #4 Cơm tấm",
+          "sentence": 2
+        },
+        {
+          "icon": "🔒",
+          "text": "Con không biết donHang tồn tại — chỉ emit tên món, cha tự quyết định ghi log",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — chốt gọn ba câu, học thuộc luôn được.",
+      "Câu một: Props truyền MỘT CHIỀU từ cha xuống con — con nhận qua defineProps, chỉ ĐỌC, không sửa trực tiếp.",
+      "Câu hai: Con báo tin lên cha bằng defineEmits khai báo sự kiện rồi gọi emit — cha quyết định xử lý.",
+      "Câu ba: Nhờ luồng một chiều rõ ràng — props xuống, emit lên — có bug dữ liệu là biết ngay cần tìm ở đâu.",
+      "Bẫy chốt: mutate prop trực tiếp trong con — Vue cảnh báo và mất dấu dòng chảy; cần 2 chiều thì dùng defineModel/v-model."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "🎤",
+          "text": "Chốt gọn 3 câu — học thuộc luôn được",
+          "sentence": 0
+        },
+        {
+          "icon": "1️⃣",
+          "text": "Props: MỘT CHIỀU cha→con qua defineProps — con chỉ ĐỌC, không sửa trực tiếp",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Emit: con báo tin qua defineEmits + emit(...) — cha quyết định xử lý",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Một chiều rõ ràng giúp debug dễ — luôn biết bug nằm ở đâu",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "Bẫy: mutate prop trực tiếp = warning + mất dấu dòng chảy; cần 2 chiều thì defineModel/v-model",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong trọn 12 câu phỏng vấn Frontend lô một — đủ 6 câu React và 6 câu Vue, từ Virtual DOM đến Props/Emit vừa xong.",
+      "Toàn bộ code demo React và Vue đều nằm công khai trong repo của series, đóng dấu tag fe-qa-batch-1 — ai cũng clone chạy thử được.",
+      "12 câu này đều có thêm bản Shorts 60 giây song song — tiện ôn nhanh ngay trước giờ phỏng vấn.",
+      "Đến lượt bạn: comment câu hỏi phỏng vấn KHÓ NHẤT bạn từng gặp — càng nhiều người góp, lô hai càng sát thực tế.",
+      "Cảm ơn bạn đã theo hết lô một — hẹn gặp lại ở lô hai với những câu hỏi hóc búa hơn!"
+    ],
+    "visual": {
+      "title": "Lô 1 hoàn tất: đủ 12/12 câu (6 React + 6 Vue)!",
+      "summary": [
+        {
+          "text": "Đủ 12/12 câu — 6 React + 6 Vue — lô 1 hoàn tất",
+          "sentence": 0
+        },
+        {
+          "text": "Code demo đầy đủ trong repo, tag fe-qa-batch-1",
+          "sentence": 1
+        },
+        {
+          "text": "Mỗi câu đều có bản Shorts 60s để ôn nhanh",
+          "sentence": 2
+        },
+        {
+          "text": "Comment câu hỏi phỏng vấn khó nhất bạn gặp → lô 2",
+          "sentence": 3
+        }
+      ],
+      "next": "Lô 2 sắp tới — comment câu hỏi khó nhất của bạn! 🎤💬"
+    }
+  }
+]

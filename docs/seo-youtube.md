@@ -1664,3 +1664,539 @@ Tập cuối: đặt 2 trình duyệt cạnh nhau — trái vietsuper-web (Style
 **Thumbnail:** badge "STYLEX 6/6" · dòng lớn "TAILWIND" / "HAY STYLEX" · phụ đề "So găng trực diện + tổng kết series" · badge emoji 🥊 · ảnh nền `screens/ep44/web-stylex-vs-tailwind-thumb.png`.
 
 **Tags:** `stylex vs tailwind, tailwind vs stylex, css bundle size, atomic css comparison, css in js vs tailwind, stylex tailwind so sanh, meta stylex, stylex tiếng việt, học stylex, tailwind tiếng việt, học tailwind, react styling, css architecture, type safe css, web development tiếng việt, học react, so sánh framework css`
+
+## SERIES PHỎNG VẤN FRONTEND — "Phỏng vấn Frontend 🇻🇳" (React & Vue, lô 1: 12 câu + 12 Shorts)
+
+> Playlist mới: **"Phỏng vấn Frontend 🇻🇳"**. Format MỚI hẳn so với các series trước: mỗi tập ngang là ĐÚNG MỘT câu hỏi phỏng vấn Frontend thật (6 câu React R1–R6, 6 câu Vue V1–V6) — nghe câu hỏi như nhà tuyển dụng hỏi, xem demo code chạy thật minh họa đúng bẫy/hành vi, rồi chốt lại cách trả lời 3 câu như đang ngồi trước người phỏng vấn. Code: `demo-fe-interview/` (`react-qa/` cổng 5197, `vue-qa/` cổng 5196), đóng băng ở tag `fe-qa-batch-1`. Mỗi câu ngang có kèm 1 bản Shorts 60 giây song song (bảng caption ở mục phụ cuối phần này). Ẩn dụ series: PHÒNG PHỎNG VẤN — người phỏng vấn hỏi, mình demo rồi chốt câu trả lời mẫu.
+
+Từ khóa chủ lực toàn series: `phỏng vấn frontend`, `phỏng vấn react`, `phỏng vấn vue`, `react interview`, `vue interview`, `câu hỏi phỏng vấn react`, `câu hỏi phỏng vấn vue`, `frontend interview questions`, `học react`, `học vue`.
+
+---
+
+### Phỏng vấn FE #1 — Virtual DOM là gì? (2:40)
+
+**Tiêu đề:** Phỏng vấn FE #1: Virtual DOM và Reconciliation là gì? | React interview
+
+**Mô tả:**
+```
+Câu hỏi kinh điển nhất mọi buổi phỏng vấn React: Virtual DOM và reconciliation là gì? Video này mở màn series MỚI "Phỏng vấn Frontend" — 12 câu hỏi thật từ vòng phỏng vấn React và Vue, mỗi câu một video demo code chạy thật, không phải đọc slide.
+
+Virtual DOM là bản sao NHẸ của DOM thật, sống hoàn toàn trong bộ nhớ JavaScript. Mỗi lần state đổi, React dựng cây Virtual DOM mới rồi diff với cây cũ — đó chính là reconciliation, thuật toán quyết định node nào giữ nguyên, node nào cần vá, xóa hay thêm mới. Kết quả diff chỉ áp đúng phần THẬT SỰ thay đổi lên DOM thật.
+
+Demo thật bằng component R1VirtualDom.tsx: một ô hiển thị mốc thời gian gắn với `<span ref={staticRef}>` — bấm nút re-render 20 lần, mốc thời gian này KHÔNG NHÍCH, trong khi ô counter bên cạnh vẫn tăng đều theo từng click. Nếu React thật sự hủy và dựng lại toàn bộ DOM mỗi lần re-render, mốc thời gian phải đổi theo — nhưng nó đứng yên, bằng chứng sống của reconciliation.
+
+Bẫy hay gặp: Virtual DOM KHÔNG phải lúc nào cũng nhanh hơn thao tác DOM trực tiếp — đây là CHIẾN LƯỢC tránh thao tác DOM tốn kém không cần thiết, không phải phép màu tốc độ tuyệt đối.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu series Phỏng vấn Frontend & câu hỏi #1
+0:25 Virtual DOM là gì? Reconciliation là gì?
+0:51 Code: R1VirtualDom.tsx — mountedAt, useRef
+1:23 Demo thật: DOM node tĩnh không remount
+1:45 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:14 Tổng kết câu 1 & hẹn câu 2
+
+📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
+⏭️ Câu tiếp theo: [LINK-EP46]
+📱 Bản Shorts 60 giây: [LINK-SHORT-01]
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#reactjs #phongvan #frontend #reactinterview #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🎤 Mở màn series Phỏng vấn Frontend: 12 câu hỏi thật từ React & Vue, mỗi câu một video demo chạy thật. Bẫy hay bị hỏi ngược ngay câu 1: Virtual DOM có phải LÚC NÀO CŨNG nhanh hơn thao tác DOM trực tiếp không? KHÔNG — đây là chiến lược tránh thao tác thừa, không phải phép màu tốc độ. Comment câu hỏi phỏng vấn Frontend khó nhất bạn từng gặp nhé!
+```
+
+**Thumbnail:** badge "PV FE #1" · dòng lớn "VIRTUAL DOM" / "LÀ GÌ?" · phụ đề "Phỏng vấn Frontend · Câu 1/12" · badge emoji 🎤 · ảnh nền `screens/feqa/r1-thumbcrop.png`.
+
+**Tags:** `virtual dom, reconciliation, react interview, phỏng vấn react, phỏng vấn frontend, virtual dom là gì, react diff algorithm, useref react, react rerender, react tiếng việt, học react, frontend interview questions, câu hỏi phỏng vấn react, javascript interview, react cho người mới, web development tiếng việt`
+
+---
+
+### Phỏng vấn FE #2 — useState và useEffect khác nhau thế nào? (2:37)
+
+**Tiêu đề:** Phỏng vấn FE #2: useState và useEffect khác nhau thế nào? | React interview
+
+**Mô tả:**
+```
+Câu 2 trong series Phỏng vấn Frontend: useState và useEffect khác nhau thế nào — và vì sao thứ tự chạy của cleanup lại là bẫy hay bị hỏi ngược trong vòng phỏng vấn React.
+
+useState giữ state nội bộ: gọi hàm set là React lên lịch re-render. useEffect đồng bộ với thứ NGOÀI React (fetch, subscribe, log...), luôn chạy SAU khi render xong — KHÔNG dùng để derive giá trị hiển thị. Cleanup (return trong effect) chạy TRƯỚC effect kế tiếp, và khi component unmount.
+
+Demo thật bằng R2Effects.tsx: tăng count, log hiện đúng trình tự "effect chạy — count = 0" rồi ngay sau "cleanup chạy (trước lần sau) — count = 0" — thứ tự luôn là cleanup CŨ trước, effect MỚI sau, không bao giờ chạy trước render. Tắt component con, dòng cleanup cuối xuất hiện đúng lúc unmount.
+
+Bẫy hay gặp: cleanup KHÔNG chỉ chạy khi unmount — nó chạy TRƯỚC MỌI effect kế tiếp, đây là điểm rất nhiều bạn trả lời sai khi bị hỏi ngược trong phỏng vấn.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 2 & nhắc lại câu 1
+0:21 useState vs useEffect là gì?
+0:49 Code: R2Effects.tsx
+1:19 Demo thật: log effect và cleanup đúng thứ tự
+1:41 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:09 Tổng kết câu 2 & hẹn câu 3
+
+📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP45]
+⏭️ Câu tiếp theo: [LINK-EP47]
+📱 Bản Shorts 60 giây: [LINK-SHORT-02]
+
+#reactjs #phongvan #frontend #reacthooks #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🎤 Đố nhỏ hay bị hỏi ngược trong phỏng vấn: cleanup trong useEffect chạy khi nào — CHỈ lúc component unmount, hay còn lúc nào khác? Video vừa chứng minh bằng log thật: cleanup chạy TRƯỚC MỖI effect kế tiếp, không chỉ khi unmount. Comment đáp án của bạn trước khi xem lại video nhé!
+```
+
+**Thumbnail:** badge "PV FE #2" · dòng lớn "USESTATE VÀ" / "USEEFFECT" · phụ đề "Phỏng vấn Frontend · Câu 2/12" · badge emoji 🎤 · ảnh nền `screens/feqa/r2-thumbcrop.png`.
+
+**Tags:** `usestate, useeffect, react hooks, cleanup function react, react interview, phỏng vấn react, phỏng vấn frontend, dependency array react, react lifecycle, side effect react, react tiếng việt, học react, câu hỏi phỏng vấn react, frontend interview questions, react cho người mới, javascript interview`
+
+---
+
+### Phỏng vấn FE #3 — Vì sao list cần key? Bẫy key=index (2:34)
+
+**Tiêu đề:** Phỏng vấn FE #3: Vì sao list cần key? Bẫy key=index | React interview
+
+**Mô tả:**
+```
+Câu 3 trong series Phỏng vấn Frontend: vì sao React yêu cầu key cho mỗi phần tử trong list — và vì sao dùng index làm key lại là một trong những bẫy hay gặp nhất khi phỏng vấn React.
+
+key giống như "chứng minh thư" của phần tử — React so sánh key cũ/mới giữa các lần render để quyết định: giữ nguyên, tạo mới hay xóa DOM node. Vấn đề của key={index}: chứng minh thư này đổi theo VỊ TRÍ trong mảng, chứ không gắn với chính phần tử — hễ list có thêm, xóa hay sắp xếp lại, React sẽ gắn nhầm DOM node và state (như giá trị input) sang phần tử khác.
+
+Demo thật bằng R3KeyProp.tsx: xóa 1 dòng ở giữa danh sách món ăn có ghi chú — với key={index}, "Bánh mì" đột nhiên nhận ghi chú "phở", "Cơm tấm" nhận ghi chú "bánh" — SAI hoàn toàn. Đổi sang key={item} (giá trị ổn định của chính phần tử), xóa dòng y hệt nhưng ghi chú vẫn đi đúng theo món ăn của nó.
+
+Bẫy hay gặp: đừng dùng Math.random() làm key — giá trị đổi mỗi lần render khiến React re-mount toàn bộ list và mất sạch state; key={index} chỉ tạm chấp nhận được khi list TĨNH, không bao giờ thêm/xóa/sắp xếp lại.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 3
+0:14 key là gì, tại sao quan trọng
+0:40 Code: R3KeyProp.tsx
+1:09 Demo thật: xóa 1 dòng, ghi chú nhảy sai chỗ
+1:32 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:02 Tổng kết câu 3 & hẹn câu 4
+
+📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP46]
+⏭️ Câu tiếp theo: [LINK-EP48]
+📱 Bản Shorts 60 giây: [LINK-SHORT-03]
+🔁 Bẫy y hệt bên Vue: câu 11 (:key trong v-for) — [LINK-EP55]
+
+#reactjs #phongvan #frontend #reactkey #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🔑 Bẫy kinh điển nhất: key={index} chỉ AN TOÀN khi nào? Gợi ý: liên quan tới việc list có bao giờ bị thêm, xóa hay sắp xếp lại hay không. Comment câu trả lời của bạn — và nhớ đón câu 11 phần Vue xem bẫy y hệt lặp lại với :key trong v-for!
+```
+
+**Thumbnail:** badge "PV FE #3" · dòng lớn "ĐỪNG DÙNG" / "INDEX LÀM KEY" · phụ đề "Phỏng vấn Frontend · Câu 3/12" · badge emoji 🔑 · ảnh nền `screens/feqa/r3-thumbcrop.png`.
+
+**Tags:** `react key prop, list key react, key index bug, reconciliation react, react interview, phỏng vấn react, phỏng vấn frontend, react list rendering, react tiếng việt, học react, câu hỏi phỏng vấn react, frontend interview questions, react cho người mới, javascript interview, react common mistakes`
+
+---
+
+### Phỏng vấn FE #4 — Controlled vs Uncontrolled component (2:52)
+
+**Tiêu đề:** Phỏng vấn FE #4: Controlled vs Uncontrolled component | React interview
+
+**Mô tả:**
+```
+Câu 4 trong series Phỏng vấn Frontend: Controlled và Uncontrolled component khác nhau ra sao — và vì sao một nút bấm chỉ tác động được MỘT trong hai kiểu input.
+
+Controlled: React state giữ giá trị, input chỉ hiển thị đúng state — value + onChange, mỗi lần gõ là một vòng render, React luôn biết giá trị hiện tại. Uncontrolled: DOM tự giữ giá trị, React không theo dõi từng ký tự gõ — đọc giá trị qua ref khi cần, không tự động đồng bộ theo từng lần gõ.
+
+Demo thật bằng R4Controlled.tsx: bấm nút UPPERCASE, ô controlled đổi ngay thành chữ HOA vì state thay đổi kéo theo re-render; ô uncontrolled đứng yên hoàn toàn vì DOM tự quản, React không hề can thiệp vào giá trị đó.
+
+Bẫy hay gặp: đổi value của input từ undefined sang có giá trị GIỮA CHỪNG sẽ khiến React cảnh báo "chuyển từ uncontrolled sang controlled". Và một ý thực tế: form lớn không cần ép TẤT CẢ input đều controlled — uncontrolled kết hợp FormData lúc submit vẫn là cách hợp lệ, nhẹ hơn.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 4
+0:17 Controlled vs Uncontrolled là gì
+0:42 Code: R4Controlled.tsx
+1:21 Demo thật: UPPERCASE chỉ ăn một bên
+1:50 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:21 Tổng kết câu 4 & hẹn câu 5
+
+📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP47]
+⏭️ Câu tiếp theo: [LINK-EP49]
+📱 Bản Shorts 60 giây: [LINK-SHORT-04]
+
+#reactjs #phongvan #frontend #reactforms #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🎛️ Câu hỏi ngược hay bị hỏi thêm: một form có 20 input, có BẮT BUỘC phải controlled hết không? Gợi ý: uncontrolled kết hợp FormData lúc submit vẫn là lựa chọn hợp lệ, nhẹ hơn nhiều. Comment quan điểm của bạn — bạn thường chọn kiểu nào cho form thật?
+```
+
+**Thumbnail:** badge "PV FE #4" · dòng lớn "CONTROLLED VS" / "UNCONTROLLED" · phụ đề "Phỏng vấn Frontend · Câu 4/12" · badge emoji 🎛️ · ảnh nền `screens/feqa/r4-thumbcrop.png`.
+
+**Tags:** `controlled component, uncontrolled component, react forms, react ref, value onchange react, react interview, phỏng vấn react, phỏng vấn frontend, react form validation, react tiếng việt, học react, câu hỏi phỏng vấn react, frontend interview questions, react cho người mới, javascript interview`
+
+---
+
+### Phỏng vấn FE #5 — React.memo, useMemo, useCallback — khi nào cần? (2:56)
+
+**Tiêu đề:** Phỏng vấn FE #5: React.memo, useMemo, useCallback khi nào cần? | React interview
+
+**Mô tả:**
+```
+Câu 5 trong series Phỏng vấn Frontend: React.memo, useMemo, useCallback khi nào thật sự cần — và khi nào chỉ tổ làm chậm thêm.
+
+React.memo bỏ qua re-render nếu props không đổi — nhưng chỉ so sánh NÔNG (shallow compare). Object literal viết thẳng trong JSX luôn là object MỚI mỗi render, khiến memo vô dụng. useMemo giữ nguyên reference giá trị qua các lần render miễn dependency không đổi; useCallback chính là useMemo dành cho hàm, hợp khi truyền function cho component đã memo hóa.
+
+Demo thật bằng R5Memo.tsx: khi cha truyền object literal mới mỗi render, con render tới 6 lần (1 lần mount + 5 lần re-render) — memo hoàn toàn vô dụng. Đổi sang truyền object qua useMemo giữ nguyên reference, con chỉ render đúng 1 lần dù cha re-render 5 lần — memo hoạt động thật sự.
+
+Bẫy hay gặp: đừng memo mọi thứ — so sánh props cũng tốn chi phí, lạm dụng có thể chậm hơn không memo. Nguyên tắc vàng: đo bằng Profiler trước khi tối ưu, đừng đoán. Ghi chú 2026: React Compiler đã tự động memo hóa lúc build, nhưng hiểu bản chất shallow compare vẫn rất cần thiết khi phỏng vấn.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 5
+0:21 React.memo / useMemo / useCallback là gì
+0:50 Code: R5Memo.tsx
+1:24 Demo thật: object literal phá memo, useMemo cứu memo
+1:50 Trả lời như đi phỏng vấn: chốt + bẫy + React Compiler 2026
+2:27 Tổng kết câu 5 & hẹn câu 6
+
+📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP48]
+⏭️ Câu tiếp theo: [LINK-EP50]
+📱 Bản Shorts 60 giây: [LINK-SHORT-05]
+
+#reactjs #phongvan #frontend #reactperformance #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🧠 Bẫy dễ sập nhất câu này: React.memo có tự động ăn khi component con nhận PROP LÀ OBJECT không? Video vừa chứng minh bằng con số thật: 6 lần render (object literal) vs 1 lần render (useMemo). Comment bạn đã từng dính bẫy này trong dự án thật chưa!
+```
+
+**Thumbnail:** badge "PV FE #5" · dòng lớn "REACT.MEMO" / "CÓ THẬT SỰ ĂN?" · phụ đề "Phỏng vấn Frontend · Câu 5/12" · badge emoji 🧠 · ảnh nền `screens/feqa/r5-thumbcrop.png`.
+
+**Tags:** `react.memo, usememo, usecallback, shallow compare react, react performance, react interview, phỏng vấn react, phỏng vấn frontend, react profiler, react compiler, react tiếng việt, học react, câu hỏi phỏng vấn react, frontend interview questions, react cho người mới, tối ưu react`
+
+---
+
+### Phỏng vấn FE #6 — Custom Hook là gì, viết thế nào? (2:55)
+
+**Tiêu đề:** Phỏng vấn FE #6: Custom Hook là gì, viết thế nào? | React interview
+
+**Mô tả:**
+```
+Câu 6 — câu cuối cùng phần React trong series Phỏng vấn Frontend: Custom Hook là gì, và làm sao để tách logic tái sử dụng giữa nhiều component.
+
+Custom hook chỉ là một hàm JS thường, với quy ước bắt buộc: tên bắt đầu bằng "use". Bên trong gọi các hook có sẵn (useState, useEffect...) để gói logic stateful, tái dùng ở nhiều nơi. Nó KHÔNG phải component — không trả JSX, chỉ trả data hoặc hàm. Và mỗi component gọi hook đó có state RIÊNG, không phải kho state dùng chung.
+
+Demo thật bằng R6CustomHook.tsx (useDebouncedValue): gõ chữ, giá trị tức thời cập nhật ngay lập tức, nhưng giá trị debounce vẫn giữ nguyên chuỗi cũ vì chưa đủ 500ms kể từ lần gõ cuối — bằng chứng sống rằng custom hook chỉ gói lại logic setTimeout + cleanup, không phải phép màu.
+
+Bẫy hay gặp: custom hook KHÔNG share STATE giữa các component gọi nó — nó chỉ share LOGIC (cách làm). Muốn share state thật giữa nhiều component, phải dùng Context hoặc một store riêng (Zustand, Redux...).
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 6 — khép phần React
+0:19 Custom hook là gì
+0:45 Code: R6CustomHook.tsx — useDebouncedValue
+1:19 Demo thật: giá trị tức thời vs debounce 500ms
+1:45 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:20 Tổng kết 6 câu React & chuyển sang phần Vue
+
+📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP49]
+⏭️ Câu tiếp theo (mở đầu phần Vue): [LINK-EP51]
+📱 Bản Shorts 60 giây: [LINK-SHORT-06]
+
+#reactjs #phongvan #frontend #customhook #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🪝 Câu hỏi ngược rất hay bị hỏi thêm: custom hook có SHARE STATE giữa các component gọi nó không? Nhiều bạn trả lời sai câu này khi phỏng vấn — đúng ra nó chỉ share LOGIC (cách làm), không share STATE. Comment đáp án của bạn kèm lý do nhé!
+```
+
+**Thumbnail:** badge "PV FE #6" · dòng lớn "CUSTOM HOOK" / "LÀ GÌ?" · phụ đề "Phỏng vấn Frontend · Câu 6/12" · badge emoji 🪝 · ảnh nền `screens/feqa/r6-thumbcrop.png`.
+
+**Tags:** `custom hook react, react hooks, use hook naming convention, usedebouncedvalue, react interview, phỏng vấn react, phỏng vấn frontend, tái sử dụng logic react, react tiếng việt, học react, câu hỏi phỏng vấn react, frontend interview questions, react cho người mới, javascript interview, debounce react`
+
+---
+
+### Phỏng vấn FE #7 — Ref và reactive khác nhau thế nào? (2:59)
+
+**Tiêu đề:** Phỏng vấn FE #7: Ref và reactive khác nhau thế nào? | Vue interview
+
+**Mô tả:**
+```
+Câu 7 — mở đầu phần Vue trong series Phỏng vấn Frontend: ref và reactive khác nhau thế nào, và vì sao destructure từ reactive lại làm mất reactivity — một bẫy tinh vi bậc nhất của Vue 3.
+
+ref bọc MỌI kiểu giá trị (kể cả primitive) trong object có .value — template tự unwrap nên không cần .value ở đó. reactive chỉ nhận object/array, tạo Proxy SÂU, truy cập trực tiếp property, không có .value. Luật quan trọng: destructure khỏi reactive là LẤY GIÁ TRỊ tại đúng thời điểm đó, MẤT liên kết Proxy — biến local không còn được Vue track nữa.
+
+Demo thật bằng V1RefReactive.vue: bấm "Tăng bản destructure" liên tiếp 3 lần — UI ĐỨNG IM HOÀN TOÀN, cả reactive.count lẫn biến destructure đều hiển thị 0. Nhưng chỉ 1 lần bấm "Tăng reactive.count" ngay sau đó, UI re-render vì lý do khác và LỘ RA giá trị ngầm: biến destructure nhảy thẳng lên 3! Giá trị vẫn tăng thật trong closure suốt 3 lần bấm trước, chỉ là ẩn tới khi có render khác kích hoạt — không hề đứng yên mãi mãi như nhiều người lầm tưởng.
+
+Bẫy hay gặp: muốn destructure an toàn, dùng toRefs(state) để tách từng property thành ref riêng (hoặc storeToRefs(store) nếu dùng Pinia) — giữ nguyên khả năng theo dõi.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu phần Vue & câu 7
+0:23 ref vs reactive là gì
+0:55 Code: V1RefReactive.vue (script setup)
+1:31 Demo thật: destructure đứng im, reactive lộ giá trị ngầm
+2:03 Trả lời như đi phỏng vấn: chốt + toRefs
+2:33 Tổng kết câu 7 & hẹn câu 8
+
+📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP50]
+⏭️ Câu tiếp theo: [LINK-EP52]
+📱 Bản Shorts 60 giây: [LINK-SHORT-07]
+
+#vuejs #phongvan #frontend #vuereactivity #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+💚 Bẫy tinh vi nhất phần Vue: bấm nút "destructure" liên tiếp 3 lần, UI đứng im — vậy giá trị bên trong có THẬT SỰ không đổi? KHÔNG — nó vẫn tăng NGẦM trong closure, chỉ chờ dịp render khác kích hoạt để lộ ra. Comment bạn đoán đúng cơ chế này trước khi xem hết video chưa!
+```
+
+**Thumbnail:** badge "PV FE #7" · dòng lớn "REF VS" / "REACTIVE" · phụ đề "Phỏng vấn Frontend · Câu 7/12" · badge emoji 💚 · ảnh nền `screens/feqa/v1-thumbcrop.png`.
+
+**Tags:** `vue ref vs reactive, reactive proxy vue, torefs vue, destructure reactivity, vue interview, phỏng vấn vue, phỏng vấn frontend, vue 3 composition api, vue reactivity system, vue tiếng việt, học vue, câu hỏi phỏng vấn vue, frontend interview questions, vue cho người mới, javascript interview`
+
+---
+
+### Phỏng vấn FE #8 — Options API và Composition API khác nhau thế nào? (2:55)
+
+**Tiêu đề:** Phỏng vấn FE #8: Options API vs Composition API | Vue interview
+
+**Mô tả:**
+```
+Câu 8 phần Vue trong series Phỏng vấn Frontend: Options API và Composition API khác nhau thế nào, và khi nào nên dùng cái nào.
+
+Options API tổ chức code theo LOẠI — data()/methods/computed tách khối riêng, quen thuộc với Vue 2. Composition API tổ chức theo TÍNH NĂNG trong <script setup> — dễ tái dùng qua composable, TypeScript tốt hơn. Cùng một counter, cùng hành vi, chỉ khác cách tổ chức code — hoàn toàn KHÔNG khác kết quả.
+
+Demo thật: hai component chạy song song. OptionsCounter.vue viết bằng data()/methods thuần, bên cạnh V2ApiStyles.vue viết bằng <script setup> gộp logic theo feature — bấm +1 (Options) chỉ tăng counter của nó, bấm +1 (Composition) chỉ tăng counter kia, hoàn toàn độc lập nhau trong cùng một trang.
+
+Bẫy hay gặp: nhiều người nghĩ Options API đã lỗi thời — SAI, Vue 3 vẫn hỗ trợ đầy đủ, hai API dùng CHUNG được trong một project. Dự án mới nên ưu tiên Composition API vì composable và TypeScript tốt hơn, nhưng đừng bao giờ trộn hai style trong CÙNG MỘT component.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 8
+0:24 Options API vs Composition API là gì
+0:54 Code: OptionsCounter.vue (Options API)
+1:13 Code: V2ApiStyles.vue (Composition API, script setup)
+1:33 Demo thật: 2 counter chạy song song, độc lập
+2:01 Trả lời như đi phỏng vấn: chốt + đừng trộn 2 style
+2:29 Tổng kết câu 8 & hẹn câu 9
+
+📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP51]
+⏭️ Câu tiếp theo: [LINK-EP53]
+📱 Bản Shorts 60 giây: [LINK-SHORT-08]
+
+#vuejs #phongvan #frontend #vuecomposition #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🧩 Câu hỏi hay bị hỏi thêm: Options API có LỖI THỜI không, có nên bỏ hẳn không trong dự án mới? Video vừa chứng minh 2 style chạy y hệt nhau, độc lập, trong cùng một trang. Comment bạn đang theo style nào trong dự án thật — Options hay Composition?
+```
+
+**Thumbnail:** badge "PV FE #8" · dòng lớn "OPTIONS VS" / "COMPOSITION" · phụ đề "Phỏng vấn Frontend · Câu 8/12" · badge emoji 🧩 · ảnh nền `screens/feqa/v2-thumbcrop.png`.
+
+**Tags:** `options api vs composition api, vue 3, script setup, vue composable, vue interview, phỏng vấn vue, phỏng vấn frontend, vue component styles, vue tiếng việt, học vue, câu hỏi phỏng vấn vue, frontend interview questions, vue cho người mới, typescript vue, vue migration`
+
+---
+
+### Phỏng vấn FE #9 — computed vs watch vs watchEffect khác nhau thế nào? (2:34)
+
+**Tiêu đề:** Phỏng vấn FE #9: computed vs watch vs watchEffect | Vue interview
+
+**Mô tả:**
+```
+Câu 9 phần Vue trong series Phỏng vấn Frontend: computed, watch và watchEffect khác nhau thế nào, khi nào dùng cái nào.
+
+computed là giá trị DẪN XUẤT, có CACHE — chỉ tính lại khi dependency đổi, dùng cho giá trị hiển thị. watch theo dõi nguồn CỤ THỂ, LAZY — có oldValue/newValue, hợp cho side-effect có chủ đích (gọi API...). watchEffect tự thu thập mọi dependency, chạy NGAY lần đầu (eager), rồi chạy lại khi có gì đổi.
+
+Demo thật bằng V3ComputedWatch.vue: template đọc {{tongTien}} tới 3 lần liên tiếp nhưng bộ đếm chỉ ghi nhận đã tính lại đúng 5 lần suốt phiên — computed CACHE thật sự, không tính thêm mỗi lần đọc. Song song đó, watchEffect chạy ngay từ km=10 lúc mount (eager), trong khi watch chỉ ghi log SAU khi km thật sự đổi (lazy, có oldValue → newValue rõ ràng).
+
+Bẫy hay gặp: computed PHẢI PURE — đếm số lần tính lại trong demo chỉ để minh họa cơ chế, đừng nhét async hay side-effect thật vào computed. watchEffect chạy ngay từ đầu nên rất dễ gây bất ngờ nếu không lường trước.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 9
+0:16 computed vs watch vs watchEffect là gì
+0:47 Code: V3ComputedWatch.vue (script setup)
+1:13 Demo thật: computed cache, watch lazy, watchEffect eager
+1:43 Trả lời như đi phỏng vấn: chốt + computed phải pure
+2:14 Tổng kết câu 9 & hẹn câu 10
+
+📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP52]
+⏭️ Câu tiếp theo: [LINK-EP54]
+📱 Bản Shorts 60 giây: [LINK-SHORT-09]
+
+#vuejs #phongvan #frontend #vuewatch #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🔁 Đố nhỏ trước khi xem: đọc {{tongTien}} 3 lần liên tiếp trong template, computed có TÍNH LẠI 3 lần không? Video vừa đo bằng bộ đếm thật — đáp án nằm ở đúng khái niệm CACHE. Comment dự đoán của bạn trước khi kéo tới đoạn demo nhé!
+```
+
+**Thumbnail:** badge "PV FE #9" · dòng lớn "COMPUTED VS" / "WATCH" · phụ đề "Phỏng vấn Frontend · Câu 9/12" · badge emoji 🔁 · ảnh nền `screens/feqa/v3-thumbcrop.png`.
+
+**Tags:** `computed vue, watch vue, watcheffect vue, vue reactivity, vue interview, phỏng vấn vue, phỏng vấn frontend, vue derived state, vue side effect, vue tiếng việt, học vue, câu hỏi phỏng vấn vue, frontend interview questions, vue cho người mới, javascript interview`
+
+---
+
+### Phỏng vấn FE #10 — v-if và v-show khác nhau thế nào? (2:30)
+
+**Tiêu đề:** Phỏng vấn FE #10: v-if và v-show khác nhau thế nào? | Vue interview
+
+**Mô tả:**
+```
+Câu 10 phần Vue trong series Phỏng vấn Frontend: v-if và v-show khác nhau thế nào, khi nào dùng cái nào.
+
+v-if thêm/xóa HẲN phần tử khỏi DOM — ẩn là unmount thật, mọi state con (như chữ đã gõ trong input) bị hủy sạch. Chi phí TOGGLE của v-if khá cao vì tạo lại mỗi lần, nhưng bù lại lazy và hỗ trợ v-else/v-else-if. v-show thì LUÔN render, tồn tại sẵn trong DOM — toggle chỉ đổi CSS display, state giữ nguyên; render ban đầu tốn hơn chút nhưng TOGGLE mỗi lần cực RẺ.
+
+Demo thật bằng V4IfShow.vue: gõ chữ vào cả hai ô, ẩn rồi hiện lại — ô dùng v-if TRỐNG TRƠN vì phần tử vừa unmount rồi mount lại từ đầu; ô dùng v-show vẫn giữ nguyên nội dung đã gõ, vì phần tử không hề bị hủy, chỉ CSS display:none che đi tạm thời.
+
+Bẫy hay gặp: v-show KHÔNG dùng chung được với v-else, và KHÔNG áp dụng được trên thẻ <template>. Quy tắc chọn: toggle THƯỜNG XUYÊN thì dùng v-show cho rẻ; điều kiện ít đổi hoặc nội dung nặng thì dùng v-if để lazy-init.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 10
+0:16 v-if vs v-show là gì
+0:46 Code: V4IfShow.vue (template)
+1:12 Demo thật: v-if mất chữ, v-show giữ chữ
+1:36 Trả lời như đi phỏng vấn: chốt + quy tắc chọn
+2:06 Tổng kết câu 10 & hẹn câu 11
+
+📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP53]
+⏭️ Câu tiếp theo: [LINK-EP55]
+📱 Bản Shorts 60 giây: [LINK-SHORT-10]
+
+#vuejs #phongvan #frontend #vueif #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🎭 Câu hỏi ngược hay bị hỏi thêm: v-show có dùng chung được với v-else không? Nhiều bạn trả lời "có" vì tưởng nó giống hệt v-if — thực ra KHÔNG, v-show không hỗ trợ v-else/v-else-if. Comment đáp án đúng của bạn kèm lý do nhé!
+```
+
+**Thumbnail:** badge "PV FE #10" · dòng lớn "V-IF VS" / "V-SHOW" · phụ đề "Phỏng vấn Frontend · Câu 10/12" · badge emoji 🎭 · ảnh nền `screens/feqa/v4-thumbcrop.png`.
+
+**Tags:** `v-if vs v-show, vue directive, vue conditional rendering, vue dom, vue interview, phỏng vấn vue, phỏng vấn frontend, vue performance, vue tiếng việt, học vue, câu hỏi phỏng vấn vue, frontend interview questions, vue cho người mới, javascript interview, vue toggle state`
+
+---
+
+### Phỏng vấn FE #11 — :key trong v-for — vì sao không dùng index? (2:43)
+
+**Tiêu đề:** Phỏng vấn FE #11: :key trong v-for, vì sao không dùng index? | Vue interview
+
+**Mô tả:**
+```
+Câu 11 phần Vue trong series Phỏng vấn Frontend: :key trong v-for là gì, vì sao quan trọng — bẫy y hệt câu 3 phía React (key={index}), giờ lặp lại nguyên vẹn trong thế giới Vue.
+
+:key cũng là "chứng minh thư" của phần tử — Vue diff cây cũ/mới y hệt React. Nếu thiếu key ổn định, Vue sẽ patch theo VỊ TRÍ (in-place), rất dễ nhận nhầm node. :key="index" đổi theo VỊ TRÍ trong mảng — hễ list có thêm, xóa hay sắp xếp lại là gắn nhầm, hậu quả y hệt: DOM node và state con (như giá trị input) bị tái sử dụng SAI chỗ.
+
+Demo thật bằng V5KeyVFor.vue: xóa 1 dòng ở giữa danh sách món ăn có ghi chú — với :key="index", "Bánh mì" đột nhiên nhận ghi chú "phở", y hệt bẫy đã thấy ở câu R3 phía React. Đổi sang :key="item" (giá trị ổn định của chính phần tử), xóa dòng y hệt nhưng ghi chú vẫn đi đúng theo món ăn của nó.
+
+Bẫy hay gặp: cùng MỘT LUẬT cho cả 2 framework — học một lần, dùng được ở cả hai nơi. Đừng dùng index làm key khi list có khả năng thêm, xóa hay sắp xếp lại.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 11
+0:18 :key trong v-for là gì, tại sao quan trọng
+0:46 Code: V5KeyVFor.vue (template)
+1:13 Demo thật: xóa 1 dòng, ghi chú nhảy sai chỗ — y hệt bẫy R3
+1:38 Trả lời như đi phỏng vấn: chốt + cùng luật với React
+2:09 Tổng kết câu 11 & hẹn câu 12 — câu cuối lô 1
+
+📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP54]
+⏭️ Câu tiếp theo: [LINK-EP56]
+📱 Bản Shorts 60 giây: [LINK-SHORT-11]
+🔁 Bẫy y hệt bên React: câu 3 (key trong list) — [LINK-EP47]
+
+#vuejs #phongvan #frontend #vuekey #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🗝️ Y hệt bẫy R3 bên React ở câu 3 — bạn còn nhớ ghi chú "nhảy sai chỗ" không? :key="index" sập bẫy y hệt khi list bị thêm, xóa hay sắp xếp lại — một luật, áp dụng được cả hai framework. Comment nếu bạn nhận ra ngay từ đầu video là "y hệt câu 3" nhé!
+```
+
+**Thumbnail:** badge "PV FE #11" · dòng lớn ":KEY TRONG" / "V-FOR" · phụ đề "Phỏng vấn Frontend · Câu 11/12" · badge emoji 🗝️ · ảnh nền `screens/feqa/v5-thumbcrop.png`.
+
+**Tags:** `vue key v-for, v-for key index bug, vue list rendering, vue reconciliation, vue interview, phỏng vấn vue, phỏng vấn frontend, vue patch algorithm, vue tiếng việt, học vue, câu hỏi phỏng vấn vue, frontend interview questions, vue cho người mới, react vs vue key, javascript interview`
+
+---
+
+### Phỏng vấn FE #12 (CUỐI LÔ 1) — Props xuống, Emit lên hoạt động thế nào? (2:33)
+
+**Tiêu đề:** Phỏng vấn FE #12: Props xuống, Emit lên hoạt động thế nào? | Vue interview
+
+**Mô tả:**
+```
+Câu 12 — câu cuối cùng khép lại lô 1 series Phỏng vấn Frontend: Props truyền xuống, Emit bắn lên — giao tiếp cha con trong Vue hoạt động thế nào, cùng tinh thần với React.
+
+Props: cha truyền dữ liệu XUỐNG con qua defineProps — con chỉ ĐỌC, không sửa trực tiếp. Emit: con phát sự kiện LÊN cha qua defineEmits + emit(...) — cha tự quyết định xử lý ra sao. Luồng dữ liệu MỘT CHIỀU: props xuống, sự kiện lên, không bao giờ ngược lại.
+
+Demo thật bằng NutDatHang.vue: bấm liên tiếp các nút món ăn ở component con, cha ghi log đúng thứ tự đã bấm — #1 Phở bò, #2 Bánh mì, #3 Bánh mì, #4 Cơm tấm. Component con hoàn toàn không biết đơn hàng tồn tại ở đâu — nó chỉ emit tên món lên, cha tự quyết định ghi log thế nào.
+
+Bẫy hay gặp: mutate prop trực tiếp trong component con sẽ ra warning và làm mất dấu dòng chảy dữ liệu — luồng một chiều rõ ràng chính là thứ giúp debug dễ hơn rất nhiều. Cần giao tiếp 2 chiều thật sự (như input) thì dùng defineModel hoặc v-model, không tự ý sửa prop.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 12 — khép lô 1
+0:17 Props xuống, Emit lên là gì, vì sao quan trọng
+0:39 Code: NutDatHang.vue (script setup)
+1:08 Demo thật: bấm nút con, cha ghi log đúng thứ tự
+1:34 Trả lời như đi phỏng vấn: chốt + defineModel khi cần 2 chiều
+2:00 Tổng kết trọn 12 câu lô 1 & CTA lô 2
+
+📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout fe-qa-batch-1 để xem đúng 12 câu code của lô 1 (6 React + 6 Vue).
+⏮️ Câu trước: [LINK-EP55]
+▶️ Xem từ đầu series: [LINK-EP45]
+📱 Bản Shorts 60 giây: [LINK-SHORT-12]
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+💬 Đến lượt bạn: comment câu hỏi phỏng vấn Frontend KHÓ NHẤT bạn từng gặp — càng nhiều người góp, lô 2 càng sát thực tế phỏng vấn ngoài kia!
+
+#vuejs #phongvan #frontend #reactvsvue #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+📮 Vậy là hết trọn 12 câu lô 1 — 6 câu React, 6 câu Vue, mỗi câu một demo chạy thật thay vì đọc slide. Đến lượt bạn: comment câu hỏi phỏng vấn Frontend KHÓ NHẤT bạn từng gặp (React hoặc Vue đều được) — càng nhiều người góp, lô 2 càng sát thực tế phỏng vấn ngoài kia. Cảm ơn đã theo hết lô 1!
+```
+
+**Thumbnail:** badge "PV FE #12" · dòng lớn "PROPS &" / "EMIT" · phụ đề "Phỏng vấn Frontend · Câu 12/12" · badge emoji 📮 · ảnh nền `screens/feqa/v6-thumbcrop.png`.
+
+**Tags:** `vue props emit, defineprops defineemits, vue parent child communication, vue one way data flow, vue interview, phỏng vấn vue, phỏng vấn frontend, definemodel vue, vue component communication, vue tiếng việt, học vue, câu hỏi phỏng vấn vue, frontend interview questions, vue cho người mới, javascript interview`
+
+---
+
+### Shorts lô 1 (12 video)
+
+> Mỗi Short <60 giây, cùng câu hỏi với video ngang tương ứng, rút gọn để ôn nhanh. Đăng cùng lệnh với 12 video ngang — mô tả mỗi Short chỉ cần dòng caption dưới đây + link video đầy đủ.
+
+| id | Tiêu đề Shorts | Caption |
+|---|---|---|
+| sr1 | Virtual DOM là gì? Trả lời trong 60 giây #shorts | Virtual DOM = bản sao nhẹ, diff rồi vá tối thiểu vào DOM thật.<br>Bẫy: KHÔNG phải lúc nào cũng nhanh hơn — đây là chiến lược tránh thao tác thừa, không phải phép màu tốc độ.<br>Video đầy đủ: [LINK-EP45]<br>#shorts #react #phongvan |
+| sr2 | useState vs useEffect: khác nhau thế nào? #shorts | useState giữ state nội bộ; useEffect đồng bộ ngoài React, luôn chạy SAU render.<br>Bẫy: cleanup chạy TRƯỚC mỗi effect kế tiếp, không chỉ khi unmount.<br>Video đầy đủ: [LINK-EP46]<br>#shorts #react #phongvan |
+| sr3 | Đừng dùng index làm key trong React! #shorts | key giúp React nhận diện đúng phần tử giữa các lần render.<br>Bẫy: key=index + thêm/xóa/sắp xếp lại danh sách = state đi lạc ngay.<br>Video đầy đủ: [LINK-EP47]<br>#shorts #react #phongvan |
+| sr4 | Controlled vs Uncontrolled input — bẫy hay hỏi #shorts | Controlled: state React giữ giá trị qua value+onChange. Uncontrolled: DOM tự giữ, đọc qua ref.<br>Bẫy: đổi value từ rỗng sang có giá trị giữa chừng — React cảnh báo "chuyển sang controlled".<br>Video đầy đủ: [LINK-EP48]<br>#shorts #react #phongvan |
+| sr5 | React.memo có thật sự ăn không? #shorts | React.memo chỉ ăn khi props giữ NGUYÊN reference — object/function mới mỗi render là phá vỡ ngay.<br>Bẫy: đừng memo tràn lan khi chưa đo bằng Profiler.<br>Video đầy đủ: [LINK-EP49]<br>#shorts #react #phongvan |
+| sr6 | Custom Hook là gì? 60 giây hiểu luôn #shorts | Custom hook = hàm bắt đầu bằng "use", gói logic có state để dùng lại nhiều nơi — không trả JSX.<br>Bẫy: custom hook KHÔNG share state giữa components, chỉ share logic.<br>Video đầy đủ: [LINK-EP50]<br>#shorts #react #phongvan |
+| sv1 | Vì sao destructure reactive mất reactivity? #shorts | ref qua .value; reactive là Proxy sâu cho object, truy cập trực tiếp property.<br>Bẫy: destructure khỏi reactive là MẤT liên kết Proxy — dùng toRefs(state) để an toàn.<br>Video đầy đủ: [LINK-EP51]<br>#shorts #vuejs #phongvan |
+| sv2 | Options API vs Composition API Vue 3 #shorts | Options API tổ chức theo LOẠI; Composition API tổ chức theo TÍNH NĂNG trong script setup.<br>Bẫy: đừng trộn 2 style trong cùng 1 component — Options KHÔNG hề lỗi thời.<br>Video đầy đủ: [LINK-EP52]<br>#shorts #vuejs #phongvan |
+| sv3 | computed vs watch vs watchEffect Vue #shorts | computed có CACHE, chỉ tính lại khi dependency đổi; watch lazy theo nguồn cụ thể; watchEffect eager chạy ngay.<br>Bẫy: computed PHẢI PURE — side-effect thật thì dùng watch.<br>Video đầy đủ: [LINK-EP53]<br>#shorts #vuejs #phongvan |
+| sv4 | v-if vs v-show: khác nhau thế nào? #shorts | v-if unmount thật, mất state con; v-show chỉ toggle CSS display, state giữ nguyên.<br>Bẫy: toggle liên tục dùng v-show cho rẻ; v-show không dùng chung với v-else.<br>Video đầy đủ: [LINK-EP54]<br>#shorts #vuejs #phongvan |
+| sv5 | Đừng dùng index làm :key trong v-for! #shorts | :key giúp Vue nhận diện đúng phần tử — cùng luật với React.<br>Bẫy: :key=index + thêm/xóa/sắp xếp lại = state đi lạc, y hệt bẫy R3 bên React.<br>Video đầy đủ: [LINK-EP55]<br>#shorts #vuejs #phongvan |
+| sv6 | Props xuống, Emit lên hoạt động sao? #shorts | Props xuống một chiều, con chỉ đọc; Emit lên để con báo tin, cha quyết định xử lý.<br>Bẫy: đừng mutate prop trực tiếp — cần 2 chiều thì dùng defineModel.<br>Video đầy đủ: [LINK-EP56]<br>#shorts #vuejs #phongvan |
