@@ -1,0 +1,194 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu tiếp theo phần Vue: v-if và v-show trông có vẻ giống nhau — nhưng khác nhau ở đâu, khi nào dùng cái nào?",
+      "Cả hai đều ẩn hiện phần tử, nhưng một bên xóa thật khỏi DOM, một bên chỉ giấu bằng CSS.",
+      "Demo ngay sau đây: gõ chữ vào ô input rồi bấm toggle — xem bên nào giữ được chữ, bên nào mất."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #10: v-if và v-show khác nhau thế nào?",
+      "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 10/12",
+      "badge": "Câu 10"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "v-if thêm hoặc xoá HẲN phần tử khỏi DOM — bấm ẩn là unmount thật, mọi state bên trong, kể cả chữ đã gõ, bị hủy theo.",
+      "Vì phải tạo lại từ đầu mỗi lần hiện, v-if có chi phí TOGGLE cao — nhưng khi đang ẩn thì gần như không tốn gì, còn hỗ trợ v-else và v-else-if.",
+      "v-show ngược lại: phần tử LUÔN được render, tồn tại sẵn trong DOM — toggle chỉ đổi CSS display, state con giữ nguyên.",
+      "Vì đã render sẵn, v-show tốn chi phí RENDER BAN ĐẦU cao hơn một chút, nhưng chi phí TOGGLE mỗi lần bấm lại rất RẺ."
+    ],
+    "visual": {
+      "title": "v-if vs v-show",
+      "bullets": [
+        {
+          "icon": "🔀",
+          "text": "v-if: thêm/xóa HẲN khỏi DOM — ẩn là unmount thật, state con (chữ đã gõ) bị hủy",
+          "sentence": 0
+        },
+        {
+          "icon": "💸",
+          "text": "v-if: chi phí TOGGLE cao (tạo lại mỗi lần), nhưng lazy — hỗ trợ v-else/v-else-if",
+          "sentence": 1
+        },
+        {
+          "icon": "👁️",
+          "text": "v-show: LUÔN render, tồn tại sẵn trong DOM — toggle chỉ đổi CSS display, state giữ nguyên",
+          "sentence": 2
+        },
+        {
+          "icon": "⚡",
+          "text": "v-show: render ban đầu tốn hơn chút, nhưng TOGGLE mỗi lần rất RẺ",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là phần template — hai khối v-if và v-show đặt cạnh nhau để so sánh trực tiếp.",
+      "Khối bên trái dùng v-if: showIf true thì render input, false thì render đoạn p thay thế qua v-else — đúng nghĩa thêm/xóa phần tử.",
+      "Khối bên phải dùng v-show: div luôn tồn tại, chỉ điều kiện style hiển thị đổi theo showShow — input bên trong không hề bị hủy.",
+      "Cùng một hành động gõ chữ rồi bấm toggle, nhưng cách Vue xử lý DOM ở hai khối này hoàn toàn khác nhau — xem ngay trên app thật."
+    ],
+    "visual": {
+      "filename": "V4IfShow.vue (template)",
+      "language": "markup",
+      "code": "  <p style=\"color: #666;\">\n    Gõ chữ vào cả 2 ô rồi bấm toggle: v-if MẤT chữ (unmount thật), v-show GIỮ chữ (chỉ ẩn CSS).\n  </p>\n  <div style=\"display: flex; gap: 16px; flex-wrap: wrap;\">\n    <div style=\"border: 1px solid #ddd; border-radius: 8px; padding: 16px; flex: 1;\">\n      <b>v-if</b>\n      <button @click=\"showIf = !showIf\">{{ showIf ? 'Ẩn (unmount)' : 'Hiện (mount lại)' }}</button>\n      <div v-if=\"showIf\" style=\"margin-top: 8px;\">\n        <input placeholder=\"gõ gì đó...\" />\n      </div>\n      <p v-else style=\"margin-top: 8px; color: #999;\">(đã unmount khỏi DOM)</p>\n    </div>\n    <div style=\"border: 1px solid #ddd; border-radius: 8px; padding: 16px; flex: 1;\">\n      <b>v-show</b>\n      <button @click=\"showShow = !showShow\">{{ showShow ? 'Ẩn (display:none)' : 'Hiện lại' }}</button>\n      <div v-show=\"showShow\" style=\"margin-top: 8px;\">\n        <input placeholder=\"gõ gì đó...\" />\n      </div>\n    </div>\n  </div>",
+      "steps": [
+        {
+          "from": 1,
+          "to": 20,
+          "sentence": 0
+        },
+        {
+          "from": 5,
+          "to": 11,
+          "sentence": 1
+        },
+        {
+          "from": 13,
+          "to": 19,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 20,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "browser",
+    "narration": [
+      "App demo thật — vue-qa cổng 5196, câu v4: hai khối v-if và v-show đặt cạnh nhau.",
+      "Gõ chữ vào cả hai ô input, rồi bấm nút toggle ẩn ở cả hai bên.",
+      "Bấm hiện lại: bên v-if, ô input trống trơn — chữ vừa gõ đã MẤT, vì phần tử vừa bị unmount rồi mount lại từ đầu.",
+      "Bên v-show, chữ vẫn còn nguyên — vì suốt lúc đó phần tử KHÔNG hề bị hủy, chỉ bị CSS display:none che đi thôi."
+    ],
+    "visual": {
+      "title": "Demo thật: v-if mất chữ, v-show giữ chữ",
+      "shots": [
+        {
+          "src": "screens/feqa/v4-main.png",
+          "sentence": 0,
+          "label": "Vue QA — v-if vs v-show: gõ chữ rồi toggle",
+          "url": "localhost:5196 — Vue QA"
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🔴",
+          "text": "Bấm hiện lại: ô v-if TRỐNG TRƠN — chữ vừa gõ đã mất vì phần tử vừa unmount rồi mount lại",
+          "sentence": 2
+        },
+        {
+          "icon": "🟢",
+          "text": "Ô v-show vẫn giữ nguyên chữ — phần tử KHÔNG hề bị hủy, chỉ CSS display:none che đi",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — chốt gọn, học thuộc luôn được.",
+      "Câu một: v-if thêm hoặc xóa hẳn khỏi DOM — unmount thật, mất state con, nhưng lazy và hỗ trợ v-else, v-else-if.",
+      "Câu hai: v-show luôn render, chỉ toggle CSS display — state con giữ nguyên, toggle rất rẻ.",
+      "Câu ba: quy tắc chọn — toggle THƯỜNG XUYÊN như modal, tab thì dùng v-show; điều kiện ít đổi hoặc phần tử nặng thì dùng v-if để lazy-init, đỡ tốn tài nguyên lúc đầu.",
+      "Bẫy: v-show không dùng được với v-else, và không áp dụng được trên thẻ template — chỉ v-if mới có hai khả năng đó."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "🎤",
+          "text": "Chốt gọn — học thuộc luôn được",
+          "sentence": 0
+        },
+        {
+          "icon": "1️⃣",
+          "text": "v-if: unmount thật, mất state con — nhưng lazy, hỗ trợ v-else/v-else-if",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "v-show: luôn render, chỉ toggle CSS display — state con giữ nguyên, toggle RẺ",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Quy tắc: toggle THƯỜNG XUYÊN → v-show; điều kiện ít đổi/nặng → v-if (lazy-init)",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "Bẫy: v-show KHÔNG dùng được với v-else, KHÔNG áp dụng trên <template>",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu bốn phần Vue — v-if unmount thật, v-show chỉ ẩn CSS, chọn theo tần suất toggle.",
+      "Nhớ: toggle liên tục dùng v-show cho rẻ; điều kiện ít đổi hoặc nặng thì dùng v-if để lazy-init; v-show không có v-else.",
+      "Câu tiếp theo phần Vue: key trong v-for — vì sao không nên dùng index, một bẫy quen thuộc y hệt bên React ở câu R3.",
+      "Video này cũng có bản Shorts 60 giây — hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Câu 4/6 phần Vue hoàn tất — hẹn gặp lại câu 5!",
+      "summary": [
+        {
+          "text": "v-if: unmount thật — mất state con, lazy render",
+          "sentence": 0
+        },
+        {
+          "text": "v-show: luôn render, chỉ toggle CSS — state giữ nguyên",
+          "sentence": 1
+        },
+        {
+          "text": "Toggle nhiều → v-show; điều kiện nặng/ít đổi → v-if",
+          "sentence": 2
+        },
+        {
+          "text": "Câu 4/6 xong — tiếp theo: key trong v-for (giống bẫy R3!)",
+          "sentence": 3
+        }
+      ],
+      "next": "Câu 5/12 phần Vue: :key trong v-for vì sao không dùng index? 🎤"
+    }
+  }
+]

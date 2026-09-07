@@ -1,0 +1,129 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "v-if vs v-show: khác nhau ở đâu?",
+        "framework": "vue"
+      },
+      "sentences": [
+        {
+          "file": "audio/sv4/s1-0-373127e6.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/sv4/s1-1-23fedfdf.wav",
+          "startFrame": 107,
+          "durationInFrames": 56
+        }
+      ],
+      "durationInFrames": 181
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "V4IfShow.vue (rút gọn)",
+        "language": "markup",
+        "code": "<div v-if=\"show\">\n  <input />\n</div>\n<p v-else>đã unmount</p>\n<div v-show=\"show2\">\n  <input />\n</div>",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 7,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sv4/s2-0-f40885f0.wav",
+          "startFrame": 0,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/sv4/s2-1-3563f8ca.wav",
+          "startFrame": 114,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/sv4/s2-2-47306ccb.wav",
+          "startFrame": 235,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 388
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/feqa/v4-vert.png",
+        "caption": "v-if mất chữ đã gõ — v-show vẫn giữ nguyên!"
+      },
+      "sentences": [
+        {
+          "file": "audio/sv4/s3-0-7ce23c3d.wav",
+          "startFrame": 0,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/sv4/s3-1-f6bc5ff0.wav",
+          "startFrame": 116,
+          "durationInFrames": 101
+        }
+      ],
+      "durationInFrames": 235
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "✅",
+            "text": "v-if: unmount thật, mất state con — nhưng lazy, hỗ trợ v-else",
+            "sentence": 0
+          },
+          {
+            "icon": "🧩",
+            "text": "v-show: luôn render, chỉ toggle CSS — state giữ nguyên, toggle rẻ",
+            "sentence": 1
+          }
+        ],
+        "trap": "Toggle nhiều dùng v-show — v-if hủy cả state con"
+      },
+      "sentences": [
+        {
+          "file": "audio/sv4/s4-0-9c3057a0.wav",
+          "startFrame": 0,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/sv4/s4-1-f920a74d.wav",
+          "startFrame": 138,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/sv4/s4-2-70e2a81a.wav",
+          "startFrame": 269,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 410
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "v-if và v-show khác nhau thế nào, khi nào dùng cái nào?",
+      "Trả lời chuẩn trong 60 giây."
+    ],
+    "visual": {
+      "question": "v-if vs v-show: khác nhau ở đâu?",
+      "framework": "vue"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Hai khối này y hệt template thật — v-if bên trên, v-show bên dưới.",
+      "v-if thêm hoặc xóa hẳn phần tử — dùng kèm v-else khi cần thay thế.",
+      "v-show luôn render, chỉ đổi CSS display — input bên trong không mất."
+    ],
+    "visual": {
+      "filename": "V4IfShow.vue (rút gọn)",
+      "language": "markup",
+      "code": "<div v-if=\"show\">\n  <input />\n</div>\n<p v-else>đã unmount</p>\n<div v-show=\"show2\">\n  <input />\n</div>",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 5,
+          "to": 7,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Gõ chữ vào cả hai ô rồi bấm toggle ẩn, sau đó bấm hiện lại.",
+      "Bên v-if, chữ mất sạch. Bên v-show, chữ vẫn còn nguyên!"
+    ],
+    "visual": {
+      "src": "screens/feqa/v4-vert.png",
+      "caption": "v-if mất chữ đã gõ — v-show vẫn giữ nguyên!"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "v-if unmount thật, mất state con — nhưng lazy, hỗ trợ v-else và v-else-if.",
+      "v-show luôn render, chỉ toggle CSS display — state giữ nguyên, toggle rẻ.",
+      "Bẫy: toggle nhiều dùng v-show; v-if sẽ hủy cả state con mỗi lần ẩn hiện."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "✅",
+          "text": "v-if: unmount thật, mất state con — nhưng lazy, hỗ trợ v-else",
+          "sentence": 0
+        },
+        {
+          "icon": "🧩",
+          "text": "v-show: luôn render, chỉ toggle CSS — state giữ nguyên, toggle rẻ",
+          "sentence": 1
+        }
+      ],
+      "trap": "Toggle nhiều dùng v-show — v-if hủy cả state con"
+    }
+  }
+]
