@@ -48,7 +48,9 @@ import ep42 from './data/ep42.timing.json';
 import ep43 from './data/ep43.timing.json';
 import ep44 from './data/ep44.timing.json';
 import ep45 from './data/ep45.timing.json';
+import ep46 from './data/ep46.timing.json';
 import sr1 from './data/sr1.timing.json';
+import sr2 from './data/sr2.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -97,6 +99,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode43', timing: ep43 as unknown as EpisodeTiming},
   {id: 'Episode44', timing: ep44 as unknown as EpisodeTiming},
   {id: 'Episode45', timing: ep45 as unknown as EpisodeTiming},
+  {id: 'Episode46', timing: ep46 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -105,6 +108,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
 // như episodes). Thêm entry tại đây (kèm import json ở trên) khi có tập mới.
 const shorts: {id: string; timing: EpisodeTiming}[] = [
   {id: 'ShortR1', timing: sr1 as unknown as EpisodeTiming},
+  {id: 'ShortR2', timing: sr2 as unknown as EpisodeTiming},
 ];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
@@ -651,6 +655,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       subtitle: 'Phỏng vấn Frontend · Câu 1/12',
       variant: 'shot',
       image: 'screens/feqa/r1-thumbcrop.png',
+      badgeEmoji: '🎤',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb46',
+    props: {
+      badge: 'PV FE #2',
+      line1: 'USESTATE VÀ',
+      line2: 'USEEFFECT',
+      subtitle: 'Phỏng vấn Frontend · Câu 2/12',
+      variant: 'shot',
+      image: 'screens/feqa/r2-thumbcrop.png',
       badgeEmoji: '🎤',
       seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },

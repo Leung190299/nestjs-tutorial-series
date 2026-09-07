@@ -1,0 +1,212 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu hỏi tiếp theo trong buổi phỏng vấn Frontend: useState và useEffect khác nhau ra sao — và effect chạy đúng lúc nào?",
+      "Nghe tưởng đơn giản, nhưng thứ tự effect chạy SAU render, và cleanup chạy TRƯỚC mỗi effect kế tiếp, chính là chỗ hay bị hỏi vặn thêm.",
+      "Nhà tuyển dụng còn hay hỏi vặn tiếp: tại sao không dùng luôn useEffect để tính mọi giá trị cho tiện — câu trả lời nằm ở demo ngay sau đây."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #2: useState và useEffect khác nhau thế nào?",
+      "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 2/12",
+      "badge": "Câu 2"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "useState giữ state nội bộ của component — mỗi lần gọi hàm set, React lên lịch re-render.",
+      "useEffect dùng để đồng bộ với thứ BÊN NGOÀI React — fetch API, subscribe, thao tác DOM — sau khi render, KHÔNG dùng để tính giá trị có thể tính ngay trong render.",
+      "Cleanup — hàm return bên trong effect — chạy TRƯỚC effect của lần kế tiếp, và cũng chạy khi component unmount.",
+      "Dependency array quyết định effect chạy lại lúc nào: giá trị nào trong mảng đó đổi thì effect chạy lại đúng lúc đó."
+    ],
+    "visual": {
+      "title": "useState vs useEffect",
+      "bullets": [
+        {
+          "icon": "🗃️",
+          "text": "useState: giữ state nội bộ — gọi hàm set → React lên lịch re-render",
+          "sentence": 0
+        },
+        {
+          "icon": "⏱️",
+          "text": "useEffect: đồng bộ thứ NGOÀI React, sau render — KHÔNG dùng để derive giá trị",
+          "sentence": 1
+        },
+        {
+          "icon": "🧹",
+          "text": "Cleanup (return trong effect): chạy TRƯỚC effect kế tiếp, và khi unmount",
+          "sentence": 2
+        },
+        {
+          "icon": "📋",
+          "text": "Dependency array: đổi giá trị nào trong mảng, effect chạy lại đúng lúc đó",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là component demo thật — R2Effects.tsx, minh họa đúng lúc effect chạy và cleanup dọn dẹp.",
+      "Component con `Child` nhận `count` và `log`, rồi khai báo `useEffect` chạy lại mỗi khi `count` đổi.",
+      "Bên trong effect, dòng đầu log 'effect chạy'; hàm return chính là cleanup — nó chạy TRƯỚC effect của lần kế tiếp.",
+      "`R2Effects` giữ ba mảnh state: `count` để trigger re-render, `mounted` để gắn hoặc tháo `Child`, `lines` để lưu log.",
+      "Bấm 'Tăng count' để thấy effect và cleanup chạy nối tiếp nhau; bấm 'Tắt component con' để unmount và xem cleanup chạy lần cuối."
+    ],
+    "visual": {
+      "filename": "R2Effects.tsx",
+      "language": "tsx",
+      "code": "import {useCallback, useEffect, useState} from 'react';\n\nfunction Child({count, log}: {count: number; log: (line: string) => void}) {\n  useEffect(() => {\n    log(`effect chạy — count = ${count}`);\n    return () => log(`cleanup chạy (trước lần sau / khi unmount) — count = ${count}`);\n  }, [count, log]);\n  return <p>Con đang mount, count = {count}</p>;\n}\n\nexport function R2Effects() {\n  const [count, setCount] = useState(0);\n  const [mounted, setMounted] = useState(true);\n  const [lines, setLines] = useState<string[]>([]);\n  const log = useCallback((line: string) => setLines((prev) => [...prev, line]), []);\n\n  return (\n    <div style={{border: '1px solid #ddd', borderRadius: 8, padding: 16}}>\n      <button onClick={() => setCount((c) => c + 1)}>Tăng count (= {count})</button>{' '}\n      <button onClick={() => setMounted((m) => !m)}>{mounted ? 'Tắt component con' : 'Bật component con'}</button>{' '}\n      <button onClick={() => setLines([])}>Xóa log</button>\n      <div style={{marginTop: 12}}>{mounted && <Child count={count} log={log} />}</div>",
+      "steps": [
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 7,
+          "sentence": 1
+        },
+        {
+          "from": 4,
+          "to": 7,
+          "sentence": 2
+        },
+        {
+          "from": 11,
+          "to": 14,
+          "sentence": 3
+        },
+        {
+          "from": 19,
+          "to": 22,
+          "sentence": 4
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "browser",
+    "narration": [
+      "Đây là app demo thật đang chạy — react-qa, cổng 5197.",
+      "Bấm 'Tăng count': log hiện đúng thứ tự — effect chạy count=0, rồi cleanup chạy (trước lần sau) count=0.",
+      "Mỗi lần count đổi, thứ tự luôn là cleanup CŨ chạy trước, rồi effect MỚI mới chạy — effect không hề chạy trước render.",
+      "Bấm 'Tắt component con' để unmount `Child` — dòng cleanup cuối cùng xuất hiện, đúng như code vừa xem."
+    ],
+    "visual": {
+      "title": "Demo thật: log effect và cleanup đúng thứ tự",
+      "shots": [
+        {
+          "src": "screens/feqa/r2-main.png",
+          "sentence": 0,
+          "label": "React QA — R2 useState vs useEffect",
+          "url": "localhost:5197 — React QA"
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🟢",
+          "text": "Tăng count → log: 'effect chạy — count = 0'",
+          "sentence": 1
+        },
+        {
+          "icon": "🧹",
+          "text": "Ngay sau: 'cleanup chạy (trước lần sau) — count = 0'",
+          "sentence": 1
+        },
+        {
+          "icon": "🔁",
+          "text": "Thứ tự luôn là: cleanup CŨ trước → effect MỚI sau — không chạy trước render",
+          "sentence": 2
+        },
+        {
+          "icon": "🔌",
+          "text": "Tắt component con → dòng cleanup cuối xuất hiện khi unmount",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — chốt gọn trong ba câu, học thuộc luôn được.",
+      "Câu một: useState giữ state nội bộ — mỗi lần gọi hàm set khiến component re-render.",
+      "Câu hai: useEffect đồng bộ với thứ ngoài React, và luôn chạy SAU khi render xong — không phải trước hay trong lúc render.",
+      "Câu ba: cleanup dọn dẹp effect trước — nó chạy trước MỖI effect kế tiếp, không chỉ khi unmount.",
+      "Bẫy nhà tuyển dụng hay gài: effect KHÔNG chạy trước render, và cleanup không chỉ chạy khi unmount — nó chạy trước MỌI effect kế tiếp."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "🎤",
+          "text": "Chốt gọn 3 câu — học thuộc luôn được",
+          "sentence": 0
+        },
+        {
+          "icon": "1️⃣",
+          "text": "useState: giữ state nội bộ — gọi hàm set → component re-render",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "useEffect: đồng bộ ngoài React — luôn chạy SAU khi render xong",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Cleanup: chạy TRƯỚC mỗi effect kế tiếp, không chỉ khi unmount",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "Bẫy: effect KHÔNG chạy trước render; cleanup chạy trước MỌI effect kế, không chỉ unmount",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu 2 trên 12 — useState quản state nội bộ, useEffect đồng bộ với bên ngoài và luôn chạy sau render.",
+      "Nhớ đúng thứ tự: render trước, effect chạy sau; và cleanup của lần trước luôn đi trước effect của lần kế tiếp.",
+      "Câu tiếp theo trong series: vì sao list cần `key`, và vì sao dùng index làm key lại là một bẫy hay gặp.",
+      "Video này cũng có bản Shorts 60 giây — cùng câu hỏi, rút gọn lại để ôn nhanh trước khi vào phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu hỏi số 3!"
+    ],
+    "visual": {
+      "title": "Câu 2/12 hoàn tất — hẹn gặp câu 3!",
+      "summary": [
+        {
+          "text": "useState = state nội bộ; useEffect = đồng bộ ngoài React, luôn chạy SAU render",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: vì sao list cần key — bẫy dùng index làm key",
+          "sentence": 2
+        },
+        {
+          "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+          "sentence": 3
+        }
+      ],
+      "next": "Câu 3/12: Vì sao list cần `key`? 🎤"
+    }
+  }
+]
