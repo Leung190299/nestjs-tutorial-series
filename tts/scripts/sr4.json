@@ -1,0 +1,87 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Controlled và Uncontrolled component khác nhau ra sao? Vì sao một nút chỉ đổi được MỘT trong hai input?",
+      "Trả lời chuẩn trong 60 giây."
+    ],
+    "visual": {
+      "question": "Controlled vs Uncontrolled component",
+      "framework": "react"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Có `value` + `onChange` như thế này, React coi input là CONTROLLED — state là nguồn sự thật.",
+      "Bên controlled, mỗi lần gõ gọi `onChange` để cập nhật state — input hiển thị đúng những gì state có.",
+      "Bên dưới là UNCONTROLLED: chỉ `ref` và `defaultValue` — DOM tự giữ giá trị, muốn đọc phải chủ động dùng ref."
+    ],
+    "visual": {
+      "filename": "R4Controlled.tsx",
+      "language": "tsx",
+      "code": "<input\n  value={value}\n  onChange={e =>\n    setValue(e.target.value)\n  }\n/>\n\n<input\n  ref={inputRef}\n  defaultValue=\"\"\n/>",
+      "steps": [
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 11,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Đã gõ 'Xin chao' vào input controlled, bấm UPPERCASE — chữ đổi hoa ngay trên input.",
+      "Input uncontrolled bên dưới gõ 'khong doi' — không có nút đổi hoa, DOM tự giữ nguyên."
+    ],
+    "visual": {
+      "src": "screens/feqa/r4-vert.png",
+      "caption": "UPPERCASE chỉ đổi input controlled"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Controlled: React giữ giá trị qua value+onChange — state là nguồn sự thật duy nhất.",
+      "Uncontrolled: DOM tự giữ giá trị — đọc qua ref khi cần, không đồng bộ liên tục.",
+      "Bẫy: đổi input từ không có value sang có value giữa chừng — React cảnh báo chuyển sang controlled."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "✅",
+          "text": "Controlled: state giữ giá trị qua value+onChange — nguồn sự thật duy nhất",
+          "sentence": 0
+        },
+        {
+          "icon": "🗄️",
+          "text": "Uncontrolled: DOM tự giữ giá trị — đọc qua ref khi cần",
+          "sentence": 1
+        }
+      ],
+      "trap": "value undefined → có giá trị giữa chừng = warning switching to controlled"
+    }
+  }
+]
