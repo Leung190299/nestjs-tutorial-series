@@ -82,6 +82,27 @@ Series web ĐẦU TIÊN của kênh (vertical), sau 3 series mobile Flutter/Reac
 
 Demo: [`demo-stylex/`](demo-stylex/) (`vietsuper-web/` viết bằng StyleX + `compare-tailwind/` đối chứng Tailwind CSS v4, dùng ở Tập 6). Mỗi tập đóng băng bằng một git tag riêng — `git checkout stylex-tap-N` để xem đúng code xuất hiện trong tập tương ứng.
 
+## Series "Phỏng vấn Frontend — React & Vue" (ep45–ep56 + 12 Shorts)
+
+Series đổi hẳn định dạng: mỗi tập ngang là ĐÚNG MỘT câu hỏi phỏng vấn Frontend thật (6 câu React R1–R6, 6 câu Vue V1–V6) — nghe câu hỏi, xem demo code chạy thật minh họa đúng bẫy/hành vi, rồi chốt lại cách trả lời như đang ngồi trước nhà tuyển dụng. Mỗi câu ngang có kèm 1 bản Shorts 60 giây song song (sr1–sr6 phía React, sv1–sv6 phía Vue).
+
+| # | Câu hỏi | Tập ngang | Short |
+|---|---------|-----------|-------|
+| R1 | Virtual DOM và reconciliation là gì? | ep45 | sr1 |
+| R2 | useState và useEffect khác nhau thế nào? | ep46 | sr2 |
+| R3 | Vì sao list cần key? Bẫy dùng index làm key | ep47 | sr3 |
+| R4 | Controlled vs Uncontrolled component | ep48 | sr4 |
+| R5 | React.memo, useMemo, useCallback — khi nào cần? | ep49 | sr5 |
+| R6 | Custom Hook là gì, viết thế nào? | ep50 | sr6 |
+| V1 | ref vs reactive & bẫy destructure mất reactivity | ep51 | sv1 |
+| V2 | Options API vs Composition API | ep52 | sv2 |
+| V3 | computed vs watch vs watchEffect | ep53 | sv3 |
+| V4 | v-if vs v-show | ep54 | sv4 |
+| V5 | :key trong v-for — vì sao không nên dùng index | ep55 | sv5 |
+| V6 | Props xuống, emit lên | ep56 | sv6 |
+
+Demo: [`demo-fe-interview/`](demo-fe-interview/) (`react-qa/` cổng 5197 + `vue-qa/` cổng 5196, mỗi app 6 trang minh họa hành vi thật cho đúng câu hỏi ở trên). `git checkout fe-qa-batch-1` để xem đúng code lô 1 (12 câu).
+
 ## Cấu trúc repo
 
 - `demo-*/` — code NestJS thật xuất hiện trong video (chạy được, đã test).
@@ -89,6 +110,7 @@ Demo: [`demo-stylex/`](demo-stylex/) (`vietsuper-web/` viết bằng StyleX + `c
 - `demo-flutter-miniapp/` — code series Mini-App với Flutter (add-to-app: app chủ SwiftUI + module Flutter, + bonus app chủ Kotlin/Jetpack Compose).
 - `demo-flutter-workspace/` — code series Mini-App Flutter thuần (pub workspace: app chủ + app vỏ standalone + 3 package mini-app, một pubspec.lock chung).
 - `demo-stylex/` — code series StyleX từ A đến Z (`vietsuper-web/` dùng StyleX + `compare-tailwind/` đối chứng Tailwind CSS v4).
+- `demo-fe-interview/` — code series Phỏng vấn Frontend (`react-qa/` + `vue-qa/`, 12 ví dụ minh họa hành vi thật cho các câu hỏi phỏng vấn React & Vue).
 - `video/` — project [Remotion](https://remotion.dev) render toàn bộ video và thumbnail.
 - `tts/` — pipeline thuyết minh tiếng Việt bằng [VieNeu-TTS](https://github.com/pnnbao97/VieNeu-TTS): kịch bản JSON → audio + timing → Remotion.
 - `docs/` — kịch bản thiết kế, kế hoạch và bộ SEO YouTube.
