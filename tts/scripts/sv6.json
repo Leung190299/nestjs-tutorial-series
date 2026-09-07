@@ -26,7 +26,7 @@
       "steps": [
         {
           "from": 1,
-          "to": 9,
+          "to": 10,
           "sentence": 0
         },
         {
@@ -36,7 +36,7 @@
         },
         {
           "from": 7,
-          "to": 9,
+          "to": 10,
           "sentence": 2
         }
       ]
