@@ -1,0 +1,82 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Props truyền xuống, Emit bắn lên — giao tiếp cha con trong Vue hoạt động thế nào?",
+      "Trả lời chuẩn trong 60 giây."
+    ],
+    "visual": {
+      "question": "Props xuống, Emit lên hoạt động thế nào?",
+      "framework": "vue"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "defineProps và defineEmits khai báo prop nhận vào và sự kiện phát ra — toàn bộ 'hợp đồng' của con.",
+      "props.mon chỉ được ĐỌC — cha truyền gì, con nhận đúng cái đó, không được sửa ngược lại.",
+      "Hàm datHang chỉ emit('dat', props.mon) — báo tin lên cha, xử lý là việc của cha."
+    ],
+    "visual": {
+      "filename": "NutDatHang.vue (rút gọn)",
+      "language": "typescript",
+      "code": "const props = defineProps<{\n  mon: string\n}>()\nconst emit = defineEmits<{\n  dat: [mon: string]\n}>()\n\nfunction datHang() {\n  emit('dat', props.mon)\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 3,
+          "sentence": 1
+        },
+        {
+          "from": 7,
+          "to": 9,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Bấm lần lượt ba nút đặt món ở component con — mỗi nút emit tên món kèm theo.",
+      "Cha ghi log đúng thứ tự đã bấm — con không hề biết mảng log này tồn tại."
+    ],
+    "visual": {
+      "src": "screens/feqa/v6-vert.png",
+      "caption": "Bấm nút con — cha ghi log đúng thứ tự, không hề sai lệch"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Props xuống một chiều, con chỉ đọc; Emit lên để con báo tin, cha quyết định xử lý.",
+      "Một chiều rõ ràng giúp debug cực dễ — luôn biết chính xác state đổi ở đâu.",
+      "Bẫy: đừng mutate prop trực tiếp — emit lên cho cha quyết định."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "✅",
+          "text": "Props xuống (cha→con, con chỉ đọc); Emit lên (con báo, cha quyết định)",
+          "sentence": 0
+        },
+        {
+          "icon": "🪪",
+          "text": "Một chiều rõ ràng — dễ debug, biết chính xác state đổi ở đâu",
+          "sentence": 1
+        }
+      ],
+      "trap": "Đừng mutate prop — emit lên cho cha quyết định"
+    }
+  }
+]

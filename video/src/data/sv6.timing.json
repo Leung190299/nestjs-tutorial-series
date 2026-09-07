@@ -1,0 +1,129 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "Props xuống, Emit lên hoạt động thế nào?",
+        "framework": "vue"
+      },
+      "sentences": [
+        {
+          "file": "audio/sv6/s1-0-b31e5649.wav",
+          "startFrame": 0,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/sv6/s1-1-23fedfdf.wav",
+          "startFrame": 131,
+          "durationInFrames": 58
+        }
+      ],
+      "durationInFrames": 207
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "NutDatHang.vue (rút gọn)",
+        "language": "typescript",
+        "code": "const props = defineProps<{\n  mon: string\n}>()\nconst emit = defineEmits<{\n  dat: [mon: string]\n}>()\n\nfunction datHang() {\n  emit('dat', props.mon)\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 1
+          },
+          {
+            "from": 7,
+            "to": 9,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sv6/s2-0-cf64c939.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/sv6/s2-1-6286c1e9.wav",
+          "startFrame": 172,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/sv6/s2-2-377548c7.wav",
+          "startFrame": 305,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 453
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/feqa/v6-vert.png",
+        "caption": "Bấm nút con — cha ghi log đúng thứ tự, không hề sai lệch"
+      },
+      "sentences": [
+        {
+          "file": "audio/sv6/s3-0-00dc12f5.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/sv6/s3-1-858ac806.wav",
+          "startFrame": 145,
+          "durationInFrames": 108
+        }
+      ],
+      "durationInFrames": 271
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "✅",
+            "text": "Props xuống (cha→con, con chỉ đọc); Emit lên (con báo, cha quyết định)",
+            "sentence": 0
+          },
+          {
+            "icon": "🪪",
+            "text": "Một chiều rõ ràng — dễ debug, biết chính xác state đổi ở đâu",
+            "sentence": 1
+          }
+        ],
+        "trap": "Đừng mutate prop — emit lên cho cha quyết định"
+      },
+      "sentences": [
+        {
+          "file": "audio/sv6/s4-0-0d6acb0e.wav",
+          "startFrame": 0,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/sv6/s4-1-ffe90083.wav",
+          "startFrame": 133,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/sv6/s4-2-c6e979dc.wav",
+          "startFrame": 266,
+          "durationInFrames": 104
+        }
+      ],
+      "durationInFrames": 388
+    }
+  ]
+}

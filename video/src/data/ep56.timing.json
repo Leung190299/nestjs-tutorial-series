@@ -1,0 +1,314 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #12: Props xuống, Emit lên hoạt động thế nào?",
+        "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 12/12",
+        "badge": "Câu 12"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep56/scene-01-0-ea1c80b0.wav",
+          "startFrame": 0,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep56/scene-01-1-a8e7e4b7.wav",
+          "startFrame": 186,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep56/scene-01-2-6af5a5e5.wav",
+          "startFrame": 360,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 522
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Props xuống, Emit lên là gì, vì sao quan trọng",
+        "bullets": [
+          {
+            "icon": "🤝",
+            "text": "Props xuống, Emit lên — luật giao tiếp cơ bản cha-con, cùng tinh thần React",
+            "sentence": 0
+          },
+          {
+            "icon": "🔽",
+            "text": "Props: cha truyền dữ liệu XUỐNG con — con chỉ ĐỌC, không sửa trực tiếp",
+            "sentence": 1
+          },
+          {
+            "icon": "🔼",
+            "text": "Emit: con phát sự kiện LÊN cha — cha tự quyết định xử lý ra sao",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "Luồng dữ liệu MỘT CHIỀU: props xuống, sự kiện lên — không bao giờ ngược lại",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep56/scene-02-0-fdc4001f.wav",
+          "startFrame": 0,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep56/scene-02-1-c3446de0.wav",
+          "startFrame": 164,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep56/scene-02-2-00f9c274.wav",
+          "startFrame": 319,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep56/scene-02-3-9328b5dc.wav",
+          "startFrame": 486,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 656
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "NutDatHang.vue (script setup)",
+        "language": "typescript",
+        "code": "// Component con: nhận prop `mon` từ cha, emit sự kiện `dat` lên cha khi bấm nút.\nconst props = defineProps<{mon: string}>();\nconst emit = defineEmits<{dat: [mon: string]}>();\n\nfunction datHang() {\n  emit('dat', props.mon);\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 2,
+            "to": 2,
+            "sentence": 1
+          },
+          {
+            "from": 3,
+            "to": 3,
+            "sentence": 2
+          },
+          {
+            "from": 5,
+            "to": 7,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep56/scene-03-0-ce38c82e.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep56/scene-03-1-5abdf805.wav",
+          "startFrame": 181,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep56/scene-03-2-3b6851ef.wav",
+          "startFrame": 345,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep56/scene-03-3-1bd3ad82.wav",
+          "startFrame": 514,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep56/scene-03-4-1bea89a3.wav",
+          "startFrame": 712,
+          "durationInFrames": 156
+        }
+      ],
+      "durationInFrames": 886
+    },
+    {
+      "id": "scene-04",
+      "type": "browser",
+      "visual": {
+        "title": "Demo thật: bấm nút con, cha ghi log đúng thứ tự",
+        "shots": [
+          {
+            "src": "screens/feqa/v6-main.png",
+            "sentence": 0,
+            "label": "Vue QA — V6 Props/Emit: 3 nút con NutDatHang",
+            "url": "localhost:5196 — Vue QA"
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "✅",
+            "text": "Log đúng thứ tự bấm: #1 Phở bò, #2 Bánh mì, #3 Bánh mì, #4 Cơm tấm",
+            "sentence": 2
+          },
+          {
+            "icon": "🔒",
+            "text": "Con không biết donHang tồn tại — chỉ emit tên món, cha tự quyết định ghi log",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep56/scene-04-0-12b0bcc7.wav",
+          "startFrame": 0,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep56/scene-04-1-3bd9d832.wav",
+          "startFrame": 222,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep56/scene-04-2-62488009.wav",
+          "startFrame": 396,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep56/scene-04-3-ce17f0ab.wav",
+          "startFrame": 596,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 758
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "🎤",
+            "text": "Chốt gọn 3 câu — học thuộc luôn được",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "Props: MỘT CHIỀU cha→con qua defineProps — con chỉ ĐỌC, không sửa trực tiếp",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Emit: con báo tin qua defineEmits + emit(...) — cha quyết định xử lý",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Một chiều rõ ràng giúp debug dễ — luôn biết bug nằm ở đâu",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: mutate prop trực tiếp = warning + mất dấu dòng chảy; cần 2 chiều thì defineModel/v-model",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep56/scene-05-0-f79bdd64.wav",
+          "startFrame": 0,
+          "durationInFrames": 89
+        },
+        {
+          "file": "audio/ep56/scene-05-1-078132c5.wav",
+          "startFrame": 97,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep56/scene-05-2-c61c286d.wav",
+          "startFrame": 259,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep56/scene-05-3-27ddf67d.wav",
+          "startFrame": 431,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep56/scene-05-4-ee99b269.wav",
+          "startFrame": 588,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 803
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Lô 1 hoàn tất: đủ 12/12 câu (6 React + 6 Vue)!",
+        "summary": [
+          {
+            "text": "Đủ 12/12 câu — 6 React + 6 Vue — lô 1 hoàn tất",
+            "sentence": 0
+          },
+          {
+            "text": "Code demo đầy đủ trong repo, tag fe-qa-batch-1",
+            "sentence": 1
+          },
+          {
+            "text": "Mỗi câu đều có bản Shorts 60s để ôn nhanh",
+            "sentence": 2
+          },
+          {
+            "text": "Comment câu hỏi phỏng vấn khó nhất bạn gặp → lô 2",
+            "sentence": 3
+          }
+        ],
+        "next": "Lô 2 sắp tới — comment câu hỏi khó nhất của bạn! 🎤💬"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep56/scene-06-0-cc438110.wav",
+          "startFrame": 0,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep56/scene-06-1-4ca79edf.wav",
+          "startFrame": 241,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep56/scene-06-2-2cfe74c4.wav",
+          "startFrame": 504,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep56/scene-06-3-88b52b11.wav",
+          "startFrame": 659,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep56/scene-06-4-c986ba39.wav",
+          "startFrame": 831,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 979
+    }
+  ]
+}
