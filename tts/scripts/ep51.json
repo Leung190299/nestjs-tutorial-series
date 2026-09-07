@@ -1,0 +1,208 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Sáu câu hỏi phần React đã xong — giờ chuyển sang phần Vue của series, mở đầu bằng câu hỏi kinh điển nhất về reactivity trong Vue 3.",
+      "Ref và reactive khác nhau thế nào? Vì sao destructure từ reactive làm mất reactivity — bẫy khiến debug cả buổi không hiểu vì sao UI không đổi.",
+      "Demo ngay sau đây: bấm nút destructure vài lần, màn hình đứng im tuyệt đối — bấm nút khác, giá trị ẩn giấu bên trong bỗng lộ ra."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #7: Ref và reactive khác nhau thế nào?",
+      "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 7/12",
+      "badge": "Câu 7"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Ref bọc mọi kiểu giá trị vào một object có .value — đọc/ghi phải qua .value, riêng trong template Vue tự unwrap nên không cần viết .value.",
+      "Reactive ngược lại — chỉ nhận object/array, tạo Proxy sâu bọc cả property lồng bên trong — truy cập trực tiếp, không có .value.",
+      "Luật quan trọng nhất: destructure property khỏi reactive là lấy giá trị tại đúng thời điểm đó — biến local KHÔNG còn là Proxy, Vue mất khả năng theo dõi.",
+      "Muốn destructure an toàn? Dùng toRefs(state) — chuyển property thành ref liên kết ngược object gốc qua getter/setter, giữ nguyên reactivity."
+    ],
+    "visual": {
+      "title": "ref vs reactive",
+      "bullets": [
+        {
+          "icon": "📦",
+          "text": "ref bọc MỌI kiểu giá trị trong object có .value — template tự unwrap, không cần .value ở đó",
+          "sentence": 0
+        },
+        {
+          "icon": "🪞",
+          "text": "reactive chỉ nhận object/array, tạo Proxy SÂU — truy cập trực tiếp property, không có .value",
+          "sentence": 1
+        },
+        {
+          "icon": "⚠️",
+          "text": "Luật: destructure khỏi reactive = LẤY GIÁ TRỊ, MẤT liên kết Proxy — biến local không còn được track",
+          "sentence": 2
+        },
+        {
+          "icon": "🔧",
+          "text": "Né bẫy: dùng toRefs(state) để tách property thành ref riêng, giữ nguyên khả năng track khi destructure",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là code thật trong demo — phần script setup của V1RefReactive.vue, Vue 3.5.42.",
+      "reactive({count: 0}) tạo Proxy sâu — nhưng dòng sau, let {count: broken} = state destructure lấy giá trị tại đúng thời điểm đó: khoảnh khắc MẤT reactivity.",
+      "So sánh: counterRef = ref(0) không dính bẫy này — vì ref luôn truy cập qua .value, không có kiểu 'lấy giá trị ra khỏi object gốc' như destructure.",
+      "Hai hàm dưới minh hoạ: state.count++ qua setter Proxy nên Vue track, tự re-render; broken++ chỉ tăng biến JS thường trong closure — Vue không hay biết.",
+      "Cùng xem ngay trên trình duyệt thật để thấy rõ hai nhịp hành vi này."
+    ],
+    "visual": {
+      "filename": "V1RefReactive.vue (script setup)",
+      "language": "typescript",
+      "code": "import {reactive, ref} from 'vue';\n\nconst state = reactive({count: 0});\n// BẪY: destructure từ reactive → biến thường, MẤT reactivity\nlet {count: broken} = state;\n\n// So sánh thêm: ref (qua .value) không dính bẫy destructure kiểu này\nconst counterRef = ref(0);\n\nfunction tangReactive() {\n  state.count++;\n}\n\nfunction tangBroken() {\n  broken++; // tăng thật, nhưng Vue không track được nên không tự re-render\n}\n\nfunction tangRef() {\n  counterRef.value++;\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 20,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 5,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 8,
+          "sentence": 2
+        },
+        {
+          "from": 10,
+          "to": 16,
+          "sentence": 3
+        },
+        {
+          "from": 1,
+          "to": 20,
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "browser",
+    "narration": [
+      "App demo thật — vue-qa cổng 5196, câu v1: ba nút riêng biệt, mỗi nút chỉ tăng đúng một biến duy nhất.",
+      "Bấm nút 'Tăng bản destructure' ba lần liên tiếp — và nhìn thật kỹ màn hình.",
+      "reactive.count vẫn 0, biến destructure vẫn 0 — UI ĐỨNG IM. Biến broken bên trong đã tăng lên 3, chỉ chưa có gì kích hoạt render.",
+      "Giờ bấm một lần nút 'Tăng reactive.count' — state.count đổi, qua setter của Proxy, Vue trigger re-render toàn bộ.",
+      "Và đây — giá trị ngầm của biến destructure LỘ RA NGAY: 3! Bug cực khó lần vì con số nhảy cóc, không khớp thao tác vừa bấm."
+    ],
+    "visual": {
+      "title": "Demo thật: bấm destructure đứng im — bấm reactive lộ giá trị ngầm",
+      "shots": [
+        {
+          "src": "screens/feqa/v1-frozen.png",
+          "sentence": 0,
+          "label": "Vue QA — sau 3 lần bấm \"Tăng bản destructure\"",
+          "url": "localhost:5196 — Vue QA"
+        },
+        {
+          "src": "screens/feqa/v1-main.png",
+          "sentence": 3,
+          "label": "Vue QA — sau 1 lần bấm \"Tăng reactive.count\"",
+          "url": "localhost:5196 — Vue QA"
+        }
+      ],
+      "sequential": true,
+      "bullets": [
+        {
+          "icon": "⏸️",
+          "text": "3 lần 'Tăng bản destructure' → reactive.count: 0, biến destructure: 0 — ĐỨNG IM HOÀN TOÀN",
+          "sentence": 2
+        },
+        {
+          "icon": "💥",
+          "text": "1 lần 'Tăng reactive.count' → reactive.count: 1, biến destructure: 3 — LỘ GIÁ TRỊ NGẦM!",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — chốt gọn, học thuộc luôn được.",
+      "Câu một: ref bọc giá trị qua .value; reactive tạo Proxy sâu cho object, truy cập trực tiếp property.",
+      "Câu hai: destructure property khỏi reactive là lấy giá trị tại thời điểm đó — biến local mất liên kết Proxy, Vue không còn track được.",
+      "Câu ba: không phải 'giá trị đứng yên mãi mãi' — giá trị vẫn tăng thật trong closure, chỉ chờ thứ khác trigger render để hiển thị.",
+      "Bẫy hay gặp: muốn destructure an toàn thì dùng toRefs(state) — hoặc storeToRefs(store) khi làm việc với Pinia."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "🎤",
+          "text": "Chốt gọn — học thuộc luôn được",
+          "sentence": 0
+        },
+        {
+          "icon": "1️⃣",
+          "text": "ref qua .value; reactive là Proxy sâu cho object, truy cập trực tiếp property",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Destructure reactive = lấy giá trị tại thời điểm đó, MẤT liên kết Proxy",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Giá trị vẫn tăng thật trong closure — chỉ ẩn tới khi có render khác kích hoạt, KHÔNG đứng yên mãi mãi",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "Bẫy: destructure an toàn thì dùng toRefs(state) (hoặc storeToRefs(store) với Pinia)",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu đầu tiên phần Vue — ref vs reactive, và bẫy destructure mất reactivity.",
+      "Nhớ kỹ: reactive là Proxy cho object; destructure ra là mất theo dõi — dữ liệu vẫn đổi ngầm, chờ dịp lộ ra. An toàn thì dùng toRefs.",
+      "Câu tiếp theo trong series Vue: Options API và Composition API khác nhau thế nào, khi nào nên dùng cái nào.",
+      "Video này cũng có bản Shorts 60 giây — ôn nhanh trước khi vào phòng phỏng vấn, hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Câu 1/6 phần Vue hoàn tất — hẹn gặp lại câu 2!",
+      "summary": [
+        {
+          "text": "ref bọc giá trị qua .value; reactive tạo Proxy sâu cho object, không có .value",
+          "sentence": 0
+        },
+        {
+          "text": "Destructure khỏi reactive = mất liên kết Proxy — dữ liệu vẫn đổi ngầm, chỉ ẩn tới khi có render khác lộ ra; an toàn thì dùng toRefs(state)",
+          "sentence": 1
+        },
+        {
+          "text": "Phần Vue đã có câu 1/6 — tiếp theo: Options API vs Composition API",
+          "sentence": 2
+        },
+        {
+          "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+          "sentence": 3
+        }
+      ],
+      "next": "Câu 2/12 phần Vue: Composition API vs Options API khác nhau thế nào? 🎤"
+    }
+  }
+]

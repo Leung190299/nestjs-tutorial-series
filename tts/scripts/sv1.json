@@ -1,0 +1,82 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Ref và reactive khác nhau thế nào? Vì sao destructure từ reactive lại làm mất reactivity?",
+      "Trả lời chuẩn trong 60 giây."
+    ],
+    "visual": {
+      "question": "Ref vs Reactive: destructure mất gì?",
+      "framework": "vue"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "reactive({count:0}) tạo Proxy sâu cho object — chỉ nhận object/array, không nhận primitive.",
+      "Nhưng destructure let {count:c} = s lấy ra giá trị thường ngay tại dòng này — mất hoàn toàn liên kết Proxy.",
+      "s.count++ có track nên tự re-render; c++ chỉ tăng biến JS thường trong closure — Vue không hề hay biết."
+    ],
+    "visual": {
+      "filename": "V1RefReactive.vue",
+      "language": "typescript",
+      "code": "const s = reactive({count: 0});\n\n// BẪY: destructure mất Proxy\nlet {count: c} = s;\n\nfunction upReactive() {\n  s.count++; // có track\n}\n\nfunction upBroken() {\n  c++; // KHÔNG track\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "sentence": 1
+        },
+        {
+          "from": 6,
+          "to": 10,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Bấm nút 'Tăng bản destructure' ba lần — reactive.count và biến destructure đều đứng yên ở 0, UI không nhúc nhích.",
+      "Rồi bấm 'Tăng reactive.count' một lần — UI re-render, và biến destructure lộ ra ngay giá trị ngầm: 3!"
+    ],
+    "visual": {
+      "src": "screens/feqa/v1-vert.png",
+      "caption": "3 lần destructure: đứng im. 1 lần reactive: lộ ra 3!"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Ref bọc mọi kiểu giá trị qua .value; reactive tạo Proxy sâu cho object, truy cập trực tiếp property.",
+      "Destructure một property ra khỏi reactive là lấy giá trị tại đúng thời điểm đó — biến local mất hoàn toàn liên kết Proxy.",
+      "Bẫy: destructure reactive làm mất tracking — muốn an toàn, dùng toRefs(state) để giữ nguyên khả năng theo dõi."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "✅",
+          "text": "ref bọc giá trị qua .value; reactive là Proxy sâu cho object, truy cập trực tiếp property",
+          "sentence": 0
+        },
+        {
+          "icon": "🧩",
+          "text": "Destructure lấy giá trị tại thời điểm đó — biến local mất liên kết Proxy, không còn được track",
+          "sentence": 1
+        }
+      ],
+      "trap": "Destructure reactive = mất tracking; dùng toRefs"
+    }
+  }
+]
