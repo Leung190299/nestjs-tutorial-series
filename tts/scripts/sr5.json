@@ -1,0 +1,87 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "React.memo, useMemo, useCallback — khi nào dùng thật sự cần, khi nào chỉ tổ làm chậm thêm?",
+      "Trả lời chuẩn trong 60 giây."
+    ],
+    "visual": {
+      "question": "React.memo / useMemo / useCallback — khi nào cần?",
+      "framework": "react"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Component con bọc trong memo — React.memo chỉ so sánh NÔNG (shallow) từng prop.",
+      "SAI: truyền object literal trực tiếp trong JSX — object MỚI mỗi lần render, memo luôn thấy 'đổi'.",
+      "ĐÚNG: bọc bằng useMemo để giữ nguyên reference qua các lần render — memo mới thật sự chặn được re-render."
+    ],
+    "visual": {
+      "filename": "R5Memo.tsx",
+      "language": "tsx",
+      "code": "const Child = memo(({cfg}) => (\n  <p>{cfg.tag}</p>\n));\n\n// SAI: object mới mỗi render\n<Child cfg={{tag: tick}} />\n\n// ĐÚNG: useMemo giữ reference\nconst cfg = useMemo(\n  () => ({tag: 'x'}),\n  []\n);\n<Child cfg={cfg} />",
+      "steps": [
+        {
+          "from": 1,
+          "to": 13,
+          "sentence": 0
+        },
+        {
+          "from": 5,
+          "to": 6,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 13,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 13,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Bản production preview: con nhận object literal render tới 6 lần dù cha chỉ re-render 5 lần.",
+      "Con nhận useMemo chỉ render đúng 1 lần — chênh lệch rõ ràng, đúng bằng chứng memo hoạt động hay không."
+    ],
+    "visual": {
+      "src": "screens/feqa/r5-vert.png",
+      "caption": "6 lần vs 1 lần — object literal phá memo"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "React.memo chỉ hiệu quả khi props giữ nguyên reference — object hoặc function mới mỗi render sẽ phá vỡ nó.",
+      "useMemo và useCallback giữ ổn định reference — nhưng chỉ nên dùng khi đo được re-render thật sự đắt.",
+      "Bẫy: memo mọi thứ = trả phí so sánh vô ích — đừng memo hoá tràn lan khi chưa đo bằng Profiler."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "✅",
+          "text": "React.memo cần props giữ nguyên reference — object/function mới mỗi render phá vỡ nó",
+          "sentence": 0
+        },
+        {
+          "icon": "🧷",
+          "text": "useMemo/useCallback giữ ổn định reference — chỉ dùng khi đo được re-render đắt",
+          "sentence": 1
+        }
+      ],
+      "trap": "Memo mọi thứ = trả phí so sánh vô ích"
+    }
+  }
+]

@@ -51,10 +51,12 @@ import ep45 from './data/ep45.timing.json';
 import ep46 from './data/ep46.timing.json';
 import ep47 from './data/ep47.timing.json';
 import ep48 from './data/ep48.timing.json';
+import ep49 from './data/ep49.timing.json';
 import sr1 from './data/sr1.timing.json';
 import sr2 from './data/sr2.timing.json';
 import sr3 from './data/sr3.timing.json';
 import sr4 from './data/sr4.timing.json';
+import sr5 from './data/sr5.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -106,6 +108,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode46', timing: ep46 as unknown as EpisodeTiming},
   {id: 'Episode47', timing: ep47 as unknown as EpisodeTiming},
   {id: 'Episode48', timing: ep48 as unknown as EpisodeTiming},
+  {id: 'Episode49', timing: ep49 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -117,6 +120,7 @@ const shorts: {id: string; timing: EpisodeTiming}[] = [
   {id: 'ShortR2', timing: sr2 as unknown as EpisodeTiming},
   {id: 'ShortR3', timing: sr3 as unknown as EpisodeTiming},
   {id: 'ShortR4', timing: sr4 as unknown as EpisodeTiming},
+  {id: 'ShortR5', timing: sr5 as unknown as EpisodeTiming},
 ];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
@@ -703,6 +707,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/feqa/r4-thumbcrop.png',
       badgeEmoji: '🎛️',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb49',
+    props: {
+      badge: 'PV FE #5',
+      line1: 'REACT.MEMO',
+      line2: 'CÓ THẬT SỰ ĂN?',
+      subtitle: 'Phỏng vấn Frontend · Câu 5/12',
+      variant: 'shot',
+      image: 'screens/feqa/r5-thumbcrop.png',
+      badgeEmoji: '🧠',
       seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },

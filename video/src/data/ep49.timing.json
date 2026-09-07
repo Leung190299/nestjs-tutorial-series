@@ -1,0 +1,324 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #5: React.memo, useMemo, useCallback — khi nào cần?",
+        "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 5/12",
+        "badge": "Câu 5"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep49/scene-01-0-13053019.wav",
+          "startFrame": 0,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep49/scene-01-1-60f83197.wav",
+          "startFrame": 198,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep49/scene-01-2-07aff544.wav",
+          "startFrame": 410,
+          "durationInFrames": 226
+        }
+      ],
+      "durationInFrames": 654
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "React.memo / useMemo / useCallback là gì",
+        "bullets": [
+          {
+            "icon": "🧩",
+            "text": "React.memo bỏ qua re-render nếu props không đổi — nhưng chỉ so sánh NÔNG (shallow compare)",
+            "sentence": 0
+          },
+          {
+            "icon": "💥",
+            "text": "Object literal viết thẳng trong JSX luôn là object MỚI mỗi render → memo vô dụng",
+            "sentence": 1
+          },
+          {
+            "icon": "🧷",
+            "text": "useMemo giữ nguyên reference giá trị qua các lần render — miễn dependency không đổi",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "useCallback = useMemo cho hàm — cache reference function, hợp khi truyền cho component đã memo",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep49/scene-02-0-2716f959.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep49/scene-02-1-01227cda.wav",
+          "startFrame": 200,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep49/scene-02-2-ebb4f869.wav",
+          "startFrame": 417,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep49/scene-02-3-cc4e74fb.wav",
+          "startFrame": 644,
+          "durationInFrames": 202
+        }
+      ],
+      "durationInFrames": 864
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "R5Memo.tsx",
+        "language": "tsx",
+        "code": "  renderCount.current += 1;\n  return (\n    <div style={{border: '1px dashed #aaa', borderRadius: 8, padding: 12, flex: 1}}>\n      <b>{label}</b>\n      <p>Số lần con render: {renderCount.current}</p>\n      <p style={{color: '#666', fontSize: 13}}>tag = {config.tag}</p>\n    </div>\n  );\n});\n\nexport function R5Memo() {\n  const [tick, setTick] = useState(0);\n  const memoConfig = useMemo(() => ({tag: 'ổn định'}), []);\n\n  return (\n    <div style={{border: '1px solid #ddd', borderRadius: 8, padding: 16}}>\n      <button onClick={() => setTick((t) => t + 1)}>Re-render cha — object literal mới (memo vô dụng)</button>{' '}\n      <button onClick={() => setTick((t) => t + 1)}>Re-render cha — object useMemo (memo hoạt động)</button>\n      <p style={{color: '#666', fontSize: 13, marginTop: 8}}>Cha đã re-render {tick} lần.</p>\n      <div style={{display: 'flex', gap: 16, marginTop: 8, flexWrap: 'wrap'}}>\n        <ExpensiveChild label=\"Object literal mới mỗi render — SAI\" config={{tag: `render #${tick}`}} />\n        <ExpensiveChild label=\"Object useMemo — ĐÚNG\" config={memoConfig} />",
+        "steps": [
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 0
+          },
+          {
+            "from": 11,
+            "to": 13,
+            "sentence": 1
+          },
+          {
+            "from": 17,
+            "to": 19,
+            "sentence": 2
+          },
+          {
+            "from": 21,
+            "to": 21,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep49/scene-03-0-e7d7d950.wav",
+          "startFrame": 0,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep49/scene-03-1-f1e9498a.wav",
+          "startFrame": 208,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep49/scene-03-2-7450ebb8.wav",
+          "startFrame": 420,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep49/scene-03-3-c5228335.wav",
+          "startFrame": 606,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep49/scene-03-4-1f8bb431.wav",
+          "startFrame": 806,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 1031
+    },
+    {
+      "id": "scene-04",
+      "type": "browser",
+      "visual": {
+        "title": "Demo thật: object literal phá memo, useMemo cứu memo",
+        "shots": [
+          {
+            "src": "screens/feqa/r5-main.png",
+            "sentence": 0,
+            "label": "React QA — R5 React.memo với prop object",
+            "url": "localhost:5197 — React QA"
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "❌",
+            "text": "Object literal mỗi render → con render 6 lần (1 đầu + 5 re-render) — memo vô dụng",
+            "sentence": 2
+          },
+          {
+            "icon": "✅",
+            "text": "useMemo giữ reference → con chỉ render 1 lần dù cha re-render 5 lần — memo hoạt động",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep49/scene-04-0-3233efa8.wav",
+          "startFrame": 0,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep49/scene-04-1-cc664218.wav",
+          "startFrame": 232,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep49/scene-04-2-e6d467c7.wav",
+          "startFrame": 370,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep49/scene-04-3-9544a838.wav",
+          "startFrame": 534,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 759
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "🎤",
+            "text": "Chốt gọn — học thuộc luôn được",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "React.memo chỉ shallow-compare — object/function mới mỗi render luôn bị coi là 'đổi'",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "useMemo cache giá trị/reference; useCallback = useMemo dành cho function",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Chỉ memo hoá khi đo được re-render đắt — dùng Profiler để đo, đừng đoán",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: đừng memo mọi thứ — so sánh props cũng có chi phí, lạm dụng có thể chậm hơn",
+            "sentence": 4
+          },
+          {
+            "icon": "🤖",
+            "text": "2026: React Compiler tự động memo hoá lúc build — hiểu bản chất vẫn cần thiết",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep49/scene-05-0-e69ab072.wav",
+          "startFrame": 0,
+          "durationInFrames": 82
+        },
+        {
+          "file": "audio/ep49/scene-05-1-46696b39.wav",
+          "startFrame": 90,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep49/scene-05-2-7a60a45b.wav",
+          "startFrame": 305,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep49/scene-05-3-8512a9e5.wav",
+          "startFrame": 481,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep49/scene-05-4-719a637a.wav",
+          "startFrame": 665,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep49/scene-05-5-078fd125.wav",
+          "startFrame": 880,
+          "durationInFrames": 209
+        }
+      ],
+      "durationInFrames": 1107
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 5/12 hoàn tất — hẹn gặp câu 6!",
+        "summary": [
+          {
+            "text": "React.memo chỉ hiệu quả khi props giữ nguyên reference — object/function literal mới mỗi render sẽ phá vỡ nó",
+            "sentence": 0
+          },
+          {
+            "text": "useMemo cache giá trị/reference; useCallback = useMemo cho hàm — đo bằng Profiler trước khi dùng, đừng memo tràn lan",
+            "sentence": 1
+          },
+          {
+            "text": "Câu sau: Custom Hook — tách và tái sử dụng logic có state giữa nhiều component",
+            "sentence": 2
+          },
+          {
+            "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+            "sentence": 3
+          }
+        ],
+        "next": "Câu 6/12: Custom Hook dùng để làm gì? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep49/scene-06-0-7ad447ed.wav",
+          "startFrame": 0,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep49/scene-06-1-bf0aabfe.wav",
+          "startFrame": 227,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep49/scene-06-2-72b701d6.wav",
+          "startFrame": 403,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep49/scene-06-3-67a4a22f.wav",
+          "startFrame": 582,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep49/scene-06-4-6f12f24a.wav",
+          "startFrame": 758,
+          "durationInFrames": 96
+        }
+      ],
+      "durationInFrames": 872
+    }
+  ]
+}
