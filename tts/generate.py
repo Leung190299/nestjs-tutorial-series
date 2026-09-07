@@ -79,6 +79,54 @@ def validate_script(script: list[dict]) -> list[str]:
                     url = shot.get("url")
                     if url is not None and not isinstance(url, str):
                         errors.append(f"{scene['id']}: shot {i} url phải là str")
+        if scene.get("type") == "vtitle":
+            question = visual.get("question")
+            if not isinstance(question, str) or not question or len(question) > 90:
+                errors.append(f"{scene['id']}: vtitle question phải là str ≤90 ký tự")
+            framework = visual.get("framework")
+            if framework not in ("react", "vue"):
+                errors.append(f"{scene['id']}: vtitle framework phải là 'react' hoặc 'vue'")
+        if scene.get("type") == "vcode":
+            code = visual.get("code")
+            if not isinstance(code, str) or not code:
+                errors.append(f"{scene['id']}: vcode thiếu code (str)")
+            else:
+                code_lines_list = code.split("\n")
+                if len(code_lines_list) > 14:
+                    errors.append(f"{scene['id']}: vcode có {len(code_lines_list)} dòng > 14 dòng")
+                for i, line in enumerate(code_lines_list, 1):
+                    if len(line) > 40:
+                        errors.append(
+                            f"{scene['id']}: vcode dòng {i} dài {len(line)} ký tự > 40 ký tự"
+                        )
+            if not isinstance(visual.get("steps"), list) or not visual.get("steps"):
+                errors.append(f"{scene['id']}: vcode thiếu steps (list)")
+        if scene.get("type") == "vanswer":
+            title = visual.get("title")
+            if not isinstance(title, str) or not title:
+                errors.append(f"{scene['id']}: vanswer thiếu title (str)")
+            bullets = visual.get("bullets")
+            if not isinstance(bullets, list) or not bullets:
+                errors.append(f"{scene['id']}: vanswer thiếu bullets (list)")
+            else:
+                for i, b in enumerate(bullets):
+                    if not isinstance(b.get("text"), str) or not b.get("text"):
+                        errors.append(f"{scene['id']}: bullet {i} thiếu text (str)")
+                    if not isinstance(b.get("sentence"), int):
+                        errors.append(f"{scene['id']}: bullet {i} thiếu sentence (int)")
+                    icon = b.get("icon")
+                    if icon is not None and not isinstance(icon, str):
+                        errors.append(f"{scene['id']}: bullet {i} icon phải là str")
+            trap = visual.get("trap")
+            if trap is not None and not isinstance(trap, str):
+                errors.append(f"{scene['id']}: vanswer trap phải là str")
+        if scene.get("type") == "vshot":
+            src = visual.get("src")
+            if not isinstance(src, str) or not src:
+                errors.append(f"{scene['id']}: vshot thiếu src (str)")
+            caption = visual.get("caption")
+            if caption is not None and not isinstance(caption, str):
+                errors.append(f"{scene['id']}: vshot caption phải là str")
         if "code" in visual and "steps" in visual:
             code_lines = len(visual["code"].split("\n"))
             for step in visual["steps"]:

@@ -97,6 +97,11 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
+// Shorts dọc (1080×1920) — kịch bản phỏng vấn FE, id dạng Short<ID> (vd ShortR3),
+// đọc video/src/data/s<id>.timing.json (sinh bởi tts/generate.py, cùng cơ chế totalDuration
+// như episodes). Thêm entry tại đây (kèm import json ở trên) khi có tập mới.
+const shorts: {id: string; timing: EpisodeTiming}[] = [];
+
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
   {
     id: 'Thumb01',
@@ -658,6 +663,18 @@ export const RemotionRoot: React.FC = () => (
         fps={e.timing.fps}
         width={1920}
         height={1080}
+      />
+    ))}
+    {shorts.map((s) => (
+      <Composition
+        key={s.id}
+        id={s.id}
+        component={Episode}
+        defaultProps={{timing: s.timing}}
+        durationInFrames={totalDuration(s.timing)}
+        fps={s.timing.fps}
+        width={1080}
+        height={1920}
       />
     ))}
   </>

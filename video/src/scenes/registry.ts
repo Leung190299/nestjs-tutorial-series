@@ -8,6 +8,10 @@ import {PhoneScene} from './PhoneScene';
 import {OutroScene} from './OutroScene';
 import {TitleScene} from './TitleScene';
 import {TerminalScene} from './TerminalScene';
+import {VTitleScene} from './VTitleScene';
+import {VCodeScene} from './VCodeScene';
+import {VAnswerScene} from './VAnswerScene';
+import {VShotScene} from './VShotScene';
 
 export const sceneRegistry: Record<string, React.FC<SceneProps>> = {
   title: TitleScene,
@@ -18,4 +22,8 @@ export const sceneRegistry: Record<string, React.FC<SceneProps>> = {
   outro: OutroScene,
   code: CodeScene,
   terminal: TerminalScene,
+  vtitle: VTitleScene,
+  vcode: VCodeScene,
+  vanswer: VAnswerScene,
+  vshot: VShotScene,
 };
