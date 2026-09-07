@@ -1,0 +1,82 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "computed, watch và watchEffect khác nhau thế nào, khi nào dùng cái nào?",
+      "Trả lời chuẩn trong 60 giây."
+    ],
+    "visual": {
+      "question": "computed vs watch vs watchEffect: khác gì?",
+      "framework": "vue"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Ba hàm hay bị hỏi chung nhưng khác việc: computed, watch, watchEffect.",
+      "computed tính tongTien, có cache — demTinh chỉ tăng khi km hoặc giá đổi thật, không phải mỗi lần đọc.",
+      "watch chạy khi km đổi, có giá trị cũ mới; watchEffect tự đọc km.value bên trong, chạy ngay từ đầu."
+    ],
+    "visual": {
+      "filename": "V3ComputedWatch.vue (rút gọn)",
+      "language": "typescript",
+      "code": "const km = ref(10)\nconst gia = ref(15000)\nlet demTinh = 0\nconst tongTien = computed(() => {\n  demTinh++\n  return km.value * gia.value\n})\nwatch(km, (moi, cu) => {\n  console.log(moi, cu)\n})\nwatchEffect(() => {\n  console.log(km.value)\n})",
+      "steps": [
+        {
+          "from": 1,
+          "to": 13,
+          "sentence": 0
+        },
+        {
+          "from": 4,
+          "to": 7,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 13,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Đổi km vài lần — computed tính lại đúng số lần km đổi, dù template đọc tongTien nhiều lần liên tiếp.",
+      "Đã tính lại 5 lần, đọc thêm 3 lần liên tiếp không tăng thêm — cache thật sự hoạt động."
+    ],
+    "visual": {
+      "src": "screens/feqa/v3-vert.png",
+      "caption": "Đã tính lại 5 lần — đọc thêm 3 lần liên tiếp không tăng, nhờ cache!"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "computed: derive có cache, chỉ tính lại khi dependency đổi — dùng cho giá trị hiển thị.",
+      "watch lazy theo nguồn cụ thể có old/new; watchEffect eager tự track, chạy ngay lần đầu.",
+      "Bẫy: computed phải pure — side-effect thì dùng watch, đừng nhét side-effect thật vào computed."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "✅",
+          "text": "computed: derive + cache, chỉ tính lại khi dependency đổi",
+          "sentence": 0
+        },
+        {
+          "icon": "🧩",
+          "text": "watch: lazy, có old/new; watchEffect: eager, tự track — chạy ngay lần đầu",
+          "sentence": 1
+        }
+      ],
+      "trap": "computed phải pure — side-effect thì dùng watch"
+    }
+  }
+]

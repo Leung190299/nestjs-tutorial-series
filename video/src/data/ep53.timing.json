@@ -1,0 +1,299 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #9: computed vs watch vs watchEffect khác nhau thế nào?",
+        "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 9/12",
+        "badge": "Câu 9"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep53/scene-01-0-4804fe19.wav",
+          "startFrame": 0,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep53/scene-01-1-49d67027.wav",
+          "startFrame": 155,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep53/scene-01-2-ccd2579d.wav",
+          "startFrame": 281,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 487
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "computed vs watch vs watchEffect",
+        "bullets": [
+          {
+            "icon": "🧮",
+            "text": "computed: giá trị DẪN XUẤT, có CACHE — chỉ tính lại khi dependency đổi",
+            "sentence": 0
+          },
+          {
+            "icon": "👀",
+            "text": "watch: theo dõi nguồn CỤ THỂ, LAZY — có oldValue/newValue, hợp side-effect có chủ đích",
+            "sentence": 1
+          },
+          {
+            "icon": "⚡",
+            "text": "watchEffect: tự thu thập mọi dependency, chạy NGAY lần đầu (eager), chạy lại khi đổi",
+            "sentence": 2
+          },
+          {
+            "icon": "⚠️",
+            "text": "computed PHẢI PURE — đếm trong demo chỉ minh họa cache, đừng side-effect thật trong computed",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep53/scene-02-0-dff4e6f4.wav",
+          "startFrame": 0,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep53/scene-02-1-ae54bca9.wav",
+          "startFrame": 217,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep53/scene-02-2-66597d35.wav",
+          "startFrame": 453,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep53/scene-02-3-8883c5a1.wav",
+          "startFrame": 656,
+          "durationInFrames": 252
+        }
+      ],
+      "durationInFrames": 926
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "V3ComputedWatch.vue (script setup)",
+        "language": "typescript",
+        "code": "import {computed, ref, watch, watchEffect} from 'vue';\n\nconst km = ref(10);\nconst giaPerKm = ref(15000);\nconst logs = ref<string[]>([]);\nlet soLanTinh = 0;\n\nconst tongTien = computed(() => {\n  soLanTinh++; // đếm số LẦN TÍNH thật — chứng minh computed có cache\n  return km.value * giaPerKm.value;\n});\n\nwatch(km, (newKm, oldKm) => {\n  logs.value.push(`watch: km đổi ${oldKm} → ${newKm}`);\n});\n\nwatchEffect(() => {\n  // tự động track km.value + giaPerKm.value; chạy NGAY lần đầu (eager)\n  logs.value.push(`watchEffect: km=${km.value}, giá/km=${giaPerKm.value}`);\n});",
+        "steps": [
+          {
+            "from": 1,
+            "to": 20,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 11,
+            "sentence": 1
+          },
+          {
+            "from": 13,
+            "to": 15,
+            "sentence": 2
+          },
+          {
+            "from": 17,
+            "to": 20,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep53/scene-03-0-585c2fdc.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep53/scene-03-1-1046a1da.wav",
+          "startFrame": 145,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep53/scene-03-2-04a0121a.wav",
+          "startFrame": 389,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep53/scene-03-3-d50f56e4.wav",
+          "startFrame": 546,
+          "durationInFrames": 231
+        }
+      ],
+      "durationInFrames": 795
+    },
+    {
+      "id": "scene-04",
+      "type": "browser",
+      "visual": {
+        "title": "Demo thật: computed cache, watch lazy, watchEffect eager",
+        "shots": [
+          {
+            "src": "screens/feqa/v3-main.png",
+            "sentence": 0,
+            "label": "Vue QA — computed/watch/watchEffect: km, tổng tiền, log",
+            "url": "localhost:5196 — Vue QA"
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🧮",
+            "text": "Đã tính lại 5 lần dù template đọc {{tongTien}} tới 3 lần liên tiếp — computed CACHE, không tính thêm",
+            "sentence": 2
+          },
+          {
+            "icon": "📜",
+            "text": "watchEffect chạy ngay từ km=10 lúc mount (eager); watch chỉ ghi log SAU khi km đổi (lazy, có oldValue→newValue)",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep53/scene-04-0-7f6035a0.wav",
+          "startFrame": 0,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep53/scene-04-1-b118296c.wav",
+          "startFrame": 208,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep53/scene-04-2-9e6ceb9e.wav",
+          "startFrame": 423,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep53/scene-04-3-3e18b6c3.wav",
+          "startFrame": 657,
+          "durationInFrames": 236
+        }
+      ],
+      "durationInFrames": 911
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "🎤",
+            "text": "Chốt gọn — học thuộc luôn được",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "computed: giá trị dẫn xuất, có CACHE, chỉ tính lại khi dependency đổi — dùng cho giá trị hiển thị",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "watch: theo dõi nguồn cụ thể, LAZY, có oldValue/newValue — hợp side-effect có chủ đích (gọi API...)",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "watchEffect: tự thu thập mọi dependency, chạy NGAY lần đầu (eager), chạy lại khi đổi",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: computed PHẢI PURE — đếm trong demo chỉ minh họa; đừng async trong computed; watchEffect chạy ngay từ đầu, dễ bất ngờ",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep53/scene-05-0-e69ab072.wav",
+          "startFrame": 0,
+          "durationInFrames": 84
+        },
+        {
+          "file": "audio/ep53/scene-05-1-99d65f87.wav",
+          "startFrame": 92,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep53/scene-05-2-f2e4b31f.wav",
+          "startFrame": 300,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep53/scene-05-3-9eccd03a.wav",
+          "startFrame": 496,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep53/scene-05-4-5caea112.wav",
+          "startFrame": 677,
+          "durationInFrames": 224
+        }
+      ],
+      "durationInFrames": 919
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 3/6 phần Vue hoàn tất — hẹn gặp lại câu 4!",
+        "summary": [
+          {
+            "text": "computed: derive + CACHE, tính lại khi dependency đổi",
+            "sentence": 0
+          },
+          {
+            "text": "watch: LAZY, có oldValue/newValue — side-effect có chủ đích",
+            "sentence": 1
+          },
+          {
+            "text": "watchEffect: EAGER, tự track, chạy ngay lần đầu",
+            "sentence": 2
+          },
+          {
+            "text": "Câu 3/6 xong — tiếp theo: v-if vs v-show. Có bản Shorts!",
+            "sentence": 3
+          }
+        ],
+        "next": "Câu 4/12 phần Vue: v-if vs v-show khác nhau thế nào? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep53/scene-06-0-1c36ea32.wav",
+          "startFrame": 0,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep53/scene-06-1-3329d1ae.wav",
+          "startFrame": 138,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep53/scene-06-2-79fc4a08.wav",
+          "startFrame": 338,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep53/scene-06-3-d04f7a50.wav",
+          "startFrame": 476,
+          "durationInFrames": 92
+        }
+      ],
+      "durationInFrames": 586
+    }
+  ]
+}

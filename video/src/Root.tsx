@@ -55,6 +55,7 @@ import ep49 from './data/ep49.timing.json';
 import ep50 from './data/ep50.timing.json';
 import ep51 from './data/ep51.timing.json';
 import ep52 from './data/ep52.timing.json';
+import ep53 from './data/ep53.timing.json';
 import sr1 from './data/sr1.timing.json';
 import sr2 from './data/sr2.timing.json';
 import sr3 from './data/sr3.timing.json';
@@ -63,6 +64,7 @@ import sr5 from './data/sr5.timing.json';
 import sr6 from './data/sr6.timing.json';
 import sv1 from './data/sv1.timing.json';
 import sv2 from './data/sv2.timing.json';
+import sv3 from './data/sv3.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -118,6 +120,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode50', timing: ep50 as unknown as EpisodeTiming},
   {id: 'Episode51', timing: ep51 as unknown as EpisodeTiming},
   {id: 'Episode52', timing: ep52 as unknown as EpisodeTiming},
+  {id: 'Episode53', timing: ep53 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -133,6 +136,7 @@ const shorts: {id: string; timing: EpisodeTiming}[] = [
   {id: 'ShortR6', timing: sr6 as unknown as EpisodeTiming},
   {id: 'ShortV1', timing: sv1 as unknown as EpisodeTiming},
   {id: 'ShortV2', timing: sv2 as unknown as EpisodeTiming},
+  {id: 'ShortV3', timing: sv3 as unknown as EpisodeTiming},
 ];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
@@ -771,6 +775,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/feqa/v2-thumbcrop.png',
       badgeEmoji: '🧩',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb53',
+    props: {
+      badge: 'PV FE #9',
+      line1: 'COMPUTED VS',
+      line2: 'WATCH',
+      subtitle: 'Phỏng vấn Frontend · Câu 9/12',
+      variant: 'shot',
+      image: 'screens/feqa/v3-thumbcrop.png',
+      badgeEmoji: '🔁',
       seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },

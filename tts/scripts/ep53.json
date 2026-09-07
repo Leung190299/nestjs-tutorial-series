@@ -1,0 +1,194 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu tiếp theo phần Vue: computed, watch và watchEffect khác nhau thế nào, khi nào dùng cái nào?",
+      "Ba anh em hay bị hỏi chung một câu — nhưng mỗi đứa giải quyết một bài toán khác nhau.",
+      "Demo ngay sau đây: một phép tính tiền theo km, có cache, có log watch và watchEffect chạy song song."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #9: computed vs watch vs watchEffect khác nhau thế nào?",
+      "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 9/12",
+      "badge": "Câu 9"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "computed tạo giá trị DẪN XUẤT, có CACHE — chỉ tính lại khi dependency đổi, dùng khi cần một giá trị hiển thị.",
+      "watch theo dõi một nguồn CỤ THỂ, mặc định LAZY — có cả giá trị cũ lẫn mới, hợp side-effect có chủ đích như gọi API.",
+      "watchEffect tự động thu thập MỌI dependency đọc bên trong, chạy NGAY lần đầu — eager — rồi chạy lại khi dependency đổi.",
+      "Bẫy: computed phải PURE — không side-effect thật; biến đếm trong demo chỉ là nhạc cụ dạy để chứng minh cache, đừng bắt chước viết computed như vậy."
+    ],
+    "visual": {
+      "title": "computed vs watch vs watchEffect",
+      "bullets": [
+        {
+          "icon": "🧮",
+          "text": "computed: giá trị DẪN XUẤT, có CACHE — chỉ tính lại khi dependency đổi",
+          "sentence": 0
+        },
+        {
+          "icon": "👀",
+          "text": "watch: theo dõi nguồn CỤ THỂ, LAZY — có oldValue/newValue, hợp side-effect có chủ đích",
+          "sentence": 1
+        },
+        {
+          "icon": "⚡",
+          "text": "watchEffect: tự thu thập mọi dependency, chạy NGAY lần đầu (eager), chạy lại khi đổi",
+          "sentence": 2
+        },
+        {
+          "icon": "⚠️",
+          "text": "computed PHẢI PURE — đếm trong demo chỉ minh họa cache, đừng side-effect thật trong computed",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là phần khai báo trong script setup — computed, watch, watchEffect đứng cạnh nhau.",
+      "computed tính tongTien từ km và giá mỗi km — dòng soLanTinh cộng một chỉ để ĐẾM minh họa, không phải cách viết computed chuẩn.",
+      "watch theo dõi km, nhận cả giá trị cũ lẫn mới — chỉ chạy khi km thật sự đổi.",
+      "watchEffect tự đọc km.value và giaPerKm.value bên trong — Vue tự biết cần theo dõi gì, chạy ngay cả khi chưa đổi gì."
+    ],
+    "visual": {
+      "filename": "V3ComputedWatch.vue (script setup)",
+      "language": "typescript",
+      "code": "import {computed, ref, watch, watchEffect} from 'vue';\n\nconst km = ref(10);\nconst giaPerKm = ref(15000);\nconst logs = ref<string[]>([]);\nlet soLanTinh = 0;\n\nconst tongTien = computed(() => {\n  soLanTinh++; // đếm số LẦN TÍNH thật — chứng minh computed có cache\n  return km.value * giaPerKm.value;\n});\n\nwatch(km, (newKm, oldKm) => {\n  logs.value.push(`watch: km đổi ${oldKm} → ${newKm}`);\n});\n\nwatchEffect(() => {\n  // tự động track km.value + giaPerKm.value; chạy NGAY lần đầu (eager)\n  logs.value.push(`watchEffect: km=${km.value}, giá/km=${giaPerKm.value}`);\n});",
+      "steps": [
+        {
+          "from": 1,
+          "to": 20,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 11,
+          "sentence": 1
+        },
+        {
+          "from": 13,
+          "to": 15,
+          "sentence": 2
+        },
+        {
+          "from": 17,
+          "to": 20,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "browser",
+    "narration": [
+      "App demo thật — vue-qa cổng 5196, câu v3: km, giá mỗi km, và tổng tiền tính bằng computed.",
+      "Đổi km vài lần bằng nút cộng trừ — mỗi lần đổi làm computed tính lại, watch ghi log km đổi, watchEffect chạy lại theo.",
+      "Nhưng nhìn kỹ dòng 'đã tính lại N lần' — template đọc tongTien tới BA lần liên tiếp ngay bên dưới, số lần tính KHÔNG tăng thêm vì computed có cache.",
+      "Log watch và watchEffect bên dưới cũng khớp: watchEffect chạy ngay từ km=10 trước cả khi đổi gì, watch chỉ chạy sau mỗi lần km đổi."
+    ],
+    "visual": {
+      "title": "Demo thật: computed cache, watch lazy, watchEffect eager",
+      "shots": [
+        {
+          "src": "screens/feqa/v3-main.png",
+          "sentence": 0,
+          "label": "Vue QA — computed/watch/watchEffect: km, tổng tiền, log",
+          "url": "localhost:5196 — Vue QA"
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🧮",
+          "text": "Đã tính lại 5 lần dù template đọc {{tongTien}} tới 3 lần liên tiếp — computed CACHE, không tính thêm",
+          "sentence": 2
+        },
+        {
+          "icon": "📜",
+          "text": "watchEffect chạy ngay từ km=10 lúc mount (eager); watch chỉ ghi log SAU khi km đổi (lazy, có oldValue→newValue)",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — chốt gọn, học thuộc luôn được.",
+      "Câu một: computed tạo giá trị dẫn xuất, có cache, chỉ tính lại khi dependency đổi — dùng cho giá trị cần hiển thị.",
+      "Câu hai: watch theo dõi nguồn cụ thể, lazy, có giá trị cũ và mới — hợp side-effect có chủ đích như gọi API.",
+      "Câu ba: watchEffect tự thu thập mọi dependency, chạy ngay lần đầu — eager — rồi chạy lại khi có gì đổi.",
+      "Bẫy: computed phải pure, đếm trong demo chỉ để minh họa; đừng async trong computed; watchEffect chạy ngay từ đầu nên dễ bất ngờ nếu quên."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "🎤",
+          "text": "Chốt gọn — học thuộc luôn được",
+          "sentence": 0
+        },
+        {
+          "icon": "1️⃣",
+          "text": "computed: giá trị dẫn xuất, có CACHE, chỉ tính lại khi dependency đổi — dùng cho giá trị hiển thị",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "watch: theo dõi nguồn cụ thể, LAZY, có oldValue/newValue — hợp side-effect có chủ đích (gọi API...)",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "watchEffect: tự thu thập mọi dependency, chạy NGAY lần đầu (eager), chạy lại khi đổi",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "Bẫy: computed PHẢI PURE — đếm trong demo chỉ minh họa; đừng async trong computed; watchEffect chạy ngay từ đầu, dễ bất ngờ",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu ba phần Vue — ba anh em computed, watch, watchEffect, mỗi đứa một việc.",
+      "Nhớ: computed derive có cache, watch lazy theo nguồn cụ thể, watchEffect eager tự track — và computed luôn phải pure.",
+      "Câu tiếp theo phần Vue: v-if và v-show khác nhau thế nào, khi nào dùng cái nào.",
+      "Video này cũng có bản Shorts 60 giây — hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Câu 3/6 phần Vue hoàn tất — hẹn gặp lại câu 4!",
+      "summary": [
+        {
+          "text": "computed: derive + CACHE, tính lại khi dependency đổi",
+          "sentence": 0
+        },
+        {
+          "text": "watch: LAZY, có oldValue/newValue — side-effect có chủ đích",
+          "sentence": 1
+        },
+        {
+          "text": "watchEffect: EAGER, tự track, chạy ngay lần đầu",
+          "sentence": 2
+        },
+        {
+          "text": "Câu 3/6 xong — tiếp theo: v-if vs v-show. Có bản Shorts!",
+          "sentence": 3
+        }
+      ],
+      "next": "Câu 4/12 phần Vue: v-if vs v-show khác nhau thế nào? 🎤"
+    }
+  }
+]
