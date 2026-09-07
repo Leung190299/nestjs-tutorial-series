@@ -1,0 +1,129 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "Vì sao v-for cần :key? Bẫy key=index",
+        "framework": "vue"
+      },
+      "sentences": [
+        {
+          "file": "audio/sv5/s1-0-3cc95b6b.wav",
+          "startFrame": 0,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/sv5/s1-1-23fedfdf.wav",
+          "startFrame": 167,
+          "durationInFrames": 51
+        }
+      ],
+      "durationInFrames": 236
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "V5KeyVFor.vue (rút gọn)",
+        "language": "markup",
+        "code": "<div v-for=\"(item,i) in itemsIndex\"\n  :key=\"i\">\n  <input />\n</div>\n<div v-for=\"item in itemsKey\"\n  :key=\"item\">\n  <input />\n</div>",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 8,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sv5/s2-0-81672276.wav",
+          "startFrame": 0,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/sv5/s2-1-d58960b9.wav",
+          "startFrame": 121,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/sv5/s2-2-b2d4a1aa.wav",
+          "startFrame": 252,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 400
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/feqa/v5-vert.png",
+        "caption": "Y hệt React: key=index làm ghi chú đi lạc"
+      },
+      "sentences": [
+        {
+          "file": "audio/sv5/s3-0-05456551.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/sv5/s3-1-0350d7b9.wav",
+          "startFrame": 148,
+          "durationInFrames": 120
+        }
+      ],
+      "durationInFrames": 286
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "✅",
+            "text": ":key: giúp Vue nhận diện đúng phần tử giữa các lần render — cùng luật với React",
+            "sentence": 0
+          },
+          {
+            "icon": "🪪",
+            "text": "Cách đúng: dùng giá trị ổn định của chính phần tử (id, tên) làm key",
+            "sentence": 1
+          }
+        ],
+        "trap": "key=index + thêm/xóa/sort = state đi lạc (cả React lẫn Vue)"
+      },
+      "sentences": [
+        {
+          "file": "audio/sv5/s4-0-474b4f04.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/sv5/s4-1-3dfe4dbf.wav",
+          "startFrame": 145,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/sv5/s4-2-8770a29f.wav",
+          "startFrame": 273,
+          "durationInFrames": 176
+        }
+      ],
+      "durationInFrames": 467
+    }
+  ]
+}
