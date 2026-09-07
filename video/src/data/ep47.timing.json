@@ -1,0 +1,317 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #3: Vì sao list cần key? Bẫy key=index",
+        "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 3/12",
+        "badge": "Câu 3"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep47/scene-01-0-44ed88c5.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep47/scene-01-1-7b2e0e19.wav",
+          "startFrame": 148,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/ep47/scene-01-2-4a910c8e.wav",
+          "startFrame": 267,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 439
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "key là gì, tại sao quan trọng",
+        "bullets": [
+          {
+            "icon": "🪪",
+            "text": "key = 'chứng minh thư' của phần tử — giúp React nhận diện xuyên suốt các lần render",
+            "sentence": 0
+          },
+          {
+            "icon": "🔍",
+            "text": "React so sánh key cũ/mới để quyết định: giữ nguyên, tạo mới hay xóa DOM node",
+            "sentence": 1
+          },
+          {
+            "icon": "🔀",
+            "text": "key={index}: chứng minh thư đổi theo VỊ TRÍ — thêm/xóa/sắp xếp là gắn nhầm",
+            "sentence": 2
+          },
+          {
+            "icon": "⚠️",
+            "text": "Hậu quả: DOM node và state (như giá trị input) bị tái sử dụng SAI chỗ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep47/scene-02-0-8a8ce410.wav",
+          "startFrame": 0,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep47/scene-02-1-1dee6007.wav",
+          "startFrame": 174,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep47/scene-02-2-c1f4868d.wav",
+          "startFrame": 353,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep47/scene-02-3-6dce967d.wav",
+          "startFrame": 539,
+          "durationInFrames": 209
+        }
+      ],
+      "durationInFrames": 766
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "R3KeyProp.tsx",
+        "language": "tsx",
+        "code": "import {useState} from 'react';\n\nconst initial = ['Phở bò', 'Bánh mì', 'Cơm tấm'];\n\nfunction List({useIndex}: {useIndex: boolean}) {\n  const [items, setItems] = useState(initial);\n  return (\n    <div style={{border: '1px solid #ddd', borderRadius: 8, padding: 16, flex: 1}}>\n      <b>{useIndex ? 'key={index} — SAI' : 'key={item} — ĐÚNG'}</b>\n      {items.map((item, i) => (\n        <div key={useIndex ? i : item} style={{display: 'flex', gap: 8, marginTop: 8}}>\n          <span style={{width: 90}}>{item}</span>\n          <input placeholder=\"ghi chú...\" />\n          <button onClick={() => setItems(items.filter((x) => x !== item))}>Xóa</button>\n        </div>\n      ))}\n    </div>\n  );\n}\n\nexport function R3KeyProp() {\n  return (",
+        "steps": [
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 1
+          },
+          {
+            "from": 11,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 12,
+            "to": 14,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep47/scene-03-0-c76404bb.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep47/scene-03-1-04c652c6.wav",
+          "startFrame": 172,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep47/scene-03-2-bc06bd0c.wav",
+          "startFrame": 341,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep47/scene-03-3-b500d962.wav",
+          "startFrame": 553,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep47/scene-03-4-de85297f.wav",
+          "startFrame": 717,
+          "durationInFrames": 147
+        }
+      ],
+      "durationInFrames": 882
+    },
+    {
+      "id": "scene-04",
+      "type": "browser",
+      "visual": {
+        "title": "Demo thật: xóa 1 dòng, ghi chú nhảy sai chỗ",
+        "shots": [
+          {
+            "src": "screens/feqa/r3-before.png",
+            "sentence": 0,
+            "label": "TRƯỚC khi xóa — cả hai bên đều đúng",
+            "url": "localhost:5197 — React QA"
+          },
+          {
+            "src": "screens/feqa/r3-bug.png",
+            "sentence": 1,
+            "label": "SAU khi xóa 'Phở bò'",
+            "url": "localhost:5197 — React QA"
+          }
+        ],
+        "sequential": true,
+        "bullets": [
+          {
+            "icon": "❌",
+            "text": "key={index}: 'Bánh mì' → ghi chú 'phở', 'Cơm tấm' → ghi chú 'bánh' — SAI",
+            "sentence": 2
+          },
+          {
+            "icon": "✅",
+            "text": "key={item}: 'Bánh mì' → 'bánh', 'Cơm tấm' → 'cơm' — vẫn ĐÚNG, không xáo trộn",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep47/scene-04-0-16590a67.wav",
+          "startFrame": 0,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep47/scene-04-1-77361cf7.wav",
+          "startFrame": 222,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep47/scene-04-2-a7071c1b.wav",
+          "startFrame": 389,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep47/scene-04-3-e15035f1.wav",
+          "startFrame": 534,
+          "durationInFrames": 149
+        }
+      ],
+      "durationInFrames": 701
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "🎤",
+            "text": "Chốt gọn 3 câu — học thuộc luôn được",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "key: giúp React nhận diện phần tử nào giữ nguyên/thêm/xóa/di chuyển giữa các lần render",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "key={index}: chỉ tạm chấp nhận khi list TĨNH — không thêm/xóa/sắp xếp lại",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Cách đúng: dùng giá trị ổn định, duy nhất của chính phần tử (id, tên) làm key",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: đừng dùng Math.random() làm key — đổi mỗi render, React re-mount toàn bộ, mất state",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep47/scene-05-0-32ac7d8d.wav",
+          "startFrame": 0,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep47/scene-05-1-04fa7f39.wav",
+          "startFrame": 109,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep47/scene-05-2-a953f872.wav",
+          "startFrame": 290,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep47/scene-05-3-300a1fd5.wav",
+          "startFrame": 457,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep47/scene-05-4-bb049102.wav",
+          "startFrame": 629,
+          "durationInFrames": 228
+        }
+      ],
+      "durationInFrames": 875
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 3/12 hoàn tất — hẹn gặp câu 4!",
+        "summary": [
+          {
+            "text": "key = chứng minh thư của phần tử; key={index} chỉ ổn với list TĨNH",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: Controlled vs Uncontrolled component",
+            "sentence": 2
+          },
+          {
+            "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+            "sentence": 3
+          }
+        ],
+        "next": "Câu 4/12: Controlled vs Uncontrolled? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep47/scene-06-0-3f2c8057.wav",
+          "startFrame": 0,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep47/scene-06-1-c5af4562.wav",
+          "startFrame": 174,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep47/scene-06-2-54fa0ebf.wav",
+          "startFrame": 398,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep47/scene-06-3-67a4a22f.wav",
+          "startFrame": 613,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep47/scene-06-4-9880c53f.wav",
+          "startFrame": 785,
+          "durationInFrames": 171
+        }
+      ],
+      "durationInFrames": 974
+    }
+  ]
+}
