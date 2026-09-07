@@ -1,0 +1,82 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Custom hook là gì? Không phải component, không trả JSX — chỉ gói logic có state để dùng lại nhiều nơi.",
+      "Trả lời chuẩn trong 60 giây."
+    ],
+    "visual": {
+      "question": "Custom Hook là gì?",
+      "framework": "react"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Hàm bắt đầu bằng 'use' — bên trong vẫn dùng useState, useEffect như bình thường.",
+      "setTimeout hẹn giờ cập nhật debounced; return clearTimeout là cleanup, y hệt kiến thức đã học.",
+      "Component chỉ gọi 1 dòng useDebouncedValue(value, 500) là có ngay logic debounce tái dùng được."
+    ],
+    "visual": {
+      "filename": "R6CustomHook.tsx",
+      "language": "tsx",
+      "code": "function useDebouncedValue(\n  value, ms\n) {\n  const [d, setD] =\n    useState(value);\n\n  useEffect(() => {\n    const t = setTimeout(\n      () => setD(value),\n      ms\n    );\n    return () =>\n      clearTimeout(t);\n  }, [value, ms]);",
+      "steps": [
+        {
+          "from": 1,
+          "to": 14,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 13,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 14,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Gõ liên tục 'React debounce demo' — giá trị tức thời đổi ngay theo từng ký tự.",
+      "Giá trị debounce vẫn còn rỗng — vì chưa đủ 500ms kể từ ký tự cuối cùng vừa gõ."
+    ],
+    "visual": {
+      "src": "screens/feqa/r6-vert.png",
+      "caption": "Tức thời đổi ngay, debounce chờ 500ms"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Custom hook = hàm bắt đầu bằng 'use', gói logic có state để tái sử dụng ở nhiều component.",
+      "Nó không trả JSX — trả về data hoặc hàm; mỗi component gọi hook có một state hoàn toàn riêng.",
+      "Bẫy: custom hook không share state giữa components — nó chỉ share logic; muốn share state thật phải dùng Context hoặc store."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "✅",
+          "text": "Hàm bắt đầu bằng 'use', gói logic có state để tái dùng ở nhiều component",
+          "sentence": 0
+        },
+        {
+          "icon": "🧩",
+          "text": "Không trả JSX — trả data/hàm; mỗi component gọi hook có state RIÊNG",
+          "sentence": 1
+        }
+      ],
+      "trap": "Hook share logic, KHÔNG share state"
+    }
+  }
+]

@@ -1,0 +1,129 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "Custom Hook là gì?",
+        "framework": "react"
+      },
+      "sentences": [
+        {
+          "file": "audio/sr6/s1-0-14df2353.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/sr6/s1-1-23fedfdf.wav",
+          "startFrame": 181,
+          "durationInFrames": 51
+        }
+      ],
+      "durationInFrames": 250
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "R6CustomHook.tsx",
+        "language": "tsx",
+        "code": "function useDebouncedValue(\n  value, ms\n) {\n  const [d, setD] =\n    useState(value);\n\n  useEffect(() => {\n    const t = setTimeout(\n      () => setD(value),\n      ms\n    );\n    return () =>\n      clearTimeout(t);\n  }, [value, ms]);",
+        "steps": [
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 13,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sr6/s2-0-c2c4a07e.wav",
+          "startFrame": 0,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/sr6/s2-1-a2d7d7b7.wav",
+          "startFrame": 126,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/sr6/s2-2-5c82be3c.wav",
+          "startFrame": 288,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 496
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/feqa/r6-vert.png",
+        "caption": "Tức thời đổi ngay, debounce chờ 500ms"
+      },
+      "sentences": [
+        {
+          "file": "audio/sr6/s3-0-ac8224a4.wav",
+          "startFrame": 0,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/sr6/s3-1-449989c2.wav",
+          "startFrame": 138,
+          "durationInFrames": 147
+        }
+      ],
+      "durationInFrames": 303
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "✅",
+            "text": "Hàm bắt đầu bằng 'use', gói logic có state để tái dùng ở nhiều component",
+            "sentence": 0
+          },
+          {
+            "icon": "🧩",
+            "text": "Không trả JSX — trả data/hàm; mỗi component gọi hook có state RIÊNG",
+            "sentence": 1
+          }
+        ],
+        "trap": "Hook share logic, KHÔNG share state"
+      },
+      "sentences": [
+        {
+          "file": "audio/sr6/s4-0-dedfde2e.wav",
+          "startFrame": 0,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/sr6/s4-1-e9845dd7.wav",
+          "startFrame": 169,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/sr6/s4-2-48ca07b4.wav",
+          "startFrame": 331,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 539
+    }
+  ]
+}

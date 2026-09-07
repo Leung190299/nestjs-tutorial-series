@@ -1,0 +1,314 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #6: Custom Hook là gì, viết thế nào?",
+        "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 6/12",
+        "badge": "Câu 6"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep50/scene-01-0-009be7b7.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep50/scene-01-1-20410f92.wav",
+          "startFrame": 181,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep50/scene-01-2-63346c8d.wav",
+          "startFrame": 374,
+          "durationInFrames": 202
+        }
+      ],
+      "durationInFrames": 594
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Custom hook là gì",
+        "bullets": [
+          {
+            "icon": "🏷️",
+            "text": "Custom hook = hàm JS thường, quy ước bắt buộc: tên bắt đầu bằng 'use'",
+            "sentence": 0
+          },
+          {
+            "icon": "🧩",
+            "text": "Bên trong gọi hook có sẵn (useState, useEffect...) để gói logic stateful, tái dùng nhiều nơi",
+            "sentence": 1
+          },
+          {
+            "icon": "🚫",
+            "text": "KHÔNG phải component — không trả JSX, chỉ trả data/hàm/object",
+            "sentence": 2
+          },
+          {
+            "icon": "🧍",
+            "text": "Mỗi component gọi hook có state RIÊNG — không phải kho state dùng chung",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep50/scene-02-0-13335085.wav",
+          "startFrame": 0,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep50/scene-02-1-04e66182.wav",
+          "startFrame": 160,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep50/scene-02-2-7a5c01be.wav",
+          "startFrame": 377,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep50/scene-02-3-86bc8da9.wav",
+          "startFrame": 585,
+          "durationInFrames": 161
+        }
+      ],
+      "durationInFrames": 764
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "R6CustomHook.tsx",
+        "language": "tsx",
+        "code": "import {useEffect, useState} from 'react';\n\nfunction useDebouncedValue<T>(value: T, delayMs: number): T {\n  const [debounced, setDebounced] = useState(value);\n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delayMs);\n    return () => clearTimeout(timer);\n  }, [value, delayMs]);\n  return debounced;\n}\n\nexport function R6CustomHook() {\n  const [value, setValue] = useState('');\n  const debounced = useDebouncedValue(value, 500);",
+        "steps": [
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 4,
+            "sentence": 1
+          },
+          {
+            "from": 5,
+            "to": 6,
+            "sentence": 2
+          },
+          {
+            "from": 7,
+            "to": 7,
+            "sentence": 3
+          },
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep50/scene-03-0-7ab57bb5.wav",
+          "startFrame": 0,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep50/scene-03-1-52338342.wav",
+          "startFrame": 205,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep50/scene-03-2-2ace283a.wav",
+          "startFrame": 353,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep50/scene-03-3-83abf09f.wav",
+          "startFrame": 544,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep50/scene-03-4-e75a5c52.wav",
+          "startFrame": 752,
+          "durationInFrames": 245
+        }
+      ],
+      "durationInFrames": 1015
+    },
+    {
+      "id": "scene-04",
+      "type": "browser",
+      "visual": {
+        "title": "Demo thật: giá trị tức thời đổi ngay, debounce chờ 500ms",
+        "shots": [
+          {
+            "src": "screens/feqa/r6-main.png",
+            "sentence": 0,
+            "label": "React QA — R6 Custom Hook useDebouncedValue",
+            "url": "localhost:5197 — React QA"
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "⚡",
+            "text": "Giá trị tức thời: \"React debounce demo\" — cập nhật ngay khi gõ",
+            "sentence": 1
+          },
+          {
+            "icon": "⏳",
+            "text": "Giá trị debounce: \"\" — vẫn rỗng vì chưa đủ 500ms từ lần gõ cuối",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep50/scene-04-0-2f4313b3.wav",
+          "startFrame": 0,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep50/scene-04-1-0a9f77ac.wav",
+          "startFrame": 212,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep50/scene-04-2-2ca47a23.wav",
+          "startFrame": 381,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep50/scene-04-3-e87b98cb.wav",
+          "startFrame": 557,
+          "durationInFrames": 204
+        }
+      ],
+      "durationInFrames": 779
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "🎤",
+            "text": "Chốt gọn — học thuộc luôn được",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "Hàm JS bắt đầu bằng 'use', gọi hook có sẵn để gói và tái sử dụng logic có state",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "KHÔNG phải component — không trả JSX, trả về data/hàm dùng lại ở nhiều nơi",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Ví dụ: useFetch(url), useDebouncedValue(value, delay) — gọi lại ở nhiều component",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: custom hook KHÔNG share STATE giữa components — chỉ share LOGIC; share state thật cần Context/store",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep50/scene-05-0-e69ab072.wav",
+          "startFrame": 0,
+          "durationInFrames": 80
+        },
+        {
+          "file": "audio/ep50/scene-05-1-17c4d9a3.wav",
+          "startFrame": 88,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep50/scene-05-2-c0b4ac04.wav",
+          "startFrame": 293,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep50/scene-05-3-52e59a81.wav",
+          "startFrame": 498,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep50/scene-05-4-356e0790.wav",
+          "startFrame": 725,
+          "durationInFrames": 334
+        }
+      ],
+      "durationInFrames": 1077
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Phần React hoàn tất 6/6 — chuyển sang Vue!",
+        "summary": [
+          {
+            "text": "Custom hook = hàm bắt đầu bằng 'use', gói và tái sử dụng LOGIC có state — không chia sẻ STATE giữa components",
+            "sentence": 0
+          },
+          {
+            "text": "Muốn share state thật sự giữa nhiều component phải dùng Context hoặc store ngoài, không phải custom hook",
+            "sentence": 1
+          },
+          {
+            "text": "Phần React đã xong 6/6 câu — tiếp theo chuyển sang Vue, bắt đầu từ ref vs reactive",
+            "sentence": 2
+          },
+          {
+            "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+            "sentence": 3
+          }
+        ],
+        "next": "Câu 1/12 phần Vue: ref vs reactive khác nhau thế nào? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep50/scene-06-0-f93b833c.wav",
+          "startFrame": 0,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep50/scene-06-1-50d82f19.wav",
+          "startFrame": 241,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep50/scene-06-2-650598b1.wav",
+          "startFrame": 477,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep50/scene-06-3-6887414b.wav",
+          "startFrame": 699,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep50/scene-06-4-bcc31858.wav",
+          "startFrame": 880,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 1021
+    }
+  ]
+}
