@@ -1673,7 +1673,7 @@ Từ khóa chủ lực toàn series: `phỏng vấn frontend`, `phỏng vấn re
 
 ---
 
-### Phỏng vấn FE #1 — Virtual DOM là gì? (2:37)
+### Phỏng vấn FE #1 — Virtual DOM là gì? (2:40)
 
 **Tiêu đề:** Phỏng vấn FE #1: Virtual DOM và Reconciliation là gì? | React interview
 
@@ -1690,10 +1690,10 @@ Bẫy hay gặp: Virtual DOM KHÔNG phải lúc nào cũng nhanh hơn thao tác 
 ⏱️ NỘI DUNG:
 0:00 Giới thiệu series Phỏng vấn Frontend & câu hỏi #1
 0:25 Virtual DOM là gì? Reconciliation là gì?
-0:50 Code: R1VirtualDom.tsx — mountedAt, useRef
-1:22 Demo thật: DOM node tĩnh không remount
-1:44 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
-2:12 Tổng kết câu 1 & hẹn câu 2
+0:51 Code: R1VirtualDom.tsx — mountedAt, useRef
+1:23 Demo thật: DOM node tĩnh không remount
+1:45 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:14 Tổng kết câu 1 & hẹn câu 2
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
@@ -1715,7 +1715,7 @@ Bẫy hay gặp: Virtual DOM KHÔNG phải lúc nào cũng nhanh hơn thao tác 
 
 ---
 
-### Phỏng vấn FE #2 — useState và useEffect khác nhau thế nào? (2:34)
+### Phỏng vấn FE #2 — useState và useEffect khác nhau thế nào? (2:37)
 
 **Tiêu đề:** Phỏng vấn FE #2: useState và useEffect khác nhau thế nào? | React interview
 
@@ -1732,10 +1732,10 @@ Bẫy hay gặp: cleanup KHÔNG chỉ chạy khi unmount — nó chạy TRƯỚC
 ⏱️ NỘI DUNG:
 0:00 Giới thiệu câu 2 & nhắc lại câu 1
 0:21 useState vs useEffect là gì?
-0:48 Code: R2Effects.tsx
-1:18 Demo thật: log effect và cleanup đúng thứ tự
-1:39 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
-2:06 Tổng kết câu 2 & hẹn câu 3
+0:49 Code: R2Effects.tsx
+1:19 Demo thật: log effect và cleanup đúng thứ tự
+1:41 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:09 Tổng kết câu 2 & hẹn câu 3
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
@@ -1757,7 +1757,7 @@ Bẫy hay gặp: cleanup KHÔNG chỉ chạy khi unmount — nó chạy TRƯỚC
 
 ---
 
-### Phỏng vấn FE #3 — Vì sao list cần key? Bẫy key=index (2:31)
+### Phỏng vấn FE #3 — Vì sao list cần key? Bẫy key=index (2:34)
 
 **Tiêu đề:** Phỏng vấn FE #3: Vì sao list cần key? Bẫy key=index | React interview
 
@@ -1774,10 +1774,10 @@ Bẫy hay gặp: đừng dùng Math.random() làm key — giá trị đổi mỗ
 ⏱️ NỘI DUNG:
 0:00 Giới thiệu câu 3
 0:14 key là gì, tại sao quan trọng
-0:39 Code: R3KeyProp.tsx
-1:08 Demo thật: xóa 1 dòng, ghi chú nhảy sai chỗ
-1:31 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
-1:59 Tổng kết câu 3 & hẹn câu 4
+0:40 Code: R3KeyProp.tsx
+1:09 Demo thật: xóa 1 dòng, ghi chú nhảy sai chỗ
+1:32 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:02 Tổng kết câu 3 & hẹn câu 4
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
@@ -1800,7 +1800,7 @@ Bẫy hay gặp: đừng dùng Math.random() làm key — giá trị đổi mỗ
 
 ---
 
-### Phỏng vấn FE #4 — Controlled vs Uncontrolled component (2:49)
+### Phỏng vấn FE #4 — Controlled vs Uncontrolled component (2:52)
 
 **Tiêu đề:** Phỏng vấn FE #4: Controlled vs Uncontrolled component | React interview
 
@@ -1818,9 +1818,9 @@ Bẫy hay gặp: đổi value của input từ undefined sang có giá trị GI�
 0:00 Giới thiệu câu 4
 0:17 Controlled vs Uncontrolled là gì
 0:42 Code: R4Controlled.tsx
-1:20 Demo thật: UPPERCASE chỉ ăn một bên
-1:48 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
-2:18 Tổng kết câu 4 & hẹn câu 5
+1:21 Demo thật: UPPERCASE chỉ ăn một bên
+1:50 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:21 Tổng kết câu 4 & hẹn câu 5
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
@@ -1842,7 +1842,7 @@ Bẫy hay gặp: đổi value của input từ undefined sang có giá trị GI�
 
 ---
 
-### Phỏng vấn FE #5 — React.memo, useMemo, useCallback — khi nào cần? (2:53)
+### Phỏng vấn FE #5 — React.memo, useMemo, useCallback — khi nào cần? (2:56)
 
 **Tiêu đề:** Phỏng vấn FE #5: React.memo, useMemo, useCallback khi nào cần? | React interview
 
@@ -1859,10 +1859,10 @@ Bẫy hay gặp: đừng memo mọi thứ — so sánh props cũng tốn chi ph�
 ⏱️ NỘI DUNG:
 0:00 Giới thiệu câu 5
 0:21 React.memo / useMemo / useCallback là gì
-0:49 Code: R5Memo.tsx
-1:23 Demo thật: object literal phá memo, useMemo cứu memo
-1:48 Trả lời như đi phỏng vấn: chốt + bẫy + React Compiler 2026
-2:24 Tổng kết câu 5 & hẹn câu 6
+0:50 Code: R5Memo.tsx
+1:24 Demo thật: object literal phá memo, useMemo cứu memo
+1:50 Trả lời như đi phỏng vấn: chốt + bẫy + React Compiler 2026
+2:27 Tổng kết câu 5 & hẹn câu 6
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
@@ -1884,7 +1884,7 @@ Bẫy hay gặp: đừng memo mọi thứ — so sánh props cũng tốn chi ph�
 
 ---
 
-### Phỏng vấn FE #6 — Custom Hook là gì, viết thế nào? (2:51)
+### Phỏng vấn FE #6 — Custom Hook là gì, viết thế nào? (2:55)
 
 **Tiêu đề:** Phỏng vấn FE #6: Custom Hook là gì, viết thế nào? | React interview
 
@@ -1901,10 +1901,10 @@ Bẫy hay gặp: custom hook KHÔNG share STATE giữa các component gọi nó 
 ⏱️ NỘI DUNG:
 0:00 Giới thiệu câu 6 — khép phần React
 0:19 Custom hook là gì
-0:44 Code: R6CustomHook.tsx — useDebouncedValue
-1:17 Demo thật: giá trị tức thời vs debounce 500ms
-1:43 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
-2:18 Tổng kết 6 câu React & chuyển sang phần Vue
+0:45 Code: R6CustomHook.tsx — useDebouncedValue
+1:19 Demo thật: giá trị tức thời vs debounce 500ms
+1:45 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:20 Tổng kết 6 câu React & chuyển sang phần Vue
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
@@ -1926,7 +1926,7 @@ Bẫy hay gặp: custom hook KHÔNG share STATE giữa các component gọi nó 
 
 ---
 
-### Phỏng vấn FE #7 — Ref và reactive khác nhau thế nào? (2:56)
+### Phỏng vấn FE #7 — Ref và reactive khác nhau thế nào? (2:59)
 
 **Tiêu đề:** Phỏng vấn FE #7: Ref và reactive khác nhau thế nào? | Vue interview
 
@@ -1942,11 +1942,11 @@ Bẫy hay gặp: muốn destructure an toàn, dùng toRefs(state) để tách t�
 
 ⏱️ NỘI DUNG:
 0:00 Giới thiệu phần Vue & câu 7
-0:22 ref vs reactive là gì
+0:23 ref vs reactive là gì
 0:55 Code: V1RefReactive.vue (script setup)
-1:30 Demo thật: destructure đứng im, reactive lộ giá trị ngầm
-2:01 Trả lời như đi phỏng vấn: chốt + toRefs
-2:31 Tổng kết câu 7 & hẹn câu 8
+1:31 Demo thật: destructure đứng im, reactive lộ giá trị ngầm
+2:03 Trả lời như đi phỏng vấn: chốt + toRefs
+2:33 Tổng kết câu 7 & hẹn câu 8
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
@@ -1968,7 +1968,7 @@ Bẫy hay gặp: muốn destructure an toàn, dùng toRefs(state) để tách t�
 
 ---
 
-### Phỏng vấn FE #8 — Options API và Composition API khác nhau thế nào? (2:51)
+### Phỏng vấn FE #8 — Options API và Composition API khác nhau thế nào? (2:55)
 
 **Tiêu đề:** Phỏng vấn FE #8: Options API vs Composition API | Vue interview
 
@@ -1985,11 +1985,11 @@ Bẫy hay gặp: nhiều người nghĩ Options API đã lỗi thời — SAI, V
 ⏱️ NỘI DUNG:
 0:00 Giới thiệu câu 8
 0:24 Options API vs Composition API là gì
-0:53 Code: OptionsCounter.vue (Options API)
-1:11 Code: V2ApiStyles.vue (Composition API, script setup)
-1:31 Demo thật: 2 counter chạy song song, độc lập
-1:59 Trả lời như đi phỏng vấn: chốt + đừng trộn 2 style
-2:26 Tổng kết câu 8 & hẹn câu 9
+0:54 Code: OptionsCounter.vue (Options API)
+1:13 Code: V2ApiStyles.vue (Composition API, script setup)
+1:33 Demo thật: 2 counter chạy song song, độc lập
+2:01 Trả lời như đi phỏng vấn: chốt + đừng trộn 2 style
+2:29 Tổng kết câu 8 & hẹn câu 9
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
@@ -2011,7 +2011,7 @@ Bẫy hay gặp: nhiều người nghĩ Options API đã lỗi thời — SAI, V
 
 ---
 
-### Phỏng vấn FE #9 — computed vs watch vs watchEffect khác nhau thế nào? (2:31)
+### Phỏng vấn FE #9 — computed vs watch vs watchEffect khác nhau thế nào? (2:34)
 
 **Tiêu đề:** Phỏng vấn FE #9: computed vs watch vs watchEffect | Vue interview
 
@@ -2028,10 +2028,10 @@ Bẫy hay gặp: computed PHẢI PURE — đếm số lần tính lại trong de
 ⏱️ NỘI DUNG:
 0:00 Giới thiệu câu 9
 0:16 computed vs watch vs watchEffect là gì
-0:46 Code: V3ComputedWatch.vue (script setup)
-1:12 Demo thật: computed cache, watch lazy, watchEffect eager
-1:42 Trả lời như đi phỏng vấn: chốt + computed phải pure
-2:12 Tổng kết câu 9 & hẹn câu 10
+0:47 Code: V3ComputedWatch.vue (script setup)
+1:13 Demo thật: computed cache, watch lazy, watchEffect eager
+1:43 Trả lời như đi phỏng vấn: chốt + computed phải pure
+2:14 Tổng kết câu 9 & hẹn câu 10
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
@@ -2053,7 +2053,7 @@ Bẫy hay gặp: computed PHẢI PURE — đếm số lần tính lại trong de
 
 ---
 
-### Phỏng vấn FE #10 — v-if và v-show khác nhau thế nào? (2:27)
+### Phỏng vấn FE #10 — v-if và v-show khác nhau thế nào? (2:30)
 
 **Tiêu đề:** Phỏng vấn FE #10: v-if và v-show khác nhau thế nào? | Vue interview
 
@@ -2071,9 +2071,9 @@ Bẫy hay gặp: v-show KHÔNG dùng chung được với v-else, và KHÔNG áp
 0:00 Giới thiệu câu 10
 0:16 v-if vs v-show là gì
 0:46 Code: V4IfShow.vue (template)
-1:11 Demo thật: v-if mất chữ, v-show giữ chữ
-1:34 Trả lời như đi phỏng vấn: chốt + quy tắc chọn
-2:04 Tổng kết câu 10 & hẹn câu 11
+1:12 Demo thật: v-if mất chữ, v-show giữ chữ
+1:36 Trả lời như đi phỏng vấn: chốt + quy tắc chọn
+2:06 Tổng kết câu 10 & hẹn câu 11
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
@@ -2095,7 +2095,7 @@ Bẫy hay gặp: v-show KHÔNG dùng chung được với v-else, và KHÔNG áp
 
 ---
 
-### Phỏng vấn FE #11 — :key trong v-for — vì sao không dùng index? (2:40)
+### Phỏng vấn FE #11 — :key trong v-for — vì sao không dùng index? (2:43)
 
 **Tiêu đề:** Phỏng vấn FE #11: :key trong v-for, vì sao không dùng index? | Vue interview
 
@@ -2112,10 +2112,10 @@ Bẫy hay gặp: cùng MỘT LUẬT cho cả 2 framework — học một lần, 
 ⏱️ NỘI DUNG:
 0:00 Giới thiệu câu 11
 0:18 :key trong v-for là gì, tại sao quan trọng
-0:45 Code: V5KeyVFor.vue (template)
-1:12 Demo thật: xóa 1 dòng, ghi chú nhảy sai chỗ — y hệt bẫy R3
-1:37 Trả lời như đi phỏng vấn: chốt + cùng luật với React
-2:07 Tổng kết câu 11 & hẹn câu 12 — câu cuối lô 1
+0:46 Code: V5KeyVFor.vue (template)
+1:13 Demo thật: xóa 1 dòng, ghi chú nhảy sai chỗ — y hệt bẫy R3
+1:38 Trả lời như đi phỏng vấn: chốt + cùng luật với React
+2:09 Tổng kết câu 11 & hẹn câu 12 — câu cuối lô 1
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
@@ -2138,7 +2138,7 @@ Bẫy hay gặp: cùng MỘT LUẬT cho cả 2 framework — học một lần, 
 
 ---
 
-### Phỏng vấn FE #12 (CUỐI LÔ 1) — Props xuống, Emit lên hoạt động thế nào? (2:30)
+### Phỏng vấn FE #12 (CUỐI LÔ 1) — Props xuống, Emit lên hoạt động thế nào? (2:33)
 
 **Tiêu đề:** Phỏng vấn FE #12: Props xuống, Emit lên hoạt động thế nào? | Vue interview
 
@@ -2155,10 +2155,10 @@ Bẫy hay gặp: mutate prop trực tiếp trong component con sẽ ra warning v
 ⏱️ NỘI DUNG:
 0:00 Giới thiệu câu 12 — khép lô 1
 0:17 Props xuống, Emit lên là gì, vì sao quan trọng
-0:38 Code: NutDatHang.vue (script setup)
-1:07 Demo thật: bấm nút con, cha ghi log đúng thứ tự
-1:32 Trả lời như đi phỏng vấn: chốt + defineModel khi cần 2 chiều
-1:58 Tổng kết trọn 12 câu lô 1 & CTA lô 2
+0:39 Code: NutDatHang.vue (script setup)
+1:08 Demo thật: bấm nút con, cha ghi log đúng thứ tự
+1:34 Trả lời như đi phỏng vấn: chốt + defineModel khi cần 2 chiều
+2:00 Tổng kết trọn 12 câu lô 1 & CTA lô 2
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng 12 câu code của lô 1 (6 React + 6 Vue).

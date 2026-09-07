@@ -13,7 +13,8 @@ export type ConceptVisual = {
 export const ConceptScene: React.FC<SceneProps> = ({visual, sentences}) => {
   const v = visual as ConceptVisual;
   // Bullet nhiều và/hoặc bullet dài (dễ wrap 2 dòng) thì thu nhỏ font/gap/padding để trọn khung.
-  // Giữ NGUYÊN mọi giá trị khi <=4 bullet — các tập cũ đa số không đổi nếu re-render.
+  // <=4 bullet thường giữ nguyên giá trị gốc; ngoại lệ duy nhất là 4 bullet mà cả 4 đều
+  // dài >55 ký tự (load=8) — trường hợp đó cũng cần thu nhỏ vì mỗi bullet wrap 2 dòng.
   // (tiền lệ: xem cách CodeScene.tsx co fontSize theo lineCount/longestLine)
   const bulletCount = v.bullets.length;
   const longCount = v.bullets.filter((b) => b.text.length > 55).length;
