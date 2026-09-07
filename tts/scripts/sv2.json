@@ -1,0 +1,82 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Options API và Composition API khác nhau thế nào? Khi nào nên dùng cái nào?",
+      "Trả lời chuẩn trong 60 giây."
+    ],
+    "visual": {
+      "question": "Options API vs Composition API",
+      "framework": "vue"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Composition API — ref(0) tạo state, increment nằm ngay bên dưới — gộp theo TÍNH NĂNG.",
+      "Không cần return gì cả — mọi biến, hàm khai báo trong script setup tự lộ ra template.",
+      "So với Options API tách state (data) và hàm (methods) hai khối riêng — đây gọn hơn hẳn."
+    ],
+    "visual": {
+      "filename": "V2ApiStyles.vue",
+      "language": "typescript",
+      "code": "import {ref} from 'vue';\n\nconst count = ref(0);\n\nfunction increment() {\n  count.value++;\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 5,
+          "to": 7,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Demo thật: hai counter cạnh nhau — trái viết Options API, phải viết Composition API.",
+      "Bấm nút riêng của từng bên, mỗi counter tăng độc lập — cùng kết quả, khác cách viết code."
+    ],
+    "visual": {
+      "src": "screens/feqa/v2-vert.png",
+      "caption": "2 counter, 2 kiểu viết — cùng kết quả, khác cách tổ chức!"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Options API tổ chức theo LOẠI — data/methods/computed tách khối; Composition API tổ chức theo TÍNH NĂNG, gộp logic lại, dễ tái dùng qua composable.",
+      "Options không lỗi thời — Vue 3 vẫn hỗ trợ đầy đủ; dự án mới nên ưu tiên Composition vì composable và TypeScript tốt hơn.",
+      "Bẫy: đừng trộn hai style trong cùng một component."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "✅",
+          "text": "Options: tổ chức theo LOẠI; Composition: tổ chức theo TÍNH NĂNG, tái dùng qua composable",
+          "sentence": 0
+        },
+        {
+          "icon": "🧩",
+          "text": "Options không lỗi thời — dự án mới nên ưu tiên Composition (composable + TypeScript)",
+          "sentence": 1
+        }
+      ],
+      "trap": "Đừng trộn 2 style trong 1 component"
+    }
+  }
+]

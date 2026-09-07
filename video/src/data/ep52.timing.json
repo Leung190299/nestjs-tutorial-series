@@ -1,0 +1,333 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #8: Options API và Composition API khác nhau thế nào?",
+        "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 8/12",
+        "badge": "Câu 8"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep52/scene-01-0-b16af1ec.wav",
+          "startFrame": 0,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep52/scene-01-1-6e059454.wav",
+          "startFrame": 232,
+          "durationInFrames": 269
+        },
+        {
+          "file": "audio/ep52/scene-01-2-a27b9cea.wav",
+          "startFrame": 509,
+          "durationInFrames": 200
+        }
+      ],
+      "durationInFrames": 727
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Options API vs Composition API",
+        "bullets": [
+          {
+            "icon": "🗂️",
+            "text": "Options API tổ chức theo LOẠI — data()/methods/computed tách khối riêng, quen thuộc với Vue 2",
+            "sentence": 0
+          },
+          {
+            "icon": "🧵",
+            "text": "Composition API tổ chức theo TÍNH NĂNG trong <script setup> — dễ tái dùng qua composable, TypeScript tốt hơn",
+            "sentence": 1
+          },
+          {
+            "icon": "⚖️",
+            "text": "Cùng một counter, cùng hành vi — chỉ khác cách tổ chức code, không khác kết quả",
+            "sentence": 2
+          },
+          {
+            "icon": "⚠️",
+            "text": "KHÔNG phải Options API lỗi thời — Vue 3 vẫn hỗ trợ đầy đủ, 2 API dùng chung được trong 1 project",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep52/scene-02-0-22eb0e08.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep52/scene-02-1-66c9231b.wav",
+          "startFrame": 200,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep52/scene-02-2-cbf5dc93.wav",
+          "startFrame": 482,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep52/scene-02-3-d1695e8c.wav",
+          "startFrame": 637,
+          "durationInFrames": 250
+        }
+      ],
+      "durationInFrames": 905
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "OptionsCounter.vue (script)",
+        "language": "typescript",
+        "code": "import {defineComponent} from 'vue';\n\n// Options API: tổ chức theo \"loại\" (data / methods), không dùng <script setup>.\nexport default defineComponent({\n  data() {\n    return {count: 0};\n  },\n  methods: {\n    increment() {\n      this.count++;\n    },\n  },\n});",
+        "steps": [
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 13,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep52/scene-03-0-0bb9daec.wav",
+          "startFrame": 0,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep52/scene-03-1-b6a8b5b8.wav",
+          "startFrame": 174,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep52/scene-03-2-c43ad509.wav",
+          "startFrame": 319,
+          "durationInFrames": 224
+        }
+      ],
+      "durationInFrames": 561
+    },
+    {
+      "id": "scene-04",
+      "type": "code",
+      "visual": {
+        "filename": "V2ApiStyles.vue (script setup)",
+        "language": "typescript",
+        "code": "// Composition API: tổ chức theo \"logic feature\", cùng trong <script setup>.\nimport {ref} from 'vue';\nimport OptionsCounter from './OptionsCounter.vue';\n\nconst count = ref(0);\nfunction increment() {\n  count.value++;\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep52/scene-04-0-ced8ffb9.wav",
+          "startFrame": 0,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep52/scene-04-1-537b984e.wav",
+          "startFrame": 167,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep52/scene-04-2-16aa19e7.wav",
+          "startFrame": 401,
+          "durationInFrames": 202
+        }
+      ],
+      "durationInFrames": 621
+    },
+    {
+      "id": "scene-05",
+      "type": "browser",
+      "visual": {
+        "title": "Demo thật: 2 counter, 2 kiểu viết, cùng chạy song song",
+        "shots": [
+          {
+            "src": "screens/feqa/v2-main.png",
+            "sentence": 0,
+            "label": "Vue QA — OptionsCounter (trái) và V2ApiStyles (phải)",
+            "url": "localhost:5196 — Vue QA"
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🅾️",
+            "text": "OptionsCounter.vue (trái): data()/methods tách khối — bấm +1 (Options) chỉ tăng counter này",
+            "sentence": 2
+          },
+          {
+            "icon": "🧩",
+            "text": "V2ApiStyles.vue (phải): script setup gộp theo feature — bấm +1 (Composition) chỉ tăng counter kia, độc lập hoàn toàn",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep52/scene-05-0-b5cb0c7b.wav",
+          "startFrame": 0,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep52/scene-05-1-a6f01477.wav",
+          "startFrame": 224,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep52/scene-05-2-92f5e0ca.wav",
+          "startFrame": 472,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep52/scene-05-3-3a1d3e21.wav",
+          "startFrame": 663,
+          "durationInFrames": 161
+        }
+      ],
+      "durationInFrames": 842
+    },
+    {
+      "id": "scene-06",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "🎤",
+            "text": "Chốt gọn — học thuộc luôn được",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "Options API tổ chức theo LOẠI — data/methods/computed tách khối riêng, hợp component đơn giản",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Composition API tổ chức theo TÍNH NĂNG trong script setup — dễ tái dùng qua composable, TypeScript tốt hơn",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Dự án mới ưu tiên Composition API — nhưng ĐỪNG trộn 2 style trong 1 component",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: không phải Options API lỗi thời — Vue 3 vẫn hỗ trợ đầy đủ, 2 style dùng chung được trong 1 project",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep52/scene-06-0-e69ab072.wav",
+          "startFrame": 0,
+          "durationInFrames": 84
+        },
+        {
+          "file": "audio/ep52/scene-06-1-222da99e.wav",
+          "startFrame": 92,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep52/scene-06-2-18451823.wav",
+          "startFrame": 240,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep52/scene-06-3-767b3023.wav",
+          "startFrame": 445,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep52/scene-06-4-70b75099.wav",
+          "startFrame": 607,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 832
+    },
+    {
+      "id": "scene-07",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 2/6 phần Vue hoàn tất — hẹn gặp lại câu 3!",
+        "summary": [
+          {
+            "text": "Options API tổ chức theo LOẠI (data/methods); Composition API tổ chức theo TÍNH NĂNG (script setup)",
+            "sentence": 0
+          },
+          {
+            "text": "Cùng hành vi, khác cách tổ chức — dự án mới ưu tiên Composition, nhưng đừng trộn 2 style trong 1 component",
+            "sentence": 1
+          },
+          {
+            "text": "Phần Vue đã có câu 2/6 — tiếp theo: computed vs watch vs watchEffect",
+            "sentence": 2
+          },
+          {
+            "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+            "sentence": 3
+          }
+        ],
+        "next": "Câu 3/12 phần Vue: computed vs watch vs watchEffect khác nhau thế nào? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep52/scene-07-0-cb2e8791.wav",
+          "startFrame": 0,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep52/scene-07-1-98d11e2a.wav",
+          "startFrame": 188,
+          "durationInFrames": 267
+        },
+        {
+          "file": "audio/ep52/scene-07-2-ea086fb6.wav",
+          "startFrame": 463,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep52/scene-07-3-dbb1149e.wav",
+          "startFrame": 620,
+          "durationInFrames": 142
+        }
+      ],
+      "durationInFrames": 780
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu tiếp theo phần Vue trong series phỏng vấn Frontend: Options API và Composition API khác nhau thế nào, khi nào nên dùng cái nào?",
+      "Cùng một counter, viết bằng hai kiểu tổ chức code khác nhau — OptionsCounter.vue theo Options API, V2ApiStyles.vue theo Composition API.",
+      "Demo ngay sau đây: hai counter đặt cạnh nhau, bấm nút nào tăng đúng counter đó — chạy song song, không cái nào thay thế cái nào."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #8: Options API và Composition API khác nhau thế nào?",
+      "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 8/12",
+      "badge": "Câu 8"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Options API tổ chức code theo LOẠI — data, methods, computed mỗi thứ một khối riêng, quen thuộc với ai từng dùng Vue 2.",
+      "Composition API tổ chức theo TÍNH NĂNG, gộp logic liên quan lại trong script setup — dễ tách thành composable dùng lại, TypeScript suy luận kiểu tốt hơn.",
+      "Cùng một counter, cùng hành vi khi chạy — chỉ khác cách tổ chức code, kết quả người dùng thấy y hệt nhau.",
+      "Bẫy: đừng nói Options API lỗi thời — Vue 3 vẫn hỗ trợ đầy đủ, hai API dùng chung được trong một project, miễn không trộn trong cùng một component."
+    ],
+    "visual": {
+      "title": "Options API vs Composition API",
+      "bullets": [
+        {
+          "icon": "🗂️",
+          "text": "Options API tổ chức theo LOẠI — data()/methods/computed tách khối riêng, quen thuộc với Vue 2",
+          "sentence": 0
+        },
+        {
+          "icon": "🧵",
+          "text": "Composition API tổ chức theo TÍNH NĂNG trong <script setup> — dễ tái dùng qua composable, TypeScript tốt hơn",
+          "sentence": 1
+        },
+        {
+          "icon": "⚖️",
+          "text": "Cùng một counter, cùng hành vi — chỉ khác cách tổ chức code, không khác kết quả",
+          "sentence": 2
+        },
+        {
+          "icon": "⚠️",
+          "text": "KHÔNG phải Options API lỗi thời — Vue 3 vẫn hỗ trợ đầy đủ, 2 API dùng chung được trong 1 project",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là OptionsCounter.vue — component con viết thuần Options API, không dùng script setup.",
+      "data() trả về object chứa count — nơi DUY NHẤT khai báo dữ liệu, nằm ở một khối riêng.",
+      "methods.increment() gọi this.count++ — hàm nằm ở khối riêng khác, tách hẳn khỏi data; đúng kiểu Options API tổ chức theo LOẠI."
+    ],
+    "visual": {
+      "filename": "OptionsCounter.vue (script)",
+      "language": "typescript",
+      "code": "import {defineComponent} from 'vue';\n\n// Options API: tổ chức theo \"loại\" (data / methods), không dùng <script setup>.\nexport default defineComponent({\n  data() {\n    return {count: 0};\n  },\n  methods: {\n    increment() {\n      this.count++;\n    },\n  },\n});",
+      "steps": [
+        {
+          "from": 1,
+          "to": 13,
+          "sentence": 0
+        },
+        {
+          "from": 5,
+          "to": 7,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 13,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "code",
+    "narration": [
+      "Còn đây là V2ApiStyles.vue — phần script setup, Composition API, chỉ tám dòng.",
+      "const count = ref(0) rồi function increment() thao tác count.value++ ngay bên dưới — gộp theo TÍNH NĂNG, không tách khối như Options.",
+      "Cùng thao tác tăng count, nhưng gọn hơn và dễ trích thành composable dùng lại ở nơi khác — đây là điểm mạnh của Composition API."
+    ],
+    "visual": {
+      "filename": "V2ApiStyles.vue (script setup)",
+      "language": "typescript",
+      "code": "// Composition API: tổ chức theo \"logic feature\", cùng trong <script setup>.\nimport {ref} from 'vue';\nimport OptionsCounter from './OptionsCounter.vue';\n\nconst count = ref(0);\nfunction increment() {\n  count.value++;\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 0
+        },
+        {
+          "from": 5,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "browser",
+    "narration": [
+      "App demo thật — vue-qa cổng 5196, câu v2: hai counter đặt cạnh nhau trong cùng một trang, viết bằng hai kiểu khác nhau.",
+      "Bên trái là OptionsCounter — Options API; bên phải là Composition API viết ngay trong script setup của V2ApiStyles.vue.",
+      "Bấm nút bên trái vài lần, rồi bấm nút bên phải số lần khác — mỗi counter chỉ tăng theo đúng nút của nó, độc lập hoàn toàn.",
+      "Hai kiểu viết khác nhau nhưng chạy song song bình thường trong cùng một project — không phải cái nọ thay thế cái kia."
+    ],
+    "visual": {
+      "title": "Demo thật: 2 counter, 2 kiểu viết, cùng chạy song song",
+      "shots": [
+        {
+          "src": "screens/feqa/v2-main.png",
+          "sentence": 0,
+          "label": "Vue QA — OptionsCounter (trái) và V2ApiStyles (phải)",
+          "url": "localhost:5196 — Vue QA"
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🅾️",
+          "text": "OptionsCounter.vue (trái): data()/methods tách khối — bấm +1 (Options) chỉ tăng counter này",
+          "sentence": 2
+        },
+        {
+          "icon": "🧩",
+          "text": "V2ApiStyles.vue (phải): script setup gộp theo feature — bấm +1 (Composition) chỉ tăng counter kia, độc lập hoàn toàn",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — chốt gọn, học thuộc luôn được.",
+      "Câu một: Options API tổ chức theo LOẠI — data, methods, computed tách khối riêng.",
+      "Câu hai: Composition API tổ chức theo TÍNH NĂNG trong script setup — dễ tái dùng qua composable, TypeScript tốt hơn.",
+      "Câu ba: dự án mới nên ưu tiên Composition API — nhưng đừng trộn hai style trong một component.",
+      "Bẫy: Options API không lỗi thời — Vue 3 vẫn hỗ trợ đầy đủ, hai style dùng chung được trong một project, miễn khác component."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "🎤",
+          "text": "Chốt gọn — học thuộc luôn được",
+          "sentence": 0
+        },
+        {
+          "icon": "1️⃣",
+          "text": "Options API tổ chức theo LOẠI — data/methods/computed tách khối riêng, hợp component đơn giản",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Composition API tổ chức theo TÍNH NĂNG trong script setup — dễ tái dùng qua composable, TypeScript tốt hơn",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Dự án mới ưu tiên Composition API — nhưng ĐỪNG trộn 2 style trong 1 component",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "Bẫy: không phải Options API lỗi thời — Vue 3 vẫn hỗ trợ đầy đủ, 2 style dùng chung được trong 1 project",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu hai phần Vue — Options API và Composition API, khác cách tổ chức code, cùng kết quả.",
+      "Nhớ kỹ: Options theo loại (data/methods), Composition theo tính năng (script setup); dự án mới ưu tiên Composition nhưng đừng trộn hai style trong một component.",
+      "Câu tiếp theo trong series Vue: computed, watch và watchEffect khác nhau thế nào.",
+      "Video này cũng có bản Shorts 60 giây — ôn nhanh trước khi vào phòng phỏng vấn, hẹn gặp lại!"
+    ],
+    "visual": {
+      "title": "Câu 2/6 phần Vue hoàn tất — hẹn gặp lại câu 3!",
+      "summary": [
+        {
+          "text": "Options API tổ chức theo LOẠI (data/methods); Composition API tổ chức theo TÍNH NĂNG (script setup)",
+          "sentence": 0
+        },
+        {
+          "text": "Cùng hành vi, khác cách tổ chức — dự án mới ưu tiên Composition, nhưng đừng trộn 2 style trong 1 component",
+          "sentence": 1
+        },
+        {
+          "text": "Phần Vue đã có câu 2/6 — tiếp theo: computed vs watch vs watchEffect",
+          "sentence": 2
+        },
+        {
+          "text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn",
+          "sentence": 3
+        }
+      ],
+      "next": "Câu 3/12 phần Vue: computed vs watch vs watchEffect khác nhau thế nào? 🎤"
+    }
+  }
+]

@@ -1,0 +1,129 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "Options API vs Composition API",
+        "framework": "vue"
+      },
+      "sentences": [
+        {
+          "file": "audio/sv2/s1-0-34822d4d.wav",
+          "startFrame": 0,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/sv2/s1-1-23fedfdf.wav",
+          "startFrame": 155,
+          "durationInFrames": 53
+        }
+      ],
+      "durationInFrames": 226
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "V2ApiStyles.vue",
+        "language": "typescript",
+        "code": "import {ref} from 'vue';\n\nconst count = ref(0);\n\nfunction increment() {\n  count.value++;\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sv2/s2-0-bdfcac73.wav",
+          "startFrame": 0,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/sv2/s2-1-834484b3.wav",
+          "startFrame": 155,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/sv2/s2-2-c80588c8.wav",
+          "startFrame": 300,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 484
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/feqa/v2-vert.png",
+        "caption": "2 counter, 2 kiểu viết — cùng kết quả, khác cách tổ chức!"
+      },
+      "sentences": [
+        {
+          "file": "audio/sv2/s3-0-8c418704.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/sv2/s3-1-33d81173.wav",
+          "startFrame": 172,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 320
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "✅",
+            "text": "Options: tổ chức theo LOẠI; Composition: tổ chức theo TÍNH NĂNG, tái dùng qua composable",
+            "sentence": 0
+          },
+          {
+            "icon": "🧩",
+            "text": "Options không lỗi thời — dự án mới nên ưu tiên Composition (composable + TypeScript)",
+            "sentence": 1
+          }
+        ],
+        "trap": "Đừng trộn 2 style trong 1 component"
+      },
+      "sentences": [
+        {
+          "file": "audio/sv2/s4-0-c03330ba.wav",
+          "startFrame": 0,
+          "durationInFrames": 286
+        },
+        {
+          "file": "audio/sv2/s4-1-7df2745e.wav",
+          "startFrame": 294,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/sv2/s4-2-45c78425.wav",
+          "startFrame": 535,
+          "durationInFrames": 80
+        }
+      ],
+      "durationInFrames": 633
+    }
+  ]
+}
