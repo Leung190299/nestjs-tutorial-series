@@ -1,0 +1,122 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng tới buổi phỏng vấn Frontend đầu tiên của series — hôm nay bắt đầu bằng câu hỏi kinh điển nhất trong React.",
+      "Câu hỏi từ nhà tuyển dụng: Virtual DOM và reconciliation là gì?",
+      "Đây là video đầu tiên trong series Phỏng vấn Frontend — mười hai câu hỏi thật từ vòng phỏng vấn React và Vue, mỗi câu một video demo chạy thật, không chỉ đọc slide.",
+      "Từ câu này, chuẩn mực sẽ lặp lại suốt series: nghe câu hỏi, xem demo code chạy thật, rồi chốt lại cách trả lời như đang ngồi trước nhà tuyển dụng."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #1: Virtual DOM là gì?",
+      "subtitle": "Phỏng vấn Frontend — React & Vue · Câu 1/12",
+      "badge": "Series mới · Câu 1"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Virtual DOM là một bản sao NHẸ của DOM thật, sống hoàn toàn trong bộ nhớ JavaScript — không chạm gì tới trình duyệt.",
+      "Mỗi lần state đổi, React dựng một cây Virtual DOM mới, rồi so sánh — diff — với cây cũ để tìm đúng chỗ khác biệt.",
+      "Reconciliation chính là thuật toán diff đó: nó quyết định node nào giữ nguyên, node nào cần vá, node nào bị xóa hoặc thêm mới.",
+      "Kết quả diff chỉ áp đúng phần THẬT SỰ thay đổi lên DOM thật — gọi là vá tối thiểu, thay vì render lại toàn bộ cây."
+    ],
+    "visual": {
+      "title": "Virtual DOM là gì?",
+      "bullets": [
+        {"icon": "🧠", "text": "Bản sao NHẸ của DOM thật — sống trong bộ nhớ JavaScript", "sentence": 0},
+        {"icon": "🔍", "text": "State đổi → dựng cây mới → diff với cây cũ để tìm khác biệt", "sentence": 1},
+        {"icon": "⚙️", "text": "Reconciliation = thuật toán diff — quyết định giữ, vá, xóa hay thêm node", "sentence": 2},
+        {"icon": "🩹", "text": "Chỉ vá đúng phần thật sự đổi vào DOM thật — không render lại toàn bộ", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là component demo thật — R1VirtualDom.tsx.",
+      "`mountedAt` là một `useRef` — giá trị chỉ được gán ĐÚNG một lần, ngay lần render đầu tiên, nhờ kiểm tra `if (mountedAt.current === null)`.",
+      "Bấm nút re-render bao nhiêu lần, `count` tăng lên, nhưng khối `if` đó không chạy lại lần nào nữa — mốc thời gian bị khóa cứng.",
+      "Ô 'DOM node KHÔNG đổi' hiển thị đúng con số `mountedAt.current` đó, gắn với node `<span ref={staticRef}>`.",
+      "Nếu React thật sự hủy và dựng lại toàn bộ DOM mỗi lần re-render, con số này phải đổi theo mỗi lần click — nhưng nó đứng yên."
+    ],
+    "visual": {
+      "filename": "R1VirtualDom.tsx",
+      "language": "tsx",
+      "code": "import {useRef, useState} from 'react';\n\nexport function R1VirtualDom() {\n  const [count, setCount] = useState(0);\n  const staticRef = useRef<HTMLSpanElement>(null);\n  const mountedAt = useRef<number | null>(null);\n\n  if (mountedAt.current === null) {\n    mountedAt.current = performance.now();\n  }\n\n  return (\n    <div style={{border: '1px solid #ddd', borderRadius: 8, padding: 16}}>\n      <button onClick={() => setCount((c) => c + 1)}>Re-render (count = {count})</button>\n      <div style={{display: 'flex', gap: 16, marginTop: 16, flexWrap: 'wrap'}}>\n        <div style={{border: '1px dashed #aaa', borderRadius: 8, padding: 12, flex: 1}}>\n          <b>Ô tĩnh — DOM node KHÔNG đổi</b>\n          <p>\n            Mounted lúc: <span ref={staticRef}>{mountedAt.current.toFixed(2)}</span> ms\n          </p>\n          <p style={{color: '#666', fontSize: 13}}>\n            Con số này không đổi qua mỗi lần re-render — chứng tỏ React không hủy/tạo lại node,",
+      "steps": [
+        {"from": 1, "to": 22, "sentence": 0},
+        {"from": 5, "to": 10, "sentence": 1},
+        {"from": 8, "to": 10, "sentence": 2},
+        {"from": 16, "to": 19, "sentence": 3},
+        {"from": 21, "to": 22, "sentence": 4},
+        {"from": 1, "to": 22, "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "browser",
+    "narration": [
+      "Đây là app demo thật đang chạy — react-qa, cổng 5197.",
+      "Bên trái: 'Mounted lúc' đứng yên ở một mốc thời gian cố định — bên phải: con số 'count' nhảy theo mỗi lần bấm nút.",
+      "Bấm 'Re-render' hai mươi lần, mốc thời gian bên trái vẫn y nguyên một giá trị — đúng như code vừa xem: DOM node đó không hề bị remount.",
+      "Đây chính là bằng chứng trực quan cho reconciliation: React không đập đi xây lại — nó vá đúng chỗ cần vá."
+    ],
+    "visual": {
+      "title": "Demo thật: DOM node tĩnh không remount",
+      "shots": [
+        {"src": "screens/feqa/r1-main.png", "sentence": 0, "label": "React QA — R1 Virtual DOM", "url": "localhost:5197 — React QA"}
+      ],
+      "bullets": [
+        {"icon": "🟢", "text": "Ô trái — 'Mounted lúc' đứng yên qua mọi lần re-render", "sentence": 1},
+        {"icon": "🔵", "text": "Ô phải — chỉ số 'count' đổi theo mỗi lần bấm nút", "sentence": 1},
+        {"icon": "🔁", "text": "Bấm 20 lần: mốc thời gian không nhích — DOM node không bị hủy/tạo lại", "sentence": 2},
+        {"icon": "✅", "text": "Bằng chứng reconciliation: vá đúng chỗ, không đập lại toàn bộ", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — chốt gọn trong ba câu, học thuộc luôn được.",
+      "Câu một: Virtual DOM là bản sao nhẹ của DOM thật, sống trong bộ nhớ JavaScript.",
+      "Câu hai: Reconciliation là thuật toán diff — so cây cũ với cây mới để tìm đúng phần thay đổi.",
+      "Câu ba: Kết quả diff được vá tối thiểu vào DOM thật — tránh thao tác DOM tốn kém một cách không cần thiết.",
+      "Bẫy nhà tuyển dụng hay gài: đừng nói Virtual DOM lúc nào cũng nhanh hơn DOM thật — dựng và diff cây cũng tốn CPU; nó là CHIẾN LƯỢC để không phải đụng DOM thừa, không phải phép màu tốc độ."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {"icon": "🎤", "text": "Chốt gọn 3 câu — học thuộc luôn được", "sentence": 0},
+        {"icon": "1️⃣", "text": "Virtual DOM: bản sao nhẹ của DOM thật, sống trong bộ nhớ JS", "sentence": 1},
+        {"icon": "2️⃣", "text": "Reconciliation: thuật toán diff so cây cũ với cây mới", "sentence": 2},
+        {"icon": "3️⃣", "text": "Vá tối thiểu vào DOM thật — tránh thao tác DOM tốn kém không cần thiết", "sentence": 3},
+        {"icon": "⚠️", "text": "Bẫy: KHÔNG phải lúc nào cũng nhanh hơn DOM thật — đây là CHIẾN LƯỢC tránh thao tác thừa, không phải phép màu tốc độ", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu 1 trên 12 của series Phỏng vấn Frontend — Virtual DOM và reconciliation, đúng như cách một buổi phỏng vấn React thật sẽ hỏi.",
+      "Câu tiếp theo trong series: useState và useEffect — khi nào dùng cái nào, và vì sao lạm dụng useEffect để tính toán lại là một bẫy khác hay gặp.",
+      "Video này còn có bản Shorts 60 giây — cùng câu hỏi, rút gọn lại để ôn nhanh trước khi vào phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu hỏi số 2!"
+    ],
+    "visual": {
+      "title": "Câu 1/12 hoàn tất — hẹn gặp câu 2!",
+      "summary": [
+        {"text": "Virtual DOM = bản sao nhẹ + diff + vá tối thiểu, không phải 'luôn nhanh hơn'", "sentence": 0},
+        {"text": "Câu sau: useState vs useEffect — bẫy dùng effect để tính toán lại", "sentence": 1},
+        {"text": "Có bản Shorts 60 giây cùng câu hỏi này — ôn nhanh trước phỏng vấn", "sentence": 2}
+      ],
+      "next": "Câu 2/12: useState vs useEffect — khi nào dùng gì? 🎤"
+    }
+  }
+]

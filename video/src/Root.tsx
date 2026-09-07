@@ -47,6 +47,8 @@ import ep41 from './data/ep41.timing.json';
 import ep42 from './data/ep42.timing.json';
 import ep43 from './data/ep43.timing.json';
 import ep44 from './data/ep44.timing.json';
+import ep45 from './data/ep45.timing.json';
+import sr1 from './data/sr1.timing.json';
 import type {EpisodeTiming} from './data/types';
 
 const episodes: {id: string; timing: EpisodeTiming}[] = [
@@ -94,13 +96,16 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode42', timing: ep42 as unknown as EpisodeTiming},
   {id: 'Episode43', timing: ep43 as unknown as EpisodeTiming},
   {id: 'Episode44', timing: ep44 as unknown as EpisodeTiming},
+  {id: 'Episode45', timing: ep45 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
 // Shorts dọc (1080×1920) — kịch bản phỏng vấn FE, id dạng Short<ID> (vd ShortR3),
 // đọc video/src/data/s<id>.timing.json (sinh bởi tts/generate.py, cùng cơ chế totalDuration
 // như episodes). Thêm entry tại đây (kèm import json ở trên) khi có tập mới.
-const shorts: {id: string; timing: EpisodeTiming}[] = [];
+const shorts: {id: string; timing: EpisodeTiming}[] = [
+  {id: 'ShortR1', timing: sr1 as unknown as EpisodeTiming},
+];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
   {
@@ -635,6 +640,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       image: 'screens/ep44/web-stylex-vs-tailwind-thumb.png',
       badgeEmoji: '🥊',
       seriesTag: 'StyleX từ A đến Z 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb45',
+    props: {
+      badge: 'PV FE #1',
+      line1: 'VIRTUAL DOM',
+      line2: 'LÀ GÌ?',
+      subtitle: 'Phỏng vấn Frontend · Câu 1/12',
+      variant: 'shot',
+      image: 'screens/feqa/r1-thumbcrop.png',
+      badgeEmoji: '🎤',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },
 ];
