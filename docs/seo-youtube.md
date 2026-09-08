@@ -2200,3 +2200,542 @@ Bẫy hay gặp: mutate prop trực tiếp trong component con sẽ ra warning v
 | sv4 | v-if vs v-show: khác nhau thế nào? #shorts | v-if unmount thật, mất state con; v-show chỉ toggle CSS display, state giữ nguyên.<br>Bẫy: toggle liên tục dùng v-show cho rẻ; v-show không dùng chung với v-else.<br>Video đầy đủ: https://youtu.be/S8QgWBGQt4w<br>#shorts #vuejs #phongvan |
 | sv5 | Đừng dùng index làm :key trong v-for! #shorts | :key giúp Vue nhận diện đúng phần tử — cùng luật với React.<br>Bẫy: :key=index + thêm/xóa/sắp xếp lại = state đi lạc, y hệt bẫy R3 bên React.<br>Video đầy đủ: https://youtu.be/NWk2UURxG9Q<br>#shorts #vuejs #phongvan |
 | sv6 | Props xuống, Emit lên hoạt động sao? #shorts | Props xuống một chiều, con chỉ đọc; Emit lên để con báo tin, cha quyết định xử lý.<br>Bẫy: đừng mutate prop trực tiếp — cần 2 chiều thì dùng defineModel.<br>Video đầy đủ: https://youtu.be/usOtTYN2KB0<br>#shorts #vuejs #phongvan |
+
+---
+
+## LÔ 2 SERIES PHỎNG VẤN FRONTEND — Hiệu năng React Native & Flutter (câu #13–#24 + 12 Shorts)
+
+> Lô 2 nối tiếp cùng playlist **"Phỏng vấn Frontend 🇻🇳"** — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE (KHÔNG tạo playlist mới — khi đăng chỉ nối 24 video lô 2 vào playlist sẵn có). CHƯA ĐĂNG — mọi link video là placeholder `[LINK-EP57]`..`[LINK-EP68]` (bản ngang) và `[LINK-SHORT-13]`..`[LINK-SHORT-24]` (Shorts), điền link thật khi đăng. Chủ đề lô 2: HIỆU NĂNG khi load nhiều dữ liệu — 6 câu React Native (N1–N6 → ep57–ep62) + 6 câu Flutter (F1–F6 → ep63–ep68), mỗi câu có demo đo SỐ THẬT trên simulator (bản debug — kịch bản luôn nói rõ "trên simulator của tôi"). Code: `demo-perf-interview/` (`rn-perf/` + `flutter_perf/`), đóng băng ở tag `perf-qa-batch-2`. Ba cặp xem chéo RN↔Flutter: câu 13↔19 (lazy list), 17↔23 (ảnh), 18↔24 (thread/isolate).
+
+Từ khóa chủ lực lô 2: `phỏng vấn react native`, `phỏng vấn flutter`, `react native performance`, `flutter performance`, `tối ưu hiệu năng app`, `flatlist`, `listview builder`, `câu hỏi phỏng vấn mobile`, `học react native`, `học flutter`.
+
+---
+
+### Phỏng vấn FE #13 — Vì sao FlatList mượt hơn ScrollView? (2:59)
+
+**Tiêu đề:** Phỏng vấn FE #13: Vì sao FlatList mượt hơn? | React Native interview
+
+**Mô tả:**
+```
+Mở màn lô 2 series Phỏng vấn Frontend — 12 câu hỏi HIỆU NĂNG thật từ vòng phỏng vấn React Native và Flutter. Câu 13: render 5.000 dòng dữ liệu, vì sao ScrollView với map lại đơ, còn FlatList thì không?
+
+ScrollView + items.map render TOÀN BỘ 5.000 component ngay lần dựng đầu tiên — JS thread chạy 5.000 lần render, native giữ 5.000 view trong bộ nhớ. FlatList xây trên VirtualizedList và dùng virtualization: chỉ giữ một render window hữu hạn, item ngoài cửa sổ bị unmount thật và thay bằng khoảng trắng đúng kích thước — chi phí theo kích thước cửa sổ, không theo độ dài danh sách.
+
+Demo thật bằng n1.tsx, đếm render bằng biến renderCount trên simulator của tôi: ScrollView dựng đủ 5.000/5.000 item mất 1.381ms — khựng gần một giây rưỡi; FlatList chỉ render 10/5.000 item (đúng initialNumToRender mặc định), dựng 198ms — nhanh hơn khoảng 7 lần. Bẫy hay gài: FlatList không phải phép màu — render ngoài màn là bất đồng bộ, cuộn quá nhanh sẽ thấy khoảng trắng; virtualization là CHIẾN LƯỢC đánh đổi.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu lô hiệu năng & câu 13
+0:23 Cơ chế: virtualization là gì?
+1:00 Code: n1.tsx — ScrollView+map vs FlatList
+1:27 Demo thật: 5000 item 1381ms vs 10 item 198ms
+1:57 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:36 Tổng kết câu 13 & hẹn câu 14
+
+📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
+⏭️ Câu tiếp theo: [LINK-EP58]
+📱 Bản Shorts 60 giây: [LINK-SHORT-13]
+🔁 Bẫy y hệt bên Flutter: câu 19 (Column vs ListView.builder) — [LINK-EP63]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#reactnative #phongvan #frontend #hieunang #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🐢 Mở màn lô 2 — 12 câu hỏi HIỆU NĂNG từ phỏng vấn React Native & Flutter, câu nào cũng đo số thật trên simulator. Đố nhỏ câu 13: FlatList có phải LÚC NÀO cũng thắng ScrollView không? KHÔNG — cuộn quá nhanh vẫn thấy khoảng trắng, vì render ngoài màn là bất đồng bộ. Virtualization là chiến lược đánh đổi, không phải phép màu. Comment câu hỏi hiệu năng khó nhất bạn từng gặp khi phỏng vấn nhé!
+```
+
+**Thumbnail:** badge "PV FE #13" · dòng lớn "5000 ITEM" / "ĐƠ 1,4 GIÂY" · phụ đề "Phỏng vấn Frontend · Câu 13/24" · badge emoji 🐢 · variant shot, ảnh dọc `screens/perfqa/n1-scrollview.png` (header đỏ 5000/5000 item · 1381ms).
+
+**Tags:** `flatlist, scrollview, react native flatlist, virtualization react native, react native performance, phỏng vấn react native, phỏng vấn frontend, tối ưu flatlist, react native list dài, initialnumtorender, react native tiếng việt, học react native, câu hỏi phỏng vấn react native, mobile performance, react native interview questions`
+
+---
+
+### Phỏng vấn FE #14 — Tối ưu FlatList: getItemLayout & windowSize (2:59)
+
+**Tiêu đề:** Phỏng vấn FE #14: Tối ưu FlatList thế nào? | React Native interview
+
+**Mô tả:**
+```
+Câu 14 lô hiệu năng: FlatList đã dùng rồi mà danh sách vẫn giật khi cuộn và không nhảy được tới cuối — tối ưu thế nào? Video có một cú scrollToIndex thất bại thật trên simulator, và một prop tên getItemLayout biến nó thành cú nhảy 49ms.
+
+Khi không biết trước kích thước item, FlatList phải render rồi ĐO chiều cao từng cái bất đồng bộ — muốn nhảy tới item 4999 là nó chịu, docs viết thẳng "Cannot scroll to locations outside the render window" nếu thiếu getItemLayout. getItemLayout đưa trước công thức length và offset cho từng index — FlatList bỏ hẳn bước đo, vị trí mọi item tính bằng số học. windowSize mặc định 21 màn (10 trên, 10 dưới, cộng màn hiện tại) — chỉnh nó là chỉnh trade-off bộ nhớ với khoảng trắng.
+
+Demo thật bằng n2.tsx: chế độ OFF bấm Nhảy tới item 4999 — list đứng yên, banner đỏ scrollToIndex FAIL vì mới đo được tới item #118; bật getItemLayout ON — nhảy tức thì 49ms, Bản ghi #4999 hiện trọn. Hai bẫy hay gài: getItemLayout chỉ dùng khi item CAO CỐ ĐỊNH (khai láo là cuộn sai vị trí), và removeClippedSubviews không tiết kiệm RAM như lời đồn — view chỉ bị detach chứ không deallocate.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 14 — FlatList vẫn giật
+0:19 Cơ chế: đo async vs công thức getItemLayout
+0:51 Code: n2.tsx — getItemLayout, windowSize
+1:23 Demo thật: scrollToIndex FAIL vs nhảy 49ms
+1:54 Trả lời như đi phỏng vấn: chốt 3 câu + 2 bẫy
+2:38 Tổng kết câu 14 & hẹn câu 15
+
+📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP57]
+⏭️ Câu tiếp theo: [LINK-EP59]
+📱 Bản Shorts 60 giây: [LINK-SHORT-14]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#reactnative #phongvan #frontend #hieunang #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🧮 Đố nhỏ câu 14: vì sao scrollToIndex tới item 4999 lại FAIL dù danh sách có đủ 5.000 item? Vì FlatList phải ĐO chiều cao từng item bất đồng bộ — mới đo tới #118 thì lấy gì nhảy tới 4999. getItemLayout đưa trước công thức là nhảy bằng số học, 49ms. Nhưng nhớ: chỉ dùng khi item cao CỐ ĐỊNH — khai láo là cuộn sai vị trí ngay. Bạn từng dính cú scrollToIndex fail nào chưa?
+```
+
+**Thumbnail:** badge "PV FE #14" · dòng lớn "SCROLLTOINDEX" / "FAIL VÌ ĐÂU?" · phụ đề "Phỏng vấn Frontend · Câu 14/24" · badge emoji 🧮 · variant shot, ảnh dọc `screens/perfqa/n2-fail.png` (banner đỏ scrollToIndex FAIL).
+
+**Tags:** `getitemlayout, scrolltoindex, flatlist optimization, windowsize flatlist, keyextractor, react native performance, phỏng vấn react native, phỏng vấn frontend, tối ưu flatlist, removeclippedsubviews, react native tiếng việt, học react native, câu hỏi phỏng vấn react native, react native interview questions, mobile performance`
+
+---
+
+### Phỏng vấn FE #15 — React.memo cho renderItem: chặn render thừa (2:49)
+
+**Tiêu đề:** Phỏng vấn FE #15: React.memo cho renderItem | React Native interview
+
+**Mô tả:**
+```
+Câu 15 lô hiệu năng: danh sách có MỘT item đổi mà cả nghìn item khác render lại — vì sao, và chặn thế nào? Bằng chứng thật trên simulator: cùng ba lần bấm, một bên MỌI hàng render 4 lần, một bên chỉ đúng hàng số 0.
+
+Khi state đổi, component cha render lại — và mọi Row con là function component thường thì render lại theo, React mặc định không so sánh props. React.memo bọc Row để so shallow từng prop — item giữ nguyên tham chiếu thì skip. Nhưng memo có hai điều kiện sống còn: update phải IMMUTABLE (object không đổi giữ nguyên tham chiếu), và renderItem phải ổn định qua useCallback — hàm mới toanh mỗi render là memo thành vô dụng.
+
+Demo thật bằng n3.tsx, mỗi Row tự đếm số lần render bằng useRef: memo OFF, bấm Đổi item số 0 ba lần — MỌI hàng render 4 lần, kể cả 29 bản ghi không đổi một byte; memo ON — chỉ hàng số 0 render 4 lần (1 mount + 3 bấm), mọi hàng khác đứng nguyên 1 lần. Hai bẫy: memo không miễn phí (list nhỏ ít khi cần bọc), và memo VÔ DỤNG nếu quên useCallback hay lỡ mutate mảng tại chỗ.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 15 — render không ai cần
+0:18 Cơ chế: vì sao cả list render lại
+0:48 Code: n3.tsx — memo + useCallback + immutable
+1:19 Demo thật: cả list 4 lần vs chỉ hàng 0
+1:46 Trả lời như đi phỏng vấn: chốt 3 câu + 2 bẫy
+2:28 Tổng kết câu 15 & hẹn câu 16
+
+📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP58]
+⏭️ Câu tiếp theo: [LINK-EP60]
+📱 Bản Shorts 60 giây: [LINK-SHORT-15]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#reactnative #phongvan #frontend #hieunang #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🛡️ Đố nhỏ câu 15: bọc React.memo rồi mà list vẫn render lại cả nghìn item — thiếu gì? Hai điều kiện sống còn: update phải IMMUTABLE để object không đổi giữ nguyên tham chiếu, và renderItem phải bọc useCallback — hàm ẩn danh mới mỗi render là memo vô dụng ngay. Trên demo: 4 lần × cả list so với 4 lần × đúng 1 hàng. Bạn đã từng memo mà quên useCallback chưa? Comment chia sẻ nhé!
+```
+
+**Thumbnail:** badge "PV FE #15" · dòng lớn "1 ITEM ĐỔI" / "CẢ LIST 4×?" · phụ đề "Phỏng vấn Frontend · Câu 15/24" · badge emoji 🛡️ · variant shot, ảnh dọc `screens/perfqa/n3-memo.png` (badge đếm render từng hàng).
+
+**Tags:** `react.memo, usecallback, renderitem flatlist, react native rerender, immutable update, react native performance, phỏng vấn react native, phỏng vấn frontend, memo react native, shallow compare props, react native tiếng việt, học react native, câu hỏi phỏng vấn react native, react native interview questions, tối ưu render`
+
+---
+
+### Phỏng vấn FE #16 — Infinite scroll: vì sao onEndReached gọi trùng? (2:58)
+
+**Tiêu đề:** Phỏng vấn FE #16: Infinite scroll — vì sao onEndReached gọi trùng? | React Native interview
+
+**Mô tả:**
+```
+Câu 16 lô hiệu năng: làm infinite scroll với onEndReached, API bị gọi trùng liên tục — vì sao và chặn thế nào? Bằng chứng thật trên simulator: cùng một kiểu kéo, một bên gọi loadMore 6 lần cho 3 trang dữ liệu, một bên đúng 1 lần mỗi nhịp.
+
+onEndReached bắn khi cuộn VÀO ngưỡng onEndReachedThreshold — tính theo chiều dài NHÌN THẤY của list, không phải pixel. Vấn đề nằm ở 800ms chờ API: content chưa dài ra, logical end vẫn ở đó — kéo RA khỏi ngưỡng rồi kéo xuống lại là bắn LẦN NỮA, xin đúng trang đang tải. Framework KHÔNG tự bắn liên tục khi đứng yên — đây là race giữa gesture người dùng và cửa sổ loading.
+
+Demo thật bằng n4.tsx: Guard OFF, kéo giật ra vào trong lúc loading qua 3 đợt đáy — Trang 4, 100 item nhưng loadMore bị gọi 6 lần; Guard ON — Trang 2, 50 item, gọi đúng 1 lần: if loadingRef.current return chặn sạch, cờ đặt TRƯỚC khi fetch. Bẫy đắt nhất: guard bằng STATE thường là hở — setState bất đồng bộ, closure cũ vẫn đọc false và lọt request; phải đọc ref. Và nhớ dedupe theo id khi append cho phòng tuyến thứ hai.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 16 — API bắn trùng khi cuộn
+0:19 Cơ chế: onEndReached bắn khi nào
+0:53 Code: n4.tsx — guard bằng loadingRef
+1:22 Demo thật: 6 lần vs 1 lần mỗi nhịp load
+1:55 Trả lời như đi phỏng vấn: chốt 3 câu + 2 bẫy
+2:39 Tổng kết câu 16 & hẹn câu 17
+
+📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP59]
+⏭️ Câu tiếp theo: [LINK-EP61]
+📱 Bản Shorts 60 giây: [LINK-SHORT-16]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#reactnative #phongvan #frontend #hieunang #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🔁 Đố nhỏ câu 16: guard loadMore bằng useState có chặn được gọi trùng không? KHÔNG chắc — setState cập nhật bất đồng bộ, closure cũ vẫn đọc false và request vẫn lọt. Phải guard bằng REF: giá trị tức thời, đặt cờ TRƯỚC khi fetch, hạ cờ khi response về — 6 lần về đúng 1 lần trên demo. Bạn từng dính API bắn trùng vì infinite scroll chưa? Kể nghe với!
+```
+
+**Thumbnail:** badge "PV FE #16" · dòng lớn "LOADMORE ×6" / "CHO 3 TRANG?" · phụ đề "Phỏng vấn Frontend · Câu 16/24" · badge emoji 🔁 · variant shot, ảnh dọc `screens/perfqa/n4-bug.png` (header vàng Trang 4 · gọi 6 lần).
+
+**Tags:** `onendreached, infinite scroll react native, flatlist load more, onendreachedthreshold, useref guard, react native performance, phỏng vấn react native, phỏng vấn frontend, pagination react native, api gọi trùng, react native tiếng việt, học react native, câu hỏi phỏng vấn react native, react native interview questions, race condition`
+
+---
+
+### Phỏng vấn FE #17 — Ảnh trong list dài: expo-image và cache 2 tầng (2:45)
+
+**Tiêu đề:** Phỏng vấn FE #17: Ảnh trong list dài — expo-image và cache | React Native interview
+
+**Mô tả:**
+```
+Câu 17 lô hiệu năng: list có hàng trăm ảnh — tối ưu ảnh thế nào để cuộn mượt và không tốn RAM? Bằng chứng là chuỗi ba con số của expo-image trên simulator: 1360ms lần đầu, 153ms khi cache ấm, 368ms sau khi kill app.
+
+Ảnh 2000px hiển thị trong ô 64px vẫn phải decode FULL-SIZE — mỗi bitmap 2000×2000 cỡ 16MB RAM. Hai việc cốt lõi: decode ĐÚNG KÍCH THƯỚC hiển thị (expo-image bật sẵn allowDownscaling theo container), và CACHE hai tầng memory + disk để không decode lại — expo-image chạy trên SDWebImage và Glide, demo dùng cachePolicy memory-disk kèm recyclingKey cho list recycle view.
+
+Demo thật bằng n5.tsx, 120 hàng dùng 12 tấm PNG 2000px: RN Image thường cold lần nào cũng cỡ 215–297ms — không nhớ gì giữa các lần mở app; expo-image lần bấm ĐẦU chậm nhất 1360ms vì phải downscale và GHI cache, từ đó chỉ còn 153–177ms (nhanh hơn khoảng 8 lần), kill app mở lại vẫn chỉ 368ms nhờ disk cache. Điểm ăn điểm khi trả lời: lần đầu CHẬM HƠN là chi phí điền cache — trả một lần, lãi mọi lần sau; demo là ảnh LOCAL nên chênh màn đầu nhỏ, ảnh MẠNG cache mới thật sự toả sáng.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 17 — ảnh trong list dài
+0:18 Cơ chế: decode đúng cỡ + cache 2 tầng
+0:52 Code: n5.tsx — RN Image vs expo-image
+1:18 Demo thật: 1360 điền cache → 153 warm → 368 sau kill
+1:50 Trả lời như đi phỏng vấn: chốt 3 câu + điểm cộng
+2:26 Tổng kết câu 17 & hẹn câu 18
+
+📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP60]
+⏭️ Câu tiếp theo: [LINK-EP62]
+📱 Bản Shorts 60 giây: [LINK-SHORT-17]
+🔁 Bài y hệt bên Flutter: câu 23 (cacheWidth) — [LINK-EP67]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#reactnative #phongvan #frontend #hieunang #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🖼️ Đố nhỏ câu 17: vì sao expo-image lần bấm ĐẦU TIÊN lại CHẬM HƠN RN Image thường (1360ms so với ~300ms)? Vì nó phải downscale và GHI cache — chi phí trả một lần, lãi mọi lần sau: warm còn 153ms, kill app vẫn 368ms nhờ disk cache. Còn RN Image lần nào cũng như lần đầu. Bẫy y hệt bên Flutter với cacheWidth — xem câu 23 của series nhé!
+```
+
+**Thumbnail:** badge "PV FE #17" · dòng lớn "ẢNH 2000PX" / "TRONG Ô 64?" · phụ đề "Phỏng vấn Frontend · Câu 17/24" · badge emoji 🖼️ · variant shot, ảnh dọc `screens/perfqa/n5-expo.png` (list ảnh expo-image kèm số ms).
+
+**Tags:** `expo-image, react native image cache, allowdownscaling, cachepolicy memory-disk, recyclingkey, sdwebimage glide, react native performance, phỏng vấn react native, phỏng vấn frontend, tối ưu ảnh react native, react native tiếng việt, học react native, câu hỏi phỏng vấn react native, react native interview questions, image optimization`
+
+---
+
+### Phỏng vấn FE #18 — Data lớn chặn JS thread: đo gap và chia lô (2:46)
+
+**Tiêu đề:** Phỏng vấn FE #18: Data lớn chặn JS thread — đo và né thế nào? | React Native interview
+
+**Mô tả:**
+```
+Câu 18 — chốt khối React Native của lô hiệu năng: app nhận về 300.000 bản ghi JSON, parse xong thì UI đứng hình. Vì sao, và xử thế nào? Bằng chứng là hai con số trên cùng một đồng hồ: một cục hụt 564ms, chia lô chỉ còn 127ms.
+
+JavaScript trong React Native chạy trên MỘT thread duy nhất — setState, timer, xử lý chạm đều xếp hàng trên đó; một khối đồng bộ dài chiếm event loop là mọi cập nhật UI phải chờ. Cách đo rẻ nhất: setInterval 100ms cập nhật đồng hồ, mỗi tick tính gap so với tick trước — gap phình to là thread vừa bị chiếm. Cách né trong thuần JS: chia việc thành từng lô 5.000, giữa các lô setTimeout 0 nhường event loop cho UI thở.
+
+Demo thật bằng n6.tsx: parse 300k một cục — tick hụt 564ms (mất chừng 5 tick đồng hồ), tổng 513ms; chia lô — tick chỉ hụt 127ms, đồng hồ nhảy đều, nhưng tổng lên 985ms. Bẫy đắt nhất của tập: chia lô KHÔNG mua tốc độ — tổng chậm hơn 2–3 lần; nó mua SỰ PHẢN HỒI, app vẫn sống trong lúc làm việc nặng. Checksum hai nhánh giống hệt 12050890 — cùng khối lượng, chỉ khác cách trải ra. RN thuần JS không có isolate tích hợp — bên Flutter có Isolate.run là parallelism thật, xem câu 24.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 18 — JS thread và data lớn
+0:19 Cơ chế: một thread — đo gap, chia lô
+0:47 Code: n6.tsx — runBlocked vs runChunked
+1:14 Demo thật: hụt 564ms vs 127ms
+1:50 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy đắt nhất
+2:27 Tổng kết câu 18 & hẹn khối Flutter
+
+📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP61]
+⏭️ Câu tiếp theo: [LINK-EP63]
+📱 Bản Shorts 60 giây: [LINK-SHORT-18]
+🔁 Cùng bài bên Flutter: câu 24 (Isolate.run) — [LINK-EP68]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#reactnative #phongvan #frontend #hieunang #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🧵 Bẫy đắt nhất câu 18: chia lô setTimeout 0 có làm parse NHANH HƠN không? KHÔNG — tổng còn chậm hơn 2–3 lần (985ms so với 513ms trên demo). Cái nó mua là SỰ PHẢN HỒI: maxGap từ 564ms xuống 127ms, app vẫn sống trong lúc làm việc nặng. RN thuần JS không có isolate — bên Flutter có Isolate.run là parallelism thật, xem câu 24 chốt sổ series nhé!
+```
+
+**Thumbnail:** badge "PV FE #18" · dòng lớn "PARSE 300K" / "ĐƠ 564MS?" · phụ đề "Phỏng vấn Frontend · Câu 18/24" · badge emoji 🧵 · variant shot, ảnh dọc `screens/perfqa/n6-blocked.png` (box đỏ tick hụt 564ms).
+
+**Tags:** `js thread react native, event loop, settimeout chia lô, parse json lớn, ui đứng hình, react native performance, phỏng vấn react native, phỏng vấn frontend, single thread javascript, đo jank react native, react native tiếng việt, học react native, câu hỏi phỏng vấn react native, react native interview questions, blocking main thread`
+
+---
+
+### Phỏng vấn FE #19 — ListView.builder vs Column: lazy building (2:59)
+
+**Tiêu đề:** Phỏng vấn FE #19: ListView.builder vs Column | Flutter interview
+
+**Mô tả:**
+```
+Sang nửa Flutter của lô hiệu năng — câu 19: hiển thị 5.000 dòng trong Flutter, vì sao Column trong SingleChildScrollView đơ cả giây, còn ListView.builder thì không? Anh em song sinh với câu ScrollView vs FlatList bên React Native.
+
+Column nhận một List con CỤ THỂ — Flutter phải build cả 5.000 widget ngay khung hình đầu tiên, dù màn hình chỉ hiện khoảng mười lăm cái; docs khuyên thẳng "Avoid using constructors with a concrete List of children". ListView.builder thì lazy — "creates items as they're scrolled onto the screen": chỉ build phần trong viewport cộng vùng đệm cacheExtent.
+
+Demo thật bằng f1_lazy_list.dart trên simulator (bản debug), đếm build bằng BuildCounter: Column build đủ 5.000/5.000, first frame 7.895ms — gần 8 giây đứng hình (số ms dao động vì debug/JIT, cái bất biến là đủ 5.000 lần build); ListView.builder chỉ build 17/5.000 item, first frame 199ms — 17 là khoảng 12 item vừa khít màn cộng cacheExtent, ổn định tuyệt đối qua mọi lần đo. Bẫy hay gài: shrinkWrap true hay lồng ListView trong Column hở chiều cao — viewport mất giới hạn, builder bị ép build HẾT.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 19 — sang nửa Flutter
+0:20 Cơ chế: lazy building của ListView.builder
+0:56 Code: f1_lazy_list.dart — Column vs builder
+1:26 Demo thật: 5000 build 7895ms vs 17 build 199ms
+1:59 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy shrinkWrap
+2:36 Tổng kết câu 19 & hẹn câu 20
+
+📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP62]
+⏭️ Câu tiếp theo: [LINK-EP64]
+📱 Bản Shorts 60 giây: [LINK-SHORT-19]
+🔁 Bẫy y hệt bên React Native: câu 13 (ScrollView vs FlatList) — [LINK-EP57]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#flutter #phongvan #frontend #hieunang #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🧱 Đố nhỏ câu 19: con số 17 trong demo là gì? ListView.builder chỉ build 17/5.000 item — khoảng 12 item vừa khít màn hình cộng vùng đệm cacheExtent — và 17 ổn định tuyệt đối qua mọi lần đo, trong khi Column build đủ 5.000. Nhưng đừng cực đoan: Column vẫn ĐÚNG cho nhóm widget ít, khác loại. Bẫy y hệt bên React Native ở câu 13 — bạn xem cả cặp chưa?
+```
+
+**Thumbnail:** badge "PV FE #19" · dòng lớn "COLUMN 5000" / "ĐƠ 8 GIÂY?" · phụ đề "Phỏng vấn Frontend · Câu 19/24" · badge emoji 🧱 · variant shot, ảnh dọc `screens/perfqa/f1-column.png` (header đỏ 5000/5000 build · first frame 7895ms).
+
+**Tags:** `listview.builder, column singlechildscrollview, flutter lazy list, cacheextent, flutter performance, phỏng vấn flutter, phỏng vấn frontend, flutter list dài, shrinkwrap flutter, first frame flutter, flutter tiếng việt, học flutter, câu hỏi phỏng vấn flutter, flutter interview questions, mobile performance`
+
+---
+
+### Phỏng vấn FE #20 — itemExtent: báo trước chiều cao cho ListView (2:58)
+
+**Tiêu đề:** Phỏng vấn FE #20: itemExtent — báo trước chiều cao cho ListView | Flutter interview
+
+**Mô tả:**
+```
+Câu 20 lô hiệu năng: ListView của bạn biết trước chiều cao từng hàng — tận dụng thế nào để cuộn và nhảy vị trí nhanh hơn? Từ khóa: itemExtent và const.
+
+Không có itemExtent, muốn tới một offset xa, sliver phải build và đo TUẦN TỰ các item dọc đường để cộng dồn chiều cao. Khai itemExtent (hoặc prototypeItem) là đưa trước extent — docs viết "scrolling machinery can make use of the foreknowledge" để save work khi cuộn nhảy xa: vị trí item chỉ còn là số học, index = offset chia 64. Kèm const constructor cho phần khung tĩnh — docs nói const cho phép Flutter "short-circuit most of the rebuild work".
+
+Demo thật bằng f2_item_extent.dart trên simulator (bản debug), khác biệt DUY NHẤT giữa hai chế độ là itemExtent 64 hay null: OFF bấm Nhảy cuối — build thêm 4.987 item dọc đường, mất 1.622ms (warm còn 1.284); ON — build thêm đúng 12 item, 34ms — cách biệt hơn bốn trăm lần số build. Hai bẫy: itemExtent CHỈ dành cho hàng cao đều — khai láo là cuộn sai; và itemExtent với prototypeItem CẤM khai cùng lúc.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 20 — đào sâu ListView
+0:16 Cơ chế: báo trước extent + const
+0:48 Code: f2_item_extent.dart — khác đúng 1 dòng
+1:21 Demo thật: 4987 build vs 12 build khi jumpTo
+2:01 Trả lời như đi phỏng vấn: chốt 3 câu + 2 bẫy
+2:39 Tổng kết câu 20 & hẹn câu 21
+
+📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP63]
+⏭️ Câu tiếp theo: [LINK-EP65]
+📱 Bản Shorts 60 giây: [LINK-SHORT-20]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#flutter #phongvan #frontend #hieunang #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+📏 Đố nhỏ câu 20: vì sao thiếu itemExtent thì jumpTo xuống đáy 5.000 hàng phải build thêm 4.987 item? Vì sliver phải build và ĐO từng item dọc đường chỉ để cộng dồn chiều cao — biết đủ extent mới biết offset rơi vào item nào. Khai itemExtent 64 là vị trí thành số học: build thêm đúng 12 item, 34ms. Nhớ bẫy: hàng cao KHÔNG đều mà khai láo là cuộn sai vị trí ngay!
+```
+
+**Thumbnail:** badge "PV FE #20" · dòng lớn "NHẢY CUỐI" / "BUILD 4987?" · phụ đề "Phỏng vấn Frontend · Câu 20/24" · badge emoji 📏 · variant shot, ảnh dọc `screens/perfqa/f2-off.png` (banner đỏ build thêm 4987 · 1622ms).
+
+**Tags:** `itemextent, prototypeitem, listview jumpto, const constructor flutter, sliver flutter, flutter performance, phỏng vấn flutter, phỏng vấn frontend, maxscrollextent, tối ưu listview, flutter tiếng việt, học flutter, câu hỏi phỏng vấn flutter, flutter interview questions, scroll performance`
+
+---
+
+### Phỏng vấn FE #21 — setState rebuild cả trang: thu hẹp phạm vi (2:53)
+
+**Tiêu đề:** Phỏng vấn FE #21: setState rebuild cả trang — cách thu hẹp phạm vi | Flutter interview
+
+**Mô tả:**
+```
+Câu 21 lô hiệu năng — chuyện kinh điển nhất của setState trong Flutter: bấm một nút counter mà cả danh sách 40 item build lại. Vì sao, và thu hẹp phạm vi rebuild thế nào?
+
+Docs Flutter nói thẳng: "When setState is called on a State object, all descendent widgets rebuild" — build() của State đó chạy lại, toàn bộ widget con cháu dựng lại theo. Thuốc chữa chính chủ cũng nằm trong docs: "localize the setState call" — đẩy state xuống widget NHỎ NHẤT thực sự cần nó. Đây là bài đối xứng với React.memo ở câu 15 nhưng chiều ngược: React chặn render từ NGOÀI bằng memo từng con, Flutter thu hẹp từ GỐC bằng tách widget.
+
+Demo thật bằng f3_rebuild_scope.dart trên simulator, mỗi item đeo badge số lần build của chính nó: setState cả trang, bấm +1 ba lần — MỌI item nhìn thấy build 4 lần (1 mount + 3 setState của page) dù 40 dòng dữ liệu không đổi; tách _CounterBox thành StatefulWidget riêng giữ _count — cùng ba lần bấm, mọi item build đúng 1 lần vì build() của page không chạy lại. Hai bẫy: tách bằng helper function _buildItem KHÔNG tạo ranh giới rebuild — phải là class widget riêng; và đừng vác Provider/Riverpod ra chỉ để né một setState.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 21 — setState kinh điển
+0:17 Cơ chế: phạm vi rebuild của setState
+0:49 Code: f3_rebuild_scope.dart — tách _CounterBox
+1:24 Demo thật: mọi item 4 lần vs 1 lần
+1:58 Trả lời như đi phỏng vấn: chốt 3 câu + 2 bẫy
+2:33 Tổng kết câu 21 & hẹn câu 22
+
+📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP64]
+⏭️ Câu tiếp theo: [LINK-EP66]
+📱 Bản Shorts 60 giây: [LINK-SHORT-21]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#flutter #phongvan #frontend #hieunang #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🌳 Đố nhỏ câu 21: tách UI ra helper function _buildItem() có thu hẹp được phạm vi rebuild không? KHÔNG — helper function không tạo ranh giới rebuild, phải là CLASS widget riêng với setState sống bên trong nó. Trên demo: tách _CounterBox đưa mọi item từ build 4 lần về đúng 1 lần. setState không sai — chỉ hay bị đặt sai tầng của cây widget. Bạn hay tách widget hay tách helper?
+```
+
+**Thumbnail:** badge "PV FE #21" · dòng lớn "BẤM +1" / "CẢ LIST 4×?" · phụ đề "Phỏng vấn Frontend · Câu 21/24" · badge emoji 🌳 · variant shot, ảnh dọc `screens/perfqa/f3-page.png` (badge đỏ build 4 lần trên từng item).
+
+**Tags:** `setstate flutter, rebuild scope, localize setstate, statefulwidget tách widget, flutter rebuild, flutter performance, phỏng vấn flutter, phỏng vấn frontend, const widget flutter, widget tree, flutter tiếng việt, học flutter, câu hỏi phỏng vấn flutter, flutter interview questions, tối ưu rebuild`
+
+---
+
+### Phỏng vấn FE #22 — Infinite scroll Flutter: guard cho ScrollController (2:55)
+
+**Tiêu đề:** Phỏng vấn FE #22: Infinite scroll Flutter — guard cho ScrollController | Flutter interview
+
+**Mô tả:**
+```
+Câu 22 lô hiệu năng — infinite scroll phía Flutter: dùng ScrollController mà API bị dội 45 LẦN trong một cú kéo. Vì sao, và chặn thế nào?
+
+Khác biệt căn bản so với onEndReached bên React Native (câu 16): listener của ScrollController là callback MỨC PIXEL — chạy MỖI scroll event, gần như mỗi khung hình khi list đang cuộn hay bounce. Điều kiện pixels > maxScrollExtent − 200 đúng LIÊN TỤC suốt vùng đáy — trang mới chưa về, content chưa dài ra, nên trong 800ms chờ fetch, mỗi scroll event lọt qua là thêm một lần gọi loadMore. Cùng bài đo, RN dội 6 lần — Flutter nghe thẳng pixel nên dội tới 45 lần.
+
+Demo thật bằng f4_infinite_scroll.dart trên simulator: Guard OFF, một cú fling tới đáy rồi kéo tiếp trong lúc loading — Trang 3, 75 item mà loadMore bị gọi 45 lần, tức khoảng 22 lần xin cùng một trang mỗi cửa sổ loading; Guard ON — gọi đúng 1 lần. Điểm sống còn: cờ _loading phải set NGAY TRƯỚC await fetchPage — set sau await là cửa sổ race vẫn mở nguyên suốt thời gian chờ mạng. Bẫy cộng thêm: dedupe theo id khi append là phòng tuyến thứ hai, và đừng quên removeListener + dispose cho controller.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 22 — infinite scroll Flutter
+0:16 Cơ chế: listener bắn theo pixel mỗi scroll event
+0:48 Code: f4_infinite_scroll.dart — cờ set trước await
+1:26 Demo thật: 45 lần vs 1 lần
+1:58 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy dedupe
+2:35 Tổng kết câu 22 & hẹn câu 23
+
+📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP65]
+⏭️ Câu tiếp theo: [LINK-EP67]
+📱 Bản Shorts 60 giây: [LINK-SHORT-22]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#flutter #phongvan #frontend #hieunang #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🔁 Đố nhỏ câu 22: cùng bài đo infinite scroll, vì sao RN chỉ dội 6 lần mà Flutter dội tới 45 lần? Vì onEndReached bắn theo SỰ KIỆN chạm ngưỡng, còn listener của ScrollController nghe thẳng PIXEL — chạy mỗi scroll event, điều kiện vùng đáy đúng liên tục trong lúc chờ fetch. Chốt chặn: if _loading return, và cờ phải set TRƯỚC await — set sau là race vẫn mở nguyên. Bạn đặt cờ chỗ nào?
+```
+
+**Thumbnail:** badge "PV FE #22" · dòng lớn "KÉO 1 CÚ" / "GỌI 45 LẦN?" · phụ đề "Phỏng vấn Frontend · Câu 22/24" · badge emoji 🔁 · variant shot, ảnh dọc `screens/perfqa/f4-bug.png` (header vàng Trang 3 · gọi 45 lần).
+
+**Tags:** `scrollcontroller flutter, infinite scroll flutter, loadmore flutter, maxscrollextent, guard loading flag, flutter performance, phỏng vấn flutter, phỏng vấn frontend, pagination flutter, race condition flutter, flutter tiếng việt, học flutter, câu hỏi phỏng vấn flutter, flutter interview questions, scroll listener`
+
+---
+
+### Phỏng vấn FE #23 — cacheWidth: decode ảnh đúng kích thước hiển thị (2:56)
+
+**Tiêu đề:** Phỏng vấn FE #23: cacheWidth — decode ảnh đúng kích thước hiển thị | Flutter interview
+
+**Mô tả:**
+```
+Câu 23 lô hiệu năng: grid trăm ảnh của bạn ngốn gần 200MB RAM — vì sao, và MỘT dòng code nào cứu được? Demo đo RAM bằng chính imageCache của engine.
+
+Chìa khóa: RAM của ảnh ăn theo kích thước DECODE, không phải kích thước file hay ô hiển thị — bitmap = width × height × 4 byte, nên ảnh 2000px chiếm 15.26MB dù ô grid chỉ rộng 190 điểm. cacheWidth là lời dặn cho engine — docs Flutter viết "decode and store the image at the specified size" — tách cỡ decode khỏi cỡ render; docs tính cho ảnh 4K: hơn 30MB RAM, khai cacheWidth 384 còn khoảng 330KB.
+
+Demo thật bằng f5_images.dart, GridView 2 cột 120 ô đọc số từ imageCache.currentSizeBytes: chế độ gốc decode full 2000px — 152.6MB ngay màn đầu, cuộn đủ 12 nguồn lên 183.1MB, VƯỢT trần imageCache mặc định 100MiB; bật cacheWidth 380 — còn 5.5MB màn đầu, 6.6MB đủ 12 nguồn — giảm 27.7 lần, đúng bình phương 2000/380, mắt thường nhìn không phân biệt nổi. Hai điểm ăn điểm: cacheWidth tính theo pixel VẬT LÝ (ô 190 điểm trên màn 2x là 380 — nhớ nhân devicePixelRatio kẻo ảnh mờ), và ảnh vẫn nằm trong imageCache sau khi rời màn — đó là feature chứ không phải leak.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 23 — grid trăm ảnh ngốn RAM
+0:15 Cơ chế: RAM ăn theo kích thước decode
+0:50 Code: f5_images.dart — một tham số cacheWidth
+1:23 Demo thật: 152.6MB vs 5.5MB imageCache
+1:59 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy pixel vật lý
+2:37 Tổng kết câu 23 & hẹn câu chốt sổ
+
+📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP66]
+⏭️ Câu tiếp theo: [LINK-EP68]
+📱 Bản Shorts 60 giây: [LINK-SHORT-23]
+🔁 Bài y hệt bên React Native: câu 17 (expo-image) — [LINK-EP61]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#flutter #phongvan #frontend #hieunang #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+💾 Đố nhỏ câu 23: ô grid rộng 190 điểm — khai cacheWidth bao nhiêu? 380, không phải 190! cacheWidth tính theo pixel VẬT LÝ — màn 2x phải nhân devicePixelRatio, kẻo ảnh mờ. Trên demo: 183.1MB xuống 6.6MB, giảm 27.7 lần đúng bình phương tỉ lệ decode, mắt thường không phân biệt nổi. Bên React Native thì expo-image tự downscale sẵn — xem câu 17 của series nhé!
+```
+
+**Thumbnail:** badge "PV FE #23" · dòng lớn "GRID ẢNH" / "NGỐN 152MB?" · phụ đề "Phỏng vấn Frontend · Câu 23/24" · badge emoji 💾 · variant shot, ảnh dọc `screens/perfqa/f5-plain.png` (banner đỏ imageCache 152.6MB).
+
+**Tags:** `cachewidth flutter, image cache flutter, imagecache currentsizebytes, decode ảnh flutter, devicepixelratio, flutter performance, phỏng vấn flutter, phỏng vấn frontend, gridview builder, cached_network_image, flutter tiếng việt, học flutter, câu hỏi phỏng vấn flutter, flutter interview questions, ram optimization`
+
+---
+
+### Phỏng vấn FE #24 (CUỐI LÔ 2) — Isolate.run: parse data lớn không chặn UI (2:45)
+
+**Tiêu đề:** Phỏng vấn FE #24: Isolate.run — parse data lớn không chặn UI | Flutter interview
+
+**Mô tả:**
+```
+Câu 24 — câu chốt sổ của series Phỏng vấn Frontend: jsonDecode 200.000 bản ghi làm UI Flutter đứng hình, bạn xử thế nào cho đúng bài? Demo đo frame gap bằng Ticker trên simulator.
+
+Chìa khóa: Dart chạy code ứng dụng trên MỘT luồng — main isolate; khối đồng bộ dài chiếm luồng là không frame nào được vẽ, docs Flutter nói quá 16ms là jank. await KHÔNG cứu — nó không tạo thread. Thoát hiểm chính chủ: Isolate.run — spawn isolate mới, chạy hàm, trả kết quả về rồi tự tắt: parallelism thật, không chia sẻ bộ nhớ, chỉ truyền message. Đối chiếu câu 18 bên React Native: một thread, chia lô chỉ mua sự phản hồi — Flutter dời hẳn việc sang chỗ khác.
+
+Demo thật bằng f6_isolate.dart, chuỗi JSON 18.9MB: chạy trên main — frame gap 235ms, spinner đứng hình (gap lớn hơn cả tổng 223ms: main bị chiếm là không MỘT frame nào); Isolate.run — gap 16ms, đúng MỘT frame 60Hz, spinner quay mượt suốt lúc decode; tổng 320ms so với 223ms — chậm chừng 1,3 lần, giá quá rẻ; checksum hai nhánh giống hệt 7960890. Bẫy chốt sổ: closure trong method của State capture this (có Ticker) là crash "object is unsendable" — helper phải là hàm TOP-LEVEL chỉ nhận String, và trả KẾT QUẢ GỌN về thay vì cả núi object.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 24 — câu chốt sổ của series
+0:18 Cơ chế: main isolate — một luồng, await không cứu
+0:45 Code: f6_isolate.dart — Isolate.run + helper top-level
+1:17 Demo thật: gap 235ms vs 16ms — đúng 1 frame
+1:53 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy unsendable
+2:27 Tổng kết trọn 24 câu & lời chào series
+
+📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout perf-qa-batch-2 để xem đúng 12 câu code của lô 2 (6 React Native + 6 Flutter).
+⏮️ Câu trước: [LINK-EP67]
+▶️ Xem lại từ đầu lô 2: [LINK-EP57]
+📱 Bản Shorts 60 giây: [LINK-SHORT-24]
+🔁 Cùng bài bên React Native: câu 18 (chia lô trên JS thread) — [LINK-EP62]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+💬 Đủ 24 câu trên playlist — comment câu hỏi phỏng vấn khó nhất bạn từng gặp để series sau càng sát thực tế!
+
+#flutter #phongvan #frontend #hieunang #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🚀 Vậy là đủ 24 câu — 12 câu React & Vue lô 1, 12 câu hiệu năng React Native & Flutter lô 2, câu nào cũng demo đo số thật. Bẫy chốt sổ câu 24: đưa closure trong State vào Isolate.run là crash "object is unsendable" — vì closure capture this có Ticker. Helper phải là hàm TOP-LEVEL chỉ nhận String. Cảm ơn bạn đã luyện cùng — comment câu hỏi khó nhất bạn từng gặp cho series sau nhé!
+```
+
+**Thumbnail:** badge "PV FE #24" · dòng lớn "DECODE 200K" / "ĐƠ 235MS?" · phụ đề "Phỏng vấn Frontend · Câu 24/24" · badge emoji 🚀 · variant shot, ảnh dọc `screens/perfqa/f6-blocked.png` (box đỏ frame gap 235ms).
+
+**Tags:** `isolate.run, isolate flutter, jsondecode lớn, main isolate, compute flutter, frame gap jank, flutter performance, phỏng vấn flutter, phỏng vấn frontend, unsendable object, flutter tiếng việt, học flutter, câu hỏi phỏng vấn flutter, flutter interview questions, parse json background`
+
+---
+
+### Shorts lô 2 (12 video)
+
+> Mỗi Short <60 giây, cùng câu hỏi với video ngang tương ứng, rút gọn để ôn nhanh. Đánh số nối tiếp lô 1: sn1..sn6 = Shorts #13..#18 (React Native), sf1..sf6 = Shorts #19..#24 (Flutter). CHƯA ĐĂNG — điền link thật thay placeholder khi đăng; mô tả mỗi Short chỉ cần dòng caption dưới đây + link video đầy đủ.
+
+| id | Tiêu đề Shorts | Caption |
+|---|---|---|
+| sn1 | Vì sao FlatList mượt hơn ScrollView? 60 giây #shorts | FlatList dùng virtualization: chỉ render trong cửa sổ — 10 item/198ms so với 5.000 item/1381ms của ScrollView+map.<br>Bẫy: cuộn quá nhanh vẫn trắng màn — chiến lược đánh đổi, không phải phép màu.<br>Video đầy đủ: [LINK-EP57]<br>#shorts #reactnative #phongvan |
+| sn2 | scrollToIndex FAIL — thiếu đúng một prop #shorts | getItemLayout đưa trước công thức length + offset — FlatList bỏ bước đo, nhảy tới item 4999 tức thì 49ms thay vì FAIL.<br>Bẫy: chỉ dùng khi item cao CỐ ĐỊNH — khai láo là cuộn sai vị trí.<br>Video đầy đủ: [LINK-EP58]<br>#shorts #reactnative #phongvan |
+| sn3 | 1 item đổi, cả nghìn item render lại? #shorts | React.memo so shallow props — kết hợp update immutable + renderItem bọc useCallback: chỉ hàng đổi mới render.<br>Bẫy: hàm ẩn danh mới mỗi render là memo vô dụng ngay.<br>Video đầy đủ: [LINK-EP59]<br>#shorts #reactnative #phongvan |
+| sn4 | onEndReached gọi trùng API — chặn bằng 1 cái ref #shorts | Guard bằng cờ trong ref: set TRƯỚC fetch, hạ khi response về — 6 lần gọi trùng về đúng 1 lần mỗi nhịp.<br>Bẫy: cờ bằng state là hở vì setState bất đồng bộ — closure cũ vẫn đọc false.<br>Video đầy đủ: [LINK-EP60]<br>#shorts #reactnative #phongvan |
+| sn5 | List trăm ảnh cuộn mượt: expo-image #shorts | expo-image decode đúng cỡ container + cache 2 tầng memory-disk: warm 153ms, kill app vẫn 368ms.<br>Bẫy: lần đầu 1360ms CHẬM HƠN là chi phí điền cache — trả một lần, lãi mọi lần sau.<br>Video đầy đủ: [LINK-EP61]<br>#shorts #reactnative #phongvan |
+| sn6 | Parse 300k bản ghi — UI đứng hình vì sao? #shorts | JS một thread — chia lô 5.000 + setTimeout 0 nhường event loop: maxGap từ 564ms xuống 127ms.<br>Bẫy: chia lô mua PHẢN HỒI chứ không mua tốc độ — tổng chậm hơn 2–3 lần.<br>Video đầy đủ: [LINK-EP62]<br>#shorts #reactnative #phongvan |
+| sf1 | Column 5000 item đơ 8 giây — vì sao? #shorts | Column build cả 5.000 widget ngay frame đầu; ListView.builder chỉ build 17 item — 199ms.<br>Bẫy: shrinkWrap true hay lồng ListView trong Column hở chiều cao là builder bị ép build HẾT.<br>Video đầy đủ: [LINK-EP63]<br>#shorts #flutter #phongvan |
+| sf2 | itemExtent — nhảy cuối list 5000 hàng trong 34ms #shorts | Khai itemExtent 64 là vị trí item thành số học: jumpTo xuống đáy chỉ build thêm 12 item thay vì 4.987.<br>Bẫy: chỉ cho hàng cao ĐỀU — và cấm khai cùng lúc với prototypeItem.<br>Video đầy đủ: [LINK-EP64]<br>#shorts #flutter #phongvan |
+| sf3 | Bấm +1 mà 40 item rebuild — sửa thế nào? #shorts | localize setState: đẩy state xuống StatefulWidget nhỏ nhất cần nó — mọi item từ build 4 lần về đúng 1 lần.<br>Bẫy: helper function không tạo ranh giới rebuild — phải là class widget riêng.<br>Video đầy đủ: [LINK-EP65]<br>#shorts #flutter #phongvan |
+| sf4 | ScrollController dội API 45 lần một cú kéo #shorts | Listener chạy MỖI scroll event — guard if _loading return, cờ set NGAY TRƯỚC await: 45 lần về 1 lần.<br>Bẫy: set cờ sau await là cửa sổ race vẫn mở suốt 800ms chờ mạng.<br>Video đầy đủ: [LINK-EP66]<br>#shorts #flutter #phongvan |
+| sf5 | Grid ảnh ngốn 183MB RAM — 1 dòng code cứu #shorts | RAM ảnh ăn theo kích thước DECODE — cacheWidth 380 đưa imageCache từ 183.1MB về 6.6MB, giảm 27.7 lần.<br>Bẫy: cacheWidth là pixel VẬT LÝ — ô 190 điểm màn 2x phải khai 380, kẻo ảnh mờ.<br>Video đầy đủ: [LINK-EP67]<br>#shorts #flutter #phongvan |
+| sf6 | jsonDecode đứng hình UI — Isolate.run cứu #shorts | Dart một luồng, await không cứu — Isolate.run dời decode sang isolate nền: gap 235ms về đúng 1 frame 16ms.<br>Bẫy: closure capture this là crash unsendable — helper top-level chỉ nhận String.<br>Video đầy đủ: [LINK-EP68]<br>#shorts #flutter #phongvan |
