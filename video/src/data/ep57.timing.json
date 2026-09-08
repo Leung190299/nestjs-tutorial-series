@@ -1,0 +1,321 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #13: Vì sao FlatList mượt hơn?",
+        "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 13/24",
+        "badge": "Lô mới · Hiệu năng dữ liệu"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep57/scene-01-0-ecffe705.wav",
+          "startFrame": 0,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep57/scene-01-1-24613993.wav",
+          "startFrame": 208,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep57/scene-01-2-9105a255.wav",
+          "startFrame": 389,
+          "durationInFrames": 291
+        }
+      ],
+      "durationInFrames": 698
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Cơ chế: virtualization",
+        "bullets": [
+          {
+            "icon": "🐢",
+            "text": "ScrollView + map: render cả 5.000 ngay lần dựng đầu",
+            "sentence": 1
+          },
+          {
+            "icon": "🪟",
+            "text": "FlatList = virtualization: chỉ giữ render window hữu hạn",
+            "sentence": 2
+          },
+          {
+            "icon": "⬜",
+            "text": "Item ngoài cửa sổ bị unmount — thay bằng blank space đúng cỡ",
+            "sentence": 3
+          },
+          {
+            "icon": "📏",
+            "text": "Chi phí theo kích thước cửa sổ, không theo độ dài list",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep57/scene-02-0-fb136d1c.wav",
+          "startFrame": 0,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep57/scene-02-1-63951276.wav",
+          "startFrame": 234,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep57/scene-02-2-f23805b8.wav",
+          "startFrame": 516,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep57/scene-02-3-78e38c0c.wav",
+          "startFrame": 731,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep57/scene-02-4-15db9403.wav",
+          "startFrame": 924,
+          "durationInFrames": 168
+        }
+      ],
+      "durationInFrames": 1110
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "n1.tsx",
+        "language": "tsx",
+        "code": "function Row({ item }: { item: Item }) {\n  renderCount++;\n  return (\n    <View style={[styles.row, { borderLeftColor: item.color }]}>\n      <Text style={styles.title}>{item.title}</Text>\n    </View>\n  );\n}\n\n  if (mode === 'scroll') {\n    return (\n      <ScrollView key={`scroll-${run}`} style={styles.list}>\n        {items.map((it) => (\n          <Row key={it.id} item={it} />\n        ))}\n      </ScrollView>\n    );\n  }\n  return (\n    <FlatList\n      data={items}\n      renderItem={({ item }) => <Row item={item} />}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 18,
+            "sentence": 1
+          },
+          {
+            "from": 19,
+            "to": 22,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep57/scene-03-0-6d0e1106.wav",
+          "startFrame": 0,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep57/scene-03-1-c79af9b1.wav",
+          "startFrame": 222,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep57/scene-03-2-d5669403.wav",
+          "startFrame": 449,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep57/scene-03-3-bcb5463e.wav",
+          "startFrame": 637,
+          "durationInFrames": 149
+        }
+      ],
+      "durationInFrames": 804
+    },
+    {
+      "id": "scene-04",
+      "type": "phone",
+      "visual": {
+        "title": "Bằng chứng: 5000 vs 10 item",
+        "screens": [
+          {
+            "src": "screens/perfqa/n1-scrollview.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/perfqa/n1-flatlist.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🐢",
+            "text": "ScrollView + map: 5000/5000 item · 1381ms",
+            "sentence": 1
+          },
+          {
+            "icon": "⚡",
+            "text": "FlatList: 10/5000 item · 198ms (initialNumToRender)",
+            "sentence": 3
+          },
+          {
+            "icon": "📏",
+            "text": "Càng dài càng chênh — cửa sổ thì không đổi",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep57/scene-04-0-602c8947.wav",
+          "startFrame": 0,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep57/scene-04-1-94d3fba6.wav",
+          "startFrame": 131,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep57/scene-04-2-3ddeee31.wav",
+          "startFrame": 339,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/ep57/scene-04-3-9eacb8e6.wav",
+          "startFrame": 448,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep57/scene-04-4-a5a16906.wav",
+          "startFrame": 687,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 902
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "ScrollView+map: render hết ngay — chi phí theo số item",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "FlatList: render window hữu hạn — ngoài cửa sổ là blank space",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Chi phí theo cửa sổ, không theo độ dài danh sách",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: cuộn nhanh vẫn trắng màn — CHIẾN LƯỢC đánh đổi, không phép màu",
+            "sentence": 4
+          },
+          {
+            "icon": "🧭",
+            "text": "Bẫy y hệt bên Flutter với Column — xem câu #19 của series",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep57/scene-05-0-f79bdd64.wav",
+          "startFrame": 0,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep57/scene-05-1-22569ad1.wav",
+          "startFrame": 104,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep57/scene-05-2-dbb27aa0.wav",
+          "startFrame": 288,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep57/scene-05-3-15a78555.wav",
+          "startFrame": 517,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep57/scene-05-4-db9987fa.wav",
+          "startFrame": 667,
+          "durationInFrames": 279
+        },
+        {
+          "file": "audio/ep57/scene-05-5-ceed0f85.wav",
+          "startFrame": 954,
+          "durationInFrames": 204
+        }
+      ],
+      "durationInFrames": 1176
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 13/24 hoàn tất — hẹn gặp câu 14!",
+        "summary": [
+          {
+            "text": "ScrollView+map: 5000/5000 · 1381ms — trả giá theo độ dài",
+            "sentence": 0
+          },
+          {
+            "text": "FlatList: 10/5000 · 198ms — render window hữu hạn",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: getItemLayout, windowSize — tối ưu FlatList",
+            "sentence": 1
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 14/24: Tối ưu FlatList — prop nào cần biết? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep57/scene-06-0-172918e8.wav",
+          "startFrame": 0,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep57/scene-06-1-ad807472.wav",
+          "startFrame": 184,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep57/scene-06-2-82aad33d.wav",
+          "startFrame": 428,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep57/scene-06-3-847df479.wav",
+          "startFrame": 583,
+          "durationInFrames": 89
+        }
+      ],
+      "durationInFrames": 690
+    }
+  ]
+}
