@@ -1,0 +1,129 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "Infinite scroll ScrollController — 1 cú kéo dội 45 lần loadMore, chặn thế nào?",
+        "framework": "flutter"
+      },
+      "sentences": [
+        {
+          "file": "audio/sf4/s1-0-0a2c4c71.wav",
+          "startFrame": 0,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/sf4/s1-1-c89f3341.wav",
+          "startFrame": 191,
+          "durationInFrames": 89
+        }
+      ],
+      "durationInFrames": 298
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "f4_infinite_scroll.dart",
+        "language": "clike",
+        "code": "// listener: chạy MỖI scroll event\nvoid _onScroll() {\n  final p = _controller.position;\n  if (p.pixels >\n      p.maxScrollExtent - 200) {\n    _loadMore();\n  }\n}\nFuture<void> _loadMore() async {\n  if (_loading) return; // guard\n  _loading = true; // cờ TRƯỚC await\n  final page = await fetchPage(_page+1);\n  _append(page); _loading = false;\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 9,
+            "to": 14,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sf4/s2-0-cd642d6a.wav",
+          "startFrame": 0,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/sf4/s2-1-86a3307c.wav",
+          "startFrame": 212,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/sf4/s2-2-2041671f.wav",
+          "startFrame": 362,
+          "durationInFrames": 128
+        }
+      ],
+      "durationInFrames": 508
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/perfqa/f4-bug.png",
+        "caption": "45 lần gọi trong 1 cú kéo"
+      },
+      "sentences": [
+        {
+          "file": "audio/sf4/s3-0-8e982830.wav",
+          "startFrame": 0,
+          "durationInFrames": 308
+        },
+        {
+          "file": "audio/sf4/s3-1-8af1f42d.wav",
+          "startFrame": 316,
+          "durationInFrames": 159
+        }
+      ],
+      "durationInFrames": 493
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "📡",
+            "text": "Listener pixel — bắn mỗi scroll event",
+            "sentence": 0
+          },
+          {
+            "icon": "🚧",
+            "text": "if (_loading) return; — cờ TRƯỚC await",
+            "sentence": 1
+          }
+        ],
+        "trap": "Dedupe id = phòng tuyến 2 · nhớ dispose controller"
+      },
+      "sentences": [
+        {
+          "file": "audio/sf4/s4-0-d5b2d3f9.wav",
+          "startFrame": 0,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/sf4/s4-1-292d0b43.wav",
+          "startFrame": 155,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/sf4/s4-2-5c6d0075.wav",
+          "startFrame": 264,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 405
+    }
+  ]
+}

@@ -1,0 +1,291 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #22: Infinite scroll Flutter — guard cho ScrollController",
+        "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 22/24",
+        "badge": "Flutter · Infinite scroll"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep66/scene-01-0-14f8861f.wav",
+          "startFrame": 0,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep66/scene-01-1-53e18391.wav",
+          "startFrame": 121,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep66/scene-01-2-430f22ef.wav",
+          "startFrame": 348,
+          "durationInFrames": 140
+        }
+      ],
+      "durationInFrames": 506
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Cơ chế: listener theo pixel",
+        "bullets": [
+          {
+            "icon": "📡",
+            "text": "Listener MỨC PIXEL — chạy mỗi scroll event",
+            "sentence": 0
+          },
+          {
+            "icon": "🕳️",
+            "text": "pixels > maxScrollExtent − 200: đúng suốt vùng đáy",
+            "sentence": 1
+          },
+          {
+            "icon": "⏱️",
+            "text": "800ms loading: mỗi event lọt qua = 1 call trùng",
+            "sentence": 1
+          },
+          {
+            "icon": "🧭",
+            "text": "RN câu #16: onEndReached dội 6 — Flutter dội 45",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep66/scene-02-0-72b133d3.wav",
+          "startFrame": 0,
+          "durationInFrames": 288
+        },
+        {
+          "file": "audio/ep66/scene-02-1-22de5911.wav",
+          "startFrame": 296,
+          "durationInFrames": 322
+        },
+        {
+          "file": "audio/ep66/scene-02-2-259ba0e7.wav",
+          "startFrame": 626,
+          "durationInFrames": 296
+        }
+      ],
+      "durationInFrames": 940
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "f4_infinite_scroll.dart",
+        "language": "clike",
+        "code": "    if (_controller.position.pixels >\n        _controller.position.maxScrollExtent - 200) {\n      _loadMore();\n    }\n  }\n\n  void _loadMore() {\n    if (widget.guard) {\n      if (_loading) return; // guard: cờ chặn gọi chồng\n    }\n    // Guard ON: cờ _loading bật ngay trong _fire (TRƯỚC await) qua _inFlight++.\n    _fire();\n  }\n\n  Future<void> _fire() async {\n    // Trang xin = trang đã commit + 1 → các call chồng của OFF đều xin\n    // CÙNG một trang (mô phỏng đúng bug \"bắn N request cho 1 trang\").\n    final req = _page + 1;\n    if (req > _totalPages) return; // hết data\n    setState(() {\n      _calls++;\n      _inFlight++; // set cờ TRƯỚC await",
+        "steps": [
+          {
+            "from": 1,
+            "to": 5,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 13,
+            "sentence": 1
+          },
+          {
+            "from": 15,
+            "to": 22,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep66/scene-03-0-be43c85b.wav",
+          "startFrame": 0,
+          "durationInFrames": 389
+        },
+        {
+          "file": "audio/ep66/scene-03-1-cbb14559.wav",
+          "startFrame": 397,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep66/scene-03-2-fdee524f.wav",
+          "startFrame": 626,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep66/scene-03-3-b28f8d7c.wav",
+          "startFrame": 886,
+          "durationInFrames": 252
+        }
+      ],
+      "durationInFrames": 1156
+    },
+    {
+      "id": "scene-04",
+      "type": "phone",
+      "visual": {
+        "title": "Bằng chứng: 45 lần vs 1 lần",
+        "screens": [
+          {
+            "src": "screens/perfqa/f4-bug.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/perfqa/f4-ok.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🔴",
+            "text": "OFF: 45 lần cho 2 trang mới — ~22 call/cửa sổ",
+            "sentence": 1
+          },
+          {
+            "icon": "🟢",
+            "text": "ON: 1 lần mỗi nhịp — guard chặn từ cửa",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep66/scene-04-0-135a2cdf.wav",
+          "startFrame": 0,
+          "durationInFrames": 288
+        },
+        {
+          "file": "audio/ep66/scene-04-1-9baa2978.wav",
+          "startFrame": 296,
+          "durationInFrames": 286
+        },
+        {
+          "file": "audio/ep66/scene-04-2-6b7d9617.wav",
+          "startFrame": 590,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep66/scene-04-3-2fb93dc3.wav",
+          "startFrame": 704,
+          "durationInFrames": 231
+        }
+      ],
+      "durationInFrames": 953
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Listener bắn mỗi scroll event — không guard là call trùng",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Cờ set TRƯỚC await — set sau là race vẫn mở",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "ON 2 call = 2 cửa sổ hợp lệ — không phải guard hở",
+            "sentence": 3
+          },
+          {
+            "icon": "🛡️",
+            "text": "Dedupe id khi append = phòng tuyến 2 · nhớ dispose",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep66/scene-05-0-753faa44.wav",
+          "startFrame": 0,
+          "durationInFrames": 63
+        },
+        {
+          "file": "audio/ep66/scene-05-1-5f4ef751.wav",
+          "startFrame": 71,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep66/scene-05-2-864817b0.wav",
+          "startFrame": 331,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep66/scene-05-3-a9e55b11.wav",
+          "startFrame": 582,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep66/scene-05-4-3dd1100c.wav",
+          "startFrame": 826,
+          "durationInFrames": 274
+        }
+      ],
+      "durationInFrames": 1118
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 22/24 hoàn tất — hẹn gặp câu 23!",
+        "summary": [
+          {
+            "text": "Listener pixel bắn mỗi event — OFF: 45 call/1 cú kéo",
+            "sentence": 0
+          },
+          {
+            "text": "Guard: if (_loading) return; — cờ TRƯỚC await",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: ảnh lớn trong list — cacheWidth",
+            "sentence": 1
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 23/24: ảnh 4K nuốt 30MB RAM? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep66/scene-06-0-dd077510.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep66/scene-06-1-965205e5.wav",
+          "startFrame": 145,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep66/scene-06-2-82aad33d.wav",
+          "startFrame": 326,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep66/scene-06-3-c207df44.wav",
+          "startFrame": 481,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 593
+    }
+  ]
+}
