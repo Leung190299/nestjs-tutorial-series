@@ -1,0 +1,188 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn Frontend — câu thứ hai mươi ba, ảnh lớn trong grid phía Flutter.",
+      "Câu hỏi từ nhà tuyển dụng: Grid trăm ảnh của bạn ngốn gần 200MB RAM — vì sao, và một dòng code nào cứu được?",
+      "Demo đo RAM bằng chính imageCache của engine, rồi chốt cách trả lời trước nhà tuyển dụng."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #23: cacheWidth — decode ảnh đúng kích thước hiển thị",
+      "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 23/24",
+      "badge": "Flutter · Ảnh & RAM"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Chìa khóa của câu này: RAM của ảnh ăn theo kích thước DECODE, không phải kích thước file hay ô hiển thị — bitmap = width nhân height nhân 4 byte, nên ảnh 2000px chiếm 15.26MB dù ô chỉ rộng 190 điểm.",
+      "cacheWidth là lời dặn cho engine — docs Flutter viết: decode and store the image at the specified size — tách cỡ decode khỏi cỡ render.",
+      "Docs Flutter tính cho ảnh 4K: hơn 30MB RAM, khai cacheWidth 384 còn khoảng 330KB; ảnh mạng thì thêm cached_network_image để cache disk."
+    ],
+    "visual": {
+      "title": "Cơ chế: RAM ăn theo kích thước decode",
+      "bullets": [
+        {
+          "icon": "💾",
+          "text": "RAM = width × height × 4 byte — theo cỡ DECODE",
+          "sentence": 0
+        },
+        {
+          "icon": "🖼️",
+          "text": "PNG 16KB → decode 15.26MB/ảnh 2000px",
+          "sentence": 0
+        },
+        {
+          "icon": "🎯",
+          "text": "cacheWidth: decode ở kích thước chỉ định",
+          "sentence": 1
+        },
+        {
+          "icon": "🌐",
+          "text": "Docs 4K: >30MB → ~330KB · mạng: cached_network_image",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Trang demo thật — f5_images.dart: header Text đọc _measureLine — in số từ imageCache.currentSizeBytes, số đo chính chủ của engine.",
+      "Grid là GridView.builder 2 cột, 120 ô — mỗi ô khoảng 190 điểm, ảnh lấy theo index chia dư 12 nguồn 2000px.",
+      "Điểm mấu chốt trong itemBuilder: Image.asset với cacheWidth — chế độ resize truyền hằng _cacheWidth bằng 380, chế độ gốc truyền null để engine decode full 2000px.",
+      "Comment trích thẳng docs: decode and store the image at the specified size — khác biệt DUY NHẤT giữa hai chế độ là một tham số này."
+    ],
+    "visual": {
+      "filename": "f5_images.dart",
+      "language": "clike",
+      "code": "          child: Text(\n            _measureLine,\n            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),\n          ),\n        ),\n        Expanded(\n          child: GridView.builder(\n            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(\n              crossAxisCount: 2,\n              mainAxisSpacing: 4,\n              crossAxisSpacing: 4,\n            ),\n            itemCount: _cellCount,\n            itemBuilder: (context, i) {\n              return Image.asset(\n                _assetPath(i),\n                // Khác biệt DUY NHẤT giữa 2 chế độ: cacheWidth bảo engine\n                // \"decode and store the image at the specified size\" thay vì\n                // kích thước gốc 2000px cho ô ~190px.\n                cacheWidth: widget.resized ? _cacheWidth : null,\n                fit: BoxFit.cover,\n              );",
+      "steps": [
+        {
+          "from": 1,
+          "to": 5,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 14,
+          "sentence": 1
+        },
+        {
+          "from": 15,
+          "to": 22,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "phone",
+    "narration": [
+      "Số thật trên simulator của tôi — chế độ Gốc 2000px trước: banner đỏ, engine decode full 2000px cho từng ô 190px.",
+      "imageCache 152.6MB ngay màn đầu; cuộn đủ 12 nguồn decode lên 183.1MB — VƯỢT trần imageCache mặc định 100MiB, demo phải nâng trần mới đo đủ.",
+      "Chuyển sang cacheWidth 380 — cùng grid, cùng 12 ảnh, mắt thường nhìn không phân biệt nổi với chế độ gốc.",
+      "Còn 5.5MB màn đầu, 6.6MB đủ 12 nguồn — giảm 27.7 lần, đúng bình phương 2000 chia 380; thời gian load thì nhiễu, RAM mới là con số ổn định."
+    ],
+    "visual": {
+      "title": "Bằng chứng: 152.6MB vs 5.5MB",
+      "screens": [
+        {
+          "src": "screens/perfqa/f5-plain.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/perfqa/f5-cache.png",
+          "sentence": 2
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🔴",
+          "text": "Gốc: 152.6MB màn đầu → 183.1MB đủ 12 nguồn",
+          "sentence": 1
+        },
+        {
+          "icon": "🟢",
+          "text": "380: 5.5MB → 6.6MB — giảm 27.7× = (2000/380)²",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — câu một: RAM ảnh ăn theo kích thước decode, nên set width height cho widget Image là CHƯA đủ — phải khai cacheWidth để engine decode nhỏ ngay từ đầu.",
+      "Câu hai: con số nói bằng imageCache.currentSizeBytes — số chính chủ của engine: 183.1MB xuống 6.6MB, khớp đúng bình phương tỉ lệ decode.",
+      "Câu ba: cacheWidth tính theo pixel VẬT LÝ — ô 190 điểm trên màn 2x là 380, nhớ nhân devicePixelRatio kẻo ảnh mờ.",
+      "Bẫy cộng thêm: ảnh vẫn nằm trong imageCache sau khi rời màn hình — đó là feature chứ không phải leak; và bẫy y hệt bên React Native — expo-image tự downscale sẵn, xem câu số 17."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "RAM theo DECODE — width/height widget là chưa đủ",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "imageCache.currentSizeBytes: 183.1MB → 6.6MB",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "cacheWidth = pixel VẬT LÝ — nhân devicePixelRatio",
+          "sentence": 2
+        },
+        {
+          "icon": "🧭",
+          "text": "Cache giữ ảnh = feature · RN expo-image — câu #17",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu 23 — một dòng cacheWidth, RAM ảnh giảm 27.7 lần, chỉ vì decode đúng cỡ hiển thị.",
+      "Câu cuối của series: jsonDecode 200 nghìn bản ghi làm spinner đứng hình — vì sao, và isolate cứu thế nào?",
+      "Video này có bản Shorts 60 giây để ôn nhanh — hẹn gặp lại ở câu số 24, câu chốt sổ của series!"
+    ],
+    "visual": {
+      "title": "Câu 23/24 hoàn tất — hẹn gặp câu 24!",
+      "summary": [
+        {
+          "text": "RAM = cỡ DECODE — 2000px = 15.26MB/ảnh",
+          "sentence": 0
+        },
+        {
+          "text": "cacheWidth: 380 — 183.1MB → 6.6MB (27.7×)",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: jsonDecode chặn UI — isolate",
+          "sentence": 1
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 24/24: jsonDecode đứng hình? 🎤"
+    }
+  }
+]

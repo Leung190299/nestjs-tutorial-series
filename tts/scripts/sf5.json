@@ -1,0 +1,81 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Grid trăm ảnh của bạn ngốn gần 200MB RAM — vì sao, và một dòng code nào cứu được?",
+      "Một tham số decode — trả lời trong 60 giây."
+    ],
+    "visual": {
+      "question": "Grid 120 ảnh ngốn 152MB RAM — 1 dòng cacheWidth kéo về 5.5MB. Vì sao?",
+      "framework": "flutter"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "RAM ảnh ăn theo kích thước DECODE — width nhân height nhân 4 byte: ảnh 2000px chiếm 15.26MB, dù ô grid chỉ 190 điểm.",
+      "cacheWidth 380 bảo engine decode đúng cỡ hiển thị 2x — mỗi ảnh còn 0.55MB."
+    ],
+    "visual": {
+      "filename": "f5_images.dart",
+      "language": "clike",
+      "code": "// ô ~190pt — ảnh gốc 2000×2000\nGridView.builder(\n  itemCount: 120,\n  itemBuilder: (context, i) {\n    return Image.asset(\n      _assetPath(i),\n      // decode đúng cỡ hiển thị @2x\n      cacheWidth: 380,\n      fit: BoxFit.cover,\n    );\n  },\n)\n// bitmap = w × h × 4 byte\n// 2000px 15.26MB → 380px 0.55MB",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 7,
+          "to": 12,
+          "sentence": 1
+        },
+        {
+          "from": 13,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Số thật: chế độ gốc, imageCache 152.6MB màn đầu — đủ 12 nguồn 183.1MB, vượt trần cache mặc định 100MiB.",
+      "Bật cacheWidth 380: còn 5.5MB — giảm 27.7 lần, đúng bình phương tỉ lệ 2000 chia 380."
+    ],
+    "visual": {
+      "src": "screens/perfqa/f5-plain.png",
+      "caption": "152.6MB vs 5.5MB — chỉ vì decode"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: RAM ảnh theo kích thước DECODE — set width height cho widget là chưa đủ.",
+      "cacheWidth decode đúng cỡ hiển thị — ảnh mạng thêm cached_network_image.",
+      "Bẫy: cacheWidth là pixel VẬT LÝ — nhân devicePixelRatio; bên RN, expo-image tự downscale — câu 17."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "💾",
+          "text": "RAM theo DECODE — width widget chưa đủ",
+          "sentence": 0
+        },
+        {
+          "icon": "🎯",
+          "text": "cacheWidth · mạng: cached_network_image",
+          "sentence": 1
+        }
+      ],
+      "trap": "Pixel VẬT LÝ × devicePixelRatio · RN: expo-image — câu #17"
+    }
+  }
+]
