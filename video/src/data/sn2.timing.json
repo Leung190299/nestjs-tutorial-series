@@ -1,0 +1,129 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "Vì sao scrollToIndex fail — và getItemLayout cứu thế nào?",
+        "framework": "rn"
+      },
+      "sentences": [
+        {
+          "file": "audio/sn2/s1-0-f3a103d4.wav",
+          "startFrame": 0,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/sn2/s1-1-258bf27d.wav",
+          "startFrame": 152,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 264
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "n2.tsx",
+        "language": "tsx",
+        "code": "// 1 hàng cao đúng 64px\nconst ROW_H = 64;\n\n<FlatList\n  data={items}\n  getItemLayout={(_, i) => ({\n    length: ROW_H,\n    offset: ROW_H * i,\n    index: i,\n  })}\n  windowSize={5}\n/>\n\nlist.scrollToIndex({ index: 4999 })",
+        "steps": [
+          {
+            "from": 1,
+            "to": 5,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 12,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sn2/s2-0-eb86efc4.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/sn2/s2-1-ee7b51bd.wav",
+          "startFrame": 172,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/sn2/s2-2-41f585d9.wav",
+          "startFrame": 389,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 523
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/perfqa/n2-fail.png",
+        "caption": "FAIL — mới đo tới #118 / 4999"
+      },
+      "sentences": [
+        {
+          "file": "audio/sn2/s3-0-9f7fb088.wav",
+          "startFrame": 0,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/sn2/s3-1-9d9a06b9.wav",
+          "startFrame": 212,
+          "durationInFrames": 183
+        }
+      ],
+      "durationInFrames": 413
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "🧮",
+            "text": "getItemLayout = length/offset — bỏ đo async",
+            "sentence": 0
+          },
+          {
+            "icon": "🚫",
+            "text": "scrollToIndex xa: bắt buộc có nó",
+            "sentence": 1
+          }
+        ],
+        "trap": "Item cao biến thiên — khai láo là cuộn sai"
+      },
+      "sentences": [
+        {
+          "file": "audio/sn2/s4-0-31022ce7.wav",
+          "startFrame": 0,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/sn2/s4-1-f5e26b64.wav",
+          "startFrame": 155,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/sn2/s4-2-5718b48b.wav",
+          "startFrame": 283,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 431
+    }
+  ]
+}

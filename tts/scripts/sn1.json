@@ -1,0 +1,62 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Render 5.000 dòng, vì sao ScrollView với map đơ mà FlatList thì không?",
+      "Câu hỏi hiệu năng React Native kinh điển — trả lời trong 60 giây."
+    ],
+    "visual": {
+      "question": "Vì sao FlatList mượt hơn ScrollView+map?",
+      "framework": "rn"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "ScrollView với map dựng cả 5.000 component ngay lần dựng đầu tiên — JS thread chạy 5.000 lần render.",
+      "FlatList chỉ dựng phần trong render window — item ngoài cửa sổ thay bằng khoảng trắng đúng cỡ.",
+      "Cùng dữ liệu, khác người cầm quyền quyết định render bao nhiêu."
+    ],
+    "visual": {
+      "filename": "n1.tsx",
+      "language": "tsx",
+      "code": "// ScrollView: dựng TẤT CẢ\n<ScrollView>\n  {items.map((it) => (\n    <Row key={it.id} item={it} />\n  ))}\n</ScrollView>\n\n// FlatList: chỉ dựng cửa sổ\n<FlatList\n  data={items}\n  renderItem={({ item }) =>\n    <Row item={item} />}\n/>",
+      "steps": [
+        {"from": 1, "to": 6, "sentence": 0},
+        {"from": 8, "to": 13, "sentence": 1},
+        {"from": 1, "to": 13, "sentence": 2}
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Số thật trên simulator: ScrollView dựng 5.000 item mất 1.381 mili giây, màn hình khựng cứng.",
+      "FlatList chỉ render 10 item đầu — 198 mili giây, nhanh hơn khoảng 7 lần."
+    ],
+    "visual": {
+      "src": "screens/perfqa/n1-flatlist.png",
+      "caption": "FlatList: 10/5000 item · 198ms"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: ScrollView với map render toàn bộ — chi phí theo độ dài danh sách.",
+      "FlatList dùng virtualization: chỉ giữ render window hữu hạn — chi phí theo cửa sổ.",
+      "Bẫy: cuộn quá nhanh FlatList vẫn trắng màn — đây là chiến lược đánh đổi, không phải phép màu."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {"icon": "🐢", "text": "ScrollView+map: render cả 5000 ngay lần đầu", "sentence": 0},
+        {"icon": "🪟", "text": "FlatList: render window — chỉ dựng phần thấy", "sentence": 1}
+      ],
+      "trap": "Cuộn quá nhanh vẫn trắng màn — trade-off"
+    }
+  }
+]

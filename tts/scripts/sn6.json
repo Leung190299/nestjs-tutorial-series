@@ -1,0 +1,82 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "App nhận về 300.000 bản ghi JSON — parse xong thì UI đứng hình. Vì sao, xử thế nào?",
+      "Câu hỏi phỏng vấn React Native — trả lời trong 60 giây."
+    ],
+    "visual": {
+      "question": "Parse 300k bản ghi JSON — vì sao UI đứng hình, xử thế nào?",
+      "framework": "rn"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "JS trong RN chạy MỘT thread — parse đồng bộ 300k là mọi cập nhật UI xếp hàng chờ.",
+      "Chữa: hàm step mỗi lượt parse ĐÚNG một trang 5.000, rồi setTimeout 0 nhường event loop.",
+      "Hết 60 trang mới finish — tổng việc y nguyên, chỉ trải ra cho UI thở."
+    ],
+    "visual": {
+      "filename": "n6.tsx",
+      "language": "tsx",
+      "code": "// mỗi lượt: parse + xử lý 1 trang 5k\nconst step = () => {\n  acc += processPage(pages[p]);\n  p++;\n  if (p < PAGE_COUNT) {\n    setTimeout(step, 0); // nhường loop\n  } else {\n    finish(acc); // xong 60 trang\n  }\n};\nsetTimeout(step, 0); // bắt đầu",
+      "steps": [
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 0
+        },
+        {
+          "from": 5,
+          "to": 10,
+          "sentence": 1
+        },
+        {
+          "from": 1,
+          "to": 11,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Số thật trên simulator: một cục hụt 564 mili giây — đồng hồ mất chừng 5 tick, tổng 513.",
+      "Chia lô chỉ hụt 127 nhưng tổng 985 — CHẬM HƠN, đổi lấy app còn phản hồi; checksum hai nhánh y hệt."
+    ],
+    "visual": {
+      "src": "screens/perfqa/n6-blocked.png",
+      "caption": "564ms đứng hình vs 127ms"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: JS một thread — đo bằng gap giữa hai tick timer.",
+      "Chia lô 5.000 cộng setTimeout 0 — maxGap từ 564 xuống 127.",
+      "Bẫy: chia lô mua PHẢN HỒI, không mua tốc độ — tổng chậm hơn 2 đến 3 lần."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "⏱️",
+          "text": "Đo: gap giữa 2 tick — 564 vs 127ms",
+          "sentence": 0
+        },
+        {
+          "icon": "🍰",
+          "text": "Chia lô 5k + setTimeout(0) nhường loop",
+          "sentence": 1
+        }
+      ],
+      "trap": "Chia lô mua PHẢN HỒI, không mua tốc độ"
+    }
+  }
+]

@@ -1,0 +1,197 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn Frontend tiếp tục — câu thứ hai mươi, đào sâu hơn vào ListView của Flutter.",
+      "Câu hỏi từ nhà tuyển dụng: ListView của bạn biết trước chiều cao từng hàng — tận dụng thế nào để cuộn và nhảy vị trí nhanh hơn?",
+      "Từ khóa: itemExtent và const — đo số thật trên simulator rồi chốt cách trả lời."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #20: itemExtent — báo trước chiều cao cho ListView",
+      "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 20/24",
+      "badge": "Flutter · itemExtent + const"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Không có itemExtent, muốn tới một offset xa, sliver phải build và đo TUẦN TỰ các item dọc đường để cộng dồn chiều cao — biết đủ extent mới biết offset đó rơi vào item nào.",
+      "Khai itemExtent — hoặc prototypeItem — là đưa trước extent: docs viết scrolling machinery can make use of the foreknowledge để save work khi cuộn nhảy xa.",
+      "Lúc đó vị trí item chỉ còn là số học: index bằng offset chia sáu mươi tư — không phải build ai dọc đường cả.",
+      "Còn const constructor: docs nói const cho phép Flutter short-circuit most of the rebuild work — widget const không phải build lại khi cha rebuild."
+    ],
+    "visual": {
+      "title": "Cơ chế: báo trước extent",
+      "bullets": [
+        {
+          "icon": "🐢",
+          "text": "Không extent: build + đo tuần tự để cộng dồn chiều cao",
+          "sentence": 0
+        },
+        {
+          "icon": "📜",
+          "text": "Docs: foreknowledge… save work khi cuộn nhảy xa",
+          "sentence": 1
+        },
+        {
+          "icon": "🧮",
+          "text": "Có itemExtent: vị trí = offset ÷ 64 — số học thuần",
+          "sentence": 2
+        },
+        {
+          "icon": "🧊",
+          "text": "const: short-circuit most of the rebuild work",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Trang demo thật — f2_item_extent.dart: nhóm biến đo khai sẵn — build thêm dọc đường nhảy cuối, thời gian, và maxScrollExtent trước với sau jumpTo.",
+      "Chọn chế độ là reset BuildCounterF2 — mỗi RowTileF2 tăng bộ đếm trong build — và remount cả list bằng ValueKey mới, bấm lại vẫn đo từ đầu.",
+      "Và đây, điểm khác biệt DUY NHẤT giữa hai chế độ: ON thì itemExtent sáu mươi tư, OFF thì null — mọi thứ khác giữ nguyên để so công bằng.",
+      "Nút Nhảy cuối reset bộ đếm rồi jumpTo thẳng maxScrollExtent — số hiện lên là build THÊM dọc đường nhảy; xem số thật trên máy."
+    ],
+    "visual": {
+      "filename": "f2_item_extent.dart",
+      "language": "clike",
+      "code": "  int? _initialBuilt; // build lần dựng đầu của chế độ\n  int? _jumpBuilt; // build THÊM dọc đường nhảy cuối\n  int? _jumpMs;\n  double? _extentBefore; // maxScrollExtent NGAY TRƯỚC jumpTo\n  double? _extentAfter; // maxScrollExtent SAU frame nhảy\n  double? _pixelsAfter; // vị trí đứng thực sau frame nhảy\n\n  void _select(_Mode mode) {\n    BuildCounterF2.count = 0;\n    _run++;\n    // Key đổi theo run → remount hoàn toàn, bấm lại cùng chế độ vẫn đo từ đầu.\n    final key = ValueKey('$mode-$_run');\n    final body = ListView.builder(\n      key: key,\n      controller: _controller,\n      // Điểm khác biệt DUY NHẤT của cấu hình list giữa 2 chế độ:\n      itemExtent: mode == _Mode.on ? 64 : null,\n      itemCount: _items.length,\n      itemBuilder: (context, i) =>\n          RowTileF2(item: _items[i], constFrame: mode == _Mode.on),\n    );",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 12,
+          "sentence": 1
+        },
+        {
+          "from": 13,
+          "to": 21,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 21,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "phone",
+    "narration": [
+      "Số thật trên simulator của tôi, bản debug — chế độ OFF trước, bấm Nhảy cuối.",
+      "Banner đỏ: build thêm 4.987 item, mất 1.622 mili giây — SliverList phải build gần trọn 5.000 hàng dọc đường chỉ để cộng dồn chiều cao; số ms dao động theo phiên, warm còn 1.284.",
+      "Giờ chế độ ON — itemExtent sáu mươi tư cộng khung const — cùng một cú nhảy.",
+      "Build thêm đúng 12 item, 34 mili giây — 12 là vừa khít viewport cộng cacheExtent; cách biệt hơn bốn trăm lần số build.",
+      "Để ý điều trung thực: cả hai chế độ đều đứng đúng Bản ghi 4.999 — hàng demo cao đều nên OFF không nhảy trượt; cái giá của OFF là build và thời gian đơ."
+    ],
+    "visual": {
+      "title": "Bằng chứng: 4987 vs 12 build",
+      "screens": [
+        {
+          "src": "screens/perfqa/f2-off.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/perfqa/f2-on.png",
+          "sentence": 2
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🐢",
+          "text": "OFF: build thêm 4987 item · 1622ms (warm 1284)",
+          "sentence": 1
+        },
+        {
+          "icon": "⚡",
+          "text": "ON: 12 item · 34ms — cách biệt hơn 400 lần build",
+          "sentence": 3
+        },
+        {
+          "icon": "🎯",
+          "text": "Cả hai đứng đúng #4999 — hàng cao đều, OFF không trượt",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — ba câu chốt.",
+      "Câu một: hàng cao đều thì khai itemExtent hoặc prototypeItem — framework biết trước extent, tính vị trí bằng số học thay vì build đo dọc đường.",
+      "Câu hai: lợi rõ nhất khi vị trí cuộn thay đổi đột ngột — trên demo, jumpTo xuống đáy 5.000 hàng: 4.987 build so với 12 build.",
+      "Câu ba: kèm const constructor cho phần khung tĩnh — short-circuit rebuild; nhưng chỉ phần tham số toàn hằng compile-time mới const được, hàng có dữ liệu động thì không.",
+      "Hai bẫy: itemExtent CHỈ dành cho hàng cao đều — khai láo là cuộn sai; itemExtent với prototypeItem CẤM khai cùng lúc. Và đừng claim số cho const khi bạn chưa tự đo."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Hàng cao đều → itemExtent/prototypeItem: vị trí = số học",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "jumpTo đáy 5000 hàng: 4987 build vs 12 build",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "const cho khung tĩnh — cần hằng compile-time",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "Khai láo chiều cao = cuộn sai · cấm khai cả hai",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu 20 — ListView biết trước chiều cao thì đừng bắt nó đo lại từng hàng.",
+      "Câu tiếp theo: bấm cộng một ở đầu trang mà bốn mươi item bên dưới rebuild theo — setState đặt chỗ nào cho đúng?",
+      "Video này có bản Shorts 60 giây — cùng câu hỏi, rút gọn để ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số 21!"
+    ],
+    "visual": {
+      "title": "Câu 20/24 hoàn tất — hẹn gặp câu 21!",
+      "summary": [
+        {
+          "text": "itemExtent: 4987 build → 12 build · 1622ms → 34ms",
+          "sentence": 0
+        },
+        {
+          "text": "Chỉ dùng khi hàng cao ĐỀU — cấm khai cùng prototypeItem",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: setState cả trang vs tách widget nhỏ",
+          "sentence": 1
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 21/24: setState đặt đâu cho đúng? 🎤"
+    }
+  }
+]

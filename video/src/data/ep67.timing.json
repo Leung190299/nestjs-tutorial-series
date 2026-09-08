@@ -1,0 +1,281 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #23: cacheWidth — decode ảnh đúng kích thước hiển thị",
+        "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 23/24",
+        "badge": "Flutter · Ảnh & RAM"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep67/scene-01-0-58cad8d5.wav",
+          "startFrame": 0,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep67/scene-01-1-b3c1f6dd.wav",
+          "startFrame": 126,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep67/scene-01-2-69eb4965.wav",
+          "startFrame": 312,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 474
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Cơ chế: RAM ăn theo kích thước decode",
+        "bullets": [
+          {
+            "icon": "💾",
+            "text": "RAM = width × height × 4 byte — theo cỡ DECODE",
+            "sentence": 0
+          },
+          {
+            "icon": "🖼️",
+            "text": "PNG 16KB → decode 15.26MB/ảnh 2000px",
+            "sentence": 0
+          },
+          {
+            "icon": "🎯",
+            "text": "cacheWidth: decode ở kích thước chỉ định",
+            "sentence": 1
+          },
+          {
+            "icon": "🌐",
+            "text": "Docs 4K: >30MB → ~330KB · mạng: cached_network_image",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep67/scene-02-0-52de457c.wav",
+          "startFrame": 0,
+          "durationInFrames": 394
+        },
+        {
+          "file": "audio/ep67/scene-02-1-493eee1d.wav",
+          "startFrame": 402,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep67/scene-02-2-c9f0b231.wav",
+          "startFrame": 646,
+          "durationInFrames": 363
+        }
+      ],
+      "durationInFrames": 1027
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "f5_images.dart",
+        "language": "clike",
+        "code": "          child: Text(\n            _measureLine,\n            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),\n          ),\n        ),\n        Expanded(\n          child: GridView.builder(\n            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(\n              crossAxisCount: 2,\n              mainAxisSpacing: 4,\n              crossAxisSpacing: 4,\n            ),\n            itemCount: _cellCount,\n            itemBuilder: (context, i) {\n              return Image.asset(\n                _assetPath(i),\n                // Khác biệt DUY NHẤT giữa 2 chế độ: cacheWidth bảo engine\n                // \"decode and store the image at the specified size\" thay vì\n                // kích thước gốc 2000px cho ô ~190px.\n                cacheWidth: widget.resized ? _cacheWidth : null,\n                fit: BoxFit.cover,\n              );",
+        "steps": [
+          {
+            "from": 1,
+            "to": 5,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 14,
+            "sentence": 1
+          },
+          {
+            "from": 15,
+            "to": 22,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep67/scene-03-0-4dbe0426.wav",
+          "startFrame": 0,
+          "durationInFrames": 269
+        },
+        {
+          "file": "audio/ep67/scene-03-1-2324c1f7.wav",
+          "startFrame": 277,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep67/scene-03-2-a3c3ca17.wav",
+          "startFrame": 513,
+          "durationInFrames": 269
+        },
+        {
+          "file": "audio/ep67/scene-03-3-ff09067e.wav",
+          "startFrame": 790,
+          "durationInFrames": 195
+        }
+      ],
+      "durationInFrames": 1003
+    },
+    {
+      "id": "scene-04",
+      "type": "phone",
+      "visual": {
+        "title": "Bằng chứng: 152.6MB vs 5.5MB",
+        "screens": [
+          {
+            "src": "screens/perfqa/f5-plain.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/perfqa/f5-cache.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🔴",
+            "text": "Gốc: 152.6MB màn đầu → 183.1MB đủ 12 nguồn",
+            "sentence": 1
+          },
+          {
+            "icon": "🟢",
+            "text": "380: 5.5MB → 6.6MB — giảm 27.7× = (2000/380)²",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep67/scene-04-0-9551f3ac.wav",
+          "startFrame": 0,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep67/scene-04-1-2bbe2afc.wav",
+          "startFrame": 236,
+          "durationInFrames": 336
+        },
+        {
+          "file": "audio/ep67/scene-04-2-1888233d.wav",
+          "startFrame": 580,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep67/scene-04-3-80729812.wav",
+          "startFrame": 761,
+          "durationInFrames": 303
+        }
+      ],
+      "durationInFrames": 1082
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "RAM theo DECODE — width/height widget là chưa đủ",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "imageCache.currentSizeBytes: 183.1MB → 6.6MB",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "cacheWidth = pixel VẬT LÝ — nhân devicePixelRatio",
+            "sentence": 2
+          },
+          {
+            "icon": "🧭",
+            "text": "Cache giữ ảnh = feature · RN expo-image — câu #17",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep67/scene-05-0-112989d0.wav",
+          "startFrame": 0,
+          "durationInFrames": 281
+        },
+        {
+          "file": "audio/ep67/scene-05-1-5e58bbdd.wav",
+          "startFrame": 289,
+          "durationInFrames": 293
+        },
+        {
+          "file": "audio/ep67/scene-05-2-5a2f7bc1.wav",
+          "startFrame": 590,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep67/scene-05-3-d528d24e.wav",
+          "startFrame": 836,
+          "durationInFrames": 274
+        }
+      ],
+      "durationInFrames": 1128
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 23/24 hoàn tất — hẹn gặp câu 24!",
+        "summary": [
+          {
+            "text": "RAM = cỡ DECODE — 2000px = 15.26MB/ảnh",
+            "sentence": 0
+          },
+          {
+            "text": "cacheWidth: 380 — 183.1MB → 6.6MB (27.7×)",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: jsonDecode chặn UI — isolate",
+            "sentence": 1
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 24/24: jsonDecode đứng hình? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep67/scene-06-0-7afbb9a0.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep67/scene-06-1-231a2810.wav",
+          "startFrame": 172,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep67/scene-06-2-f13a47d9.wav",
+          "startFrame": 375,
+          "durationInFrames": 176
+        }
+      ],
+      "durationInFrames": 569
+    }
+  ]
+}

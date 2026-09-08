@@ -1,0 +1,129 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "Vì sao ListView.builder mượt hơn Column?",
+        "framework": "flutter"
+      },
+      "sentences": [
+        {
+          "file": "audio/sf1/s1-0-0ee547aa.wav",
+          "startFrame": 0,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/sf1/s1-1-cc3d9300.wav",
+          "startFrame": 157,
+          "durationInFrames": 89
+        }
+      ],
+      "durationInFrames": 264
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "f1_lazy_list.dart",
+        "language": "clike",
+        "code": "// Column: build TẤT CẢ 5000\nSingleChildScrollView(\n  child: Column(\n    children: _items.map((it) =>\n      RowTile(item: it)).toList(),\n  ),\n)\n\n// builder: chỉ build phần thấy\nListView.builder(\n  itemCount: _items.length,\n  itemBuilder: (c, i) =>\n    RowTile(item: _items[i]),\n)",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 9,
+            "to": 14,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sf1/s2-0-c8800639.wav",
+          "startFrame": 0,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/sf1/s2-1-2e2d426c.wav",
+          "startFrame": 133,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/sf1/s2-2-14bf8109.wav",
+          "startFrame": 283,
+          "durationInFrames": 75
+        }
+      ],
+      "durationInFrames": 376
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/perfqa/f1-column.png",
+        "caption": "5000 build · gần 8 giây"
+      },
+      "sentences": [
+        {
+          "file": "audio/sf1/s3-0-99b16a33.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/sf1/s3-1-4b80ecef.wav",
+          "startFrame": 172,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 387
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "🐢",
+            "text": "Column: build cả 5000 ngay frame đầu",
+            "sentence": 0
+          },
+          {
+            "icon": "⚡",
+            "text": "builder: 17/5000 — viewport + cacheExtent",
+            "sentence": 1
+          }
+        ],
+        "trap": "shrinkWrap:true / hở chiều cao = build hết"
+      },
+      "sentences": [
+        {
+          "file": "audio/sf1/s4-0-f5105630.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/sf1/s4-1-2fb1231d.wav",
+          "startFrame": 145,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/sf1/s4-2-db2f7568.wav",
+          "startFrame": 302,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 486
+    }
+  ]
+}

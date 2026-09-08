@@ -1,0 +1,129 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "Vì sao onEndReached gọi loadMore trùng — và guard thế nào?",
+        "framework": "rn"
+      },
+      "sentences": [
+        {
+          "file": "audio/sn4/s1-0-2807bf2e.wav",
+          "startFrame": 0,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/sn4/s1-1-258bf27d.wav",
+          "startFrame": 140,
+          "durationInFrames": 89
+        }
+      ],
+      "durationInFrames": 247
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "n4.tsx",
+        "language": "tsx",
+        "code": "const loadingRef = useRef(false);\n\nconst loadMore = () => {\n  // GUARD: đang tải thì bỏ qua\n  if (loadingRef.current) return;\n  loadingRef.current = true; // đặt cờ\n  fetchPage(next).then((batch) => {\n    setItems((p) => [...p, ...batch]);\n    loadingRef.current = false;\n  });\n};\n\n<FlatList onEndReached={loadMore}\n  onEndReachedThreshold={0.3} />",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 11,
+            "sentence": 1
+          },
+          {
+            "from": 11,
+            "to": 14,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sn4/s2-0-fe028073.wav",
+          "startFrame": 0,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/sn4/s2-1-6a10f302.wav",
+          "startFrame": 133,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/sn4/s2-2-0b617357.wav",
+          "startFrame": 269,
+          "durationInFrames": 216
+        }
+      ],
+      "durationInFrames": 503
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/perfqa/n4-bug.png",
+        "caption": "6 lần gọi cho 3 trang"
+      },
+      "sentences": [
+        {
+          "file": "audio/sn4/s3-0-3e6d16e4.wav",
+          "startFrame": 0,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/sn4/s3-1-ee056151.wav",
+          "startFrame": 248,
+          "durationInFrames": 113
+        }
+      ],
+      "durationInFrames": 379
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "🎯",
+            "text": "Bắn khi VÀO ngưỡng — loading kéo lại là trùng",
+            "sentence": 0
+          },
+          {
+            "icon": "🛡️",
+            "text": "loadingRef: set trước fetch, hạ khi xong",
+            "sentence": 1
+          }
+        ],
+        "trap": "Cờ bằng state = hở — dùng REF + dedupe id"
+      },
+      "sentences": [
+        {
+          "file": "audio/sn4/s4-0-5068d1e5.wav",
+          "startFrame": 0,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/sn4/s4-1-32bcdec0.wav",
+          "startFrame": 184,
+          "durationInFrames": 111
+        },
+        {
+          "file": "audio/sn4/s4-2-f37166ac.wav",
+          "startFrame": 303,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 453
+    }
+  ]
+}

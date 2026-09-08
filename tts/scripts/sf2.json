@@ -1,0 +1,62 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "ListView của bạn biết trước chiều cao từng hàng — tận dụng thế nào để nhảy vị trí nhanh hơn?",
+      "itemExtent — trả lời trong 60 giây."
+    ],
+    "visual": {
+      "question": "ListView biết trước chiều cao hàng — itemExtent giúp gì?",
+      "framework": "flutter"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Khai itemExtent 64 — mọi hàng cao đều, framework biết trước extent: vị trí item chỉ còn là offset chia 64.",
+      "jumpTo maxScrollExtent — nhảy thẳng xuống đáy 5.000 hàng.",
+      "Không itemExtent? Sliver phải build và đo từng item dọc đường để cộng dồn chiều cao."
+    ],
+    "visual": {
+      "filename": "f2_item_extent.dart",
+      "language": "clike",
+      "code": "// ON: báo trước chiều cao hàng\nListView.builder(\n  controller: _controller,\n  itemExtent: 64, // OFF: null\n  itemCount: _items.length,\n  itemBuilder: (context, i) =>\n    RowTileF2(item: _items[i]),\n)\n\n// Nhảy thẳng xuống đáy 5000 hàng\n_controller.jumpTo(\n  _controller.position.maxScrollExtent,\n);",
+      "steps": [
+        {"from": 1, "to": 8, "sentence": 0},
+        {"from": 10, "to": 13, "sentence": 1},
+        {"from": 1, "to": 13, "sentence": 2}
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Số thật trên simulator debug: OFF build thêm 4.987 item dọc cú nhảy — đơ 1.622 mili giây.",
+      "ON build thêm đúng 12 item — 34 mili giây; cách biệt hơn bốn trăm lần số build."
+    ],
+    "visual": {
+      "src": "screens/perfqa/f2-on.png",
+      "caption": "12 build · 34ms — nhờ itemExtent"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: hàng cao đều thì khai itemExtent — framework tính vị trí bằng số học, khỏi build dọc đường.",
+      "Kèm const cho phần khung tĩnh — short-circuit rebuild; phần dữ liệu động không const được.",
+      "Bẫy: itemExtent chỉ cho hàng cao ĐỀU — khai láo là cuộn sai; và cấm khai cùng lúc với prototypeItem."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {"icon": "📏", "text": "itemExtent: vị trí = số học — 4987 → 12 build", "sentence": 0},
+        {"icon": "🧊", "text": "const khung tĩnh: short-circuit rebuild", "sentence": 1}
+      ],
+      "trap": "Hàng cao KHÔNG đều = cuộn sai · cấm khai cả 2"
+    }
+  }
+]

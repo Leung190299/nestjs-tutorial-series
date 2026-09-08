@@ -1,0 +1,121 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn Frontend, câu số 16 — hôm nay nói về những cú API bắn trùng khi cuộn.",
+      "Câu hỏi từ nhà tuyển dụng: Làm infinite scroll với onEndReached, API của bạn bị gọi trùng liên tục — vì sao và chặn thế nào?",
+      "Bằng chứng thật trên simulator: cùng một kiểu kéo, một bên gọi loadMore 6 lần cho 3 trang dữ liệu, một bên đúng 1 lần mỗi nhịp."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #16: Infinite scroll — vì sao onEndReached gọi trùng?",
+      "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 16/24",
+      "badge": "onEndReached · loadingRef"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Trước hết, onEndReached bắn khi nào? Docs nói: Called once when the scroll position gets within onEndReachedThreshold from the logical end — cuộn VÀO ngưỡng là bắn một lần.",
+      "Ngưỡng đó tính theo chiều dài NHÌN THẤY của list, không phải pixel — threshold 0.3 nghĩa là còn cách đáy ba phần mười màn hình là kích hoạt.",
+      "Vấn đề nằm ở 800 mili giây chờ API: content chưa dài ra, logical end vẫn ở đó — kéo RA khỏi ngưỡng rồi kéo xuống lại là bắn LẦN NỮA, xin đúng trang đang tải.",
+      "Nghĩa là framework KHÔNG tự bắn liên tục khi đứng yên — đây là race giữa gesture của người dùng và cửa sổ loading, kiểu kéo giật giật chờ load rất đời thường."
+    ],
+    "visual": {
+      "title": "Cơ chế: onEndReached bắn khi nào",
+      "bullets": [
+        {"icon": "🎯", "text": "Bắn khi cuộn VÀO ngưỡng — 'called once' mỗi lần vào", "sentence": 0},
+        {"icon": "📏", "text": "Threshold theo chiều dài NHÌN THẤY — 0.3 = 3/10 màn", "sentence": 1},
+        {"icon": "🔁", "text": "Đang loading: kéo ra/vào ngưỡng — bắn thêm, cùng trang", "sentence": 2},
+        {"icon": "🏁", "text": "Race gesture × loading — không phải 'tự bắn liên tục'", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Trang demo n4.tsx: hai cái ref — loadingRef là cờ guard đọc giá trị tức thời, pageRef là trang đã commit, gọi chồng thì xin cùng một trang.",
+      "loadMore mở màn bằng guard: đang tải thì return ngay — cờ đặt TRƯỚC khi fetch, hết dữ liệu cũng chặn luôn.",
+      "Bộ đếm calls chỉ đếm lần thật sự đi tới fetch — fetchPage 800 mili giây, response về mới commit trang và hạ cờ.",
+      "Dưới cùng là FlatList: onEndReached trỏ vào loadMore, onEndReachedThreshold 0.3 — toàn bộ cơ chế nằm ở hai prop này."
+    ],
+    "visual": {
+      "filename": "n4.tsx",
+      "language": "tsx",
+      "code": "  const loadingRef = useRef(false); // guard đọc ref (giá trị tức thời), không đọc state cũ trong closure\n  const pageRef = useRef(1); // trang đã commit — các lần gọi chồng đều xin CÙNG trang kế tiếp\n\n  const loadMore = () => {\n    if (guard && loadingRef.current) return; // GUARD ON: đang tải thì bỏ qua\n    if (pageRef.current * PAGE_SIZE >= ALL.length) return; // hết dữ liệu\n    if (guard) loadingRef.current = true; // đặt cờ TRƯỚC khi fetch\n    setCalls((c) => c + 1); // đếm số lần loadMore thật sự chạy tới fetch\n    setLoading(true);\n    const next = pageRef.current + 1;\n    fetchPage(next).then((batch) => {\n      pageRef.current = Math.max(pageRef.current, next);\n      setPage(pageRef.current);\n      setLoading(false);\n      if (guard) loadingRef.current = false;\n    });\n  };\n\n      <FlatList\n        data={items}\n        onEndReached={loadMore}\n        onEndReachedThreshold={0.3}",
+      "steps": [
+        {"from": 1, "to": 2, "sentence": 0},
+        {"from": 4, "to": 7, "sentence": 1},
+        {"from": 8, "to": 17, "sentence": 2},
+        {"from": 1, "to": 22, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "phone",
+    "narration": [
+      "Lên simulator của tôi — Guard OFF, kéo tới đáy rồi TIẾP TỤC kéo giật ra vào trong lúc 800 mili giây loading, lặp qua ba đợt đáy.",
+      "Header vàng nói hết: Trang 4, 100 item, nhưng gọi loadMore tới 6 lần — mỗi cửa sổ loading bị gọi trùng đúng 2 lần.",
+      "Bật Guard ON, danh sách reset về trang 1 — cũng đúng kiểu kéo giật đó trong lúc loading.",
+      "Giờ header ghi: Trang 2, 50 item, gọi loadMore đúng 1 lần — if loadingRef.current return chặn sạch mọi phát bắn thêm trong cửa sổ chờ.",
+      "Đứng yên ở đáy thì không tự bắn lại — phải kéo tiếp mới dính, mà người dùng thật chờ load thì luôn kéo tiếp."
+    ],
+    "visual": {
+      "title": "Bằng chứng: 6 lần vs 1 lần",
+      "screens": [
+        {"src": "screens/perfqa/n4-bug.png", "sentence": 0},
+        {"src": "screens/perfqa/n4-ok.png", "sentence": 2}
+      ],
+      "bullets": [
+        {"icon": "🔥", "text": "OFF: 3 trang — 6 lần gọi, mỗi cửa sổ trùng ×2", "sentence": 1},
+        {"icon": "✅", "text": "ON: cùng gesture — 1 lần mỗi nhịp, cờ chặn sạch", "sentence": 3},
+        {"icon": "🧷", "text": "Đứng yên đáy không tự bắn — kéo tiếp mới dính", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — ba câu chốt, kèm hai cái bẫy hay gài.",
+      "Câu một: onEndReached bắn khi cuộn vào ngưỡng theo chiều dài nhìn thấy — đang chờ API mà kéo ra vào ngưỡng là bắn thêm, race giữa gesture và loading.",
+      "Câu hai: guard bằng cờ loading — if loadingRef.current return, đặt cờ trước khi fetch, hạ cờ khi response về — trên demo của tôi là 6 lần so với 1 lần.",
+      "Câu ba: chọn threshold vừa phải cỡ 0.3 đến 0.5 và gắn footer spinner — người dùng thấy đang tải thì đỡ kéo giật.",
+      "Bẫy một: guard bằng STATE thường là hở — setState cập nhật bất đồng bộ, closure cũ vẫn đọc false và lọt request; phải đọc ref, giá trị tức thời.",
+      "Bẫy hai: phòng thủ nốt tầng dữ liệu — dedupe theo id khi append, lỡ có response trùng trang thì list không vỡ key, không lặp hàng."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {"icon": "1️⃣", "text": "Bắn khi VÀO ngưỡng — đang loading kéo lại là bắn thêm", "sentence": 1},
+        {"icon": "2️⃣", "text": "Guard cờ loading: set trước fetch, hạ khi xong — 6 vs 1", "sentence": 2},
+        {"icon": "3️⃣", "text": "Threshold 0.3–0.5 + footer spinner báo trạng thái", "sentence": 3},
+        {"icon": "⚠️", "text": "Bẫy: cờ bằng state là hở — async, closure cũ; dùng REF", "sentence": 4},
+        {"icon": "⚠️", "text": "Bẫy: dedupe id khi append — lọt request cũng không vỡ list", "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là câu 16 khép lại — onEndReached bắn lại vì mình kéo tiếp trong lúc loading, và một cái ref chặn được tất.",
+      "Câu tiếp theo: ảnh trong list dài — vì sao cuộn giật, ngốn RAM, và expo-image cứu thế nào.",
+      "Video này có bản Shorts 60 giây — cùng câu hỏi, rút gọn để ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số 17!"
+    ],
+    "visual": {
+      "title": "Câu 16/24 hoàn tất — hẹn gặp câu 17!",
+      "summary": [
+        {"text": "onEndReached: bắn khi VÀO ngưỡng — theo màn nhìn thấy", "sentence": 0},
+        {"text": "Race gesture × loading — kéo tiếp là gọi trùng", "sentence": 0},
+        {"text": "Guard loadingRef + dedupe id: 6 lần → 1 lần", "sentence": 0},
+        {"text": "Câu sau: ảnh trong list — expo-image + cache", "sentence": 1}
+      ],
+      "next": "Câu 17/24: Ảnh trong list dài — expo-image 🎤"
+    }
+  }
+]

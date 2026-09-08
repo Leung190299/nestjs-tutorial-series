@@ -1,0 +1,122 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại phòng phỏng vấn Frontend — lô mới bắt đầu từ hôm nay: hiệu năng khi load nhiều dữ liệu, mở màn bằng React Native.",
+      "Câu hỏi từ nhà tuyển dụng: Render 5.000 dòng dữ liệu, vì sao ScrollView với map lại đơ, còn FlatList thì không?",
+      "Đây là câu số 13 của series — sáu câu React Native, sáu câu Flutter, câu nào cũng có demo đo số thật trên simulator, rồi chốt cách trả lời trước nhà tuyển dụng."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #13: Vì sao FlatList mượt hơn?",
+      "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 13/24",
+      "badge": "Lô mới · Hiệu năng dữ liệu"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Vì sao câu này hay bị hỏi? Vì list dài là bài toán ngày nào cũng gặp, và cách bạn trả lời lộ ngay bạn có hiểu cơ chế render của React Native hay không.",
+      "ScrollView với items.map render TOÀN BỘ 5.000 component ngay lần dựng đầu tiên — JS thread chạy 5.000 lần render, native phải giữ 5.000 view trong bộ nhớ.",
+      "FlatList xây trên VirtualizedList và dùng virtualization: chỉ giữ một render window hữu hạn các item đang hoạt động.",
+      "Item ngoài cửa sổ bị unmount thật, thay bằng khoảng trắng đúng kích thước — docs gọi là appropriately sized blank space.",
+      "Nhờ vậy thời gian dựng và bộ nhớ gần như không phụ thuộc độ dài danh sách — chỉ phụ thuộc kích thước cửa sổ."
+    ],
+    "visual": {
+      "title": "Cơ chế: virtualization",
+      "bullets": [
+        {"icon": "🐢", "text": "ScrollView + map: render cả 5.000 ngay lần dựng đầu", "sentence": 1},
+        {"icon": "🪟", "text": "FlatList = virtualization: chỉ giữ render window hữu hạn", "sentence": 2},
+        {"icon": "⬜", "text": "Item ngoài cửa sổ bị unmount — thay bằng blank space đúng cỡ", "sentence": 3},
+        {"icon": "📏", "text": "Chi phí theo kích thước cửa sổ, không theo độ dài list", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là trang demo thật — n1.tsx: mỗi Row tăng biến đếm renderCount mỗi lần nó được render, để mình đếm chính xác bao nhiêu hàng đã dựng.",
+      "Nhánh một: ScrollView với items.map — 5.000 phần tử bị nhét thẳng vào cây UI ngay khi dựng, ScrollView không có quyền từ chối.",
+      "Nhánh hai: FlatList chỉ nhận data và renderItem — nó toàn quyền quyết định gọi hàm này lúc nào, cho item nào.",
+      "Cùng một Row, cùng 5.000 item — khác biệt duy nhất là ai cầm quyền quyết định render bao nhiêu."
+    ],
+    "visual": {
+      "filename": "n1.tsx",
+      "language": "tsx",
+      "code": "function Row({ item }: { item: Item }) {\n  renderCount++;\n  return (\n    <View style={[styles.row, { borderLeftColor: item.color }]}>\n      <Text style={styles.title}>{item.title}</Text>\n    </View>\n  );\n}\n\n  if (mode === 'scroll') {\n    return (\n      <ScrollView key={`scroll-${run}`} style={styles.list}>\n        {items.map((it) => (\n          <Row key={it.id} item={it} />\n        ))}\n      </ScrollView>\n    );\n  }\n  return (\n    <FlatList\n      data={items}\n      renderItem={({ item }) => <Row item={item} />}",
+      "steps": [
+        {"from": 1, "to": 8, "sentence": 0},
+        {"from": 10, "to": 18, "sentence": 1},
+        {"from": 19, "to": 22, "sentence": 2},
+        {"from": 1, "to": 22, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "phone",
+    "narration": [
+      "Số đo thật trên simulator của tôi — bấm chế độ ScrollView với map trước.",
+      "Header ghi rõ: đã render 5.000 trên 5.000 item, dựng mất 1.381 mili giây — màn hình khựng gần một giây rưỡi.",
+      "Giờ bấm sang FlatList — cùng danh sách, cùng component Row.",
+      "Chỉ 10 trên 5.000 item được render, dựng mất 198 mili giây — con số 10 chính là initialNumToRender mặc định của FlatList.",
+      "Nhanh hơn khoảng 7 lần, và danh sách càng dài khoảng cách càng giãn — ScrollView trả giá theo độ dài, FlatList trả theo cửa sổ."
+    ],
+    "visual": {
+      "title": "Bằng chứng: 5000 vs 10 item",
+      "screens": [
+        {"src": "screens/perfqa/n1-scrollview.png", "sentence": 0},
+        {"src": "screens/perfqa/n1-flatlist.png", "sentence": 2}
+      ],
+      "bullets": [
+        {"icon": "🐢", "text": "ScrollView + map: 5000/5000 item · 1381ms", "sentence": 1},
+        {"icon": "⚡", "text": "FlatList: 10/5000 item · 198ms (initialNumToRender)", "sentence": 3},
+        {"icon": "📏", "text": "Càng dài càng chênh — cửa sổ thì không đổi", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — chốt gọn ba câu, học thuộc luôn được.",
+      "Câu một: ScrollView với map render toàn bộ danh sách ngay lần dựng đầu, chi phí tỉ lệ thuận với số item.",
+      "Câu hai: FlatList dùng virtualization — chỉ giữ một render window hữu hạn, item ngoài cửa sổ bị unmount và thay bằng khoảng trắng đúng kích thước.",
+      "Câu ba: nhờ vậy thời gian dựng và bộ nhớ phụ thuộc kích thước cửa sổ, không phụ thuộc độ dài danh sách.",
+      "Bẫy hay gài: FlatList không phải lúc nào cũng thắng — render ngoài màn là bất đồng bộ, cuộn quá nhanh sẽ thấy khoảng trắng; virtualization là CHIẾN LƯỢC đánh đổi, không phải phép màu.",
+      "Và bẫy y hệt tồn tại bên Flutter với Column trong SingleChildScrollView — xem câu số 19 của series để so hai thế giới."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {"icon": "1️⃣", "text": "ScrollView+map: render hết ngay — chi phí theo số item", "sentence": 1},
+        {"icon": "2️⃣", "text": "FlatList: render window hữu hạn — ngoài cửa sổ là blank space", "sentence": 2},
+        {"icon": "3️⃣", "text": "Chi phí theo cửa sổ, không theo độ dài danh sách", "sentence": 3},
+        {"icon": "⚠️", "text": "Bẫy: cuộn nhanh vẫn trắng màn — CHIẾN LƯỢC đánh đổi, không phép màu", "sentence": 4},
+        {"icon": "🧭", "text": "Bẫy y hệt bên Flutter với Column — xem câu #19 của series", "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu 13 — mở màn lô hiệu năng bằng bài học kinh điển nhất của danh sách dài trong React Native.",
+      "Câu tiếp theo: FlatList vẫn giật thì tối ưu tiếp bằng gì — keyExtractor, getItemLayout, windowSize và những prop nhà tuyển dụng rất thích hỏi.",
+      "Video này có bản Shorts 60 giây — cùng câu hỏi, rút gọn để ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số 14!"
+    ],
+    "visual": {
+      "title": "Câu 13/24 hoàn tất — hẹn gặp câu 14!",
+      "summary": [
+        {"text": "ScrollView+map: 5000/5000 · 1381ms — trả giá theo độ dài", "sentence": 0},
+        {"text": "FlatList: 10/5000 · 198ms — render window hữu hạn", "sentence": 0},
+        {"text": "Câu sau: getItemLayout, windowSize — tối ưu FlatList", "sentence": 1},
+        {"text": "Có bản Shorts 60 giây để ôn nhanh", "sentence": 2}
+      ],
+      "next": "Câu 14/24: Tối ưu FlatList — prop nào cần biết? 🎤"
+    }
+  }
+]

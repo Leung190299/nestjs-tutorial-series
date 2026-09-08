@@ -1,0 +1,190 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn Frontend — câu thứ hai mươi hai, infinite scroll phía Flutter.",
+      "Câu hỏi từ nhà tuyển dụng: Infinite scroll bằng ScrollController — API bị dội 45 lần trong một cú kéo. Vì sao, và chặn thế nào?",
+      "Demo đếm từng lần gọi loadMore trên simulator, rồi chốt cách trả lời trước nhà tuyển dụng."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #22: Infinite scroll Flutter — guard cho ScrollController",
+      "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 22/24",
+      "badge": "Flutter · Infinite scroll"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Câu này soi một khác biệt căn bản: listener của ScrollController là callback MỨC PIXEL — nó chạy MỖI scroll event, tức gần như mỗi khung hình khi list đang cuộn hay đang bounce.",
+      "Điều kiện pixels lớn hơn maxScrollExtent trừ 200 đúng LIÊN TỤC suốt vùng đáy — trang mới chưa về, content chưa dài ra, nên trong 800ms chờ fetch, mỗi scroll event lọt qua là thêm một lần gọi loadMore.",
+      "So với câu số 16 bên React Native: onEndReached bắn theo SỰ KIỆN chạm ngưỡng nên cùng bài đo chỉ dội 6 lần — Flutter nghe thẳng pixel nên dội tới 45 lần, dữ dội hơn hẳn."
+    ],
+    "visual": {
+      "title": "Cơ chế: listener theo pixel",
+      "bullets": [
+        {
+          "icon": "📡",
+          "text": "Listener MỨC PIXEL — chạy mỗi scroll event",
+          "sentence": 0
+        },
+        {
+          "icon": "🕳️",
+          "text": "pixels > maxScrollExtent − 200: đúng suốt vùng đáy",
+          "sentence": 1
+        },
+        {
+          "icon": "⏱️",
+          "text": "800ms loading: mỗi event lọt qua = 1 call trùng",
+          "sentence": 1
+        },
+        {
+          "icon": "🧭",
+          "text": "RN câu #16: onEndReached dội 6 — Flutter dội 45",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Trang demo thật — f4_infinite_scroll.dart, trong listener _onScroll: so position.pixels với maxScrollExtent trừ 200 — cách đáy dưới 200px là gọi _loadMore, và phép so này chạy lại MỖI scroll event.",
+      "_loadMore chỉ có một chốt chặn: bật guard thì if _loading return — cờ _loading nghĩa là _inFlight lớn hơn 0, đang có fetch bay là chặn ngay từ cửa.",
+      "_fire xin trang kế: _page cộng 1 — và điểm sống còn nằm ở setState đầu tiên: _inFlight tăng NGAY TRƯỚC await fetchPage, cửa sổ race đóng lại từ trước khi bắt đầu chờ mạng.",
+      "Còn khi guard OFF, mọi call chồng đều xin CÙNG một trang — vì _page chỉ commit khi response về; bug hiện nguyên hình trên bộ đếm calls chứ không phải trên số hàng."
+    ],
+    "visual": {
+      "filename": "f4_infinite_scroll.dart",
+      "language": "clike",
+      "code": "    if (_controller.position.pixels >\n        _controller.position.maxScrollExtent - 200) {\n      _loadMore();\n    }\n  }\n\n  void _loadMore() {\n    if (widget.guard) {\n      if (_loading) return; // guard: cờ chặn gọi chồng\n    }\n    // Guard ON: cờ _loading bật ngay trong _fire (TRƯỚC await) qua _inFlight++.\n    _fire();\n  }\n\n  Future<void> _fire() async {\n    // Trang xin = trang đã commit + 1 → các call chồng của OFF đều xin\n    // CÙNG một trang (mô phỏng đúng bug \"bắn N request cho 1 trang\").\n    final req = _page + 1;\n    if (req > _totalPages) return; // hết data\n    setState(() {\n      _calls++;\n      _inFlight++; // set cờ TRƯỚC await",
+      "steps": [
+        {
+          "from": 1,
+          "to": 5,
+          "sentence": 0
+        },
+        {
+          "from": 7,
+          "to": 13,
+          "sentence": 1
+        },
+        {
+          "from": 15,
+          "to": 22,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "phone",
+    "narration": [
+      "Số thật trên simulator của tôi — Guard OFF trước: một cú fling tới đáy, rồi KÉO TIẾP trong lúc 800ms đang loading — đúng kiểu người dùng sốt ruột.",
+      "Header vàng đọc: Trang 3, 75 item, gọi loadMore 45 lần — 45 request chỉ để lấy 2 trang dữ liệu mới, tức khoảng 22 lần xin cùng một trang trong mỗi cửa sổ loading.",
+      "Giờ Guard ON — kéo chậm tới đáy rồi đứng yên chờ đúng một nhịp load.",
+      "Trang 2, 50 item, gọi loadMore đúng 1 lần — if _loading return chặn sạch mọi phát bắn thừa của listener trong cửa sổ 800ms."
+    ],
+    "visual": {
+      "title": "Bằng chứng: 45 lần vs 1 lần",
+      "screens": [
+        {
+          "src": "screens/perfqa/f4-bug.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/perfqa/f4-ok.png",
+          "sentence": 2
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🔴",
+          "text": "OFF: 45 lần cho 2 trang mới — ~22 call/cửa sổ",
+          "sentence": 1
+        },
+        {
+          "icon": "🟢",
+          "text": "ON: 1 lần mỗi nhịp — guard chặn từ cửa",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — ba câu chốt.",
+      "Câu một: listener của ScrollController chạy mỗi scroll event và điều kiện vùng đáy đúng liên tục trong lúc chờ fetch — không guard thì một cú kéo là hàng chục call trùng.",
+      "Câu hai: guard bằng cờ loading — if _loading return, và cờ phải set TRƯỚC await; set sau await là cửa sổ race vẫn mở nguyên trong suốt thời gian chờ mạng.",
+      "Câu ba: hiểu đúng số đo — Guard ON mà thấy 2 call với gesture hung hãn thì đó là 2 cửa sổ loading hợp lệ, mỗi cửa sổ đúng 1 call, không phải guard hở.",
+      "Bẫy cộng thêm: dedupe theo id khi append là phòng tuyến thứ hai — lỡ có response trùng trang thì list vẫn không vỡ; và đừng quên removeListener cộng dispose cho controller."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Listener bắn mỗi scroll event — không guard là call trùng",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Cờ set TRƯỚC await — set sau là race vẫn mở",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "ON 2 call = 2 cửa sổ hợp lệ — không phải guard hở",
+          "sentence": 3
+        },
+        {
+          "icon": "🛡️",
+          "text": "Dedupe id khi append = phòng tuyến 2 · nhớ dispose",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu 22 — ScrollController không có debounce sẵn, kỷ luật nằm ở cái cờ bạn tự đặt.",
+      "Câu tiếp theo: ảnh lớn trong list — vì sao ảnh 4K nuốt hơn 30MB RAM, và cacheWidth cứu thế nào?",
+      "Video này có bản Shorts 60 giây — cùng câu hỏi, rút gọn để ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số 23!"
+    ],
+    "visual": {
+      "title": "Câu 22/24 hoàn tất — hẹn gặp câu 23!",
+      "summary": [
+        {
+          "text": "Listener pixel bắn mỗi event — OFF: 45 call/1 cú kéo",
+          "sentence": 0
+        },
+        {
+          "text": "Guard: if (_loading) return; — cờ TRƯỚC await",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: ảnh lớn trong list — cacheWidth",
+          "sentence": 1
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 23/24: ảnh 4K nuốt 30MB RAM? 🎤"
+    }
+  }
+]

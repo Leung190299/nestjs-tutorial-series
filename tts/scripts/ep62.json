@@ -1,0 +1,197 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn Frontend, câu số 18 — hôm nay nói về JS thread và dữ liệu lớn.",
+      "Câu hỏi từ nhà tuyển dụng: App của bạn nhận về 300.000 bản ghi JSON — parse xong thì UI đứng hình. Vì sao, và xử thế nào?",
+      "Bằng chứng là hai con số trên cùng một đồng hồ: một cục hụt 564 mili giây, chia lô chỉ còn 127."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #18: Data lớn chặn JS thread — đo và né thế nào?",
+      "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 18/24",
+      "badge": "JS thread · setTimeout(0)"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "JavaScript trong React Native chạy trên MỘT thread duy nhất — setState, timer, xử lý sự kiện chạm đều xếp hàng trên đó.",
+      "Một khối đồng bộ dài chiếm event loop là mọi cập nhật UI từ JS phải chờ nó xong — màn hình đứng hình theo nghĩa đen.",
+      "Cách đo rẻ nhất: setInterval 100 mili giây cập nhật đồng hồ, mỗi tick tính gap so với tick trước — gap phình to nghĩa là thread vừa bị chiếm.",
+      "Cách né trong thuần JS: chia việc thành từng lô, giữa các lô setTimeout 0 để nhường event loop cho UI kịp thở."
+    ],
+    "visual": {
+      "title": "Cơ chế: một thread — đo gap, chia lô",
+      "bullets": [
+        {
+          "icon": "🧵",
+          "text": "JS trong RN: MỘT thread — mọi thứ xếp hàng",
+          "sentence": 0
+        },
+        {
+          "icon": "🧊",
+          "text": "Khối đồng bộ dài = UI từ JS chờ đến hết",
+          "sentence": 1
+        },
+        {
+          "icon": "⏱️",
+          "text": "Đo: gap giữa 2 tick setInterval 100ms",
+          "sentence": 2
+        },
+        {
+          "icon": "🍰",
+          "text": "Né: chia lô + setTimeout(0) nhường event loop",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Trang demo n6.tsx — nhánh một runBlocked: parse và xử lý CẢ 60 trang JSON trong MỘT vòng lặp đồng bộ trên JS thread.",
+      "setTimeout 50 chỉ để chữ đang chạy kịp vẽ — còn vòng for bên trong chiếm thread một mạch từ trang 0 đến trang 59.",
+      "Nhánh hai runChunked: hàm step mỗi lượt xử lý ĐÚNG một trang 5.000 bản ghi, rồi setTimeout 0 nhường event loop trước khi sang trang kế.",
+      "Trang cuối xong mới finish chốt tổng — hai nhánh cùng khối lượng, chỉ khác cách xếp việc lên event loop."
+    ],
+    "visual": {
+      "filename": "n6.tsx",
+      "language": "tsx",
+      "code": "  const runBlocked = () => {\n    begin('blocked');\n    // setTimeout(50) để state \"đang chạy\" kịp vẽ trước khi thread bị chiếm.\n    setTimeout(() => {\n      const t0 = performance.now();\n      let acc = 0;\n      for (let p = 0; p < PAGE_COUNT; p++) acc += processPage(pages[p]);\n      finish('blocked', performance.now() - t0, acc);\n    }, 50);\n  };\n\n  // Nhánh 2: cùng 60 trang nhưng mỗi setTimeout(0) xử lý đúng 1 trang (5k).\n  const runChunked = () => {\n    begin('chunked');\n    const t0 = performance.now();\n    let acc = 0;\n    let p = 0;\n    const step = () => {\n      acc += processPage(pages[p]);\n      p++;\n      if (p < PAGE_COUNT) setTimeout(step, 0);\n      else finish('chunked', performance.now() - t0, acc);",
+      "steps": [
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 0
+        },
+        {
+          "from": 4,
+          "to": 9,
+          "sentence": 1
+        },
+        {
+          "from": 13,
+          "to": 22,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "phone",
+    "narration": [
+      "Simulator của tôi — bấm Parse 300k một cục: đồng hồ khựng lại, box đỏ báo tick bị hụt 564 mili giây, tổng parse cộng xử lý 513.",
+      "Tick 100 mili giây mà hụt 564 — khoảng 5 tick đồng hồ mất trắng, chạm nút trong lúc đó cũng xếp hàng chờ.",
+      "Sang nhánh chia lô: tick bị hụt chỉ 127 mili giây — dưới ngưỡng hụt 150, đồng hồ vẫn nhảy đều.",
+      "Đổi lại tổng là 985 mili giây — CHẬM HƠN hẳn 513 của một cục; qua các lần chạy, nhánh chia lô chậm hơn 2 đến 3 lần.",
+      "Và nhìn checksum: hai nhánh cùng 12050890 — đúng một khối lượng việc, chỉ khác cách trải nó ra."
+    ],
+    "visual": {
+      "title": "Bằng chứng: 564ms vs 127ms",
+      "screens": [
+        {
+          "src": "screens/perfqa/n6-blocked.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/perfqa/n6-chunked.png",
+          "sentence": 2
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🥶",
+          "text": "Một cục: hụt 564ms · tổng 513ms — mất ~5 tick",
+          "sentence": 1
+        },
+        {
+          "icon": "🫁",
+          "text": "Chia lô: hụt 127ms — đồng hồ vẫn chạy",
+          "sentence": 2
+        },
+        {
+          "icon": "⚖️",
+          "text": "Tổng 985ms vs 513ms — chậm hơn 2–3× · checksum y hệt",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — ba câu chốt, kèm cái bẫy đắt nhất của tập này.",
+      "Câu một: JS trong RN chạy một thread — khối parse đồng bộ 300 nghìn bản ghi chặn mọi cập nhật UI từ JS; tôi đo bằng gap giữa hai tick timer.",
+      "Câu hai: chia dữ liệu thành lô 5.000, mỗi setTimeout 0 xử lý một lô rồi nhường event loop — maxGap từ 564 xuống 127.",
+      "Câu ba — bẫy đắt nhất: chia lô KHÔNG mua tốc độ, tổng chậm hơn 2 đến 3 lần; nó mua SỰ PHẢN HỒI — app vẫn sống trong lúc làm việc nặng.",
+      "RN thuần JS không có isolate tích hợp — trade-off một thread; bên Flutter có Isolate.run là parallelism thật, bẫy y hệt bên đó — xem câu số 24."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Một thread — đo bằng gap giữa 2 tick timer",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Chia lô 5k + setTimeout(0): 564 → 127ms",
+          "sentence": 2
+        },
+        {
+          "icon": "🪤",
+          "text": "Chia lô mua PHẢN HỒI, không mua tốc độ (2–3× chậm)",
+          "sentence": 3
+        },
+        {
+          "icon": "🧭",
+          "text": "RN không có isolate — Flutter Isolate.run: xem câu #24",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là câu 18 khép lại — một thread, đo bằng gap, chia lô cho UI thở.",
+      "Câu tiếp theo mở màn khối Flutter: 5.000 item nhét thẳng vào Column — vì sao first frame chậm tê tái.",
+      "Video này có bản Shorts 60 giây — cùng câu hỏi, rút gọn để ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số 19!"
+    ],
+    "visual": {
+      "title": "Câu 18/24 hoàn tất — hẹn gặp câu 19!",
+      "summary": [
+        {
+          "text": "JS trong RN một thread — khối đồng bộ chặn UI từ JS",
+          "sentence": 0
+        },
+        {
+          "text": "Đo bằng gap giữa 2 tick — hụt 564ms vs 127ms",
+          "sentence": 0
+        },
+        {
+          "text": "Chia lô mua phản hồi, không mua tốc độ — tổng 2–3× chậm",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: Column 5000 item bên Flutter — first frame",
+          "sentence": 1
+        }
+      ],
+      "next": "Câu 19/24: Column 5000 item — first frame chậm? 🎤"
+    }
+  }
+]

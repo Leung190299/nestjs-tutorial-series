@@ -1,0 +1,62 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "FlatList của bạn không nhảy được tới item 4999 — thiếu đúng một prop.",
+      "Câu hỏi phỏng vấn React Native — trả lời trong 60 giây."
+    ],
+    "visual": {
+      "question": "Vì sao scrollToIndex fail — và getItemLayout cứu thế nào?",
+      "framework": "rn"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Không biết trước chiều cao, FlatList phải đo từng item — scrollToIndex ra ngoài vùng đã đo là fail.",
+      "getItemLayout đưa trước công thức: length 64, offset bằng 64 nhân index — vị trí mọi item tính bằng số học.",
+      "Có công thức rồi, nhảy tới 4999 là tức thì."
+    ],
+    "visual": {
+      "filename": "n2.tsx",
+      "language": "tsx",
+      "code": "// 1 hàng cao đúng 64px\nconst ROW_H = 64;\n\n<FlatList\n  data={items}\n  getItemLayout={(_, i) => ({\n    length: ROW_H,\n    offset: ROW_H * i,\n    index: i,\n  })}\n  windowSize={5}\n/>\n\nlist.scrollToIndex({ index: 4999 })",
+      "steps": [
+        {"from": 1, "to": 5, "sentence": 0},
+        {"from": 6, "to": 12, "sentence": 1},
+        {"from": 1, "to": 14, "sentence": 2}
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Bằng chứng trên simulator: bấm nhảy khi thiếu getItemLayout — list đứng yên, banner đỏ scrollToIndex FAIL.",
+      "Nó mới đo được tới item 118 — còn khi bật getItemLayout, cùng nút đó nhảy tức thì 49 mili giây."
+    ],
+    "visual": {
+      "src": "screens/perfqa/n2-fail.png",
+      "caption": "FAIL — mới đo tới #118 / 4999"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: getItemLayout đưa trước length và offset — FlatList bỏ bước đo bất đồng bộ.",
+      "Nó là điều kiện bắt buộc để scrollToIndex nhảy ra ngoài render window.",
+      "Bẫy: chỉ dùng khi item cao cố định — cao biến thiên mà khai láo là cuộn sai vị trí."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {"icon": "🧮", "text": "getItemLayout = length/offset — bỏ đo async", "sentence": 0},
+        {"icon": "🚫", "text": "scrollToIndex xa: bắt buộc có nó", "sentence": 1}
+      ],
+      "trap": "Item cao biến thiên — khai láo là cuộn sai"
+    }
+  }
+]

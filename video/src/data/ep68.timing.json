@@ -1,0 +1,281 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #24: Isolate.run — parse data lớn không chặn UI",
+        "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 24/24",
+        "badge": "Flutter · Isolate"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep68/scene-01-0-3426c28c.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep68/scene-01-1-bdf761e8.wav",
+          "startFrame": 181,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep68/scene-01-2-6169a86a.wav",
+          "startFrame": 384,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 556
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Cơ chế: main isolate — một luồng",
+        "bullets": [
+          {
+            "icon": "🧵",
+            "text": "Main isolate — 1 luồng · quá 16ms = jank",
+            "sentence": 0
+          },
+          {
+            "icon": "🚫",
+            "text": "await không tạo thread — vẫn chặn main",
+            "sentence": 1
+          },
+          {
+            "icon": "🚀",
+            "text": "Isolate.run: spawn → chạy → trả về → tự tắt",
+            "sentence": 1
+          },
+          {
+            "icon": "🔁",
+            "text": "RN #18: chia lô 1 thread · Flutter: isolate thật",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep68/scene-02-0-d4539448.wav",
+          "startFrame": 0,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep68/scene-02-1-98e2611d.wav",
+          "startFrame": 251,
+          "durationInFrames": 298
+        },
+        {
+          "file": "audio/ep68/scene-02-2-40bb4ae7.wav",
+          "startFrame": 557,
+          "durationInFrames": 228
+        }
+      ],
+      "durationInFrames": 803
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "f6_isolate.dart",
+        "language": "clike",
+        "code": "/// điểm khác biệt duy nhất giữa 2 nhánh: nhánh 1 gọi thẳng trên main isolate,\n/// nhánh 2 gọi bên trong Isolate.run và chỉ trả bộ số gọn này về\n/// (\"đừng chuyển cả núi object về, trả kết quả gọn\").\n_Summary _decodeAndSum(String big) {\n  final sw = Stopwatch()..start();\n  final list = jsonDecode(big) as List<dynamic>;\n  var checksum = 0;\n  for (final m in list) {\n    final map = m as Map<String, dynamic>;\n    checksum +=\n        (map['title'] as String).length + (map['subtitle'] as String).length;\n  }\n  sw.stop();\n  return (list.length, checksum, sw.elapsedMilliseconds);\n}\n\n/// Helper TOP-LEVEL: closure gửi vào Isolate.run phải tạo ở scope chỉ chứa\n/// `big` — nếu tạo trực tiếp trong method của State, context của closure kéo\n/// theo `this` (State chứa Ticker) → \"Illegal argument in isolate message:\n/// object is unsendable\" (đã dính thật khi viết trang này, ghi report).\nFuture<_Summary> _decodeInIsolate(String big) =>\n    Isolate.run(() => _decodeAndSum(big));",
+        "steps": [
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 15,
+            "sentence": 1
+          },
+          {
+            "from": 16,
+            "to": 22,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep68/scene-03-0-205ee90e.wav",
+          "startFrame": 0,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep68/scene-03-1-9723a943.wav",
+          "startFrame": 260,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep68/scene-03-2-a1a45f22.wav",
+          "startFrame": 472,
+          "durationInFrames": 272
+        },
+        {
+          "file": "audio/ep68/scene-03-3-50dea8ad.wav",
+          "startFrame": 752,
+          "durationInFrames": 202
+        }
+      ],
+      "durationInFrames": 972
+    },
+    {
+      "id": "scene-04",
+      "type": "phone",
+      "visual": {
+        "title": "Bằng chứng: gap 235ms vs 16ms",
+        "screens": [
+          {
+            "src": "screens/perfqa/f6-blocked.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/perfqa/f6-isolate.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🔴",
+            "text": "Main: gap 235ms · tổng 223ms — đứng hình",
+            "sentence": 1
+          },
+          {
+            "icon": "🟢",
+            "text": "Isolate.run: gap 16ms = 1 frame · tổng 320ms",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep68/scene-04-0-369eaf05.wav",
+          "startFrame": 0,
+          "durationInFrames": 317
+        },
+        {
+          "file": "audio/ep68/scene-04-1-854fccf4.wav",
+          "startFrame": 325,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep68/scene-04-2-4930537a.wav",
+          "startFrame": 542,
+          "durationInFrames": 276
+        },
+        {
+          "file": "audio/ep68/scene-04-3-69fe9779.wav",
+          "startFrame": 826,
+          "durationInFrames": 243
+        }
+      ],
+      "durationInFrames": 1087
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "1 luồng — await không cứu · Isolate.run/compute",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Gap 235 → 16ms · tổng chỉ ~1,3–1,5×",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "String vào — kết quả GỌN ra",
+            "sentence": 2
+          },
+          {
+            "icon": "💣",
+            "text": "Closure capture this → unsendable — helper top-level",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep68/scene-05-0-dc71ec04.wav",
+          "startFrame": 0,
+          "durationInFrames": 279
+        },
+        {
+          "file": "audio/ep68/scene-05-1-a4ceadcf.wav",
+          "startFrame": 287,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep68/scene-05-2-97303dbf.wav",
+          "startFrame": 550,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep68/scene-05-3-3e05a3c3.wav",
+          "startFrame": 724,
+          "durationInFrames": 252
+        }
+      ],
+      "durationInFrames": 994
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Đủ 24/24 — cảm ơn bạn đã luyện cùng!",
+        "summary": [
+          {
+            "text": "Main isolate chặn: gap 235ms — spinner đứng hình",
+            "sentence": 0
+          },
+          {
+            "text": "Isolate.run: gap 16ms = 1 frame · tổng ~1,3–1,5×",
+            "sentence": 0
+          },
+          {
+            "text": "Đủ 24 câu — luyện lại từ câu #1 trên playlist",
+            "sentence": 1
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Đủ 24/24 — luyện từ câu #1! 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep68/scene-06-0-f8dec63f.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep68/scene-06-1-7ce9cfd4.wav",
+          "startFrame": 200,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep68/scene-06-2-06a073d2.wav",
+          "startFrame": 364,
+          "durationInFrames": 178
+        }
+      ],
+      "durationInFrames": 560
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #14: Tối ưu FlatList thế nào?",
+        "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 14/24",
+        "badge": "getItemLayout · windowSize"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep58/scene-01-0-3223d484.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep58/scene-01-1-95c919b4.wav",
+          "startFrame": 148,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep58/scene-01-2-cb095bc3.wav",
+          "startFrame": 320,
+          "durationInFrames": 236
+        }
+      ],
+      "durationInFrames": 574
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Cơ chế: đo async vs công thức",
+        "bullets": [
+          {
+            "icon": "📏",
+            "text": "Không biết size → FlatList phải ĐO từng item bất đồng bộ",
+            "sentence": 0
+          },
+          {
+            "icon": "🚫",
+            "text": "scrollToIndex ngoài render window: BẮT BUỘC getItemLayout",
+            "sentence": 1
+          },
+          {
+            "icon": "🧮",
+            "text": "getItemLayout = công thức length/offset — bỏ hẳn bước đo",
+            "sentence": 2
+          },
+          {
+            "icon": "🪟",
+            "text": "windowSize default 21 màn — trade-off RAM ↔ khoảng trắng",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep58/scene-02-0-b829f5f1.wav",
+          "startFrame": 0,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep58/scene-02-1-d0992355.wav",
+          "startFrame": 229,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/ep58/scene-02-2-891de922.wav",
+          "startFrame": 485,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep58/scene-02-3-3a7df26e.wav",
+          "startFrame": 709,
+          "durationInFrames": 233
+        }
+      ],
+      "durationInFrames": 960
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "n2.tsx",
+        "language": "tsx",
+        "code": "const ROW_H = 64; // chiều cao cố định — điều kiện để getItemLayout đúng\n\n  const jump = () => {\n    setBanner(null);\n    startRef.current = performance.now();\n    listRef.current?.scrollToIndex({ index: TOTAL - 1, animated: false });\n  };\n\n        <FlatList\n        getItemLayout={\n          on ? (_, index) => ({ length: ROW_H, offset: ROW_H * index, index }) : undefined\n        }\n        windowSize={on ? 5 : undefined}\n        initialNumToRender={on ? 12 : undefined}\n        onScrollToIndexFailed={(info) => {\n          setBanner({\n            kind: 'fail',\n            msg: 'scrollToIndex FAIL — thiếu getItemLayout',\n            detail: `index ${info.index} ngoài render window · mới đo được tới #${info.highestMeasuredFrameIndex}`,\n          });\n        }}\n        />",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 9,
+            "to": 12,
+            "sentence": 1
+          },
+          {
+            "from": 13,
+            "to": 21,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep58/scene-03-0-104eb566.wav",
+          "startFrame": 0,
+          "durationInFrames": 303
+        },
+        {
+          "file": "audio/ep58/scene-03-1-64441a2c.wav",
+          "startFrame": 311,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep58/scene-03-2-246bb4e6.wav",
+          "startFrame": 528,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep58/scene-03-3-5bd5eb9c.wav",
+          "startFrame": 796,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 966
+    },
+    {
+      "id": "scene-04",
+      "type": "phone",
+      "visual": {
+        "title": "Bằng chứng: FAIL vs 49ms",
+        "screens": [
+          {
+            "src": "screens/perfqa/n2-fail.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/perfqa/n2-ok.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🛑",
+            "text": "OFF: FAIL — 4999 ngoài window · mới đo được tới #118",
+            "sentence": 1
+          },
+          {
+            "icon": "⚡",
+            "text": "ON: nhảy tức thì 49ms — đứng trọn Bản ghi #4999",
+            "sentence": 3
+          },
+          {
+            "icon": "🎯",
+            "text": "Khác biệt ĐƯỢC/KHÔNG ĐƯỢC — không phải nhanh/chậm",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep58/scene-04-0-e8f6b975.wav",
+          "startFrame": 0,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep58/scene-04-1-be2c6c48.wav",
+          "startFrame": 193,
+          "durationInFrames": 262
+        },
+        {
+          "file": "audio/ep58/scene-04-2-f4ff4bbb.wav",
+          "startFrame": 463,
+          "durationInFrames": 80
+        },
+        {
+          "file": "audio/ep58/scene-04-3-64c486f5.wav",
+          "startFrame": 551,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep58/scene-04-4-7e61a976.wav",
+          "startFrame": 730,
+          "durationInFrames": 192
+        }
+      ],
+      "durationInFrames": 940
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "getItemLayout: bỏ đo async — bắt buộc cho scrollToIndex xa",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "keyExtractor key ổn định · windowSize 21 màn mặc định",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Số thật: FAIL → 49ms — đo rồi mới chỉnh",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: item cao biến thiên — khai láo là cuộn sai vị trí",
+            "sentence": 4
+          },
+          {
+            "icon": "⚠️",
+            "text": "removeClippedSubviews: detach, KHÔNG deallocate RAM",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep58/scene-05-0-bd3133f9.wav",
+          "startFrame": 0,
+          "durationInFrames": 99
+        },
+        {
+          "file": "audio/ep58/scene-05-1-981fb800.wav",
+          "startFrame": 107,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep58/scene-05-2-d5e8538b.wav",
+          "startFrame": 375,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/ep58/scene-05-3-42baf9a7.wav",
+          "startFrame": 631,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep58/scene-05-4-3dcd32a1.wav",
+          "startFrame": 860,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep58/scene-05-5-36015790.wav",
+          "startFrame": 1065,
+          "durationInFrames": 221
+        }
+      ],
+      "durationInFrames": 1304
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 14/24 hoàn tất — hẹn gặp câu 15!",
+        "summary": [
+          {
+            "text": "getItemLayout: công thức length/offset — bỏ đo async",
+            "sentence": 0
+          },
+          {
+            "text": "scrollToIndex xa: FAIL → nhảy tức thì 49ms",
+            "sentence": 0
+          },
+          {
+            "text": "windowSize 21 màn · removeClippedSubviews không tiết kiệm RAM",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: React.memo — 1 item đổi, cả list re-render",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 15/24: React.memo cho renderItem 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep58/scene-06-0-f57f759f.wav",
+          "startFrame": 0,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep58/scene-06-1-27b43434.wav",
+          "startFrame": 188,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep58/scene-06-2-82aad33d.wav",
+          "startFrame": 391,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep58/scene-06-3-a04d2747.wav",
+          "startFrame": 539,
+          "durationInFrames": 84
+        }
+      ],
+      "durationInFrames": 641
+    }
+  ]
+}

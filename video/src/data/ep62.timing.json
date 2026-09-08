@@ -1,0 +1,306 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #18: Data lớn chặn JS thread — đo và né thế nào?",
+        "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 18/24",
+        "badge": "JS thread · setTimeout(0)"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep62/scene-01-0-96c71310.wav",
+          "startFrame": 0,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep62/scene-01-1-3c6082d1.wav",
+          "startFrame": 150,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep62/scene-01-2-879b25b3.wav",
+          "startFrame": 360,
+          "durationInFrames": 200
+        }
+      ],
+      "durationInFrames": 578
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Cơ chế: một thread — đo gap, chia lô",
+        "bullets": [
+          {
+            "icon": "🧵",
+            "text": "JS trong RN: MỘT thread — mọi thứ xếp hàng",
+            "sentence": 0
+          },
+          {
+            "icon": "🧊",
+            "text": "Khối đồng bộ dài = UI từ JS chờ đến hết",
+            "sentence": 1
+          },
+          {
+            "icon": "⏱️",
+            "text": "Đo: gap giữa 2 tick setInterval 100ms",
+            "sentence": 2
+          },
+          {
+            "icon": "🍰",
+            "text": "Né: chia lô + setTimeout(0) nhường event loop",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep62/scene-02-0-cd397e48.wav",
+          "startFrame": 0,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep62/scene-02-1-befb6131.wav",
+          "startFrame": 196,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep62/scene-02-2-ee1fa2c4.wav",
+          "startFrame": 392,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep62/scene-02-3-237179aa.wav",
+          "startFrame": 631,
+          "durationInFrames": 192
+        }
+      ],
+      "durationInFrames": 841
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "n6.tsx",
+        "language": "tsx",
+        "code": "  const runBlocked = () => {\n    begin('blocked');\n    // setTimeout(50) để state \"đang chạy\" kịp vẽ trước khi thread bị chiếm.\n    setTimeout(() => {\n      const t0 = performance.now();\n      let acc = 0;\n      for (let p = 0; p < PAGE_COUNT; p++) acc += processPage(pages[p]);\n      finish('blocked', performance.now() - t0, acc);\n    }, 50);\n  };\n\n  // Nhánh 2: cùng 60 trang nhưng mỗi setTimeout(0) xử lý đúng 1 trang (5k).\n  const runChunked = () => {\n    begin('chunked');\n    const t0 = performance.now();\n    let acc = 0;\n    let p = 0;\n    const step = () => {\n      acc += processPage(pages[p]);\n      p++;\n      if (p < PAGE_COUNT) setTimeout(step, 0);\n      else finish('chunked', performance.now() - t0, acc);",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 9,
+            "sentence": 1
+          },
+          {
+            "from": 13,
+            "to": 22,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep62/scene-03-0-16ab942b.wav",
+          "startFrame": 0,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep62/scene-03-1-2f3d38dd.wav",
+          "startFrame": 222,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep62/scene-03-2-9267ac28.wav",
+          "startFrame": 434,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep62/scene-03-3-2f9e5f77.wav",
+          "startFrame": 658,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 820
+    },
+    {
+      "id": "scene-04",
+      "type": "phone",
+      "visual": {
+        "title": "Bằng chứng: 564ms vs 127ms",
+        "screens": [
+          {
+            "src": "screens/perfqa/n6-blocked.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/perfqa/n6-chunked.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🥶",
+            "text": "Một cục: hụt 564ms · tổng 513ms — mất ~5 tick",
+            "sentence": 1
+          },
+          {
+            "icon": "🫁",
+            "text": "Chia lô: hụt 127ms — đồng hồ vẫn chạy",
+            "sentence": 2
+          },
+          {
+            "icon": "⚖️",
+            "text": "Tổng 985ms vs 513ms — chậm hơn 2–3× · checksum y hệt",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep62/scene-04-0-1cc45e65.wav",
+          "startFrame": 0,
+          "durationInFrames": 267
+        },
+        {
+          "file": "audio/ep62/scene-04-1-d51edacf.wav",
+          "startFrame": 275,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep62/scene-04-2-83c66711.wav",
+          "startFrame": 480,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep62/scene-04-3-e7e875bc.wav",
+          "startFrame": 680,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep62/scene-04-4-87193d46.wav",
+          "startFrame": 895,
+          "durationInFrames": 156
+        }
+      ],
+      "durationInFrames": 1069
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Một thread — đo bằng gap giữa 2 tick timer",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Chia lô 5k + setTimeout(0): 564 → 127ms",
+            "sentence": 2
+          },
+          {
+            "icon": "🪤",
+            "text": "Chia lô mua PHẢN HỒI, không mua tốc độ (2–3× chậm)",
+            "sentence": 3
+          },
+          {
+            "icon": "🧭",
+            "text": "RN không có isolate — Flutter Isolate.run: xem câu #24",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep62/scene-05-0-abe24d3d.wav",
+          "startFrame": 0,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep62/scene-05-1-025121d6.wav",
+          "startFrame": 114,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep62/scene-05-2-60050db3.wav",
+          "startFrame": 348,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep62/scene-05-3-0f0277fc.wav",
+          "startFrame": 601,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep62/scene-05-4-78ffe639.wav",
+          "startFrame": 816,
+          "durationInFrames": 284
+        }
+      ],
+      "durationInFrames": 1118
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 18/24 hoàn tất — hẹn gặp câu 19!",
+        "summary": [
+          {
+            "text": "JS trong RN một thread — khối đồng bộ chặn UI từ JS",
+            "sentence": 0
+          },
+          {
+            "text": "Đo bằng gap giữa 2 tick — hụt 564ms vs 127ms",
+            "sentence": 0
+          },
+          {
+            "text": "Chia lô mua phản hồi, không mua tốc độ — tổng 2–3× chậm",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: Column 5000 item bên Flutter — first frame",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 19/24: Column 5000 item — first frame chậm? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep62/scene-06-0-71e279ce.wav",
+          "startFrame": 0,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep62/scene-06-1-c86e9a4b.wav",
+          "startFrame": 133,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep62/scene-06-2-82aad33d.wav",
+          "startFrame": 302,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep62/scene-06-3-b62ab49f.wav",
+          "startFrame": 447,
+          "durationInFrames": 104
+        }
+      ],
+      "durationInFrames": 569
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "Parse 300k bản ghi JSON — vì sao UI đứng hình, xử thế nào?",
+        "framework": "rn"
+      },
+      "sentences": [
+        {
+          "file": "audio/sn6/s1-0-f947bdaf.wav",
+          "startFrame": 0,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/sn6/s1-1-258bf27d.wav",
+          "startFrame": 160,
+          "durationInFrames": 92
+        }
+      ],
+      "durationInFrames": 270
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "n6.tsx",
+        "language": "tsx",
+        "code": "// mỗi lượt: parse + xử lý 1 trang 5k\nconst step = () => {\n  acc += processPage(pages[p]);\n  p++;\n  if (p < PAGE_COUNT) {\n    setTimeout(step, 0); // nhường loop\n  } else {\n    finish(acc); // xong 60 trang\n  }\n};\nsetTimeout(step, 0); // bắt đầu",
+        "steps": [
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 10,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 11,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sn6/s2-0-3367cb30.wav",
+          "startFrame": 0,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/sn6/s2-1-fa4e3fc6.wav",
+          "startFrame": 164,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/sn6/s2-2-ed52aae7.wav",
+          "startFrame": 304,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 445
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/perfqa/n6-blocked.png",
+        "caption": "564ms đứng hình vs 127ms"
+      },
+      "sentences": [
+        {
+          "file": "audio/sn6/s3-0-a972cb31.wav",
+          "startFrame": 0,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/sn6/s3-1-b4b4fa58.wav",
+          "startFrame": 184,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 392
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "⏱️",
+            "text": "Đo: gap giữa 2 tick — 564 vs 127ms",
+            "sentence": 0
+          },
+          {
+            "icon": "🍰",
+            "text": "Chia lô 5k + setTimeout(0) nhường loop",
+            "sentence": 1
+          }
+        ],
+        "trap": "Chia lô mua PHẢN HỒI, không mua tốc độ"
+      },
+      "sentences": [
+        {
+          "file": "audio/sn6/s4-0-7f579a8f.wav",
+          "startFrame": 0,
+          "durationInFrames": 101
+        },
+        {
+          "file": "audio/sn6/s4-1-860eb507.wav",
+          "startFrame": 109,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/sn6/s4-2-c136c280.wav",
+          "startFrame": 273,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 407
+    }
+  ]
+}

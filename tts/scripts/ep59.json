@@ -1,0 +1,121 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn Frontend, câu số 15 — hôm nay nói về những lần render không ai cần.",
+      "Câu hỏi từ nhà tuyển dụng: Danh sách của bạn có một item đổi mà cả nghìn item khác render lại — vì sao, và chặn thế nào?",
+      "Video này có bằng chứng thật trên simulator: cùng ba lần bấm, một bên MỌI hàng render 4 lần, một bên chỉ đúng hàng số 0."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #15: React.memo cho renderItem",
+      "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 15/24",
+      "badge": "React.memo · useCallback"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Vì sao cả list render lại? Khi state đổi, component cha render lại — và mọi Row con là function component thường thì render lại theo, React mặc định không so sánh props.",
+      "React.memo bọc Row để so shallow từng prop — item nào giữ nguyên tham chiếu thì skip, chỉ hàng có object mới render lại.",
+      "Nhưng memo có hai điều kiện sống còn — một: update phải IMMUTABLE, để những object không đổi giữ nguyên tham chiếu.",
+      "Hai: renderItem phải ổn định qua useCallback — object hay hàm mới toanh mỗi render là prop khác đi, memo thành vô dụng."
+    ],
+    "visual": {
+      "title": "Cơ chế: vì sao cả list render lại",
+      "bullets": [
+        {"icon": "🔁", "text": "State đổi → cha render lại → MỌI Row thường render theo", "sentence": 0},
+        {"icon": "🛡️", "text": "React.memo: so shallow props — giữ tham chiếu là skip", "sentence": 1},
+        {"icon": "🧊", "text": "Điều kiện 1: update IMMUTABLE — object cũ giữ tham chiếu", "sentence": 2},
+        {"icon": "🪝", "text": "Điều kiện 2: renderItem useCallback — hàm mới là phá memo", "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Trang demo n3.tsx: mỗi Row tự đếm số lần render của CHÍNH NÓ bằng useRef, hiện thẳng trên hàng — và RowMemo chỉ là memo bọc quanh RowInner, so sánh shallow mặc định.",
+      "Nút Đổi item số 0 update immutable: map copy mảng, chỉ index 0 nhận object mới — 29 object còn lại giữ nguyên tham chiếu.",
+      "renderItem bọc useCallback với deps memoOn — hàm ổn định giữa các lần bấm, vì hàm ẩn danh mới mỗi render là phá memo ngay.",
+      "FlatList đổi key theo chế độ để remount toàn bộ cell, bộ đếm về 0 — hai chế độ so từ cùng một gốc."
+    ],
+    "visual": {
+      "filename": "n3.tsx",
+      "language": "tsx",
+      "code": "function RowInner({ item }: { item: Item }) {\n  const renders = useRef(0);\n  renders.current += 1;\n      <Text style={styles.count}>render {renders.current}×</Text>\n}\nconst RowMemo = memo(RowInner);\n\n  const changeFirst = () => {\n    setItems((prev) =>\n      prev.map((it, i) => (i === 0 ? { ...it, title: `${it.title} ✓` } : it))\n    );\n  };\n\n  const renderItem = useCallback(\n    ({ item }: { item: Item }) =>\n      memoOn ? <RowMemo item={item} /> : <RowInner item={item} />,\n    [memoOn]\n  );\n      <FlatList\n        key={memoOn ? 'memo' : 'plain'}\n        renderItem={renderItem}\n      />",
+      "steps": [
+        {"from": 1, "to": 6, "sentence": 0},
+        {"from": 8, "to": 12, "sentence": 1},
+        {"from": 14, "to": 18, "sentence": 2},
+        {"from": 1, "to": 22, "sentence": 3}
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "phone",
+    "narration": [
+      "Lên simulator của tôi — React.memo OFF, bấm Đổi item số 0 đúng ba lần.",
+      "Hàng số 0 nhận đủ ba dấu tích — nhưng nhìn cột bên phải: MỌI hàng đều render 4 lần, kể cả 29 bản ghi không đổi một byte.",
+      "Bật React.memo ON, danh sách reset về gốc, cũng ba lần bấm đó.",
+      "Giờ chỉ hàng số 0 render 4 lần — một lần mount cộng ba lần bấm — còn mọi hàng khác đứng nguyên render 1 lần.",
+      "Ba mươi hàng chỉ là demo — nhân lên list nghìn item là hiểu vì sao cuộn giật."
+    ],
+    "visual": {
+      "title": "Bằng chứng: 4× cả list vs 1×",
+      "screens": [
+        {"src": "screens/perfqa/n3-nomemo.png", "sentence": 0},
+        {"src": "screens/perfqa/n3-memo.png", "sentence": 2}
+      ],
+      "bullets": [
+        {"icon": "🔥", "text": "OFF: MỌI hàng render 4× — cả 29 item không hề đổi", "sentence": 1},
+        {"icon": "✅", "text": "ON: chỉ #0 render 4× — còn lại đứng nguyên 1×", "sentence": 3},
+        {"icon": "📈", "text": "30 item là demo — nghìn item là giật thấy rõ", "sentence": 4}
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — ba câu chốt, kèm hai cái bẫy hay gài.",
+      "Câu một: cha render lại là mọi Row thường render theo — React không so props cho function component thường, dù object chẳng đổi gì.",
+      "Câu hai: bọc Row bằng React.memo để so shallow — kết hợp update immutable thì chỉ item có object mới render lại, trên demo của tôi là 4 lần so với 1 lần.",
+      "Câu ba: giữ renderItem ổn định bằng useCallback, tránh hàm ẩn danh và style inline trong JSX — prop mới mỗi render là memo mất tác dụng.",
+      "Bẫy một: memo không miễn phí — mỗi lần render cha vẫn tốn phép so sánh props, list nhỏ ít khi cần bọc.",
+      "Bẫy hai: memo VÔ DỤNG nếu quên useCallback hay lỡ mutate mảng tại chỗ — mutate còn làm chính list không cập nhật, vì data không đổi tham chiếu."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {"icon": "1️⃣", "text": "Cha render → mọi Row thường render theo — không so props", "sentence": 1},
+        {"icon": "2️⃣", "text": "React.memo + immutable: chỉ object mới render — 4× vs 1×", "sentence": 2},
+        {"icon": "3️⃣", "text": "renderItem useCallback — hàm mới mỗi render là phá memo", "sentence": 3},
+        {"icon": "⚠️", "text": "Bẫy: memo không miễn phí — list nhỏ ít khi cần", "sentence": 4},
+        {"icon": "⚠️", "text": "Bẫy: mutate tại chỗ — memo vô dụng, list còn đứng im", "sentence": 5}
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là câu 15 khép lại — một item đổi mà cả list render lại, thuốc là memo cộng đúng hai điều kiện đi kèm.",
+      "Câu tiếp theo: infinite scroll bằng onEndReached — vì sao loadMore bị gọi dồn dập, và guard thế nào cho chuẩn.",
+      "Video này có bản Shorts 60 giây — cùng câu hỏi, rút gọn để ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số 16!"
+    ],
+    "visual": {
+      "title": "Câu 15/24 hoàn tất — hẹn gặp câu 16!",
+      "summary": [
+        {"text": "React.memo: so shallow — chỉ object mới render lại", "sentence": 0},
+        {"text": "Điều kiện: update immutable + renderItem useCallback", "sentence": 0},
+        {"text": "Số thật: mọi hàng 4× → chỉ #0 4×, còn lại 1×", "sentence": 0},
+        {"text": "Câu sau: onEndReached — chặn loadMore gọi dồn dập", "sentence": 1}
+      ],
+      "next": "Câu 16/24: Infinite scroll onEndReached 🎤"
+    }
+  }
+]

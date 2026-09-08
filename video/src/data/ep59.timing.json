@@ -1,0 +1,316 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #15: React.memo cho renderItem",
+        "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 15/24",
+        "badge": "React.memo · useCallback"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep59/scene-01-0-b0895333.wav",
+          "startFrame": 0,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep59/scene-01-1-7f43d556.wav",
+          "startFrame": 140,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep59/scene-01-2-e04a45dc.wav",
+          "startFrame": 340,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 555
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Cơ chế: vì sao cả list render lại",
+        "bullets": [
+          {
+            "icon": "🔁",
+            "text": "State đổi → cha render lại → MỌI Row thường render theo",
+            "sentence": 0
+          },
+          {
+            "icon": "🛡️",
+            "text": "React.memo: so shallow props — giữ tham chiếu là skip",
+            "sentence": 1
+          },
+          {
+            "icon": "🧊",
+            "text": "Điều kiện 1: update IMMUTABLE — object cũ giữ tham chiếu",
+            "sentence": 2
+          },
+          {
+            "icon": "🪝",
+            "text": "Điều kiện 2: renderItem useCallback — hàm mới là phá memo",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep59/scene-02-0-1b659849.wav",
+          "startFrame": 0,
+          "durationInFrames": 264
+        },
+        {
+          "file": "audio/ep59/scene-02-1-2edb983d.wav",
+          "startFrame": 272,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep59/scene-02-2-e9fc26eb.wav",
+          "startFrame": 475,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep59/scene-02-3-a4a1ea46.wav",
+          "startFrame": 690,
+          "durationInFrames": 185
+        }
+      ],
+      "durationInFrames": 893
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "n3.tsx",
+        "language": "tsx",
+        "code": "function RowInner({ item }: { item: Item }) {\n  const renders = useRef(0);\n  renders.current += 1;\n      <Text style={styles.count}>render {renders.current}×</Text>\n}\nconst RowMemo = memo(RowInner);\n\n  const changeFirst = () => {\n    setItems((prev) =>\n      prev.map((it, i) => (i === 0 ? { ...it, title: `${it.title} ✓` } : it))\n    );\n  };\n\n  const renderItem = useCallback(\n    ({ item }: { item: Item }) =>\n      memoOn ? <RowMemo item={item} /> : <RowInner item={item} />,\n    [memoOn]\n  );\n      <FlatList\n        key={memoOn ? 'memo' : 'plain'}\n        renderItem={renderItem}\n      />",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 12,
+            "sentence": 1
+          },
+          {
+            "from": 14,
+            "to": 18,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep59/scene-03-0-1c0533b8.wav",
+          "startFrame": 0,
+          "durationInFrames": 284
+        },
+        {
+          "file": "audio/ep59/scene-03-1-2eb08d5e.wav",
+          "startFrame": 292,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep59/scene-03-2-e5761e6c.wav",
+          "startFrame": 524,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep59/scene-03-3-e4b3ea29.wav",
+          "startFrame": 746,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 928
+    },
+    {
+      "id": "scene-04",
+      "type": "phone",
+      "visual": {
+        "title": "Bằng chứng: 4× cả list vs 1×",
+        "screens": [
+          {
+            "src": "screens/perfqa/n3-nomemo.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/perfqa/n3-memo.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🔥",
+            "text": "OFF: MỌI hàng render 4× — cả 29 item không hề đổi",
+            "sentence": 1
+          },
+          {
+            "icon": "✅",
+            "text": "ON: chỉ #0 render 4× — còn lại đứng nguyên 1×",
+            "sentence": 3
+          },
+          {
+            "icon": "📈",
+            "text": "30 item là demo — nghìn item là giật thấy rõ",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep59/scene-04-0-567d112b.wav",
+          "startFrame": 0,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep59/scene-04-1-e0244907.wav",
+          "startFrame": 143,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep59/scene-04-2-d34362c7.wav",
+          "startFrame": 346,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep59/scene-04-3-f0113ab5.wav",
+          "startFrame": 477,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep59/scene-04-4-910ced1e.wav",
+          "startFrame": 658,
+          "durationInFrames": 128
+        }
+      ],
+      "durationInFrames": 804
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Cha render → mọi Row thường render theo — không so props",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "React.memo + immutable: chỉ object mới render — 4× vs 1×",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "renderItem useCallback — hàm mới mỗi render là phá memo",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: memo không miễn phí — list nhỏ ít khi cần",
+            "sentence": 4
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: mutate tại chỗ — memo vô dụng, list còn đứng im",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep59/scene-05-0-bd3133f9.wav",
+          "startFrame": 0,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ep59/scene-05-1-73c1a94b.wav",
+          "startFrame": 102,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep59/scene-05-2-9976869e.wav",
+          "startFrame": 302,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep59/scene-05-3-8b9a949e.wav",
+          "startFrame": 584,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep59/scene-05-4-104f5232.wav",
+          "startFrame": 842,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep59/scene-05-5-918bcce7.wav",
+          "startFrame": 1028,
+          "durationInFrames": 224
+        }
+      ],
+      "durationInFrames": 1270
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 15/24 hoàn tất — hẹn gặp câu 16!",
+        "summary": [
+          {
+            "text": "React.memo: so shallow — chỉ object mới render lại",
+            "sentence": 0
+          },
+          {
+            "text": "Điều kiện: update immutable + renderItem useCallback",
+            "sentence": 0
+          },
+          {
+            "text": "Số thật: mọi hàng 4× → chỉ #0 4×, còn lại 1×",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: onEndReached — chặn loadMore gọi dồn dập",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 16/24: Infinite scroll onEndReached 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep59/scene-06-0-c39d3396.wav",
+          "startFrame": 0,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep59/scene-06-1-0502deea.wav",
+          "startFrame": 179,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep59/scene-06-2-82aad33d.wav",
+          "startFrame": 365,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep59/scene-06-3-eb66c5fa.wav",
+          "startFrame": 527,
+          "durationInFrames": 99
+        }
+      ],
+      "durationInFrames": 644
+    }
+  ]
+}

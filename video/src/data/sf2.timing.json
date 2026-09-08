@@ -1,0 +1,129 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "ListView biết trước chiều cao hàng — itemExtent giúp gì?",
+        "framework": "flutter"
+      },
+      "sentences": [
+        {
+          "file": "audio/sf2/s1-0-c1f55c06.wav",
+          "startFrame": 0,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/sf2/s1-1-8f1b0e81.wav",
+          "startFrame": 138,
+          "durationInFrames": 75
+        }
+      ],
+      "durationInFrames": 231
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "f2_item_extent.dart",
+        "language": "clike",
+        "code": "// ON: báo trước chiều cao hàng\nListView.builder(\n  controller: _controller,\n  itemExtent: 64, // OFF: null\n  itemCount: _items.length,\n  itemBuilder: (context, i) =>\n    RowTileF2(item: _items[i]),\n)\n\n// Nhảy thẳng xuống đáy 5000 hàng\n_controller.jumpTo(\n  _controller.position.maxScrollExtent,\n);",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 13,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sf2/s2-0-40e07286.wav",
+          "startFrame": 0,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/sf2/s2-1-ffb8d713.wav",
+          "startFrame": 217,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/sf2/s2-2-a109efc0.wav",
+          "startFrame": 333,
+          "durationInFrames": 140
+        }
+      ],
+      "durationInFrames": 491
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/perfqa/f2-on.png",
+        "caption": "12 build · 34ms — nhờ itemExtent"
+      },
+      "sentences": [
+        {
+          "file": "audio/sf2/s3-0-aadf2642.wav",
+          "startFrame": 0,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/sf2/s3-1-63402013.wav",
+          "startFrame": 241,
+          "durationInFrames": 142
+        }
+      ],
+      "durationInFrames": 401
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "📏",
+            "text": "itemExtent: vị trí = số học — 4987 → 12 build",
+            "sentence": 0
+          },
+          {
+            "icon": "🧊",
+            "text": "const khung tĩnh: short-circuit rebuild",
+            "sentence": 1
+          }
+        ],
+        "trap": "Hàng cao KHÔNG đều = cuộn sai · cấm khai cả 2"
+      },
+      "sentences": [
+        {
+          "file": "audio/sf2/s4-0-4d9bd8a4.wav",
+          "startFrame": 0,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/sf2/s4-1-3f0ae864.wav",
+          "startFrame": 174,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/sf2/s4-2-693321bb.wav",
+          "startFrame": 312,
+          "durationInFrames": 173
+        }
+      ],
+      "durationInFrames": 503
+    }
+  ]
+}

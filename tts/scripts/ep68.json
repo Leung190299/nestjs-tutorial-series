@@ -1,0 +1,188 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn Frontend — câu thứ hai mươi tư, câu chốt sổ của series: xử lý data lớn phía Flutter.",
+      "Câu hỏi từ nhà tuyển dụng: jsonDecode 200.000 bản ghi làm UI Flutter đứng hình — bạn xử thế nào cho đúng bài?",
+      "Demo đo frame gap bằng Ticker trên simulator, rồi chốt cách trả lời trước nhà tuyển dụng."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #24: Isolate.run — parse data lớn không chặn UI",
+      "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 24/24",
+      "badge": "Flutter · Isolate"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Chìa khóa: Dart chạy code ứng dụng trên MỘT luồng — main isolate; khối đồng bộ dài chiếm luồng là không frame nào được vẽ — docs Flutter nói quá 16 mili giây là jank.",
+      "await không cứu — nó không tạo thread; thoát hiểm chính chủ: Isolate.run — spawn isolate mới, chạy hàm, trả kết quả về rồi tự tắt: parallelism thật, không chia sẻ bộ nhớ, chỉ truyền message.",
+      "Còn nhớ câu 18 bên React Native: một thread, chia lô chỉ mua sự phản hồi mà tổng chậm 2 đến 3 lần — Flutter dời hẳn việc sang chỗ khác."
+    ],
+    "visual": {
+      "title": "Cơ chế: main isolate — một luồng",
+      "bullets": [
+        {
+          "icon": "🧵",
+          "text": "Main isolate — 1 luồng · quá 16ms = jank",
+          "sentence": 0
+        },
+        {
+          "icon": "🚫",
+          "text": "await không tạo thread — vẫn chặn main",
+          "sentence": 1
+        },
+        {
+          "icon": "🚀",
+          "text": "Isolate.run: spawn → chạy → trả về → tự tắt",
+          "sentence": 1
+        },
+        {
+          "icon": "🔁",
+          "text": "RN #18: chia lô 1 thread · Flutter: isolate thật",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Trang demo thật — f6_isolate.dart: hai nút chạy CÙNG một hàm, comment nói rõ khác biệt duy nhất là chạy ở đâu — và chỉ trả bộ số gọn về.",
+      "_decodeAndSum: jsonDecode cả chuỗi lớn, cộng checksum của cả 200 nghìn bản ghi — trả về count, checksum, decodeMs.",
+      "Helper _decodeInIsolate BẮT BUỘC top-level — comment kể bẫy tôi dính thật: closure trong method của State kéo theo this có Ticker, crash object is unsendable.",
+      "Nút main gọi thẳng _decodeAndSum, nút kia await _decodeInIsolate — một dòng Isolate.run, closure chỉ còn chuỗi big."
+    ],
+    "visual": {
+      "filename": "f6_isolate.dart",
+      "language": "clike",
+      "code": "/// điểm khác biệt duy nhất giữa 2 nhánh: nhánh 1 gọi thẳng trên main isolate,\n/// nhánh 2 gọi bên trong Isolate.run và chỉ trả bộ số gọn này về\n/// (\"đừng chuyển cả núi object về, trả kết quả gọn\").\n_Summary _decodeAndSum(String big) {\n  final sw = Stopwatch()..start();\n  final list = jsonDecode(big) as List<dynamic>;\n  var checksum = 0;\n  for (final m in list) {\n    final map = m as Map<String, dynamic>;\n    checksum +=\n        (map['title'] as String).length + (map['subtitle'] as String).length;\n  }\n  sw.stop();\n  return (list.length, checksum, sw.elapsedMilliseconds);\n}\n\n/// Helper TOP-LEVEL: closure gửi vào Isolate.run phải tạo ở scope chỉ chứa\n/// `big` — nếu tạo trực tiếp trong method của State, context của closure kéo\n/// theo `this` (State chứa Ticker) → \"Illegal argument in isolate message:\n/// object is unsendable\" (đã dính thật khi viết trang này, ghi report).\nFuture<_Summary> _decodeInIsolate(String big) =>\n    Isolate.run(() => _decodeAndSum(big));",
+      "steps": [
+        {
+          "from": 1,
+          "to": 3,
+          "sentence": 0
+        },
+        {
+          "from": 4,
+          "to": 15,
+          "sentence": 1
+        },
+        {
+          "from": 16,
+          "to": 22,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "phone",
+    "narration": [
+      "Số thật trên simulator của tôi — header xám: chuỗi JSON 18.9 megabyte chuẩn bị sẵn, ngoài phần đo; bấm nút main: box đỏ, frame gap 235 mili giây, spinner đứng hình.",
+      "Tổng 223 — gap lớn hơn cả tổng: main bị chiếm là không một frame nào; các phiên khác cũng 186 đến 261.",
+      "Chuyển sang Isolate.run: box xanh, frame gap 16 mili giây — đúng MỘT frame 60Hz, spinner quay mượt suốt lúc decode; lần đầu có thể 50 do spawn cộng copy chuỗi.",
+      "Tổng 320 so với 223 — chậm chừng 1,3 lần; checksum hai nhánh giống hệt 7960890 — cùng khối lượng, mà main thì rảnh."
+    ],
+    "visual": {
+      "title": "Bằng chứng: gap 235ms vs 16ms",
+      "screens": [
+        {
+          "src": "screens/perfqa/f6-blocked.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/perfqa/f6-isolate.png",
+          "sentence": 2
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🔴",
+          "text": "Main: gap 235ms · tổng 223ms — đứng hình",
+          "sentence": 1
+        },
+        {
+          "icon": "🟢",
+          "text": "Isolate.run: gap 16ms = 1 frame · tổng 320ms",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — câu một: Dart một luồng, decode đồng bộ chặn main isolate; await không cứu — dời sang isolate nền bằng Isolate.run hoặc compute, hai cách chính chủ.",
+      "Câu hai: gap 235 xuống 16 mili giây trên simulator của tôi — UI mượt tuyệt đối, tổng chỉ chậm 1,3 đến 1,5 lần — giá quá rẻ.",
+      "Câu ba: truyền String vào isolate, trả KẾT QUẢ GỌN ra — đừng chuyển cả núi object về khi UI chỉ cần con số.",
+      "Bẫy chốt: closure capture this là dính unsendable — helper top-level chỉ nhận String; bên RN câu 18 không có isolate — cặp video xem chéo."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "1 luồng — await không cứu · Isolate.run/compute",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Gap 235 → 16ms · tổng chỉ ~1,3–1,5×",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "String vào — kết quả GỌN ra",
+          "sentence": 2
+        },
+        {
+          "icon": "💣",
+          "text": "Closure capture this → unsendable — helper top-level",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu 24 — decode dời sang Isolate.run: gap từ 235 về đúng 1 frame, tổng gần như không đổi.",
+      "Vậy là 24 câu phỏng vấn frontend cộng hiệu năng đã đủ trên playlist — luyện lại từ câu số 1 nhé.",
+      "Video này có bản Shorts 60 giây để ôn nhanh — cảm ơn bạn đã theo tới câu chốt sổ, hẹn gặp ở series sau!"
+    ],
+    "visual": {
+      "title": "Đủ 24/24 — cảm ơn bạn đã luyện cùng!",
+      "summary": [
+        {
+          "text": "Main isolate chặn: gap 235ms — spinner đứng hình",
+          "sentence": 0
+        },
+        {
+          "text": "Isolate.run: gap 16ms = 1 frame · tổng ~1,3–1,5×",
+          "sentence": 0
+        },
+        {
+          "text": "Đủ 24 câu — luyện lại từ câu #1 trên playlist",
+          "sentence": 1
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Đủ 24/24 — luyện từ câu #1! 🎤"
+    }
+  }
+]

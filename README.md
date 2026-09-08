@@ -82,7 +82,7 @@ Series web ĐẦU TIÊN của kênh (vertical), sau 3 series mobile Flutter/Reac
 
 Demo: [`demo-stylex/`](demo-stylex/) (`vietsuper-web/` viết bằng StyleX + `compare-tailwind/` đối chứng Tailwind CSS v4, dùng ở Tập 6). Mỗi tập đóng băng bằng một git tag riêng — `git checkout stylex-tap-N` để xem đúng code xuất hiện trong tập tương ứng.
 
-## Series "Phỏng vấn Frontend — React & Vue" (ep45–ep56 + 12 Shorts)
+## Series "Phỏng vấn Frontend" (lô 1: React & Vue ep45–ep56 · lô 2: hiệu năng RN & Flutter ep57–ep68, mỗi lô kèm 12 Shorts)
 
 Series đổi hẳn định dạng: mỗi tập ngang là ĐÚNG MỘT câu hỏi phỏng vấn Frontend thật (6 câu React R1–R6, 6 câu Vue V1–V6) — nghe câu hỏi, xem demo code chạy thật minh họa đúng bẫy/hành vi, rồi chốt lại cách trả lời như đang ngồi trước nhà tuyển dụng. Mỗi câu ngang có kèm 1 bản Shorts 60 giây song song (sr1–sr6 phía React, sv1–sv6 phía Vue).
 
@@ -102,6 +102,27 @@ Series đổi hẳn định dạng: mỗi tập ngang là ĐÚNG MỘT câu hỏ
 | V6 | Props xuống, emit lên | ep56 | sv6 |
 
 Demo: [`demo-fe-interview/`](demo-fe-interview/) (`react-qa/` cổng 5197 + `vue-qa/` cổng 5196, mỗi app 6 trang minh họa hành vi thật cho đúng câu hỏi ở trên). `git checkout fe-qa-batch-1` để xem đúng code lô 1 (12 câu).
+
+### Lô 2 — Hiệu năng React Native & Flutter (ep57–ep68 + 12 Shorts)
+
+Lô 2 nối tiếp cùng format: 12 câu hỏi HIỆU NĂNG khi load nhiều dữ liệu — 6 câu React Native (N1–N6) + 6 câu Flutter (F1–F6), mỗi câu có demo đo số thật trên simulator (list ảo hóa, tối ưu FlatList/ListView, chặn render/rebuild thừa, infinite scroll, ảnh trong list, xử lý data lớn không chặn UI). Mỗi câu ngang kèm 1 bản Shorts 60 giây (sn1–sn6 phía React Native, sf1–sf6 phía Flutter).
+
+| # | Câu hỏi | Tập ngang | Short |
+|---|---------|-----------|-------|
+| N1 | Vì sao FlatList mượt hơn ScrollView + map với 5.000 item? | ep57 | sn1 |
+| N2 | Tối ưu FlatList: getItemLayout, windowSize, keyExtractor | ep58 | sn2 |
+| N3 | React.memo cho renderItem — chặn render thừa cả list | ep59 | sn3 |
+| N4 | Infinite scroll: vì sao onEndReached gọi trùng, guard bằng ref | ep60 | sn4 |
+| N5 | Ảnh trong list dài — expo-image, decode đúng cỡ + cache 2 tầng | ep61 | sn5 |
+| N6 | Data lớn chặn JS thread — đo frame gap, chia lô setTimeout 0 | ep62 | sn6 |
+| F1 | ListView.builder vs Column trong SingleChildScrollView | ep63 | sf1 |
+| F2 | itemExtent + const — báo trước chiều cao cho ListView | ep64 | sf2 |
+| F3 | setState rebuild cả trang — localize, tách widget | ep65 | sf3 |
+| F4 | Infinite scroll với ScrollController — guard cờ loading | ep66 | sf4 |
+| F5 | cacheWidth — decode ảnh đúng kích thước hiển thị | ep67 | sf5 |
+| F6 | Isolate.run — parse data lớn không chặn UI | ep68 | sf6 |
+
+Demo: [`demo-perf-interview/`](demo-perf-interview/) (`rn-perf/` + `flutter_perf/`, mỗi app 6 trang đo số thật cho đúng câu hỏi ở trên). `git checkout perf-qa-batch-2` để xem đúng code lô 2 (12 câu).
 
 ## Cấu trúc repo
 

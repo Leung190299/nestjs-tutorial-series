@@ -84,8 +84,8 @@ def validate_script(script: list[dict]) -> list[str]:
             if not isinstance(question, str) or not question or len(question) > 90:
                 errors.append(f"{scene['id']}: vtitle question phải là str ≤90 ký tự")
             framework = visual.get("framework")
-            if framework not in ("react", "vue"):
-                errors.append(f"{scene['id']}: vtitle framework phải là 'react' hoặc 'vue'")
+            if framework not in ("react", "vue", "rn", "flutter"):
+                errors.append(f"{scene['id']}: vtitle framework phải là 'react', 'vue', 'rn' hoặc 'flutter'")
         if scene.get("type") == "vcode":
             code = visual.get("code")
             if not isinstance(code, str) or not code:
