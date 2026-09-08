@@ -1,0 +1,202 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn Frontend, câu số 17 — hôm nay nói về ảnh trong danh sách dài.",
+      "Câu hỏi từ nhà tuyển dụng: List có hàng trăm ảnh — bạn tối ưu ảnh thế nào để cuộn mượt và không tốn RAM?",
+      "Bằng chứng là chuỗi ba con số của expo-image: 1360 lần đầu, 153 khi cache ấm, 368 sau khi kill app."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #17: Ảnh trong list dài — expo-image và cache",
+      "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 17/24",
+      "badge": "expo-image · cachePolicy"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Ảnh 2000 pixel hiển thị trong ô 64 pixel vẫn phải decode FULL-SIZE — mỗi bitmap 2000 nhân 2000 tính ra cỡ 16 megabyte RAM.",
+      "Việc cốt lõi thứ nhất: decode ĐÚNG KÍCH THƯỚC hiển thị — docs React Native khuyên thumbnail nhỏ nhất có thể; expo-image bật sẵn allowDownscaling theo container.",
+      "Việc thứ hai: CACHE hai tầng memory và disk để không decode lại — expo-image chạy trên SDWebImage và Glide.",
+      "cachePolicy mặc định là disk — demo dùng memory-disk, cache RAM có fallback xuống đĩa; recyclingKey sinh cho list recycle view."
+    ],
+    "visual": {
+      "title": "Cơ chế: decode đúng cỡ + cache 2 tầng",
+      "bullets": [
+        {
+          "icon": "💥",
+          "text": "Ô 64px nhưng decode 2000px — ~16MB RAM mỗi bitmap",
+          "sentence": 0
+        },
+        {
+          "icon": "📐",
+          "text": "Việc 1: decode đúng cỡ hiển thị — allowDownscaling",
+          "sentence": 1
+        },
+        {
+          "icon": "🗄️",
+          "text": "Việc 2: cache memory + disk — SDWebImage / Glide",
+          "sentence": 2
+        },
+        {
+          "icon": "🎛️",
+          "text": "cachePolicy: default disk — demo dùng memory-disk",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Trang demo n5.tsx — renderRow của 120 hàng: mỗi hàng lấy một trong 12 tấm PNG 2000 pixel theo modulo.",
+      "Nhánh một: RN Image thường — style 64 nhân 64 chỉ là kích thước hiển thị, nguồn decode vẫn là PNG 2000 pixel.",
+      "Nhánh hai: expo-image — downscale theo container, cachePolicy memory-disk, recyclingKey theo id của item.",
+      "Cùng ảnh, cùng ô 64 pixel — khác engine đứng sau."
+    ],
+    "visual": {
+      "filename": "n5.tsx",
+      "language": "tsx",
+      "code": "  const renderRow = ({ item, index }: { item: Item; index: number }) => {\n    const src = BIG[index % BIG.length]; // ảnh theo modulo 12\n    return (\n      <View style={styles.row}>\n        {mode === 'plain' ? (\n          // RN core Image: style 64×64 nhưng nguồn decode vẫn là PNG 2000px\n          <RNImage\n            source={src}\n            style={styles.thumb}\n            onLoadEnd={() => onImgLoaded(index)}\n          />\n        ) : (\n          // expo-image: downscale theo container + cache memory-disk,\n          // recyclingKey reset nội dung view trước khi load ảnh mới\n          <ExpoImage\n            source={src}\n            style={styles.thumb}\n            cachePolicy=\"memory-disk\"\n            recyclingKey={item.id}\n            onLoadEnd={() => onImgLoaded(index)}\n          />\n        )}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 0
+        },
+        {
+          "from": 5,
+          "to": 11,
+          "sentence": 1
+        },
+        {
+          "from": 12,
+          "to": 21,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "phone",
+    "narration": [
+      "Simulator của tôi, ảnh local — Image gốc 2000 pixel: màn đầu đủ ảnh sau 297 mili giây.",
+      "Cold lần nào cũng cỡ đó — 215 đến 297 — RN Image không nhớ gì giữa các lần mở app.",
+      "Sang expo-image: lần bấm ĐẦU TIÊN chậm nhất — 1360 mili giây, vì phải downscale và GHI cache.",
+      "Từ đó chỉ còn 153 đến 177 như trên màn hình — nhanh hơn lần điền cache khoảng 8 lần.",
+      "Kill app, mở lại — vẫn chỉ 368 nhờ disk cache còn sống; RN Image thì quay về gần 300."
+    ],
+    "visual": {
+      "title": "Bằng chứng: 1360 → 153 → 368ms",
+      "screens": [
+        {
+          "src": "screens/perfqa/n5-plain.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/perfqa/n5-expo.png",
+          "sentence": 2
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🐢",
+          "text": "RN Image: cold nào cũng 215–297ms — không nhớ gì",
+          "sentence": 1
+        },
+        {
+          "icon": "💸",
+          "text": "expo lần đầu 1360ms — downscale + GHI cache",
+          "sentence": 2
+        },
+        {
+          "icon": "⚡",
+          "text": "Warm 153–177ms (~8×) · kill app vẫn 368ms nhờ disk",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — ba câu chốt, kèm hai điều ăn điểm.",
+      "Câu một: ảnh trong list có hai việc cốt lõi — decode đúng kích thước hiển thị thay vì full-size, và cache hai tầng memory với disk.",
+      "Câu hai: tôi dùng expo-image — nền SDWebImage với Glide, cachePolicy memory-disk, recyclingKey khi list recycle.",
+      "Câu ba: lần đầu CHẬM HƠN là chi phí điền cache — trả một lần, lãi mọi lần sau: warm còn 153, kill app vẫn 368.",
+      "Ăn điểm: demo của tôi là ảnh LOCAL nên chênh màn đầu nhỏ — ảnh MẠNG cache mới toả sáng; và bài y hệt bên Flutter với cacheWidth — xem câu số 23."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Hai việc: decode đúng cỡ + cache memory/disk",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "expo-image: SDWebImage/Glide · memory-disk · recyclingKey",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Lần đầu chậm = điền cache — trả 1 lần, lãi mọi lần sau",
+          "sentence": 3
+        },
+        {
+          "icon": "🌐",
+          "text": "Ảnh local chênh ít — ảnh MẠNG cache mới toả sáng",
+          "sentence": 4
+        },
+        {
+          "icon": "🧭",
+          "text": "Cùng bài bên Flutter: cacheWidth — xem câu #23",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là câu 17 khép lại — decode đúng cỡ, cache hai tầng, một lần chậm đổi lấy mọi lần sau.",
+      "Câu tiếp theo: parse JSON ba trăm nghìn bản ghi trên JS thread — vì sao app đứng hình.",
+      "Video này có bản Shorts 60 giây — cùng câu hỏi, rút gọn để ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số 18!"
+    ],
+    "visual": {
+      "title": "Câu 17/24 hoàn tất — hẹn gặp câu 18!",
+      "summary": [
+        {
+          "text": "Decode đúng cỡ hiển thị — đừng decode full 2000px",
+          "sentence": 0
+        },
+        {
+          "text": "expo-image: cache memory-disk — 1360 → 153 → 368ms",
+          "sentence": 0
+        },
+        {
+          "text": "Ảnh mạng mới là nơi cache toả sáng — nói trung thực",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: JSON 300k bản ghi chặn JS thread",
+          "sentence": 1
+        }
+      ],
+      "next": "Câu 18/24: Parse data lớn — vì sao đứng hình? 🎤"
+    }
+  }
+]

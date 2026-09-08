@@ -1,0 +1,311 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #17: Ảnh trong list dài — expo-image và cache",
+        "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 17/24",
+        "badge": "expo-image · cachePolicy"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep61/scene-01-0-5dccc029.wav",
+          "startFrame": 0,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep61/scene-01-1-a31f2786.wav",
+          "startFrame": 143,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep61/scene-01-2-f0c970e8.wav",
+          "startFrame": 310,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 566
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Cơ chế: decode đúng cỡ + cache 2 tầng",
+        "bullets": [
+          {
+            "icon": "💥",
+            "text": "Ô 64px nhưng decode 2000px — ~16MB RAM mỗi bitmap",
+            "sentence": 0
+          },
+          {
+            "icon": "📐",
+            "text": "Việc 1: decode đúng cỡ hiển thị — allowDownscaling",
+            "sentence": 1
+          },
+          {
+            "icon": "🗄️",
+            "text": "Việc 2: cache memory + disk — SDWebImage / Glide",
+            "sentence": 2
+          },
+          {
+            "icon": "🎛️",
+            "text": "cachePolicy: default disk — demo dùng memory-disk",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep61/scene-02-0-70351eea.wav",
+          "startFrame": 0,
+          "durationInFrames": 272
+        },
+        {
+          "file": "audio/ep61/scene-02-1-a1a85dfc.wav",
+          "startFrame": 280,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/ep61/scene-02-2-c9678346.wav",
+          "startFrame": 536,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep61/scene-02-3-cc273c29.wav",
+          "startFrame": 760,
+          "durationInFrames": 224
+        }
+      ],
+      "durationInFrames": 1002
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "n5.tsx",
+        "language": "tsx",
+        "code": "  const renderRow = ({ item, index }: { item: Item; index: number }) => {\n    const src = BIG[index % BIG.length]; // ảnh theo modulo 12\n    return (\n      <View style={styles.row}>\n        {mode === 'plain' ? (\n          // RN core Image: style 64×64 nhưng nguồn decode vẫn là PNG 2000px\n          <RNImage\n            source={src}\n            style={styles.thumb}\n            onLoadEnd={() => onImgLoaded(index)}\n          />\n        ) : (\n          // expo-image: downscale theo container + cache memory-disk,\n          // recyclingKey reset nội dung view trước khi load ảnh mới\n          <ExpoImage\n            source={src}\n            style={styles.thumb}\n            cachePolicy=\"memory-disk\"\n            recyclingKey={item.id}\n            onLoadEnd={() => onImgLoaded(index)}\n          />\n        )}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 11,
+            "sentence": 1
+          },
+          {
+            "from": 12,
+            "to": 21,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep61/scene-03-0-9a2b19dc.wav",
+          "startFrame": 0,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep61/scene-03-1-f81f27f9.wav",
+          "startFrame": 241,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep61/scene-03-2-b7b1cebc.wav",
+          "startFrame": 461,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep61/scene-03-3-15dcbfab.wav",
+          "startFrame": 661,
+          "durationInFrames": 104
+        }
+      ],
+      "durationInFrames": 783
+    },
+    {
+      "id": "scene-04",
+      "type": "phone",
+      "visual": {
+        "title": "Bằng chứng: 1360 → 153 → 368ms",
+        "screens": [
+          {
+            "src": "screens/perfqa/n5-plain.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/perfqa/n5-expo.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🐢",
+            "text": "RN Image: cold nào cũng 215–297ms — không nhớ gì",
+            "sentence": 1
+          },
+          {
+            "icon": "💸",
+            "text": "expo lần đầu 1360ms — downscale + GHI cache",
+            "sentence": 2
+          },
+          {
+            "icon": "⚡",
+            "text": "Warm 153–177ms (~8×) · kill app vẫn 368ms nhờ disk",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep61/scene-04-0-addbb119.wav",
+          "startFrame": 0,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep61/scene-04-1-c94475a4.wav",
+          "startFrame": 198,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep61/scene-04-2-27621dc1.wav",
+          "startFrame": 398,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep61/scene-04-3-988e4fb0.wav",
+          "startFrame": 603,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep61/scene-04-4-edf84e25.wav",
+          "startFrame": 784,
+          "durationInFrames": 176
+        }
+      ],
+      "durationInFrames": 978
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Hai việc: decode đúng cỡ + cache memory/disk",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "expo-image: SDWebImage/Glide · memory-disk · recyclingKey",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Lần đầu chậm = điền cache — trả 1 lần, lãi mọi lần sau",
+            "sentence": 3
+          },
+          {
+            "icon": "🌐",
+            "text": "Ảnh local chênh ít — ảnh MẠNG cache mới toả sáng",
+            "sentence": 4
+          },
+          {
+            "icon": "🧭",
+            "text": "Cùng bài bên Flutter: cacheWidth — xem câu #23",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep61/scene-05-0-61c1dd9b.wav",
+          "startFrame": 0,
+          "durationInFrames": 92
+        },
+        {
+          "file": "audio/ep61/scene-05-1-72b52ce4.wav",
+          "startFrame": 100,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep61/scene-05-2-0023352e.wav",
+          "startFrame": 334,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep61/scene-05-3-542fec02.wav",
+          "startFrame": 573,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep61/scene-05-4-95383a55.wav",
+          "startFrame": 788,
+          "durationInFrames": 264
+        }
+      ],
+      "durationInFrames": 1070
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 17/24 hoàn tất — hẹn gặp câu 18!",
+        "summary": [
+          {
+            "text": "Decode đúng cỡ hiển thị — đừng decode full 2000px",
+            "sentence": 0
+          },
+          {
+            "text": "expo-image: cache memory-disk — 1360 → 153 → 368ms",
+            "sentence": 0
+          },
+          {
+            "text": "Ảnh mạng mới là nơi cache toả sáng — nói trung thực",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: JSON 300k bản ghi chặn JS thread",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 18/24: Parse data lớn — vì sao đứng hình? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep61/scene-06-0-c5a735d8.wav",
+          "startFrame": 0,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep61/scene-06-1-f26808aa.wav",
+          "startFrame": 164,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep61/scene-06-2-82aad33d.wav",
+          "startFrame": 324,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep61/scene-06-3-172fc1fb.wav",
+          "startFrame": 476,
+          "durationInFrames": 84
+        }
+      ],
+      "durationInFrames": 578
+    }
+  ]
+}

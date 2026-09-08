@@ -1,0 +1,129 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "Ảnh trong list dài — tối ưu thế nào cho mượt, đỡ RAM?",
+        "framework": "rn"
+      },
+      "sentences": [
+        {
+          "file": "audio/sn5/s1-0-99c4a3e3.wav",
+          "startFrame": 0,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/sn5/s1-1-258bf27d.wav",
+          "startFrame": 112,
+          "durationInFrames": 104
+        }
+      ],
+      "durationInFrames": 234
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "n5.tsx",
+        "language": "tsx",
+        "code": "// RN Image: decode full 2000px\n<RNImage\n  source={src}\n  style={styles.thumb} // 64×64\n/>\n\n// expo-image: downscale + cache\n<ExpoImage\n  source={src}\n  style={styles.thumb}\n  cachePolicy=\"memory-disk\"\n  recyclingKey={item.id}\n/>",
+        "steps": [
+          {
+            "from": 1,
+            "to": 5,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 13,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 13,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sn5/s2-0-0061c63e.wav",
+          "startFrame": 0,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/sn5/s2-1-0e56e426.wav",
+          "startFrame": 167,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/sn5/s2-2-1d49c061.wav",
+          "startFrame": 391,
+          "durationInFrames": 137
+        }
+      ],
+      "durationInFrames": 546
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/perfqa/n5-expo.png",
+        "caption": "1360 → 153 → 368ms"
+      },
+      "sentences": [
+        {
+          "file": "audio/sn5/s3-0-3b92e798.wav",
+          "startFrame": 0,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/sn5/s3-1-3d32dbb5.wav",
+          "startFrame": 208,
+          "durationInFrames": 228
+        }
+      ],
+      "durationInFrames": 454
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "📐",
+            "text": "Decode đúng cỡ hiển thị — đừng full-size",
+            "sentence": 0
+          },
+          {
+            "icon": "🗄️",
+            "text": "Cache memory-disk: 1360 → 153 → 368ms",
+            "sentence": 1
+          }
+        ],
+        "trap": "Lần đầu chậm = điền cache — trả 1 lần, lãi mãi"
+      },
+      "sentences": [
+        {
+          "file": "audio/sn5/s4-0-13c8b2ff.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/sn5/s4-1-3da61bfd.wav",
+          "startFrame": 148,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/sn5/s4-2-dbc1560d.wav",
+          "startFrame": 303,
+          "durationInFrames": 156
+        }
+      ],
+      "durationInFrames": 477
+    }
+  ]
+}
