@@ -1667,7 +1667,7 @@ Tập cuối: đặt 2 trình duyệt cạnh nhau — trái vietsuper-web (Style
 
 ## SERIES PHỎNG VẤN FRONTEND — "Phỏng vấn Frontend 🇻🇳" (React & Vue, lô 1: 12 câu + 12 Shorts)
 
-> Playlist mới: **"Phỏng vấn Frontend 🇻🇳"**. Format MỚI hẳn so với các series trước: mỗi tập ngang là ĐÚNG MỘT câu hỏi phỏng vấn Frontend thật (6 câu React R1–R6, 6 câu Vue V1–V6) — nghe câu hỏi như nhà tuyển dụng hỏi, xem demo code chạy thật minh họa đúng bẫy/hành vi, rồi chốt lại cách trả lời 3 câu như đang ngồi trước người phỏng vấn. Code: `demo-fe-interview/` (`react-qa/` cổng 5197, `vue-qa/` cổng 5196), đóng băng ở tag `fe-qa-batch-1`. Mỗi câu ngang có kèm 1 bản Shorts 60 giây song song (bảng caption ở mục phụ cuối phần này). Ẩn dụ series: PHÒNG PHỎNG VẤN — người phỏng vấn hỏi, mình demo rồi chốt câu trả lời mẫu.
+> Playlist: **"Phỏng vấn Frontend 🇻🇳"** — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE (ĐÃ ĐĂNG 2026-09-08, đủ 24 video). Format MỚI hẳn so với các series trước: mỗi tập ngang là ĐÚNG MỘT câu hỏi phỏng vấn Frontend thật (6 câu React R1–R6, 6 câu Vue V1–V6) — nghe câu hỏi như nhà tuyển dụng hỏi, xem demo code chạy thật minh họa đúng bẫy/hành vi, rồi chốt lại cách trả lời 3 câu như đang ngồi trước người phỏng vấn. Code: `demo-fe-interview/` (`react-qa/` cổng 5197, `vue-qa/` cổng 5196), đóng băng ở tag `fe-qa-batch-1`. Mỗi câu ngang có kèm 1 bản Shorts 60 giây song song (bảng caption ở mục phụ cuối phần này). Ẩn dụ series: PHÒNG PHỎNG VẤN — người phỏng vấn hỏi, mình demo rồi chốt câu trả lời mẫu.
 
 Từ khóa chủ lực toàn series: `phỏng vấn frontend`, `phỏng vấn react`, `phỏng vấn vue`, `react interview`, `vue interview`, `câu hỏi phỏng vấn react`, `câu hỏi phỏng vấn vue`, `frontend interview questions`, `học react`, `học vue`.
 
@@ -1697,8 +1697,8 @@ Bẫy hay gặp: Virtual DOM KHÔNG phải lúc nào cũng nhanh hơn thao tác 
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
-⏭️ Câu tiếp theo: [LINK-EP46]
-📱 Bản Shorts 60 giây: [LINK-SHORT-01]
+⏭️ Câu tiếp theo: https://youtu.be/LdTBWvjazsU
+📱 Bản Shorts 60 giây: https://youtu.be/h3Q1viZ34z8
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
 #reactjs #phongvan #frontend #reactinterview #laptrinh
@@ -1739,9 +1739,9 @@ Bẫy hay gặp: cleanup KHÔNG chỉ chạy khi unmount — nó chạy TRƯỚC
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP45]
-⏭️ Câu tiếp theo: [LINK-EP47]
-📱 Bản Shorts 60 giây: [LINK-SHORT-02]
+⏮️ Câu trước: https://youtu.be/G5bCudY1jSU
+⏭️ Câu tiếp theo: https://youtu.be/c325Ox2Ckro
+📱 Bản Shorts 60 giây: https://youtu.be/GWwd2Vr51Wg
 
 #reactjs #phongvan #frontend #reacthooks #laptrinh
 ```
@@ -1781,10 +1781,10 @@ Bẫy hay gặp: đừng dùng Math.random() làm key — giá trị đổi mỗ
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP46]
-⏭️ Câu tiếp theo: [LINK-EP48]
-📱 Bản Shorts 60 giây: [LINK-SHORT-03]
-🔁 Bẫy y hệt bên Vue: câu 11 (:key trong v-for) — [LINK-EP55]
+⏮️ Câu trước: https://youtu.be/LdTBWvjazsU
+⏭️ Câu tiếp theo: https://youtu.be/CVXBGZuNBZA
+📱 Bản Shorts 60 giây: https://youtu.be/4oT6ToGBxcg
+🔁 Bẫy y hệt bên Vue: câu 11 (:key trong v-for) — https://youtu.be/NWk2UURxG9Q
 
 #reactjs #phongvan #frontend #reactkey #laptrinh
 ```
@@ -1824,9 +1824,9 @@ Bẫy hay gặp: đổi value của input từ undefined sang có giá trị GI�
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP47]
-⏭️ Câu tiếp theo: [LINK-EP49]
-📱 Bản Shorts 60 giây: [LINK-SHORT-04]
+⏮️ Câu trước: https://youtu.be/c325Ox2Ckro
+⏭️ Câu tiếp theo: https://youtu.be/IOT05xjnJ1g
+📱 Bản Shorts 60 giây: https://youtu.be/Ho_w13OlYbQ
 
 #reactjs #phongvan #frontend #reactforms #laptrinh
 ```
@@ -1866,9 +1866,9 @@ Bẫy hay gặp: đừng memo mọi thứ — so sánh props cũng tốn chi ph�
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP48]
-⏭️ Câu tiếp theo: [LINK-EP50]
-📱 Bản Shorts 60 giây: [LINK-SHORT-05]
+⏮️ Câu trước: https://youtu.be/CVXBGZuNBZA
+⏭️ Câu tiếp theo: https://youtu.be/ci3l-FV3RUA
+📱 Bản Shorts 60 giây: https://youtu.be/VdXXu3QaSkc
 
 #reactjs #phongvan #frontend #reactperformance #laptrinh
 ```
@@ -1908,9 +1908,9 @@ Bẫy hay gặp: custom hook KHÔNG share STATE giữa các component gọi nó 
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP49]
-⏭️ Câu tiếp theo (mở đầu phần Vue): [LINK-EP51]
-📱 Bản Shorts 60 giây: [LINK-SHORT-06]
+⏮️ Câu trước: https://youtu.be/IOT05xjnJ1g
+⏭️ Câu tiếp theo (mở đầu phần Vue): https://youtu.be/oaEsQQa45pw
+📱 Bản Shorts 60 giây: https://youtu.be/78iuviICHpo
 
 #reactjs #phongvan #frontend #customhook #laptrinh
 ```
@@ -1950,9 +1950,9 @@ Bẫy hay gặp: muốn destructure an toàn, dùng toRefs(state) để tách t�
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP50]
-⏭️ Câu tiếp theo: [LINK-EP52]
-📱 Bản Shorts 60 giây: [LINK-SHORT-07]
+⏮️ Câu trước: https://youtu.be/ci3l-FV3RUA
+⏭️ Câu tiếp theo: https://youtu.be/iToDJGcGcaE
+📱 Bản Shorts 60 giây: https://youtu.be/iO0QsuHiqbw
 
 #vuejs #phongvan #frontend #vuereactivity #laptrinh
 ```
@@ -1993,9 +1993,9 @@ Bẫy hay gặp: nhiều người nghĩ Options API đã lỗi thời — SAI, V
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP51]
-⏭️ Câu tiếp theo: [LINK-EP53]
-📱 Bản Shorts 60 giây: [LINK-SHORT-08]
+⏮️ Câu trước: https://youtu.be/oaEsQQa45pw
+⏭️ Câu tiếp theo: https://youtu.be/SPCXsjvpS3k
+📱 Bản Shorts 60 giây: https://youtu.be/bInrH9l16UA
 
 #vuejs #phongvan #frontend #vuecomposition #laptrinh
 ```
@@ -2035,9 +2035,9 @@ Bẫy hay gặp: computed PHẢI PURE — đếm số lần tính lại trong de
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP52]
-⏭️ Câu tiếp theo: [LINK-EP54]
-📱 Bản Shorts 60 giây: [LINK-SHORT-09]
+⏮️ Câu trước: https://youtu.be/iToDJGcGcaE
+⏭️ Câu tiếp theo: https://youtu.be/S8QgWBGQt4w
+📱 Bản Shorts 60 giây: https://youtu.be/7FGQlsWoxKw
 
 #vuejs #phongvan #frontend #vuewatch #laptrinh
 ```
@@ -2077,9 +2077,9 @@ Bẫy hay gặp: v-show KHÔNG dùng chung được với v-else, và KHÔNG áp
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP53]
-⏭️ Câu tiếp theo: [LINK-EP55]
-📱 Bản Shorts 60 giây: [LINK-SHORT-10]
+⏮️ Câu trước: https://youtu.be/SPCXsjvpS3k
+⏭️ Câu tiếp theo: https://youtu.be/NWk2UURxG9Q
+📱 Bản Shorts 60 giây: https://youtu.be/mOfndGObbpk
 
 #vuejs #phongvan #frontend #vueif #laptrinh
 ```
@@ -2119,10 +2119,10 @@ Bẫy hay gặp: cùng MỘT LUẬT cho cả 2 framework — học một lần, 
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP54]
-⏭️ Câu tiếp theo: [LINK-EP56]
-📱 Bản Shorts 60 giây: [LINK-SHORT-11]
-🔁 Bẫy y hệt bên React: câu 3 (key trong list) — [LINK-EP47]
+⏮️ Câu trước: https://youtu.be/S8QgWBGQt4w
+⏭️ Câu tiếp theo: https://youtu.be/usOtTYN2KB0
+📱 Bản Shorts 60 giây: https://youtu.be/f0LmsVkoAGs
+🔁 Bẫy y hệt bên React: câu 3 (key trong list) — https://youtu.be/c325Ox2Ckro
 
 #vuejs #phongvan #frontend #vuekey #laptrinh
 ```
@@ -2162,9 +2162,9 @@ Bẫy hay gặp: mutate prop trực tiếp trong component con sẽ ra warning v
 
 📦 Source code (demo-fe-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout fe-qa-batch-1 để xem đúng 12 câu code của lô 1 (6 React + 6 Vue).
-⏮️ Câu trước: [LINK-EP55]
-▶️ Xem từ đầu series: [LINK-EP45]
-📱 Bản Shorts 60 giây: [LINK-SHORT-12]
+⏮️ Câu trước: https://youtu.be/NWk2UURxG9Q
+▶️ Xem từ đầu series: https://youtu.be/G5bCudY1jSU
+📱 Bản Shorts 60 giây: https://youtu.be/xQzzjm_TS0Y
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 💬 Đến lượt bạn: comment câu hỏi phỏng vấn Frontend KHÓ NHẤT bạn từng gặp — càng nhiều người góp, lô 2 càng sát thực tế phỏng vấn ngoài kia!
 
@@ -2188,15 +2188,15 @@ Bẫy hay gặp: mutate prop trực tiếp trong component con sẽ ra warning v
 
 | id | Tiêu đề Shorts | Caption |
 |---|---|---|
-| sr1 | Virtual DOM là gì? Trả lời trong 60 giây #shorts | Virtual DOM = bản sao nhẹ, diff rồi vá tối thiểu vào DOM thật.<br>Bẫy: KHÔNG phải lúc nào cũng nhanh hơn — đây là chiến lược tránh thao tác thừa, không phải phép màu tốc độ.<br>Video đầy đủ: [LINK-EP45]<br>#shorts #react #phongvan |
-| sr2 | useState vs useEffect: khác nhau thế nào? #shorts | useState giữ state nội bộ; useEffect đồng bộ ngoài React, luôn chạy SAU render.<br>Bẫy: cleanup chạy TRƯỚC mỗi effect kế tiếp, không chỉ khi unmount.<br>Video đầy đủ: [LINK-EP46]<br>#shorts #react #phongvan |
-| sr3 | Đừng dùng index làm key trong React! #shorts | key giúp React nhận diện đúng phần tử giữa các lần render.<br>Bẫy: key=index + thêm/xóa/sắp xếp lại danh sách = state đi lạc ngay.<br>Video đầy đủ: [LINK-EP47]<br>#shorts #react #phongvan |
-| sr4 | Controlled vs Uncontrolled input — bẫy hay hỏi #shorts | Controlled: state React giữ giá trị qua value+onChange. Uncontrolled: DOM tự giữ, đọc qua ref.<br>Bẫy: đổi value từ rỗng sang có giá trị giữa chừng — React cảnh báo "chuyển sang controlled".<br>Video đầy đủ: [LINK-EP48]<br>#shorts #react #phongvan |
-| sr5 | React.memo có thật sự ăn không? #shorts | React.memo chỉ ăn khi props giữ NGUYÊN reference — object/function mới mỗi render là phá vỡ ngay.<br>Bẫy: đừng memo tràn lan khi chưa đo bằng Profiler.<br>Video đầy đủ: [LINK-EP49]<br>#shorts #react #phongvan |
-| sr6 | Custom Hook là gì? 60 giây hiểu luôn #shorts | Custom hook = hàm bắt đầu bằng "use", gói logic có state để dùng lại nhiều nơi — không trả JSX.<br>Bẫy: custom hook KHÔNG share state giữa components, chỉ share logic.<br>Video đầy đủ: [LINK-EP50]<br>#shorts #react #phongvan |
-| sv1 | Vì sao destructure reactive mất reactivity? #shorts | ref qua .value; reactive là Proxy sâu cho object, truy cập trực tiếp property.<br>Bẫy: destructure khỏi reactive là MẤT liên kết Proxy — dùng toRefs(state) để an toàn.<br>Video đầy đủ: [LINK-EP51]<br>#shorts #vuejs #phongvan |
-| sv2 | Options API vs Composition API Vue 3 #shorts | Options API tổ chức theo LOẠI; Composition API tổ chức theo TÍNH NĂNG trong script setup.<br>Bẫy: đừng trộn 2 style trong cùng 1 component — Options KHÔNG hề lỗi thời.<br>Video đầy đủ: [LINK-EP52]<br>#shorts #vuejs #phongvan |
-| sv3 | computed vs watch vs watchEffect Vue #shorts | computed có CACHE, chỉ tính lại khi dependency đổi; watch lazy theo nguồn cụ thể; watchEffect eager chạy ngay.<br>Bẫy: computed PHẢI PURE — side-effect thật thì dùng watch.<br>Video đầy đủ: [LINK-EP53]<br>#shorts #vuejs #phongvan |
-| sv4 | v-if vs v-show: khác nhau thế nào? #shorts | v-if unmount thật, mất state con; v-show chỉ toggle CSS display, state giữ nguyên.<br>Bẫy: toggle liên tục dùng v-show cho rẻ; v-show không dùng chung với v-else.<br>Video đầy đủ: [LINK-EP54]<br>#shorts #vuejs #phongvan |
-| sv5 | Đừng dùng index làm :key trong v-for! #shorts | :key giúp Vue nhận diện đúng phần tử — cùng luật với React.<br>Bẫy: :key=index + thêm/xóa/sắp xếp lại = state đi lạc, y hệt bẫy R3 bên React.<br>Video đầy đủ: [LINK-EP55]<br>#shorts #vuejs #phongvan |
-| sv6 | Props xuống, Emit lên hoạt động sao? #shorts | Props xuống một chiều, con chỉ đọc; Emit lên để con báo tin, cha quyết định xử lý.<br>Bẫy: đừng mutate prop trực tiếp — cần 2 chiều thì dùng defineModel.<br>Video đầy đủ: [LINK-EP56]<br>#shorts #vuejs #phongvan |
+| sr1 | Virtual DOM là gì? Trả lời trong 60 giây #shorts | Virtual DOM = bản sao nhẹ, diff rồi vá tối thiểu vào DOM thật.<br>Bẫy: KHÔNG phải lúc nào cũng nhanh hơn — đây là chiến lược tránh thao tác thừa, không phải phép màu tốc độ.<br>Video đầy đủ: https://youtu.be/G5bCudY1jSU<br>#shorts #react #phongvan |
+| sr2 | useState vs useEffect: khác nhau thế nào? #shorts | useState giữ state nội bộ; useEffect đồng bộ ngoài React, luôn chạy SAU render.<br>Bẫy: cleanup chạy TRƯỚC mỗi effect kế tiếp, không chỉ khi unmount.<br>Video đầy đủ: https://youtu.be/LdTBWvjazsU<br>#shorts #react #phongvan |
+| sr3 | Đừng dùng index làm key trong React! #shorts | key giúp React nhận diện đúng phần tử giữa các lần render.<br>Bẫy: key=index + thêm/xóa/sắp xếp lại danh sách = state đi lạc ngay.<br>Video đầy đủ: https://youtu.be/c325Ox2Ckro<br>#shorts #react #phongvan |
+| sr4 | Controlled vs Uncontrolled input — bẫy hay hỏi #shorts | Controlled: state React giữ giá trị qua value+onChange. Uncontrolled: DOM tự giữ, đọc qua ref.<br>Bẫy: đổi value từ rỗng sang có giá trị giữa chừng — React cảnh báo "chuyển sang controlled".<br>Video đầy đủ: https://youtu.be/CVXBGZuNBZA<br>#shorts #react #phongvan |
+| sr5 | React.memo có thật sự ăn không? #shorts | React.memo chỉ ăn khi props giữ NGUYÊN reference — object/function mới mỗi render là phá vỡ ngay.<br>Bẫy: đừng memo tràn lan khi chưa đo bằng Profiler.<br>Video đầy đủ: https://youtu.be/IOT05xjnJ1g<br>#shorts #react #phongvan |
+| sr6 | Custom Hook là gì? 60 giây hiểu luôn #shorts | Custom hook = hàm bắt đầu bằng "use", gói logic có state để dùng lại nhiều nơi — không trả JSX.<br>Bẫy: custom hook KHÔNG share state giữa components, chỉ share logic.<br>Video đầy đủ: https://youtu.be/ci3l-FV3RUA<br>#shorts #react #phongvan |
+| sv1 | Vì sao destructure reactive mất reactivity? #shorts | ref qua .value; reactive là Proxy sâu cho object, truy cập trực tiếp property.<br>Bẫy: destructure khỏi reactive là MẤT liên kết Proxy — dùng toRefs(state) để an toàn.<br>Video đầy đủ: https://youtu.be/oaEsQQa45pw<br>#shorts #vuejs #phongvan |
+| sv2 | Options API vs Composition API Vue 3 #shorts | Options API tổ chức theo LOẠI; Composition API tổ chức theo TÍNH NĂNG trong script setup.<br>Bẫy: đừng trộn 2 style trong cùng 1 component — Options KHÔNG hề lỗi thời.<br>Video đầy đủ: https://youtu.be/iToDJGcGcaE<br>#shorts #vuejs #phongvan |
+| sv3 | computed vs watch vs watchEffect Vue #shorts | computed có CACHE, chỉ tính lại khi dependency đổi; watch lazy theo nguồn cụ thể; watchEffect eager chạy ngay.<br>Bẫy: computed PHẢI PURE — side-effect thật thì dùng watch.<br>Video đầy đủ: https://youtu.be/SPCXsjvpS3k<br>#shorts #vuejs #phongvan |
+| sv4 | v-if vs v-show: khác nhau thế nào? #shorts | v-if unmount thật, mất state con; v-show chỉ toggle CSS display, state giữ nguyên.<br>Bẫy: toggle liên tục dùng v-show cho rẻ; v-show không dùng chung với v-else.<br>Video đầy đủ: https://youtu.be/S8QgWBGQt4w<br>#shorts #vuejs #phongvan |
+| sv5 | Đừng dùng index làm :key trong v-for! #shorts | :key giúp Vue nhận diện đúng phần tử — cùng luật với React.<br>Bẫy: :key=index + thêm/xóa/sắp xếp lại = state đi lạc, y hệt bẫy R3 bên React.<br>Video đầy đủ: https://youtu.be/NWk2UURxG9Q<br>#shorts #vuejs #phongvan |
+| sv6 | Props xuống, Emit lên hoạt động sao? #shorts | Props xuống một chiều, con chỉ đọc; Emit lên để con báo tin, cha quyết định xử lý.<br>Bẫy: đừng mutate prop trực tiếp — cần 2 chiều thì dùng defineModel.<br>Video đầy đủ: https://youtu.be/usOtTYN2KB0<br>#shorts #vuejs #phongvan |
