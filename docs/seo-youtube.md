@@ -2205,7 +2205,7 @@ Bẫy hay gặp: mutate prop trực tiếp trong component con sẽ ra warning v
 
 ## LÔ 2 SERIES PHỎNG VẤN FRONTEND — Hiệu năng React Native & Flutter (câu #13–#24 + 12 Shorts)
 
-> Lô 2 nối tiếp cùng playlist **"Phỏng vấn Frontend 🇻🇳"** — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE (KHÔNG tạo playlist mới — khi đăng chỉ nối 24 video lô 2 vào playlist sẵn có). CHƯA ĐĂNG — mọi link video là placeholder `[LINK-EP57]`..`[LINK-EP68]` (bản ngang) và `[LINK-SHORT-13]`..`[LINK-SHORT-24]` (Shorts), điền link thật khi đăng. Chủ đề lô 2: HIỆU NĂNG khi load nhiều dữ liệu — 6 câu React Native (N1–N6 → ep57–ep62) + 6 câu Flutter (F1–F6 → ep63–ep68), mỗi câu có demo đo SỐ THẬT trên simulator (bản debug — kịch bản luôn nói rõ "trên simulator của tôi"). Code: `demo-perf-interview/` (`rn-perf/` + `flutter_perf/`), đóng băng ở tag `perf-qa-batch-2`. Ba cặp xem chéo RN↔Flutter: câu 13↔19 (lazy list), 17↔23 (ảnh), 18↔24 (thread/isolate).
+> Lô 2 nối tiếp cùng playlist **"Phỏng vấn Frontend 🇻🇳"** — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE (KHÔNG tạo playlist mới — khi đăng chỉ nối 24 video lô 2 vào playlist sẵn có). CHƯA ĐĂNG — mọi link video là placeholder `https://youtu.be/2yu2FhayLY0`..`https://youtu.be/Jzn5ELGPewk` (bản ngang) và `https://youtu.be/EpTJxDVIJdI`..`https://youtu.be/oYjtEW_Z1UM` (Shorts), điền link thật khi đăng. Chủ đề lô 2: HIỆU NĂNG khi load nhiều dữ liệu — 6 câu React Native (N1–N6 → ep57–ep62) + 6 câu Flutter (F1–F6 → ep63–ep68), mỗi câu có demo đo SỐ THẬT trên simulator (bản debug — kịch bản luôn nói rõ "trên simulator của tôi"). Code: `demo-perf-interview/` (`rn-perf/` + `flutter_perf/`), đóng băng ở tag `perf-qa-batch-2`. Ba cặp xem chéo RN↔Flutter: câu 13↔19 (lazy list), 17↔23 (ảnh), 18↔24 (thread/isolate).
 
 Từ khóa chủ lực lô 2: `phỏng vấn react native`, `phỏng vấn flutter`, `react native performance`, `flutter performance`, `tối ưu hiệu năng app`, `flatlist`, `listview builder`, `câu hỏi phỏng vấn mobile`, `học react native`, `học flutter`.
 
@@ -2233,9 +2233,9 @@ Demo thật bằng n1.tsx, đếm render bằng biến renderCount trên simulat
 
 📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
-⏭️ Câu tiếp theo: [LINK-EP58]
-📱 Bản Shorts 60 giây: [LINK-SHORT-13]
-🔁 Bẫy y hệt bên Flutter: câu 19 (Column vs ListView.builder) — [LINK-EP63]
+⏭️ Câu tiếp theo: https://youtu.be/lhaNL9y2Q7M
+📱 Bản Shorts 60 giây: https://youtu.be/EpTJxDVIJdI
+🔁 Bẫy y hệt bên Flutter: câu 19 (Column vs ListView.builder) — https://youtu.be/JHP-5gZ6cqA
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2275,9 +2275,9 @@ Demo thật bằng n2.tsx: chế độ OFF bấm Nhảy tới item 4999 — list
 
 📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP57]
-⏭️ Câu tiếp theo: [LINK-EP59]
-📱 Bản Shorts 60 giây: [LINK-SHORT-14]
+⏮️ Câu trước: https://youtu.be/2yu2FhayLY0
+⏭️ Câu tiếp theo: https://youtu.be/OLD6KBVCzzc
+📱 Bản Shorts 60 giây: https://youtu.be/nDiEq90wqU4
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2317,9 +2317,9 @@ Demo thật bằng n3.tsx, mỗi Row tự đếm số lần render bằng useRef
 
 📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP58]
-⏭️ Câu tiếp theo: [LINK-EP60]
-📱 Bản Shorts 60 giây: [LINK-SHORT-15]
+⏮️ Câu trước: https://youtu.be/lhaNL9y2Q7M
+⏭️ Câu tiếp theo: https://youtu.be/oTYFiL8OzB8
+📱 Bản Shorts 60 giây: https://youtu.be/QX9aH_HEmd4
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2359,9 +2359,9 @@ Demo thật bằng n4.tsx: Guard OFF, kéo giật ra vào trong lúc loading qua
 
 📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP59]
-⏭️ Câu tiếp theo: [LINK-EP61]
-📱 Bản Shorts 60 giây: [LINK-SHORT-16]
+⏮️ Câu trước: https://youtu.be/OLD6KBVCzzc
+⏭️ Câu tiếp theo: https://youtu.be/GUXD0Yas9JA
+📱 Bản Shorts 60 giây: https://youtu.be/Z6HhBq8xDAI
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2401,10 +2401,10 @@ Demo thật bằng n5.tsx, 120 hàng dùng 12 tấm PNG 2000px: RN Image thườ
 
 📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP60]
-⏭️ Câu tiếp theo: [LINK-EP62]
-📱 Bản Shorts 60 giây: [LINK-SHORT-17]
-🔁 Bài y hệt bên Flutter: câu 23 (cacheWidth) — [LINK-EP67]
+⏮️ Câu trước: https://youtu.be/oTYFiL8OzB8
+⏭️ Câu tiếp theo: https://youtu.be/zlzQHCex90o
+📱 Bản Shorts 60 giây: https://youtu.be/b3WCGHcixVQ
+🔁 Bài y hệt bên Flutter: câu 23 (cacheWidth) — https://youtu.be/koAhlIE_vzw
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2444,10 +2444,10 @@ Demo thật bằng n6.tsx: parse 300k một cục — tick hụt 564ms (mất ch
 
 📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP61]
-⏭️ Câu tiếp theo: [LINK-EP63]
-📱 Bản Shorts 60 giây: [LINK-SHORT-18]
-🔁 Cùng bài bên Flutter: câu 24 (Isolate.run) — [LINK-EP68]
+⏮️ Câu trước: https://youtu.be/GUXD0Yas9JA
+⏭️ Câu tiếp theo: https://youtu.be/JHP-5gZ6cqA
+📱 Bản Shorts 60 giây: https://youtu.be/2ULY6BIFDvw
+🔁 Cùng bài bên Flutter: câu 24 (Isolate.run) — https://youtu.be/Jzn5ELGPewk
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2487,10 +2487,10 @@ Demo thật bằng f1_lazy_list.dart trên simulator (bản debug), đếm build
 
 📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP62]
-⏭️ Câu tiếp theo: [LINK-EP64]
-📱 Bản Shorts 60 giây: [LINK-SHORT-19]
-🔁 Bẫy y hệt bên React Native: câu 13 (ScrollView vs FlatList) — [LINK-EP57]
+⏮️ Câu trước: https://youtu.be/zlzQHCex90o
+⏭️ Câu tiếp theo: https://youtu.be/1B_MsC6zh_4
+📱 Bản Shorts 60 giây: https://youtu.be/FckJ2bI1Y68
+🔁 Bẫy y hệt bên React Native: câu 13 (ScrollView vs FlatList) — https://youtu.be/2yu2FhayLY0
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2530,9 +2530,9 @@ Demo thật bằng f2_item_extent.dart trên simulator (bản debug), khác bi�
 
 📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP63]
-⏭️ Câu tiếp theo: [LINK-EP65]
-📱 Bản Shorts 60 giây: [LINK-SHORT-20]
+⏮️ Câu trước: https://youtu.be/JHP-5gZ6cqA
+⏭️ Câu tiếp theo: https://youtu.be/PKOBn2a6Rnk
+📱 Bản Shorts 60 giây: https://youtu.be/W7QrzdunfJQ
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2572,9 +2572,9 @@ Demo thật bằng f3_rebuild_scope.dart trên simulator, mỗi item đeo badge 
 
 📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP64]
-⏭️ Câu tiếp theo: [LINK-EP66]
-📱 Bản Shorts 60 giây: [LINK-SHORT-21]
+⏮️ Câu trước: https://youtu.be/1B_MsC6zh_4
+⏭️ Câu tiếp theo: https://youtu.be/Wc3dkoRP0ig
+📱 Bản Shorts 60 giây: https://youtu.be/HrC7B_N0OGo
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2614,9 +2614,9 @@ Demo thật bằng f4_infinite_scroll.dart trên simulator: Guard OFF, một cú
 
 📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP65]
-⏭️ Câu tiếp theo: [LINK-EP67]
-📱 Bản Shorts 60 giây: [LINK-SHORT-22]
+⏮️ Câu trước: https://youtu.be/PKOBn2a6Rnk
+⏭️ Câu tiếp theo: https://youtu.be/koAhlIE_vzw
+📱 Bản Shorts 60 giây: https://youtu.be/n4XWIFkbGXY
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2656,10 +2656,10 @@ Demo thật bằng f5_images.dart, GridView 2 cột 120 ô đọc số từ imag
 
 📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout perf-qa-batch-2 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP66]
-⏭️ Câu tiếp theo: [LINK-EP68]
-📱 Bản Shorts 60 giây: [LINK-SHORT-23]
-🔁 Bài y hệt bên React Native: câu 17 (expo-image) — [LINK-EP61]
+⏮️ Câu trước: https://youtu.be/Wc3dkoRP0ig
+⏭️ Câu tiếp theo: https://youtu.be/Jzn5ELGPewk
+📱 Bản Shorts 60 giây: https://youtu.be/TZh0OO9O1TA
+🔁 Bài y hệt bên React Native: câu 17 (expo-image) — https://youtu.be/GUXD0Yas9JA
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2699,10 +2699,10 @@ Demo thật bằng f6_isolate.dart, chuỗi JSON 18.9MB: chạy trên main — f
 
 📦 Source code (demo-perf-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout perf-qa-batch-2 để xem đúng 12 câu code của lô 2 (6 React Native + 6 Flutter).
-⏮️ Câu trước: [LINK-EP67]
-▶️ Xem lại từ đầu lô 2: [LINK-EP57]
-📱 Bản Shorts 60 giây: [LINK-SHORT-24]
-🔁 Cùng bài bên React Native: câu 18 (chia lô trên JS thread) — [LINK-EP62]
+⏮️ Câu trước: https://youtu.be/koAhlIE_vzw
+▶️ Xem lại từ đầu lô 2: https://youtu.be/2yu2FhayLY0
+📱 Bản Shorts 60 giây: https://youtu.be/oYjtEW_Z1UM
+🔁 Cùng bài bên React Native: câu 18 (chia lô trên JS thread) — https://youtu.be/zlzQHCex90o
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 💬 Đủ 24 câu trên playlist — comment câu hỏi phỏng vấn khó nhất bạn từng gặp để series sau càng sát thực tế!
@@ -2727,15 +2727,15 @@ Demo thật bằng f6_isolate.dart, chuỗi JSON 18.9MB: chạy trên main — f
 
 | id | Tiêu đề Shorts | Caption |
 |---|---|---|
-| sn1 | Vì sao FlatList mượt hơn ScrollView? 60 giây #shorts | FlatList dùng virtualization: chỉ render trong cửa sổ — 10 item/198ms so với 5.000 item/1381ms của ScrollView+map.<br>Bẫy: cuộn quá nhanh vẫn trắng màn — chiến lược đánh đổi, không phải phép màu.<br>Video đầy đủ: [LINK-EP57]<br>#shorts #reactnative #phongvan |
-| sn2 | scrollToIndex FAIL — thiếu đúng một prop #shorts | getItemLayout đưa trước công thức length + offset — FlatList bỏ bước đo, nhảy tới item 4999 tức thì 49ms thay vì FAIL.<br>Bẫy: chỉ dùng khi item cao CỐ ĐỊNH — khai láo là cuộn sai vị trí.<br>Video đầy đủ: [LINK-EP58]<br>#shorts #reactnative #phongvan |
-| sn3 | 1 item đổi, cả nghìn item render lại? #shorts | React.memo so shallow props — kết hợp update immutable + renderItem bọc useCallback: chỉ hàng đổi mới render.<br>Bẫy: hàm ẩn danh mới mỗi render là memo vô dụng ngay.<br>Video đầy đủ: [LINK-EP59]<br>#shorts #reactnative #phongvan |
-| sn4 | onEndReached gọi trùng API — chặn bằng 1 cái ref #shorts | Guard bằng cờ trong ref: set TRƯỚC fetch, hạ khi response về — 6 lần gọi trùng về đúng 1 lần mỗi nhịp.<br>Bẫy: cờ bằng state là hở vì setState bất đồng bộ — closure cũ vẫn đọc false.<br>Video đầy đủ: [LINK-EP60]<br>#shorts #reactnative #phongvan |
-| sn5 | List trăm ảnh cuộn mượt: expo-image #shorts | expo-image decode đúng cỡ container + cache 2 tầng memory-disk: warm 153ms, kill app vẫn 368ms.<br>Bẫy: lần đầu 1360ms CHẬM HƠN là chi phí điền cache — trả một lần, lãi mọi lần sau.<br>Video đầy đủ: [LINK-EP61]<br>#shorts #reactnative #phongvan |
-| sn6 | Parse 300k bản ghi — UI đứng hình vì sao? #shorts | JS một thread — chia lô 5.000 + setTimeout 0 nhường event loop: maxGap từ 564ms xuống 127ms.<br>Bẫy: chia lô mua PHẢN HỒI chứ không mua tốc độ — tổng chậm hơn 2–3 lần.<br>Video đầy đủ: [LINK-EP62]<br>#shorts #reactnative #phongvan |
-| sf1 | Column 5000 item đơ 8 giây — vì sao? #shorts | Column build cả 5.000 widget ngay frame đầu; ListView.builder chỉ build 17 item — 199ms.<br>Bẫy: shrinkWrap true hay lồng ListView trong Column hở chiều cao là builder bị ép build HẾT.<br>Video đầy đủ: [LINK-EP63]<br>#shorts #flutter #phongvan |
-| sf2 | itemExtent — nhảy cuối list 5000 hàng trong 34ms #shorts | Khai itemExtent 64 là vị trí item thành số học: jumpTo xuống đáy chỉ build thêm 12 item thay vì 4.987.<br>Bẫy: chỉ cho hàng cao ĐỀU — và cấm khai cùng lúc với prototypeItem.<br>Video đầy đủ: [LINK-EP64]<br>#shorts #flutter #phongvan |
-| sf3 | Bấm +1 mà 40 item rebuild — sửa thế nào? #shorts | localize setState: đẩy state xuống StatefulWidget nhỏ nhất cần nó — mọi item từ build 4 lần về đúng 1 lần.<br>Bẫy: helper function không tạo ranh giới rebuild — phải là class widget riêng.<br>Video đầy đủ: [LINK-EP65]<br>#shorts #flutter #phongvan |
-| sf4 | ScrollController dội API 45 lần một cú kéo #shorts | Listener chạy MỖI scroll event — guard if _loading return, cờ set NGAY TRƯỚC await: 45 lần về 1 lần.<br>Bẫy: set cờ sau await là cửa sổ race vẫn mở suốt 800ms chờ mạng.<br>Video đầy đủ: [LINK-EP66]<br>#shorts #flutter #phongvan |
-| sf5 | Grid ảnh ngốn 183MB RAM — 1 dòng code cứu #shorts | RAM ảnh ăn theo kích thước DECODE — cacheWidth 380 đưa imageCache từ 183.1MB về 6.6MB, giảm 27.7 lần.<br>Bẫy: cacheWidth là pixel VẬT LÝ — ô 190 điểm màn 2x phải khai 380, kẻo ảnh mờ.<br>Video đầy đủ: [LINK-EP67]<br>#shorts #flutter #phongvan |
-| sf6 | jsonDecode đứng hình UI — Isolate.run cứu #shorts | Dart một luồng, await không cứu — Isolate.run dời decode sang isolate nền: gap 235ms về đúng 1 frame 16ms.<br>Bẫy: closure capture this là crash unsendable — helper top-level chỉ nhận String.<br>Video đầy đủ: [LINK-EP68]<br>#shorts #flutter #phongvan |
+| sn1 | Vì sao FlatList mượt hơn ScrollView? 60 giây #shorts | FlatList dùng virtualization: chỉ render trong cửa sổ — 10 item/198ms so với 5.000 item/1381ms của ScrollView+map.<br>Bẫy: cuộn quá nhanh vẫn trắng màn — chiến lược đánh đổi, không phải phép màu.<br>Video đầy đủ: https://youtu.be/2yu2FhayLY0<br>#shorts #reactnative #phongvan |
+| sn2 | scrollToIndex FAIL — thiếu đúng một prop #shorts | getItemLayout đưa trước công thức length + offset — FlatList bỏ bước đo, nhảy tới item 4999 tức thì 49ms thay vì FAIL.<br>Bẫy: chỉ dùng khi item cao CỐ ĐỊNH — khai láo là cuộn sai vị trí.<br>Video đầy đủ: https://youtu.be/lhaNL9y2Q7M<br>#shorts #reactnative #phongvan |
+| sn3 | 1 item đổi, cả nghìn item render lại? #shorts | React.memo so shallow props — kết hợp update immutable + renderItem bọc useCallback: chỉ hàng đổi mới render.<br>Bẫy: hàm ẩn danh mới mỗi render là memo vô dụng ngay.<br>Video đầy đủ: https://youtu.be/OLD6KBVCzzc<br>#shorts #reactnative #phongvan |
+| sn4 | onEndReached gọi trùng API — chặn bằng 1 cái ref #shorts | Guard bằng cờ trong ref: set TRƯỚC fetch, hạ khi response về — 6 lần gọi trùng về đúng 1 lần mỗi nhịp.<br>Bẫy: cờ bằng state là hở vì setState bất đồng bộ — closure cũ vẫn đọc false.<br>Video đầy đủ: https://youtu.be/oTYFiL8OzB8<br>#shorts #reactnative #phongvan |
+| sn5 | List trăm ảnh cuộn mượt: expo-image #shorts | expo-image decode đúng cỡ container + cache 2 tầng memory-disk: warm 153ms, kill app vẫn 368ms.<br>Bẫy: lần đầu 1360ms CHẬM HƠN là chi phí điền cache — trả một lần, lãi mọi lần sau.<br>Video đầy đủ: https://youtu.be/GUXD0Yas9JA<br>#shorts #reactnative #phongvan |
+| sn6 | Parse 300k bản ghi — UI đứng hình vì sao? #shorts | JS một thread — chia lô 5.000 + setTimeout 0 nhường event loop: maxGap từ 564ms xuống 127ms.<br>Bẫy: chia lô mua PHẢN HỒI chứ không mua tốc độ — tổng chậm hơn 2–3 lần.<br>Video đầy đủ: https://youtu.be/zlzQHCex90o<br>#shorts #reactnative #phongvan |
+| sf1 | Column 5000 item đơ 8 giây — vì sao? #shorts | Column build cả 5.000 widget ngay frame đầu; ListView.builder chỉ build 17 item — 199ms.<br>Bẫy: shrinkWrap true hay lồng ListView trong Column hở chiều cao là builder bị ép build HẾT.<br>Video đầy đủ: https://youtu.be/JHP-5gZ6cqA<br>#shorts #flutter #phongvan |
+| sf2 | itemExtent — nhảy cuối list 5000 hàng trong 34ms #shorts | Khai itemExtent 64 là vị trí item thành số học: jumpTo xuống đáy chỉ build thêm 12 item thay vì 4.987.<br>Bẫy: chỉ cho hàng cao ĐỀU — và cấm khai cùng lúc với prototypeItem.<br>Video đầy đủ: https://youtu.be/1B_MsC6zh_4<br>#shorts #flutter #phongvan |
+| sf3 | Bấm +1 mà 40 item rebuild — sửa thế nào? #shorts | localize setState: đẩy state xuống StatefulWidget nhỏ nhất cần nó — mọi item từ build 4 lần về đúng 1 lần.<br>Bẫy: helper function không tạo ranh giới rebuild — phải là class widget riêng.<br>Video đầy đủ: https://youtu.be/PKOBn2a6Rnk<br>#shorts #flutter #phongvan |
+| sf4 | ScrollController dội API 45 lần một cú kéo #shorts | Listener chạy MỖI scroll event — guard if _loading return, cờ set NGAY TRƯỚC await: 45 lần về 1 lần.<br>Bẫy: set cờ sau await là cửa sổ race vẫn mở suốt 800ms chờ mạng.<br>Video đầy đủ: https://youtu.be/Wc3dkoRP0ig<br>#shorts #flutter #phongvan |
+| sf5 | Grid ảnh ngốn 183MB RAM — 1 dòng code cứu #shorts | RAM ảnh ăn theo kích thước DECODE — cacheWidth 380 đưa imageCache từ 183.1MB về 6.6MB, giảm 27.7 lần.<br>Bẫy: cacheWidth là pixel VẬT LÝ — ô 190 điểm màn 2x phải khai 380, kẻo ảnh mờ.<br>Video đầy đủ: https://youtu.be/koAhlIE_vzw<br>#shorts #flutter #phongvan |
+| sf6 | jsonDecode đứng hình UI — Isolate.run cứu #shorts | Dart một luồng, await không cứu — Isolate.run dời decode sang isolate nền: gap 235ms về đúng 1 frame 16ms.<br>Bẫy: closure capture this là crash unsendable — helper top-level chỉ nhận String.<br>Video đầy đủ: https://youtu.be/Jzn5ELGPewk<br>#shorts #flutter #phongvan |
