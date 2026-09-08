@@ -60,7 +60,9 @@ import ep54 from './data/ep54.timing.json';
 import ep55 from './data/ep55.timing.json';
 import ep56 from './data/ep56.timing.json';
 import ep57 from './data/ep57.timing.json';
+import ep58 from './data/ep58.timing.json';
 import sn1 from './data/sn1.timing.json';
+import sn2 from './data/sn2.timing.json';
 import sr1 from './data/sr1.timing.json';
 import sr2 from './data/sr2.timing.json';
 import sr3 from './data/sr3.timing.json';
@@ -133,6 +135,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode55', timing: ep55 as unknown as EpisodeTiming},
   {id: 'Episode56', timing: ep56 as unknown as EpisodeTiming},
   {id: 'Episode57', timing: ep57 as unknown as EpisodeTiming},
+  {id: 'Episode58', timing: ep58 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -153,6 +156,7 @@ const shorts: {id: string; timing: EpisodeTiming}[] = [
   {id: 'ShortV5', timing: sv5 as unknown as EpisodeTiming},
   {id: 'ShortV6', timing: sv6 as unknown as EpisodeTiming},
   {id: 'ShortN1', timing: sn1 as unknown as EpisodeTiming},
+  {id: 'ShortN2', timing: sn2 as unknown as EpisodeTiming},
 ];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
@@ -856,6 +860,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/perfqa/n1-scrollview.png',
       badgeEmoji: '🐢',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb58',
+    props: {
+      badge: 'PV FE #14',
+      line1: 'SCROLLTOINDEX',
+      line2: 'FAIL VÌ ĐÂU?',
+      subtitle: 'Phỏng vấn Frontend · Câu 14/24',
+      variant: 'shot',
+      image: 'screens/perfqa/n2-fail.png',
+      badgeEmoji: '🧮',
       seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },
