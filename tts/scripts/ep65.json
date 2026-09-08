@@ -1,0 +1,192 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn Frontend — câu thứ hai mươi mốt, chuyện kinh điển nhất của setState trong Flutter.",
+      "Câu hỏi từ nhà tuyển dụng: Bấm một nút counter mà cả danh sách 40 item build lại — vì sao, và thu hẹp phạm vi rebuild thế nào?",
+      "Demo đếm build từng item trên simulator, rồi chốt cách trả lời trước nhà tuyển dụng."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #21: setState rebuild cả trang — cách thu hẹp phạm vi",
+      "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 21/24",
+      "badge": "Flutter · Rebuild scope"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Câu này soi một chuyện duy nhất: state của bạn đang treo ở tầng nào trong cây widget.",
+      "Docs Flutter nói thẳng: When setState is called on a State object, all descendent widgets rebuild — build() của State đó chạy lại, toàn bộ widget con cháu dựng lại theo.",
+      "Thuốc chữa chính chủ cũng nằm trong docs: localize the setState call — đẩy state xuống widget NHỎ NHẤT thực sự cần nó, đừng gọi setState cao trên cây.",
+      "Đây là bài đối xứng với React.memo bên React Native ở câu số 15 — nhưng chiều ngược: React chặn render từ NGOÀI bằng memo từng con, Flutter thu hẹp từ GỐC bằng tách widget."
+    ],
+    "visual": {
+      "title": "Cơ chế: phạm vi setState",
+      "bullets": [
+        {
+          "icon": "🌳",
+          "text": "Docs: all descendent widgets rebuild — cả subtree",
+          "sentence": 1
+        },
+        {
+          "icon": "💊",
+          "text": "Localize setState — state xuống widget NHỎ NHẤT",
+          "sentence": 2
+        },
+        {
+          "icon": "🧭",
+          "text": "Đối xứng React.memo câu #15 — chiều ngược",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Trang demo thật — f3_rebuild_scope.dart: chế độ một, _CounterPanel nhận onAdd gọi setState của CHÍNH page — build() cả trang chạy lại, itemBuilder phát widget mới, 40 item rebuild theo.",
+      "Chế độ hai chỉ đổi đúng một dòng: đặt _CounterBox — một StatefulWidget riêng, giữ _count và gọi setState bên trong chính nó, page không hề hay biết.",
+      "Bên dưới là ListView.builder 40 item — mỗi RowTileF3 tự tăng bộ đếm trong build() và đeo badge số lần build của chính nó; RowTileF3 cố ý KHÔNG const để đo trung thực.",
+      "Hai chế độ dùng chung _CounterPanel, nhìn giống hệt nhau — khác biệt duy nhất là AI LÀM CHỦ state của counter."
+    ],
+    "visual": {
+      "filename": "f3_rebuild_scope.dart",
+      "language": "clike",
+      "code": "            if (_mode == _Mode.page)\n              _CounterPanel(\n                counter: _pageCounter,\n                // setState của PAGE → toàn bộ build() này chạy lại,\n                // itemBuilder phát widget mới → 40 item rebuild theo.\n                onAdd: () => setState(() => _pageCounter++),\n              )\n            else\n              _CounterBox(key: ValueKey('box-$_run')),\n            Expanded(\n              child: ListView.builder(\n                key: ValueKey('list-$_mode-$_run'),\n                itemCount: _items.length,\n                itemBuilder: (context, i) =>\n                    RowTileF3(item: _items[i], index: i),\n              ),\n            ),",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 9,
+          "sentence": 1
+        },
+        {
+          "from": 10,
+          "to": 17,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 17,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "phone",
+    "narration": [
+      "Số thật trên simulator của tôi, bản debug — chế độ setState cả trang trước, bấm cộng một đúng ba lần.",
+      "Counter lên 3 — và MỌI item nhìn thấy đeo badge đỏ build 4 lần: 1 lần lúc mount cộng 3 lần theo 3 cú setState của page, dù 40 dòng dữ liệu không hề đổi.",
+      "Giờ chế độ tách widget — cùng thao tác, bấm cộng một đúng ba lần.",
+      "Counter vẫn 3, nhưng mọi item xanh build 1 lần — build() của page không chạy lại nên itemBuilder không được gọi lại, 40 item đứng yên.",
+      "Ghi chú trung thực: 4 lần áp cho item ĐÃ build — phần nhìn thấy cộng cacheExtent; item ngoài màn chưa từng build ở cả hai chế độ, ListView vẫn lazy."
+    ],
+    "visual": {
+      "title": "Bằng chứng: build 4× vs 1×",
+      "screens": [
+        {
+          "src": "screens/perfqa/f3-page.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/perfqa/f3-scoped.png",
+          "sentence": 2
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🔴",
+          "text": "Cả trang: mọi item build 4× — 1 mount + 3 setState",
+          "sentence": 1
+        },
+        {
+          "icon": "🟢",
+          "text": "Tách widget: mọi item build 1× — Counter vẫn 3",
+          "sentence": 3
+        },
+        {
+          "icon": "📏",
+          "text": "4× = item ĐÃ build (màn + cacheExtent) — ngoài màn: lazy",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — ba câu chốt.",
+      "Câu một: setState gọi ở State nào thì build() của State đó chạy lại và toàn bộ subtree dựng lại — counter là state của page nên 40 item bị kéo theo.",
+      "Câu hai: localize setState — đẩy state xuống widget nhỏ nhất cần nó; trên demo, tách _CounterBox đưa mọi item từ build 4 lần về đúng 1 lần.",
+      "Câu ba: đây là tối ưu KIẾN TRÚC chứ không phải hack — const item cũng chặn được rebuild, nhưng chỉ khi dữ liệu tĩnh, hằng compile-time.",
+      "Hai bẫy: tách bằng helper function _buildItem không tạo ranh giới rebuild — phải là class widget riêng; và đừng vác Provider hay Riverpod ra chỉ để né một setState."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "setState ở State nào → subtree State đó dựng lại",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Localize: state xuống widget nhỏ nhất — 4× → 1×",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Tối ưu KIẾN TRÚC — const chỉ khi data tĩnh",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "Helper function ≠ ranh giới · đừng vác Provider né setState",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu 21 — setState không sai, chỉ hay bị đặt sai tầng của cây widget.",
+      "Câu tiếp theo: infinite scroll với ScrollController — kéo một cú mà loadMore bị gọi 45 lần, chặn kiểu gì?",
+      "Video này có bản Shorts 60 giây — cùng câu hỏi, rút gọn để ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số 22!"
+    ],
+    "visual": {
+      "title": "Câu 21/24 hoàn tất — hẹn gặp câu 22!",
+      "summary": [
+        {
+          "text": "setState cả trang: mọi item 4× — tách widget: 1×",
+          "sentence": 0
+        },
+        {
+          "text": "Localize setState — state xuống widget nhỏ nhất",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: infinite scroll — loadMore gọi 45 lần",
+          "sentence": 1
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 22/24: chặn loadMore gọi 45 lần? 🎤"
+    }
+  }
+]

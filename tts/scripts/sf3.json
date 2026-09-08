@@ -1,0 +1,62 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Bấm một nút counter mà cả danh sách 40 item build lại — vì sao, và thu hẹp phạm vi rebuild thế nào?",
+      "Tách widget — localize setState, trả lời trong 60 giây."
+    ],
+    "visual": {
+      "question": "Bấm +1 mà cả list 40 item build lại — thu hẹp phạm vi rebuild thế nào?",
+      "framework": "flutter"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "setState của page: mỗi cú cộng một chạy lại build() cả trang — itemBuilder phát widget mới, 40 item rebuild theo.",
+      "Thuốc: _CounterBox — StatefulWidget riêng, _count và setState sống TRONG box; page không rebuild, 40 item đứng yên.",
+      "Docs gọi đây là localize the setState call — đẩy state xuống widget nhỏ nhất cần nó."
+    ],
+    "visual": {
+      "filename": "f3_rebuild_scope.dart",
+      "language": "clike",
+      "code": "// setState CẢ TRANG → 40 item rebuild\nonAdd: () =>\n  setState(() => _pageCounter++),\n\n// tách widget: state RIÊNG của box\nclass _CounterBoxState\n    extends State<_CounterBox> {\n  int _count = 0;\n  Widget build(BuildContext c) =>\n      _CounterPanel(\n        counter: _count,\n        onAdd: () =>\n            setState(() => _count++));\n}",
+      "steps": [
+        {"from": 1, "to": 3, "sentence": 0},
+        {"from": 5, "to": 14, "sentence": 1},
+        {"from": 1, "to": 14, "sentence": 2}
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Số thật trên simulator: setState cả trang, bấm cộng một ba lần — Counter lên 3, MỌI item nhìn thấy build 4 lần đỏ.",
+      "Tách widget, cùng ba lần bấm: mọi item build đúng 1 lần — page không rebuild."
+    ],
+    "visual": {
+      "src": "screens/perfqa/f3-page.png",
+      "caption": "bấm 3 lần — cả list build 4×"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: localize the setState — đẩy state xuống widget nhỏ nhất thực sự cần nó.",
+      "Tách widget là tối ưu kiến trúc; const cũng chặn rebuild nhưng chỉ khi dữ liệu tĩnh.",
+      "Bẫy: đừng vác Provider hay Riverpod ra chỉ để né một setState."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {"icon": "🎯", "text": "Localize setState — widget nhỏ nhất: 4× → 1×", "sentence": 0},
+        {"icon": "🧊", "text": "const chặn rebuild — chỉ khi data tĩnh", "sentence": 1}
+      ],
+      "trap": "Đừng vác Provider/Riverpod chỉ để né 1 setState"
+    }
+  }
+]

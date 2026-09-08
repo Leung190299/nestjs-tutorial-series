@@ -1,0 +1,301 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #21: setState rebuild cả trang — cách thu hẹp phạm vi",
+        "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 21/24",
+        "badge": "Flutter · Rebuild scope"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep65/scene-01-0-f97f593b.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/ep65/scene-01-1-a27b6778.wav",
+          "startFrame": 148,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep65/scene-01-2-2049b3c8.wav",
+          "startFrame": 363,
+          "durationInFrames": 140
+        }
+      ],
+      "durationInFrames": 521
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Cơ chế: phạm vi setState",
+        "bullets": [
+          {
+            "icon": "🌳",
+            "text": "Docs: all descendent widgets rebuild — cả subtree",
+            "sentence": 1
+          },
+          {
+            "icon": "💊",
+            "text": "Localize setState — state xuống widget NHỎ NHẤT",
+            "sentence": 2
+          },
+          {
+            "icon": "🧭",
+            "text": "Đối xứng React.memo câu #15 — chiều ngược",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep65/scene-02-0-7c1c14ac.wav",
+          "startFrame": 0,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep65/scene-02-1-5a6592ce.wav",
+          "startFrame": 131,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep65/scene-02-2-9efdbc59.wav",
+          "startFrame": 399,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep65/scene-02-3-e405e5cf.wav",
+          "startFrame": 657,
+          "durationInFrames": 279
+        }
+      ],
+      "durationInFrames": 954
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "f3_rebuild_scope.dart",
+        "language": "clike",
+        "code": "            if (_mode == _Mode.page)\n              _CounterPanel(\n                counter: _pageCounter,\n                // setState của PAGE → toàn bộ build() này chạy lại,\n                // itemBuilder phát widget mới → 40 item rebuild theo.\n                onAdd: () => setState(() => _pageCounter++),\n              )\n            else\n              _CounterBox(key: ValueKey('box-$_run')),\n            Expanded(\n              child: ListView.builder(\n                key: ValueKey('list-$_mode-$_run'),\n                itemCount: _items.length,\n                itemBuilder: (context, i) =>\n                    RowTileF3(item: _items[i], index: i),\n              ),\n            ),",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 9,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 17,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 17,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep65/scene-03-0-94228b47.wav",
+          "startFrame": 0,
+          "durationInFrames": 348
+        },
+        {
+          "file": "audio/ep65/scene-03-1-5d4065d9.wav",
+          "startFrame": 356,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep65/scene-03-2-0b28586a.wav",
+          "startFrame": 588,
+          "durationInFrames": 279
+        },
+        {
+          "file": "audio/ep65/scene-03-3-3a1c93d8.wav",
+          "startFrame": 875,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 1059
+    },
+    {
+      "id": "scene-04",
+      "type": "phone",
+      "visual": {
+        "title": "Bằng chứng: build 4× vs 1×",
+        "screens": [
+          {
+            "src": "screens/perfqa/f3-page.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/perfqa/f3-scoped.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🔴",
+            "text": "Cả trang: mọi item build 4× — 1 mount + 3 setState",
+            "sentence": 1
+          },
+          {
+            "icon": "🟢",
+            "text": "Tách widget: mọi item build 1× — Counter vẫn 3",
+            "sentence": 3
+          },
+          {
+            "icon": "📏",
+            "text": "4× = item ĐÃ build (màn + cacheExtent) — ngoài màn: lazy",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep65/scene-04-0-80a27eda.wav",
+          "startFrame": 0,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep65/scene-04-1-191e7309.wav",
+          "startFrame": 160,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep65/scene-04-2-c9c4789d.wav",
+          "startFrame": 423,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep65/scene-04-3-b68f2c75.wav",
+          "startFrame": 537,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep65/scene-04-4-cc80a148.wav",
+          "startFrame": 754,
+          "durationInFrames": 245
+        }
+      ],
+      "durationInFrames": 1017
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "setState ở State nào → subtree State đó dựng lại",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Localize: state xuống widget nhỏ nhất — 4× → 1×",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Tối ưu KIẾN TRÚC — const chỉ khi data tĩnh",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Helper function ≠ ranh giới · đừng vác Provider né setState",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep65/scene-05-0-753faa44.wav",
+          "startFrame": 0,
+          "durationInFrames": 63
+        },
+        {
+          "file": "audio/ep65/scene-05-1-c2f0d3dc.wav",
+          "startFrame": 71,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep65/scene-05-2-d31f0145.wav",
+          "startFrame": 329,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep65/scene-05-3-821ed095.wav",
+          "startFrame": 565,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep65/scene-05-4-c52a8733.wav",
+          "startFrame": 765,
+          "durationInFrames": 260
+        }
+      ],
+      "durationInFrames": 1043
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 21/24 hoàn tất — hẹn gặp câu 22!",
+        "summary": [
+          {
+            "text": "setState cả trang: mọi item 4× — tách widget: 1×",
+            "sentence": 0
+          },
+          {
+            "text": "Localize setState — state xuống widget nhỏ nhất",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: infinite scroll — loadMore gọi 45 lần",
+            "sentence": 1
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 22/24: chặn loadMore gọi 45 lần? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep65/scene-06-0-3d494aac.wav",
+          "startFrame": 0,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep65/scene-06-1-5a265847.wav",
+          "startFrame": 136,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep65/scene-06-2-82aad33d.wav",
+          "startFrame": 334,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep65/scene-06-3-2943a0e6.wav",
+          "startFrame": 484,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 596
+    }
+  ]
+}

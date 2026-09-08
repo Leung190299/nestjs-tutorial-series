@@ -1,0 +1,129 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "Bấm +1 mà cả list 40 item build lại — thu hẹp phạm vi rebuild thế nào?",
+        "framework": "flutter"
+      },
+      "sentences": [
+        {
+          "file": "audio/sf3/s1-0-11334792.wav",
+          "startFrame": 0,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/sf3/s1-1-7105e1fe.wav",
+          "startFrame": 186,
+          "durationInFrames": 96
+        }
+      ],
+      "durationInFrames": 300
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "f3_rebuild_scope.dart",
+        "language": "clike",
+        "code": "// setState CẢ TRANG → 40 item rebuild\nonAdd: () =>\n  setState(() => _pageCounter++),\n\n// tách widget: state RIÊNG của box\nclass _CounterBoxState\n    extends State<_CounterBox> {\n  int _count = 0;\n  Widget build(BuildContext c) =>\n      _CounterPanel(\n        counter: _count,\n        onAdd: () =>\n            setState(() => _count++));\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 14,
+            "sentence": 1
+          },
+          {
+            "from": 1,
+            "to": 14,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sf3/s2-0-0e01fdd3.wav",
+          "startFrame": 0,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/sf3/s2-1-2e861bde.wav",
+          "startFrame": 196,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/sf3/s2-2-d4aef2f8.wav",
+          "startFrame": 416,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 566
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/perfqa/f3-page.png",
+        "caption": "bấm 3 lần — cả list build 4×"
+      },
+      "sentences": [
+        {
+          "file": "audio/sf3/s3-0-fc94db7f.wav",
+          "startFrame": 0,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/sf3/s3-1-75a3f366.wav",
+          "startFrame": 191,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 332
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "🎯",
+            "text": "Localize setState — widget nhỏ nhất: 4× → 1×",
+            "sentence": 0
+          },
+          {
+            "icon": "🧊",
+            "text": "const chặn rebuild — chỉ khi data tĩnh",
+            "sentence": 1
+          }
+        ],
+        "trap": "Đừng vác Provider/Riverpod chỉ để né 1 setState"
+      },
+      "sentences": [
+        {
+          "file": "audio/sf3/s4-0-55a1b8d2.wav",
+          "startFrame": 0,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/sf3/s4-1-ffd996b8.wav",
+          "startFrame": 138,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/sf3/s4-2-10d1794a.wav",
+          "startFrame": 290,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 414
+    }
+  ]
+}
