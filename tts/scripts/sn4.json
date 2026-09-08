@@ -1,0 +1,62 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Infinite scroll với onEndReached — API bị gọi trùng, một cái ref chặn được tất.",
+      "Câu hỏi phỏng vấn React Native — trả lời trong 60 giây."
+    ],
+    "visual": {
+      "question": "Vì sao onEndReached gọi loadMore trùng — và guard thế nào?",
+      "framework": "rn"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Cờ guard là một cái ref — đang tải thì loadMore return ngay, cờ đặt trước khi fetch.",
+      "Response về mới append và hạ cờ — mỗi cửa sổ loading chỉ một request sống.",
+      "FlatList hai prop: onEndReached trỏ vào loadMore, threshold 0.3 theo chiều dài nhìn thấy — đang loading kéo ra vào ngưỡng cũng không lọt."
+    ],
+    "visual": {
+      "filename": "n4.tsx",
+      "language": "tsx",
+      "code": "const loadingRef = useRef(false);\n\nconst loadMore = () => {\n  // GUARD: đang tải thì bỏ qua\n  if (loadingRef.current) return;\n  loadingRef.current = true; // đặt cờ\n  fetchPage(next).then((batch) => {\n    setItems((p) => [...p, ...batch]);\n    loadingRef.current = false;\n  });\n};\n\n<FlatList onEndReached={loadMore}\n  onEndReachedThreshold={0.3} />",
+      "steps": [
+        {"from": 1, "to": 6, "sentence": 0},
+        {"from": 7, "to": 11, "sentence": 1},
+        {"from": 11, "to": 14, "sentence": 2}
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Bằng chứng trên simulator: Guard OFF, kéo tới đáy rồi kéo tiếp trong lúc 800 mili giây loading — ba trang dữ liệu mà loadMore bị gọi 6 lần.",
+      "Bật guard, cùng kiểu kéo — đúng 1 lần mỗi nhịp, header nói thay tất cả."
+    ],
+    "visual": {
+      "src": "screens/perfqa/n4-bug.png",
+      "caption": "6 lần gọi cho 3 trang"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: onEndReached bắn khi cuộn vào ngưỡng — đang loading kéo lại là bắn thêm, vì danh sách chưa dài ra.",
+      "Guard bằng cờ trong ref: set trước fetch, hạ khi response về.",
+      "Bẫy: cờ bằng state là hở vì cập nhật bất đồng bộ — và nhớ dedupe id khi append."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {"icon": "🎯", "text": "Bắn khi VÀO ngưỡng — loading kéo lại là trùng", "sentence": 0},
+        {"icon": "🛡️", "text": "loadingRef: set trước fetch, hạ khi xong", "sentence": 1}
+      ],
+      "trap": "Cờ bằng state = hở — dùng REF + dedupe id"
+    }
+  }
+]

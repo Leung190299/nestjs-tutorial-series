@@ -1,0 +1,316 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #16: Infinite scroll — vì sao onEndReached gọi trùng?",
+        "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 16/24",
+        "badge": "onEndReached · loadingRef"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep60/scene-01-0-21b6be03.wav",
+          "startFrame": 0,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep60/scene-01-1-fb03b956.wav",
+          "startFrame": 143,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep60/scene-01-2-92e21b00.wav",
+          "startFrame": 353,
+          "durationInFrames": 204
+        }
+      ],
+      "durationInFrames": 575
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Cơ chế: onEndReached bắn khi nào",
+        "bullets": [
+          {
+            "icon": "🎯",
+            "text": "Bắn khi cuộn VÀO ngưỡng — 'called once' mỗi lần vào",
+            "sentence": 0
+          },
+          {
+            "icon": "📏",
+            "text": "Threshold theo chiều dài NHÌN THẤY — 0.3 = 3/10 màn",
+            "sentence": 1
+          },
+          {
+            "icon": "🔁",
+            "text": "Đang loading: kéo ra/vào ngưỡng — bắn thêm, cùng trang",
+            "sentence": 2
+          },
+          {
+            "icon": "🏁",
+            "text": "Race gesture × loading — không phải 'tự bắn liên tục'",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep60/scene-02-0-6ae6a2e7.wav",
+          "startFrame": 0,
+          "durationInFrames": 286
+        },
+        {
+          "file": "audio/ep60/scene-02-1-1460bbd7.wav",
+          "startFrame": 294,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep60/scene-02-2-34740741.wav",
+          "startFrame": 516,
+          "durationInFrames": 272
+        },
+        {
+          "file": "audio/ep60/scene-02-3-ed4bfbcc.wav",
+          "startFrame": 796,
+          "durationInFrames": 221
+        }
+      ],
+      "durationInFrames": 1035
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "n4.tsx",
+        "language": "tsx",
+        "code": "  const loadingRef = useRef(false); // guard đọc ref (giá trị tức thời), không đọc state cũ trong closure\n  const pageRef = useRef(1); // trang đã commit — các lần gọi chồng đều xin CÙNG trang kế tiếp\n\n  const loadMore = () => {\n    if (guard && loadingRef.current) return; // GUARD ON: đang tải thì bỏ qua\n    if (pageRef.current * PAGE_SIZE >= ALL.length) return; // hết dữ liệu\n    if (guard) loadingRef.current = true; // đặt cờ TRƯỚC khi fetch\n    setCalls((c) => c + 1); // đếm số lần loadMore thật sự chạy tới fetch\n    setLoading(true);\n    const next = pageRef.current + 1;\n    fetchPage(next).then((batch) => {\n      pageRef.current = Math.max(pageRef.current, next);\n      setPage(pageRef.current);\n      setLoading(false);\n      if (guard) loadingRef.current = false;\n    });\n  };\n\n      <FlatList\n        data={items}\n        onEndReached={loadMore}\n        onEndReachedThreshold={0.3}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 2,
+            "sentence": 0
+          },
+          {
+            "from": 4,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 17,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep60/scene-03-0-86312433.wav",
+          "startFrame": 0,
+          "durationInFrames": 245
+        },
+        {
+          "file": "audio/ep60/scene-03-1-dad0809d.wav",
+          "startFrame": 253,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep60/scene-03-2-9e6ebfde.wav",
+          "startFrame": 429,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep60/scene-03-3-f67b6461.wav",
+          "startFrame": 653,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 868
+    },
+    {
+      "id": "scene-04",
+      "type": "phone",
+      "visual": {
+        "title": "Bằng chứng: 6 lần vs 1 lần",
+        "screens": [
+          {
+            "src": "screens/perfqa/n4-bug.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/perfqa/n4-ok.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🔥",
+            "text": "OFF: 3 trang — 6 lần gọi, mỗi cửa sổ trùng ×2",
+            "sentence": 1
+          },
+          {
+            "icon": "✅",
+            "text": "ON: cùng gesture — 1 lần mỗi nhịp, cờ chặn sạch",
+            "sentence": 3
+          },
+          {
+            "icon": "🧷",
+            "text": "Đứng yên đáy không tự bắn — kéo tiếp mới dính",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep60/scene-04-0-b8e9b7d8.wav",
+          "startFrame": 0,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep60/scene-04-1-df8490a6.wav",
+          "startFrame": 224,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep60/scene-04-2-046c8b88.wav",
+          "startFrame": 417,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep60/scene-04-3-0f0907be.wav",
+          "startFrame": 577,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep60/scene-04-4-1938f162.wav",
+          "startFrame": 828,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 998
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Bắn khi VÀO ngưỡng — đang loading kéo lại là bắn thêm",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Guard cờ loading: set trước fetch, hạ khi xong — 6 vs 1",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Threshold 0.3–0.5 + footer spinner báo trạng thái",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: cờ bằng state là hở — async, closure cũ; dùng REF",
+            "sentence": 4
+          },
+          {
+            "icon": "⚠️",
+            "text": "Bẫy: dedupe id khi append — lọt request cũng không vỡ list",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep60/scene-05-0-bd3133f9.wav",
+          "startFrame": 0,
+          "durationInFrames": 96
+        },
+        {
+          "file": "audio/ep60/scene-05-1-10df7326.wav",
+          "startFrame": 104,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep60/scene-05-2-981a5968.wav",
+          "startFrame": 352,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep60/scene-05-3-84e67647.wav",
+          "startFrame": 610,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep60/scene-05-4-8c64301b.wav",
+          "startFrame": 820,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/ep60/scene-05-5-74a484f5.wav",
+          "startFrame": 1076,
+          "durationInFrames": 204
+        }
+      ],
+      "durationInFrames": 1298
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 16/24 hoàn tất — hẹn gặp câu 17!",
+        "summary": [
+          {
+            "text": "onEndReached: bắn khi VÀO ngưỡng — theo màn nhìn thấy",
+            "sentence": 0
+          },
+          {
+            "text": "Race gesture × loading — kéo tiếp là gọi trùng",
+            "sentence": 0
+          },
+          {
+            "text": "Guard loadingRef + dedupe id: 6 lần → 1 lần",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: ảnh trong list — expo-image + cache",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 17/24: Ảnh trong list dài — expo-image 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep60/scene-06-0-770b5b58.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep60/scene-06-1-37b517c9.wav",
+          "startFrame": 172,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep60/scene-06-2-82aad33d.wav",
+          "startFrame": 332,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep60/scene-06-3-43e732d8.wav",
+          "startFrame": 472,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 584
+    }
+  ]
+}
