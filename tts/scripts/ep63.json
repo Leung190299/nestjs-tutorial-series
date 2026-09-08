@@ -1,0 +1,204 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tiếp tục phòng phỏng vấn Frontend — sang nửa Flutter của lô hiệu năng, bắt đầu bằng bài học kinh điển nhất của danh sách dài.",
+      "Câu hỏi từ nhà tuyển dụng: Hiển thị 5.000 dòng trong Flutter — vì sao Column trong SingleChildScrollView đơ cả giây, ListView.builder thì không?",
+      "Câu số 19 của series — demo đo số thật trên simulator, rồi chốt cách trả lời trước nhà tuyển dụng."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #19: ListView.builder vs Column",
+      "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 19/24",
+      "badge": "Flutter · Lazy building"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Câu này soi đúng một điều: bạn có hiểu widget được build lúc nào không.",
+      "Column nhận một List con CỤ THỂ — Flutter phải build cả 5.000 widget ngay khung hình đầu tiên, dù màn hình chỉ hiện được khoảng mười lăm cái.",
+      "Docs Flutter khuyên thẳng: Avoid using constructors with a concrete List of children — tránh constructor nhận sẵn danh sách con khi phần lớn con không hiện trên màn.",
+      "ListView.builder thì lazy — docs mô tả: creates items as they're scrolled onto the screen — chỉ build phần trong viewport cộng vùng đệm cacheExtent.",
+      "Đúng bài ScrollView vs FlatList bên React Native ở câu số 13 — cùng một triết lý, xem tập đó để so hai thế giới."
+    ],
+    "visual": {
+      "title": "Cơ chế: lazy building",
+      "bullets": [
+        {
+          "icon": "🐢",
+          "text": "Column = List con cụ thể: build cả 5000 ngay frame đầu",
+          "sentence": 1
+        },
+        {
+          "icon": "📜",
+          "text": "Docs: tránh constructor nhận sẵn List con",
+          "sentence": 2
+        },
+        {
+          "icon": "⚡",
+          "text": "builder: build khi item cuộn vào màn — viewport + cacheExtent",
+          "sentence": 3
+        },
+        {
+          "icon": "🧭",
+          "text": "Cặp chéo ScrollView vs FlatList — xem câu #13",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Trang demo thật — f1_lazy_list.dart: mỗi RowTile tăng BuildCounter.count trong build; bấm nút là reset bộ đếm và bấm Stopwatch đo tới khung hình đầu.",
+      "Nhánh một: SingleChildScrollView bọc Column — items.map dựng đủ 5.000 RowTile nhét thẳng vào cây widget, không ai có quyền hoãn.",
+      "Nhánh hai: ListView.builder chỉ nhận itemCount và itemBuilder — framework toàn quyền gọi hàm này khi item sắp hiện ra.",
+      "Cùng một RowTile, cùng 5.000 bản ghi — khác biệt duy nhất là ai quyết định build bao nhiêu, giống hệt câu chuyện FlatList."
+    ],
+    "visual": {
+      "filename": "f1_lazy_list.dart",
+      "language": "clike",
+      "code": "  void _select(_Mode mode) {\n    BuildCounter.count = 0;\n    _run++;\n    final sw = Stopwatch()..start();\n    // Key đổi theo run → remount hoàn toàn, bấm lại cùng chế độ vẫn đo từ đầu.\n    final key = ValueKey('$mode-$_run');\n    final Widget body;\n    if (mode == _Mode.column) {\n      body = SingleChildScrollView(\n        key: key,\n        child: Column(\n          crossAxisAlignment: CrossAxisAlignment.stretch,\n          children: _items.map((it) => RowTile(item: it)).toList(),\n        ),\n      );\n    } else {\n      body = ListView.builder(\n        key: key,\n        itemCount: _items.length,\n        itemBuilder: (context, i) => RowTile(item: _items[i]),\n      );\n    }",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 15,
+          "sentence": 1
+        },
+        {
+          "from": 16,
+          "to": 22,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "phone",
+    "narration": [
+      "Số đo thật trên simulator của tôi, bản debug — bấm Column 5000 trước.",
+      "Header đỏ ghi: đã build 5.000 trên 5.000, first frame 7.895 mili giây — gần 8 giây đứng hình; số ms dao động vì debug và JIT, cái bất biến là đủ 5.000 lần build.",
+      "Giờ bấm ListView.builder — cùng danh sách, cùng RowTile.",
+      "Chỉ 17 trên 5.000 item được build, first frame 199 mili giây — và con số 17 ổn định tuyệt đối qua mọi lần đo.",
+      "17 là gì? Khoảng 12 item vừa khít màn hình cộng vùng đệm cacheExtent — chi phí theo cửa sổ nhìn thấy, không theo độ dài danh sách."
+    ],
+    "visual": {
+      "title": "Bằng chứng: 5000 vs 17 build",
+      "screens": [
+        {
+          "src": "screens/perfqa/f1-column.png",
+          "sentence": 0
+        },
+        {
+          "src": "screens/perfqa/f1-builder.png",
+          "sentence": 2
+        }
+      ],
+      "bullets": [
+        {
+          "icon": "🐢",
+          "text": "Column: 5000/5000 build · gần 8 giây (dao động)",
+          "sentence": 1
+        },
+        {
+          "icon": "⚡",
+          "text": "builder: 17/5000 build · 199ms — ổn định mọi lần",
+          "sentence": 3
+        },
+        {
+          "icon": "📏",
+          "text": "17 = ~12 item trên màn + cacheExtent",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — ba câu chốt, học thuộc được.",
+      "Câu một: Column nhận List con cụ thể nên Flutter build toàn bộ 5.000 widget ngay khung hình đầu — chi phí tỉ lệ với số item.",
+      "Câu hai: ListView.builder gọi itemBuilder theo nhu cầu, chỉ build phần nhìn thấy cộng cacheExtent — trên demo là 17 trên 5.000.",
+      "Câu ba: nhờ vậy first frame gần như không phụ thuộc độ dài danh sách — vài trăm mili giây thay vì vài giây trên demo debug.",
+      "Bẫy hay gài: shrinkWrap true, hay lồng ListView trong Column hở chiều cao — viewport mất giới hạn, builder bị ép build HẾT.",
+      "Và đừng cực đoan: Column vẫn ĐÚNG cho nhóm widget ít, khác loại — lazy builder sinh ra cho danh sách dài đồng dạng."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Column = List cụ thể: build cả 5000 ngay frame đầu",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "builder: itemBuilder theo nhu cầu — 17/5000 + cacheExtent",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "First frame theo cửa sổ, không theo độ dài list",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "shrinkWrap:true / hở chiều cao = builder build hết",
+          "sentence": 4
+        },
+        {
+          "icon": "🧭",
+          "text": "Column vẫn đúng cho nhóm widget ÍT và khác loại",
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu 19 — bài mở màn cho sáu câu Flutter, anh em song sinh với FlatList bên React Native.",
+      "Câu tiếp theo: itemExtent, prototypeItem và const constructor giúp gì cho ListView dài — nhà tuyển dụng rất thích hỏi.",
+      "Video này có bản Shorts 60 giây — cùng câu hỏi, rút gọn để ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số 20!"
+    ],
+    "visual": {
+      "title": "Câu 19/24 hoàn tất — hẹn gặp câu 20!",
+      "summary": [
+        {
+          "text": "Column: 5000/5000 build · đơ vài giây — giá theo độ dài",
+          "sentence": 0
+        },
+        {
+          "text": "builder: 17/5000 · 199ms — cửa sổ + cacheExtent",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: itemExtent, prototypeItem, const",
+          "sentence": 1
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 20/24: itemExtent & const giúp gì? 🎤"
+    }
+  }
+]
