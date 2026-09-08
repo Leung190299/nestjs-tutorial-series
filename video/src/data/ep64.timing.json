@@ -1,0 +1,306 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #20: itemExtent — báo trước chiều cao cho ListView",
+        "subtitle": "Phỏng vấn Frontend — Hiệu năng · Câu 20/24",
+        "badge": "Flutter · itemExtent + const"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep64/scene-01-0-242bd9d9.wav",
+          "startFrame": 0,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep64/scene-01-1-193de826.wav",
+          "startFrame": 150,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep64/scene-01-2-eab4ce04.wav",
+          "startFrame": 341,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 494
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Cơ chế: báo trước extent",
+        "bullets": [
+          {
+            "icon": "🐢",
+            "text": "Không extent: build + đo tuần tự để cộng dồn chiều cao",
+            "sentence": 0
+          },
+          {
+            "icon": "📜",
+            "text": "Docs: foreknowledge… save work khi cuộn nhảy xa",
+            "sentence": 1
+          },
+          {
+            "icon": "🧮",
+            "text": "Có itemExtent: vị trí = offset ÷ 64 — số học thuần",
+            "sentence": 2
+          },
+          {
+            "icon": "🧊",
+            "text": "const: short-circuit most of the rebuild work",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep64/scene-02-0-de5bd251.wav",
+          "startFrame": 0,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep64/scene-02-1-b1b85abe.wav",
+          "startFrame": 268,
+          "durationInFrames": 264
+        },
+        {
+          "file": "audio/ep64/scene-02-2-d50df08a.wav",
+          "startFrame": 540,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep64/scene-02-3-79c8baa3.wav",
+          "startFrame": 724,
+          "durationInFrames": 228
+        }
+      ],
+      "durationInFrames": 970
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "f2_item_extent.dart",
+        "language": "clike",
+        "code": "  int? _initialBuilt; // build lần dựng đầu của chế độ\n  int? _jumpBuilt; // build THÊM dọc đường nhảy cuối\n  int? _jumpMs;\n  double? _extentBefore; // maxScrollExtent NGAY TRƯỚC jumpTo\n  double? _extentAfter; // maxScrollExtent SAU frame nhảy\n  double? _pixelsAfter; // vị trí đứng thực sau frame nhảy\n\n  void _select(_Mode mode) {\n    BuildCounterF2.count = 0;\n    _run++;\n    // Key đổi theo run → remount hoàn toàn, bấm lại cùng chế độ vẫn đo từ đầu.\n    final key = ValueKey('$mode-$_run');\n    final body = ListView.builder(\n      key: key,\n      controller: _controller,\n      // Điểm khác biệt DUY NHẤT của cấu hình list giữa 2 chế độ:\n      itemExtent: mode == _Mode.on ? 64 : null,\n      itemCount: _items.length,\n      itemBuilder: (context, i) =>\n          RowTileF2(item: _items[i], constFrame: mode == _Mode.on),\n    );",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 12,
+            "sentence": 1
+          },
+          {
+            "from": 13,
+            "to": 21,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 21,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep64/scene-03-0-2ae2ac93.wav",
+          "startFrame": 0,
+          "durationInFrames": 262
+        },
+        {
+          "file": "audio/ep64/scene-03-1-ce38c3ce.wav",
+          "startFrame": 270,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep64/scene-03-2-a747cc5c.wav",
+          "startFrame": 509,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep64/scene-03-3-8ae77703.wav",
+          "startFrame": 743,
+          "durationInFrames": 216
+        }
+      ],
+      "durationInFrames": 977
+    },
+    {
+      "id": "scene-04",
+      "type": "phone",
+      "visual": {
+        "title": "Bằng chứng: 4987 vs 12 build",
+        "screens": [
+          {
+            "src": "screens/perfqa/f2-off.png",
+            "sentence": 0
+          },
+          {
+            "src": "screens/perfqa/f2-on.png",
+            "sentence": 2
+          }
+        ],
+        "bullets": [
+          {
+            "icon": "🐢",
+            "text": "OFF: build thêm 4987 item · 1622ms (warm 1284)",
+            "sentence": 1
+          },
+          {
+            "icon": "⚡",
+            "text": "ON: 12 item · 34ms — cách biệt hơn 400 lần build",
+            "sentence": 3
+          },
+          {
+            "icon": "🎯",
+            "text": "Cả hai đứng đúng #4999 — hàng cao đều, OFF không trượt",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep64/scene-04-0-7c50743b.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep64/scene-04-1-95c8e9f9.wav",
+          "startFrame": 145,
+          "durationInFrames": 386
+        },
+        {
+          "file": "audio/ep64/scene-04-2-dbcfb480.wav",
+          "startFrame": 539,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep64/scene-04-3-a0fb525b.wav",
+          "startFrame": 670,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep64/scene-04-4-0363ee5d.wav",
+          "startFrame": 892,
+          "durationInFrames": 288
+        }
+      ],
+      "durationInFrames": 1198
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Hàng cao đều → itemExtent/prototypeItem: vị trí = số học",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "jumpTo đáy 5000 hàng: 4987 build vs 12 build",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "const cho khung tĩnh — cần hằng compile-time",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "Khai láo chiều cao = cuộn sai · cấm khai cả hai",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep64/scene-05-0-753faa44.wav",
+          "startFrame": 0,
+          "durationInFrames": 65
+        },
+        {
+          "file": "audio/ep64/scene-05-1-726f640b.wav",
+          "startFrame": 73,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep64/scene-05-2-1c07973f.wav",
+          "startFrame": 312,
+          "durationInFrames": 269
+        },
+        {
+          "file": "audio/ep64/scene-05-3-88f60759.wav",
+          "startFrame": 589,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep64/scene-05-4-0a5a6578.wav",
+          "startFrame": 857,
+          "durationInFrames": 272
+        }
+      ],
+      "durationInFrames": 1147
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 20/24 hoàn tất — hẹn gặp câu 21!",
+        "summary": [
+          {
+            "text": "itemExtent: 4987 build → 12 build · 1622ms → 34ms",
+            "sentence": 0
+          },
+          {
+            "text": "Chỉ dùng khi hàng cao ĐỀU — cấm khai cùng prototypeItem",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: setState cả trang vs tách widget nhỏ",
+            "sentence": 1
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 21/24: setState đặt đâu cho đúng? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep64/scene-06-0-9a60ba18.wav",
+          "startFrame": 0,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep64/scene-06-1-2d3fbe59.wav",
+          "startFrame": 131,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep64/scene-06-2-82aad33d.wav",
+          "startFrame": 310,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep64/scene-06-3-d9211d21.wav",
+          "startFrame": 462,
+          "durationInFrames": 96
+        }
+      ],
+      "durationInFrames": 576
+    }
+  ]
+}
