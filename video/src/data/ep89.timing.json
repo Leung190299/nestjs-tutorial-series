@@ -1,0 +1,350 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #45: $transaction — tất cả hoặc không gì cả",
+        "subtitle": "Phỏng vấn Frontend — Database · Câu 45/48",
+        "badge": "Prisma 6.19.3 · $transaction & rollback"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep89/scene-01-0-9407705e.wav",
+          "startFrame": 0,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep89/scene-01-1-f61b71aa.wav",
+          "startFrame": 157,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep89/scene-01-2-1af8432f.wav",
+          "startFrame": 338,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 488
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Transaction = một đơn vị, không phải một cái hàm",
+        "bullets": [
+          {
+            "icon": "📖",
+            "text": "docs v6: \"guaranteed to either succeed or fail as a whole\"",
+            "sentence": 0
+          },
+          {
+            "icon": "⚛️",
+            "text": "Nguyên tử: cả hai bước cùng vào, hoặc KHÔNG bước nào",
+            "sentence": 0
+          },
+          {
+            "icon": "🚫",
+            "text": "2 lệnh trong 1 hàm KHÔNG phải transaction — Promise.all càng không",
+            "sentence": 1
+          },
+          {
+            "icon": "📚",
+            "text": "$transaction([...]) — mảng thao tác ĐỘC LẬP, dựng sẵn",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "$transaction(async tx => ...) — khi bước 2 cần id của bước 1",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep89/scene-02-0-a26c14e4.wav",
+          "startFrame": 0,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep89/scene-02-1-c9fde763.wav",
+          "startFrame": 217,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep89/scene-02-2-2ad11c0e.wav",
+          "startFrame": 439,
+          "durationInFrames": 214
+        }
+      ],
+      "durationInFrames": 671
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "p3.mjs",
+        "language": "javascript",
+        "code": "  // ---- [A] KHÔNG transaction: hai lệnh rời ------------------------------\n  phase = 'A';\n  const outA = { id: null, ok: false };\n  let errA = null;\n  try {\n    await twoSteps(p, outA);\n  } catch (e) {\n    errA = e;\n  }\n  await drain();\n  phase = 'off';\n  const midA = { c: await p.customer.count(), o: await p.order.count() };\n\n  // ---- [B] $transaction interactive -------------------------------------\n  phase = 'B';\n  const outB = { id: null, ok: false };\n  let errB = null;\n  try {\n    await p.$transaction(async (tx) => twoSteps(tx, outB));\n  } catch (e) {\n    errB = e;\n  }",
+        "steps": [
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 0
+          },
+          {
+            "from": 14,
+            "to": 18,
+            "sentence": 1
+          },
+          {
+            "from": 19,
+            "to": 22,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep89/scene-03-0-20a50d4d.wav",
+          "startFrame": 0,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep89/scene-03-1-0a366102.wav",
+          "startFrame": 227,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep89/scene-03-2-62a48c6b.wav",
+          "startFrame": 418,
+          "durationInFrames": 214
+        }
+      ],
+      "durationInFrames": 650
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node p3.mjs — counts TRƯỚC/SAU 2 nhánh",
+        "commands": [
+          {
+            "cmd": "node p3.mjs",
+            "output": "b1 customer.create · b2 order.create(customerId)\nb2 lỗi: total 2147483648 > int4 max 2147483647\n\n[A] KHÔNG transaction — 2 lệnh rời\n  customers TRƯỚC 5000 · b1 tạo id=5011\n  b2 FAIL · customers SAU 5001 <- TĂNG 1\n=> khách có thật, đơn thì không: NỬA VỜI\n\n[B] $transaction(async tx => ...) interactive\n  customers TRƯỚC 5001 · b1 tạo id=5012\n  b2 FAIL · customers SAU 5001 <- KHÔNG ĐỔI\n=> bước 1 bị ROLLBACK theo: KHÔNG để lại rác",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep89/scene-04-0-27996869.wav",
+          "startFrame": 0,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep89/scene-04-1-5e39f4dc.wav",
+          "startFrame": 169,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep89/scene-04-2-1e462b8f.wav",
+          "startFrame": 329,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep89/scene-04-3-3625be13.wav",
+          "startFrame": 505,
+          "durationInFrames": 149
+        }
+      ],
+      "durationInFrames": 672
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "lỗi b2 nguyên văn + log BEGIN/ROLLBACK",
+        "commands": [
+          {
+            "cmd": "node p3.mjs",
+            "output": "Invalid `prisma.order.create()` invocation:\nError occurred during query execution:\nConversionError(\"Unable to fit integer value\n'2147483648' into an INT4 (32-bit signed\ninteger).\")\nPrismaClientUnknownRequestError · mã: không có\n=> [B] lỗi Y HỆT · chặn ở driver (kind:ToSql)\n\n== Prisma gửi gì xuống DB (log query) ==\nA INSERT customers | INSERT orders\nB BEGIN | INSERT customers | INSERT orders |\n  ROLLBACK",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep89/scene-05-0-aec9ed44.wav",
+          "startFrame": 0,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep89/scene-05-1-f8c7ca86.wav",
+          "startFrame": 215,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep89/scene-05-2-afcf0b9b.wav",
+          "startFrame": 413,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep89/scene-05-3-074e1279.wav",
+          "startFrame": 556,
+          "durationInFrames": 272
+        }
+      ],
+      "durationInFrames": 846
+    },
+    {
+      "id": "scene-06",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Không transaction = 2 đơn vị độc lập → 5000 → 5001, khách mồ côi",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "$transaction = 1 đơn vị: 1 bước lỗi → rollback TOÀN BỘ (5001 → 5001)",
+            "sentence": 1
+          },
+          {
+            "icon": "👁️",
+            "text": "Bằng chứng: chỉ nhánh B có BEGIN … ROLLBACK trong log query",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Mảng = thao tác độc lập · interactive = cần logic/kết quả ở giữa",
+            "sentence": 2
+          },
+          {
+            "icon": "⏱️",
+            "text": "Interactive mặc định maxWait 2s · timeout 5s — đừng gọi HTTP bên trong",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep89/scene-06-0-322ff6a1.wav",
+          "startFrame": 0,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep89/scene-06-1-6e281348.wav",
+          "startFrame": 208,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep89/scene-06-2-2e4adbf9.wav",
+          "startFrame": 389,
+          "durationInFrames": 226
+        }
+      ],
+      "durationInFrames": 633
+    },
+    {
+      "id": "scene-07",
+      "type": "concept",
+      "visual": {
+        "title": "Bẫy & chi tiết tinh tế",
+        "bullets": [
+          {
+            "icon": "🔢",
+            "text": "Rollback KHÔNG trả lại sequence: last_value 5016 vs max(id) 5000",
+            "sentence": 0
+          },
+          {
+            "icon": "🧠",
+            "text": "Sequence không transaction-safe (cố ý) → id nhảy cóc là bình thường",
+            "sentence": 1
+          },
+          {
+            "icon": "🦀",
+            "text": "code undefined — Prisma chặn ở driver, Postgres chưa nhận INSERT",
+            "sentence": 2
+          },
+          {
+            "icon": "🔗",
+            "text": "Lỗi do DB ném thì khác: P2003 · constraint orders_customer_id_fkey",
+            "sentence": 2
+          },
+          {
+            "icon": "🔒",
+            "text": "Transaction dài giữ khóa lâu → deadlock (câu #41) · catch {} im lặng",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep89/scene-07-0-0214f0e6.wav",
+          "startFrame": 0,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep89/scene-07-1-50e1e58c.wav",
+          "startFrame": 258,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep89/scene-07-2-f64246b4.wav",
+          "startFrame": 430,
+          "durationInFrames": 272
+        },
+        {
+          "file": "audio/ep89/scene-07-3-76d996a3.wav",
+          "startFrame": 710,
+          "durationInFrames": 224
+        }
+      ],
+      "durationInFrames": 952
+    },
+    {
+      "id": "scene-08",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 45/48 hoàn tất — tất cả hoặc không gì cả",
+        "summary": [
+          {
+            "text": "[A] 2 lệnh rời: 5000 → 5001, khách mồ côi · [B] tx: 5001 → 5001",
+            "sentence": 0
+          },
+          {
+            "text": "Lỗi Y HỆT ở cả 2 nhánh — transaction đổi HẬU QUẢ, không đổi lỗi",
+            "sentence": 0
+          },
+          {
+            "text": "Sequence vẫn tiêu 1 giá trị dù rollback: 5016 vs max(id) 5000",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: thêm cột NOT NULL vào bảng 1.000 dòng — migrate dev ra sao?",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 46/48: migration thêm cột NOT NULL trên bảng đã có data 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep89/scene-08-0-a5b65d49.wav",
+          "startFrame": 0,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep89/scene-08-1-06f18dcd.wav",
+          "startFrame": 222,
+          "durationInFrames": 176
+        }
+      ],
+      "durationInFrames": 416
+    }
+  ]
+}

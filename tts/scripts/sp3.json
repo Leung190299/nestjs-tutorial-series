@@ -1,0 +1,75 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Tạo khách xong, tạo đơn thì lỗi. Khách vừa tạo có còn nằm lại trong database không?",
+      "Đo thật trên Prisma sáu chấm mười chín: còn nguyên. Trừ khi bạn bọc transaction."
+    ],
+    "visual": {
+      "question": "Bước 2 lỗi — khách vừa tạo có ở lại?",
+      "framework": "prisma"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Hai lệnh rời: bước một đã ghi, bước hai lỗi. Customers từ năm nghìn lên năm nghìn linh một — một khách không đơn nào.",
+      "Cùng hàm đó bọc $transaction: vẫn lỗi y hệt, nhưng đếm lại KHÔNG ĐỔI, và log có BEGIN với ROLLBACK."
+    ],
+    "visual": {
+      "filename": "p3.mjs",
+      "language": "javascript",
+      "code": "// [A] 2 lệnh rời — KHÔNG transaction\nconst c = await p.customer.create();\nawait p.order.create({ /* LỖI */ });\n// customers 5000 -> 5001: khách mồ côi\n\n// [B] cùng hàm, chỉ khác CÁI VỎ\nawait p.$transaction(async (tx) => {\n  const c = await tx.customer.create();\n  await tx.order.create({ /* LỖI */ });\n});\n// customers 5001 -> 5001: KHÔNG ĐỔI\n\n// log A: INSERT | INSERT\n// log B: BEGIN | INSERT×2 | ROLLBACK",
+      "steps": [
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Ba lần chạy ra y một con số. Lỗi giống hệt nhau ở cả hai nhánh — transaction không đổi lỗi, chỉ đổi hậu quả.",
+      "Bước hai cần id của bước một, nên phải dùng dạng interactive chứ không dùng được dạng mảng."
+    ],
+    "visual": {
+      "src": "screens/dbqa/p3-transaction.png",
+      "caption": "không transaction: khách mồ côi ở lại"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Bẫy: gói hai lệnh vào một hàm KHÔNG phải transaction. Promise.all càng không.",
+      "Và rollback không trả lại sequence — id nhảy cóc là bình thường."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "⚛️",
+          "text": "$transaction = tất cả hoặc không gì: 5001 → 5001",
+          "sentence": 0
+        },
+        {
+          "icon": "🔁",
+          "text": "Bước 2 cần id bước 1 → dạng interactive async tx",
+          "sentence": 0
+        }
+      ],
+      "trap": "2 lệnh trong 1 hàm KHÔNG phải transaction · rollback không trả lại sequence"
+    }
+  }
+]
