@@ -159,7 +159,7 @@ console.log(`=> ORM giấu query: code trông như 1 vòng for,`);
 console.log(`   bật log mới thấy ${qa.length} lượt đi-về thật`);
 console.log(`=> include gộp còn ${qb.length} query (cha + con) và`);
 console.log('   KHÔNG tăng theo số khách — 200 khách vẫn 2');
-console.log(`=> cùng bệnh câu #43/D3 ở tầng SQL (51 vs 1):`);
+console.log(`=> cùng bệnh câu #39 ở tầng SQL (51 query vs 1):`);
 console.log('   ORM chỉ làm nó VÔ HÌNH, không làm nó biến mất');
 
 await p.$disconnect();
