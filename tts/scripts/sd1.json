@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Cứ tạo index là query nhanh hơn à? Câu phỏng vấn Database kinh điển.",
+      "Sáu mươi giây: một bảng năm trăm nghìn dòng, cùng một câu query, chạy hai lần."
+    ],
+    "visual": {
+      "question": "Index làm gì? Cứ tạo index là nhanh hơn?",
+      "framework": "postgres"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Bảng orders năm trăm nghìn dòng, chỉ có khoá chính trên id — lọc theo customer_id là phải quét cả bảng.",
+      "Tạo index đúng cột đang lọc, ANALYZE, rồi chạy lại y hệt câu đó — query không đổi một chữ."
+    ],
+    "visual": {
+      "filename": "d1.sql",
+      "language": "sql",
+      "code": "-- orders: 500.000 dòng\n-- chỉ có PRIMARY KEY trên id\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT * FROM orders\nWHERE customer_id = 1;\n\nCREATE INDEX idx_orders_customer\n  ON orders(customer_id);\nANALYZE orders;\n\n-- chạy lại Y HỆT câu trên\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT * FROM orders\nWHERE customer_id = 1;",
+      "steps": [
+        {
+          "from": 1,
+          "to": 5,
+          "sentence": 0
+        },
+        {
+          "from": 7,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Chưa index: Gather rồi Parallel Seq Scan — mỗi worker vứt một trăm sáu sáu nghìn dòng để lấy sáu mươi mốt dòng.",
+      "Có index: Bitmap Heap Scan chứ không phải Index Scan trơn, vì sáu mươi mốt dòng nằm rải trên sáu mươi trang."
+    ],
+    "visual": {
+      "src": "screens/dbqa/d1-index.png",
+      "caption": "8.5ms → 0.65ms · buffers 3604 → 63"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: không index thì quét cả bảng lọc rồi vứt; có index thì nhảy thẳng tới dòng — planner chọn kiểu quét theo chi phí.",
+      "Index không miễn phí: ba phẩy năm mê-ga cộng thuế lên mọi lệnh ghi.",
+      "Bẫy: lọc tám mươi phần trăm bảng thì Postgres bỏ index, quay lại Seq Scan — và thế là đúng."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🌲",
+          "text": "Không index: quét cả bảng · có index: nhảy thẳng tới dòng",
+          "sentence": 0
+        },
+        {
+          "icon": "💰",
+          "text": "Index tốn 3496 kB + thuế lên mọi INSERT/UPDATE/DELETE",
+          "sentence": 1
+        }
+      ],
+      "trap": "Lọc 80% bảng → PG bỏ index, Seq Scan lại rẻ hơn"
+    }
+  }
+]
