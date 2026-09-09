@@ -1,0 +1,16 @@
+{
+  "name": "prisma-qa",
+  "version": "1.0.0",
+  "description": "6 demo Prisma (P1-P6) cho lo 4 phong van DB - chay tren DB dbqa cong 5433",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "generate": "prisma generate",
+    "pull": "prisma db pull"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "prisma": "^6.19.3"
+  }
+}

@@ -1,0 +1,33 @@
+// Prisma cho lô 4 phỏng vấn DB (câu P1–P6).
+// 2 bảng customers/orders do `sql-qa/seed.mjs` tạo bằng SQL thuần — schema này chỉ MAP lại,
+// KHÔNG dùng `prisma migrate` cho chúng (P4 sẽ migrate trên bảng phụ `notes` riêng).
+// Sinh ra bằng `npx prisma db pull` rồi đổi tên model + thêm @@map/@map cho đúng quy ước JS.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id     Int     @id @default(autoincrement())
+  name   String?
+  city   String?
+  orders Order[]
+
+  @@map("customers")
+}
+
+model Order {
+  id         Int       @id @default(autoincrement())
+  customerId Int?      @map("customer_id")
+  total      Int?
+  status     String?
+  createdAt  DateTime? @map("created_at") @db.Timestamptz(6)
+  customer   Customer? @relation(fields: [customerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("orders")
+}
