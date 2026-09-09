@@ -3283,3 +3283,565 @@ Demo thật bằng all-exceptions.filter.ts: curl /s6/boom kèm cờ demo x-raw 
 | ss4 | Body bẩn — ValidationPipe + DTO chặn từ cửa #shorts | DTO + decorator là hợp đồng: body sai dính 400 kèm mảng lỗi chi tiết — handler không hề chạy.<br>Bẫy: whitelist mặc định KHÔNG bật — quên là field lạ kiểu isAdmin true vẫn lọt vào object.<br>Video đầy đủ: https://youtu.be/zewSDau0iN8<br>#shorts #nestjs #phongvan |
 | ss5 | Bọc mọi response + đo giờ — 1 interceptor #shorts | next.handle() trả Observable — transform chỉ là một phép map: vỏ ok/data/tookMs + header X-Response-Time.<br>Bẫy: map chỉ chạy khi handler thành công — lỗi bỏ qua chiều về, rơi thẳng xuống filter.<br>Video đầy đủ: https://youtu.be/g8hW8u7FKrk<br>#shorts #nestjs #phongvan |
 | ss6 | Lỗi thô 500 — exception filter chuẩn hóa #shorts | @Catch() để trống bắt mọi lỗi: client nhận vỏ code/message/path/timestamp, stack chỉ log server.<br>Bẫy: nhớ phân nhánh HttpException — đừng nuốt 404 chủ động thành 500.<br>Video đầy đủ: https://youtu.be/Qmm-UDqc49Q<br>#shorts #nestjs #phongvan |
+
+## LÔ 4 SERIES PHỎNG VẤN FRONTEND — Database & SQL (câu #37–#48 + 12 Shorts)
+
+> Lô 4 nối tiếp cùng playlist **"Phỏng vấn Frontend 🇻🇳"** — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE (KHÔNG tạo playlist mới — khi đăng chỉ nối 24 video lô 4 vào playlist sẵn có). CHƯA ĐĂNG — mọi link video lô 4 là placeholder `[LINK-EP81]`..`[LINK-EP92]` (bản ngang) và `[LINK-SHORT-37]`..`[LINK-SHORT-48]` (Shorts), điền link thật khi đăng. Chủ đề lô 4: DATABASE cho dân Frontend đi phỏng vấn Fullstack — 6 câu SQL/PostgreSQL (D1–D6 → ep81–ep86) + 6 câu Prisma (P1–P6 → ep87–ep92), mỗi câu có demo chạy SỐ THẬT trên **PostgreSQL 17.11** + **Prisma 6.19.3** (kịch bản luôn nói rõ "trên máy tôi"). Code: `demo-db-interview/` (`sql-qa/` + `prisma-qa/`), đóng băng ở tag `db-qa-batch-4`. Cặp chéo 2 chiều: câu 37↔48 (index bị planner bỏ qua) và câu 39↔43 (N+1 ở tầng SQL ↔ tầng ORM).
+
+Từ khóa chủ lực lô 4: `phỏng vấn database`, `phỏng vấn sql`, `phỏng vấn postgresql`, `phỏng vấn prisma`, `explain analyze`, `index postgresql`, `n+1 query`, `isolation level`, `deadlock postgres`, `connection pool prisma`, `câu hỏi phỏng vấn database`, `học sql`, `học prisma`.
+
+---
+
+### Phỏng vấn FE #37 — Index làm gì? Seq Scan vs Index Scan (2:52)
+
+**Tiêu đề:** Phỏng vấn FE #37: Index làm gì? Seq Scan vs Index Scan | PostgreSQL interview
+
+**Mô tả:**
+```
+Mở màn lô 4 series Phỏng vấn Frontend — 12 câu hỏi DATABASE mà dân Frontend đi phỏng vấn Fullstack chắc chắn gặp: 6 câu SQL/PostgreSQL + 6 câu Prisma. Câu 37 là câu mở màn kinh điển của mọi buổi phỏng vấn database: index trong database làm gì, và cứ tạo index là query nhanh hơn à?
+
+Cơ chế: không index thì docs Postgres nói thẳng — hệ thống phải quét toàn bộ bảng, từng dòng một, lọc rồi vứt gần hết; index là cấu trúc phụ nằm cạnh bảng để đi vài tầng cây rồi nhảy thẳng tới dòng cần. Chỗ đa số trả lời hụt: Postgres có nhiều kiểu quét — Seq Scan, Bitmap Heap Scan, Index Scan — và planner CHỌN theo chi phí, nên tạo index xong vẫn phải ANALYZE để thống kê tươi.
+
+Demo thật trên PostgreSQL 17.11, bảng orders 500.000 dòng, cùng một câu EXPLAIN (ANALYZE, BUFFERS) chạy hai lần, không sửa một chữ. Chưa index: plan không phải Seq Scan trơn mà là Gather → Parallel Seq Scan, mỗi worker vứt 166.646 dòng để lấy đúng 61 dòng, chạm 3604 trang. Có index: 8.5ms → 0.65ms, buffers 3604 → 63 — và twist thứ hai, node KHÔNG phải Index Scan mà là Bitmap Heap Scan, vì 61 dòng khớp nằm rải trên 60 trang. Bẫy vàng: lọc customer_id < 4000 — 80% bảng — thì Postgres BỎ index, quay lại Seq Scan, và thế là ĐÚNG.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu lô Database & câu 37
+0:17 Cơ chế: index làm gì — ai quyết định dùng nó
+0:46 Code: d1.sql — EXPLAIN, CREATE INDEX, chạy lại
+1:14 Demo thật: [A] chưa index — Parallel Seq Scan
+1:28 Demo thật: [B] có index — Bitmap Heap Scan
+1:59 Trả lời như đi phỏng vấn: 3 câu + bẫy 80% bảng
+2:34 Tổng kết câu 37 & hẹn câu 38
+
+📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
+⏮️ Câu chốt lô 3: https://youtu.be/Qmm-UDqc49Q
+⏭️ Câu tiếp theo: [LINK-EP82]
+📱 Bản Shorts 60 giây: [LINK-SHORT-37]
+🔁 Cùng bài học ở tầng ORM — câu #48: index sai cột thì planner không thèm dùng: [LINK-EP92]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#postgresql #sql #phongvan #backend
+```
+
+**Comment ghim gợi ý:**
+```
+🐘 Mở màn lô 4 — 12 câu hỏi DATABASE từ phòng phỏng vấn: 6 câu SQL/PostgreSQL + 6 câu Prisma, câu nào cũng demo chạy số thật trên PostgreSQL 17.11. Đố nhỏ câu 37: có index rồi mà lọc 80% bảng thì Postgres dùng index không? KHÔNG — nó quay lại Seq Scan, vì lấy phần lớn bảng thì đọc tuần tự rẻ hơn nhảy ngẫu nhiên. Và twist thứ hai: 61 dòng khớp nằm rải trên 60 trang nên plan ra Bitmap Heap Scan chứ không phải Index Scan trơn. Comment xem bạn đã từng tạo index mà query vẫn chậm chưa nhé!
+```
+
+**Thumbnail:** badge "PV FE #37" · dòng lớn "TẠO INDEX" / "LÀ NHANH?" · phụ đề "Phỏng vấn Frontend · Câu 37/48" · badge emoji 🐘 · variant shot, ảnh dọc `screens/dbqa/d1-index.png` (plan chưa index vs có index).
+
+**Tags:** `index postgresql, seq scan vs index scan, bitmap heap scan, explain analyze buffers, create index, analyze postgres, phỏng vấn database, phỏng vấn sql, câu hỏi phỏng vấn database, postgresql 17, sql tiếng việt, học sql, học postgresql, database interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #38 — Đọc EXPLAIN ANALYZE: cost, rows, buffers (2:45)
+
+**Tiêu đề:** Phỏng vấn FE #38: Đọc EXPLAIN ANALYZE — cost, rows, buffers | PostgreSQL interview
+
+**Mô tả:**
+```
+Câu 38 là câu phân loại ứng viên nhanh nhất mảng Database: đưa bạn một cái EXPLAIN ANALYZE — bạn đọc từ đâu, nhìn con số nào trước? Video mổ một plan THẬT 5 tầng node, và có một con số lệch 1677 lần khiến rất nhiều người trả lời sai.
+
+Bốn con số phải đọc: plan là một CÂY, node tầng đáy là node quét nên đọc từ trong ra ngoài; cost=x..y là ước lượng của planner theo đơn vị quy ước, KHÔNG phải mili giây; actual time mới là ms thật, có được vì ANALYZE thực sự CHẠY query; rows là số dòng node PHÁT RA sau khi lọc, và loops > 1 thì phải NHÂN.
+
+Demo thật trên PostgreSQL 17.11 (orders 500.000 dòng, customers 5.000): cùng một node có cost=7948.36..7950.70 nhưng actual time=18.553..18.618 ms — hai đại lượng khác nhau hoàn toàn. loops=3 tại Parallel Seq Scan nghĩa là 55366 × 3 = 166.098 dòng thật sự đi qua; Buffers shared hit=3876 read=0 là chạm 3876 trang, không đụng đĩa; Planning Time 0.440 ms vs Execution Time 18.653 ms.
+
+Và mục làm rớt nhiều người nhất: Gather Merge ước 33538 dòng mà thật ra chỉ phát ra 20 — lệch 1677x. ĐỪNG vội kêu thống kê cũ: đó là LIMIT 20 dừng sớm, node không chạy hết. Bằng chứng nằm ngay dưới — node QUÉT chỉ lệch 1.3x, thống kê còn tươi nguyên.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 38
+0:17 Cơ chế: plan là một CÂY & 4 con số phải đọc
+0:41 Code: d2.sql — câu JOIN trang danh sách + LIMIT 20
+1:03 Demo thật: cây, cost vs actual, rows
+1:22 Demo thật: loops, buffers, Planning vs Execution
+1:42 Demo thật: lệch 1677x — LIMIT hay thống kê cũ?
+2:02 Trả lời như đi phỏng vấn: 3 câu + bẫy
+2:32 Tổng kết câu 38 & hẹn câu 39
+
+📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP81]
+⏭️ Câu tiếp theo: [LINK-EP83]
+📱 Bản Shorts 60 giây: [LINK-SHORT-38]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#postgresql #sql #phongvan #backend
+```
+
+**Comment ghim gợi ý:**
+```
+🔍 Bẫy đắt nhất câu 38: thấy rows ước 33538 mà thật 20 (lệch 1677x) là nhiều người kêu ngay "thống kê cũ, chạy ANALYZE đi". Sai — đó là LIMIT 20 dừng sớm nên node không chạy hết; muốn biết thống kê có cũ hay không thì soi node LÁ (node quét), ở đây chỉ lệch 1.3x là còn tươi. Và nhớ nhân loops: loops=3 thì 55366 × 3 = 166.098 dòng mới là số thật. Comment con số nào trong plan bạn nhìn đầu tiên nhé!
+```
+
+**Thumbnail:** badge "PV FE #38" · dòng lớn "COST 7948" / "THẬT 18MS?" · phụ đề "Phỏng vấn Frontend · Câu 38/48" · badge emoji 🔍 · variant shot, ảnh dọc `screens/dbqa/d2-explain.png` (9 mục đọc plan trích từ plan thật).
+
+**Tags:** `explain analyze, đọc explain postgres, cost vs actual time, rows loops buffers, shared hit read, planning time execution time, gather merge, phỏng vấn database, phỏng vấn sql, tối ưu query postgres, postgresql 17, sql tiếng việt, học postgresql, database interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #39 — N+1 query: 51 câu hay 1 câu JOIN? (2:42)
+
+**Tiêu đề:** Phỏng vấn FE #39: N+1 query — 51 câu hay 1 câu JOIN? | PostgreSQL interview
+
+**Mô tả:**
+```
+Câu 39 là câu ai làm màn hình danh sách cũng gặp: lấy 50 khách kèm đơn của họ — bạn viết 51 câu query hay một câu JOIN, và khác nhau ở đâu? N+1 là hình dạng 1 câu lấy danh sách cha + N câu lấy chi tiết, chi phí tăng TUYẾN TÍNH: 5.000 khách là 5.001 query.
+
+Demo thật trên PostgreSQL 17.11, bảng orders 500.000 dòng, số query được ĐẾM chứ không hardcode — mọi câu gửi xuống Postgres đều qua một bộ đếm. Nhánh N+1: 51 query, tổng 25.82 ms (câu danh sách 0.52 ms, 50 câu nhỏ trung bình 0.51 ms). Nhánh JOIN: đúng 1 query, 16.38 ms. Checksum tính TRONG JavaScript — 4881 dòng đơn, tổng total 12244954433 — khớp từng chữ số ở cả hai bên, hai cách viết một tập dữ liệu.
+
+Nói thẳng con số: chỉ chênh 1.6 lần vì đo trên localhost, round-trip gần như miễn phí — qua mạng thật thì 51 lần nhân độ trễ còn tệ hơn nhiều. Beat vàng: ép planner dùng index cho chính câu JOIN đó thì plan ra Nested Loop + Bitmap Index Scan với loops=50, chỉ 1.79 ms — Postgres cũng tra index đúng 50 lần, nhưng BÊN TRONG database chứ không phải 50 lượt đi–về.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 39
+0:14 Cơ chế: N+1 = 1 câu danh sách + N câu chi tiết
+0:38 Code: d3.sql — vòng for 50 câu vs 1 câu JOIN
+0:56 Demo thật: 51 query vs 1 query
+1:12 Demo thật: checksum JS — cùng dữ liệu không?
+1:28 Demo thật: bảng so sánh & sự thật localhost
+1:47 Trả lời như đi phỏng vấn: 3 câu + beat loops=50
+2:25 Tổng kết câu 39 & hẹn câu 40
+
+📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP82]
+⏭️ Câu tiếp theo: [LINK-EP84]
+📱 Bản Shorts 60 giây: [LINK-SHORT-39]
+🔁 Cùng bệnh ở tầng ORM — câu #43: N+1 trong Prisma, nhưng vô hình: [LINK-EP87]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#postgresql #sql #phongvan #backend
+```
+
+**Comment ghim gợi ý:**
+```
+🔁 Beat vàng câu 39: ép câu JOIN dùng index thì plan ra loops=50 — Postgres CŨNG tra index 50 lần, nhưng bên trong database, tốn 1.79 ms; còn N+1 là 51 lượt đi–về từ app xuống DB. Nên thước đo không phải "câu nào nhanh" mà là SỐ QUERY gửi đi (hoặc loops=N trong EXPLAIN ANALYZE). Demo chỉ chênh 1.6x vì chạy localhost — qua mạng thật, 51 lần nhân độ trễ mới là hóa đơn thật. Comment xem bạn phát hiện N+1 bằng cách nào nhé!
+```
+
+**Thumbnail:** badge "PV FE #39" · dòng lớn "51 QUERY" / "HAY 1 CÂU?" · phụ đề "Phỏng vấn Frontend · Câu 39/48" · badge emoji 🔁 · variant shot, ảnh dọc `screens/dbqa/d3-nplus1.png` (51 query 25.82 ms vs 1 query 16.38 ms).
+
+**Tags:** `n+1 query, join vs n+1, nested loop postgres, loops explain analyze, tối ưu query danh sách, đếm số query, bitmap index scan, phỏng vấn database, phỏng vấn sql, câu hỏi phỏng vấn sql, postgresql 17, sql tiếng việt, học sql, database interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #40 — Isolation level: READ COMMITTED vs REPEATABLE READ (2:57)
+
+**Tiêu đề:** Phỏng vấn FE #40: Isolation level — READ COMMITTED vs REPEATABLE READ | PostgreSQL interview
+
+**Mô tả:**
+```
+Câu 40 làm rơi nhiều ứng viên tự tin: cùng một câu SELECT, trong cùng một transaction, chạy hai lần ra hai kết quả — chuyện gì xảy ra? Transaction không chỉ là tất-cả-hoặc-không-gì; nó còn quyết định bạn THẤY GÌ khi người khác commit giữa chừng.
+
+READ COMMITTED — mặc định của Postgres — chụp ảnh ở MỖI CÂU LỆNH, nên đọc hai lần trong một transaction có thể ra hai kết quả (non-repeatable read). REPEATABLE READ chụp ảnh MỘT LẦN, ở câu lệnh đầu tiên của transaction, và mọi câu sau đều nhìn đúng ảnh đó.
+
+Demo thật trên PostgreSQL 17.11 với hai phiên là hai pg.Client RIÊNG (dùng pool chung thì transaction tan luôn). Vòng 1 read committed: A đọc 4518520, B cộng 1000 rồi COMMIT, A đọc lại ra 4519520 — ĐỔI. Vòng 2 chỉ thêm mấy chữ vào câu BEGIN, ISOLATION LEVEL REPEATABLE READ: A đọc 4519520, B commit thành 4520520, A đọc lại VẪN 4519520 — beat vàng ở đây, A đang đọc một giá trị KHÔNG CÒN TỒN TẠI trong bảng. Đó chính là snapshot, nhìn thấy bằng mắt.
+
+Giá phải trả: A mà tự UPDATE đúng dòng B vừa đổi thì Postgres ném 40001 could not serialize access due to concurrent update — ứng dụng PHẢI retry. Bẫy hay gặp: trong Postgres READ UNCOMMITTED chạy y hệt READ COMMITTED, còn REPEATABLE READ của Postgres chặt hơn chuẩn SQL — không có phantom read.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 40
+0:13 Cơ chế: BEGIN có đóng băng dữ liệu bạn đọc không?
+0:38 Code: d4.mjs — 2 phiên là 2 client RIÊNG
+1:03 Demo thật: vòng 1 READ COMMITTED — ĐỔI
+1:26 Demo thật: vòng 2 REPEATABLE READ — GIỮ
+1:56 Trả lời như đi phỏng vấn: 3 câu + bẫy 40001
+2:43 Tổng kết câu 40 & hẹn câu 41
+
+📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP83]
+⏭️ Câu tiếp theo: [LINK-EP85]
+📱 Bản Shorts 60 giây: [LINK-SHORT-40]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#postgresql #sql #phongvan #backend
+```
+
+**Comment ghim gợi ý:**
+```
+📸 Khoảnh khắc đáng giá nhất câu 40: ở REPEATABLE READ, phiên A đọc lại ra 4519520 trong khi bảng thật đã là 4520520 — A đang đọc một giá trị KHÔNG CÒN TỒN TẠI. Đó là snapshot, thấy bằng mắt chứ không cần lý thuyết. Nhưng nó không miễn phí: A tự UPDATE đúng dòng B vừa đổi là ăn 40001 could not serialize, app phải RETRY. Chọn isolation theo nghiệp vụ — càng cao KHÔNG phải càng tốt. Comment xem bạn đã từng gặp non-repeatable read trên production chưa!
+```
+
+**Thumbnail:** badge "PV FE #40" · dòng lớn "1 SELECT" / "2 KẾT QUẢ?" · phụ đề "Phỏng vấn Frontend · Câu 40/48" · badge emoji 📸 · variant shot, ảnh dọc `screens/dbqa/d4-isolation.png` (2 vòng ĐỔI vs GIỮ).
+
+**Tags:** `isolation level, read committed, repeatable read, non-repeatable read, snapshot postgres, could not serialize 40001, transaction postgres, mvcc, phỏng vấn database, phỏng vấn sql, postgresql 17, sql tiếng việt, học postgresql, database interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #41 — Deadlock: Postgres tự hủy một phiên sau 1 giây (2:46)
+
+**Tiêu đề:** Phỏng vấn FE #41: Deadlock — Postgres tự phát hiện và hủy một phiên | PostgreSQL interview
+
+**Mô tả:**
+```
+Câu 41: deadlock trong database là gì, bạn từng gặp chưa và xử thế nào? Hai transaction khóa chéo nhau — Postgres KHÔNG treo, nó tự phát hiện và hủy một phiên. Không cần SELECT FOR UPDATE mới có khóa: một câu UPDATE đã tự khóa dòng đó tới hết transaction.
+
+Demo thật trên PostgreSQL 17.11: A khóa dòng id=1, B khóa dòng id=2, rồi A đòi dòng 2 (t=0ms) và B đòi dòng 1 (t=202ms) — vòng chờ khép kín. Mẹo dựng được deadlock nằm ở chỗ hai câu bị chặn được gửi đi mà KHÔNG await; nạn nhân cũng không hardcode, nó sinh ra từ promise nào bị reject. Sau 1008ms — đúng bằng deadlock_timeout mặc định 1s, đo bằng SHOW ngay trong demo — Postgres dò đồ thị chờ, thấy chu trình và hủy MỘT nạn nhân.
+
+Message chép nguyên văn: code 40P01, message vỏn vẹn "deadlock detected" (không tiền tố ERROR, không tên bảng), detail hai dòng mỗi chiều một dòng (Process ... waits for ShareLock on transaction ...; blocked by process ...), hint "See server log for query details." — PID đổi mỗi lần chạy. Beat vàng: sau deadlock CẢ HAI dòng đều +1, vì phiên bị hủy rollback nhả khóa, câu UPDATE đang chờ của phiên kia chạy tiếp và nó commit trọn cả hai câu. Và hint kia nói thật: client chỉ thấy PID, câu SQL thủ phạm nằm ở log server.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 41
+0:16 Cơ chế: khóa dòng & vòng chờ chéo
+0:46 Code: d5.mjs — gửi UPDATE mà KHÔNG await
+1:06 Demo thật: dựng vòng chờ chéo
+1:30 Demo thật: 40P01 deadlock detected
+2:01 Trả lời như đi phỏng vấn: 3 câu + beat cả 2 dòng +1
+2:32 Tổng kết câu 41 & hẹn câu 42
+
+📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP84]
+⏭️ Câu tiếp theo: [LINK-EP86]
+📱 Bản Shorts 60 giây: [LINK-SHORT-41]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#postgresql #sql #phongvan #backend
+```
+
+**Comment ghim gợi ý:**
+```
+🔒 Hai chi tiết ăn điểm ở câu 41: (1) sau deadlock CẢ HAI dòng đều +1 — phiên bị hủy rollback nhả khóa, phiên còn lại nhận khóa rồi commit trọn cả hai câu, nên đừng nói "deadlock là mất dữ liệu"; (2) Postgres không dò ngay mà chờ hết deadlock_timeout (mặc định 1s — demo đo được 1008ms), vì đa số lần chờ khóa sẽ tự hết. Cách chữa: khóa mọi nơi theo CÙNG một thứ tự, transaction ngắn, và RETRY khi gặp 40P01 — tăng timeout không sửa gì. Comment lần bạn gặp deadlock gần nhất nhé!
+```
+
+**Thumbnail:** badge "PV FE #41" · dòng lớn "DEADLOCK" / "AI BỊ HỦY?" · phụ đề "Phỏng vấn Frontend · Câu 41/48" · badge emoji 🔒 · variant shot, ảnh dọc `screens/dbqa/d5-deadlock.png` (40P01 nguyên văn + detail 2 chiều).
+
+**Tags:** `deadlock postgres, 40p01, deadlock detected, deadlock_timeout, row lock postgres, sharelock, retry deadlock, transaction postgres, phỏng vấn database, phỏng vấn sql, postgresql 17, sql tiếng việt, học postgresql, database interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #42 — Phân trang OFFSET vs cursor: vì sao trang cuối chậm (2:43)
+
+**Tiêu đề:** Phỏng vấn FE #42: Phân trang OFFSET vs cursor — vì sao trang cuối chậm | PostgreSQL interview
+
+**Mô tả:**
+```
+Câu 42: phân trang tới trang thứ 25.000 thì API chậm hẳn — vì sao và sửa thế nào? Câu trả lời KHÔNG phải "thiếu index": hai cách trong video dùng CHUNG một index mà lệch nhau 52–68 lần. Docs Postgres nói thẳng — dòng bị OFFSET bỏ qua VẪN phải được tính bên trong server, nên OFFSET lớn có thể rất kém hiệu quả.
+
+Demo thật trên PostgreSQL 17.11, orders 500.000 dòng. Nhánh OFFSET 499980: node Limit trả rows=20, nhưng node con Index Scan using orders_pkey báo rows=500000 — Postgres sinh đủ 500.000 dòng rồi VỨT BỎ 499.980, buffers hit=4974, query 21.6 ms. Nhánh cursor WHERE id > lastId: quét 20 dòng, VỨT BỎ 0, hit=4, 0.35 ms. Beat vàng: CÙNG một node Index Scan using orders_pkey, khác đúng MỘT dòng — Index Cond.
+
+Đường cong mới là thứ khiến bug này khó thấy: OFFSET 0 và 1000 đều ~0.38 ms (trang đầu nhanh, test thấy ổn), 100000 lên 4.49 ms, 499980 lên 21.52 ms — tuyến tính theo N; còn cột cursor phẳng lì 0.34–0.37 ms ở MỌI mốc. Bẫy: cột sắp xếp phải ỔN ĐỊNH và UNIQUE — created_at trùng nhau là lệch trang, phải ghép thêm id; và cursor chỉ tiến/lùi nên UI phải là "tải thêm"/infinite scroll.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 42
+0:16 Cơ chế: OFFSET không hề "nhảy" tới dòng thứ N
+0:38 Code: d6.sql — OFFSET vs cursor cùng 20 dòng
+0:54 Demo thật: [A] OFFSET 499980
+1:16 Demo thật: [B] cursor + checksum
+1:37 Demo thật: càng sâu càng chậm
+1:56 Trả lời như đi phỏng vấn: 3 câu + bẫy cột sắp xếp
+2:25 Tổng kết câu 42 & hết khối SQL
+
+📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP85]
+⏭️ Câu tiếp theo: [LINK-EP87]
+📱 Bản Shorts 60 giây: [LINK-SHORT-42]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#postgresql #sql #phongvan #backend
+```
+
+**Comment ghim gợi ý:**
+```
+📄 Chốt khối SQL của lô 4: OFFSET 499980 và cursor DÙNG CHUNG một index, cùng node Index Scan using orders_pkey — khác đúng MỘT dòng Index Cond, mà lệch 52–68 lần (21.6 ms vs 0.35 ms). Lý do: OFFSET N không "nhảy", server vẫn TÍNH rồi VỨT đủ N dòng — nên trang đầu 0.37 ms, trang cuối 21.5 ms, tuyến tính theo độ sâu. Bẫy khi đổi sang cursor: cột sắp xếp phải ỔN ĐỊNH & UNIQUE, created_at trùng thì ghép (created_at, id). Comment app của bạn đang phân trang kiểu nào nhé!
+```
+
+**Thumbnail:** badge "PV FE #42" · dòng lớn "OFFSET 499980" / "QUÉT BAO NHIÊU?" · phụ đề "Phỏng vấn Frontend · Câu 42/48" · badge emoji 📄 · variant shot, ảnh dọc `screens/dbqa/d6-pagination.png` (21.6ms vs 0.35ms, cùng 20 dòng).
+
+**Tags:** `offset vs cursor, keyset pagination, phân trang postgres, limit offset chậm, index cond, orders_pkey index scan, infinite scroll api, phỏng vấn database, phỏng vấn sql, tối ưu phân trang, postgresql 17, sql tiếng việt, học postgresql, database interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #43 — N+1 trong ORM: bật log Prisma là thấy (2:48)
+
+**Tiêu đề:** Phỏng vấn FE #43: N+1 trong ORM — bật log Prisma là thấy | Prisma interview
+
+**Mô tả:**
+```
+Mở khối Prisma của lô 4. Câu 43: ORM giấu SQL đi — làm sao bạn biết code mình đang bắn 21 câu query? Docs Prisma v6 nói rõ kết quả trả về gồm mọi trường vô hướng và KHÔNG có quan hệ nào, nên người ta lấy 20 khách rồi lặp gọi thêm 20 lần cho đơn hàng — đúng bệnh N+1, mà đọc code thì không thấy vì nó nấp trong resolver, trong getter, trong Promise.all.
+
+Demo thật trên Prisma 6.19.3 + PostgreSQL 17.11, đếm bằng log dạng sự kiện và $on(query) — trung thực trước: 24 query warm-up bị LOẠI khỏi phép đếm. Vòng for: SỐ QUERY THẬT 21. Thêm đúng một dòng include: { orders: true }: đúng 2 query. Bất biến 3/3 lần chạy. Thời gian chỉ 21.20 ms vs 19.70 ms — chênh ~1.3x và còn dao động, nên đừng bán N+1 bằng tốc độ localhost: con số biết nói là SỐ QUERY.
+
+Beat vàng nằm ở SQL thật: câu con của include là WHERE customer_id IN ($1..$20) — include KHÔNG PHẢI JOIN. Prisma 6 gom 20 câu thành một câu IN rồi ghép cha–con ở tầng ứng dụng, nên ra 2 query CỐ ĐỊNH (200 khách vẫn 2). Bẫy version rất đắt: docs mới nhất nói "join là mặc định, 1 query" — đó là Prisma 7/8, ở v6 nó còn là Preview (relationJoins). Bẫy nữa: Promise.all KHÔNG chữa N+1 — vẫn 20 query và dễ cạn pool; và e.duration của Prisma làm tròn số nguyên ms nên phải đo bằng performance.now().
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 43 — mở khối Prisma
+0:15 Cơ chế: ORM không TẠO ra N+1, nó GIẤU N+1
+0:37 Code: p1.mjs — $on(query) để ĐẾM thật
+0:54 Demo thật: ĐẾM query — 21 vs 2
+1:22 Demo thật: SQL Prisma sinh ra + checksum JS
+1:46 Trả lời như đi phỏng vấn: 3 câu
+2:09 Bẫy & cách đo cho đúng
+2:32 Tổng kết câu 43 & hẹn câu 44
+
+📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP86]
+⏭️ Câu tiếp theo: [LINK-EP88]
+📱 Bản Shorts 60 giây: [LINK-SHORT-43]
+🔁 Cùng bệnh ở tầng SQL — câu #39: 51 query vs 1 câu JOIN: [LINK-EP83]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#prisma #orm #phongvan #backend
+```
+
+**Comment ghim gợi ý:**
+```
+🔺 Beat vàng câu 43: include KHÔNG phải JOIN. Ở Prisma 6, include sinh 1 query cha + 1 query con WHERE customer_id IN ($1..$20) rồi ghép ở tầng app — nên kết quả là 2 query CỐ ĐỊNH, không phải 1. Cái docs mới nói "join là mặc định, 1 query" là Prisma 7/8, ở v6 vẫn là preview relationJoins. Và đừng dùng Promise.all để "chữa" N+1: vẫn 20 query, còn dễ cạn connection pool. Thước đo là số query đếm được trong log, không phải ms trên localhost. Comment bạn từng thấy bao nhiêu query trong 1 request nhé!
+```
+
+**Thumbnail:** badge "PV FE #43" · dòng lớn "ORM GIẤU" / "21 CÂU QUERY?" · phụ đề "Phỏng vấn Frontend · Câu 43/48" · badge emoji 🔺 · variant shot, ảnh dọc `screens/dbqa/p1-nplus1.png` (21 query → 2 query, chỉ đổi 1 dòng).
+
+**Tags:** `prisma n+1, prisma include, relationjoins prisma, đếm query prisma, prisma log query, $on query prisma, orm n+1, prisma 6, phỏng vấn prisma, phỏng vấn backend, prisma tiếng việt, học prisma, câu hỏi phỏng vấn orm, prisma interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #44 — select đúng cột: payload 98KB xuống 26KB (2:52)
+
+**Tiêu đề:** Phỏng vấn FE #44: select đúng cột — payload 98KB xuống 26KB | Prisma interview
+
+**Mô tả:**
+```
+Câu 44: API trả về JSON nặng gấp bốn lần cần thiết — bạn cắt ở đâu? Docs Prisma v6 nói thẳng kết quả gồm TẤT CẢ trường vô hướng; không khai gì thì nhận hết. Cái giá trả ở ba tầng: database gửi, mạng chở về, rồi Node dựng object và JSON.stringify.
+
+Demo thật trên Prisma 6.19.3, lấy 1000 đơn đầu, hai nhánh khác nhau đúng một tham số. findMany mặc định: SỐ CỘT THẬT 5 (id, customerId, total, status, createdAt), 97.9 KB, 4.29 ms. Thêm select: { id: true, total: true }: 2 cột, 26.1 KB, 3.83 ms. Giảm 73.4%, bất biến 3/3 lần chạy vì payload đo bằng Buffer.byteLength của JSON.stringify chứ không ước lượng. Checksum tính TRONG JavaScript: 1000 dòng cả hai bên, tổng total 2513527232 khớp từng chữ số. Vì sao -73% chứ không -60% như tỉ lệ cột? createdAt là chuỗi ISO nặng ~40 byte mỗi dòng — một mình nó bằng cả object nhánh select.
+
+BEAT VÀNG ít kênh chịu nói: chạy EXPLAIN trên chính hai câu SQL Prisma vừa gửi thì hai kế hoạch GIỐNG HỆT — cùng Index Scan using orders_pkey, cùng cost 0.42..33.63, cùng Buffers shared hit=14; đổi đúng một thứ: width 25 → 8. Postgres là row-store, một trang chứa cả dòng nên vẫn đọc bấy nhiêu trang. select KHÔNG làm query nhanh hơn — nó cắt byte chở về, cắt RAM Node, cắt JSON. Muốn giữ mặc định mà chỉ giấu passwordHash thì dùng omit — đã kiểm, omit cũng cắt cột ngay trong câu SQL.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 44
+0:16 Cơ chế: mặc định của ORM là hào phóng
+0:37 Code: p2.mjs — findMany vs select 2 cột
+0:59 Demo thật: đếm CỘT + đo KB payload
+1:24 Demo thật: checksum JS + bảng so sánh
+1:48 BEAT VÀNG: select KHÔNG đổi PLAN
+2:13 Trả lời như đi phỏng vấn + bẫy
+2:38 Tổng kết câu 44 & hẹn câu 45
+
+📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP87]
+⏭️ Câu tiếp theo: [LINK-EP89]
+📱 Bản Shorts 60 giây: [LINK-SHORT-44]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#prisma #orm #phongvan #backend
+```
+
+**Comment ghim gợi ý:**
+```
+✂️ BEAT VÀNG câu 44: chạy EXPLAIN trên chính hai câu SQL Prisma sinh ra thì plan GIỐNG HỆT nhau — cùng Index Scan using orders_pkey, cùng cost, cùng Buffers shared hit=14; đổi đúng một thứ là width 25 → 8. Postgres là row-store, một trang chứa cả dòng nên select KHÔNG làm query nhanh hơn. Cái nó cắt là byte chở về (97.9 KB → 26.1 KB, -73.4%), RAM Node và JSON. Đừng đi phỏng vấn mà hứa "select làm DB nhanh hơn" — trừ khi cột TEXT/JSONB lớn hoặc có covering index. Comment payload API của bạn đang bao nhiêu KB nhé!
+```
+
+**Thumbnail:** badge "PV FE #44" · dòng lớn "98KB" / "HAY 26KB?" · phụ đề "Phỏng vấn Frontend · Câu 44/48" · badge emoji ✂️ · variant shot, ảnh dọc `screens/dbqa/p2-select.png` (5 cột 97.9 KB vs 2 cột 26.1 KB).
+
+**Tags:** `prisma select, prisma omit, payload api nặng, json stringify size, prisma findmany, select đúng cột, width explain postgres, row store postgres, prisma 6, phỏng vấn prisma, phỏng vấn backend, prisma tiếng việt, học prisma, prisma interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #45 — $transaction: tất cả hoặc không gì cả (2:57)
+
+**Tiêu đề:** Phỏng vấn FE #45: $transaction — tất cả hoặc không gì cả | Prisma interview
+
+**Mô tả:**
+```
+Câu 45: tạo khách rồi tạo đơn — bước hai lỗi, dữ liệu của bạn giờ ra sao? Họ không hỏi lý thuyết ACID, họ hỏi bạn đã từng thấy một hàng dữ liệu NỬA VỜI trong bảng của mình chưa. Điểm dễ sai nhất: gói hai lệnh vào chung một hàm KHÔNG biến chúng thành transaction — hàm là chuyện JavaScript, transaction là chuyện database.
+
+Demo thật trên Prisma 6.19.3: cùng một hàm nghiệp vụ, hai cái vỏ. Nhánh 2 lệnh rời: customers TRƯỚC 5000, bước 1 tạo id=5011, bước 2 FAIL, đếm lại 5001 — TĂNG 1, một khách có thật mà không có nổi một đơn: KHÁCH MỒ CÔI. Nhánh $transaction(async tx => ...) interactive: bước 2 vẫn FAIL y hệt, nhưng đếm lại 5001 → 5001, KHÔNG ĐỔI. Bằng chứng tận mắt trong log query: nhánh rời chỉ có INSERT rồi INSERT, nhánh transaction có BEGIN ở đầu và ROLLBACK ở cuối. Lỗi thì Y HỆT ở cả hai nhánh — transaction đổi HẬU QUẢ, không đổi lỗi.
+
+Chi tiết tinh tế nhất: rollback KHÔNG trả lại sequence — sau 3 lần chạy last_value là 5016 còn max(id) chỉ 5000. Đó là đúng thiết kế Postgres, sequence không mang tính transaction, id nhảy cóc là bình thường. Bẫy nữa: lỗi ConversionError trong demo bị chặn ngay ở tầng driver nên code là undefined, Postgres CHƯA HỀ nhận câu INSERT — lỗi do chính database ném mới có mã dạng P2003. Và transaction interactive mặc định maxWait 2s, timeout 5s: đừng gọi HTTP bên trong, transaction dài giữ khóa lâu là đường tới deadlock ở câu #41.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 45
+0:16 Cơ chế: transaction là một ĐƠN VỊ, không phải một cái hàm
+0:38 Code: p3.mjs — cùng hàm, khác cái vỏ
+1:00 Demo thật: đếm TRƯỚC/SAU ở 2 nhánh
+1:22 Demo thật: lỗi nguyên văn + log BEGIN/ROLLBACK
+1:50 Trả lời như đi phỏng vấn: 3 câu
+2:12 Bẫy & chi tiết tinh tế: sequence không rollback
+2:43 Tổng kết câu 45 & hẹn câu 46
+
+📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP88]
+⏭️ Câu tiếp theo: [LINK-EP90]
+📱 Bản Shorts 60 giây: [LINK-SHORT-45]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#prisma #orm #phongvan #backend
+```
+
+**Comment ghim gợi ý:**
+```
+⚛️ Chi tiết tinh tế nhất câu 45: ROLLBACK không trả lại sequence — sau 3 lần chạy, last_value là 5016 mà max(id) chỉ 5000. Đúng thiết kế Postgres (sequence không transaction-safe), nên id nhảy cóc là bình thường, đừng đi hoảng. Và nhớ: gói 2 lệnh vào 1 hàm KHÔNG phải transaction, Promise.all càng không — bằng chứng nằm trong log query, chỉ nhánh $transaction mới có BEGIN … ROLLBACK. Comment lần bạn phải đi dọn dữ liệu nửa vời nhé!
+```
+
+**Thumbnail:** badge "PV FE #45" · dòng lớn "BƯỚC 2 LỖI" / "DỮ LIỆU NỬA VỜI?" · phụ đề "Phỏng vấn Frontend · Câu 45/48" · badge emoji ⚛️ · variant shot, ảnh dọc `screens/dbqa/p3-transaction.png` (5000 → 5001 khách mồ côi vs 5001 → 5001).
+
+**Tags:** `prisma transaction, $transaction interactive, rollback prisma, atomic transaction, acid database, sequence không rollback, prisma log query, dữ liệu nửa vời, prisma 6, phỏng vấn prisma, phỏng vấn backend, prisma tiếng việt, học prisma, prisma interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #46 — Migration an toàn: thêm cột NOT NULL vào bảng có data (2:54)
+
+**Tiêu đề:** Phỏng vấn FE #46: Migration an toàn — thêm cột NOT NULL vào bảng có data | Prisma interview
+
+**Mô tả:**
+```
+Câu 46: thêm một cột bắt buộc vào bảng đang có 1000 dòng — bạn migrate thế nào? Bảng rỗng thì thêm cột NOT NULL nào cũng qua, vì thế bug này chỉ nổ trên production. Nhớ một câu: prisma migrate dev sinh SQL từ DIFF giữa schema cũ và schema mới, nó KHÔNG đoán dữ liệu.
+
+Demo thật trên Prisma 6.19.3, bảng notes 1000 dòng. Làm một phát: migrate dev in nguyên văn "We found changes that cannot be executed" — Step 0 Added the required column channel ... "There are 1000 rows in this table, it is not possible to execute this step.", exit code 1, KHÔNG file migration nào được sinh, cột chưa tồn tại và KHÔNG có prompt hỏi reset. Prisma chặn TRƯỚC khi chạy câu SQL nào — nó còn từ chối SINH RA file.
+
+Cách đúng là 3 bước theo mẫu expand–migrate–contract: (1) schema để channel String? → Prisma sinh ADD COLUMN channel TEXT; (2) --create-only sinh migration RỖNG, mình VIẾT TAY UPDATE notes SET channel = 'web' (bảng chục triệu dòng thì backfill theo lô); (3) schema trả channel về bắt buộc → Prisma sinh ALTER COLUMN channel SET NOT NULL. Đọc từ information_schema: is_nullable = NO, 1000/1000 dòng mang giá trị web, không NULL. Beat ăn điểm: bước 3 cũng có rủi ro NULL nhưng Prisma chỉ ghi WARNING vào TRONG file và vẫn sinh file; còn pha 1 là ERROR, từ chối sinh file — vì bước 3 Prisma BIẾT viết SQL gì, pha 1 thì không. Bẫy lớn nhất: backfill PHẢI nằm trong migration, vì production chạy migrate deploy chỉ thi hành file trong migrations — script tay không có ở đó, deploy nhảy từ bước 1 sang bước 3 và chết.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 46
+0:13 Cơ chế: migrate dev sinh SQL từ DIFF schema
+0:36 Code: 3 file migration.sql của 3 bước
+0:54 Demo thật: PHA 1 (SAI) — 1000 rows, KHÔNG sinh file
+1:19 Demo thật: PHA 2 (ĐÚNG) 3 bước + kết quả cuối
+1:45 Trả lời như đi phỏng vấn + beat ERROR vs WARNING
+2:13 Bẫy phải tránh khi migrate
+2:42 Tổng kết câu 46 & hẹn câu 47
+
+📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP89]
+⏭️ Câu tiếp theo: [LINK-EP91]
+📱 Bản Shorts 60 giây: [LINK-SHORT-46]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#prisma #orm #phongvan #backend
+```
+
+**Comment ghim gợi ý:**
+```
+🚧 Beat ăn điểm câu 46: cùng chuyện "cột có thể còn NULL" mà Prisma xử hai kiểu khác nhau — pha làm-một-phát là ERROR, từ chối SINH RA cả file migration ("There are 1000 rows in this table"); còn bước 3 SET NOT NULL chỉ là WARNING nằm TRONG file, vẫn sinh file vẫn chạy. Lý do: bước 3 Prisma BIẾT phải viết SQL gì, pha 1 thì không. Bẫy chí tử: backfill phải là MỘT MIGRATION — để script tay là production (migrate deploy) nhảy từ bước 1 sang bước 3 rồi chết. Comment lần migration của bạn suýt xóa data nhé!
+```
+
+**Thumbnail:** badge "PV FE #46" · dòng lớn "CỘT NOT NULL" / "1000 DÒNG CŨ?" · phụ đề "Phỏng vấn Frontend · Câu 46/48" · badge emoji 🚧 · variant shot, ảnh dọc `screens/dbqa/p4-migration.png` (3 bước nullable → backfill → NOT NULL).
+
+**Tags:** `prisma migrate, prisma migration, add column not null, backfill migration, expand migrate contract, prisma create-only, migrate deploy production, prisma db push, prisma 6, phỏng vấn prisma, phỏng vấn backend, prisma tiếng việt, học prisma, prisma interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #47 — Connection pool: P2024 và giới hạn kết nối (2:51)
+
+**Tiêu đề:** Phỏng vấn FE #47: Connection pool — P2024 và giới hạn kết nối | Prisma interview
+
+**Mô tả:**
+```
+Câu 47: traffic tăng, app bắt đầu ném lỗi timeout khi lấy connection — chuyện gì đang xảy ra? Cái bẫy nằm ở chữ "song song": 20 query song song KHÔNG phải 20 kết nối. Prisma giữ một pool — số kết nối tối đa cộng hàng đợi phía trước — khai ngay trên URL bằng connection_limit và pool_timeout; mặc định pool = num_physical_cpus × 2 + 1, pool_timeout 10s, và tầng dưới Postgres còn trần max_connections (demo đo được 100).
+
+Demo thật trên Prisma 6.19.3, ba client cùng một tải 20 query × pg_sleep(0.3s), bắn bằng Promise.allSettled để đếm được cả lỗi. connection_limit=2: 3048 ms, cao điểm 2 kết nối, 0 lỗi — 20 query chia 10 lượt, pool nhỏ biến song song thành tuần tự. connection_limit=20: 357 ms, cùng việc y hệt, nhanh hơn ~8,5 lần. Cao điểm đo từ pg_stat_activity ĐÚNG BẰNG connection_limit ở cả ba nhánh.
+
+Nhánh connection_limit=1 pool_timeout=1: OK 4 query, 16 query ăn P2024 — nguyên văn "Timed out fetching a new connection from the connection pool", và phần đắt nhất nằm trong ngoặc: (Current connection pool timeout: 1, connection limit: 1) — Prisma in thẳng hai tham số bạn vừa đặt. Beat ăn điểm: pool_timeout là timeout XIN kết nối, KHÔNG phải timeout query; số học chứng minh với pool 1 thì query thứ k bắt đầu ở 0,3×(k−1) giây nên đúng 4 query chờ dưới 1 giây ⇒ 4 OK / 16 P2024. Bẫy: tăng pool KHÔNG miễn phí (10 instance × pool 20 = 200 > max_connections 100, serverless bắt buộc pooler ngoài như PgBouncer); và khi tự đo, pg_sleep trơn qua queryRaw ném P2010 deserialize column of type void — lỗi kiểu dữ liệu, rất dễ nhầm là lỗi pool.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 47
+0:15 Cơ chế: pool = số kết nối tối đa + hàng đợi
+0:41 Code: p5.mjs — 3 client, cùng 20 query song song
+0:59 Demo thật: pool 2 vs pool 20
+1:21 Demo thật: pool 1 + pool_timeout 1s → P2024
+1:42 Trả lời như đi phỏng vấn + beat pool_timeout
+2:11 Bẫy phải tránh khi nói về pool
+2:38 Tổng kết câu 47 & hẹn câu 48
+
+📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP90]
+⏭️ Câu tiếp theo: [LINK-EP92]
+📱 Bản Shorts 60 giây: [LINK-SHORT-47]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#prisma #orm #phongvan #backend
+```
+
+**Comment ghim gợi ý:**
+```
+🏊 Beat ăn điểm câu 47: pool_timeout là timeout XIN kết nối, KHÔNG phải timeout query. Chứng minh bằng số học: pool 1, mỗi query 0,3s thì query thứ k bắt đầu ở 0,3×(k−1) giây — đúng 4 query đầu chờ dưới 1 giây, nên kết quả là 4 OK / 16 lỗi P2024, khớp y hệt demo. Và P2024 nghĩa là app thiếu kết nối hoặc giữ quá lâu, KHÔNG phải DB chậm — nhìn cả hai phía trước khi tăng pool, vì trần thật là max_connections=100. Comment pool size dự án bạn đang set bao nhiêu nhé!
+```
+
+**Thumbnail:** badge "PV FE #47" · dòng lớn "POOL CẠN" / "16 QUERY CHẾT?" · phụ đề "Phỏng vấn Frontend · Câu 47/48" · badge emoji 🏊 · variant shot, ảnh dọc `screens/dbqa/p5-pool.png` (pool 2: 3s · pool 20: 0.37s · pool 1: P2024).
+
+**Tags:** `connection pool prisma, p2024 prisma, connection_limit, pool_timeout, max_connections postgres, pgbouncer, prisma serverless pool, pg_stat_activity, prisma 6, phỏng vấn prisma, phỏng vấn backend, prisma tiếng việt, học prisma, prisma interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #48 (CUỐI LÔ 4) — Query chậm: từ log tới index đúng (2:58)
+
+**Tiêu đề:** Phỏng vấn FE #48: Query chậm — từ log tới index đúng | Prisma interview
+
+**Mô tả:**
+```
+Câu 48 — câu chốt sổ lô Database: một API chậm, bạn có 10 phút, quy trình của bạn là gì? Đáp án là 3 bước, không phải mẹo vặt: (1) NHÌN, đừng đoán — bật log query Prisma, $on(query), lấy ĐÚNG BYTE SQL; (2) EXPLAIN (ANALYZE, BUFFERS) CHÍNH câu đó, tìm node chạm nhiều dòng nhất chứ không phải node bạn NGHĨ là chậm; (3) index khớp hình dạng query — cột lọc đứng trước, cột sắp xếp đứng sau và đúng chiều — rồi ANALYZE và ĐO LẠI.
+
+Demo thật trên Prisma 6.19.3 + PostgreSQL 17.11, query nghiệp vụ là 20 đơn paid mới nhất của khách ở Da Nang. Prisma sinh MỘT câu duy nhất có LEFT JOIN customers (lọc theo quan hệ luôn thành JOIN, khác include ở câu #43), cuối câu là ORDER BY created_at DESC LIMIT 20 — chính hình dạng mà index phải khớp. EXPLAIN câu đó: Parallel Seq Scan on orders, 166.098 dòng, và một Sort trong plan.
+
+Bốn trạng thái index, không phải hai: chưa index 15.58 ms / 166.098 dòng; index đơn orders(status) 15.96 ms / 166.098 dòng — BEAT VÀNG: index TẠO RA MÀ PLANNER KHÔNG THÈM DÙNG, plan không đổi một chữ, vì paid chiếm 33% bảng; index ghép orders(status, created_at DESC) 0.74 ms / 93 dòng, Index Scan using idx_orders_status_created và Sort BIẾN MẤT; thêm customers(city) thì plan y hệt nên script tự DROP nó. Bất biến 6/6 lần chạy: 16ms → 0,7ms (21–26x), 166.098 → 93 dòng (1786x), buffers 3876 → 373. Bẫy: đừng ĐOÁN index (CREATE INDEX(status) tốn 115–150ms mà thu về không), index thừa tốn ghi + dung lượng, và một lần client đo gần 6ms mà Postgres báo 0,2ms là Prisma replan chứ không phải DB chậm.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 48 — câu cuối lô Database
+0:18 Cơ chế: quy trình 3 bước, không phải mẹo vặt
+0:43 Code: p6.mjs — log query, EXPLAIN, tạo index
+1:03 Demo thật: [1] SQL thật → [2] EXPLAIN câu đó
+1:24 Demo thật: [3] 4 trạng thái index
+1:53 Trả lời như đi phỏng vấn + beat index bị bỏ qua
+2:20 Bẫy phải tránh khi tối ưu query
+2:43 Tổng kết trọn 48 câu & lời chào lô 4
+
+📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout db-qa-batch-4 để xem đúng 12 câu code của lô 4 (6 SQL + 6 Prisma).
+⏮️ Câu trước: [LINK-EP91]
+▶️ Xem lại từ đầu lô 4: [LINK-EP81]
+📱 Bản Shorts 60 giây: [LINK-SHORT-48]
+🔁 Cùng bài học ở tầng SQL — câu #37: lọc 80% bảng thì PG bỏ index: [LINK-EP81]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+💬 Đủ 48 câu trên playlist — comment câu hỏi phỏng vấn khó nhất bạn từng gặp để lô sau càng sát thực tế!
+
+#prisma #orm #phongvan #backend
+```
+
+**Comment ghim gợi ý:**
+```
+🎯 Vậy là đủ 48 câu — 12 câu React & Vue, 12 câu hiệu năng RN & Flutter, 12 câu backend Node.js & NestJS, và 12 câu Database & SQL, câu nào cũng demo chạy số thật. BEAT VÀNG chốt sổ câu 48: index trên orders(status) TẠO RA MÀ PLANNER KHÔNG THÈM DÙNG — plan không đổi một chữ, vẫn 15.96 ms, vì paid chiếm 33% bảng; phải là orders(status, created_at DESC) khớp CẢ lọc lẫn sắp xếp thì mới xuống 0,74 ms và Sort biến mất. Đừng đoán index — lấy SQL thật từ log, EXPLAIN chính câu đó, rồi mới tạo. Cảm ơn bạn đã luyện cùng — comment câu hỏi phỏng vấn khó nhất bạn từng gặp cho lô sau nhé!
+```
+
+**Thumbnail:** badge "PV FE #48" · dòng lớn "INDEX ĐÚNG" / "16MS → 0.7MS" · phụ đề "Phỏng vấn Frontend · Câu 48/48" · badge emoji 🎯 · variant shot, ảnh dọc `screens/dbqa/p6-optimize.png` (4 trạng thái index, [B] bị bỏ qua).
+
+**Tags:** `tối ưu query chậm, prisma log query, explain analyze buffers, composite index, index status created_at, index bị bỏ qua, planner postgres, slow query production, prisma 6, phỏng vấn prisma, phỏng vấn database, prisma tiếng việt, học prisma, prisma interview questions, phỏng vấn fullstack`
+
+---
+
+### Shorts lô 4 (12 video)
+
+> Mỗi Short <60 giây, cùng câu hỏi với video ngang tương ứng, rút gọn để ôn nhanh. Đánh số nối tiếp lô 3: sd1..sd6 = Shorts #37..#42 (SQL/PostgreSQL), sp1..sp6 = Shorts #43..#48 (Prisma). CHƯA ĐĂNG — điền link thật thay placeholder khi đăng; mô tả mỗi Short chỉ cần dòng caption dưới đây + link video đầy đủ.
+
+| id | Tiêu đề Shorts | Caption |
+|---|---|---|
+| sd1 | Cứ tạo index là query nhanh hơn? 60 giây #shorts | Chưa index: Gather → Parallel Seq Scan, vứt ~500k dòng để lấy 61 dòng; có index: 8.5ms → 0.65ms, buffers 3604 → 63.<br>Bẫy: lọc 80% bảng thì PG BỎ index, quay lại Seq Scan — và thế là đúng.<br>Video đầy đủ: [LINK-EP81]<br>#shorts #postgresql #phongvan |
+| sd2 | Đọc EXPLAIN ANALYZE: nhìn con số nào trước? #shorts | cost là ước lượng của planner, actual time mới là ms thật; loops=3 nghĩa là 55366 × 3 = 166.098 dòng đi qua.<br>Bẫy: lệch 1677x KHÔNG phải thống kê cũ — đó là LIMIT dừng sớm, node quét chỉ lệch 1.3x.<br>Video đầy đủ: [LINK-EP82]<br>#shorts #postgresql #phongvan |
+| sd3 | 50 khách + đơn: 51 query hay 1 JOIN? #shorts | 51 query 25.82 ms vs 1 câu JOIN 16.38 ms — checksum JS khớp từng số, cùng 4881 dòng đơn.<br>Bẫy: mỗi query nhỏ chỉ 0.51 ms — phải NHÂN với 51 lượt đi–về; ép index thì loops=50 nằm BÊN TRONG DB.<br>Video đầy đủ: [LINK-EP83]<br>#shorts #postgresql #phongvan |
+| sd4 | 1 câu SELECT, 2 kết quả trong 1 transaction?! #shorts | READ COMMITTED chụp ảnh MỖI CÂU LỆNH nên đọc lại thấy 4519520; REPEATABLE READ chốt 1 ảnh từ câu đầu.<br>Bẫy: A đọc giá trị KHÔNG CÒN TỒN TẠI là đúng snapshot — nhưng 40001 could not serialize thì phải RETRY.<br>Video đầy đủ: [LINK-EP84]<br>#shorts #postgresql #phongvan |
+| sd5 | 2 transaction khóa chéo — ai bị hủy? #shorts | UPDATE tự khóa dòng tới hết transaction; sau 1008ms ≈ deadlock_timeout 1s, PG hủy 1 nạn nhân với 40P01.<br>Bẫy: sau deadlock CẢ HAI dòng đều +1 — và câu SQL thủ phạm chỉ nằm ở log server.<br>Video đầy đủ: [LINK-EP85]<br>#shorts #postgresql #phongvan |
+| sd6 | OFFSET 499980: vì sao trang cuối chậm 60x? #shorts | OFFSET không "nhảy": quét 500.000 dòng rồi VỨT 499.980 · 21.6 ms; cursor WHERE id > lastId chỉ 20 dòng · 0.35 ms.<br>Bẫy: cùng node Index Scan orders_pkey, khác đúng 1 dòng Index Cond — cột sắp xếp phải ỔN ĐỊNH & UNIQUE.<br>Video đầy đủ: [LINK-EP86]<br>#shorts #postgresql #phongvan |
+| sp1 | Prisma: vòng for findMany = 21 query?! #shorts | Bật log rồi ĐẾM: vòng for 21 query, include 2 query — bất biến, 200 khách vẫn 2.<br>Bẫy: include KHÔNG phải JOIN (WHERE customer_id IN $1..$20) · Promise.all vẫn 20 query.<br>Video đầy đủ: [LINK-EP87]<br>#shorts #prisma #phongvan |
+| sp2 | findMany trả 98KB — select còn 26KB #shorts | 5 cột 97.9 KB → 2 cột 26.1 KB (-73.4%), đo bằng JSON.stringify, bất biến 3/3 lần chạy.<br>Bẫy: select KHÔNG đổi PLAN — cùng Index Scan, cùng buffers hit=14, chỉ width 25 → 8.<br>Video đầy đủ: [LINK-EP88]<br>#shorts #prisma #phongvan |
+| sp3 | Bước 2 lỗi — khách vừa tạo có ở lại? #shorts | 2 lệnh rời: customers 5000 → 5001, khách mồ côi; bọc $transaction: 5001 → 5001, log có BEGIN … ROLLBACK.<br>Bẫy: 2 lệnh trong 1 hàm KHÔNG phải transaction · rollback không trả lại sequence.<br>Video đầy đủ: [LINK-EP89]<br>#shorts #prisma #phongvan |
+| sp4 | Thêm cột NOT NULL vào bảng 1000 dòng? #shorts | migrate dev từ chối SINH cả file: "There are 1000 rows in this table"; cách đúng là 3 bước nullable → backfill → SET NOT NULL.<br>Bẫy: backfill PHẢI là migration — production dùng migrate deploy sẽ nhảy bước 1 → 3 rồi chết.<br>Video đầy đủ: [LINK-EP90]<br>#shorts #prisma #phongvan |
+| sp5 | 20 query song song, pool 2 kết nối thì sao? #shorts | pool 2: 3048ms · pool 20: 357ms — cao điểm kết nối ĐÚNG BẰNG connection_limit; pool 1 + timeout 1s: OK 4 / 16 lỗi P2024.<br>Bẫy: pool_timeout là timeout XIN kết nối, không phải timeout query — trần thật là max_connections=100.<br>Video đầy đủ: [LINK-EP91]<br>#shorts #prisma #phongvan |
+| sp6 | Tạo index rồi mà query vẫn chậm y cũ? #shorts | orders(status) 15.96ms — plan KHÔNG ĐỔI một chữ vì paid = 33% bảng; orders(status, created_at DESC) 0.74ms, Sort biến mất.<br>Bẫy: đừng ĐOÁN index — lấy SQL thật từ log, EXPLAIN chính câu đó rồi mới tạo.<br>Video đầy đủ: [LINK-EP92]<br>#shorts #prisma #phongvan |
+
