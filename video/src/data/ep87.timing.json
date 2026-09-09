@@ -1,0 +1,345 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #43: N+1 trong ORM — bật log Prisma là thấy",
+        "subtitle": "Phỏng vấn Frontend — Database · Câu 43/48",
+        "badge": "Prisma 6.19.3 · ORM & N+1"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep87/scene-01-0-be90d9da.wav",
+          "startFrame": 0,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep87/scene-01-1-bf78ccf9.wav",
+          "startFrame": 203,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep87/scene-01-2-878d4b28.wav",
+          "startFrame": 336,
+          "durationInFrames": 113
+        }
+      ],
+      "durationInFrames": 467
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "ORM không tạo ra N+1 — nó giấu N+1",
+        "bullets": [
+          {
+            "icon": "🎭",
+            "text": "ORM viết SQL hộ bạn → bạn KHÔNG thấy câu lệnh thật chạy",
+            "sentence": 0
+          },
+          {
+            "icon": "📖",
+            "text": "docs v6: kết quả gồm \"All scalar fields\" · \"No relations\"",
+            "sentence": 0
+          },
+          {
+            "icon": "🔁",
+            "text": "20 khách + vòng for gọi order.findMany → 1 + 20 = 21 query",
+            "sentence": 1
+          },
+          {
+            "icon": "🔍",
+            "text": "Nấp trong resolver/getter/Promise.all → phải bật log query mà ĐẾM",
+            "sentence": 2
+          },
+          {
+            "icon": "🧩",
+            "text": "Chữa: include — khai báo quan hệ ngay trong MỘT lời gọi",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep87/scene-02-0-b44c0f1c.wav",
+          "startFrame": 0,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/ep87/scene-02-1-ed1732f8.wav",
+          "startFrame": 256,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep87/scene-02-2-97502282.wav",
+          "startFrame": 384,
+          "durationInFrames": 245
+        }
+      ],
+      "durationInFrames": 647
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "p1.mjs",
+        "language": "javascript",
+        "code": "const p = new PrismaClient({ log: [{ emit: 'event', level: 'query' }] });\nlet phase = 'warm';\nconst events = []; // { phase, query, duration }\np.$on('query', (e) => events.push({ phase, query: e.query, duration: e.duration }));\n\nconst drain = () => new Promise((r) => setTimeout(r, 100));\nconst INFRA = /^\\s*(BEGIN|COMMIT|ROLLBACK|SET\\b|DEALLOCATE|SELECT 1\\b)/i;\nconst business = (ph) => bucket(ph).filter((e) => !INFRA.test(e.query));\n\n// --- nhánh A: N+1 ----------------------------------------------------------\nasync function nPlusOne() {\n  const customers = await p.customer.findMany({ take: TAKE, orderBy: { id: 'asc' } });\n  const orders = [];\n  for (const c of customers) {\n    orders.push(...(await p.order.findMany({ where: { customerId: c.id } })));\n  }\n}\n// --- nhánh B: include ------------------------------------------------------\nasync function withInclude() {\n  const customers = await p.customer.findMany({\n    take: TAKE, orderBy: { id: 'asc' }, include: { orders: true },\n  });",
+        "steps": [
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 22,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep87/scene-03-0-18470046.wav",
+          "startFrame": 0,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep87/scene-03-1-8da034b2.wav",
+          "startFrame": 184,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep87/scene-03-2-c4a96119.wav",
+          "startFrame": 363,
+          "durationInFrames": 125
+        }
+      ],
+      "durationInFrames": 506
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node p1.mjs — ĐẾM query thật",
+        "commands": [
+          {
+            "cmd": "node p1.mjs",
+            "output": "== P1: 21 query vs 2 query ==\n20 khách đầu + đơn của họ · Prisma 6.19.3\n=> warm-up: 24 query bị LOẠI khỏi phép đếm\n   (1 lúc khởi tạo + 23 lượt làm nóng)\n\n[A] N+1: findMany(20) + 20 lần order.findMany\n  SỐ QUERY THẬT: 21 · TỔNG 21.20 ms\n\n[B] include: { orders: true }\n  SỐ QUERY THẬT: 2 · TỔNG 19.70 ms",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep87/scene-04-0-d3270554.wav",
+          "startFrame": 0,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep87/scene-04-1-2d52d1ba.wav",
+          "startFrame": 179,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep87/scene-04-2-9ce4142c.wav",
+          "startFrame": 384,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep87/scene-04-3-05af0492.wav",
+          "startFrame": 582,
+          "durationInFrames": 240
+        }
+      ],
+      "durationInFrames": 840
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "SQL Prisma sinh ra + checksum JS",
+        "commands": [
+          {
+            "cmd": "node p1.mjs",
+            "output": "== SQL Prisma sinh ra (bỏ cột, giữ WHERE) ==\nA#2 = 1 trong 20 lượt · B#2 = query con\nA#2 SELECT ... FROM orders WHERE orders.custome\n    r_id = $1 OFFSET $2\nB#2 SELECT ... FROM orders WHERE orders.custome\n    r_id IN ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11\n    ,$12,$13,$14,$15,$16,$17,$18,$19,$20) OFFS…\n\n== cùng dữ liệu? checksum trong JS ==\n             |     N+1 (A) | include(B)\ndòng đơn     |        1964 |       1964\ntổng total   |  4873155036 | 4873155036",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep87/scene-05-0-88758a99.wav",
+          "startFrame": 0,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep87/scene-05-1-66b53b7b.wav",
+          "startFrame": 164,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep87/scene-05-2-174dfbe3.wav",
+          "startFrame": 307,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep87/scene-05-3-8f9c0f8a.wav",
+          "startFrame": 512,
+          "durationInFrames": 200
+        }
+      ],
+      "durationInFrames": 730
+    },
+    {
+      "id": "scene-06",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Prisma trả scalar, KHÔNG kèm relation → vòng for = 1 + 20 = 21 query",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Khai báo quan hệ trong MỘT lời gọi: include (hoặc select lồng)",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Prisma 6: 1 query cha + 1 query con, ghép ở app → 2 CỐ ĐỊNH",
+            "sentence": 2
+          },
+          {
+            "icon": "📈",
+            "text": "21 tăng theo N · 2 KHÔNG tăng — 200 khách vẫn 2 query",
+            "sentence": 2
+          },
+          {
+            "icon": "🏆",
+            "text": "Muốn 1 query LATERAL JOIN: preview relationJoins + relationLoadStrategy",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep87/scene-06-0-7057053d.wav",
+          "startFrame": 0,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep87/scene-06-1-f2079cbc.wav",
+          "startFrame": 160,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep87/scene-06-2-52c48753.wav",
+          "startFrame": 351,
+          "durationInFrames": 320
+        }
+      ],
+      "durationInFrames": 689
+    },
+    {
+      "id": "scene-07",
+      "type": "concept",
+      "visual": {
+        "title": "Bẫy & cách đo cho đúng",
+        "bullets": [
+          {
+            "icon": "⚠️",
+            "text": "Docs mới nói \"join là mặc định, 1 query\" — đó là v7/v8, KHÔNG phải v6",
+            "sentence": 0
+          },
+          {
+            "icon": "🚫",
+            "text": "Promise.all KHÔNG chữa N+1: vẫn 20 query, còn dễ cạn pool",
+            "sentence": 1
+          },
+          {
+            "icon": "🪆",
+            "text": "include lồng sâu → thêm query; include tràn lan → thừa cột (câu #44)",
+            "sentence": 1
+          },
+          {
+            "icon": "⏱️",
+            "text": "Đo bằng performance.now() — e.duration làm tròn số nguyên ms",
+            "sentence": 2
+          },
+          {
+            "icon": "🔗",
+            "text": "Cùng bệnh ở tầng SQL: câu #39 — 51 query vs 1 câu JOIN",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep87/scene-07-0-95f886a7.wav",
+          "startFrame": 0,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep87/scene-07-1-f75bc94f.wav",
+          "startFrame": 205,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep87/scene-07-2-5727e92d.wav",
+          "startFrame": 422,
+          "durationInFrames": 255
+        }
+      ],
+      "durationInFrames": 695
+    },
+    {
+      "id": "scene-08",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 43/48 hoàn tất — mở khối Prisma",
+        "summary": [
+          {
+            "text": "Vòng for: 21 query · include: 2 query — bất biến 3/3 lần chạy",
+            "sentence": 0
+          },
+          {
+            "text": "include KHÔNG phải JOIN: WHERE customer_id IN ($1..$20)",
+            "sentence": 0
+          },
+          {
+            "text": "ms chỉ chênh ~1.3x trên localhost — beat là SỐ QUERY, không phải tốc độ",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: select lồng — bớt cột có làm query nhanh hơn?",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 44/48: select vs include — bớt cột có nhanh hơn? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep87/scene-08-0-1d359b64.wav",
+          "startFrame": 0,
+          "durationInFrames": 272
+        },
+        {
+          "file": "audio/ep87/scene-08-1-e515d980.wav",
+          "startFrame": 280,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 495
+    }
+  ]
+}

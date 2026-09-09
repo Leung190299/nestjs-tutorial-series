@@ -89,6 +89,7 @@ import ep83 from './data/ep83.timing.json';
 import ep84 from './data/ep84.timing.json';
 import ep85 from './data/ep85.timing.json';
 import ep86 from './data/ep86.timing.json';
+import ep87 from './data/ep87.timing.json';
 import sb1 from './data/sb1.timing.json';
 import sb2 from './data/sb2.timing.json';
 import sb3 from './data/sb3.timing.json';
@@ -120,6 +121,7 @@ import sd3 from './data/sd3.timing.json';
 import sd4 from './data/sd4.timing.json';
 import sd5 from './data/sd5.timing.json';
 import sd6 from './data/sd6.timing.json';
+import sp1 from './data/sp1.timing.json';
 import sr2 from './data/sr2.timing.json';
 import sr3 from './data/sr3.timing.json';
 import sr4 from './data/sr4.timing.json';
@@ -220,6 +222,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode84', timing: ep84 as unknown as EpisodeTiming},
   {id: 'Episode85', timing: ep85 as unknown as EpisodeTiming},
   {id: 'Episode86', timing: ep86 as unknown as EpisodeTiming},
+  {id: 'Episode87', timing: ep87 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -269,6 +272,7 @@ const shorts: {id: string; timing: EpisodeTiming}[] = [
   {id: 'ShortD4', timing: sd4 as unknown as EpisodeTiming},
   {id: 'ShortD5', timing: sd5 as unknown as EpisodeTiming},
   {id: 'ShortD6', timing: sd6 as unknown as EpisodeTiming},
+  {id: 'ShortP1', timing: sp1 as unknown as EpisodeTiming},
 ];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
@@ -1349,6 +1353,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/dbqa/d6-pagination.png',
       badgeEmoji: '📄',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb87',
+    props: {
+      badge: 'PV FE #43',
+      line1: 'ORM GIẤU',
+      line2: '21 CÂU QUERY?',
+      subtitle: 'Phỏng vấn Frontend · Câu 43/48',
+      variant: 'shot',
+      image: 'screens/dbqa/p1-nplus1.png',
+      badgeEmoji: '🔺',
       seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },

@@ -1,0 +1,75 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Hai mươi khách kèm đơn hàng bằng Prisma. Vòng for gọi findMany là hai mươi mốt query.",
+      "Sáu mươi giây: đếm bằng log, và vì sao include ra HAI."
+    ],
+    "visual": {
+      "question": "Vòng for gọi findMany: 21 query hay 2?",
+      "framework": "prisma"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Prisma không trả kèm quan hệ, nên vòng for bắn thêm hai mươi câu — một cộng hai mươi.",
+      "Đổi đúng một dòng: include orders true. Hai query cố định, hai trăm khách vẫn hai."
+    ],
+    "visual": {
+      "filename": "p1.mjs",
+      "language": "javascript",
+      "code": "// [A] N+1: 1 + 20 = 21 query\nconst cs = await p.customer.findMany({\n  take: 20,\n});\nfor (const c of cs)\n  await p.order.findMany({\n    where: { customerId: c.id } });\n// [B] include: 2 query CỐ ĐỊNH\nconst cs2 = await p.customer.findMany({\n  take: 20,\n  include: { orders: true },\n});\n// 21 -> 2 · SQL: WHERE id IN ($1..$20)\n// include KHÔNG phải JOIN",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Đo thật bằng $on query: hai mươi mốt so với hai. Số query bất biến, còn ms chỉ chênh một phẩy ba lần.",
+      "Nhìn SQL: câu con là WHERE customer_id IN — include KHÔNG phải JOIN."
+    ],
+    "visual": {
+      "src": "screens/dbqa/p1-nplus1.png",
+      "caption": "21 query → 2 query, chỉ đổi 1 dòng"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Đừng bán N cộng một bằng tốc độ localhost; con số biết nói là số query.",
+      "Bẫy: Promise chấm all vẫn hai mươi query, và docs mới nói một query là Prisma bảy, tám."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🔢",
+          "text": "Bật log Prisma rồi ĐẾM: 21 vs 2 — bất biến",
+          "sentence": 0
+        },
+        {
+          "icon": "🧩",
+          "text": "include: 1 query cha + 1 con, KHÔNG tăng theo N",
+          "sentence": 0
+        }
+      ],
+      "trap": "Promise.all vẫn 20 query · \"join 1 query\" là Prisma 7/8"
+    }
+  }
+]
