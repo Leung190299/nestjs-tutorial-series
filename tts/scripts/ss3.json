@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Auth trong NestJS — đặt ở middleware hay guard? Kèm cái bẫy bốn lẻ một, bốn lẻ ba rất nhiều người nhầm.",
+      "Trả lời trong sáu mươi giây — kèm bốn curl chạy thật."
+    ],
+    "visual": {
+      "question": "NestJS: auth đặt ở middleware hay guard?",
+      "framework": "nestjs"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Guard có ExecutionContext — đọc metadata @Roles của ĐÚNG handler sắp chạy; và muốn bốn lẻ một đúng nghĩa, guard phải TỰ ném UnauthorizedException.",
+      "Còn sai quyền thì trả false — Nest TỰ ném ForbiddenException: bốn lẻ ba, với body mặc định của framework."
+    ],
+    "visual": {
+      "filename": "role.guard.ts (rút gọn)",
+      "language": "tsx",
+      "code": "// guard: biết ĐÚNG handler sắp chạy\nconst required = reflector.get(\n  ROLES_KEY, ctx.getHandler());\nif (!required) return true;\n\n// muốn 401 → PHẢI TỰ ném\nif (!req.user)\n  throw new UnauthorizedException(\n    'Chưa đăng nhập');\n\n// false → Nest tự ném 403!\nreturn required\n  .includes(req.user.role);",
+      "steps": [
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 0
+        },
+        {
+          "from": 10,
+          "to": 13,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Chạy thật: không token — guard tự ném bốn lẻ một; token lee user sai quyền — bốn lẻ ba Forbidden resource, body mặc định của Nest.",
+      "Đúng role admin — hai trăm kèm secret; route public không @Roles — ai cũng vào; còn middleware không chặn một request nào."
+    ],
+    "visual": {
+      "src": "screens/beqa/s3-auth.png",
+      "caption": "401 tự ném · 403 Nest tặng"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: middleware mù ngữ cảnh — chỉ parse token gắn req.user; guard đọc @Roles của đúng handler — phân quyền đặt ở guard.",
+      "Ghi điểm: bốn lẻ một là chưa biết anh là ai — bốn lẻ ba là biết rồi nhưng thiếu quyền.",
+      "Bẫy: guard trả false — Nest trả bốn lẻ ba, KHÔNG phải bốn lẻ một; muốn bốn lẻ một phải TỰ ném UnauthorizedException."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🛡️",
+          "text": "MW gắn req.user · Guard quyết theo @Roles",
+          "sentence": 0
+        },
+        {
+          "icon": "🔑",
+          "text": "401 = chưa biết ai · 403 = thiếu quyền",
+          "sentence": 1
+        }
+      ],
+      "trap": "return false → 403, muốn 401 phải TỰ ném"
+    }
+  }
+]

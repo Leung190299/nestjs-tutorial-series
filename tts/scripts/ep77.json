@@ -1,0 +1,201 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu số ba mươi ba — nhà tuyển dụng hỏi: auth trong NestJS — bạn đặt ở middleware hay guard? Vì sao?",
+      "Mình trả lời bằng demo bốn curl chạy thật: một route admin, hai lớp gác — và cái bẫy bốn lẻ một, bốn lẻ ba mà rất nhiều người nhầm."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #33: Guard vs Middleware — auth đặt ở đâu?",
+      "subtitle": "Phỏng vấn Frontend — NestJS · Câu 33/36",
+      "badge": "NestJS backend"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Middleware chạy ĐẦU TIÊN, kiểu Express — nhưng docs nói thẳng: middleware, by its nature, is context-blind — nó không biết handler nào sẽ chạy sau next.",
+      "Nên middleware hợp với việc chung: parse token, log, gắn req.user — còn quyết cho hay chặn theo từng route thì nó không đủ thông tin.",
+      "Guard thì có ExecutionContext — biết CHÍNH XÁC handler sắp chạy, dùng Reflector đọc được metadata @Roles gắn trên đúng handler đó — nên phân quyền đặt ở guard.",
+      "Thứ tự cũng là câu quote ăn điểm: Guards are executed after all middleware, but before any interceptor or pipe."
+    ],
+    "visual": {
+      "title": "Middleware mù ngữ cảnh — Guard biết handler",
+      "bullets": [
+        {
+          "icon": "🕶️",
+          "text": "Middleware chạy đầu — 'context-blind'",
+          "sentence": 0
+        },
+        {
+          "icon": "🧰",
+          "text": "Việc của MW: parse token · log · gắn req.user",
+          "sentence": 1
+        },
+        {
+          "icon": "🛡️",
+          "text": "Guard: ExecutionContext + Reflector đọc @Roles",
+          "sentence": 2
+        },
+        {
+          "icon": "📜",
+          "text": "Sau MỌI middleware — trước interceptor/pipe",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là role.guard.ts — canActivate nhận ExecutionContext: Reflector đọc metadata @Roles của ĐÚNG handler sắp chạy; route không gắn @Roles thì không yêu cầu quyền — cho qua.",
+      "Request lấy từ context switchToHttp — nếu middleware phía trước parse được x-token thì trên đó đã có sẵn req.user.",
+      "Bẫy nằm đây: không có req.user — tức chưa đăng nhập — muốn trả bốn lẻ một đúng nghĩa thì guard phải TỰ ném UnauthorizedException.",
+      "Còn sai quyền thì return false — Nest tự ném ForbiddenException bốn lẻ ba, đúng như docs: when a guard returns false, the framework throws a ForbiddenException."
+    ],
+    "visual": {
+      "filename": "role.guard.ts — canActivate (dòng 15–36)",
+      "language": "tsx",
+      "code": "  canActivate(context: ExecutionContext): boolean {\n    // Route không gắn @Roles → không yêu cầu quyền, cho qua.\n    const required = this.reflector.get<string[] | undefined>(\n      ROLES_KEY,\n      context.getHandler(),\n    );\n    if (!required || required.length === 0) return true;\n\n    const req = context\n      .switchToHttp()\n      .getRequest<Request & { user?: { name: string; role: string } }>();\n\n    // BẪY: guard trả false → Nest ném ForbiddenException (403), KHÔNG phải\n    // 401. Muốn 401 \"chưa đăng nhập\" phải TỰ ném UnauthorizedException.\n    if (!req.user) throw new UnauthorizedException('Chưa đăng nhập');\n\n    // Sai quyền → return false: GIỮ hành vi mặc định của Nest\n    // (\"when a guard returns false, the framework throws a\n    // ForbiddenException\") để thấy body 403 mặc định.\n    return required.includes(req.user.role);\n  }\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 9,
+          "to": 11,
+          "sentence": 1
+        },
+        {
+          "from": 13,
+          "to": 15,
+          "sentence": 2
+        },
+        {
+          "from": 17,
+          "to": 22,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy thật — curl route admin không token: guard TỰ ném — bốn lẻ một Unauthorized, message Chưa đăng nhập là chuỗi MÌNH truyền vào.",
+      "Gửi token lee user — có danh tính nhưng sai quyền: guard trả false, Nest tự trả bốn lẻ ba với body MẶC ĐỊNH của framework — Forbidden resource.",
+      "Beat trừ điểm kinh điển nằm đây: guard trả false là Nest tự trả bốn lẻ ba Forbidden — muốn bốn lẻ một đúng nghĩa, PHẢI TỰ ném UnauthorizedException."
+    ],
+    "visual": {
+      "title": "Chặn cửa: 401 tự ném · 403 Nest mặc định",
+      "commands": [
+        {
+          "cmd": "curl -s -i http://localhost:3998/s3/admin",
+          "output": "HTTP/1.1 401 Unauthorized\n{\"message\":\"Chưa đăng nhập\",\"error\":\"Unauthorized\",\"statusCode\":401}\n=> 401: guard TỰ ném — message của MÌNH",
+          "sentence": 0
+        },
+        {
+          "cmd": "curl -s -i -H \"x-token: lee:user\" http://localhost:3998/s3/admin",
+          "output": "HTTP/1.1 403 Forbidden\n{\"message\":\"Forbidden resource\",\"error\":\"Forbidden\",\"statusCode\":403}\n=> 403: guard trả false — body MẶC ĐỊNH của Nest",
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04b",
+    "type": "terminal",
+    "narration": [
+      "Đúng role admin — hai trăm, kèm secret doanh thu quý ba: qua cả hai lớp gác.",
+      "Route public không gắn @Roles — guard đọc metadata thấy không yêu cầu quyền, ai cũng vào; và log middleware cho thấy MỌI request — kể cả request bốn lẻ một — đều đi QUA nó: middleware không chặn ai."
+    ],
+    "visual": {
+      "title": "Cho qua: 200 · log MW — middleware không chặn ai",
+      "commands": [
+        {
+          "cmd": "curl -s -i -H \"x-token: lee:admin\" http://localhost:3998/s3/admin",
+          "output": "HTTP/1.1 200 OK\n{\"secret\":\"doanh thu Q3\",\"user\":{\"name\":\"lee\",\"role\":\"admin\"}}",
+          "sentence": 0
+        },
+        {
+          "cmd": "curl -s -i http://localhost:3998/s3/public",
+          "output": "HTTP/1.1 200 OK\n{\"ok\":true}\n-- log middleware (KHÔNG chặn ai, kể cả request 401):\n[S3-MW] không có x-token → req.user = undefined\n[S3-MW] user=lee role=user\n[S3-MW] user=lee role=admin",
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — câu một: bốn lẻ một là CHƯA BIẾT anh là ai — thiếu đăng nhập; bốn lẻ ba là biết rồi nhưng KHÔNG ĐỦ QUYỀN — phân biệt được là ăn điểm ngay.",
+      "Câu hai: phân nhiệm chuẩn — middleware chạy đầu, parse token gắn req.user; guard đọc metadata @Roles qua ExecutionContext rồi quyết cho hay chặn theo từng route.",
+      "Câu ba: route không gắn @Roles thì guard này cho qua — mặc định MỞ; muốn mặc định ĐÓNG thì đảo điều kiện — đó là lựa chọn thiết kế, nói được là cộng điểm.",
+      "Bẫy: guard trả false là Nest ném ForbiddenException bốn lẻ ba — đừng tưởng tự ra bốn lẻ một; muốn bốn lẻ một phải tự ném UnauthorizedException."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "401 = chưa biết là ai · 403 = biết, thiếu quyền",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "MW gắn req.user · Guard quyết theo @Roles",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Không @Roles → cho qua: mặc định MỞ hay ĐÓNG?",
+          "sentence": 2
+        },
+        {
+          "icon": "🪤",
+          "text": "return false → 403, KHÔNG phải 401",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu ba mươi ba — guard vs middleware: middleware mù ngữ cảnh chỉ gắn user, guard đọc metadata quyết cho chặn — và bẫy bốn lẻ một, bốn lẻ ba.",
+      "Mai sang câu ba mươi tư: ValidationPipe với DTO hoạt động thế nào — body sai thì chuyện gì xảy ra, và whitelist để làm gì?",
+      "Video này có bản Shorts sáu mươi giây để bạn ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số ba mươi tư!"
+    ],
+    "visual": {
+      "title": "Câu 33/36 hoàn tất — 401 hay 403, rõ rồi!",
+      "summary": [
+        {
+          "text": "MW context-blind — chỉ parse & gắn req.user",
+          "sentence": 0
+        },
+        {
+          "text": "Guard: ExecutionContext + @Roles → cho/chặn",
+          "sentence": 0
+        },
+        {
+          "text": "401 TỰ ném · 403 Nest mặc định khi false",
+          "sentence": 0
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 34/36: ValidationPipe + DTO — chặn body sai 🎤"
+    }
+  }
+]
