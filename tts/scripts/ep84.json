@@ -1,0 +1,197 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại phòng phỏng vấn — câu bốn mươi, câu làm rơi nhiều ứng viên tự tin.",
+      "Cùng một câu SELECT trong một transaction, chạy hai lần ra hai kết quả — chuyện gì xảy ra?",
+      "Đo thật, hai phiên song song, và một con số không còn tồn tại trong bảng."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #40: Isolation level — READ COMMITTED vs REPEATABLE READ",
+      "subtitle": "Phỏng vấn Frontend — Database · Câu 40/48",
+      "badge": "Database & SQL · PostgreSQL 17"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Transaction không chỉ tất-cả-hoặc-không-gì; nó còn quyết định bạn thấy gì khi người khác commit giữa chừng.",
+      "READ COMMITTED — mặc định Postgres: mỗi CÂU LỆNH nhìn ảnh chụp tại thời điểm câu đó bắt đầu. Nên đọc hai lần trong một transaction có thể ra hai kết quả — non-repeatable read.",
+      "REPEATABLE READ thì chụp ảnh MỘT LẦN, ở câu lệnh đầu tiên của transaction, và mọi câu sau đều nhìn đúng ảnh đó."
+    ],
+    "visual": {
+      "title": "BEGIN có đóng băng dữ liệu bạn đọc không?",
+      "bullets": [
+        {
+          "icon": "🧊",
+          "text": "Người khác commit giữa chừng — transaction của tôi thấy gì?",
+          "sentence": 0
+        },
+        {
+          "icon": "🔓",
+          "text": "READ COMMITTED (mặc định PG): ảnh chụp MỖI CÂU LỆNH",
+          "sentence": 1
+        },
+        {
+          "icon": "🔁",
+          "text": "Cùng 1 SELECT, 2 lần, 2 kết quả = non-repeatable read",
+          "sentence": 1
+        },
+        {
+          "icon": "📸",
+          "text": "REPEATABLE READ: chụp 1 LẦN ở câu đầu transaction",
+          "sentence": 2
+        },
+        {
+          "icon": "📖",
+          "text": "docs: \"successive SELECT ... see the same data\"",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Hai phiên là hai pg.Client RIÊNG. Dùng pool chung thì transaction của phiên A tan luôn — mỗi câu có thể rơi vào connection khác.",
+      "Một vòng diễn: A mở transaction, hỏi thẳng server SHOW transaction_isolation, đọc lần một; B cộng một nghìn rồi COMMIT; A đọc lần hai.",
+      "Giữa hai vòng chỉ đổi ĐÚNG một thứ: câu BEGIN của A. Không sleep, không hardcode — ĐỔI hay GIỮ sinh từ so sánh hai số đọc được."
+    ],
+    "visual": {
+      "filename": "d4.mjs",
+      "language": "javascript",
+      "code": "// hai pg.Client RIÊNG cho 2 phiên — KHÔNG dùng pool\nconst a = new pg.Client({ connectionString: CONN });\nconst b = new pg.Client({ connectionString: CONN });\n\nasync function round(no, a, b, beginSql, isoLabel) {\n  await a.query(beginSql);           // A mở transaction\n  const { rows: iso } =\n    await a.query('SHOW transaction_isolation');\n  const first = await readTotal(a);  // A đọc lần 1\n\n  await b.query(SQL_BUMP, [ORDER_ID, BUMP]);\n  await b.query('COMMIT');           // B ghi + COMMIT\n\n  const second = await readTotal(a); // A đọc lần 2\n  await a.query('COMMIT');\n  return { first, second, changed: first !== second };\n}\n\n// giữa 2 vòng CHỈ đổi đúng câu BEGIN của phiên A:\nr1 = await round(1, a, b, 'BEGIN', 'READ COMMITTED');\nr2 = await round(2, a, b,\n  'BEGIN ISOLATION LEVEL REPEATABLE READ', 'REPEATABLE READ');",
+      "steps": [
+        {
+          "from": 1,
+          "to": 3,
+          "sentence": 0
+        },
+        {
+          "from": 5,
+          "to": 16,
+          "sentence": 1
+        },
+        {
+          "from": 18,
+          "to": 22,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Dòng thí nghiệm: orders id một, total gốc bốn triệu năm trăm mười tám nghìn năm trăm hai mươi — gọi là bản mười tám. Server tự khai: mặc định read committed.",
+      "Vòng một. A mở BEGIN, đọc lần một ra bản mười tám. B cộng một nghìn rồi COMMIT — trong bảng bây giờ là bản mười chín.",
+      "A đọc lại, cùng câu SELECT, cùng transaction: bản mười chín. ĐỔI. Vậy BEGIN không hề đóng băng dữ liệu bạn đọc được."
+    ],
+    "visual": {
+      "title": "node d4.mjs — vòng 1: READ COMMITTED",
+      "commands": [
+        {
+          "cmd": "node d4.mjs",
+          "output": "== D4: cùng câu SELECT, 2 kết quả ==\norders id=1 · total gốc 4518520\ndefault_transaction_isolation: read committed\n-- VÒNG 1: READ COMMITTED (mặc định) --\n[phiên A] BEGIN\n  SHOW transaction_isolation -> read committed\n[phiên A] SELECT total (lần 1) -> 4518520\n[phiên B] UPDATE total = total+1000\n[phiên B] COMMIT xong -> 4519520\n[phiên A] SELECT total (lần 2) -> 4519520\n[phiên A] COMMIT\n=> lần 1 4518520 != lần 2 4519520: ĐỔI",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Vòng hai, chỉ thêm mấy chữ vào câu BEGIN của A: ISOLATION LEVEL REPEATABLE READ. Server xác nhận: repeatable read.",
+      "A đọc lần một ra bản mười chín. B lại cộng một nghìn rồi COMMIT — trong bảng bây giờ là bản hai mươi.",
+      "A đọc lần hai: vẫn bản mười chín. Beat vàng đây — lúc A đọc ra bản mười chín, trong bảng thật đang là bản hai mươi, B đã commit rồi.",
+      "A đang đọc một giá trị KHÔNG CÒN TỒN TẠI trong bảng. Đó chính là snapshot — nhìn thấy bằng mắt, không cần lý thuyết."
+    ],
+    "visual": {
+      "title": "node d4.mjs — vòng 2: REPEATABLE READ",
+      "commands": [
+        {
+          "cmd": "node d4.mjs",
+          "output": "-- VÒNG 2: REPEATABLE READ --\n[phiên A] BEGIN ISOLATION LEVEL REPEATABLE READ\n  SHOW transaction_isolation -> repeatable read\n[phiên A] SELECT total (lần 1) -> 4519520\n[phiên B] UPDATE total = total+1000\n[phiên B] COMMIT xong -> 4520520\n[phiên A] SELECT total (lần 2) -> 4519520\n[phiên A] COMMIT\n=> lần 1 4519520 == lần 2 4519520: GIỮ\n== tổng kết 2 vòng ==\nvòng 1 read committed : 4518520 -> 4519520 ĐỔI\nvòng 2 repeatable read: 4519520 -> 4519520 GIỮ",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "concept",
+    "narration": [
+      "Trả lời phỏng vấn. Một: mặc định là READ COMMITTED, mỗi câu lệnh chụp ảnh mới, nên đọc hai lần trong một transaction có thể ra hai kết quả.",
+      "Hai: REPEATABLE READ chụp ảnh một lần ở câu đầu transaction, đọc lại vẫn ra giá trị cũ dù người khác đã commit.",
+      "Ba: nó KHÔNG miễn phí. A mà tự UPDATE đúng dòng B vừa đổi thì Postgres ném lỗi bốn không không không một, could not serialize access due to concurrent update, phải retry.",
+      "Bẫy hay gặp: READ UNCOMMITTED trong Postgres chạy y hệt READ COMMITTED; còn REPEATABLE READ của Postgres chặt hơn chuẩn SQL — không có phantom read.",
+      "Chọn mức isolation theo nghiệp vụ, không phải càng cao càng tốt. Trên nữa còn SERIALIZABLE; khóa hẳn dòng là câu bốn mươi mốt."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "READ COMMITTED: ảnh chụp MỖI CÂU LỆNH → non-repeatable read",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "REPEATABLE READ: 1 ảnh từ câu đầu → đọc lại vẫn giá trị cũ",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Giá phải trả: 40001 could not serialize → phải RETRY",
+          "sentence": 2
+        },
+        {
+          "icon": "⚠️",
+          "text": "PG: READ UNCOMMITTED = READ COMMITTED · không có phantom read",
+          "sentence": 3
+        },
+        {
+          "icon": "🎚️",
+          "text": "Chọn theo nghiệp vụ — càng cao KHÔNG phải càng tốt",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "outro",
+    "narration": [
+      "Xong câu bốn mươi — cùng một câu SELECT, hai kết quả: khác ở mức isolation, không ở dữ liệu.",
+      "Câu tiếp: hai transaction khóa chéo nhau — deadlock là gì, Postgres xử lý ra sao?",
+      "Có bản Shorts sáu mươi giây để ôn nhanh — hẹn gặp ở câu bốn mươi mốt!"
+    ],
+    "visual": {
+      "title": "Câu 40/48 hoàn tất — hẹn gặp câu 41!",
+      "summary": [
+        {
+          "text": "READ COMMITTED: 4518520 → 4519520 — cùng 1 SELECT, 2 kết quả",
+          "sentence": 0
+        },
+        {
+          "text": "REPEATABLE READ: đọc lại vẫn 4519520 dù bảng đã là 4520520",
+          "sentence": 0
+        },
+        {
+          "text": "Giá phải trả: 40001 could not serialize — ứng dụng phải retry",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: khóa dòng & deadlock — hai transaction đụng nhau",
+          "sentence": 1
+        }
+      ],
+      "next": "Câu 41/48: Hai transaction khóa chéo — ai chết? 🎤"
+    }
+  }
+]

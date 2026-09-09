@@ -1,0 +1,75 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Cùng một câu SELECT, trong một transaction, chạy hai lần ra hai kết quả — vì sao?",
+      "Sáu mươi giây: READ COMMITTED và REPEATABLE READ, đo thật."
+    ],
+    "visual": {
+      "question": "1 câu SELECT chạy 2 lần trong 1 transaction: 2 kết quả?",
+      "framework": "postgres"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Mặc định READ COMMITTED: mỗi CÂU LỆNH chụp ảnh mới, nên giữa hai lần đọc ai commit là thấy ngay.",
+      "Thêm ISOLATION LEVEL REPEATABLE READ thì ảnh chốt từ câu đầu, hai lần đọc ra đúng một giá trị."
+    ],
+    "visual": {
+      "filename": "d4.sql",
+      "language": "sql",
+      "code": "-- [phiên A] mặc định = READ COMMITTED\nBEGIN;\nSELECT total FROM orders WHERE id = 1;\n-- [phiên B] UPDATE +1000; COMMIT;\nSELECT total FROM orders WHERE id = 1;\nCOMMIT;   -- 2 lần đọc KHÁC nhau\n\n-- [phiên A] chỉ đổi đúng câu BEGIN:\nBEGIN ISOLATION LEVEL REPEATABLE READ;\nSELECT total FROM orders WHERE id = 1;\n-- [phiên B] UPDATE +1000; COMMIT;\nSELECT total FROM orders WHERE id = 1;\nCOMMIT;   -- 2 lần đọc GIỐNG nhau\n-- snapshot chốt từ câu lệnh ĐẦU TIÊN",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Vòng một, READ COMMITTED: bốn năm một tám đổi thành bốn năm một chín — non-repeatable read.",
+      "Vòng hai, REPEATABLE READ: A đọc lại vẫn ra giá trị cũ, trong khi bảng thật đã đổi — A đọc giá trị không còn tồn tại. Đó là snapshot."
+    ],
+    "visual": {
+      "src": "screens/dbqa/d4-isolation.png",
+      "caption": "đọc lại vẫn thấy giá trị đã bị đổi"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "READ COMMITTED chụp ảnh mỗi câu lệnh; REPEATABLE READ chụp một lần ở câu đầu.",
+      "Bẫy: không miễn phí — A tự UPDATE dòng B vừa đổi là ăn lỗi could not serialize, phải retry."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🔓",
+          "text": "READ COMMITTED (mặc định): ảnh chụp MỖI CÂU LỆNH",
+          "sentence": 0
+        },
+        {
+          "icon": "📸",
+          "text": "REPEATABLE READ: 1 ảnh chốt từ câu đầu transaction",
+          "sentence": 0
+        }
+      ],
+      "trap": "Không miễn phí: 40001 could not serialize — phải RETRY"
+    }
+  }
+]
