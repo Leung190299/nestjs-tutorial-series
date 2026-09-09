@@ -1,0 +1,293 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #36: Exception filter — chuẩn hóa lỗi toàn app",
+        "subtitle": "Phỏng vấn Frontend — NestJS · Câu 36/36",
+        "badge": "NestJS backend"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep80/scene-01-0-1f612f91.wav",
+          "startFrame": 0,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep80/scene-01-1-62a5381f.wav",
+          "startFrame": 241,
+          "durationInFrames": 195
+        }
+      ],
+      "durationInFrames": 454
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Exception filter — giành quyền kiểm soát lỗi",
+        "bullets": [
+          {
+            "icon": "🕳️",
+            "text": "Không bắt: lỗi lạ → 500 chung chung, vô hồn",
+            "sentence": 0
+          },
+          {
+            "icon": "🎛️",
+            "text": "Docs: control cả FLOW lẫn CONTENT của response",
+            "sentence": 1
+          },
+          {
+            "icon": "🧾",
+            "text": "@Catch() TRỐNG → vỏ {code, message, path, timestamp}",
+            "sentence": 2
+          },
+          {
+            "icon": "🛡️",
+            "text": "HttpException giữ status — stack chỉ log server",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep80/scene-02-0-fe26262c.wav",
+          "startFrame": 0,
+          "durationInFrames": 276
+        },
+        {
+          "file": "audio/ep80/scene-02-1-8fd40f03.wav",
+          "startFrame": 284,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep80/scene-02-2-f1ac18b2.wav",
+          "startFrame": 530,
+          "durationInFrames": 276
+        },
+        {
+          "file": "audio/ep80/scene-02-3-2c86c4ac.wav",
+          "startFrame": 814,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 1029
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "all-exceptions.filter.ts — dòng 21–42 (@Catch() + cờ demo x-raw kể miệng)",
+        "language": "tsx",
+        "code": "    const isHttp = exception instanceof HttpException;\n    const status = isHttp ? exception.getStatus() : 500;\n    // HttpException chủ động ném (404, 400…) giữ nguyên status + message của nó;\n    // lỗi thô (Error thường) → code 'INTERNAL' + message AN TOÀN, KHÔNG lộ err.message/stack.\n    const code: number | string = isHttp ? status : 'INTERNAL';\n    const message = isHttp\n      ? exception.message\n      : 'Có lỗi phía server, thử lại sau';\n\n    // Stack chỉ log SERVER-SIDE (1 dòng cắt gọn) — client không bao giờ thấy.\n    const stack =\n      exception instanceof Error ? (exception.stack ?? exception.message) : String(exception);\n    console.error('[S6] stack:', stack.split('\\n').slice(0, 2).join(' <- ').trim());\n\n    res.status(status).json({\n      code,\n      message,\n      path: req.url,\n      timestamp: new Date().toISOString(),\n    });\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 2,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 13,
+            "sentence": 2
+          },
+          {
+            "from": 15,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep80/scene-03-0-29bd9058.wav",
+          "startFrame": 0,
+          "durationInFrames": 365
+        },
+        {
+          "file": "audio/ep80/scene-03-1-3c74a88a.wav",
+          "startFrame": 373,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep80/scene-03-2-c2009f24.wav",
+          "startFrame": 633,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep80/scene-03-3-c31d4dd3.wav",
+          "startFrame": 915,
+          "durationInFrames": 216
+        }
+      ],
+      "durationInFrames": 1149
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "curl /s6/boom — mặc định vs qua filter",
+        "commands": [
+          {
+            "cmd": "curl -s -i -H 'x-raw: 1' http://localhost:3998/s6/boom",
+            "output": "HTTP/1.1 500 Internal Server Error\n{\"statusCode\":500,\"message\":\"Internal server error\"}\n=> mặc định Nest — x-raw là CỜ DEMO tự chế",
+            "sentence": 0
+          },
+          {
+            "cmd": "curl -s -i http://localhost:3998/s6/boom",
+            "output": "HTTP/1.1 500 Internal Server Error\n{\"code\":\"INTERNAL\",\n \"message\":\"Có lỗi phía server, thử lại sau\",\n \"path\":\"/s6/boom\",\"timestamp\":\"2026-09-09T03:39:33.466Z\"}\n=> vỏ thống nhất — 'db exploded' KHÔNG lộ ra",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep80/scene-04-0-0c972bd5.wav",
+          "startFrame": 0,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep80/scene-04-1-6f3d1518.wav",
+          "startFrame": 236,
+          "durationInFrames": 298
+        }
+      ],
+      "durationInFrames": 552
+    },
+    {
+      "id": "scene-04b",
+      "type": "terminal",
+      "visual": {
+        "title": "Log server + curl /s6/known — 404 giữ nguyên",
+        "commands": [
+          {
+            "cmd": "curl -s http://localhost:3998/s6/boom",
+            "output": "-- log server (đường dẫn stack lược cho gọn):\n[S6] stack: Error: db exploded\n  <- at S6Controller.boom (s6.controller.js)\n=> stack chỉ nằm server-side — đủ để debug",
+            "sentence": 0
+          },
+          {
+            "cmd": "curl -s -i http://localhost:3998/s6/known",
+            "output": "HTTP/1.1 404 Not Found\n{\"code\":404,\n \"message\":\"Không thấy đơn hàng #42\",\n \"path\":\"/s6/known\",\"timestamp\":\"2026-09-09T03:39:33.487Z\"}\n=> 404 chủ động GIỮ NGUYÊN — không bị nuốt thành 500",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep80/scene-04b-0-0f007ae4.wav",
+          "startFrame": 0,
+          "durationInFrames": 276
+        },
+        {
+          "file": "audio/ep80/scene-04b-1-f7a77751.wav",
+          "startFrame": 284,
+          "durationInFrames": 286
+        }
+      ],
+      "durationInFrames": 588
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Mặc định 500 chung chung → filter @Catch() trống",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "HttpException giữ status — stack chỉ log server",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Global: APP_FILTER — 1 chỗ khai, cả app 1 vỏ",
+            "sentence": 2
+          },
+          {
+            "icon": "🪤",
+            "text": "Filter = chốt chặn CUỐI — không thay try/catch",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep80/scene-05-0-0f9dc388.wav",
+          "startFrame": 0,
+          "durationInFrames": 312
+        },
+        {
+          "file": "audio/ep80/scene-05-1-ecc23df2.wav",
+          "startFrame": 320,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep80/scene-05-2-1a71a0d4.wav",
+          "startFrame": 496,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep80/scene-05-3-3d799a38.wav",
+          "startFrame": 701,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 907
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 36/36 hoàn tất — trọn bộ 36 câu!",
+        "summary": [
+          {
+            "text": "Filter @Catch() trống — cả app 1 format lỗi",
+            "sentence": 0
+          },
+          {
+            "text": "Stack ở server — client nhận vỏ sạch",
+            "sentence": 0
+          },
+          {
+            "text": "6 câu Node + 6 câu NestJS — đủ bộ backend",
+            "sentence": 1
+          },
+          {
+            "text": "Playlist 36 câu — luyện từ câu #1",
+            "sentence": 2
+          }
+        ],
+        "next": "Trọn bộ 36 câu phỏng vấn trên playlist 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep80/scene-06-0-0d4b9e1b.wav",
+          "startFrame": 0,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep80/scene-06-1-7477602d.wav",
+          "startFrame": 229,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep80/scene-06-2-ff5b03fd.wav",
+          "startFrame": 449,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 655
+    }
+  ]
+}

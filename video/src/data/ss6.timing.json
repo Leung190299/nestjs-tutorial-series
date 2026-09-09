@@ -1,0 +1,119 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "NestJS: lỗi thô 500 — chuẩn hóa error toàn app thế nào?",
+        "framework": "nestjs"
+      },
+      "sentences": [
+        {
+          "file": "audio/ss6/s1-0-b02122c2.wav",
+          "startFrame": 0,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ss6/s1-1-2018c6e1.wav",
+          "startFrame": 193,
+          "durationInFrames": 68
+        }
+      ],
+      "durationInFrames": 279
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "all-exceptions.filter.ts (rút gọn)",
+        "language": "tsx",
+        "code": "@Catch() // TRỐNG = bắt MỌI exception\ncatch(err, host) {\n  const isHttp =\n    err instanceof HttpException;\n  // 404 chủ động giữ status của nó\n  const status =\n    isHttp ? err.getStatus() : 500;\n  const message = isHttp ? err.message\n    : 'Có lỗi phía server, thử lại sau';\n  // stack chỉ log SERVER-side\n  console.error('[S6]', err.stack);\n  res.status(status).json({\n    code: isHttp ? status : 'INTERNAL',\n    message, path, timestamp });",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 14,
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ss6/s2-0-26c3011e.wav",
+          "startFrame": 0,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ss6/s2-1-e3c02fd1.wav",
+          "startFrame": 258,
+          "durationInFrames": 200
+        }
+      ],
+      "durationInFrames": 476
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/beqa/s6-filter.png",
+        "caption": "stack ở server · client nhận code sạch"
+      },
+      "sentences": [
+        {
+          "file": "audio/ss6/s3-0-cbe31ad4.wav",
+          "startFrame": 0,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ss6/s3-1-293a7e53.wav",
+          "startFrame": 268,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 466
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "🧾",
+            "text": "@Catch() trống → vỏ {code, message, path, ts}",
+            "sentence": 0
+          },
+          {
+            "icon": "🌍",
+            "text": "APP_FILTER → cả app 1 format lỗi",
+            "sentence": 1
+          }
+        ],
+        "trap": "Quên phân nhánh HttpException — 404 thành 500"
+      },
+      "sentences": [
+        {
+          "file": "audio/ss6/s4-0-8d0ccfaf.wav",
+          "startFrame": 0,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ss6/s4-1-3aefaec4.wav",
+          "startFrame": 203,
+          "durationInFrames": 94
+        },
+        {
+          "file": "audio/ss6/s4-2-c36d3995.wav",
+          "startFrame": 305,
+          "durationInFrames": 125
+        }
+      ],
+      "durationInFrames": 448
+    }
+  ]
+}
