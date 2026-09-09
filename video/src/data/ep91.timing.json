@@ -1,0 +1,365 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #47: Connection pool — P2024 và giới hạn kết nối",
+        "subtitle": "Phỏng vấn Frontend — Database · Câu 47/48",
+        "badge": "Prisma 6.19.3 · connection_limit & pool_timeout"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep91/scene-01-0-f304530c.wav",
+          "startFrame": 0,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep91/scene-01-1-6685ca43.wav",
+          "startFrame": 193,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep91/scene-01-2-53700fed.wav",
+          "startFrame": 321,
+          "durationInFrames": 118
+        }
+      ],
+      "durationInFrames": 457
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Pool = số kết nối tối đa + hàng đợi",
+        "bullets": [
+          {
+            "icon": "🏊",
+            "text": "app KHÔNG mở kết nối vô hạn: pool = số kết nối tối đa + hàng đợi",
+            "sentence": 0
+          },
+          {
+            "icon": "🔗",
+            "text": "Prisma 6 khai trên URL: ?connection_limit=N&pool_timeout=S",
+            "sentence": 1
+          },
+          {
+            "icon": "📖",
+            "text": "docs v6: chờ quá hạn → ném P2024 rồi CHUYỂN sang query kế tiếp",
+            "sentence": 2
+          },
+          {
+            "icon": "⚙️",
+            "text": "mặc định: pool = num_physical_cpus * 2 + 1 · pool_timeout = 10s",
+            "sentence": 3
+          },
+          {
+            "icon": "🧱",
+            "text": "trần thật ở tầng DB: SHOW max_connections = 100",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep91/scene-02-0-a9ea2cec.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep91/scene-02-1-44a54fec.wav",
+          "startFrame": 172,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep91/scene-02-2-445732b6.wav",
+          "startFrame": 363,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep91/scene-02-3-bae30293.wav",
+          "startFrame": 575,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 800
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "demo-db-interview/prisma-qa/p5.mjs",
+        "language": "javascript",
+        "code": "const LOAD = `SELECT 1 AS ok FROM pg_sleep(${SLEEP})`;\nconst POLL_MS = 40;\n\nconst url = (app, params) => `${BASE}?application_name=${app}&${params}`;\nconst mk = (app, params) =>\n  new PrismaClient({ datasources: { db: { url: url(app, params) } } });\n\nasync function burst(app, c) {\n  const stop = watch(app);\n  const t0 = performance.now();\n  const rs = await Promise.allSettled(\n    Array.from({ length: N }, () => c.$queryRawUnsafe(LOAD)),\n  );\n\n  const A = await withClient('p5A', 'connection_limit=2&pool_timeout=10', (c) =>\n    burst('p5A', c),\n  );\n  const B = await withClient('p5B', 'connection_limit=20', (c) => burst('p5B', c));\n  const C = await withClient('p5C', 'connection_limit=1&pool_timeout=1', (c) =>\n    burst('p5C', c),\n  );",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 13,
+            "sentence": 1
+          },
+          {
+            "from": 15,
+            "to": 21,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep91/scene-03-0-890a4d59.wav",
+          "startFrame": 0,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep91/scene-03-1-cf931e96.wav",
+          "startFrame": 184,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep91/scene-03-2-4c911603.wav",
+          "startFrame": 353,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 537
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "3 nhánh: cùng 20 query song song",
+        "commands": [
+          {
+            "cmd": "node p5.mjs",
+            "output": "20 query song song qua $queryRawUnsafe:\n  SELECT 1 AS ok FROM pg_sleep(0.3)\nđo kết nối: pg_stat_activity theo\napplication_name (client giám sát tên riêng)\n\n[A] connection_limit=2 pool_timeout=10\n  3048ms · cao điểm 2 kết nối · lỗi 0\n=> 20 query chia 10 lượt: 10 x 0.3s\n\n[B] connection_limit=20\n  357ms · cao điểm 20 kết nối · lỗi 0\n=> cùng 20 query, 1 lượt: nhanh hơn 8.5x",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep91/scene-04-0-8bf0d0fb.wav",
+          "startFrame": 0,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep91/scene-04-1-c36a533b.wav",
+          "startFrame": 152,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep91/scene-04-2-446a0ac1.wav",
+          "startFrame": 266,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep91/scene-04-3-77613155.wav",
+          "startFrame": 426,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 651
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "[C] connection_limit=1 pool_timeout=1",
+        "commands": [
+          {
+            "cmd": "node p5.mjs",
+            "output": "  1247ms · cao điểm 1 · OK 4 / lỗi 16\nP2024 PrismaClientKnownRequestError\nTimed out fetching a new connection from the\nconnection pool. More info:\nhttp://pris.ly/d/connection-pool (Current\nconnection pool timeout: 1, connection limit: 1)\n\npool     |    ms | k.nối | lỗi\n[A] 2    |  3048 |     2 | -\n[B] 20   |   357 |    20 | -\n[C] 1    |  1247 |     1 | 16x P2024\nSHOW max_connections = 100",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep91/scene-05-0-d6a2abc9.wav",
+          "startFrame": 0,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep91/scene-05-1-f9ed6dc0.wav",
+          "startFrame": 152,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep91/scene-05-2-cb2c75a3.wav",
+          "startFrame": 285,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep91/scene-05-3-259aa6ca.wav",
+          "startFrame": 483,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 631
+    },
+    {
+      "id": "scene-06",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn + beat vàng",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Không xin được kết nối → XẾP HÀNG: pool nhỏ = nhiều lượt tuần tự",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Chờ quá pool_timeout → P2024 · app thiếu/giữ lâu, KHÔNG phải DB chậm",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Pool to không phải luôn tốt: trần thật là max_connections",
+            "sentence": 2
+          },
+          {
+            "icon": "🟡",
+            "text": "pool_timeout = timeout XIN kết nối, KHÔNG phải timeout query",
+            "sentence": 3
+          },
+          {
+            "icon": "🔢",
+            "text": "pool 1: query thứ k chờ 0,3×(k−1)s → đúng 4 query < 1s ⇒ 4 OK / 16 P2024",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep91/scene-06-0-91ea23e6.wav",
+          "startFrame": 0,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep91/scene-06-1-7c4ce218.wav",
+          "startFrame": 169,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep91/scene-06-2-0e76a06c.wav",
+          "startFrame": 386,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep91/scene-06-3-fe104de7.wav",
+          "startFrame": 524,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep91/scene-06-4-eb593dbb.wav",
+          "startFrame": 652,
+          "durationInFrames": 192
+        }
+      ],
+      "durationInFrames": 862
+    },
+    {
+      "id": "scene-07",
+      "type": "concept",
+      "visual": {
+        "title": "Bẫy phải tránh khi nói về pool",
+        "bullets": [
+          {
+            "icon": "🧱",
+            "text": "Tăng pool KHÔNG miễn phí: 10 instance × pool 20 = 200 > max_connections 100",
+            "sentence": 0
+          },
+          {
+            "icon": "☁️",
+            "text": "Serverless: bắt buộc pooler ngoài (PgBouncer)",
+            "sentence": 1
+          },
+          {
+            "icon": "🩺",
+            "text": "P2024 = xếp hàng quá lâu, KHÔNG phải DB chết — nhìn CẢ 2 phía",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "Gốc hay gặp: transaction gọi HTTP · N+1 bắn 20 query bằng Promise.all",
+            "sentence": 2
+          },
+          {
+            "icon": "🪤",
+            "text": "BẪY ĐO: pg_sleep trơn → P2010 deserialize void, KHÔNG phải lỗi pool",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep91/scene-07-0-59612b3f.wav",
+          "startFrame": 0,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep91/scene-07-1-a35883e3.wav",
+          "startFrame": 186,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep91/scene-07-2-78826f52.wav",
+          "startFrame": 326,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep91/scene-07-3-4e47efce.wav",
+          "startFrame": 560,
+          "durationInFrames": 252
+        }
+      ],
+      "durationInFrames": 830
+    },
+    {
+      "id": "scene-08",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 47/48 hoàn tất — pool là hàng đợi trước DB",
+        "summary": [
+          {
+            "text": "pool 2: 3048ms · pool 20: 357ms — cùng 20 query, nhanh hơn 8,5 lần",
+            "sentence": 0
+          },
+          {
+            "text": "Cao điểm kết nối = ĐÚNG connection_limit: 2 / 20 / 1",
+            "sentence": 0
+          },
+          {
+            "text": "pool 1 + pool_timeout 1s: OK 4 · 16 lỗi P2024 (timeout XIN kết nối)",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: query chậm trên production — quy trình tối ưu từ A tới Z",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 48/48: query chậm → quy trình tối ưu 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep91/scene-08-0-683eb01d.wav",
+          "startFrame": 0,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep91/scene-08-1-a3e0f384.wav",
+          "startFrame": 169,
+          "durationInFrames": 185
+        }
+      ],
+      "durationInFrames": 372
+    }
+  ]
+}
