@@ -1,0 +1,119 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "Lấy 50 khách + đơn của họ: 51 query hay 1 JOIN?",
+        "framework": "postgres"
+      },
+      "sentences": [
+        {
+          "file": "audio/sd3/s1-0-8f19ce73.wav",
+          "startFrame": 0,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/sd3/s1-1-cd487c6e.wav",
+          "startFrame": 128,
+          "durationInFrames": 147
+        }
+      ],
+      "durationInFrames": 293
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "d3.sql",
+        "language": "sql",
+        "code": "-- [A] N+1: 1 câu + 50 câu\nSELECT id FROM customers\nORDER BY id LIMIT 50;\n-- rồi vòng for x50:\nSELECT * FROM orders\nWHERE customer_id = $1;\n\n-- [B] JOIN: đúng 1 câu\nSELECT c.name, o.*\nFROM (SELECT id, name\n      FROM customers\n      ORDER BY id LIMIT 50) c\nJOIN orders o\n  ON o.customer_id = c.id;",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 14,
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sd3/s2-0-58b890b0.wav",
+          "startFrame": 0,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/sd3/s2-1-21f72352.wav",
+          "startFrame": 133,
+          "durationInFrames": 101
+        }
+      ],
+      "durationInFrames": 252
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/dbqa/d3-nplus1.png",
+        "caption": "51 query 25ms vs 1 query 16ms"
+      },
+      "sentences": [
+        {
+          "file": "audio/sd3/s3-0-533a826b.wav",
+          "startFrame": 0,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/sd3/s3-1-01098ddf.wav",
+          "startFrame": 251,
+          "durationInFrames": 159
+        }
+      ],
+      "durationInFrames": 428
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "🧮",
+            "text": "Query nhỏ 0.51 ms — nhưng phải NHÂN với 51 lượt đi–về",
+            "sentence": 0
+          },
+          {
+            "icon": "🏆",
+            "text": "Ép index: loops=50 → 1.79 ms — cũng 50 lần, BÊN TRONG DB",
+            "sentence": 1
+          }
+        ],
+        "trap": "JOIN 1-nhiều nhân dòng cha ra — 10.000 đơn thì dùng WHERE IN"
+      },
+      "sentences": [
+        {
+          "file": "audio/sd3/s4-0-8c81df1a.wav",
+          "startFrame": 0,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/sd3/s4-1-9dd63f79.wav",
+          "startFrame": 150,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/sd3/s4-2-e6e89ec7.wav",
+          "startFrame": 406,
+          "durationInFrames": 149
+        }
+      ],
+      "durationInFrames": 573
+    }
+  ]
+}
