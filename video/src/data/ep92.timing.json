@@ -1,0 +1,365 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #48: Query chậm — từ log tới index đúng",
+        "subtitle": "Phỏng vấn Frontend — Database · Câu 48/48",
+        "badge": "Prisma 6.19.3 · PostgreSQL 17 · orders 500.000 dòng"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep92/scene-01-0-c9847b68.wav",
+          "startFrame": 0,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep92/scene-01-1-723f1c04.wav",
+          "startFrame": 176,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep92/scene-01-2-838c4b6d.wav",
+          "startFrame": 372,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 544
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Quy trình 3 bước, không phải mẹo vặt",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "bật log Prisma + $on('query') → lấy ĐÚNG BYTE SQL, không đoán từ TypeScript",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "EXPLAIN (ANALYZE, BUFFERS) CHÍNH câu đó → node chạm nhiều dòng nhất",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "index khớp hình dạng: cột lọc = đứng TRƯỚC, cột sắp xếp đứng SAU + đúng chiều",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "ANALYZE rồi ĐO LẠI — chứng minh bằng số, không tin cảm giác",
+            "sentence": 2
+          },
+          {
+            "icon": "📖",
+            "text": "docs: index khớp ORDER BY + LIMIT n → lấy thẳng n dòng đầu, KHÔNG quét phần còn lại",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep92/scene-02-0-93990a84.wav",
+          "startFrame": 0,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep92/scene-02-1-4ef8baff.wav",
+          "startFrame": 162,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep92/scene-02-2-5c09a8d5.wav",
+          "startFrame": 408,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep92/scene-02-3-6a3b772b.wav",
+          "startFrame": 599,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 769
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "demo-db-interview/prisma-qa/p6.mjs",
+        "language": "javascript",
+        "code": "const p = new PrismaClient({ log: [{ emit: 'event', level: 'query' }] });\n\nlet phase = 'warm';\nconst events = [];\np.$on('query', (e) => events.push({ phase, query: e.query, params: e.params }));\n\nconst businessQuery = () =>\n  p.order.findMany({\n    where: { status: STATUS, customer: { city: CITY } },\n    orderBy: { createdAt: 'desc' },\n    take: TAKE,\n  });\n\n  const ev = lastOf('A'); // SQL thật + params thật, lấy từ log\n  const ea = await explain(ev.query, ev.params);\n\n  const msB = await ddl(`CREATE INDEX ${IDX_STATUS} ON orders(status)`);\n\n  await p.$executeRawUnsafe(`DROP INDEX ${IDX_STATUS}`);\n  const msC = await ddl(\n    `CREATE INDEX ${IDX_COMBO} ON orders(status, created_at DESC)`,\n  );",
+        "steps": [
+          {
+            "from": 1,
+            "to": 5,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 12,
+            "sentence": 1
+          },
+          {
+            "from": 14,
+            "to": 22,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep92/scene-03-0-ff9dbb7c.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep92/scene-03-1-923a28b4.wav",
+          "startFrame": 181,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep92/scene-03-2-5128801c.wav",
+          "startFrame": 348,
+          "durationInFrames": 224
+        }
+      ],
+      "durationInFrames": 590
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "[1] SQL thật → [2] EXPLAIN câu đó",
+        "commands": [
+          {
+            "cmd": "node p6.mjs",
+            "output": "[1] SQL Prisma 6.19.3 sinh ra (log, cột -> ...):\nSELECT ... FROM orders LEFT JOIN customers AS j0\nON (j0.id) = (orders.customer_id) WHERE\n(orders.status = $1 AND (j0.city = $2 AND (j0.id\nIS NOT NULL))) ORDER BY orders.created_at DESC\nLIMIT $3 OFFSET $4\nparams: [\"paid\",\"Da Nang\",20,0]\n\n[2] EXPLAIN câu đó — node chạm nhiều dòng nhất:\n  Parallel Seq Scan on orders · 166098 dòng\n  Execution Time 23.892ms · buffers 3876",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep92/scene-04-0-6836a933.wav",
+          "startFrame": 0,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep92/scene-04-1-bbf71fb4.wav",
+          "startFrame": 208,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep92/scene-04-2-9e66f62b.wav",
+          "startFrame": 372,
+          "durationInFrames": 236
+        }
+      ],
+      "durationInFrames": 626
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "[3] 4 trạng thái index — node THẬT",
+        "commands": [
+          {
+            "cmd": "node p6.mjs",
+            "output": "[A] chưa index\n     15.58ms · 166098 dòng · Parallel Seq Scan\n[B] orders(status) — index BỊ BỎ QUA\n     15.96ms · 166098 dòng · Parallel Seq Scan\n[C] orders(status, created_at DESC)\n      0.74ms · 93 dòng · Index Scan using\n      idx_orders_status_created\n[D] [C] + customers(city)\n      0.75ms · 93 dòng · plan y hệt [C]\n\n=> [B] index TẠO RA MÀ PLANNER KHÔNG THÈM DÙNG vì\n   lọc 33% bảng; [D] cũng vậy, đã DROP",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep92/scene-05-0-fc978406.wav",
+          "startFrame": 0,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep92/scene-05-1-ad046d03.wav",
+          "startFrame": 176,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep92/scene-05-2-e01d4b5c.wav",
+          "startFrame": 326,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep92/scene-05-3-484635f7.wav",
+          "startFrame": 526,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep92/scene-05-4-c5913f13.wav",
+          "startFrame": 722,
+          "durationInFrames": 142
+        }
+      ],
+      "durationInFrames": 882
+    },
+    {
+      "id": "scene-06",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn + beat vàng",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Lấy SQL THẬT từ log Prisma — ORM che mất tầng SQL, đừng đoán",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "EXPLAIN chính câu đó → BIẾT node nào tốn, không phải ĐOÁN node nào tốn",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Index khớp CẢ lọc lẫn sắp xếp: (status) trượt · (status, created_at DESC) ăn",
+            "sentence": 2
+          },
+          {
+            "icon": "🟡",
+            "text": "BEAT: index trên status tạo ra mà planner KHÔNG THÈM DÙNG — paid = 33% bảng",
+            "sentence": 2
+          },
+          {
+            "icon": "🔢",
+            "text": "bất biến: 166.098 → 93 dòng (1786x) · buffers 3876 → 373 · 21–26x nhanh",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep92/scene-06-0-af4f5599.wav",
+          "startFrame": 0,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep92/scene-06-1-d754dc2b.wav",
+          "startFrame": 160,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep92/scene-06-2-b07009bb.wav",
+          "startFrame": 291,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep92/scene-06-3-7a6e182f.wav",
+          "startFrame": 465,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep92/scene-06-4-fcec8a76.wav",
+          "startFrame": 644,
+          "durationInFrames": 147
+        }
+      ],
+      "durationInFrames": 809
+    },
+    {
+      "id": "scene-07",
+      "type": "concept",
+      "visual": {
+        "title": "Bẫy phải tránh khi nói về tối ưu query",
+        "bullets": [
+          {
+            "icon": "🪤",
+            "text": "Đừng ĐOÁN index — đọc plan rồi mới tạo · CREATE INDEX(status) tốn 115–150ms trả không",
+            "sentence": 0
+          },
+          {
+            "icon": "💾",
+            "text": "Index thừa tốn GHI + dung lượng: customers(city) tạo ra rồi phải DROP",
+            "sentence": 1
+          },
+          {
+            "icon": "📏",
+            "text": "Đo lại phải nhìn Buffers + số dòng — ms client dao động, số bất biến mới tin được",
+            "sentence": 2
+          },
+          {
+            "icon": "⚠️",
+            "text": "Outlier thật: client 6ms mà Postgres báo 0,2ms = Prisma replan, KHÔNG phải DB",
+            "sentence": 2
+          },
+          {
+            "icon": "🔗",
+            "text": "Câu #37: lọc 80% bảng thì PG bỏ index — ở đây 33% cũng y hệt",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep92/scene-07-0-bc6edffb.wav",
+          "startFrame": 0,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep92/scene-07-1-8837ce7a.wav",
+          "startFrame": 167,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep92/scene-07-2-cdda2bac.wav",
+          "startFrame": 334,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep92/scene-07-3-72f6cb34.wav",
+          "startFrame": 515,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 697
+    },
+    {
+      "id": "scene-08",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 48/48 hoàn tất — trọn bộ 48 câu phỏng vấn",
+        "summary": [
+          {
+            "text": "3 bước: log → EXPLAIN câu THẬT → index khớp lọc + sắp xếp",
+            "sentence": 0
+          },
+          {
+            "text": "16ms → 0,7ms (21–26x) · 166.098 → 93 dòng · buffers 3876 → 373",
+            "sentence": 0
+          },
+          {
+            "text": "BEAT: index sai cột thì planner KHÔNG THÈM DÙNG — plan không đổi một chữ",
+            "sentence": 0
+          },
+          {
+            "text": "Trọn lô 4: 6 câu SQL/PostgreSQL + 6 câu Prisma = đủ bộ database",
+            "sentence": 1
+          }
+        ],
+        "next": "48/48 hoàn tất — luyện lại từ câu #1 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep92/scene-08-0-607dcfa0.wav",
+          "startFrame": 0,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep92/scene-08-1-8208e0a6.wav",
+          "startFrame": 184,
+          "durationInFrames": 226
+        }
+      ],
+      "durationInFrames": 428
+    }
+  ]
+}

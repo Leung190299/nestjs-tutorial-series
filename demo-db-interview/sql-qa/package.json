@@ -1,0 +1,10 @@
+{
+  "name": "sql-qa",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Demo SQL/Postgres cho lô 4 phỏng vấn Database (D1–D6) — chạy thật, in output có nhãn",
+  "dependencies": {
+    "pg": "^8.13.1"
+  }
+}

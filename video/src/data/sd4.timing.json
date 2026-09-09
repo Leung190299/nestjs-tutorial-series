@@ -1,0 +1,114 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "1 câu SELECT chạy 2 lần trong 1 transaction: 2 kết quả?",
+        "framework": "postgres"
+      },
+      "sentences": [
+        {
+          "file": "audio/sd4/s1-0-1da87362.wav",
+          "startFrame": 0,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/sd4/s1-1-25d3941f.wav",
+          "startFrame": 131,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 313
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "d4.sql",
+        "language": "sql",
+        "code": "-- [phiên A] mặc định = READ COMMITTED\nBEGIN;\nSELECT total FROM orders WHERE id = 1;\n-- [phiên B] UPDATE +1000; COMMIT;\nSELECT total FROM orders WHERE id = 1;\nCOMMIT;   -- 2 lần đọc KHÁC nhau\n\n-- [phiên A] chỉ đổi đúng câu BEGIN:\nBEGIN ISOLATION LEVEL REPEATABLE READ;\nSELECT total FROM orders WHERE id = 1;\n-- [phiên B] UPDATE +1000; COMMIT;\nSELECT total FROM orders WHERE id = 1;\nCOMMIT;   -- 2 lần đọc GIỐNG nhau\n-- snapshot chốt từ câu lệnh ĐẦU TIÊN",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 14,
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sd4/s2-0-c8295dd8.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/sd4/s2-1-05d29f03.wav",
+          "startFrame": 200,
+          "durationInFrames": 243
+        }
+      ],
+      "durationInFrames": 461
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/dbqa/d4-isolation.png",
+        "caption": "đọc lại vẫn thấy giá trị đã bị đổi"
+      },
+      "sentences": [
+        {
+          "file": "audio/sd4/s3-0-dbaa4c64.wav",
+          "startFrame": 0,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/sd4/s3-1-2e4947b9.wav",
+          "startFrame": 210,
+          "durationInFrames": 303
+        }
+      ],
+      "durationInFrames": 531
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "🔓",
+            "text": "READ COMMITTED (mặc định): ảnh chụp MỖI CÂU LỆNH",
+            "sentence": 0
+          },
+          {
+            "icon": "📸",
+            "text": "REPEATABLE READ: 1 ảnh chốt từ câu đầu transaction",
+            "sentence": 0
+          }
+        ],
+        "trap": "Không miễn phí: 40001 could not serialize — phải RETRY"
+      },
+      "sentences": [
+        {
+          "file": "audio/sd4/s4-0-51a5ccab.wav",
+          "startFrame": 0,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/sd4/s4-1-4f890279.wav",
+          "startFrame": 268,
+          "durationInFrames": 166
+        }
+      ],
+      "durationInFrames": 452
+    }
+  ]
+}

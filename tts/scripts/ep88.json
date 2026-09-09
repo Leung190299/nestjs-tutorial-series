@@ -1,0 +1,234 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn, câu bốn mươi bốn: API trả về JSON nặng gấp bốn lần cần thiết — bạn cắt ở đâu?",
+      "Họ muốn biết bạn có nắm ORM mặc định lấy về những gì, và cái giá của sự hào phóng đó nằm ở đâu.",
+      "Đo thật trên Prisma sáu chấm mười chín, bảng orders năm trăm nghìn dòng, lấy một nghìn đơn đầu."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #44: select đúng cột — payload 98KB xuống 26KB",
+      "subtitle": "Phỏng vấn Frontend — Database · Câu 44/48",
+      "badge": "Prisma 6.19.3 · select & payload"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Docs Prisma v6 nói thẳng: kết quả trả về gồm TẤT CẢ trường vô hướng, và không quan hệ nào. Không khai gì thì nhận hết.",
+      "Cái giá trả ở ba tầng: database gửi, mạng chở về, rồi Node dựng object và JSON chấm stringify.",
+      "Thuốc là select: khai đúng thứ mình cần, payload nhỏ đi, kiểu TypeScript cũng thu hẹp theo. Muốn giữ mặc định mà chỉ giấu vài cột nhạy cảm thì dùng omit."
+    ],
+    "visual": {
+      "title": "Mặc định của ORM là hào phóng — và không miễn phí",
+      "bullets": [
+        {
+          "icon": "📖",
+          "text": "docs v6: kết quả gồm \"All scalar fields\" · \"No relations\"",
+          "sentence": 0
+        },
+        {
+          "icon": "💸",
+          "text": "Payload trả tiền 3 tầng: DB gửi → mạng chở → RAM Node + JSON",
+          "sentence": 1
+        },
+        {
+          "icon": "✂️",
+          "text": "select = \"return a subset of fields instead of all fields\"",
+          "sentence": 2
+        },
+        {
+          "icon": "🧠",
+          "text": "Kiểu TypeScript thu hẹp theo đúng những cột đã chọn",
+          "sentence": 2
+        },
+        {
+          "icon": "🙈",
+          "text": "omit = mặt kia của select: giữ mặc định, bỏ cột nhạy cảm",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Hai nhánh khác nhau đúng một tham số: nhánh A findMany take một nghìn, không khai select; nhánh B thêm select id và total.",
+      "Đo cho sạch: mỗi nhánh ba lượt lấy trung bình, sau khi bỏ một lượt làm nóng, performance chấm now bọc quanh lời gọi.",
+      "Hai con số chốt đều được ĐẾM: số cột từ Object chấm keys trên object đã về tới Node, payload từ Buffer chấm byteLength của JSON chấm stringify."
+    ],
+    "visual": {
+      "filename": "p2.mjs",
+      "language": "javascript",
+      "code": "// --- hai nhánh -------------------------------------------------------------\nconst allColumns = () => p.order.findMany({ take: TAKE, orderBy: { id: 'asc' } });\nconst twoColumns = () =>\n  p.order.findMany({ take: TAKE, orderBy: { id: 'asc' }, select: { id: true, total: true } });\n\n/** Chạy `fn` RUNS lượt, trả ms TRUNG BÌNH + mảng rows của lượt cuối. */\nasync function measure(fn) {\n  let total = 0;\n  let rows;\n  for (let i = 0; i < RUNS; i++) {\n    const t0 = performance.now();\n    rows = await fn();\n    total += performance.now() - t0;\n  }\n  return { ms: total / RUNS, rows };\n}\n\n/** Số CỘT thật trên object đã về tới Node — đếm, không đọc schema. */\nconst colsOf = (rows) => Object.keys(rows[0]);\n/** Payload đúng thứ một JSON API đẩy ra dây. */\nconst kbOf = (rows) => Buffer.byteLength(JSON.stringify(rows)) / 1024;",
+      "steps": [
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 16,
+          "sentence": 1
+        },
+        {
+          "from": 18,
+          "to": 21,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Nhánh A, findMany mặc định: SỐ CỘT THẬT là năm — id, customerId, total, status, createdAt. Chín mươi bảy phẩy chín ki-lô-bai.",
+      "Nhánh B, thêm select id và total: đúng hai cột, hai mươi sáu phẩy một ki-lô-bai.",
+      "Giảm bảy mươi ba phần trăm, y hệt cả ba lần chạy — payload là hàm thuần của dữ liệu nên stringify luôn ra đúng bấy nhiêu byte.",
+      "Còn mili giây? Bốn phẩy hai chín so với ba phẩy tám ba. Nhớ con số đó, lát nữa ta nói thẳng về nó."
+    ],
+    "visual": {
+      "title": "node p2.mjs — đếm CỘT + đo KB payload",
+      "commands": [
+        {
+          "cmd": "node p2.mjs",
+          "output": "== P2: payload lấy cả bảng vs select đúng cột ==\n1000 đơn đầu (orderBy id asc) · Prisma 6.19.3\n=> ms = TRUNG BÌNH 3 lượt (bỏ 1 lượt làm nóng)\n\n[A] findMany({take:1000}) — mặc định MỌI cột\n  SỐ CỘT THẬT: 5 · 97.9 KB · 4.29 ms\n  cột: id, customerId, total, status, createdAt\n\n[B] thêm select: { id: true, total: true }\n  SỐ CỘT THẬT: 2 (id, total) · 26.1 KB · 3.83 ms",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Trước khi so, phải chắc hai nhánh cùng dữ liệu: checksum tính TRONG JavaScript, không nhờ hàm sum của SQL.",
+      "Một nghìn dòng cả hai bên, tổng total khớp từng chữ số. Cùng dữ liệu, chỉ khác lượng cột.",
+      "Bảng so sánh: số cột giảm sáu mươi phần trăm, nhưng payload giảm bảy mươi ba phẩy bốn.",
+      "Vì sao không phải sáu mươi như tỉ lệ cột? createdAt là chuỗi ISO nặng khoảng bốn mươi bai — một mình nó bằng cả object nhánh B."
+    ],
+    "visual": {
+      "title": "checksum JS + bảng so sánh",
+      "commands": [
+        {
+          "cmd": "node p2.mjs",
+          "output": "== cùng dữ liệu? checksum trong JS ==\n           |    cả bảng |   select 2\ndòng       |       1000 |       1000\ntổng total | 2513527232 | 2513527232\n=> KHỚP TỪNG SỐ: cùng dữ liệu, khác lượng cột\n\n== bảng so sánh ==\n           |    cả bảng |   select 2 |   giảm\nsố cột     |          5 |          2 | -60.0%\npayload KB |       97.9 |       26.1 | -73.4%\nms (tb 3)  |       4.29 |       3.83 | -10.9%",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "concept",
+    "narration": [
+      "Giờ tới phần ít kênh nào chịu nói. Tôi chạy EXPLAIN trên chính hai câu SQL Prisma vừa gửi, và hai kế hoạch giống hệt nhau.",
+      "Cùng node Index Scan using orders pkey, cùng cost, cùng mười bốn trang buffer chạm vào. Chỉ đúng một thứ đổi: width, hai mươi lăm xuống tám.",
+      "Postgres là row-store, một trang chứa cả dòng nên nó vẫn đọc bấy nhiêu trang. select KHÔNG làm query nhanh hơn — nó cắt byte chở về, cắt RAM Node, cắt JSON."
+    ],
+    "visual": {
+      "title": "BEAT VÀNG: select không đổi PLAN",
+      "bullets": [
+        {
+          "icon": "🔬",
+          "text": "EXPLAIN 2 nhánh: CÙNG Index Scan using orders_pkey",
+          "sentence": 0
+        },
+        {
+          "icon": "🟰",
+          "text": "CÙNG cost 0.42..33.63 · CÙNG Buffers: shared hit=14",
+          "sentence": 1
+        },
+        {
+          "icon": "📏",
+          "text": "Khác đúng 1 thứ: width 25 → 8",
+          "sentence": 1
+        },
+        {
+          "icon": "🧱",
+          "text": "Postgres row-store: 1 trang chứa cả dòng → đọc y nguyên",
+          "sentence": 2
+        },
+        {
+          "icon": "✂️",
+          "text": "select cắt BYTE chở về + RAM Node + JSON, KHÔNG cắt trang đọc",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "concept",
+    "narration": [
+      "Trả lời ba câu. Một: mặc định trả mọi trường vô hướng, kể cả cột bạn không dùng. Hai: select lấy đúng cột cần, payload nhỏ và kiểu TypeScript thu hẹp theo.",
+      "Ba: chỉ muốn bỏ password hash thì dùng omit — tôi đã kiểm, omit cũng cắt cột ngay trong câu SQL chứ không xóa field ở JavaScript.",
+      "Bẫy: đừng hứa select làm database nhanh hơn, trừ khi cột TEXT, JSONB lớn hoặc index phủ đủ cột. Nó cũng ẩn rủi ro thiếu field khi refactor."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn + bẫy",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Mặc định = mọi scalar field, kể cả cột bạn không hiển thị",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "select = đúng cột cần → payload nhỏ + kiểu TS thu hẹp theo",
+          "sentence": 0
+        },
+        {
+          "icon": "3️⃣",
+          "text": "omit giấu passwordHash mà không liệt kê tay — cũng cắt ở tầng SQL",
+          "sentence": 1
+        },
+        {
+          "icon": "⚠️",
+          "text": "Đừng hứa select làm DB nhanh — trừ cột TEXT/JSONB lớn hoặc covering index",
+          "sentence": 2
+        },
+        {
+          "icon": "🕳️",
+          "text": "select + include CÙNG CẤP → lỗi · select ẩn rủi ro thiếu field khi refactor",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "outro",
+    "narration": [
+      "Xong câu bốn mươi bốn. Chín bảy phẩy chín ki-lô-bai xuống hai sáu phẩy một, bất biến ba trên ba lần — nhưng plan không đổi một chữ.",
+      "Câu tiếp: tạo customer rồi tạo order, bước hai lỗi giữa chừng, dữ liệu còn nửa vời. Transaction sửa được gì? Hẹn ở câu bốn mươi lăm!"
+    ],
+    "visual": {
+      "title": "Câu 44/48 hoàn tất — cắt cột, không cắt sự thật",
+      "summary": [
+        {
+          "text": "5 cột 97.9 KB → 2 cột 26.1 KB (-73.4%), bất biến 3/3 lần chạy",
+          "sentence": 0
+        },
+        {
+          "text": "-73% chứ không -60%: createdAt ISO string ~40 byte mỗi dòng",
+          "sentence": 0
+        },
+        {
+          "text": "EXPLAIN y hệt nhau, chỉ width 25 → 8 — select KHÔNG đổi PLAN",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: bước 2 lỗi giữa chừng — $transaction cứu gì?",
+          "sentence": 1
+        }
+      ],
+      "next": "Câu 45/48: $transaction — nửa vời hay được ăn cả ngã về không? 🎤"
+    }
+  }
+]

@@ -5,7 +5,7 @@ import type {SceneProps} from '../data/types';
 
 export type VTitleVisual = {
   question: string;
-  framework: 'react' | 'vue' | 'rn' | 'flutter' | 'node' | 'nestjs';
+  framework: 'react' | 'vue' | 'rn' | 'flutter' | 'node' | 'nestjs' | 'postgres' | 'prisma';
 };
 
 const FW = {
@@ -15,6 +15,8 @@ const FW = {
   flutter: {label: 'Flutter', emoji: '🐦', color: '#027DFD', text: '#ffffff'},
   node: {label: 'Node.js', emoji: '🟢', color: '#339933', text: '#ffffff'},
   nestjs: {label: 'NestJS', emoji: '🐈', color: '#E0234E', text: '#ffffff'},
+  postgres: {label: 'PostgreSQL', emoji: '🐘', color: '#336791', text: '#ffffff'},
+  prisma: {label: 'Prisma', emoji: '▲', color: '#2D3748', text: '#ffffff'},
 };
 
 export const VTitleScene: React.FC<SceneProps> = ({visual}) => {

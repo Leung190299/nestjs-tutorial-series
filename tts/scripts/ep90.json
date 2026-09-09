@@ -1,0 +1,240 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn, câu bốn mươi sáu: thêm một cột bắt buộc vào bảng đang có một nghìn dòng — bạn migrate thế nào?",
+      "Bảng rỗng thì thêm cột NOT NULL nào cũng qua. Vì thế bug này chỉ nổ trên production.",
+      "Đo thật trên Prisma sáu chấm mười chín, bảng notes một nghìn dòng."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #46: Migration an toàn — thêm cột NOT NULL vào bảng có data",
+      "subtitle": "Phỏng vấn Frontend — Database · Câu 46/48",
+      "badge": "Prisma 6.19.3 · migrate dev & luật 3 bước"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Nhớ một câu: migrate dev sinh SQL từ DIFF giữa schema cũ và schema mới. Nó không đoán dữ liệu.",
+      "Mà thêm cột NOT NULL không default vào bảng có data là BẤT KHẢ THI: một nghìn dòng cũ lấy giá trị đâu ra?",
+      "Nên luật là ba bước, mẫu expand migrate contract: nullable, backfill, rồi siết NOT NULL.",
+      "Docs v6, cho db push: không thể thêm trường bắt buộc vào bảng đã có nội dung."
+    ],
+    "visual": {
+      "title": "migrate dev sinh SQL từ DIFF schema",
+      "bullets": [
+        {
+          "icon": "📐",
+          "text": "migrate dev = dịch DIFF (schema cũ ↔ schema mới) thành SQL",
+          "sentence": 0
+        },
+        {
+          "icon": "🚫",
+          "text": "ADD COLUMN NOT NULL không default + bảng CÓ DATA = BẤT KHẢ THI",
+          "sentence": 1
+        },
+        {
+          "icon": "🧩",
+          "text": "Luật 3 bước: nullable → backfill → siết NOT NULL",
+          "sentence": 2
+        },
+        {
+          "icon": "📖",
+          "text": "docs v6: \"cannot add a required field to a table with existing content\"",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "Câu docs đó viết cho db push — wording của migrate dev KHÁC HẲN",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Bước một Prisma tự sinh: ADD COLUMN channel TEXT — nullable, nên dòng cũ nhận NULL.",
+      "Bước hai là file VIẾT TAY: create-only sinh một migration RỖNG, mình gõ câu UPDATE vào.",
+      "Bước ba Prisma lại tự sinh. Chú ý block Warnings trong file: sẽ fail nếu còn NULL. Nhưng file VẪN được sinh."
+    ],
+    "visual": {
+      "filename": "prisma/migrations/*/migration.sql",
+      "language": "sql",
+      "code": "-- 20260909171617_add_channel_nullable\n-- AlterTable\nALTER TABLE \"notes\" ADD COLUMN     \"channel\" TEXT;\n\n-- 20260909171618_backfill_channel  <- VIẾT TAY\n-- Sinh RỖNG bởi `migrate dev --create-only`.\n-- Backfill phải nằm TRONG lịch sử migration để\n-- `migrate deploy` chạy đúng thứ tự trên prod.\nUPDATE \"notes\" SET \"channel\" = 'web';\n\n-- 20260909171619_channel_required\n/*\n  Warnings:\n\n  - Made the column `channel` on table `notes`\n    required. This step will fail if there are\n    existing NULL values in that column.\n\n*/\n-- AlterTable\nALTER TABLE \"notes\" ALTER COLUMN \"channel\" SET NOT NULL;",
+      "steps": [
+        {
+          "from": 1,
+          "to": 3,
+          "sentence": 0
+        },
+        {
+          "from": 5,
+          "to": 9,
+          "sentence": 1
+        },
+        {
+          "from": 11,
+          "to": 21,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Còn nếu làm một phát? Chạy migrate dev.",
+      "Nguyên văn: We found changes that cannot be executed. Step 0 thêm cột bắt buộc channel, không default.",
+      "Câu chốt: There are 1000 rows in this table, it is not possible to execute this step.",
+      "Exit code một. Không file migration nào được sinh, cột chưa tồn tại, và KHÔNG có prompt hỏi reset.",
+      "Prisma chặn TRƯỚC khi chạy câu SQL nào — nó còn từ chối SINH RA file migration."
+    ],
+    "visual": {
+      "title": "PHA 1 (SAI): channel String NOT NULL",
+      "commands": [
+        {
+          "cmd": "npx prisma migrate dev --name add_channel",
+          "output": "Error:\n⚠️ We found changes that cannot be executed:\n  • Step 0 Added the required column `channel`\n    to the `notes` table without a default\n    value. There are 1000 rows in this table, it\n    is not possible to execute this step.\nYou can use prisma migrate dev --create-only to\n  create the migration file, and manually modify\n  it to address the underlying issue(s).\nexit=1 · KHÔNG sinh migration · cột chưa có\n=> chặn TRƯỚC khi chạy SQL, không hỏi reset",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Cách đúng: ba bước. Bước một, schema để channel nullable, Prisma sinh ADD COLUMN channel TEXT.",
+      "Bước hai, create-only sinh migration RỖNG, mình viết tay câu UPDATE vào — bảng chục triệu dòng phải backfill theo lô.",
+      "Bước ba, schema trả channel về bắt buộc, Prisma sinh ALTER COLUMN channel SET NOT NULL.",
+      "Đọc từ information_schema: is_nullable bằng NO, một nghìn trên một nghìn dòng là web, không NULL."
+    ],
+    "visual": {
+      "title": "PHA 2 (ĐÚNG) 3 bước + kết quả cuối",
+      "commands": [
+        {
+          "cmd": "node p4.mjs",
+          "output": "1 schema channel String?  -> migrate dev OK\n  20260909171617_add_channel_nullable\n  ADD COLUMN channel TEXT;\n2 --create-only + VIẾT TAY UPDATE -> dev OK\n  20260909171618_backfill_channel\n  UPDATE notes SET channel = 'web';\n3 schema channel String   -> migrate dev OK\n  20260909171619_channel_required\n  ALTER COLUMN channel SET NOT NULL;\n\n== kết quả cuối ==\nchannel text is_nullable=NO · 1000/1000 'web'",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "concept",
+    "narration": [
+      "Trả lời ba câu. Một: bảng có data thì migration KHÔNG chạy — dòng cũ không có gì để điền.",
+      "Hai: ba bước — nullable, backfill bằng MỘT MIGRATION, rồi migration thứ ba siết NOT NULL.",
+      "Ba: cần sửa tay migration thì dùng create-only — Prisma sinh file mà chưa áp dụng.",
+      "Chi tiết ăn điểm: bước ba cũng có rủi ro NULL, nhưng Prisma chỉ ghi WARNING vào TRONG file — vẫn sinh file.",
+      "Còn pha một là ERROR, từ chối sinh file. Bước ba Prisma BIẾT viết SQL gì; pha một thì không."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn + beat vàng",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Bảng CÓ DATA + cột bắt buộc → migration KHÔNG chạy được",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "3 bước: nullable → backfill (là 1 MIGRATION) → SET NOT NULL",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "--create-only: sinh file mà CHƯA áp dụng, để viết SQL tay",
+          "sentence": 2
+        },
+        {
+          "icon": "🟡",
+          "text": "Bước 3 = WARNING nằm TRONG file → vẫn sinh file, vẫn chạy",
+          "sentence": 3
+        },
+        {
+          "icon": "🔴",
+          "text": "Pha 1 = ERROR, từ chối SINH file → không có SQL nào để viết",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "concept",
+    "narration": [
+      "Bẫy lớn nhất: backfill PHẢI nằm trong migration. Production dùng migrate deploy, chỉ chạy file trong migrations.",
+      "Script tay không có ở đó, deploy nhảy từ bước một sang bước ba, siết NOT NULL trên cột toàn NULL, và chết.",
+      "Bẫy hai: production KHÔNG dùng migrate dev — nó cần shadow database, dễ đòi reset. Db push chỉ để prototyping.",
+      "Bẫy ba: thêm đại default web cho qua = ép mặc định vĩnh viễn vào schema.",
+      "Và demo chạy DB riêng: bảng tạo bằng SQL thuần bị coi là drift, đòi reset."
+    ],
+    "visual": {
+      "title": "Bẫy phải tránh khi migrate",
+      "bullets": [
+        {
+          "icon": "🧨",
+          "text": "Backfill bằng script tay → deploy nhảy bước 1 → 3 → CHẾT",
+          "sentence": 1
+        },
+        {
+          "icon": "🚀",
+          "text": "Production = migrate deploy · KHÔNG BAO GIỜ migrate dev",
+          "sentence": 2
+        },
+        {
+          "icon": "🧪",
+          "text": "db push: không file migration, không _prisma_migrations → prototyping",
+          "sentence": 2
+        },
+        {
+          "icon": "🎯",
+          "text": "@default(\"web\") cho qua = ép mặc định VĨNH VIỄN vào schema",
+          "sentence": 3
+        },
+        {
+          "icon": "🛡️",
+          "text": "Bảng tạo bằng SQL thuần = drift → demo chạy DB riêng dbqa_mig",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "outro",
+    "narration": [
+      "Xong câu bốn mươi sáu. Một phát thì Prisma từ chối sinh file; ba bước thì một nghìn trên một nghìn dòng có giá trị.",
+      "Câu tiếp: bắn hai mươi query song song mà pool chỉ có hai kết nối thì sao? Hẹn ở câu bốn mươi bảy!"
+    ],
+    "visual": {
+      "title": "Câu 46/48 hoàn tất — nullable, backfill, NOT NULL",
+      "summary": [
+        {
+          "text": "Pha 1: ERROR \"There are 1000 rows in this table\" — KHÔNG sinh file",
+          "sentence": 0
+        },
+        {
+          "text": "Pha 2: nullable → backfill (migration) → SET NOT NULL · 1000/1000 'web'",
+          "sentence": 0
+        },
+        {
+          "text": "Bước 3 chỉ WARNING trong file · production luôn là migrate deploy",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: pool 2 kết nối mà bắn 20 query song song thì sao?",
+          "sentence": 1
+        }
+      ],
+      "next": "Câu 47/48: connection pool cạn — query xếp hàng 🎤"
+    }
+  }
+]

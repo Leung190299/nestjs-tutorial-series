@@ -1,0 +1,330 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #39: N+1 query — 51 câu hay 1 câu JOIN?",
+        "subtitle": "Phỏng vấn Frontend — Database · Câu 39/48",
+        "badge": "Database & SQL · PostgreSQL 17"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep83/scene-01-0-98635194.wav",
+          "startFrame": 0,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep83/scene-01-1-b59e107f.wav",
+          "startFrame": 136,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep83/scene-01-2-7051a8a1.wav",
+          "startFrame": 293,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 443
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "N+1: 1 câu danh sách + N câu chi tiết",
+        "bullets": [
+          {
+            "icon": "🔁",
+            "text": "1 query lấy danh sách + N query chi tiết = 51 câu",
+            "sentence": 0
+          },
+          {
+            "icon": "⚡",
+            "text": "Mỗi câu nhỏ RẤT nhanh — nhưng cộng 51 lượt đi–về",
+            "sentence": 1
+          },
+          {
+            "icon": "📈",
+            "text": "Tăng TUYẾN TÍNH: 5.000 khách → 5.001 query",
+            "sentence": 2
+          },
+          {
+            "icon": "🧩",
+            "text": "JOIN đẩy việc ghép cho DB — nơi nó giỏi, 1 lượt về",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep83/scene-02-0-4240392d.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep83/scene-02-1-4ad46cb6.wav",
+          "startFrame": 181,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep83/scene-02-2-bb0e78e9.wav",
+          "startFrame": 348,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep83/scene-02-3-52500ff2.wav",
+          "startFrame": 544,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 706
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "sql-qa/d3.mjs — câu SQL trong script",
+        "language": "sql",
+        "code": "-- orders 500.000 dòng · customers 5.000 dòng\n-- cần: 50 khách đầu KÈM đơn hàng của họ\n\n-- [A] N+1: 1 câu lấy danh sách...\nSELECT id, name, city FROM customers\nORDER BY id LIMIT 50;\n\n-- ...rồi 50 câu chi tiết trong vòng for\nSELECT id, customer_id, total, status, created_at\nFROM orders WHERE customer_id = $1;   -- x50\n\n-- [B] JOIN: đúng 1 câu, DB tự ghép\nSELECT c.id AS cust_id, c.name, c.city,\n       o.id, o.customer_id, o.total,\n       o.status, o.created_at\nFROM (SELECT id, name, city FROM customers\n      ORDER BY id LIMIT 50) c\nJOIN orders o ON o.customer_id = c.id;\n\n-- index idx_orders_customer phục vụ CẢ HAI\n-- nhánh — so N+1 vs JOIN, chứ không phải\n-- so index vs không-index",
+        "steps": [
+          {
+            "from": 4,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 12,
+            "to": 18,
+            "sentence": 1
+          },
+          {
+            "from": 20,
+            "to": 22,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep83/scene-03-0-b4ba1552.wav",
+          "startFrame": 0,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep83/scene-03-1-e097efd3.wav",
+          "startFrame": 191,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep83/scene-03-2-a7a79766.wav",
+          "startFrame": 346,
+          "durationInFrames": 168
+        }
+      ],
+      "durationInFrames": 532
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node d3.mjs — 51 query vs 1 query",
+        "commands": [
+          {
+            "cmd": "node d3.mjs",
+            "output": "== D3: 51 query vs 1 query ==\n50 khách đầu (ORDER BY id LIMIT 50) + đơn của họ\n=> 4881 dòng đơn · index: idx_orders_customer\n\n[A] N+1: 1 query danh sách + 50 query chi tiết\n  #1 SELECT ... FROM customers LIMIT 50: 0.52 ms\n  #2..#51 SELECT ... WHERE customer_id=$1\n     mỗi query nhỏ tb 0.51 ms (0.40-1.51)\n  SỐ QUERY THẬT: 51 · TỔNG 25.82 ms\n\n[B] JOIN: 1 query duy nhất, DB tự ghép\n  SỐ QUERY THẬT: 1 · TỔNG 16.38 ms",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep83/scene-04-0-1ce05a41.wav",
+          "startFrame": 0,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep83/scene-04-1-fe9adff7.wav",
+          "startFrame": 162,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep83/scene-04-2-55698556.wav",
+          "startFrame": 401,
+          "durationInFrames": 89
+        }
+      ],
+      "durationInFrames": 508
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "node d3.mjs — checksum: cùng dữ liệu không?",
+        "commands": [
+          {
+            "cmd": "node d3.mjs",
+            "output": "== cùng dữ liệu? checksum tính trong JS ==\n             |     N+1 (A) |    JOIN (B)\ndòng đơn     |        4881 |        4881\ntổng total   | 12244954433 | 12244954433\nkhách có đơn |          50 |          50\n=> KHỚP TỪNG SỐ: hai cách viết, một tập dữ liệu",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep83/scene-05-0-3d65af15.wav",
+          "startFrame": 0,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep83/scene-05-1-5c48635b.wav",
+          "startFrame": 222,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 478
+    },
+    {
+      "id": "scene-06",
+      "type": "terminal",
+      "visual": {
+        "title": "node d3.mjs — bảng so sánh + sự thật localhost",
+        "commands": [
+          {
+            "cmd": "node d3.mjs",
+            "output": "== bảng so sánh ==\n             |     N+1 (A) |    JOIN (B)\nsố query     |          51 |           1\ntổng ms      |       25.82 |       16.38\n=> JOIN nhanh hơn 1.6x với 1/51 số query\n=> mỗi query nhỏ chỉ 0.51 ms, nhưng 51 lượt\n   đi-về cộng dồn mới là thứ giết hiệu năng\n=> đo trên localhost, round-trip gần như miễn phí:\n   đã chênh 1.6 lần — qua mạng thật còn tệ hơn\n=> JOIN để DB làm việc nó giỏi: ghép ngay tại chỗ,\n   trả về đúng một lần",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep83/scene-06-0-55bccbf4.wav",
+          "startFrame": 0,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep83/scene-06-1-e0f98408.wav",
+          "startFrame": 157,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep83/scene-06-2-bf6a77d6.wav",
+          "startFrame": 331,
+          "durationInFrames": 212
+        }
+      ],
+      "durationInFrames": 561
+    },
+    {
+      "id": "scene-07",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "51 lượt đi–về + 51 lần parse/plan/execute vs 1 lượt",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Chi phí tăng theo N · đo 1 câu lẻ là tự lừa mình",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Phát hiện: ĐẾM số query · hoặc loops=N trong EXPLAIN",
+            "sentence": 2
+          },
+          {
+            "icon": "🏆",
+            "text": "Ép index: Nested Loop + Bitmap Index Scan loops=50 → 1.79 ms",
+            "sentence": 3
+          },
+          {
+            "icon": "📍",
+            "text": "Cũng tra index 50 lần — nhưng BÊN TRONG DB, không qua mạng",
+            "sentence": 4
+          },
+          {
+            "icon": "🔗",
+            "text": "Cùng bệnh ở tầng ORM: câu #43 — Prisma, nhưng vô hình",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep83/scene-07-0-c8f78bdb.wav",
+          "startFrame": 0,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep83/scene-07-1-e18cc8b0.wav",
+          "startFrame": 215,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep83/scene-07-2-cc050959.wav",
+          "startFrame": 403,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep83/scene-07-3-d394836b.wav",
+          "startFrame": 611,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep83/scene-07-4-734f327e.wav",
+          "startFrame": 871,
+          "durationInFrames": 240
+        }
+      ],
+      "durationInFrames": 1129
+    },
+    {
+      "id": "scene-08",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 39/48 hoàn tất — hẹn gặp câu 40!",
+        "summary": [
+          {
+            "text": "51 query 25.82 ms vs 1 query JOIN 16.38 ms — checksum khớp từng số",
+            "sentence": 0
+          },
+          {
+            "text": "Mỗi câu nhỏ 0.51 ms — nhưng 51 lượt đi–về mới là con số phải nhìn",
+            "sentence": 0
+          },
+          {
+            "text": "loops=50 trong plan: Postgres cũng tra 50 lần, nhưng BÊN TRONG DB",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: isolation level — READ COMMITTED vs REPEATABLE READ",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 40/48: Hai giao dịch, một dòng — ai thắng? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep83/scene-08-0-934cfcdd.wav",
+          "startFrame": 0,
+          "durationInFrames": 123
+        },
+        {
+          "file": "audio/ep83/scene-08-1-8434684a.wav",
+          "startFrame": 131,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep83/scene-08-2-afd01669.wav",
+          "startFrame": 370,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 504
+    }
+  ]
+}

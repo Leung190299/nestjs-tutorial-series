@@ -1,0 +1,215 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại phòng phỏng vấn — câu ba mươi chín, câu ai làm màn hình danh sách cũng gặp.",
+      "Lấy năm mươi khách và đơn của họ — bạn viết năm mươi mốt câu query hay một câu JOIN? Khác nhau ở đâu?",
+      "Đo thật trên Postgres năm trăm nghìn dòng, và một beat làm bạn nhìn N cộng một khác đi."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #39: N+1 query — 51 câu hay 1 câu JOIN?",
+      "subtitle": "Phỏng vấn Frontend — Database · Câu 39/48",
+      "badge": "Database & SQL · PostgreSQL 17"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "N cộng một là hình dạng này: một câu lấy danh sách cha, rồi N câu lấy chi tiết — năm mươi khách thành năm mươi mốt câu.",
+      "Bẫy lớn nhất: mỗi câu nhỏ RẤT nhanh. Nhưng nhanh một lượt không cứu nổi năm mươi mốt lượt đi về cộng dồn.",
+      "Chi phí tăng tuyến tính: năm nghìn khách là năm nghìn lẻ một query — nó chết khi data lớn, không chết trên máy dev.",
+      "JOIN thì đẩy việc ghép xuống database, đúng chỗ nó giỏi: ghép tại chỗ, trả về đúng một lần."
+    ],
+    "visual": {
+      "title": "N+1: 1 câu danh sách + N câu chi tiết",
+      "bullets": [
+        {
+          "icon": "🔁",
+          "text": "1 query lấy danh sách + N query chi tiết = 51 câu",
+          "sentence": 0
+        },
+        {
+          "icon": "⚡",
+          "text": "Mỗi câu nhỏ RẤT nhanh — nhưng cộng 51 lượt đi–về",
+          "sentence": 1
+        },
+        {
+          "icon": "📈",
+          "text": "Tăng TUYẾN TÍNH: 5.000 khách → 5.001 query",
+          "sentence": 2
+        },
+        {
+          "icon": "🧩",
+          "text": "JOIN đẩy việc ghép cho DB — nơi nó giỏi, 1 lượt về",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Nhánh A, N cộng một: một câu lấy năm mươi khách đầu, rồi vòng for gọi năm mươi câu SELECT theo customer_id.",
+      "Nhánh B, JOIN: đúng một câu — subquery lấy năm mươi khách rồi JOIN sang orders, database tự ghép.",
+      "Và để phép đo công bằng: index idx_orders_customer phục vụ CẢ HAI nhánh."
+    ],
+    "visual": {
+      "filename": "sql-qa/d3.mjs — câu SQL trong script",
+      "language": "sql",
+      "code": "-- orders 500.000 dòng · customers 5.000 dòng\n-- cần: 50 khách đầu KÈM đơn hàng của họ\n\n-- [A] N+1: 1 câu lấy danh sách...\nSELECT id, name, city FROM customers\nORDER BY id LIMIT 50;\n\n-- ...rồi 50 câu chi tiết trong vòng for\nSELECT id, customer_id, total, status, created_at\nFROM orders WHERE customer_id = $1;   -- x50\n\n-- [B] JOIN: đúng 1 câu, DB tự ghép\nSELECT c.id AS cust_id, c.name, c.city,\n       o.id, o.customer_id, o.total,\n       o.status, o.created_at\nFROM (SELECT id, name, city FROM customers\n      ORDER BY id LIMIT 50) c\nJOIN orders o ON o.customer_id = c.id;\n\n-- index idx_orders_customer phục vụ CẢ HAI\n-- nhánh — so N+1 vs JOIN, chứ không phải\n-- so index vs không-index",
+      "steps": [
+        {
+          "from": 4,
+          "to": 10,
+          "sentence": 0
+        },
+        {
+          "from": 12,
+          "to": 18,
+          "sentence": 1
+        },
+        {
+          "from": 20,
+          "to": 22,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Số query đếm thật, không hardcode — mọi câu lệnh gửi xuống Postgres đều qua một bộ đếm.",
+      "Nhánh A: câu danh sách không phẩy năm hai mili giây, năm mươi câu nhỏ trung bình không phẩy năm mốt — tổng năm mươi mốt query, hai lăm phẩy tám hai mili giây.",
+      "Nhánh B đúng một query: mười sáu phẩy ba tám mili giây."
+    ],
+    "visual": {
+      "title": "node d3.mjs — 51 query vs 1 query",
+      "commands": [
+        {
+          "cmd": "node d3.mjs",
+          "output": "== D3: 51 query vs 1 query ==\n50 khách đầu (ORDER BY id LIMIT 50) + đơn của họ\n=> 4881 dòng đơn · index: idx_orders_customer\n\n[A] N+1: 1 query danh sách + 50 query chi tiết\n  #1 SELECT ... FROM customers LIMIT 50: 0.52 ms\n  #2..#51 SELECT ... WHERE customer_id=$1\n     mỗi query nhỏ tb 0.51 ms (0.40-1.51)\n  SỐ QUERY THẬT: 51 · TỔNG 25.82 ms\n\n[B] JOIN: 1 query duy nhất, DB tự ghép\n  SỐ QUERY THẬT: 1 · TỔNG 16.38 ms",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Nhanh hơn thì phải chứng minh là cùng dữ liệu. Checksum này tính trong JavaScript từ thứ đã về tới Node, không nhờ SQL đếm hộ.",
+      "Bốn nghìn tám trăm tám mươi mốt dòng, tổng total mười hai tỷ hai trăm bốn mươi bốn triệu chín trăm năm mươi tư nghìn bốn trăm ba mươi ba — khớp từng chữ số ở cả hai cột."
+    ],
+    "visual": {
+      "title": "node d3.mjs — checksum: cùng dữ liệu không?",
+      "commands": [
+        {
+          "cmd": "node d3.mjs",
+          "output": "== cùng dữ liệu? checksum tính trong JS ==\n             |     N+1 (A) |    JOIN (B)\ndòng đơn     |        4881 |        4881\ntổng total   | 12244954433 | 12244954433\nkhách có đơn |          50 |          50\n=> KHỚP TỪNG SỐ: hai cách viết, một tập dữ liệu",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "terminal",
+    "narration": [
+      "Bảng chốt: năm mươi mốt query so với một, hai lăm phẩy tám hai mili giây so với mười sáu phẩy ba tám.",
+      "Mỗi query nhỏ đúng là chỉ không phẩy năm mốt mili giây, nhưng năm mươi mốt lượt cộng dồn mới là thứ giết hiệu năng.",
+      "Nói thẳng: chênh một phẩy sáu lần vì đo trên localhost, round-trip gần như miễn phí — qua mạng thật, năm mươi mốt lần nhân độ trễ còn tệ hơn nhiều."
+    ],
+    "visual": {
+      "title": "node d3.mjs — bảng so sánh + sự thật localhost",
+      "commands": [
+        {
+          "cmd": "node d3.mjs",
+          "output": "== bảng so sánh ==\n             |     N+1 (A) |    JOIN (B)\nsố query     |          51 |           1\ntổng ms      |       25.82 |       16.38\n=> JOIN nhanh hơn 1.6x với 1/51 số query\n=> mỗi query nhỏ chỉ 0.51 ms, nhưng 51 lượt\n   đi-về cộng dồn mới là thứ giết hiệu năng\n=> đo trên localhost, round-trip gần như miễn phí:\n   đã chênh 1.6 lần — qua mạng thật còn tệ hơn\n=> JOIN để DB làm việc nó giỏi: ghép ngay tại chỗ,\n   trả về đúng một lần",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "concept",
+    "narration": [
+      "Trả lời phỏng vấn. Một: vòng lặp là bệnh N cộng một — năm mươi mốt lần đi về và năm mươi mốt lần parse plan execute, còn JOIN chỉ một.",
+      "Hai: cùng một tập dữ liệu, nhưng chi phí tăng theo số dòng cha — đo bằng một câu lẻ là tự lừa mình, phải nhân với N.",
+      "Ba: phát hiện bằng cách ĐẾM số query gửi đi, hoặc nhìn loops bằng N trong EXPLAIN ANALYZE.",
+      "Beat vàng: ép planner dùng index cho chính câu JOIN đó thì ra Nested Loop với Bitmap Index Scan, loops bằng năm mươi, chỉ một phẩy bảy chín mili giây.",
+      "Postgres cũng tra index đúng năm mươi lần, nhưng BÊN TRONG database chứ không phải năm mươi lượt đi về. Cùng bệnh ở tầng ORM là câu bốn mươi ba, Prisma."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "51 lượt đi–về + 51 lần parse/plan/execute vs 1 lượt",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Chi phí tăng theo N · đo 1 câu lẻ là tự lừa mình",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Phát hiện: ĐẾM số query · hoặc loops=N trong EXPLAIN",
+          "sentence": 2
+        },
+        {
+          "icon": "🏆",
+          "text": "Ép index: Nested Loop + Bitmap Index Scan loops=50 → 1.79 ms",
+          "sentence": 3
+        },
+        {
+          "icon": "📍",
+          "text": "Cũng tra index 50 lần — nhưng BÊN TRONG DB, không qua mạng",
+          "sentence": 4
+        },
+        {
+          "icon": "🔗",
+          "text": "Cùng bệnh ở tầng ORM: câu #43 — Prisma, nhưng vô hình",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "outro",
+    "narration": [
+      "Xong câu ba mươi chín — đếm số query mới là thước đo, không phải cảm giác câu nào nhanh.",
+      "Câu tiếp: hai giao dịch đụng cùng một dòng — READ COMMITTED và REPEATABLE READ khác nhau chỗ nào?",
+      "Có bản Shorts sáu mươi giây để ôn nhanh — hẹn gặp lại ở câu bốn mươi!"
+    ],
+    "visual": {
+      "title": "Câu 39/48 hoàn tất — hẹn gặp câu 40!",
+      "summary": [
+        {
+          "text": "51 query 25.82 ms vs 1 query JOIN 16.38 ms — checksum khớp từng số",
+          "sentence": 0
+        },
+        {
+          "text": "Mỗi câu nhỏ 0.51 ms — nhưng 51 lượt đi–về mới là con số phải nhìn",
+          "sentence": 0
+        },
+        {
+          "text": "loops=50 trong plan: Postgres cũng tra 50 lần, nhưng BÊN TRONG DB",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: isolation level — READ COMMITTED vs REPEATABLE READ",
+          "sentence": 1
+        }
+      ],
+      "next": "Câu 40/48: Hai giao dịch, một dòng — ai thắng? 🎤"
+    }
+  }
+]

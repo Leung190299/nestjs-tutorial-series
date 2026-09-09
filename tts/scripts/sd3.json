@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Lấy năm mươi khách kèm đơn của họ — bạn viết năm mươi mốt câu query hay một câu JOIN?",
+      "Sáu mươi giây: đo thật trên Postgres năm trăm nghìn dòng, và một beat làm bạn nhìn N cộng một khác đi."
+    ],
+    "visual": {
+      "question": "Lấy 50 khách + đơn của họ: 51 query hay 1 JOIN?",
+      "framework": "postgres"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Nhánh A: một câu lấy năm mươi khách, rồi vòng for bắn năm mươi câu chi tiết — tổng năm mươi mốt.",
+      "Nhánh B: đúng một câu JOIN, database tự ghép rồi trả về một lượt."
+    ],
+    "visual": {
+      "filename": "d3.sql",
+      "language": "sql",
+      "code": "-- [A] N+1: 1 câu + 50 câu\nSELECT id FROM customers\nORDER BY id LIMIT 50;\n-- rồi vòng for x50:\nSELECT * FROM orders\nWHERE customer_id = $1;\n\n-- [B] JOIN: đúng 1 câu\nSELECT c.name, o.*\nFROM (SELECT id, name\n      FROM customers\n      ORDER BY id LIMIT 50) c\nJOIN orders o\n  ON o.customer_id = c.id;",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Năm mươi mốt query hai lăm phẩy tám hai mili giây, một câu JOIN mười sáu phẩy ba tám — checksum khớp từng số, cùng bốn nghìn tám trăm tám mươi mốt dòng.",
+      "Chênh chỉ một phẩy sáu lần vì đo trên localhost, round-trip gần như miễn phí — qua mạng thật còn tệ hơn."
+    ],
+    "visual": {
+      "src": "screens/dbqa/d3-nplus1.png",
+      "caption": "51 query 25ms vs 1 query 16ms"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Mỗi query nhỏ chỉ không phẩy năm mốt mili giây — nhưng phải nhân với năm mươi mốt lượt đi về.",
+      "Beat vàng: ép JOIN dùng index thì plan ra loops bằng năm mươi — Postgres cũng tra năm mươi lần, nhưng bên trong database, một phẩy bảy chín mili giây.",
+      "Bẫy: JOIN một nhiều nhân dòng cha ra — khách mười nghìn đơn thì cân nhắc hai query gộp WHERE IN."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🧮",
+          "text": "Query nhỏ 0.51 ms — nhưng phải NHÂN với 51 lượt đi–về",
+          "sentence": 0
+        },
+        {
+          "icon": "🏆",
+          "text": "Ép index: loops=50 → 1.79 ms — cũng 50 lần, BÊN TRONG DB",
+          "sentence": 1
+        }
+      ],
+      "trap": "JOIN 1-nhiều nhân dòng cha ra — 10.000 đơn thì dùng WHERE IN"
+    }
+  }
+]

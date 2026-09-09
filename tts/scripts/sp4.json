@@ -1,0 +1,74 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Thêm một cột bắt buộc vào bảng đang có một nghìn dòng. prisma migrate dev sẽ ra sao?",
+      "Đo thật trên Prisma sáu chấm mười chín: nó từ chối sinh cả file migration."
+    ],
+    "visual": {
+      "question": "Thêm cột NOT NULL vào bảng 1000 dòng?",
+      "framework": "prisma"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Ba bước, ba migration: thêm cột nullable, backfill dữ liệu cũ bằng chính một migration viết tay, rồi mới siết NOT NULL.",
+      "Làm một phát thì migrate dev báo: có một nghìn dòng trong bảng, không thể thực thi bước này."
+    ],
+    "visual": {
+      "filename": "migration.sql",
+      "language": "sql",
+      "code": "-- 1. thêm cột NULLABLE (Prisma sinh)\nALTER TABLE \"notes\"\n  ADD COLUMN \"channel\" TEXT;\n\n-- 2. backfill — VIẾT TAY, --create-only\nUPDATE \"notes\" SET \"channel\" = 'web';\n\n-- 3. siết NOT NULL (Prisma sinh)\nALTER TABLE \"notes\"\n  ALTER COLUMN \"channel\" SET NOT NULL;\n\n-- làm 1 phát? migrate dev TỪ CHỐI:\n-- \"There are 1000 rows in this table\"\n-- -> không sinh nổi file migration",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Kết quả: một nghìn trên một nghìn dòng mang giá trị web, không dòng NULL nào, cột NOT NULL.",
+      "Còn làm một phát: exit code một, không file migration nào được sinh, và Prisma không hề hỏi reset."
+    ],
+    "visual": {
+      "src": "screens/dbqa/p4-migration.png",
+      "caption": "3 bước: nullable → backfill → NOT NULL"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Bẫy: backfill phải là một migration, đừng chạy script tay — production dùng migrate deploy sẽ nhảy từ bước một sang bước ba và chết."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🧩",
+          "text": "3 bước: nullable → backfill → siết NOT NULL",
+          "sentence": 0
+        },
+        {
+          "icon": "🟡",
+          "text": "Bước 3 chỉ WARNING · pha 1 là ERROR, không sinh file",
+          "sentence": 0
+        }
+      ],
+      "trap": "Backfill PHẢI là migration · production dùng migrate deploy"
+    }
+  }
+]

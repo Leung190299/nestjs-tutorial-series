@@ -82,7 +82,7 @@ Series web ĐẦU TIÊN của kênh (vertical), sau 3 series mobile Flutter/Reac
 
 Demo: [`demo-stylex/`](demo-stylex/) (`vietsuper-web/` viết bằng StyleX + `compare-tailwind/` đối chứng Tailwind CSS v4, dùng ở Tập 6). Mỗi tập đóng băng bằng một git tag riêng — `git checkout stylex-tap-N` để xem đúng code xuất hiện trong tập tương ứng.
 
-## Series "Phỏng vấn Frontend" (lô 1: React & Vue ep45–ep56 · lô 2: hiệu năng RN & Flutter ep57–ep68 · lô 3: backend Node.js & NestJS ep69–ep80, mỗi lô kèm 12 Shorts)
+## Series "Phỏng vấn Frontend" (lô 1: React & Vue ep45–ep56 · lô 2: hiệu năng RN & Flutter ep57–ep68 · lô 3: backend Node.js & NestJS ep69–ep80 · lô 4: Database & SQL ep81–ep92, mỗi lô kèm 12 Shorts)
 
 Series đổi hẳn định dạng: mỗi tập ngang là ĐÚNG MỘT câu hỏi phỏng vấn Frontend thật (6 câu React R1–R6, 6 câu Vue V1–V6) — nghe câu hỏi, xem demo code chạy thật minh họa đúng bẫy/hành vi, rồi chốt lại cách trả lời như đang ngồi trước nhà tuyển dụng. Mỗi câu ngang có kèm 1 bản Shorts 60 giây song song (sr1–sr6 phía React, sv1–sv6 phía Vue).
 
@@ -144,6 +144,27 @@ Lô 3 nối tiếp cùng format, rẽ sang BACKEND — 12 câu hỏi mà dân Fr
 | S6 | Exception filter — chuẩn hóa lỗi toàn app | ep80 | ss6 |
 
 Demo: [`demo-be-interview/`](demo-be-interview/) (`node-qa/` 6 script đo số thật + `nest-qa/` app NestJS 6 route minh họa đúng câu hỏi ở trên). `git checkout be-qa-batch-3` để xem đúng code lô 3 (12 câu).
+
+### Lô 4 — Database & SQL (ep81–ep92 + 12 Shorts)
+
+Lô 4 nối tiếp cùng format, rẽ sang DATABASE — 12 câu hỏi mà dân Frontend đi phỏng vấn Fullstack chắc chắn gặp: 6 câu SQL/PostgreSQL (D1–D6) + 6 câu Prisma (P1–P6), mỗi câu có demo chạy số thật trên **PostgreSQL 17.11** + **Prisma 6.19.3** (index & kiểu quét, đọc EXPLAIN ANALYZE, N+1 vs JOIN, isolation level, deadlock, phân trang OFFSET vs cursor; N+1 trong ORM, select đúng cột, `$transaction`, migration an toàn, connection pool, quy trình tối ưu query chậm). Mỗi câu ngang kèm 1 bản Shorts 60 giây (sd1–sd6 phía SQL, sp1–sp6 phía Prisma).
+
+| # | Câu hỏi | Tập ngang | Short |
+|---|---------|-----------|-------|
+| D1 | Index làm gì? Seq Scan vs Bitmap Heap Scan vs Index Scan | ep81 | sd1 |
+| D2 | Đọc EXPLAIN ANALYZE — cost, actual time, rows, loops, buffers | ep82 | sd2 |
+| D3 | N+1 query — 51 câu hay 1 câu JOIN? | ep83 | sd3 |
+| D4 | Isolation level — READ COMMITTED vs REPEATABLE READ | ep84 | sd4 |
+| D5 | Deadlock — Postgres tự phát hiện và hủy một phiên (40P01) | ep85 | sd5 |
+| D6 | Phân trang OFFSET vs cursor — vì sao trang cuối chậm | ep86 | sd6 |
+| P1 | N+1 trong ORM — bật log Prisma mà ĐẾM (21 vs 2 query) | ep87 | sp1 |
+| P2 | select đúng cột — payload 97.9KB → 26.1KB, nhưng plan không đổi | ep88 | sp2 |
+| P3 | `$transaction` — tất cả hoặc không gì cả, tránh khách mồ côi | ep89 | sp3 |
+| P4 | Migration an toàn — thêm cột NOT NULL vào bảng có data (3 bước) | ep90 | sp4 |
+| P5 | Connection pool — P2024 và giới hạn kết nối | ep91 | sp5 |
+| P6 | Query chậm — từ log tới index đúng cột (16ms → 0,7ms) | ep92 | sp6 |
+
+Demo: [`demo-db-interview/`](demo-db-interview/) (`sql-qa/` script SQL + `prisma-qa/` script Prisma đo số thật, `prisma-mig/` cho câu migration, PostgreSQL 17 chạy bằng `docker-compose.yml`). `git checkout db-qa-batch-4` để xem đúng code lô 4 (12 câu).
 
 ## Cấu trúc repo
 

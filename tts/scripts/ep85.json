@@ -1,0 +1,198 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn, câu bốn mươi mốt: deadlock trong database là gì? Bạn từng gặp chưa, và xử thế nào?",
+      "Hai transaction khóa chéo nhau. Postgres không treo — nó tự phát hiện và hủy một phiên.",
+      "Message lỗi hôm nay chép nguyên văn từ PostgreSQL mười bảy chạy thật."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #41: Deadlock — Postgres tự phát hiện và hủy một phiên",
+      "subtitle": "Phỏng vấn Frontend — Database · Câu 41/48",
+      "badge": "Database & SQL · PostgreSQL 17"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Không cần SELECT FOR UPDATE mới có khóa. Một câu UPDATE đã tự khóa dòng đó tới hết transaction — ai sửa cùng dòng phải xếp hàng chờ.",
+      "Deadlock là khi hàng chờ khép thành vòng: A giữ dòng một chờ dòng hai, B giữ dòng hai chờ dòng một. Hai bên chờ nhau vĩnh viễn.",
+      "Postgres không để treo mãi. Nó chờ hết deadlock_timeout — mặc định một giây — rồi dò đồ thị chờ, thấy chu trình và hủy một phiên với SQLSTATE bốn không P không một.",
+      "Docs nói thẳng: phiên nào bị hủy thì khó đoán và không nên dựa vào."
+    ],
+    "visual": {
+      "title": "Hai giao dịch chờ nhau — ai gỡ vòng?",
+      "bullets": [
+        {
+          "icon": "🔒",
+          "text": "UPDATE tự khóa dòng tới hết transaction — không cần FOR UPDATE",
+          "sentence": 0
+        },
+        {
+          "icon": "🔁",
+          "text": "Deadlock = A giữ dòng 1 chờ dòng 2, B giữ dòng 2 chờ dòng 1",
+          "sentence": 1
+        },
+        {
+          "icon": "⏱️",
+          "text": "Postgres chờ deadlock_timeout (mặc định 1s) rồi mới đi dò",
+          "sentence": 2
+        },
+        {
+          "icon": "💥",
+          "text": "Thấy chu trình → HỦY 1 nạn nhân, SQLSTATE 40P01",
+          "sentence": 2
+        },
+        {
+          "icon": "📖",
+          "text": "docs: \"which transaction will be aborted is difficult to predict\"",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Hai phiên là hai pg.Client RIÊNG — pool chung thì mỗi câu có thể rơi vào connection khác, transaction của phiên A tan luôn.",
+      "Mẹo nằm ở đây: hai câu bị chặn gửi đi mà KHÔNG await. Await ngay câu của A là script treo, B không bao giờ được gửi, không có deadlock.",
+      "Chỗ dừng duy nhất là Promise.all. Nạn nhân không hardcode — ai bị hủy sinh từ việc promise nào bị reject."
+    ],
+    "visual": {
+      "filename": "d5.mjs",
+      "language": "javascript",
+      "code": "const a = new pg.Client({ connectionString: CONNECTION_STRING });\nconst b = new pg.Client({ connectionString: CONNECTION_STRING });\n\n  await a.query('BEGIN');\n  await a.query(SQL_BUMP, [ROW_A]);\n  console.log(`[A] BEGIN; UPDATE id=${ROW_A} (+1) · giữ khóa dòng ${ROW_A}`);\n\n  await b.query('BEGIN');\n  await b.query(SQL_BUMP, [ROW_B]);\n  console.log(`[B] BEGIN; UPDATE id=${ROW_B} (+1) · giữ khóa dòng ${ROW_B}`);\n\n  // Từ đây là hai câu BỊ CHẶN — gửi đi rồi mới in mốc, không await ngay.\n  const t0 = now();\n  const waitA = settle(a.query(SQL_BUMP, [ROW_B]));\n\n  const waitB = settle(b.query(SQL_BUMP, [ROW_A]));\n  console.log(`[B] UPDATE id=${ROW_A} gửi đi (t=${fmt(now() - t0)}) -> chờ chéo`);\n\n  const [resA, resB] = await Promise.all([waitA, waitB]);\n\n  if (!resA.ok && resB.ok) [victim, survivor] = ['A', 'B'];\n  else if (resA.ok && !resB.ok) [victim, survivor] = ['B', 'A'];",
+      "steps": [
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 0
+        },
+        {
+          "from": 12,
+          "to": 17,
+          "sentence": 1
+        },
+        {
+          "from": 19,
+          "to": 22,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Hai dòng thí nghiệm: orders id một và id hai. Hỏi thẳng server, SHOW deadlock_timeout ra một giây.",
+      "A mở transaction UPDATE dòng một, giữ khóa dòng một. B mở transaction UPDATE dòng hai, giữ khóa dòng hai. Chưa ai chờ ai.",
+      "A gửi UPDATE dòng hai tại mốc không. Chờ hai trăm mili giây cho A vào hàng đợi khóa. Tại hai trăm lẻ hai, B gửi UPDATE dòng một — vòng chờ khép kín."
+    ],
+    "visual": {
+      "title": "node d5.mjs — dựng vòng chờ chéo",
+      "commands": [
+        {
+          "cmd": "node d5.mjs",
+          "output": "== D5: deadlock detected ==\norders total gốc: id=1 4518520 · id=2 1426550\nSHOW deadlock_timeout -> 1s\n[A] BEGIN; UPDATE id=1 (+1) · giữ khóa dòng 1\n[B] BEGIN; UPDATE id=2 (+1) · giữ khóa dòng 2\n[A] UPDATE id=2 gửi đi, không await (t=0ms)\n    chờ 200ms cho A chắc chắn vào hàng chờ khóa\n[B] UPDATE id=1 gửi đi (t=202ms) -> chờ chéo",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Sau một nghìn lẻ tám mili giây — khoảng một giây, đúng bằng deadlock_timeout — Postgres phát hiện deadlock. Nó không dò ngay, vì đa số lần chờ khóa sẽ tự hết.",
+      "Postgres chọn MỘT nạn nhân. Lần này A bị hủy, B chạy tiếp — nhưng ai bị hủy không đoán trước được.",
+      "Đọc nguyên văn: code bốn không P không một; message vỏn vẹn deadlock detected, không tiền tố ERROR, không tên bảng.",
+      "detail hai dòng, mỗi chiều một dòng: process này chờ ShareLock trên transaction kia, và ngược lại. PID đổi mỗi lần. hint: See server log for query details."
+    ],
+    "visual": {
+      "title": "node d5.mjs — 40P01 deadlock detected",
+      "commands": [
+        {
+          "cmd": "node d5.mjs",
+          "output": "-- sau 1008ms Postgres phát hiện deadlock --\n[A] BỊ HỦY · [B] chạy tiếp\ncode   : 40P01\nmessage: deadlock detected\ndetail : Process 6942 waits for ShareLock on\n         transaction 966; blocked by process\n         6943.\n         Process 6943 waits for ShareLock on\n         transaction 965; blocked by process\n         6942.\nhint   : See server log for query details.\n[A] ROLLBACK · [B] COMMIT OK",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "concept",
+    "narration": [
+      "Trả lời ba câu. Một: UPDATE giữ khóa dòng tới hết transaction; deadlock là hai bên chờ chéo.",
+      "Hai: Postgres tự dò sau deadlock_timeout rồi hủy một nạn nhân với mã bốn không P không một, phiên còn lại chạy tiếp bình thường.",
+      "Ba: khóa mọi nơi theo CÙNG một thứ tự, transaction ngắn, và phải retry khi gặp lỗi này. Tăng timeout không sửa gì.",
+      "Beat vàng: sau deadlock CẢ HAI dòng đều cộng một. A rollback nhả khóa, câu UPDATE của B đang chờ chạy tiếp và B commit trọn cả hai câu.",
+      "Còn hint kia nói thật: client chỉ thấy PID; câu SQL thủ phạm nằm ở log server."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "UPDATE giữ khóa dòng tới hết transaction → chờ chéo = deadlock",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "PG tự dò sau deadlock_timeout → hủy 1 nạn nhân (40P01)",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Khóa theo THỨ TỰ nhất quán · transaction ngắn · RETRY khi 40P01",
+          "sentence": 2
+        },
+        {
+          "icon": "🏆",
+          "text": "Sau deadlock CẢ HAI dòng đều +1 — B nhận khóa rồi commit cả 2 câu",
+          "sentence": 3
+        },
+        {
+          "icon": "📄",
+          "text": "hint đúng: client chỉ có PID, câu SQL thủ phạm ở log server",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "outro",
+    "narration": [
+      "Xong câu bốn mươi mốt — deadlock không treo server, tốn đúng một giây rồi hủy một phiên.",
+      "Câu tiếp: LIMIT OFFSET với offset lớn có vấn đề gì, cursor sửa được gì?",
+      "Có bản Shorts sáu mươi giây để ôn nhanh — hẹn gặp ở câu bốn mươi hai!"
+    ],
+    "visual": {
+      "title": "Câu 41/48 hoàn tất — hẹn gặp câu 42!",
+      "summary": [
+        {
+          "text": "40P01 deadlock detected — sau 1008ms ≈ deadlock_timeout 1s",
+          "sentence": 0
+        },
+        {
+          "text": "Postgres hủy MỘT nạn nhân — ai bị hủy KHÔNG đoán trước được",
+          "sentence": 0
+        },
+        {
+          "text": "Cả 2 dòng đều +1: phiên thắng nhận khóa rồi commit trọn vẹn",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: OFFSET 499980 chậm vì sao — cursor/keyset pagination",
+          "sentence": 1
+        }
+      ],
+      "next": "Câu 42/48: OFFSET lớn vs cursor — trang càng sâu càng chậm? 🎤"
+    }
+  }
+]

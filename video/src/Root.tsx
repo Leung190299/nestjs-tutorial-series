@@ -83,6 +83,18 @@ import ep77 from './data/ep77.timing.json';
 import ep78 from './data/ep78.timing.json';
 import ep79 from './data/ep79.timing.json';
 import ep80 from './data/ep80.timing.json';
+import ep81 from './data/ep81.timing.json';
+import ep82 from './data/ep82.timing.json';
+import ep83 from './data/ep83.timing.json';
+import ep84 from './data/ep84.timing.json';
+import ep85 from './data/ep85.timing.json';
+import ep86 from './data/ep86.timing.json';
+import ep87 from './data/ep87.timing.json';
+import ep88 from './data/ep88.timing.json';
+import ep89 from './data/ep89.timing.json';
+import ep90 from './data/ep90.timing.json';
+import ep91 from './data/ep91.timing.json';
+import ep92 from './data/ep92.timing.json';
 import sb1 from './data/sb1.timing.json';
 import sb2 from './data/sb2.timing.json';
 import sb3 from './data/sb3.timing.json';
@@ -108,6 +120,18 @@ import ss3 from './data/ss3.timing.json';
 import ss4 from './data/ss4.timing.json';
 import ss5 from './data/ss5.timing.json';
 import ss6 from './data/ss6.timing.json';
+import sd1 from './data/sd1.timing.json';
+import sd2 from './data/sd2.timing.json';
+import sd3 from './data/sd3.timing.json';
+import sd4 from './data/sd4.timing.json';
+import sd5 from './data/sd5.timing.json';
+import sd6 from './data/sd6.timing.json';
+import sp1 from './data/sp1.timing.json';
+import sp2 from './data/sp2.timing.json';
+import sp3 from './data/sp3.timing.json';
+import sp4 from './data/sp4.timing.json';
+import sp5 from './data/sp5.timing.json';
+import sp6 from './data/sp6.timing.json';
 import sr2 from './data/sr2.timing.json';
 import sr3 from './data/sr3.timing.json';
 import sr4 from './data/sr4.timing.json';
@@ -202,6 +226,18 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode78', timing: ep78 as unknown as EpisodeTiming},
   {id: 'Episode79', timing: ep79 as unknown as EpisodeTiming},
   {id: 'Episode80', timing: ep80 as unknown as EpisodeTiming},
+  {id: 'Episode81', timing: ep81 as unknown as EpisodeTiming},
+  {id: 'Episode82', timing: ep82 as unknown as EpisodeTiming},
+  {id: 'Episode83', timing: ep83 as unknown as EpisodeTiming},
+  {id: 'Episode84', timing: ep84 as unknown as EpisodeTiming},
+  {id: 'Episode85', timing: ep85 as unknown as EpisodeTiming},
+  {id: 'Episode86', timing: ep86 as unknown as EpisodeTiming},
+  {id: 'Episode87', timing: ep87 as unknown as EpisodeTiming},
+  {id: 'Episode88', timing: ep88 as unknown as EpisodeTiming},
+  {id: 'Episode89', timing: ep89 as unknown as EpisodeTiming},
+  {id: 'Episode90', timing: ep90 as unknown as EpisodeTiming},
+  {id: 'Episode91', timing: ep91 as unknown as EpisodeTiming},
+  {id: 'Episode92', timing: ep92 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -245,6 +281,18 @@ const shorts: {id: string; timing: EpisodeTiming}[] = [
   {id: 'ShortS4', timing: ss4 as unknown as EpisodeTiming},
   {id: 'ShortS5', timing: ss5 as unknown as EpisodeTiming},
   {id: 'ShortS6', timing: ss6 as unknown as EpisodeTiming},
+  {id: 'ShortD1', timing: sd1 as unknown as EpisodeTiming},
+  {id: 'ShortD2', timing: sd2 as unknown as EpisodeTiming},
+  {id: 'ShortD3', timing: sd3 as unknown as EpisodeTiming},
+  {id: 'ShortD4', timing: sd4 as unknown as EpisodeTiming},
+  {id: 'ShortD5', timing: sd5 as unknown as EpisodeTiming},
+  {id: 'ShortD6', timing: sd6 as unknown as EpisodeTiming},
+  {id: 'ShortP1', timing: sp1 as unknown as EpisodeTiming},
+  {id: 'ShortP2', timing: sp2 as unknown as EpisodeTiming},
+  {id: 'ShortP3', timing: sp3 as unknown as EpisodeTiming},
+  {id: 'ShortP4', timing: sp4 as unknown as EpisodeTiming},
+  {id: 'ShortP5', timing: sp5 as unknown as EpisodeTiming},
+  {id: 'ShortP6', timing: sp6 as unknown as EpisodeTiming},
 ];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
@@ -1247,6 +1295,162 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/beqa/s6-filter.png',
       badgeEmoji: '🧯',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb81',
+    props: {
+      badge: 'PV FE #37',
+      line1: 'TẠO INDEX',
+      line2: 'LÀ NHANH?',
+      subtitle: 'Phỏng vấn Frontend · Câu 37/48',
+      variant: 'shot',
+      image: 'screens/dbqa/d1-index.png',
+      badgeEmoji: '🐘',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb82',
+    props: {
+      badge: 'PV FE #38',
+      line1: 'COST 7948',
+      line2: 'THẬT 18MS?',
+      subtitle: 'Phỏng vấn Frontend · Câu 38/48',
+      variant: 'shot',
+      image: 'screens/dbqa/d2-explain.png',
+      badgeEmoji: '🔍',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb83',
+    props: {
+      badge: 'PV FE #39',
+      line1: '51 QUERY',
+      line2: 'HAY 1 CÂU?',
+      subtitle: 'Phỏng vấn Frontend · Câu 39/48',
+      variant: 'shot',
+      image: 'screens/dbqa/d3-nplus1.png',
+      badgeEmoji: '🔁',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb84',
+    props: {
+      badge: 'PV FE #40',
+      line1: '1 SELECT',
+      line2: '2 KẾT QUẢ?',
+      subtitle: 'Phỏng vấn Frontend · Câu 40/48',
+      variant: 'shot',
+      image: 'screens/dbqa/d4-isolation.png',
+      badgeEmoji: '📸',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb85',
+    props: {
+      badge: 'PV FE #41',
+      line1: 'DEADLOCK',
+      line2: 'AI BỊ HỦY?',
+      subtitle: 'Phỏng vấn Frontend · Câu 41/48',
+      variant: 'shot',
+      image: 'screens/dbqa/d5-deadlock.png',
+      badgeEmoji: '🔒',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb86',
+    props: {
+      badge: 'PV FE #42',
+      line1: 'OFFSET 499980',
+      line2: 'QUÉT BAO NHIÊU?',
+      subtitle: 'Phỏng vấn Frontend · Câu 42/48',
+      variant: 'shot',
+      image: 'screens/dbqa/d6-pagination.png',
+      badgeEmoji: '📄',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb87',
+    props: {
+      badge: 'PV FE #43',
+      line1: 'ORM GIẤU',
+      line2: '21 CÂU QUERY?',
+      subtitle: 'Phỏng vấn Frontend · Câu 43/48',
+      variant: 'shot',
+      image: 'screens/dbqa/p1-nplus1.png',
+      badgeEmoji: '🔺',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb88',
+    props: {
+      badge: 'PV FE #44',
+      line1: '98KB',
+      line2: 'HAY 26KB?',
+      subtitle: 'Phỏng vấn Frontend · Câu 44/48',
+      variant: 'shot',
+      image: 'screens/dbqa/p2-select.png',
+      badgeEmoji: '✂️',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb89',
+    props: {
+      badge: 'PV FE #45',
+      line1: 'BƯỚC 2 LỖI',
+      line2: 'DỮ LIỆU NỬA VỜI?',
+      subtitle: 'Phỏng vấn Frontend · Câu 45/48',
+      variant: 'shot',
+      image: 'screens/dbqa/p3-transaction.png',
+      badgeEmoji: '⚛️',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb90',
+    props: {
+      badge: 'PV FE #46',
+      line1: 'CỘT NOT NULL',
+      line2: '1000 DÒNG CŨ?',
+      subtitle: 'Phỏng vấn Frontend · Câu 46/48',
+      variant: 'shot',
+      image: 'screens/dbqa/p4-migration.png',
+      badgeEmoji: '🚧',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb91',
+    props: {
+      badge: 'PV FE #47',
+      line1: 'POOL CẠN',
+      line2: '16 QUERY CHẾT?',
+      subtitle: 'Phỏng vấn Frontend · Câu 47/48',
+      variant: 'shot',
+      image: 'screens/dbqa/p5-pool.png',
+      badgeEmoji: '🏊',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb92',
+    props: {
+      badge: 'PV FE #48',
+      line1: 'INDEX ĐÚNG',
+      line2: '16MS → 0.7MS',
+      subtitle: 'Phỏng vấn Frontend · Câu 48/48',
+      variant: 'shot',
+      image: 'screens/dbqa/p6-optimize.png',
+      badgeEmoji: '🎯',
       seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },

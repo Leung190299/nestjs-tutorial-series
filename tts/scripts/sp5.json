@@ -1,0 +1,74 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Hai mươi query song song mà pool chỉ có hai kết nối thì chuyện gì xảy ra?",
+      "Đo thật trên Prisma sáu chấm mười chín: pool nhỏ biến song song thành xếp hàng."
+    ],
+    "visual": {
+      "question": "20 query song song, pool 2 kết nối?",
+      "framework": "prisma"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Pool khai trên URL, và chỉ khai được lúc tạo client. Ba cấu hình: pool hai, pool hai mươi, pool một chờ một giây.",
+      "Cùng một tải hai mươi query. Kết quả: ba nghìn mili giây, ba trăm năm bảy mili giây, và mười sáu lỗi P2024."
+    ],
+    "visual": {
+      "filename": "p5.mjs",
+      "language": "javascript",
+      "code": "// pool khai trên URL, lúc TẠO client\nconst A = mk('?connection_limit=2' +\n             '&pool_timeout=10');\nconst B = mk('?connection_limit=20');\nconst C = mk('?connection_limit=1' +\n             '&pool_timeout=1');\n\n// cùng tải: 20 query x 0.3s song song\nawait Promise.allSettled(\n  Array.from({ length: 20 }, () =>\n    c.$queryRawUnsafe(LOAD)),\n);\n// A 3048ms · B 357ms · C: 16x P2024\n// cao điểm kết nối = 2 / 20 / 1",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Cao điểm kết nối đo từ pg_stat_activity đúng bằng connection_limit: hai, hai mươi, một.",
+      "Nhánh cạn pool: OK bốn query, mười sáu query còn lại ăn P2024, timed out fetching a new connection."
+    ],
+    "visual": {
+      "src": "screens/dbqa/p5-pool.png",
+      "caption": "pool 2: 3s · pool 20: 0.37s · pool 1: P2024"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Bẫy: pool_timeout là timeout XIN kết nối, không phải timeout query. Và tăng pool không miễn phí — trần thật là max_connections."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🏊",
+          "text": "Pool = kết nối tối đa + hàng đợi · chờ lâu quá → P2024",
+          "sentence": 0
+        },
+        {
+          "icon": "🟡",
+          "text": "pool_timeout = timeout XIN kết nối, KHÔNG phải timeout query",
+          "sentence": 0
+        }
+      ],
+      "trap": "Tăng pool KHÔNG miễn phí · trần thật là max_connections=100"
+    }
+  }
+]

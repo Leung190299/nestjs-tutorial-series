@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Đưa bạn một cái EXPLAIN ANALYZE — bạn đọc từ đâu, nhìn con số nào trước?",
+      "Sáu mươi giây: một plan Postgres thật, năm tầng node, và một cái bẫy lệch một nghìn sáu trăm bảy bảy lần."
+    ],
+    "visual": {
+      "question": "Đọc EXPLAIN ANALYZE: nhìn con số nào trước?",
+      "framework": "postgres"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Câu query trang danh sách đơn: JOIN orders với customers, lọc status và city, sắp mới nhất, lấy hai mươi dòng.",
+      "cost là ước lượng của planner, đơn vị quy ước; actual time mới là mili giây thật, vì ANALYZE có chạy query."
+    ],
+    "visual": {
+      "filename": "d2.sql",
+      "language": "sql",
+      "code": "-- orders 500k · customers 5k\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT o.id, o.total, c.name\nFROM orders o\nJOIN customers c\n  ON c.id = o.customer_id\nWHERE o.status = 'paid'\n  AND c.city = 'Da Nang'\nORDER BY o.created_at DESC\nLIMIT 20;\n\n-- cost = ước lượng của planner\n-- actual time = mili giây THẬT",
+      "steps": [
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 0
+        },
+        {
+          "from": 12,
+          "to": 13,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Plan là cây: đọc từ trong ra ngoài. loops bằng ba nghĩa là năm lăm nghìn ba trăm sáu sáu nhân ba — một trăm sáu sáu nghìn dòng thật sự đi qua.",
+      "Buffers shared hit ba nghìn tám trăm bảy sáu, read bằng không — chạm gần bốn nghìn trang, lấy hết từ cache."
+    ],
+    "visual": {
+      "src": "screens/dbqa/d2-explain.png",
+      "caption": "cost là ước lượng · actual mới là thật"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "rows là số dòng node phát ra sau khi lọc — Gather Merge ước ba ba nghìn, thật hai mươi, lệch một nghìn sáu trăm bảy bảy lần.",
+      "Nhưng đừng kêu thống kê cũ: đó là LIMIT dừng sớm. Node quét bên dưới chỉ lệch một phẩy ba lần.",
+      "Nhìn actual time của node tốn nhất, không phải node đầu tiên."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "📤",
+          "text": "rows = dòng PHÁT RA sau lọc · Gather Merge 33538 vs 20",
+          "sentence": 0
+        },
+        {
+          "icon": "✂️",
+          "text": "Lệch 1677x là do LIMIT dừng sớm · node quét chỉ lệch 1.3x",
+          "sentence": 1
+        }
+      ],
+      "trap": "Nhìn actual time node TỐN NHẤT, không phải node đầu"
+    }
+  }
+]

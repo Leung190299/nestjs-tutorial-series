@@ -1,0 +1,234 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn, câu bốn mươi ba: ORM giấu SQL đi — làm sao bạn biết code mình đang bắn hai mươi mốt câu query?",
+      "Họ muốn biết bạn đã bao giờ mở log ra ĐẾM, hay chỉ tin rằng ORM tự tối ưu.",
+      "Đo thật bằng Prisma sáu chấm mười chín, bảng orders năm trăm nghìn dòng."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #43: N+1 trong ORM — bật log Prisma là thấy",
+      "subtitle": "Phỏng vấn Frontend — Database · Câu 43/48",
+      "badge": "Prisma 6.19.3 · ORM & N+1"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "ORM viết SQL hộ bạn — đó cũng là chỗ nguy. Docs Prisma v6 nói rõ: kết quả trả về gồm mọi trường vô hướng, KHÔNG có quan hệ nào.",
+      "Nên người ta lấy hai mươi khách rồi lặp gọi thêm hai mươi lần cho đơn hàng — đúng bệnh N cộng một.",
+      "Đọc code không thấy: nó nấp trong resolver GraphQL, trong getter, trong Promise chấm all. Cách chắc chắn duy nhất là bật log rồi ĐẾM — chữa bằng include."
+    ],
+    "visual": {
+      "title": "ORM không tạo ra N+1 — nó giấu N+1",
+      "bullets": [
+        {
+          "icon": "🎭",
+          "text": "ORM viết SQL hộ bạn → bạn KHÔNG thấy câu lệnh thật chạy",
+          "sentence": 0
+        },
+        {
+          "icon": "📖",
+          "text": "docs v6: kết quả gồm \"All scalar fields\" · \"No relations\"",
+          "sentence": 0
+        },
+        {
+          "icon": "🔁",
+          "text": "20 khách + vòng for gọi order.findMany → 1 + 20 = 21 query",
+          "sentence": 1
+        },
+        {
+          "icon": "🔍",
+          "text": "Nấp trong resolver/getter/Promise.all → phải bật log query mà ĐẾM",
+          "sentence": 2
+        },
+        {
+          "icon": "🧩",
+          "text": "Chữa: include — khai báo quan hệ ngay trong MỘT lời gọi",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Cách đếm là phần đắt nhất của câu này: bật log dạng sự kiện, rồi $on query nhét mọi câu vào giỏ theo pha.",
+      "Chi tiết dễ sai: sự kiện query bắn SAU khi promise resolve, phải nhường một nhịp event loop trước khi đổi pha.",
+      "Nhánh A là vòng for kinh điển. Nhánh B khác đúng một dòng: include orders true."
+    ],
+    "visual": {
+      "filename": "p1.mjs",
+      "language": "javascript",
+      "code": "const p = new PrismaClient({ log: [{ emit: 'event', level: 'query' }] });\nlet phase = 'warm';\nconst events = []; // { phase, query, duration }\np.$on('query', (e) => events.push({ phase, query: e.query, duration: e.duration }));\n\nconst drain = () => new Promise((r) => setTimeout(r, 100));\nconst INFRA = /^\\s*(BEGIN|COMMIT|ROLLBACK|SET\\b|DEALLOCATE|SELECT 1\\b)/i;\nconst business = (ph) => bucket(ph).filter((e) => !INFRA.test(e.query));\n\n// --- nhánh A: N+1 ----------------------------------------------------------\nasync function nPlusOne() {\n  const customers = await p.customer.findMany({ take: TAKE, orderBy: { id: 'asc' } });\n  const orders = [];\n  for (const c of customers) {\n    orders.push(...(await p.order.findMany({ where: { customerId: c.id } })));\n  }\n}\n// --- nhánh B: include ------------------------------------------------------\nasync function withInclude() {\n  const customers = await p.customer.findMany({\n    take: TAKE, orderBy: { id: 'asc' }, include: { orders: true },\n  });",
+      "steps": [
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 10,
+          "to": 22,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy thật. Trung thực trước: hai mươi tư query warm-up bị LOẠI khỏi phép đếm — một lúc khởi tạo, hai ba lượt làm nóng.",
+      "Nhánh A: SỐ QUERY THẬT hai mươi mốt. Nhánh B, include: đúng HAI. Ba lần chạy y hệt — con số này bất biến.",
+      "Thời gian? Hai mốt phẩy hai so với mười chín phẩy bảy mili giây — chênh khoảng một phẩy ba lần, và dao động giữa các lần chạy.",
+      "Nói thẳng: đừng bán N cộng một bằng tốc độ trên localhost. Con số biết nói là SỐ QUERY — ra production mỗi query là một vòng đi-về qua mạng."
+    ],
+    "visual": {
+      "title": "node p1.mjs — ĐẾM query thật",
+      "commands": [
+        {
+          "cmd": "node p1.mjs",
+          "output": "== P1: 21 query vs 2 query ==\n20 khách đầu + đơn của họ · Prisma 6.19.3\n=> warm-up: 24 query bị LOẠI khỏi phép đếm\n   (1 lúc khởi tạo + 23 lượt làm nóng)\n\n[A] N+1: findMany(20) + 20 lần order.findMany\n  SỐ QUERY THẬT: 21 · TỔNG 21.20 ms\n\n[B] include: { orders: true }\n  SỐ QUERY THẬT: 2 · TỔNG 19.70 ms",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Beat vàng ở SQL thật. Câu A#2 là một trong hai mươi lượt: WHERE customer_id BẰNG đô một.",
+      "Câu B#2 thay cả hai mươi câu đó: WHERE customer_id IN, đô một tới đô hai mươi.",
+      "Include KHÔNG PHẢI JOIN. Prisma sáu gom hai mươi câu thành một câu IN rồi ghép cha–con ở tầng ứng dụng — nên ra hai, không phải một.",
+      "Checksum tính trong JavaScript: một nghìn chín trăm sáu mươi tư dòng đơn, tổng total khớp từng số — một tập dữ liệu, hai cách gọi."
+    ],
+    "visual": {
+      "title": "SQL Prisma sinh ra + checksum JS",
+      "commands": [
+        {
+          "cmd": "node p1.mjs",
+          "output": "== SQL Prisma sinh ra (bỏ cột, giữ WHERE) ==\nA#2 = 1 trong 20 lượt · B#2 = query con\nA#2 SELECT ... FROM orders WHERE orders.custome\n    r_id = $1 OFFSET $2\nB#2 SELECT ... FROM orders WHERE orders.custome\n    r_id IN ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11\n    ,$12,$13,$14,$15,$16,$17,$18,$19,$20) OFFS…\n\n== cùng dữ liệu? checksum trong JS ==\n             |     N+1 (A) | include(B)\ndòng đơn     |        1964 |       1964\ntổng total   |  4873155036 | 4873155036",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "concept",
+    "narration": [
+      "Trả lời ba câu. Một: Prisma chỉ trả trường vô hướng, không kèm quan hệ — vòng for thành hai mươi mốt query.",
+      "Hai: khai báo quan hệ ngay trong một lời gọi bằng include hoặc select lồng, để Prisma tự lấy cả cha lẫn con.",
+      "Ba: ở Prisma sáu, include gửi một query cha, một query con rồi ghép ở app — hai query CỐ ĐỊNH, không tăng theo số khách. Muốn một query LATERAL JOIN: bật preview relationJoins."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Prisma trả scalar, KHÔNG kèm relation → vòng for = 1 + 20 = 21 query",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Khai báo quan hệ trong MỘT lời gọi: include (hoặc select lồng)",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Prisma 6: 1 query cha + 1 query con, ghép ở app → 2 CỐ ĐỊNH",
+          "sentence": 2
+        },
+        {
+          "icon": "📈",
+          "text": "21 tăng theo N · 2 KHÔNG tăng — 200 khách vẫn 2 query",
+          "sentence": 2
+        },
+        {
+          "icon": "🏆",
+          "text": "Muốn 1 query LATERAL JOIN: preview relationJoins + relationLoadStrategy",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "concept",
+    "narration": [
+      "Bẫy version rất đắt: docs mới nhất nói join là mặc định, một query — đó là Prisma bảy, tám. Ở bản sáu nó còn là Preview.",
+      "Bẫy nữa: Promise chấm all không sửa N cộng một — vẫn hai mươi query và dễ cạn pool; include lồng sâu thì sinh thêm query, chậm đi.",
+      "Và đo bằng performance chấm now: e chấm duration của Prisma làm tròn số nguyên mili giây, query dưới một mili giây thành số không."
+    ],
+    "visual": {
+      "title": "Bẫy & cách đo cho đúng",
+      "bullets": [
+        {
+          "icon": "⚠️",
+          "text": "Docs mới nói \"join là mặc định, 1 query\" — đó là v7/v8, KHÔNG phải v6",
+          "sentence": 0
+        },
+        {
+          "icon": "🚫",
+          "text": "Promise.all KHÔNG chữa N+1: vẫn 20 query, còn dễ cạn pool",
+          "sentence": 1
+        },
+        {
+          "icon": "🪆",
+          "text": "include lồng sâu → thêm query; include tràn lan → thừa cột (câu #44)",
+          "sentence": 1
+        },
+        {
+          "icon": "⏱️",
+          "text": "Đo bằng performance.now() — e.duration làm tròn số nguyên ms",
+          "sentence": 2
+        },
+        {
+          "icon": "🔗",
+          "text": "Cùng bệnh ở tầng SQL: câu #39 — 51 query vs 1 câu JOIN",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "outro",
+    "narration": [
+      "Xong câu bốn mươi ba. Cùng bệnh với câu ba mươi chín ở tầng SQL — ORM chỉ làm nó vô hình. Thước đo không phải code đọc thấy gì, mà là log query đếm được bao nhiêu.",
+      "Câu tiếp: include gộp còn hai query nhưng kéo về cả cột bạn không dùng. Select lồng có nhanh hơn không? Hẹn ở câu bốn mươi tư!"
+    ],
+    "visual": {
+      "title": "Câu 43/48 hoàn tất — mở khối Prisma",
+      "summary": [
+        {
+          "text": "Vòng for: 21 query · include: 2 query — bất biến 3/3 lần chạy",
+          "sentence": 0
+        },
+        {
+          "text": "include KHÔNG phải JOIN: WHERE customer_id IN ($1..$20)",
+          "sentence": 0
+        },
+        {
+          "text": "ms chỉ chênh ~1.3x trên localhost — beat là SỐ QUERY, không phải tốc độ",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: select lồng — bớt cột có làm query nhanh hơn?",
+          "sentence": 1
+        }
+      ],
+      "next": "Câu 44/48: select vs include — bớt cột có nhanh hơn? 🎤"
+    }
+  }
+]

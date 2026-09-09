@@ -1,0 +1,238 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phỏng vấn, câu bốn mươi tám — câu cuối lô database: một API chậm, bạn có mười phút, quy trình của bạn là gì?",
+      "Đáp án là ba bước: lấy SQL thật, EXPLAIN chính câu đó, rồi index theo đúng cái plan chỉ ra.",
+      "Đo trên năm trăm nghìn đơn: mười sáu mili giây xuống không phẩy bảy — mà có index planner không thèm dùng."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #48: Query chậm — từ log tới index đúng",
+      "subtitle": "Phỏng vấn Frontend — Database · Câu 48/48",
+      "badge": "Prisma 6.19.3 · PostgreSQL 17 · orders 500.000 dòng"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Bước một là NHÌN, đừng đoán: bật log query của Prisma, $on query, lấy đúng byte SQL.",
+      "Bước hai: EXPLAIN ANALYZE BUFFERS chính câu đó, tìm node chạm nhiều dòng nhất, không phải node bạn NGHĨ là chậm.",
+      "Bước ba: index khớp hình dạng query — cột lọc trước, cột sắp xếp sau, đúng chiều — rồi ANALYZE và đo lại.",
+      "Docs Postgres: có index khớp ORDER BY thì n dòng đầu lấy thẳng, không quét phần còn lại."
+    ],
+    "visual": {
+      "title": "Quy trình 3 bước, không phải mẹo vặt",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "bật log Prisma + $on('query') → lấy ĐÚNG BYTE SQL, không đoán từ TypeScript",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "EXPLAIN (ANALYZE, BUFFERS) CHÍNH câu đó → node chạm nhiều dòng nhất",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "index khớp hình dạng: cột lọc = đứng TRƯỚC, cột sắp xếp đứng SAU + đúng chiều",
+          "sentence": 2
+        },
+        {
+          "icon": "🔁",
+          "text": "ANALYZE rồi ĐO LẠI — chứng minh bằng số, không tin cảm giác",
+          "sentence": 2
+        },
+        {
+          "icon": "📖",
+          "text": "docs: index khớp ORDER BY + LIMIT n → lấy thẳng n dòng đầu, KHÔNG quét phần còn lại",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Trên code: khai log emit event level query lúc tạo client, rồi $on query đẩy từng câu vào mảng.",
+      "Query nghiệp vụ: hai mươi đơn paid mới nhất của khách ở Đà Nẵng — lọc, lọc theo quan hệ, sắp xếp, LIMIT.",
+      "Rồi lấy câu SQL cuối từ log, EXPLAIN chính nó, và tạo index: đơn trên status, rồi ghép với created_at DESC."
+    ],
+    "visual": {
+      "filename": "demo-db-interview/prisma-qa/p6.mjs",
+      "language": "javascript",
+      "code": "const p = new PrismaClient({ log: [{ emit: 'event', level: 'query' }] });\n\nlet phase = 'warm';\nconst events = [];\np.$on('query', (e) => events.push({ phase, query: e.query, params: e.params }));\n\nconst businessQuery = () =>\n  p.order.findMany({\n    where: { status: STATUS, customer: { city: CITY } },\n    orderBy: { createdAt: 'desc' },\n    take: TAKE,\n  });\n\n  const ev = lastOf('A'); // SQL thật + params thật, lấy từ log\n  const ea = await explain(ev.query, ev.params);\n\n  const msB = await ddl(`CREATE INDEX ${IDX_STATUS} ON orders(status)`);\n\n  await p.$executeRawUnsafe(`DROP INDEX ${IDX_STATUS}`);\n  const msC = await ddl(\n    `CREATE INDEX ${IDX_COMBO} ON orders(status, created_at DESC)`,\n  );",
+      "steps": [
+        {
+          "from": 1,
+          "to": 5,
+          "sentence": 0
+        },
+        {
+          "from": 7,
+          "to": 12,
+          "sentence": 1
+        },
+        {
+          "from": 14,
+          "to": 22,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Prisma sinh MỘT câu duy nhất có LEFT JOIN customers — lọc theo quan hệ luôn thành JOIN, khác include ở câu bốn ba.",
+      "Cuối câu là ORDER BY created_at DESC LIMIT hai mươi — chính hình dạng mà index phải khớp.",
+      "EXPLAIN câu đó: Parallel Seq Scan on orders, một trăm sáu sáu nghìn dòng, hai ba phẩy chín mili giây — và một Sort trong plan."
+    ],
+    "visual": {
+      "title": "[1] SQL thật → [2] EXPLAIN câu đó",
+      "commands": [
+        {
+          "cmd": "node p6.mjs",
+          "output": "[1] SQL Prisma 6.19.3 sinh ra (log, cột -> ...):\nSELECT ... FROM orders LEFT JOIN customers AS j0\nON (j0.id) = (orders.customer_id) WHERE\n(orders.status = $1 AND (j0.city = $2 AND (j0.id\nIS NOT NULL))) ORDER BY orders.created_at DESC\nLIMIT $3 OFFSET $4\nparams: [\"paid\",\"Da Nang\",20,0]\n\n[2] EXPLAIN câu đó — node chạm nhiều dòng nhất:\n  Parallel Seq Scan on orders · 166098 dòng\n  Execution Time 23.892ms · buffers 3876",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Bốn trạng thái, không phải hai. A chưa index: mười lăm phẩy sáu mili giây, một trăm sáu sáu nghìn dòng.",
+      "B, index đơn trên status: mười lăm phẩy chín sáu. Vẫn Seq Scan, vẫn ngần ấy dòng.",
+      "Beat vàng: index TẠO RA MÀ PLANNER KHÔNG THÈM DÙNG, plan không đổi một chữ, vì paid chiếm ba mươi ba phần trăm bảng.",
+      "C, index ghép status với created_at DESC: không phẩy bảy tư mili giây, chín mươi ba dòng — Sort BIẾN MẤT.",
+      "D thêm index customers city: plan y hệt C, script tự DROP nó."
+    ],
+    "visual": {
+      "title": "[3] 4 trạng thái index — node THẬT",
+      "commands": [
+        {
+          "cmd": "node p6.mjs",
+          "output": "[A] chưa index\n     15.58ms · 166098 dòng · Parallel Seq Scan\n[B] orders(status) — index BỊ BỎ QUA\n     15.96ms · 166098 dòng · Parallel Seq Scan\n[C] orders(status, created_at DESC)\n      0.74ms · 93 dòng · Index Scan using\n      idx_orders_status_created\n[D] [C] + customers(city)\n      0.75ms · 93 dòng · plan y hệt [C]\n\n=> [B] index TẠO RA MÀ PLANNER KHÔNG THÈM DÙNG vì\n   lọc 33% bảng; [D] cũng vậy, đã DROP",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "concept",
+    "narration": [
+      "Trả lời ba câu. Một: lấy SQL THẬT từ log, đừng đoán — ORM che mất tầng SQL.",
+      "Hai: EXPLAIN chính câu đó để BIẾT node nào tốn, thay vì đoán.",
+      "Ba: index khớp cả lọc lẫn sắp xếp — status một mình trượt, status cộng created_at DESC mới ăn.",
+      "Bất biến sáu trên sáu lần chạy: dòng chạm xuống chín mươi ba, ít hơn một nghìn bảy trăm tám sáu lần.",
+      "Buffers ba nghìn tám trăm bảy sáu xuống ba trăm bảy ba, nhanh hơn hai mươi mốt tới hai mươi sáu lần."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn + beat vàng",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Lấy SQL THẬT từ log Prisma — ORM che mất tầng SQL, đừng đoán",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "EXPLAIN chính câu đó → BIẾT node nào tốn, không phải ĐOÁN node nào tốn",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Index khớp CẢ lọc lẫn sắp xếp: (status) trượt · (status, created_at DESC) ăn",
+          "sentence": 2
+        },
+        {
+          "icon": "🟡",
+          "text": "BEAT: index trên status tạo ra mà planner KHÔNG THÈM DÙNG — paid = 33% bảng",
+          "sentence": 2
+        },
+        {
+          "icon": "🔢",
+          "text": "bất biến: 166.098 → 93 dòng (1786x) · buffers 3876 → 373 · 21–26x nhanh",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "concept",
+    "narration": [
+      "Bẫy một: đừng ĐOÁN index — đọc plan rồi mới tạo, tạo bừa thì trả hơn trăm mili giây mà không thu gì.",
+      "Bẫy hai: index thừa tốn ghi và dung lượng — customers city tạo ra rồi phải xóa vì plan không dùng tới.",
+      "Bẫy ba: một lần client đo gần sáu mili giây mà Postgres báo không phẩy hai — Prisma replan, không phải DB chậm.",
+      "Nhớ câu ba mươi bảy: cùng bài học ở tầng SQL — lọc tám mươi phần trăm bảng thì Postgres bỏ index."
+    ],
+    "visual": {
+      "title": "Bẫy phải tránh khi nói về tối ưu query",
+      "bullets": [
+        {
+          "icon": "🪤",
+          "text": "Đừng ĐOÁN index — đọc plan rồi mới tạo · CREATE INDEX(status) tốn 115–150ms trả không",
+          "sentence": 0
+        },
+        {
+          "icon": "💾",
+          "text": "Index thừa tốn GHI + dung lượng: customers(city) tạo ra rồi phải DROP",
+          "sentence": 1
+        },
+        {
+          "icon": "📏",
+          "text": "Đo lại phải nhìn Buffers + số dòng — ms client dao động, số bất biến mới tin được",
+          "sentence": 2
+        },
+        {
+          "icon": "⚠️",
+          "text": "Outlier thật: client 6ms mà Postgres báo 0,2ms = Prisma replan, KHÔNG phải DB",
+          "sentence": 2
+        },
+        {
+          "icon": "🔗",
+          "text": "Câu #37: lọc 80% bảng thì PG bỏ index — ở đây 33% cũng y hệt",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "outro",
+    "narration": [
+      "Xong câu bốn mươi tám: log, EXPLAIN, index đúng cột — mười sáu mili giây xuống không phẩy bảy.",
+      "Xong cả lô: sáu câu SQL cộng sáu câu ORM là đủ bộ database. Bốn mươi tám câu đã trên playlist — luyện từ câu một!"
+    ],
+    "visual": {
+      "title": "Câu 48/48 hoàn tất — trọn bộ 48 câu phỏng vấn",
+      "summary": [
+        {
+          "text": "3 bước: log → EXPLAIN câu THẬT → index khớp lọc + sắp xếp",
+          "sentence": 0
+        },
+        {
+          "text": "16ms → 0,7ms (21–26x) · 166.098 → 93 dòng · buffers 3876 → 373",
+          "sentence": 0
+        },
+        {
+          "text": "BEAT: index sai cột thì planner KHÔNG THÈM DÙNG — plan không đổi một chữ",
+          "sentence": 0
+        },
+        {
+          "text": "Trọn lô 4: 6 câu SQL/PostgreSQL + 6 câu Prisma = đủ bộ database",
+          "sentence": 1
+        }
+      ],
+      "next": "48/48 hoàn tất — luyện lại từ câu #1 🎤"
+    }
+  }
+]

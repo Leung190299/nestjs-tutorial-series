@@ -1,0 +1,325 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #38: Đọc EXPLAIN ANALYZE — cost, rows, buffers",
+        "subtitle": "Phỏng vấn Frontend — Database · Câu 38/48",
+        "badge": "Database & SQL · PostgreSQL 17"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep82/scene-01-0-8dc14695.wav",
+          "startFrame": 0,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep82/scene-01-1-46381bec.wav",
+          "startFrame": 150,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep82/scene-01-2-45e7c556.wav",
+          "startFrame": 331,
+          "durationInFrames": 161
+        }
+      ],
+      "durationInFrames": 510
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Plan là một CÂY — và bốn con số phải đọc",
+        "bullets": [
+          {
+            "icon": "🌲",
+            "text": "Plan là CÂY: node đáy là scan — đọc TRONG RA NGOÀI",
+            "sentence": 0
+          },
+          {
+            "icon": "💰",
+            "text": "cost=x..y: đơn vị quy ước của planner, KHÔNG phải ms",
+            "sentence": 1
+          },
+          {
+            "icon": "⏱️",
+            "text": "actual time: ms THẬT — vì ANALYZE có CHẠY query",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "rows = dòng PHÁT RA sau lọc · loops>1 thì phải NHÂN",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep82/scene-02-0-cd958890.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep82/scene-02-1-df8bf5ec.wav",
+          "startFrame": 181,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep82/scene-02-2-82f046fa.wav",
+          "startFrame": 345,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep82/scene-02-3-6940ed8d.wav",
+          "startFrame": 543,
+          "durationInFrames": 173
+        }
+      ],
+      "durationInFrames": 734
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "sql-qa/d2.mjs — câu SQL trong script",
+        "language": "sql",
+        "code": "-- orders 500.000 dòng · customers 5.000 dòng\n-- status='paid'   → 166.097/500.000 đơn\n-- city='Da Nang'  → 1.208/5.000 khách\n\n-- câu \"trang danh sách đơn\" hay gặp nhất\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT o.id, o.total, o.status, o.created_at,\n       c.name, c.city\nFROM orders o\nJOIN customers c ON c.id = o.customer_id\nWHERE o.status = $1 AND c.city = $2\nORDER BY o.created_at DESC\nLIMIT 20;\n\n-- ANALYZE = CHẠY THẬT câu query rồi in số thật\n-- → UPDATE/DELETE phải bọc BEGIN ... ROLLBACK",
+        "steps": [
+          {
+            "from": 5,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 1
+          },
+          {
+            "from": 15,
+            "to": 16,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep82/scene-03-0-4f5e16b3.wav",
+          "startFrame": 0,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep82/scene-03-1-55c5d1f0.wav",
+          "startFrame": 241,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep82/scene-03-2-5f82fe0a.wav",
+          "startFrame": 432,
+          "durationInFrames": 224
+        }
+      ],
+      "durationInFrames": 674
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node d2.mjs — đọc plan: cây, cost, actual, rows",
+        "commands": [
+          {
+            "cmd": "node d2.mjs",
+            "output": "== ĐỌC PLAN NHƯ THẾ NÀO ==\n[1] node ngoài cùng: Limit\n    node trong cùng: Seq Scan on customers c\n=> plan là CÂY: trong cùng chạy TRƯỚC, node\n   ngoài cùng trả kết quả CUỐI\n[2] ước lượng: (cost=7948.36..7950.70)\n=> đơn vị quy ước của planner, KHÔNG phải ms\n[3] thật:      (actual time=18.553..18.618)\n=> ms thật, có được vì ANALYZE CHẠY query\n[4] rows: ước 20 vs thật 20 (lệch 1.0x)\n=> rows là số dòng node PHÁT RA sau khi lọc",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep82/scene-04-0-bcee0fa1.wav",
+          "startFrame": 0,
+          "durationInFrames": 257
+        },
+        {
+          "file": "audio/ep82/scene-04-1-6b8e4468.wav",
+          "startFrame": 265,
+          "durationInFrames": 267
+        }
+      ],
+      "durationInFrames": 550
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "node d2.mjs — loops, buffers, Planning vs Execution",
+        "commands": [
+          {
+            "cmd": "node d2.mjs",
+            "output": "[5] loops=3 tại node:\n    Parallel Seq Scan on orders o\n=> time/rows là TRUNG BÌNH 1 lượt: 55366 x\n   3 = 166098 dòng thật sự đi qua\n[6] Buffers: shared hit=3876\n=> 3876 trang lấy từ cache, 0 trang đọc đĩa\n[7] Planning Time: 0.440 ms\n    Execution Time: 18.653 ms\n=> lập kế hoạch vs thi hành; Execution KHÔNG\n   gồm parse/rewrite/planning",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep82/scene-05-0-3b58e997.wav",
+          "startFrame": 0,
+          "durationInFrames": 262
+        },
+        {
+          "file": "audio/ep82/scene-05-1-90cffdcf.wav",
+          "startFrame": 270,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep82/scene-05-2-a77248a1.wav",
+          "startFrame": 422,
+          "durationInFrames": 156
+        }
+      ],
+      "durationInFrames": 596
+    },
+    {
+      "id": "scene-06",
+      "type": "terminal",
+      "visual": {
+        "title": "node d2.mjs — lệch 1677x: LIMIT hay thống kê cũ?",
+        "commands": [
+          {
+            "cmd": "node d2.mjs",
+            "output": "[8] node lệch nhất: Gather Merge\n    ước 33538 vs thật 20 = lệch 1677x\n=> lệch to nhưng KHÔNG phải thống kê cũ: LIMIT\n   20 dừng sớm, node không chạy hết\n[9] node QUÉT lệch nhất:\n    Parallel Seq Scan on orders o\n    ước 69410 vs thật 55366 = lệch 1.3x\n=> dưới 10x: thống kê còn tươi, ước lượng của\n   planner đáng tin ở node quét",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep82/scene-06-0-f5d519d5.wav",
+          "startFrame": 0,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep82/scene-06-1-c4c1fc74.wav",
+          "startFrame": 248,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep82/scene-06-2-fe588857.wav",
+          "startFrame": 448,
+          "durationInFrames": 137
+        }
+      ],
+      "durationInFrames": 603
+    },
+    {
+      "id": "scene-07",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Cây node: đọc từ scan trong cùng ra · cost ước, actual thật",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "rows = dòng PHÁT RA · loops=3 → 55366 x 3 = 166098 dòng",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Buffers shared hit=3876 read=0 → chạm 3876 trang, không đụng đĩa",
+            "sentence": 2
+          },
+          {
+            "icon": "🪤",
+            "text": "Nhìn node TỐN NHẤT · rows lệch ở node LÁ mới cần ANALYZE",
+            "sentence": 3
+          },
+          {
+            "icon": "⚠️",
+            "text": "EXPLAIN không ANALYZE = không chạy thật, không có số thật",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep82/scene-07-0-8fbedad7.wav",
+          "startFrame": 0,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep82/scene-07-1-7c46f8a1.wav",
+          "startFrame": 162,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep82/scene-07-2-dac2ad01.wav",
+          "startFrame": 338,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep82/scene-07-3-0ff03b27.wav",
+          "startFrame": 507,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep82/scene-07-4-2f33d89e.wav",
+          "startFrame": 719,
+          "durationInFrames": 164
+        }
+      ],
+      "durationInFrames": 901
+    },
+    {
+      "id": "scene-08",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 38/48 hoàn tất — hẹn gặp câu 39!",
+        "summary": [
+          {
+            "text": "Plan là CÂY: đọc trong ra ngoài · cost ước lượng, actual time thật",
+            "sentence": 0
+          },
+          {
+            "text": "loops=3 → 55366 x 3 = 166098 dòng · Buffers shared hit=3876",
+            "sentence": 0
+          },
+          {
+            "text": "Lệch 1677x là do LIMIT dừng sớm — node quét chỉ lệch 1.3x",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: JOIN vs N+1 — nhìn loops là ra bệnh",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 39/48: 1 JOIN hay 50 câu SELECT? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep82/scene-08-0-17fd6aaf.wav",
+          "startFrame": 0,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/ep82/scene-08-1-311066b4.wav",
+          "startFrame": 128,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep82/scene-08-2-df2bb3c4.wav",
+          "startFrame": 264,
+          "durationInFrames": 111
+        }
+      ],
+      "durationInFrames": 393
+    }
+  ]
+}

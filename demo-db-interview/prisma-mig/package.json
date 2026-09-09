@@ -1,0 +1,15 @@
+{
+  "name": "prisma-mig",
+  "version": "1.0.0",
+  "description": "Demo P4 (ep90) - migration an toan khi them cot NOT NULL tren bang co data. CHAY TREN DB RIENG dbqa_mig, KHONG BAO GIO tro vao dbqa (500k don seed).",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "p4": "node p4.mjs"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "prisma": "^6.19.3"
+  }
+}

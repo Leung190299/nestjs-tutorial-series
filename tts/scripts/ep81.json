@@ -1,0 +1,192 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại phòng phỏng vấn — từ câu ba mươi bảy, series rẽ sang Database: mười hai câu SQL và Prisma cho dân Fullstack.",
+      "Câu hỏi từ nhà tuyển dụng: Index trong database làm gì? Cứ tạo index là query nhanh hơn à?",
+      "Câu mở màn kinh điển — và demo hôm nay có hai cú twist mà rất nhiều bài viết nói sai."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #37: Index làm gì? Seq Scan vs Index Scan",
+      "subtitle": "Phỏng vấn Frontend — Database · Câu 37/48",
+      "badge": "Lô mới · Database & SQL"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Không có index, docs Postgres nói thẳng: hệ thống phải quét toàn bộ bảng, từng dòng một, để tìm các dòng khớp.",
+      "Index là cấu trúc phụ nằm cạnh bảng: Postgres chỉ đi vài tầng trong cây tìm kiếm rồi nhảy thẳng tới dòng cần.",
+      "Chỗ đa số trả lời hụt: Postgres có nhiều kiểu quét — Seq Scan, Bitmap Heap Scan, Index Scan — planner CHỌN theo chi phí.",
+      "Bảng demo: orders năm trăm nghìn dòng, chỉ có PRIMARY KEY trên id — nên lọc theo customer_id vẫn quét cả bảng."
+    ],
+    "visual": {
+      "title": "Index làm gì — và ai quyết định dùng nó",
+      "bullets": [
+        {
+          "icon": "🔍",
+          "text": "Không index: quét TOÀN BỘ bảng, từng dòng — lọc rồi vứt",
+          "sentence": 0
+        },
+        {
+          "icon": "🌲",
+          "text": "Index = cấu trúc phụ: đi vài tầng cây rồi nhảy thẳng tới dòng",
+          "sentence": 1
+        },
+        {
+          "icon": "⚖️",
+          "text": "PG có Seq Scan / Bitmap Heap Scan / Index Scan — planner chọn theo cost",
+          "sentence": 2
+        },
+        {
+          "icon": "🔑",
+          "text": "PK chỉ index cột id — WHERE customer_id vẫn quét cả bảng",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Kịch bản viết bằng SQL trần cho dễ soi. Bước A: chưa index, bọc câu SELECT trong EXPLAIN ANALYZE BUFFERS để Postgres khai thật.",
+      "Rồi CREATE INDEX trên đúng cột đang lọc, và ANALYZE orders — thiếu ANALYZE thì thống kê cũ, planner có thể vẫn không dùng index.",
+      "Bước B: chạy lại ĐÚNG câu đó, không sửa một chữ. Query không đổi, chỉ bảng có thêm index — khác biệt đến từ CÁCH QUÉT."
+    ],
+    "visual": {
+      "filename": "sql-qa/d1.mjs — câu SQL trong script",
+      "language": "sql",
+      "code": "-- orders: 500.000 dòng, chỉ có PRIMARY KEY trên id\n-- khách #1 có 61 đơn = 0.012% số dòng cả bảng\n\n-- [A] chưa có index cho cột customer_id\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT * FROM orders WHERE customer_id = 1;\n\n-- [+] tạo index trên đúng cột đang lọc\nCREATE INDEX idx_orders_customer ON orders(customer_id);\nANALYZE orders;\n\n-- [B] chạy lại ĐÚNG câu đó, không sửa một chữ\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT * FROM orders WHERE customer_id = 1;",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 10,
+          "sentence": 1
+        },
+        {
+          "from": 12,
+          "to": 14,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy nhánh A — twist đầu tiên: plan không phải Seq Scan trơn, mà là Gather rồi Parallel Seq Scan.",
+      "Hai worker quét song song, mỗi worker vứt một trăm sáu sáu nghìn sáu trăm bốn sáu dòng, để lấy đúng sáu mươi mốt dòng — và chạm ba nghìn sáu trăm lẻ tư trang."
+    ],
+    "visual": {
+      "title": "node d1.mjs — [A] chưa có index",
+      "commands": [
+        {
+          "cmd": "node d1.mjs",
+          "output": "== D1: quét cả bảng vs dùng index ==\nkhách #1: 61 đơn / 500000 đơn cả bảng\n=> chỉ 0.012% số dòng thỏa WHERE\n[A] CHƯA INDEX (orders chỉ có PK trên id)\nGather\n  (cost=1000.00..7218.17 rows=100 width=25)\n  (actual time=0.270..7.724 rows=61 loops=1)\n  -> Parallel Seq Scan on orders\n     Rows Removed by Filter: 166646 (x3 worker)\n  Buffers: shared hit=3604\n  Execution Time: 7.734 ms\n  query thường x3: 8.4 / 8.2 / 9.1 ms",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Tạo index bảy mươi ba mili giây, ANALYZE hai mươi chín, index nặng ba nghìn bốn trăm chín sáu ki-lô-bai. Chạy lại y hệt câu đó.",
+      "Twist thứ hai: node KHÔNG phải Index Scan mà là Bitmap Heap Scan, dưới nó là Bitmap Index Scan on idx_orders_customer — vẫn là dùng index.",
+      "Vì sáu mươi mốt dòng khớp nằm rải trên sáu mươi trang — bitmap gom địa chỉ rồi đọc trang theo thứ tự, rẻ hơn Index Scan trơn.",
+      "Kết quả: tám phẩy năm mili giây xuống không phẩy sáu lăm, nhanh gần mười hai lần; buffers ba nghìn sáu trăm lẻ tư xuống sáu ba."
+    ],
+    "visual": {
+      "title": "node d1.mjs — [B] sau khi có index",
+      "commands": [
+        {
+          "cmd": "node d1.mjs",
+          "output": "[+] CREATE INDEX idx_orders_customer: 73 ms\n    ANALYZE: 29 ms · index nặng 3496 kB\n[B] SAU KHI CÓ INDEX\nBitmap Heap Scan on orders\n  (cost=5.19..349.95 rows=99 width=25)\n  (actual time=0.037..0.083 rows=61 loops=1)\n  -> Bitmap Index Scan on idx_orders_customer\n     Index Cond: (customer_id = 1)\n  Buffers: shared hit=60 read=3\n  Execution Time: 0.102 ms\n  query thường x3: 0.7 / 1.0 / 0.5 ms\n=> nhanh hơn 11.8x, chạm ít hơn 57.2x trang",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn. Một: không index thì quét cả bảng, lọc rồi vứt gần hết; có index thì đi vài tầng cây rồi nhảy thẳng tới dòng.",
+      "Hai: index không miễn phí — nặng ba phẩy năm mê-ga, và mọi INSERT, UPDATE, DELETE đều phải cập nhật thêm nó.",
+      "Ba: index chỉ được planner chọn khi thống kê nói nó đáng — tạo index hay nạp data lớn xong phải ANALYZE.",
+      "Bẫy vàng: lọc customer_id nhỏ hơn bốn nghìn — tám mươi phần trăm bảng — thì Postgres BỎ index, quay lại Seq Scan.",
+      "Và thế là ĐÚNG: lấy phần lớn bảng thì đọc tuần tự rẻ hơn nhảy ngẫu nhiên. Index sai cột planner cũng không dùng — xem câu bốn tám."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Không index: quét cả bảng, vứt ~500k dòng để lấy 61 dòng",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Index KHÔNG miễn phí: 3496 kB + thuế lên mọi lệnh ghi",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Tạo index xong phải ANALYZE — planner cần thống kê mới",
+          "sentence": 2
+        },
+        {
+          "icon": "🪤",
+          "text": "Lọc 80% bảng → PG BỎ index, quay lại Seq Scan",
+          "sentence": 3
+        },
+        {
+          "icon": "🧭",
+          "text": "Index sai cột planner cũng không dùng — xem câu #48",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu ba mươi bảy — mở màn lô Database bằng đúng câu nhà tuyển dụng nào cũng thủ sẵn.",
+      "Câu tiếp theo: đưa bạn một plan EXPLAIN ANALYZE, bạn đọc từ đâu? cost với actual time khác nhau chỗ nào?",
+      "Có bản Shorts sáu mươi giây để ôn nhanh — hẹn gặp lại ở câu số ba mươi tám!"
+    ],
+    "visual": {
+      "title": "Câu 37/48 hoàn tất — hẹn gặp câu 38!",
+      "summary": [
+        {
+          "text": "Chưa index: Gather → Parallel Seq Scan, vứt ~500k dòng",
+          "sentence": 0
+        },
+        {
+          "text": "Có index: Bitmap Heap Scan — 8.5ms → 0.65ms, buffers 3604 → 63",
+          "sentence": 0
+        },
+        {
+          "text": "Bẫy: lọc 80% bảng thì PG bỏ index — Seq Scan lại rẻ hơn",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: đọc EXPLAIN ANALYZE — cost vs actual time",
+          "sentence": 1
+        }
+      ],
+      "next": "Câu 38/48: Đọc EXPLAIN (ANALYZE, BUFFERS) thế nào? 🎤"
+    }
+  }
+]

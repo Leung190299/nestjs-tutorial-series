@@ -1,0 +1,238 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn, câu bốn mươi bảy: traffic tăng, app bắt đầu ném lỗi timeout khi lấy connection — chuyện gì đang xảy ra?",
+      "Cái bẫy ở chữ song song: hai mươi query song song KHÔNG phải hai mươi kết nối.",
+      "Đo thật trên Prisma sáu chấm mười chín, ba cấu hình pool, cùng một khối lượng việc."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #47: Connection pool — P2024 và giới hạn kết nối",
+      "subtitle": "Phỏng vấn Frontend — Database · Câu 47/48",
+      "badge": "Prisma 6.19.3 · connection_limit & pool_timeout"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Nhớ một câu: app không mở kết nối vô hạn. Prisma giữ một pool — số kết nối tối đa, cộng hàng đợi phía trước.",
+      "Prisma sáu khai hai tham số ngay trên URL: connection_limit là kích thước pool, pool_timeout là hạn chờ.",
+      "Docs v6: query chờ trong hàng đợi quá giới hạn thì bị ném P2024, rồi engine chuyển sang query kế.",
+      "Mặc định pool bằng số CPU vật lý nhân hai cộng một. Và tầng dưới, Postgres có trần max_connections: đo được một trăm."
+    ],
+    "visual": {
+      "title": "Pool = số kết nối tối đa + hàng đợi",
+      "bullets": [
+        {
+          "icon": "🏊",
+          "text": "app KHÔNG mở kết nối vô hạn: pool = số kết nối tối đa + hàng đợi",
+          "sentence": 0
+        },
+        {
+          "icon": "🔗",
+          "text": "Prisma 6 khai trên URL: ?connection_limit=N&pool_timeout=S",
+          "sentence": 1
+        },
+        {
+          "icon": "📖",
+          "text": "docs v6: chờ quá hạn → ném P2024 rồi CHUYỂN sang query kế tiếp",
+          "sentence": 2
+        },
+        {
+          "icon": "⚙️",
+          "text": "mặc định: pool = num_physical_cpus * 2 + 1 · pool_timeout = 10s",
+          "sentence": 3
+        },
+        {
+          "icon": "🧱",
+          "text": "trần thật ở tầng DB: SHOW max_connections = 100",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Tải giống hệt ở cả ba nhánh: hai mươi query, mỗi query ngủ không phẩy ba giây. Pool chỉ khai lúc TẠO client.",
+      "Bắn bằng Promise.allSettled chứ không phải all — nhánh cạn pool phải đếm được bao nhiêu OK, bao nhiêu lỗi.",
+      "Ba nhánh là ba client riêng: pool hai chờ mười giây, pool hai mươi, pool một chờ một giây để ép lỗi."
+    ],
+    "visual": {
+      "filename": "demo-db-interview/prisma-qa/p5.mjs",
+      "language": "javascript",
+      "code": "const LOAD = `SELECT 1 AS ok FROM pg_sleep(${SLEEP})`;\nconst POLL_MS = 40;\n\nconst url = (app, params) => `${BASE}?application_name=${app}&${params}`;\nconst mk = (app, params) =>\n  new PrismaClient({ datasources: { db: { url: url(app, params) } } });\n\nasync function burst(app, c) {\n  const stop = watch(app);\n  const t0 = performance.now();\n  const rs = await Promise.allSettled(\n    Array.from({ length: N }, () => c.$queryRawUnsafe(LOAD)),\n  );\n\n  const A = await withClient('p5A', 'connection_limit=2&pool_timeout=10', (c) =>\n    burst('p5A', c),\n  );\n  const B = await withClient('p5B', 'connection_limit=20', (c) => burst('p5B', c));\n  const C = await withClient('p5C', 'connection_limit=1&pool_timeout=1', (c) =>\n    burst('p5C', c),\n  );",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 13,
+          "sentence": 1
+        },
+        {
+          "from": 15,
+          "to": 21,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy. Nhánh A, pool hai: ba nghìn không bốn tám mili giây, cao điểm đúng hai kết nối, không lỗi.",
+      "Hai mươi query chia mười lượt — pool nhỏ biến song song thành tuần tự.",
+      "Nhánh B, pool hai mươi: ba trăm năm bảy mili giây. Cùng việc y hệt, một lượt, nhanh hơn hơn tám lần.",
+      "Cao điểm đo từ pg_stat_activity ĐÚNG BẰNG connection_limit cả ba nhánh — tham số có tác dụng thật."
+    ],
+    "visual": {
+      "title": "3 nhánh: cùng 20 query song song",
+      "commands": [
+        {
+          "cmd": "node p5.mjs",
+          "output": "20 query song song qua $queryRawUnsafe:\n  SELECT 1 AS ok FROM pg_sleep(0.3)\nđo kết nối: pg_stat_activity theo\napplication_name (client giám sát tên riêng)\n\n[A] connection_limit=2 pool_timeout=10\n  3048ms · cao điểm 2 kết nối · lỗi 0\n=> 20 query chia 10 lượt: 10 x 0.3s\n\n[B] connection_limit=20\n  357ms · cao điểm 20 kết nối · lỗi 0\n=> cùng 20 query, 1 lượt: nhanh hơn 8.5x",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Nhánh C, pool một, chờ một giây: cao điểm một kết nối, OK bốn query, lỗi mười sáu query.",
+      "Nguyên văn: Timed out fetching a new connection from the connection pool.",
+      "Rồi phần đắt nhất, trong ngoặc: connection pool timeout một, connection limit một — Prisma in thẳng hai tham số bạn vừa đặt.",
+      "Bảng tổng kết: cao điểm hai, hai mươi, một; mười sáu lỗi P2024."
+    ],
+    "visual": {
+      "title": "[C] connection_limit=1 pool_timeout=1",
+      "commands": [
+        {
+          "cmd": "node p5.mjs",
+          "output": "  1247ms · cao điểm 1 · OK 4 / lỗi 16\nP2024 PrismaClientKnownRequestError\nTimed out fetching a new connection from the\nconnection pool. More info:\nhttp://pris.ly/d/connection-pool (Current\nconnection pool timeout: 1, connection limit: 1)\n\npool     |    ms | k.nối | lỗi\n[A] 2    |  3048 |     2 | -\n[B] 20   |   357 |    20 | -\n[C] 1    |  1247 |     1 | 16x P2024\nSHOW max_connections = 100",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "concept",
+    "narration": [
+      "Trả lời ba câu. Một: query không xin được kết nối thì xếp hàng — pool nhỏ biến song song thành nhiều lượt tuần tự.",
+      "Hai: chờ quá pool_timeout thì query bị hủy với P2024 — app thiếu kết nối hoặc giữ quá lâu, không phải DB chậm.",
+      "Ba: pool to hơn không phải luôn tốt — trần thật là max_connections của Postgres.",
+      "Beat ăn điểm: pool_timeout là timeout XIN kết nối, không phải timeout query.",
+      "Số học chứng minh: pool một, query thứ k bắt đầu ở không phẩy ba nhân k trừ một giây — chỉ bốn query đầu chờ dưới một giây."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn + beat vàng",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Không xin được kết nối → XẾP HÀNG: pool nhỏ = nhiều lượt tuần tự",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Chờ quá pool_timeout → P2024 · app thiếu/giữ lâu, KHÔNG phải DB chậm",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Pool to không phải luôn tốt: trần thật là max_connections",
+          "sentence": 2
+        },
+        {
+          "icon": "🟡",
+          "text": "pool_timeout = timeout XIN kết nối, KHÔNG phải timeout query",
+          "sentence": 3
+        },
+        {
+          "icon": "🔢",
+          "text": "pool 1: query thứ k chờ 0,3×(k−1)s → đúng 4 query < 1s ⇒ 4 OK / 16 P2024",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "concept",
+    "narration": [
+      "Bẫy lớn nhất: tăng pool KHÔNG miễn phí. Postgres chỉ có một trăm kết nối; mười instance nhân pool hai mươi là hai trăm.",
+      "Serverless mỗi function một pool, nên bắt buộc có pooler ngoài kiểu PgBouncer.",
+      "Bẫy hai: P2024 là xếp hàng quá lâu, không phải DB chết. Nhìn cả hai phía: pool quá nhỏ, hay ai đó giữ kết nối quá lâu?",
+      "Bẫy khi tự đo: pg_sleep trơn qua queryRaw ném P2010, deserialize column of type void — lỗi kiểu dữ liệu, dễ nhầm là lỗi pool."
+    ],
+    "visual": {
+      "title": "Bẫy phải tránh khi nói về pool",
+      "bullets": [
+        {
+          "icon": "🧱",
+          "text": "Tăng pool KHÔNG miễn phí: 10 instance × pool 20 = 200 > max_connections 100",
+          "sentence": 0
+        },
+        {
+          "icon": "☁️",
+          "text": "Serverless: bắt buộc pooler ngoài (PgBouncer)",
+          "sentence": 1
+        },
+        {
+          "icon": "🩺",
+          "text": "P2024 = xếp hàng quá lâu, KHÔNG phải DB chết — nhìn CẢ 2 phía",
+          "sentence": 2
+        },
+        {
+          "icon": "🔁",
+          "text": "Gốc hay gặp: transaction gọi HTTP · N+1 bắn 20 query bằng Promise.all",
+          "sentence": 2
+        },
+        {
+          "icon": "🪤",
+          "text": "BẪY ĐO: pg_sleep trơn → P2010 deserialize void, KHÔNG phải lỗi pool",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "outro",
+    "narration": [
+      "Xong câu bốn mươi bảy. Cùng hai mươi query: pool hai mất ba giây, pool hai mươi mất không phẩy ba bảy giây.",
+      "Câu tiếp là câu cuối lô: query Prisma chạy chậm trên production, quy trình của bạn là gì? Hẹn ở câu bốn mươi tám!"
+    ],
+    "visual": {
+      "title": "Câu 47/48 hoàn tất — pool là hàng đợi trước DB",
+      "summary": [
+        {
+          "text": "pool 2: 3048ms · pool 20: 357ms — cùng 20 query, nhanh hơn 8,5 lần",
+          "sentence": 0
+        },
+        {
+          "text": "Cao điểm kết nối = ĐÚNG connection_limit: 2 / 20 / 1",
+          "sentence": 0
+        },
+        {
+          "text": "pool 1 + pool_timeout 1s: OK 4 · 16 lỗi P2024 (timeout XIN kết nối)",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: query chậm trên production — quy trình tối ưu từ A tới Z",
+          "sentence": 1
+        }
+      ],
+      "next": "Câu 48/48: query chậm → quy trình tối ưu 🎤"
+    }
+  }
+]

@@ -1,0 +1,75 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Prisma findMany trả về mọi cột. Một nghìn đơn thành gần trăm ki-lô-bai JSON.",
+      "Thêm select hai cột còn hai sáu. Nhưng nó có làm query nhanh hơn không?"
+    ],
+    "visual": {
+      "question": "findMany trả về gì? 98KB hay 26KB?",
+      "framework": "prisma"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Mặc định là năm cột vô hướng, chín bảy phẩy chín ki-lô-bai — kể cả cột bạn không hiển thị.",
+      "Thêm select id và total: hai cột, hai sáu phẩy một. Giảm bảy mươi ba phần trăm, cùng một nghìn dòng."
+    ],
+    "visual": {
+      "filename": "p2.mjs",
+      "language": "javascript",
+      "code": "// [A] mặc định: MỌI cột vô hướng\nconst a = await p.order.findMany({\n  take: 1000,\n});                  // 5 cột · 97.9 KB\n// [B] select đúng thứ UI cần\nconst b = await p.order.findMany({\n  take: 1000,\n  select: { id: true, total: true },\n});                  // 2 cột · 26.1 KB\n// -73.4% payload · cùng 1000 dòng\n// checksum SUM(total) khớp từng số\n// EXPLAIN 2 nhánh Y HỆT nhau:\n// cùng Index Scan, chỉ width 25 -> 8\n// select cắt BYTE, không cắt trang",
+      "steps": [
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 0
+        },
+        {
+          "from": 10,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Đo bằng JSON chấm stringify, không ước lượng — ba lần chạy ra y một con số.",
+      "Vì sao bảy mươi ba chứ không sáu mươi? createdAt dạng chuỗi ISO nặng bốn mươi bai mỗi dòng."
+    ],
+    "visual": {
+      "src": "screens/dbqa/p2-select.png",
+      "caption": "97.9KB → 26.1KB · cùng 1000 dòng"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Bẫy lớn nhất: select KHÔNG làm query nhanh hơn. EXPLAIN hai nhánh cùng plan, chỉ width đổi hai lăm xuống tám.",
+      "Postgres là row-store, vẫn đọc bấy nhiêu trang. Cái giảm là byte chở về và RAM Node."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "✂️",
+          "text": "select đúng cột: 97.9KB → 26.1KB (-73.4%)",
+          "sentence": 0
+        },
+        {
+          "icon": "🙈",
+          "text": "omit = mặt kia của select, cũng cắt ở tầng SQL",
+          "sentence": 0
+        }
+      ],
+      "trap": "select KHÔNG đổi PLAN · cùng Index Scan, chỉ width 25 → 8"
+    }
+  }
+]

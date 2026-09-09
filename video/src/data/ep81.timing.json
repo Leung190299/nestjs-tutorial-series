@@ -1,0 +1,298 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #37: Index làm gì? Seq Scan vs Index Scan",
+        "subtitle": "Phỏng vấn Frontend — Database · Câu 37/48",
+        "badge": "Lô mới · Database & SQL"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep81/scene-01-0-49cb8d89.wav",
+          "startFrame": 0,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep81/scene-01-1-91836e59.wav",
+          "startFrame": 224,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep81/scene-01-2-969ab61c.wav",
+          "startFrame": 376,
+          "durationInFrames": 140
+        }
+      ],
+      "durationInFrames": 534
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Index làm gì — và ai quyết định dùng nó",
+        "bullets": [
+          {
+            "icon": "🔍",
+            "text": "Không index: quét TOÀN BỘ bảng, từng dòng — lọc rồi vứt",
+            "sentence": 0
+          },
+          {
+            "icon": "🌲",
+            "text": "Index = cấu trúc phụ: đi vài tầng cây rồi nhảy thẳng tới dòng",
+            "sentence": 1
+          },
+          {
+            "icon": "⚖️",
+            "text": "PG có Seq Scan / Bitmap Heap Scan / Index Scan — planner chọn theo cost",
+            "sentence": 2
+          },
+          {
+            "icon": "🔑",
+            "text": "PK chỉ index cột id — WHERE customer_id vẫn quét cả bảng",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep81/scene-02-0-991a07ab.wav",
+          "startFrame": 0,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep81/scene-02-1-47e854f5.wav",
+          "startFrame": 186,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep81/scene-02-2-d2690626.wav",
+          "startFrame": 384,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep81/scene-02-3-0eb81631.wav",
+          "startFrame": 608,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 864
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "sql-qa/d1.mjs — câu SQL trong script",
+        "language": "sql",
+        "code": "-- orders: 500.000 dòng, chỉ có PRIMARY KEY trên id\n-- khách #1 có 61 đơn = 0.012% số dòng cả bảng\n\n-- [A] chưa có index cho cột customer_id\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT * FROM orders WHERE customer_id = 1;\n\n-- [+] tạo index trên đúng cột đang lọc\nCREATE INDEX idx_orders_customer ON orders(customer_id);\nANALYZE orders;\n\n-- [B] chạy lại ĐÚNG câu đó, không sửa một chữ\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT * FROM orders WHERE customer_id = 1;",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 10,
+            "sentence": 1
+          },
+          {
+            "from": 12,
+            "to": 14,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep81/scene-03-0-13cac4fd.wav",
+          "startFrame": 0,
+          "durationInFrames": 308
+        },
+        {
+          "file": "audio/ep81/scene-03-1-b0a1a185.wav",
+          "startFrame": 316,
+          "durationInFrames": 308
+        },
+        {
+          "file": "audio/ep81/scene-03-2-35f30a62.wav",
+          "startFrame": 632,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 830
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node d1.mjs — [A] chưa có index",
+        "commands": [
+          {
+            "cmd": "node d1.mjs",
+            "output": "== D1: quét cả bảng vs dùng index ==\nkhách #1: 61 đơn / 500000 đơn cả bảng\n=> chỉ 0.012% số dòng thỏa WHERE\n[A] CHƯA INDEX (orders chỉ có PK trên id)\nGather\n  (cost=1000.00..7218.17 rows=100 width=25)\n  (actual time=0.270..7.724 rows=61 loops=1)\n  -> Parallel Seq Scan on orders\n     Rows Removed by Filter: 166646 (x3 worker)\n  Buffers: shared hit=3604\n  Execution Time: 7.734 ms\n  query thường x3: 8.4 / 8.2 / 9.1 ms",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep81/scene-04-0-83feec8f.wav",
+          "startFrame": 0,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ep81/scene-04-1-e6f5e8e1.wav",
+          "startFrame": 167,
+          "durationInFrames": 248
+        }
+      ],
+      "durationInFrames": 433
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "node d1.mjs — [B] sau khi có index",
+        "commands": [
+          {
+            "cmd": "node d1.mjs",
+            "output": "[+] CREATE INDEX idx_orders_customer: 73 ms\n    ANALYZE: 29 ms · index nặng 3496 kB\n[B] SAU KHI CÓ INDEX\nBitmap Heap Scan on orders\n  (cost=5.19..349.95 rows=99 width=25)\n  (actual time=0.037..0.083 rows=61 loops=1)\n  -> Bitmap Index Scan on idx_orders_customer\n     Index Cond: (customer_id = 1)\n  Buffers: shared hit=60 read=3\n  Execution Time: 0.102 ms\n  query thường x3: 0.7 / 1.0 / 0.5 ms\n=> nhanh hơn 11.8x, chạm ít hơn 57.2x trang",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep81/scene-05-0-24c83361.wav",
+          "startFrame": 0,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep81/scene-05-1-c3ac01eb.wav",
+          "startFrame": 241,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep81/scene-05-2-2abf16fb.wav",
+          "startFrame": 523,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep81/scene-05-3-47c0c7a5.wav",
+          "startFrame": 728,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 934
+    },
+    {
+      "id": "scene-06",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Không index: quét cả bảng, vứt ~500k dòng để lấy 61 dòng",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Index KHÔNG miễn phí: 3496 kB + thuế lên mọi lệnh ghi",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Tạo index xong phải ANALYZE — planner cần thống kê mới",
+            "sentence": 2
+          },
+          {
+            "icon": "🪤",
+            "text": "Lọc 80% bảng → PG BỎ index, quay lại Seq Scan",
+            "sentence": 3
+          },
+          {
+            "icon": "🧭",
+            "text": "Index sai cột planner cũng không dùng — xem câu #48",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep81/scene-06-0-6109d959.wav",
+          "startFrame": 0,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep81/scene-06-1-e7002b61.wav",
+          "startFrame": 217,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep81/scene-06-2-17e41abd.wav",
+          "startFrame": 451,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep81/scene-06-3-9061927b.wav",
+          "startFrame": 639,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep81/scene-06-4-b6b6115c.wav",
+          "startFrame": 823,
+          "durationInFrames": 195
+        }
+      ],
+      "durationInFrames": 1036
+    },
+    {
+      "id": "scene-07",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 37/48 hoàn tất — hẹn gặp câu 38!",
+        "summary": [
+          {
+            "text": "Chưa index: Gather → Parallel Seq Scan, vứt ~500k dòng",
+            "sentence": 0
+          },
+          {
+            "text": "Có index: Bitmap Heap Scan — 8.5ms → 0.65ms, buffers 3604 → 63",
+            "sentence": 0
+          },
+          {
+            "text": "Bẫy: lọc 80% bảng thì PG bỏ index — Seq Scan lại rẻ hơn",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: đọc EXPLAIN ANALYZE — cost vs actual time",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 38/48: Đọc EXPLAIN (ANALYZE, BUFFERS) thế nào? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep81/scene-07-0-fc36141e.wav",
+          "startFrame": 0,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep81/scene-07-1-0420077d.wav",
+          "startFrame": 162,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/ep81/scene-07-2-23ea2f10.wav",
+          "startFrame": 418,
+          "durationInFrames": 116
+        }
+      ],
+      "durationInFrames": 552
+    }
+  ]
+}

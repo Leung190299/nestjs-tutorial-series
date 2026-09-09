@@ -1,0 +1,24 @@
+# Postgres dùng chung cho 12 câu phỏng vấn DB (lô 4).
+# LUÔN chạy với project name riêng để không đụng container của project khác:
+#   docker compose -p dbqa -f demo-db-interview/docker-compose.yml up -d
+#   docker compose -p dbqa -f demo-db-interview/docker-compose.yml down   (KHÔNG dùng -v: giữ data)
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: dbqa-pg
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: dbqa
+      POSTGRES_PASSWORD: dbqa
+      POSTGRES_DB: dbqa
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dbqa -d dbqa"]
+      interval: 3s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - dbqa-data:/var/lib/postgresql/data
+
+volumes:
+  dbqa-data:
