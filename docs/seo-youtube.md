@@ -2739,3 +2739,547 @@ Demo thật bằng f6_isolate.dart, chuỗi JSON 18.9MB: chạy trên main — f
 | sf4 | ScrollController dội API 45 lần một cú kéo #shorts | Listener chạy MỖI scroll event — guard if _loading return, cờ set NGAY TRƯỚC await: 45 lần về 1 lần.<br>Bẫy: set cờ sau await là cửa sổ race vẫn mở suốt 800ms chờ mạng.<br>Video đầy đủ: https://youtu.be/Wc3dkoRP0ig<br>#shorts #flutter #phongvan |
 | sf5 | Grid ảnh ngốn 183MB RAM — 1 dòng code cứu #shorts | RAM ảnh ăn theo kích thước DECODE — cacheWidth 380 đưa imageCache từ 183.1MB về 6.6MB, giảm 27.7 lần.<br>Bẫy: cacheWidth là pixel VẬT LÝ — ô 190 điểm màn 2x phải khai 380, kẻo ảnh mờ.<br>Video đầy đủ: https://youtu.be/koAhlIE_vzw<br>#shorts #flutter #phongvan |
 | sf6 | jsonDecode đứng hình UI — Isolate.run cứu #shorts | Dart một luồng, await không cứu — Isolate.run dời decode sang isolate nền: gap 235ms về đúng 1 frame 16ms.<br>Bẫy: closure capture this là crash unsendable — helper top-level chỉ nhận String.<br>Video đầy đủ: https://youtu.be/Jzn5ELGPewk<br>#shorts #flutter #phongvan |
+
+
+---
+
+## LÔ 3 SERIES PHỎNG VẤN FRONTEND — Backend Node.js & NestJS (câu #25–#36 + 12 Shorts)
+
+> Lô 3 nối tiếp cùng playlist **"Phỏng vấn Frontend 🇻🇳"** — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE (KHÔNG tạo playlist mới — khi đăng chỉ nối 24 video lô 3 vào playlist sẵn có). CHƯA ĐĂNG — mọi link video là placeholder `[LINK-EP69]`..`[LINK-EP80]` (bản ngang) và `[LINK-SHORT-25]`..`[LINK-SHORT-36]` (Shorts), điền link thật khi đăng. Chủ đề lô 3: BACKEND cho dân Frontend đi phỏng vấn Fullstack — 6 câu Node.js core (B1–B6 → ep69–ep74) + 6 câu NestJS (S1–S6 → ep75–ep80), mỗi câu có demo chạy SỐ THẬT trên Node 22 (kịch bản luôn nói rõ "trên máy tôi"). Code: `demo-be-interview/` (`node-qa/` + `nest-qa/`), đóng băng ở tag `be-qa-batch-3`. Cặp chéo: câu 25↔30 (twist microtask ESM ↔ require(esm)), câu 27 nhắc sang câu 18 RN + 24 Flutter (một chiều — video cũ không sửa), câu 32 trỏ playlist series NestJS cũ.
+
+Từ khóa chủ lực lô 3: `phỏng vấn nodejs`, `phỏng vấn nestjs`, `phỏng vấn backend`, `event loop nodejs`, `worker threads`, `stream backpressure`, `promise.all`, `dependency injection nestjs`, `câu hỏi phỏng vấn backend`, `học nodejs`, `học nestjs`.
+
+---
+
+### Phỏng vấn FE #25 — Event loop Node: thứ tự chạy thật (2:58)
+
+**Tiêu đề:** Phỏng vấn FE #25: Event loop Node — thứ tự chạy thật | Node.js interview
+
+**Mô tả:**
+```
+Mở màn lô 3 series Phỏng vấn Frontend — 12 câu hỏi BACKEND thật mà dân Frontend đi phỏng vấn Fullstack chắc chắn gặp: 6 câu Node.js core + 6 câu NestJS. Câu 25 là câu kinh điển số một của mọi buổi phỏng vấn backend Node: console.log, setTimeout 0, setImmediate, nextTick, promise — đố bạn thứ tự chạy?
+
+Mô hình chuẩn trong docs: code sync chạy hết trước — call stack xả sạch; rồi tới microtask — process.nextTick trước (docs nói thẳng nextTick KHÔNG thuộc event loop, nó xả ngay sau operation hiện tại), xong mới tới Promise callback; hết microtask event loop mới quay vòng qua các phase timers, poll, check.
+
+Demo thật bằng b1.mjs trên Node 22, hàm hit gắn số thứ tự ĐỘNG — và một cú twist rất nhiều sách viết sai: promise.then chạy TRƯỚC nextTick, vì file .mjs là ESM — module được evaluate như một microtask; đối chứng file .cjs thì nextTick lên trước, đúng sách. Còn setTimeout 0 với setImmediate: ngoài I/O cycle thứ tự KHÔNG đảm bảo (5 lần chạy 4 lần đảo trên máy tôi), nhưng đặt trong callback fs.readFile thì immediate thắng 5/5 lần — docs đảm bảo điều này.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu lô Node.js & câu 25
+0:20 Cơ chế: stack → microtask → phase
+0:55 Code: b1.mjs — 5 ứng viên xếp hàng
+1:19 Demo thật: twist ESM — promise trước nextTick
+1:54 Trả lời như đi phỏng vấn: chốt 3 câu + twist ESM
+2:37 Tổng kết câu 25 & hẹn câu 26
+
+📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
+⏮️ Câu chốt lô 2: https://youtu.be/Jzn5ELGPewk
+⏭️ Câu tiếp theo: [LINK-EP70]
+📱 Bản Shorts 60 giây: [LINK-SHORT-25]
+🔁 CommonJS vs ESM còn cú twist lớn hơn: câu 30 — require(esm): [LINK-EP74]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#nodejs #phongvan #backend #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🔁 Mở màn lô 3 — 12 câu hỏi BACKEND từ phòng phỏng vấn Node.js & NestJS, câu nào cũng demo chạy số thật. Đố nhỏ câu 25: trong file .mjs, promise.then hay process.nextTick chạy trước? PROMISE — vì module ESM được evaluate như một microtask, .then nối thẳng vào hàng đang xả; file .cjs thì nextTick lên trước, đúng sách. Nói được twist này là interviewer biết bạn đã tự chạy code. Comment thứ tự bạn đoán trước khi xem nhé!
+```
+
+**Thumbnail:** badge "PV FE #25" · dòng lớn "PROMISE TRƯỚC" / "NEXTTICK?!" · phụ đề "Phỏng vấn Frontend · Câu 25/36" · badge emoji 🔁 · variant shot, ảnh dọc `screens/beqa/b1-order.png` (terminal thứ tự thật 5 hàng đợi).
+
+**Tags:** `event loop nodejs, process.nexttick, setimmediate, settimeout 0, microtask nodejs, esm vs commonjs, phỏng vấn nodejs, phỏng vấn backend, nodejs event loop order, node 22, nodejs tiếng việt, học nodejs, câu hỏi phỏng vấn nodejs, nodejs interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #26 — Node 1 thread: vì sao vẫn cân nghìn request? (2:58)
+
+**Tiêu đề:** Phỏng vấn FE #26: Node 1 thread — vì sao vẫn cân nghìn request? | Node.js interview
+
+**Mô tả:**
+```
+Câu 26 lô backend: Node chạy một thread — sao phục vụ được nghìn request cùng lúc? Và khi nào thì KHÔNG? Trả lời bằng một server thật với hai route cùng MỘT khối lượng — chỉ khác một chữ Sync — rồi để autocannon in số ra màn hình.
+
+Bí mật scalability nằm ngay trong docs: Node dùng một số lượng NHỎ thread để phục vụ rất nhiều client — vì thread chính không bao giờ NGỒI CHỜ I/O: gặp việc chờ mạng, chờ đĩa là event loop giao cho hệ thống làm nền rồi quay sang client khác. Việc nặng như crypto, nén, file I/O thì API async đẩy sang Worker Pool của libuv — mặc định 4 thread. Mặt trái: event loop bị giữ quá lâu là MỌI client hiện tại lẫn mới đều không tới lượt.
+
+Demo thật bằng b2-server.mjs: khối lượng là pbkdf2 40.000 vòng — khoảng 8–9ms mỗi hash trên máy tôi. Autocannon bắn 10 kết nối trong 5 giây: route sync (pbkdf2Sync chạy ngay trên event loop) khoảng 104 req/s, latency trung bình 95ms — đúng bằng 10 request xếp hàng nhân 9ms mỗi hash, lat max gần nửa giây; route async 322 req/s, latency 30ms — hơn GẤP BA, cùng một thread JavaScript. Và gấp ba chứ không vô hạn: việc nặng không biến mất, nó RỜI event loop sang threadpool 4 thread — trần song song nằm ở đó, nấc chỉnh tiếp theo là UV_THREADPOOL_SIZE.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 26 — 1 thread, nghìn request
+0:18 Cơ chế: non-blocking I/O & worker pool
+0:52 Code: b2-server.mjs — pbkdf2 sync vs async
+1:24 Demo thật: 104 vs 322 req/s — gấp 3 lần
+2:00 Trả lời như đi phỏng vấn: chốt 3 câu + điểm cộng
+2:40 Tổng kết câu 26 & hẹn câu 27
+
+📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP69]
+⏭️ Câu tiếp theo: [LINK-EP71]
+📱 Bản Shorts 60 giây: [LINK-SHORT-26]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#nodejs #phongvan #backend #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🧵 Đố nhỏ câu 26: đổi pbkdf2Sync sang pbkdf2 callback thì MỘT request đơn lẻ có nhanh hơn không? KHÔNG — phép tính vẫn 8–9ms; async chỉ DỜI việc nặng sang threadpool 4 thread của libuv để event loop rảnh đi nhận client khác. Khác biệt chỉ lộ khi nhiều kết nối đồng thời: 104 vs 322 req/s trên demo. Luật số một của Node: đừng chặn event loop. Bạn từng dính API sync nào làm server đơ chưa?
+```
+
+**Thumbnail:** badge "PV FE #26" · dòng lớn "1 THREAD" / "322 REQ/S?" · phụ đề "Phỏng vấn Frontend · Câu 26/36" · badge emoji 🧵 · variant shot, ảnh dọc `screens/beqa/b2-bench.png` (bảng autocannon sync vs async).
+
+**Tags:** `non-blocking io, nodejs single thread, libuv threadpool, uv_threadpool_size, autocannon, pbkdf2 nodejs, event loop blocking, phỏng vấn nodejs, phỏng vấn backend, nodejs scalability, nodejs tiếng việt, học nodejs, câu hỏi phỏng vấn nodejs, nodejs interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #27 — CPU-bound trên Node: worker_threads cứu server (2:53)
+
+**Tiêu đề:** Phỏng vấn FE #27: CPU-bound trên Node — worker_threads cứu server | Node.js interview
+
+**Mô tả:**
+```
+Câu 27 lô backend — hệ quả trực tiếp của câu trước: hash password hay nén ảnh trên Node làm cả server đơ, bạn xử lý thế nào? Demo chạy CÙNG một khối hash theo hai cách — trên main thread và qua worker_threads — để đồng hồ tick 100ms làm trọng tài.
+
+JavaScript của Node chạy trên MỘT thread — khối CPU dài chiếm event loop là không timer, không I/O, không request nào được phục vụ. Lời giải chính danh trong docs: worker_threads — "threads that execute JavaScript in parallel" — thread chạy JavaScript song song trong cùng process. Docs khoanh vùng rõ: worker hợp cho tính toán CPU nặng, còn I/O thì KHÔNG giúp mấy. Giao việc qua workerData, worker tính xong postMessage kết quả về — main chỉ việc await.
+
+Demo thật bằng b3.mjs: pbkdf2Sync 40.000 vòng lặp 200 lần chuỗi NỐI (không chia song song được). Nhánh main: maxGap 1.921ms — đồng hồ ĐỨNG HÌNH trọn 1,9 giây, với server thật là 1,9 giây KHÔNG một request nào được phục vụ. Nhánh worker: spawn 45ms, maxGap chỉ 102ms — đúng một tick cộng 2ms jitter. Hai dòng tổng 1.871 vs 1.874ms — NGANG NHAU, hai nhánh in cùng hash khớp từng ký tự: việc chạy chỗ khác chứ không xếp hàng lại, không ai ăn gian. Và nhớ phân biệt: cluster nhân cả PROCESS chia sẻ cổng — scale ngang cả app; task nặng lẻ thì worker_threads.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 27 — hash làm server đơ
+0:16 Cơ chế: worker_threads — JS song song cùng process
+0:49 Code: b3.mjs — main vs new Worker
+1:21 Demo thật: maxGap 1921ms vs 102ms
+1:55 Trả lời như đi phỏng vấn: chốt 3 câu + so 3 nền tảng
+2:35 Tổng kết câu 27 & hẹn câu 28
+
+📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP70]
+⏭️ Câu tiếp theo: [LINK-EP72]
+📱 Bản Shorts 60 giây: [LINK-SHORT-27]
+🔁 Cùng bài trên mobile: câu 18 (RN chia lô trên JS thread) — https://youtu.be/zlzQHCex90o · câu 24 (Flutter Isolate.run) — https://youtu.be/Jzn5ELGPewk
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#nodejs #phongvan #backend #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+👷 Đố nhỏ câu 27: bọc khối hash trong async/await có cứu được server không? KHÔNG — await không tạo thread nào cả, CPU-bound vẫn chiếm event loop 1,9 giây. Phải bê việc sang worker_threads: maxGap từ 1921ms về 102ms, tổng thời gian KHÔNG đổi, hash khớp từng ký tự — việc chạy chỗ khác chứ không ai làm ít đi. Còn cluster là nhân cả process để scale ngang — chuyện khác. Bạn từng nhầm worker_threads với cluster chưa?
+```
+
+**Thumbnail:** badge "PV FE #27" · dòng lớn "SERVER ĐƠ 1.9S" / "VÌ 1 CÚ HASH?" · phụ đề "Phỏng vấn Frontend · Câu 27/36" · badge emoji 👷 · variant shot, ảnh dọc `screens/beqa/b3-worker.png` (đồng hồ tick — maxGap hai nhánh).
+
+**Tags:** `worker threads nodejs, worker_threads, cpu bound nodejs, cluster vs worker threads, postmessage workerdata, event loop blocking, hash password nodejs, phỏng vấn nodejs, phỏng vấn backend, nodejs parallel, nodejs tiếng việt, học nodejs, câu hỏi phỏng vấn nodejs, nodejs interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #28 — Stream và backpressure: 1GB file, 100MB RAM (2:37)
+
+**Tiêu đề:** Phỏng vấn FE #28: Stream và backpressure — 1GB file, 100MB RAM | Node.js interview
+
+**Mô tả:**
+```
+Câu 28 lô backend: API cho tải file 1GB — code của bạn có làm server phình 1GB RAM không? Demo đo RSS thật trên CÙNG một file 1GB, đọc theo hai cách: readFile cả cục và stream chảy từng chunk.
+
+readFile tải NGUYÊN file vào RAM rồi mới xử lý — file 1GB là RSS phồng đúng cỡ đó, 10GB là server gục. Stream đọc từng chunk theo highWaterMark — read stream của fs mặc định 64KiB — nên bộ nhớ giữ cố định dù file bao lớn. Backpressure: bên ghi chậm hơn bên đọc thì write() trả false — tín hiệu dừng nguồn, chờ event drain rồi mới bơm tiếp; và pipe tự lo trọn gói — docs nói dòng chảy được "automatically managed".
+
+Demo thật bằng b4.mjs: nhánh readfile — RSS từ 40MB phồng lên đỉnh 1.071MB, đúng nguyên cỡ file (có lần đo 545MB do macOS nén bộ nhớ — số sạch nhất vẫn là cả gigabyte); nhánh stream — đỉnh chỉ 97MB, chênh 11 lần, và highWaterMark thật in đúng 65.536 byte. Trung thực luôn: thời gian hai cách ngang nhau — 203 vs 315ms trên máy tôi — stream mua RAM phẳng, KHÔNG mua tốc độ. Bẫy: đọc file để trả response thì pipe thẳng vào res — đừng await đọc hết rồi res.send.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 28 — file 1GB, RAM bao nhiêu?
+0:14 Cơ chế: readFile cả cục vs stream từng chunk
+0:42 Code: b4.mjs — createReadStream + pipe
+1:13 Demo thật: RSS đỉnh 1071MB vs 97MB
+1:45 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:15 Tổng kết câu 28 & hẹn câu 29
+
+📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP71]
+⏭️ Câu tiếp theo: [LINK-EP73]
+📱 Bản Shorts 60 giây: [LINK-SHORT-28]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#nodejs #phongvan #backend #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🌊 Đố nhỏ câu 28: stream có làm đọc file NHANH hơn readFile không? KHÔNG — 203 vs 315ms, ngang nhau trên demo. Stream mua RAM PHẲNG: đỉnh 97MB thay vì 1071MB cho cùng file 1GB, chênh 11 lần — vì chỉ giữ từng chunk 64KiB trong tay. Còn backpressure? write() trả false là dừng, chờ drain bơm tiếp — mà pipe tự lo hết cho bạn. Bạn từng thấy server ăn RAM theo cỡ file chưa? Kể nghe với!
+```
+
+**Thumbnail:** badge "PV FE #28" · dòng lớn "1GB FILE" / "97MB RAM?" · phụ đề "Phỏng vấn Frontend · Câu 28/36" · badge emoji 🌊 · variant shot, ảnh dọc `screens/beqa/b4-rss.png` (RSS đỉnh hai nhánh).
+
+**Tags:** `stream nodejs, backpressure, highwatermark, createreadstream, pipe nodejs, readfile vs stream, rss memory nodejs, phỏng vấn nodejs, phỏng vấn backend, file lớn nodejs, nodejs tiếng việt, học nodejs, câu hỏi phỏng vấn nodejs, nodejs interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #29 — Promise.all: 3 API trong 300ms và bẫy fail-fast (2:43)
+
+**Tiêu đề:** Phỏng vấn FE #29: Promise.all — 3 API trong 300ms và bẫy fail-fast | Node.js interview
+
+**Mô tả:**
+```
+Câu 29 lô backend: trang cần gọi 3 API — code của bạn mất 900 hay 300 mili giây? Và khi một API hỏng thì sao? Demo đo thật: cùng 3 API giả lập 300ms mỗi cái, chạy đủ bốn kiểu — await tuần tự, Promise.all, bẫy fail-fast và allSettled.
+
+Await tuần tự là cộng dồn: mỗi await đợi API trước xong mới bắn cái sau. Promise.all bắn cả ba cùng lúc rồi đợi chung — tổng bằng cái CHẬM NHẤT (MDN: fulfill khi TẤT CẢ promise đầu vào fulfill). Nhưng nó fail-fast: chỉ MỘT cái reject là cả cụm reject NGAY với lỗi đầu tiên — và các promise kia KHÔNG bị hủy, vẫn chạy ngầm. Muốn nhận đủ kết quả từng cái kể cả lỗi thì Promise.allSettled.
+
+Số thật từ b5.mjs trên máy tôi: tuần tự — từng bước 302ms, tổng 907ms; Promise.all — 303ms, chênh đúng 3 lần, bằng số promise. Khối bẫy: orders reject sau 100ms — Promise.all nổ NGAY ở 103ms, không đợi hai cái 300ms; nhưng dòng bằng chứng cho thấy user và promos vẫn âm thầm chạy xong ở 302ms — không ai nhận kết quả. Còn allSettled đợi đủ cả ba, tổng 302ms, không nổ. Bẫy chốt: fail-fast KHÔNG hủy promise còn lại — muốn hủy thật phải truyền tín hiệu kiểu AbortController.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 29 — 900 hay 300 mili giây?
+0:16 Cơ chế: tuần tự cộng dồn vs Promise.all
+0:48 Code: b5.mjs — 4 kiểu chạy 3 API
+1:18 Demo thật: 907ms vs 303ms + bẫy fail-fast
+1:50 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:19 Tổng kết câu 29 & hẹn câu 30
+
+📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP72]
+⏭️ Câu tiếp theo: [LINK-EP74]
+📱 Bản Shorts 60 giây: [LINK-SHORT-29]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#nodejs #phongvan #backend #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+⚡ Đố nhỏ câu 29: Promise.all reject ở giây 103 vì orders hỏng — hai API còn lại có dừng không? KHÔNG — fail-fast chỉ nghĩa là cụm reject ngay với lỗi đầu tiên; user và promos vẫn âm thầm chạy xong ở 302ms, tốn tài nguyên mà không ai nhận kết quả. Muốn hủy thật phải AbortController; muốn đủ báo cáo từng cái kể cả lỗi thì allSettled. Bạn hay dùng all hay allSettled? Comment lý do nhé!
+```
+
+**Thumbnail:** badge "PV FE #29" · dòng lớn "3 API" / "907 HAY 303MS?" · phụ đề "Phỏng vấn Frontend · Câu 29/36" · badge emoji ⚡ · variant shot, ảnh dọc `screens/beqa/b5-timing.png` (bảng thời gian 4 kiểu chạy).
+
+**Tags:** `promise.all, promise.allsettled, promise.race, fail fast promise, await tuần tự, async await nodejs, abortcontroller, phỏng vấn nodejs, phỏng vấn javascript, gọi api song song, nodejs tiếng việt, học nodejs, câu hỏi phỏng vấn nodejs, nodejs interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #30 — CommonJS vs ESM: require(esm) đã chạy được (2:57)
+
+**Tiêu đề:** Phỏng vấn FE #30: CommonJS vs ESM — require(esm) đã chạy được | Node.js interview
+
+**Mô tả:**
+```
+Câu 30 lô backend: dự án Node của bạn dùng CommonJS hay ESM — và khác nhau thật sự ở đâu? Trả lời bằng bốn phép thử chạy thật trên cả hai hệ: __dirname, load JSON, top-level await, và load chéo — kèm một cú twist nhiều người chưa cập nhật.
+
+CommonJS là hệ cũ của Node: require với module.exports — load động, đồng bộ; ESM là chuẩn chung của JavaScript: import/export tĩnh. Node chọn hệ theo đuôi file: .mjs luôn là ESM, .cjs luôn là CommonJS, .js theo trường type trong package.json — không khai thì mặc định CommonJS. CJS có sẵn __dirname, require JSON ăn ngay; ESM mất __dirname (thay bằng import.meta.dirname) nhưng có top-level await, và import JSON phải khai with type json.
+
+Demo thật b6.mjs + b6-cjs.cjs trên Node 22: CJS — __dirname OK, require JSON OK, top-level await là SyntaxError ngay lúc parse. Twist ở mục 4: require một file ESM có top-level await nổ ERR_REQUIRE_ASYNC_MODULE, nhưng require file ESM ĐỒNG BỘ thì chạy luôn — không cờ, không warning (require(esm) chính thức từ Node 22.12). Bẫy: bật type module là mọi file .js thành ESM hết — require cũ chết ngay, file cần CommonJS thì đổi đuôi .cjs. Và ESM đổi cả thứ tự microtask — cú twist đã đo ở câu 25.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 30 — CommonJS hay ESM?
+0:14 Cơ chế: hai hệ module — luật chọn theo đuôi file
+0:47 Code: b6.mjs — 4 phép thử
+1:16 Demo thật: require(esm) chạy — twist Node 22
+1:58 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:34 Tổng kết câu 30 — khối Node 6/6 xong
+
+📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP73]
+⏭️ Câu tiếp theo: [LINK-EP75]
+📱 Bản Shorts 60 giây: [LINK-SHORT-30]
+🔁 Cú twist microtask của ESM đã đo ở câu 25: [LINK-EP69]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#nodejs #phongvan #backend #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+📦 Đố nhỏ câu 30: require một file ESM trong Node — chạy được không? ĐƯỢC RỒI — từ Node 22.12, require(esm) load được ES module đồng bộ, không cờ, không warning; chỉ nổ ERR_REQUIRE_ASYNC_MODULE khi file dính top-level await. Rất nhiều tài liệu cũ vẫn viết "không thể" — nói được câu này là interviewer biết bạn cập nhật. Dự án của bạn đang là CommonJS hay ESM? Comment cho mình biết nhé!
+```
+
+**Thumbnail:** badge "PV FE #30" · dòng lớn "REQUIRE(ESM)" / "CHẠY ĐƯỢC RỒI?" · phụ đề "Phỏng vấn Frontend · Câu 30/36" · badge emoji 📦 · variant shot, ảnh dọc `screens/beqa/b6-compare.png` (bảng đối chiếu 4 phép thử CJS vs ESM).
+
+**Tags:** `commonjs vs esm, require esm, import.meta.dirname, top-level await, type module, dirname esm, import json esm, phỏng vấn nodejs, phỏng vấn backend, node 22, nodejs tiếng việt, học nodejs, câu hỏi phỏng vấn nodejs, nodejs interview questions, es modules`
+
+---
+
+### Phỏng vấn FE #31 — DI trong NestJS: vì sao không tự new service? (2:56)
+
+**Tiêu đề:** Phỏng vấn FE #31: DI trong NestJS — vì sao không tự new service? | NestJS interview
+
+**Mô tả:**
+```
+Câu 31 — mở màn khối NestJS của lô backend: Dependency Injection là gì, và vì sao NestJS bắt bạn dùng nó ngay từ dòng đầu tiên? Demo chạy thật: một service giá 100, một bản mock giá 1 — thay ruột mà không sửa một dòng nào ở chỗ dùng.
+
+IoC — đảo quyền khởi tạo: class KHÔNG tự new dependency, chỉ khai báo mình cần gì ở constructor — container của Nest lo tạo và đưa instance vào. Docs nói thẳng: Nest có built-in IoC container quản quan hệ giữa các provider — foundation of dependency injection; container resolve theo đúng type annotation bạn khai. Provider mặc định là SINGLETON: tạo đúng một lần, ai inject cũng nhận lại chính instance đó.
+
+Demo thật bằng S1MockModule — 12 dòng: providers đăng ký provide PriceService, useValue là object thường chỉ có getPrice trả về 1 — class thật không bao giờ được khởi tạo cho module này. Chạy thật: curl /s1 — service thật trả price 100, và log server in dòng constructor ĐÚNG MỘT LẦN cho cả 7 request — singleton; curl /s1-mock — price còn 1, from là useValue mock, consumer không sửa dòng nào. Bẫy: đừng giữ state theo từng request trong service singleton — muốn per-request phải khai Scope.REQUEST và chấp nhận trả giá hiệu năng; bộ công cụ thay ruột là useValue, useClass, useFactory.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 31 — mở màn khối NestJS
+0:16 Cơ chế: IoC container — trái tim của NestJS
+0:51 Code: S1MockModule — useValue thay ruột
+1:28 Demo thật: giá 100 vs 1 — constructor chạy đúng 1 lần
+1:57 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:33 Tổng kết câu 31 & hẹn câu 32
+
+📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP74]
+⏭️ Câu tiếp theo: [LINK-EP76]
+📱 Bản Shorts 60 giây: [LINK-SHORT-31]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#nestjs #phongvan #backend #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+💉 Đố nhỏ câu 31: PriceService constructor chạy mấy lần cho 7 request? MỘT — provider mặc định là singleton: container tạo đúng một lần lúc boot, ai inject cũng nhận lại chính instance đó. Hệ quả: đừng giữ state theo từng request trong service — muốn per-request phải khai Scope.REQUEST. Còn thay ruột để test? Chỉ đổi provider ở module: useValue, useClass, useFactory — consumer không sửa dòng nào. Bạn đã từng mock service kiểu này chưa?
+```
+
+**Thumbnail:** badge "PV FE #31" · dòng lớn "KHÔNG NEW" / "VẪN CÓ SERVICE?" · phụ đề "Phỏng vấn Frontend · Câu 31/36" · badge emoji 💉 · variant shot, ảnh dọc `screens/beqa/s1-di.png` (price 100 vs 1 — hai provider).
+
+**Tags:** `dependency injection nestjs, ioc container, provider nestjs, usevalue useclass usefactory, singleton scope, scope.request, mock service nestjs, phỏng vấn nestjs, phỏng vấn backend, inversion of control, nestjs tiếng việt, học nestjs, câu hỏi phỏng vấn nestjs, nestjs interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #32 — Request lifecycle NestJS: 6 lớp theo thứ tự (2:48)
+
+**Tiêu đề:** Phỏng vấn FE #32: Request lifecycle NestJS — 6 lớp theo thứ tự | NestJS interview
+
+**Mô tả:**
+```
+Câu 32 — câu kinh điển số một của NestJS: một request vào NestJS đi qua những lớp nào, theo thứ tự nào? Demo in log đánh số từng lớp — và một request lỗi, để lộ chỗ mà interceptor chiều về biến mất.
+
+Docs NestJS có hẳn trang FAQ request lifecycle: request chảy qua middleware → guard → interceptor → pipe → handler, rồi quay về qua interceptor. Mỗi lớp một việc: middleware sơ chế kiểu Express, guard quyết cho vào hay không, interceptor bọc trước và sau, pipe validate/transform tham số. Chỗ hay trả lời sai nhất: pipe KHÔNG chạy sớm — nó đứng NGAY TRƯỚC handler, sau cả guard lẫn interceptor chiều đi. Khi có lỗi: exception filter đứng cuối hứng tất.
+
+Demo thật bằng s2.interceptor.ts (18 dòng, dùng tap của RxJS — vì interceptor làm việc với Observable): curl /s2?msg=hello — log đếm đủ [1] middleware, [2] guard, [3] interceptor trước handler, [4] pipe sát handler nhất, [H] handler, [5] interceptor sau handler. Rồi curl /s2/boom — bốn bước đầu y hệt, handler ném Error giữa chừng: dòng [5] BIẾN MẤT — lỗi bỏ qua toàn bộ chiều về của interceptor, rơi thẳng xuống [F] — filter bắt lỗi, tự format response 500. Interceptor là lớp duy nhất chạy cả hai chiều — nhiều interceptor lồng nhau thì chiều về resolve kiểu first-in-last-out.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 32 — câu kinh điển số một NestJS
+0:15 Cơ chế: request lifecycle — chuỗi chuẩn của docs
+0:50 Code: s2.interceptor.ts — lớp duy nhất 2 chiều
+1:22 Demo thật: chuỗi đủ [1]→[5]
+1:38 Demo lỗi: [5] biến mất, rơi xuống [F]
+1:51 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy pipe
+2:24 Tổng kết câu 32 & hẹn câu 33
+
+📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP75]
+⏭️ Câu tiếp theo: [LINK-EP77]
+📱 Bản Shorts 60 giây: [LINK-SHORT-32]
+🔁 Đào sâu từng lớp — series NestJS trên kênh (mỗi lớp một tập): https://www.youtube.com/playlist?list=PLOTM2LWBjkI0
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#nestjs #phongvan #backend #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🚦 Đố nhỏ câu 32: pipe chạy trước hay sau guard? SAU — pipe đứng NGAY TRƯỚC handler, sau cả guard lẫn interceptor chiều đi; đừng nói "validate rồi mới auth". Và beat ít ai biết: handler ném lỗi là dòng [5] — interceptor chiều về — BIẾN MẤT, lỗi rơi thẳng xuống [F] exception filter. Thuộc chuỗi một hơi: middleware, guard, interceptor, pipe, handler, interceptor về. Bạn đọc trúng thứ tự không? Comment thử trước khi xem nhé!
+```
+
+**Thumbnail:** badge "PV FE #32" · dòng lớn "REQUEST ĐI QUA" / "MẤY LỚP?" · phụ đề "Phỏng vấn Frontend · Câu 32/36" · badge emoji 🚦 · variant shot, ảnh dọc `screens/beqa/s2-lifecycle.png` (chuỗi log đánh số [1]→[5]).
+
+**Tags:** `request lifecycle nestjs, middleware guard interceptor pipe, nestjs interceptor, exception filter nestjs, thứ tự lifecycle nestjs, rxjs tap, observable nestjs, phỏng vấn nestjs, phỏng vấn backend, nestjs pipeline, nestjs tiếng việt, học nestjs, câu hỏi phỏng vấn nestjs, nestjs interview questions, phỏng vấn fullstack`
+
+---
+
+### Phỏng vấn FE #33 — Guard vs Middleware: auth đặt ở đâu? (2:56)
+
+**Tiêu đề:** Phỏng vấn FE #33: Guard vs Middleware — auth đặt ở đâu? | NestJS interview
+
+**Mô tả:**
+```
+Câu 33 lô backend: auth trong NestJS — bạn đặt ở middleware hay guard? Vì sao? Demo bốn curl chạy thật: một route admin, hai lớp gác — và cái bẫy 401/403 mà rất nhiều người nhầm.
+
+Middleware chạy ĐẦU TIÊN, kiểu Express — nhưng docs nói thẳng: middleware, by its nature, is context-blind — nó không biết handler nào sẽ chạy sau next(). Nên middleware hợp việc chung: parse token, log, gắn req.user. Guard thì có ExecutionContext — biết CHÍNH XÁC handler sắp chạy, dùng Reflector đọc metadata @Roles gắn trên đúng handler đó — nên phân quyền đặt ở guard. Câu quote ăn điểm: "Guards are executed after all middleware, but before any interceptor or pipe."
+
+Demo thật bằng role.guard.ts: curl route admin không token — guard TỰ ném 401 Unauthorized, message "Chưa đăng nhập" là chuỗi mình truyền vào; token lee/user — có danh tính nhưng sai quyền: guard trả false, Nest tự trả 403 với body MẶC ĐỊNH "Forbidden resource"; đúng role admin — 200 kèm secret doanh thu quý 3; route public không gắn @Roles — ai cũng vào. Và log middleware cho thấy MỌI request — kể cả request 401 — đều đi QUA nó: middleware không chặn ai. Beat trừ điểm kinh điển: guard trả false là Nest ném ForbiddenException 403 — muốn 401 đúng nghĩa PHẢI TỰ ném UnauthorizedException.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 33 — auth đặt ở đâu?
+0:12 Cơ chế: middleware mù ngữ cảnh — guard biết handler
+0:44 Code: role.guard.ts — đọc @Roles + tự ném 401
+1:19 Demo chặn cửa: 401 tự ném · 403 Nest mặc định
+1:42 Demo cho qua: 200 + middleware không chặn ai
+1:58 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy 401/403
+2:33 Tổng kết câu 33 & hẹn câu 34
+
+📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP76]
+⏭️ Câu tiếp theo: [LINK-EP78]
+📱 Bản Shorts 60 giây: [LINK-SHORT-33]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#nestjs #phongvan #backend #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🛡️ Đố nhỏ câu 33: guard trả false thì client nhận 401 hay 403? 403 — Nest tự ném ForbiddenException với body mặc định; muốn 401 đúng nghĩa phải TỰ ném UnauthorizedException. Phân biệt chuẩn: 401 = chưa biết anh là ai (thiếu đăng nhập), 403 = biết rồi nhưng KHÔNG ĐỦ QUYỀN — nói được là ăn điểm ngay. Còn middleware? Mù ngữ cảnh — chỉ parse token gắn req.user, không chặn ai. Bạn từng trả nhầm 403 thành 401 chưa?
+```
+
+**Thumbnail:** badge "PV FE #33" · dòng lớn "401 HAY 403" / "BẠN NHẦM CHỖ NÀO?" · phụ đề "Phỏng vấn Frontend · Câu 33/36" · badge emoji 🛡️ · variant shot, ảnh dọc `screens/beqa/s3-auth.png` (4 curl — 401 tự ném, 403 mặc định).
+
+**Tags:** `guard nestjs, middleware vs guard, canactivate, executioncontext, reflector roles, 401 vs 403, unauthorizedexception, forbiddenexception, phỏng vấn nestjs, phỏng vấn backend, auth nestjs, nestjs tiếng việt, học nestjs, câu hỏi phỏng vấn nestjs, nestjs interview questions`
+
+---
+
+### Phỏng vấn FE #34 — ValidationPipe: DTO là hợp đồng chặn body bẩn (2:57)
+
+**Tiêu đề:** Phỏng vấn FE #34: ValidationPipe — DTO là hợp đồng chặn body bẩn | NestJS interview
+
+**Mô tả:**
+```
+Câu 34 lô backend: API của bạn tin body client gửi lên đến mức nào? Validate ở đâu cho chuẩn NestJS? Demo chạy thật: DTO 3 field cộng một dòng ValidationPipe — body sai dính 400 kèm 3 lỗi, field lạ thì biến mất.
+
+NestJS giải bằng HỢP ĐỒNG: class DTO gắn decorator class-validator — IsString, IsInt, IsEmail; type TypeScript bị xóa lúc runtime, chính decorator mới là thứ pipe đọc. ValidationPipe được chèn NGAY TRƯỚC handler — docs: "Nest interposes a pipe just before a method is invoked". Body sai là pipe ném exception — tự trả 400 kèm mảng message chi tiết, và "no controller method is subsequently executed" — handler không bao giờ chạy. Bật whitelist thì pipe gọt sạch mọi property không có decorator — chặn mass assignment từ ngoài cửa.
+
+Demo thật bằng create-order.dto.ts + s4.controller.ts: gửi body sai cả 3 field (ten là số 123, soLuong bằng 0, email chỉ là "abc") — 400 Bad Request kèm mảng 3 message: ten must be a string; soLuong must not be less than 1; email must be an email — mỗi field sai một câu, tự động, và log server không có một dòng nào từ handler. Body đúng nhưng nhét thêm field hack — 201 Created, và order KHÔNG có hack: whitelist đã gọt field lạ, client không nhét được cột lạ vào DB. Bẫy: whitelist mặc định KHÔNG bật — phải tự bật; muốn trả 400 thay vì lặng lẽ gọt thì thêm forbidNonWhitelisted.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 34 — tin body đến mức nào?
+0:14 Cơ chế: DTO là hợp đồng — pipe gác trước handler
+0:49 Code: create-order.dto.ts — 3 điều khoản
+1:09 Code: s4.controller.ts — ValidationPipe whitelist
+1:28 Demo thật: body sai → 400 kèm 3 lỗi chi tiết
+1:50 Demo whitelist: field "hack" biến mất
+2:06 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:35 Tổng kết câu 34 & hẹn câu 35
+
+📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP77]
+⏭️ Câu tiếp theo: [LINK-EP79]
+📱 Bản Shorts 60 giây: [LINK-SHORT-34]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#nestjs #phongvan #backend #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+✂️ Đố nhỏ câu 34: body hợp lệ nhưng nhét thêm "isAdmin": true — có lọt vào app không? CÓ, nếu bạn quên bật whitelist — nó mặc định KHÔNG bật! Bật whitelist là pipe gọt sạch mọi property không có decorator trong DTO — chặn mass assignment từ ngoài cửa; muốn 400 thay vì lặng lẽ gọt thì thêm forbidNonWhitelisted. Và nhớ: type TypeScript bị xóa lúc runtime — pipe chỉ đọc decorator. Bạn đã bật whitelist trong dự án chưa? Kiểm tra ngay nhé!
+```
+
+**Thumbnail:** badge "PV FE #34" · dòng lớn "BODY BẨN" / "CHẶN Ở ĐÂU?" · phụ đề "Phỏng vấn Frontend · Câu 34/36" · badge emoji ✂️ · variant shot, ảnh dọc `screens/beqa/s4-validate.png` (400 mảng 3 lỗi · field hack bị strip).
+
+**Tags:** `validationpipe nestjs, dto nestjs, class-validator, whitelist validationpipe, forbidnonwhitelisted, mass assignment, transform dto, validate body nestjs, phỏng vấn nestjs, phỏng vấn backend, isstring isint isemail, nestjs tiếng việt, học nestjs, câu hỏi phỏng vấn nestjs, nestjs interview questions`
+
+---
+
+### Phỏng vấn FE #35 — Interceptor: bọc response, đo giờ mọi API (2:58)
+
+**Tiêu đề:** Phỏng vấn FE #35: Interceptor — bọc response, đo giờ mọi API | NestJS interview
+
+**Mô tả:**
+```
+Câu 35 lô backend: muốn mọi response của app tự bọc chung một khuôn và tự đo thời gian xử lý — bạn làm ở lớp nào? Demo chạy thật: một interceptor duy nhất — mọi API cùng vỏ ok, data, tookMs kèm header đo giờ; route đối chứng bên cạnh vẫn trần trụi.
+
+Interceptor là lớp lấy cảm hứng từ AOP — chỗ DUY NHẤT trong lifecycle ôm trọn CẢ HAI CHIỀU quanh handler. Bí mật nằm ở next.handle(): nó trả về Observable của response — cầm được stream này thì biến đổi data chỉ còn là một phép RxJS map(), đúng cách docs dạy. Docs kể đủ 5 khả năng: gắn logic trước/sau handler, biến đổi kết quả, biến đổi exception, mở rộng hành vi, override hoàn toàn theo điều kiện.
+
+Demo thật bằng wrap.interceptor.ts: ghi t0 trước khi handler chạy, trong map() tính tookMs rồi set header X-Response-Time (khai rõ: convention TỰ ĐẶT, không phải header chuẩn của Nest). curl /s5 — 200 OK, header X-Response-Time: 121ms, body bọc đúng khuôn ok/data/tookMs; con số đắt: handler delay 120, đo ra 121 trên máy tôi — phép đo ôm TRỌN handler cả hai đầu, middleware chỉ có phía vào, chịu. Còn /s5/raw — cùng handler logic, chỉ thiếu đúng decorator @UseInterceptors: body trần, không header. Bẫy: next.handle() trả Observable LAZY — quên return chuỗi pipe là response treo; muốn cả app cùng khuôn thì khai provider APP_INTERCEPTOR.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 35 — bọc response, đo giờ
+0:16 Cơ chế: interceptor — lớp AOP ôm cả 2 chiều
+0:52 Code: wrap.interceptor.ts — map + setHeader
+1:30 Demo thật: /s5 bọc + 121ms · /s5/raw trần
+2:00 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy lazy
+2:36 Tổng kết câu 35 & hẹn câu 36
+
+📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
+⏮️ Câu trước: [LINK-EP78]
+⏭️ Câu tiếp theo: [LINK-EP80]
+📱 Bản Shorts 60 giây: [LINK-SHORT-35]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+
+#nestjs #phongvan #backend #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🎁 Đố nhỏ câu 35: viết interceptor mà quên return next.handle().pipe(...) thì sao? Response TREO — next.handle() trả Observable LAZY, không return chuỗi pipe là không ai subscribe. Và nhớ: map() chỉ chạy khi handler THÀNH CÔNG — lỗi là toàn bộ chiều về bị bỏ qua, rơi thẳng xuống exception filter (đúng cảnh dòng [5] biến mất ở câu 32). Muốn cả app một khuôn: APP_INTERCEPTOR — một chỗ khai, mọi route được bọc. App bạn đã có khuôn response chung chưa?
+```
+
+**Thumbnail:** badge "PV FE #35" · dòng lớn "MỌI API" / "CHUNG 1 KHUÔN?" · phụ đề "Phỏng vấn Frontend · Câu 35/36" · badge emoji 🎁 · variant shot, ảnh dọc `screens/beqa/s5-intercept.png` (body bọc + header X-Response-Time 121ms).
+
+**Tags:** `interceptor nestjs, nestinterceptor, next.handle observable, rxjs map nestjs, transform response, app_interceptor, x-response-time, aop nestjs, phỏng vấn nestjs, phỏng vấn backend, đo thời gian api, nestjs tiếng việt, học nestjs, câu hỏi phỏng vấn nestjs, nestjs interview questions`
+
+---
+
+### Phỏng vấn FE #36 (CUỐI LÔ 3) — Exception filter: chuẩn hóa lỗi toàn app (2:57)
+
+**Tiêu đề:** Phỏng vấn FE #36: Exception filter — chuẩn hóa lỗi toàn app | NestJS interview
+
+**Mô tả:**
+```
+Câu 36 — câu chốt sổ của lô backend: service ném lỗi thô ra tận client — bạn chuẩn hóa error toàn app NestJS thế nào? Demo chạy thật: cùng một lỗi "db exploded" — mặc định 500 vô hồn, qua filter thành vỏ thống nhất, an toàn.
+
+Không bắt lỗi thì sao? Nest có sẵn exceptions layer: lỗi lạ — không phải HttpException — thành 500 Internal server error; an toàn nhưng vô hồn, mất sạch ngữ cảnh. Exception filter giành lại quyền đó — docs: filter cho bạn kiểm soát chính xác cả LUỒNG xử lý lẫn NỘI DUNG response. Cách bắt trọn: @Catch() để TRỐNG là bắt mọi exception chưa xử lý — trả vỏ thống nhất 4 trường code, message, path, timestamp; stack chỉ log ở server.
+
+Demo thật bằng all-exceptions.filter.ts: curl /s6/boom kèm cờ demo x-raw (tự chế, để thấy hành vi GỐC) — lỗi thô bị nuốt thành 500 Internal server error vô hồn; bỏ cờ, filter vào việc — vẫn 500 nhưng vỏ thống nhất: code INTERNAL, message an toàn, kèm path và timestamp; chữ "db exploded" KHÔNG lộ ra bất kỳ response nào — chỉ nằm trong log server kèm vị trí ném lỗi. Còn /s6/known ném NotFoundException chủ động: 404 vẫn là 404, giữ nguyên message — KHÔNG bị nuốt thành 500. Muốn cả app một format: khai provider APP_FILTER. Bẫy chốt sổ: filter là chốt chặn CUỐI — không thay cho try/catch nghiệp vụ.
+
+⏱️ NỘI DUNG:
+0:00 Giới thiệu câu 36 — câu cuối cùng của lô
+0:15 Cơ chế: exception filter giành quyền kiểm soát lỗi
+0:49 Code: all-exceptions.filter.ts — @Catch() trống
+1:27 Demo thật: 500 vô hồn vs vỏ thống nhất
+1:46 Demo log server + 404 giữ nguyên
+2:05 Trả lời như đi phỏng vấn: chốt 3 câu + bẫy
+2:35 Tổng kết trọn 36 câu & lời chào lô 3
+
+📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
+💡 git checkout be-qa-batch-3 để xem đúng 12 câu code của lô 3 (6 Node.js + 6 NestJS).
+⏮️ Câu trước: [LINK-EP79]
+▶️ Xem lại từ đầu lô 3: [LINK-EP69]
+📱 Bản Shorts 60 giây: [LINK-SHORT-36]
+▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
+▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
+💬 Đủ 36 câu trên playlist — comment câu hỏi phỏng vấn khó nhất bạn từng gặp để lô sau càng sát thực tế!
+
+#nestjs #phongvan #backend #laptrinh
+```
+
+**Comment ghim gợi ý:**
+```
+🧯 Vậy là đủ 36 câu — 12 câu React & Vue, 12 câu hiệu năng RN & Flutter, và 12 câu backend Node.js & NestJS, câu nào cũng demo chạy số thật. Bẫy chốt sổ câu 36: viết filter @Catch() trống mà quên phân nhánh HttpException là 404 chủ động bị nuốt thành 500 — status của HttpException phải được giữ nguyên; còn stack chỉ log server, client nhận vỏ code/message/path/timestamp sạch. Cảm ơn bạn đã luyện cùng — comment câu hỏi khó nhất bạn từng gặp cho lô sau nhé!
+```
+
+**Thumbnail:** badge "PV FE #36" · dòng lớn "LỖI THÔ 500" / "LỘ GÌ RA NGOÀI?" · phụ đề "Phỏng vấn Frontend · Câu 36/36" · badge emoji 🧯 · variant shot, ảnh dọc `screens/beqa/s6-filter.png` (500 vô hồn vs vỏ code INTERNAL).
+
+**Tags:** `exception filter nestjs, catch decorator, httpexception, chuẩn hóa error, app_filter, error handling nestjs, notfoundexception, internal server error, phỏng vấn nestjs, phỏng vấn backend, log stack server, nestjs tiếng việt, học nestjs, câu hỏi phỏng vấn nestjs, nestjs interview questions`
+
+---
+
+### Shorts lô 3 (12 video)
+
+> Mỗi Short <60 giây, cùng câu hỏi với video ngang tương ứng, rút gọn để ôn nhanh. Đánh số nối tiếp lô 2: sb1..sb6 = Shorts #25..#30 (Node.js), ss1..ss6 = Shorts #31..#36 (NestJS). CHƯA ĐĂNG — điền link thật thay placeholder khi đăng; mô tả mỗi Short chỉ cần dòng caption dưới đây + link video đầy đủ.
+
+| id | Tiêu đề Shorts | Caption |
+|---|---|---|
+| sb1 | Node event loop: promise chạy TRƯỚC nextTick?! #shorts | Twist ESM: file .mjs được evaluate như microtask — promise.then lên trước nextTick, ngược với CommonJS.<br>Bẫy: setTimeout 0 không hề chạy ngay — sớm nhất là phase timers vòng sau, sau toàn bộ microtask.<br>Video đầy đủ: [LINK-EP69]<br>#shorts #nodejs #phongvan |
+| sb2 | Node 1 thread — sao cân nghìn request? 60 giây #shorts | Thread không ngồi chờ I/O: event loop giao việc chờ đi — sync 104 req/s vs async 322, gấp 3 lần.<br>Bẫy: async không nhanh hơn cho 1 request đơn lẻ — nó chỉ DỜI việc nặng sang threadpool 4 thread.<br>Video đầy đủ: [LINK-EP70]<br>#shorts #nodejs #phongvan |
+| sb3 | Hash làm Node đơ 1,9 giây — worker_threads cứu #shorts | Worker chạy JS song song cùng process: maxGap từ 1921ms về 102ms, tổng ngang nhau, hash khớp từng ký tự.<br>Bẫy: async/await KHÔNG cứu CPU-bound — await không tạo thread nào cả.<br>Video đầy đủ: [LINK-EP71]<br>#shorts #nodejs #phongvan |
+| sb4 | File 1GB — server phình 1GB RAM? Stream cứu #shorts | readFile nuốt cả file: RSS đỉnh 1071MB; stream + pipe chảy chunk 64KiB — đỉnh 97MB, chênh 11 lần.<br>Bẫy: stream mua RAM phẳng, KHÔNG mua tốc độ — và trả file cho client thì pipe thẳng vào res.<br>Video đầy đủ: [LINK-EP72]<br>#shorts #nodejs #phongvan |
+| sb5 | 3 API — mất 900ms hay 300ms? Promise.all #shorts | Task độc lập thì Promise.all: 907ms về 303ms — tổng bằng cái chậm nhất, chênh đúng 3 lần.<br>Bẫy: fail-fast không hủy promise còn lại — vẫn chạy ngầm; muốn hủy thật phải AbortController.<br>Video đầy đủ: [LINK-EP73]<br>#shorts #nodejs #phongvan |
+| sb6 | require(esm) đã chạy được — CJS vs ESM 60 giây #shorts | .mjs là ESM, .cjs là CJS, .js theo trường type; từ Node 22.12 require load được ESM đồng bộ — không cờ.<br>Bẫy: bật type module là mọi file .js thành ESM hết — file cần CommonJS đổi đuôi .cjs.<br>Video đầy đủ: [LINK-EP74]<br>#shorts #nodejs #phongvan |
+| ss1 | NestJS: vì sao KHÔNG tự new service? #shorts | DI = container new giùm bạn: khai type ở constructor, thay ruột chỉ đổi provider — giá 100 vs 1, không sửa consumer.<br>Bẫy: provider mặc định singleton — đừng giữ state theo request; per-request phải Scope.REQUEST.<br>Video đầy đủ: [LINK-EP75]<br>#shorts #nestjs #phongvan |
+| ss2 | Request vào NestJS đi qua mấy lớp? #shorts | Thuộc một hơi: middleware → guard → interceptor → pipe → handler → interceptor chiều về — filter khi lỗi.<br>Bẫy: handler ném lỗi là interceptor chiều về KHÔNG chạy — dòng [5] biến mất, rơi xuống [F].<br>Video đầy đủ: [LINK-EP76]<br>#shorts #nestjs #phongvan |
+| ss3 | Auth NestJS: middleware hay guard? 401 vs 403 #shorts | Middleware mù ngữ cảnh chỉ gắn req.user; guard đọc @Roles của đúng handler — phân quyền đặt ở guard.<br>Bẫy: guard trả false là Nest trả 403 — muốn 401 đúng nghĩa phải TỰ ném UnauthorizedException.<br>Video đầy đủ: [LINK-EP77]<br>#shorts #nestjs #phongvan |
+| ss4 | Body bẩn — ValidationPipe + DTO chặn từ cửa #shorts | DTO + decorator là hợp đồng: body sai dính 400 kèm mảng lỗi chi tiết — handler không hề chạy.<br>Bẫy: whitelist mặc định KHÔNG bật — quên là field lạ kiểu isAdmin true vẫn lọt vào object.<br>Video đầy đủ: [LINK-EP78]<br>#shorts #nestjs #phongvan |
+| ss5 | Bọc mọi response + đo giờ — 1 interceptor #shorts | next.handle() trả Observable — transform chỉ là một phép map: vỏ ok/data/tookMs + header X-Response-Time.<br>Bẫy: map chỉ chạy khi handler thành công — lỗi bỏ qua chiều về, rơi thẳng xuống filter.<br>Video đầy đủ: [LINK-EP79]<br>#shorts #nestjs #phongvan |
+| ss6 | Lỗi thô 500 — exception filter chuẩn hóa #shorts | @Catch() để trống bắt mọi lỗi: client nhận vỏ code/message/path/timestamp, stack chỉ log server.<br>Bẫy: nhớ phân nhánh HttpException — đừng nuốt 404 chủ động thành 500.<br>Video đầy đủ: [LINK-EP80]<br>#shorts #nestjs #phongvan |
