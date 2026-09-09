@@ -1,0 +1,75 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Hai transaction cùng sửa hai dòng, khóa chéo nhau — chuyện gì xảy ra?",
+      "Sáu mươi giây: deadlock trong Postgres, đo thật."
+    ],
+    "visual": {
+      "question": "2 transaction khóa chéo nhau: ai bị hủy?",
+      "framework": "postgres"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "A khóa dòng một, B khóa dòng hai. Rồi A đòi dòng hai còn B đòi dòng một — hàng chờ khép thành vòng.",
+      "Postgres chờ hết deadlock_timeout, mặc định một giây, rồi hủy một phiên với mã bốn không P không một."
+    ],
+    "visual": {
+      "filename": "d5.sql",
+      "language": "sql",
+      "code": "-- [A] BEGIN;\nUPDATE orders SET total=total+1\n  WHERE id = 1;   -- A khóa dòng 1\n-- [B] BEGIN;\nUPDATE orders SET total=total+1\n  WHERE id = 2;   -- B khóa dòng 2\n\n-- [A] chờ dòng 2 (B đang giữ)\nUPDATE ... WHERE id = 2;  -- CHẶN\n-- [B] chờ dòng 1 (A đang giữ)\nUPDATE ... WHERE id = 1;  -- CHẶN\n\n-- vòng chờ khép kín → sau 1 giây\n-- ERROR 40P01 deadlock detected",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Đo thật: sau một nghìn lẻ tám mili giây, message nguyên văn là deadlock detected, kèm detail hai chiều vòng chờ.",
+      "Beat vàng: sau deadlock CẢ HAI dòng đều cộng một — phiên thua nhả khóa, phiên thắng commit trọn vẹn."
+    ],
+    "visual": {
+      "src": "screens/dbqa/d5-deadlock.png",
+      "caption": "40P01 deadlock detected — sau đúng 1 giây"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Postgres tự phát hiện và hủy một nạn nhân; ai bị hủy không đoán trước được.",
+      "Bẫy: chỉ log rồi thôi. Deadlock là lỗi tạm — phải khóa theo thứ tự nhất quán và retry."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🔒",
+          "text": "UPDATE tự khóa dòng tới hết transaction",
+          "sentence": 0
+        },
+        {
+          "icon": "💥",
+          "text": "PG dò sau 1s → hủy 1 nạn nhân, 40P01",
+          "sentence": 0
+        }
+      ],
+      "trap": "Khóa theo THỨ TỰ nhất quán + RETRY khi 40P01"
+    }
+  }
+]

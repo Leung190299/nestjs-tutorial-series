@@ -1,0 +1,308 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #41: Deadlock — Postgres tự phát hiện và hủy một phiên",
+        "subtitle": "Phỏng vấn Frontend — Database · Câu 41/48",
+        "badge": "Database & SQL · PostgreSQL 17"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep85/scene-01-0-293add9f.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep85/scene-01-1-58ddadab.wav",
+          "startFrame": 181,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep85/scene-01-2-eca8532b.wav",
+          "startFrame": 333,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 481
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Hai giao dịch chờ nhau — ai gỡ vòng?",
+        "bullets": [
+          {
+            "icon": "🔒",
+            "text": "UPDATE tự khóa dòng tới hết transaction — không cần FOR UPDATE",
+            "sentence": 0
+          },
+          {
+            "icon": "🔁",
+            "text": "Deadlock = A giữ dòng 1 chờ dòng 2, B giữ dòng 2 chờ dòng 1",
+            "sentence": 1
+          },
+          {
+            "icon": "⏱️",
+            "text": "Postgres chờ deadlock_timeout (mặc định 1s) rồi mới đi dò",
+            "sentence": 2
+          },
+          {
+            "icon": "💥",
+            "text": "Thấy chu trình → HỦY 1 nạn nhân, SQLSTATE 40P01",
+            "sentence": 2
+          },
+          {
+            "icon": "📖",
+            "text": "docs: \"which transaction will be aborted is difficult to predict\"",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep85/scene-02-0-779958e9.wav",
+          "startFrame": 0,
+          "durationInFrames": 276
+        },
+        {
+          "file": "audio/ep85/scene-02-1-3f5bd7d2.wav",
+          "startFrame": 284,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep85/scene-02-2-317f6936.wav",
+          "startFrame": 480,
+          "durationInFrames": 288
+        },
+        {
+          "file": "audio/ep85/scene-02-3-f45ee74f.wav",
+          "startFrame": 776,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 900
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "d5.mjs",
+        "language": "javascript",
+        "code": "// hai pg.Client RIÊNG cho 2 phiên — KHÔNG dùng pool chung\nconst a = new pg.Client({ connectionString: CONNECTION_STRING });\nconst b = new pg.Client({ connectionString: CONNECTION_STRING });\n\nawait a.query('BEGIN');\nawait a.query(SQL_BUMP, [ROW_A]);  // A giữ khóa dòng 1\nawait b.query('BEGIN');\nawait b.query(SQL_BUMP, [ROW_B]);  // B giữ khóa dòng 2\n\n// hai câu BỊ CHẶN: gửi đi rồi mới in mốc — KHÔNG await ngay\nconst t0 = now();\nconst waitA = settle(a.query(SQL_BUMP, [ROW_B])); // chờ dòng 2\n\nawait new Promise((r) => setTimeout(r, SETTLE_MS)); // 200ms\n\nconst waitB = settle(b.query(SQL_BUMP, [ROW_A])); // chờ dòng 1\n\n// chỗ dừng DUY NHẤT — vòng chờ đã khép kín\nconst [resA, resB] = await Promise.all([waitA, waitB]);\n\nif (!resA.ok && resB.ok) [victim, survivor] = ['A', 'B'];\nelse if (resA.ok && !resB.ok) [victim, survivor] = ['B', 'A'];",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 16,
+            "sentence": 1
+          },
+          {
+            "from": 18,
+            "to": 22,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep85/scene-03-0-fa105147.wav",
+          "startFrame": 0,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep85/scene-03-1-704fcb6f.wav",
+          "startFrame": 217,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep85/scene-03-2-9f575223.wav",
+          "startFrame": 427,
+          "durationInFrames": 156
+        }
+      ],
+      "durationInFrames": 601
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node d5.mjs — dựng vòng chờ chéo",
+        "commands": [
+          {
+            "cmd": "node d5.mjs",
+            "output": "== D5: deadlock detected ==\norders total gốc: id=1 4518520 · id=2 1426550\nSHOW deadlock_timeout -> 1s\n[A] BEGIN; UPDATE id=1 (+1) · giữ khóa dòng 1\n[B] BEGIN; UPDATE id=2 (+1) · giữ khóa dòng 2\n[A] UPDATE id=2 gửi đi, không await (t=0ms)\n    chờ 200ms cho A chắc chắn vào hàng chờ khóa\n[B] UPDATE id=1 gửi đi (t=202ms) -> chờ chéo",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep85/scene-04-0-4b4c3c9e.wav",
+          "startFrame": 0,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep85/scene-04-1-fb75a620.wav",
+          "startFrame": 193,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep85/scene-04-2-bb9e7613.wav",
+          "startFrame": 453,
+          "durationInFrames": 274
+        }
+      ],
+      "durationInFrames": 745
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "node d5.mjs — 40P01 deadlock detected",
+        "commands": [
+          {
+            "cmd": "node d5.mjs",
+            "output": "-- sau 1008ms Postgres phát hiện deadlock --\n[A] BỊ HỦY · [B] chạy tiếp\ncode   : 40P01\nmessage: deadlock detected\ndetail : Process 6942 waits for ShareLock on\n         transaction 966; blocked by process\n         6943.\n         Process 6943 waits for ShareLock on\n         transaction 965; blocked by process\n         6942.\nhint   : See server log for query details.\n[A] ROLLBACK · [B] COMMIT OK",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep85/scene-05-0-17fe391b.wav",
+          "startFrame": 0,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep85/scene-05-1-1a39d187.wav",
+          "startFrame": 260,
+          "durationInFrames": 152
+        },
+        {
+          "file": "audio/ep85/scene-05-2-006ac04c.wav",
+          "startFrame": 420,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep85/scene-05-3-a665f030.wav",
+          "startFrame": 620,
+          "durationInFrames": 267
+        }
+      ],
+      "durationInFrames": 905
+    },
+    {
+      "id": "scene-06",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "UPDATE giữ khóa dòng tới hết transaction → chờ chéo = deadlock",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "PG tự dò sau deadlock_timeout → hủy 1 nạn nhân (40P01)",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Khóa theo THỨ TỰ nhất quán · transaction ngắn · RETRY khi 40P01",
+            "sentence": 2
+          },
+          {
+            "icon": "🏆",
+            "text": "Sau deadlock CẢ HAI dòng đều +1 — B nhận khóa rồi commit cả 2 câu",
+            "sentence": 3
+          },
+          {
+            "icon": "📄",
+            "text": "hint đúng: client chỉ có PID, câu SQL thủ phạm ở log server",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep85/scene-06-0-1152599c.wav",
+          "startFrame": 0,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep85/scene-06-1-cb7f49aa.wav",
+          "startFrame": 184,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep85/scene-06-2-64579071.wav",
+          "startFrame": 384,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep85/scene-06-3-4b45fc5a.wav",
+          "startFrame": 568,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep85/scene-06-4-f4b2ee64.wav",
+          "startFrame": 804,
+          "durationInFrames": 132
+        }
+      ],
+      "durationInFrames": 954
+    },
+    {
+      "id": "scene-07",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 41/48 hoàn tất — hẹn gặp câu 42!",
+        "summary": [
+          {
+            "text": "40P01 deadlock detected — sau 1008ms ≈ deadlock_timeout 1s",
+            "sentence": 0
+          },
+          {
+            "text": "Postgres hủy MỘT nạn nhân — ai bị hủy KHÔNG đoán trước được",
+            "sentence": 0
+          },
+          {
+            "text": "Cả 2 dòng đều +1: phiên thắng nhận khóa rồi commit trọn vẹn",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: OFFSET 499980 chậm vì sao — cursor/keyset pagination",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 42/48: OFFSET lớn vs cursor — trang càng sâu càng chậm? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep85/scene-07-0-bec1af96.wav",
+          "startFrame": 0,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep85/scene-07-1-33111835.wav",
+          "startFrame": 150,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep85/scene-07-2-5efd045c.wav",
+          "startFrame": 290,
+          "durationInFrames": 104
+        }
+      ],
+      "durationInFrames": 412
+    }
+  ]
+}
