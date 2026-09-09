@@ -73,8 +73,10 @@ import ep67 from './data/ep67.timing.json';
 import ep68 from './data/ep68.timing.json';
 import ep69 from './data/ep69.timing.json';
 import ep70 from './data/ep70.timing.json';
+import ep71 from './data/ep71.timing.json';
 import sb1 from './data/sb1.timing.json';
 import sb2 from './data/sb2.timing.json';
+import sb3 from './data/sb3.timing.json';
 import sf1 from './data/sf1.timing.json';
 import sf2 from './data/sf2.timing.json';
 import sf3 from './data/sf3.timing.json';
@@ -172,6 +174,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode68', timing: ep68 as unknown as EpisodeTiming},
   {id: 'Episode69', timing: ep69 as unknown as EpisodeTiming},
   {id: 'Episode70', timing: ep70 as unknown as EpisodeTiming},
+  {id: 'Episode71', timing: ep71 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -205,6 +208,7 @@ const shorts: {id: string; timing: EpisodeTiming}[] = [
   {id: 'ShortF6', timing: sf6 as unknown as EpisodeTiming},
   {id: 'ShortB1', timing: sb1 as unknown as EpisodeTiming},
   {id: 'ShortB2', timing: sb2 as unknown as EpisodeTiming},
+  {id: 'ShortB3', timing: sb3 as unknown as EpisodeTiming},
 ];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
@@ -1077,6 +1081,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/beqa/b2-bench.png',
       badgeEmoji: '🧵',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb71',
+    props: {
+      badge: 'PV FE #27',
+      line1: 'SERVER ĐƠ 1.9S',
+      line2: 'VÌ 1 CÚ HASH?',
+      subtitle: 'Phỏng vấn Frontend · Câu 27/36',
+      variant: 'shot',
+      image: 'screens/beqa/b3-worker.png',
+      badgeEmoji: '👷',
       seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },

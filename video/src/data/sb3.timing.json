@@ -1,0 +1,119 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "CPU nặng làm Node đơ cả server — worker_threads cứu thế nào?",
+        "framework": "node"
+      },
+      "sentences": [
+        {
+          "file": "audio/sb3/s1-0-1d0c81bc.wav",
+          "startFrame": 0,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/sb3/s1-1-1868d5ae.wav",
+          "startFrame": 121,
+          "durationInFrames": 178
+        }
+      ],
+      "durationInFrames": 317
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "b3.mjs + b3-worker.mjs",
+        "language": "javascript",
+        "code": "// main — b3.mjs\nconst worker = new Worker(\n  new URL('./b3-worker.mjs',\n          import.meta.url),\n  { workerData });\nconst result = await new Promise(\n  (res) => worker.once('message', res));\n\n// worker — b3-worker.mjs\nlet key = Buffer.from('mat-khau');\nfor (let i = 0; i < rounds; i++)\n  key = pbkdf2Sync(key, 'muoi',\n    iterations, 64, 'sha512');\nparentPort.postMessage({ hex });",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 14,
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sb3/s2-0-4403fe0e.wav",
+          "startFrame": 0,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/sb3/s2-1-e2bc1f8b.wav",
+          "startFrame": 222,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 420
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/beqa/b3-worker.png",
+        "caption": "gap 1921ms → 102ms — tổng không đổi"
+      },
+      "sentences": [
+        {
+          "file": "audio/sb3/s3-0-cf3d4512.wav",
+          "startFrame": 0,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/sb3/s3-1-8cc35222.wav",
+          "startFrame": 241,
+          "durationInFrames": 149
+        }
+      ],
+      "durationInFrames": 408
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "⚙️",
+            "text": "CPU nặng → worker_threads: main vẫn rảnh",
+            "sentence": 0
+          },
+          {
+            "icon": "🔀",
+            "text": "cluster = nhân PROCESS share port — chuyện scale",
+            "sentence": 1
+          }
+        ],
+        "trap": "async/await KHÔNG cứu CPU-bound — không tạo thread"
+      },
+      "sentences": [
+        {
+          "file": "audio/sb3/s4-0-c9ad9b2c.wav",
+          "startFrame": 0,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/sb3/s4-1-745aa36b.wav",
+          "startFrame": 203,
+          "durationInFrames": 120
+        },
+        {
+          "file": "audio/sb3/s4-2-c3412b23.wav",
+          "startFrame": 331,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 472
+    }
+  ]
+}
