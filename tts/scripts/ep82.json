@@ -1,0 +1,210 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại phòng phỏng vấn — câu ba mươi tám, câu phân loại ứng viên nhanh nhất mảng Database.",
+      "Đưa bạn một cái EXPLAIN ANALYZE — bạn đọc từ đâu, nhìn con số nào trước?",
+      "Ta sẽ mổ một plan thật năm tầng node, có con số lệch một nghìn sáu trăm bảy bảy lần khiến nhiều người trả lời sai."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #38: Đọc EXPLAIN ANALYZE — cost, rows, buffers",
+      "subtitle": "Phỏng vấn Frontend — Database · Câu 38/48",
+      "badge": "Database & SQL · PostgreSQL 17"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Plan là một CÂY node. Docs nói node tầng đáy là node quét, trả dòng thô từ bảng — nên đọc từ trong ra ngoài, từ dưới lên.",
+      "cost bằng x chấm chấm y là ước lượng của planner, đơn vị quy ước chứ KHÔNG phải mili giây.",
+      "actual time mới là thật, có được vì ANALYZE thực sự CHẠY query rồi in thời gian và số dòng thật từng node.",
+      "rows là số dòng node PHÁT RA sau khi lọc, không phải số dòng nó quét. Loops lớn hơn một thì phải nhân."
+    ],
+    "visual": {
+      "title": "Plan là một CÂY — và bốn con số phải đọc",
+      "bullets": [
+        {
+          "icon": "🌲",
+          "text": "Plan là CÂY: node đáy là scan — đọc TRONG RA NGOÀI",
+          "sentence": 0
+        },
+        {
+          "icon": "💰",
+          "text": "cost=x..y: đơn vị quy ước của planner, KHÔNG phải ms",
+          "sentence": 1
+        },
+        {
+          "icon": "⏱️",
+          "text": "actual time: ms THẬT — vì ANALYZE có CHẠY query",
+          "sentence": 2
+        },
+        {
+          "icon": "🔁",
+          "text": "rows = dòng PHÁT RA sau lọc · loops>1 thì phải NHÂN",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Câu ví dụ là câu trang danh sách đơn: JOIN orders với customers, lọc status và city, sắp xếp mới nhất, LIMIT hai mươi.",
+      "Orders năm trăm nghìn dòng, một trăm sáu sáu nghìn đơn paid; customers năm nghìn, một nghìn hai trăm lẻ tám khách Đà Nẵng.",
+      "Nhớ: ANALYZE là CHẠY THẬT — với UPDATE hay DELETE phải bọc BEGIN rồi ROLLBACK."
+    ],
+    "visual": {
+      "filename": "d2.sql",
+      "language": "sql",
+      "code": "-- orders 500.000 dòng · customers 5.000 dòng\n-- status='paid'   → 166.097/500.000 đơn\n-- city='Da Nang'  → 1.208/5.000 khách\n\n-- câu \"trang danh sách đơn\" hay gặp nhất\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT o.id, o.total, o.status, o.created_at,\n       c.name, c.city\nFROM orders o\nJOIN customers c ON c.id = o.customer_id\nWHERE o.status = $1 AND c.city = $2\nORDER BY o.created_at DESC\nLIMIT 20;\n\n-- ANALYZE = CHẠY THẬT câu query rồi in số thật\n-- → UPDATE/DELETE phải bọc BEGIN ... ROLLBACK",
+      "steps": [
+        {
+          "from": 5,
+          "to": 13,
+          "sentence": 0
+        },
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 1
+        },
+        {
+          "from": 15,
+          "to": 16,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Script in chín mục đọc plan, mọi số trích thẳng từ plan thật. Mục một: node ngoài cùng là Limit, trong cùng là Seq Scan on customers.",
+      "Mục hai và ba, cùng một node: cost bảy nghìn chín trăm bốn tám là quy ước, actual time mười tám phẩy năm là mili giây thật. Mục bốn: rows ước hai mươi, thật hai mươi."
+    ],
+    "visual": {
+      "title": "node d2.mjs — đọc plan: cây, cost, actual, rows",
+      "commands": [
+        {
+          "cmd": "node d2.mjs",
+          "output": "== ĐỌC PLAN NHƯ THẾ NÀO ==\n[1] node ngoài cùng: Limit\n    node trong cùng: Seq Scan on customers c\n=> plan là CÂY: trong cùng chạy TRƯỚC, node\n   ngoài cùng trả kết quả CUỐI\n[2] ước lượng: (cost=7948.36..7950.70)\n=> đơn vị quy ước của planner, KHÔNG phải ms\n[3] thật:      (actual time=18.553..18.618)\n=> ms thật, có được vì ANALYZE CHẠY query\n[4] rows: ước 20 vs thật 20 (lệch 1.0x)\n=> rows là số dòng node PHÁT RA sau khi lọc",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Mục năm là chỗ sai nhiều nhất: loops bằng ba tại Parallel Seq Scan. Năm lăm nghìn ba trăm sáu sáu là trung bình một lượt — nhân ba ra một trăm sáu sáu nghìn dòng.",
+      "Mục sáu: Buffers shared hit ba nghìn tám trăm bảy sáu, read bằng không — lấy hết từ cache.",
+      "Mục bảy: Planning không phẩy bốn bốn mili giây, Execution mười tám phẩy sáu — không gồm parse hay planning."
+    ],
+    "visual": {
+      "title": "node d2.mjs — loops, buffers, Planning vs Execution",
+      "commands": [
+        {
+          "cmd": "node d2.mjs",
+          "output": "[5] loops=3 tại node:\n    Parallel Seq Scan on orders o\n=> time/rows là TRUNG BÌNH 1 lượt: 55366 x\n   3 = 166098 dòng thật sự đi qua\n[6] Buffers: shared hit=3876\n=> 3876 trang lấy từ cache, 0 trang đọc đĩa\n[7] Planning Time: 0.440 ms\n    Execution Time: 18.653 ms\n=> lập kế hoạch vs thi hành; Execution KHÔNG\n   gồm parse/rewrite/planning",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "terminal",
+    "narration": [
+      "Đây là mục làm rớt nhiều người nhất. Gather Merge ước ba ba nghìn năm trăm ba tám dòng, thật ra phát ra đúng hai mươi — lệch một nghìn sáu trăm bảy bảy lần.",
+      "Nhưng ĐỪNG vội kêu thống kê cũ: đây là LIMIT hai mươi dừng sớm, node không chạy hết — docs nói đó là ca lệch mà chẳng có gì sai.",
+      "Bằng chứng ở mục chín: node QUÉT bên dưới chỉ lệch một phẩy ba lần — thống kê còn tươi nguyên."
+    ],
+    "visual": {
+      "title": "node d2.mjs — lệch 1677x: LIMIT hay thống kê cũ?",
+      "commands": [
+        {
+          "cmd": "node d2.mjs",
+          "output": "[8] node lệch nhất: Gather Merge\n    ước 33538 vs thật 20 = lệch 1677x\n=> lệch to nhưng KHÔNG phải thống kê cũ: LIMIT\n   20 dừng sớm, node không chạy hết\n[9] node QUÉT lệch nhất:\n    Parallel Seq Scan on orders o\n    ước 69410 vs thật 55366 = lệch 1.3x\n=> dưới 10x: thống kê còn tươi, ước lượng của\n   planner đáng tin ở node quét",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "concept",
+    "narration": [
+      "Trả lời phỏng vấn. Một: plan là cây, đọc từ trong ra ngoài; cost là ước lượng, actual time mới là mili giây thật.",
+      "Hai: rows là số dòng phát ra sau lọc, loops lớn hơn một thì phải nhân — quên nhân là đọc sai gấp ba lần.",
+      "Ba: Buffers cho biết chạm bao nhiêu trang — hit là cache, read là xuống đĩa, tín hiệu I/O rõ nhất trong plan.",
+      "Bẫy: nhìn actual time của node TỐN NHẤT chứ không phải node đầu; rows lệch ở node LÁ mới là dấu hiệu cần ANALYZE.",
+      "Bẫy cuối: EXPLAIN không kèm ANALYZE thì Postgres chỉ đoán, không chạy thật."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Cây node: đọc từ scan trong cùng ra · cost ước, actual thật",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "rows = dòng PHÁT RA · loops=3 → 55366 x 3 = 166098 dòng",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Buffers shared hit=3876 read=0 → chạm 3876 trang, không đụng đĩa",
+          "sentence": 2
+        },
+        {
+          "icon": "🪤",
+          "text": "Nhìn node TỐN NHẤT · rows lệch ở node LÁ mới cần ANALYZE",
+          "sentence": 3
+        },
+        {
+          "icon": "⚠️",
+          "text": "EXPLAIN không ANALYZE = không chạy thật, không có số thật",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "outro",
+    "narration": [
+      "Xong câu ba mươi tám — đọc plan là kỹ năng suy luận, không phải thuộc lòng con số.",
+      "Câu tiếp: lấy năm mươi khách kèm đơn hàng, viết một JOIN hay lặp năm mươi câu SELECT?",
+      "Có bản Shorts sáu mươi giây để ôn nhanh — hẹn gặp lại ở câu ba mươi chín!"
+    ],
+    "visual": {
+      "title": "Câu 38/48 hoàn tất — hẹn gặp câu 39!",
+      "summary": [
+        {
+          "text": "Plan là CÂY: đọc trong ra ngoài · cost ước lượng, actual time thật",
+          "sentence": 0
+        },
+        {
+          "text": "loops=3 → 55366 x 3 = 166098 dòng · Buffers shared hit=3876",
+          "sentence": 0
+        },
+        {
+          "text": "Lệch 1677x là do LIMIT dừng sớm — node quét chỉ lệch 1.3x",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: JOIN vs N+1 — nhìn loops là ra bệnh",
+          "sentence": 1
+        }
+      ],
+      "next": "Câu 39/48: 1 JOIN hay 50 câu SELECT? 🎤"
+    }
+  }
+]

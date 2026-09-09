@@ -1,0 +1,119 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "Đọc EXPLAIN ANALYZE: nhìn con số nào trước?",
+        "framework": "postgres"
+      },
+      "sentences": [
+        {
+          "file": "audio/sd2/s1-0-46381bec.wav",
+          "startFrame": 0,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/sd2/s1-1-08b3571a.wav",
+          "startFrame": 184,
+          "durationInFrames": 161
+        }
+      ],
+      "durationInFrames": 363
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "d2.sql",
+        "language": "sql",
+        "code": "-- orders 500k · customers 5k\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT o.id, o.total, c.name\nFROM orders o\nJOIN customers c\n  ON c.id = o.customer_id\nWHERE o.status = 'paid'\n  AND c.city = 'Da Nang'\nORDER BY o.created_at DESC\nLIMIT 20;\n\n-- cost = ước lượng của planner\n-- actual time = mili giây THẬT",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 12,
+            "to": 13,
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sd2/s2-0-b059d756.wav",
+          "startFrame": 0,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/sd2/s2-1-6b224750.wav",
+          "startFrame": 203,
+          "durationInFrames": 200
+        }
+      ],
+      "durationInFrames": 421
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/dbqa/d2-explain.png",
+        "caption": "cost là ước lượng · actual mới là thật"
+      },
+      "sentences": [
+        {
+          "file": "audio/sd2/s3-0-b25a2e01.wav",
+          "startFrame": 0,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/sd2/s3-1-b31adb82.wav",
+          "startFrame": 215,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 387
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "📤",
+            "text": "rows = dòng PHÁT RA sau lọc · Gather Merge 33538 vs 20",
+            "sentence": 0
+          },
+          {
+            "icon": "✂️",
+            "text": "Lệch 1677x là do LIMIT dừng sớm · node quét chỉ lệch 1.3x",
+            "sentence": 1
+          }
+        ],
+        "trap": "Nhìn actual time node TỐN NHẤT, không phải node đầu"
+      },
+      "sentences": [
+        {
+          "file": "audio/sd2/s4-0-c7bd39ad.wav",
+          "startFrame": 0,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/sd2/s4-1-8737f647.wav",
+          "startFrame": 212,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/sd2/s4-2-347b4cc2.wav",
+          "startFrame": 374,
+          "durationInFrames": 89
+        }
+      ],
+      "durationInFrames": 481
+    }
+  ]
+}
