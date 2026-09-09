@@ -76,11 +76,13 @@ import ep70 from './data/ep70.timing.json';
 import ep71 from './data/ep71.timing.json';
 import ep72 from './data/ep72.timing.json';
 import ep73 from './data/ep73.timing.json';
+import ep74 from './data/ep74.timing.json';
 import sb1 from './data/sb1.timing.json';
 import sb2 from './data/sb2.timing.json';
 import sb3 from './data/sb3.timing.json';
 import sb4 from './data/sb4.timing.json';
 import sb5 from './data/sb5.timing.json';
+import sb6 from './data/sb6.timing.json';
 import sf1 from './data/sf1.timing.json';
 import sf2 from './data/sf2.timing.json';
 import sf3 from './data/sf3.timing.json';
@@ -181,6 +183,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode71', timing: ep71 as unknown as EpisodeTiming},
   {id: 'Episode72', timing: ep72 as unknown as EpisodeTiming},
   {id: 'Episode73', timing: ep73 as unknown as EpisodeTiming},
+  {id: 'Episode74', timing: ep74 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -217,6 +220,7 @@ const shorts: {id: string; timing: EpisodeTiming}[] = [
   {id: 'ShortB3', timing: sb3 as unknown as EpisodeTiming},
   {id: 'ShortB4', timing: sb4 as unknown as EpisodeTiming},
   {id: 'ShortB5', timing: sb5 as unknown as EpisodeTiming},
+  {id: 'ShortB6', timing: sb6 as unknown as EpisodeTiming},
 ];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
@@ -1128,6 +1132,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/beqa/b5-timing.png',
       badgeEmoji: '⚡',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb74',
+    props: {
+      badge: 'PV FE #30',
+      line1: 'REQUIRE(ESM)',
+      line2: 'CHẠY ĐƯỢC RỒI?',
+      subtitle: 'Phỏng vấn Frontend · Câu 30/36',
+      variant: 'shot',
+      image: 'screens/beqa/b6-compare.png',
+      badgeEmoji: '📦',
       seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },

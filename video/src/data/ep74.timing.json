@@ -1,0 +1,291 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #30: CommonJS vs ESM — require(esm) đã chạy được",
+        "subtitle": "Phỏng vấn Frontend — Node.js core · Câu 30/36",
+        "badge": "Node.js backend"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep74/scene-01-0-7e60a0aa.wav",
+          "startFrame": 0,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep74/scene-01-1-bebb51e4.wav",
+          "startFrame": 205,
+          "durationInFrames": 224
+        }
+      ],
+      "durationInFrames": 447
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Hai hệ module — luật chọn theo đuôi file",
+        "bullets": [
+          {
+            "icon": "📦",
+            "text": "CJS: require/module.exports — load động, đồng bộ",
+            "sentence": 0
+          },
+          {
+            "icon": "📏",
+            "text": ".mjs = ESM · .cjs = CJS · .js theo \"type\"",
+            "sentence": 1
+          },
+          {
+            "icon": "🔍",
+            "text": "Khác thật sự: __dirname · JSON · top-level await",
+            "sentence": 2
+          },
+          {
+            "icon": "🔀",
+            "text": "Gọi chéo được — CÓ ĐIỀU KIỆN (twist mục 4)",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep74/scene-02-0-d07f0132.wav",
+          "startFrame": 0,
+          "durationInFrames": 286
+        },
+        {
+          "file": "audio/ep74/scene-02-1-fa229de6.wav",
+          "startFrame": 294,
+          "durationInFrames": 298
+        },
+        {
+          "file": "audio/ep74/scene-02-2-3203ae5a.wav",
+          "startFrame": 600,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep74/scene-02-3-6ecf45b5.wav",
+          "startFrame": 815,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 968
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "b6.mjs",
+        "language": "javascript",
+        "code": "// [1] __dirname — ESM không có biến wrapper CJS\ntry {\n  console.log(`[1] __dirname: ${__dirname}`);\n} catch (err) {\n  console.log(`[1] __dirname: FAIL ${err.name}`);\n  console.log(`  ${err.message}`);\n  console.log('  thay thế import.meta.dirname:');\n  console.log(` ${tilde(import.meta.dirname)}`); // indent 1 — dòng 49 ký tự\n}\n\n// [2] import JSON — thử THIẾU `with` trước, rồi có `with { type: 'json' }`\nconsole.log('[2] import JSON:');\ntry {\n  await import('./b6-data.json');\n  console.log(\"  thiếu with: OK (?)\");\n} catch (err) {\n  console.log(`  thiếu with: FAIL ${err.code ?? err.name}`);\n}\ntry {\n  const mod = await import('./b6-data.json', { with: { type: 'json' } });\n  console.log(\"  with { type: 'json' }: OK\");\n  console.log(`  app=${mod.default.app} version=${mod.default.version}`);",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 11,
+            "to": 18,
+            "sentence": 1
+          },
+          {
+            "from": 19,
+            "to": 22,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep74/scene-03-0-fc97eddb.wav",
+          "startFrame": 0,
+          "durationInFrames": 279
+        },
+        {
+          "file": "audio/ep74/scene-03-1-3e32c1c7.wav",
+          "startFrame": 287,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep74/scene-03-2-29d781bc.wav",
+          "startFrame": 507,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep74/scene-03-3-67b49828.wav",
+          "startFrame": 676,
+          "durationInFrames": 171
+        }
+      ],
+      "durationInFrames": 865
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node b6-cjs.cjs · node b6.mjs",
+        "commands": [
+          {
+            "cmd": "node b6-cjs.cjs",
+            "output": "[1] __dirname: OK\n[3] top-level await: FAIL SyntaxError\n[4] require('./b6.mjs'): FAIL\n  ERR_REQUIRE_ASYNC_MODULE\n  b6-sync.mjs — ESM KHÔNG có await: OK",
+            "sentence": 0
+          },
+          {
+            "cmd": "node b6.mjs",
+            "output": "[1] __dirname: FAIL ReferenceError\n[2] import JSON:\n  thiếu with: FAIL ERR_IMPORT_ATTRIBUTE_MISSING\n  with { type: 'json' }: OK\n[3] top-level await: OK\n[4] ESM import CJS: OK",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep74/scene-04-0-d7852c30.wav",
+          "startFrame": 0,
+          "durationInFrames": 281
+        },
+        {
+          "file": "audio/ep74/scene-04-1-556c0a87.wav",
+          "startFrame": 289,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep74/scene-04-2-c084f71f.wav",
+          "startFrame": 533,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep74/scene-04-3-2d0f0a6b.wav",
+          "startFrame": 779,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep74/scene-04-4-c18c868d.wav",
+          "startFrame": 1061,
+          "durationInFrames": 185
+        }
+      ],
+      "durationInFrames": 1264
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Dự án mới → ESM (chuẩn chung + top-level await)",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "require(esm): OK từ Node 22.12 — module đồng bộ",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Mất __dirname → import.meta.dirname",
+            "sentence": 2
+          },
+          {
+            "icon": "🪤",
+            "text": "\"type\":\"module\" → .js thành ESM HẾT (.cjs thoát)",
+            "sentence": 3
+          },
+          {
+            "icon": "🔁",
+            "text": "ESM đổi cả microtask — xem lại câu #25",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep74/scene-05-0-fb540f42.wav",
+          "startFrame": 0,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep74/scene-05-1-8095c90f.wav",
+          "startFrame": 227,
+          "durationInFrames": 269
+        },
+        {
+          "file": "audio/ep74/scene-05-2-a6375f4d.wav",
+          "startFrame": 504,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/ep74/scene-05-3-f62f85ad.wav",
+          "startFrame": 654,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep74/scene-05-4-1ae79921.wav",
+          "startFrame": 890,
+          "durationInFrames": 195
+        }
+      ],
+      "durationInFrames": 1103
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 30/36 hoàn tất — khối Node 6/6 xong!",
+        "summary": [
+          {
+            "text": "CJS vs ESM: __dirname · JSON · top-level await",
+            "sentence": 0
+          },
+          {
+            "text": "require(esm): OK từ 22.12 — module đồng bộ",
+            "sentence": 0
+          },
+          {
+            "text": "Khối Node 6/6 xong — mai sang NestJS",
+            "sentence": 1
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 31/36: DI/IoC — trái tim của NestJS 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep74/scene-06-0-e582a4ff.wav",
+          "startFrame": 0,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep74/scene-06-1-35d670b6.wav",
+          "startFrame": 260,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep74/scene-06-2-81324e93.wav",
+          "startFrame": 458,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep74/scene-06-3-36adc471.wav",
+          "startFrame": 579,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 691
+    }
+  ]
+}

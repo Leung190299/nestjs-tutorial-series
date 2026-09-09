@@ -1,0 +1,186 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu số ba mươi — nhà tuyển dụng hỏi: dự án Node của bạn dùng CommonJS hay ESM — và khác nhau thật sự ở đâu?",
+      "Mình trả lời bằng bốn phép thử chạy thật trên cả hai hệ: __dirname, load JSON, top-level await, và load chéo — kèm một cú twist nhiều người chưa cập nhật."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #30: CommonJS vs ESM — require(esm) đã chạy được",
+      "subtitle": "Phỏng vấn Frontend — Node.js core · Câu 30/36",
+      "badge": "Node.js backend"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "CommonJS là hệ cũ của Node: require với module.exports — load động, đồng bộ; ESM là chuẩn chung của JavaScript: import export tĩnh, phân tích được từ lúc parse.",
+      "Node chọn hệ theo đuôi file: chấm mjs luôn là ESM, chấm cjs luôn là CommonJS; chấm js theo trường type trong package.json — không khai thì mặc định CommonJS.",
+      "Khác biệt không chỉ cú pháp: CJS có sẵn __dirname, require JSON ăn ngay; ESM mất __dirname nhưng có top-level await.",
+      "Hai thế giới vẫn gọi chéo nhau được — có điều kiện, và điều kiện đó vừa đổi trên Node hai mươi hai."
+    ],
+    "visual": {
+      "title": "Hai hệ module — luật chọn theo đuôi file",
+      "bullets": [
+        {
+          "icon": "📦",
+          "text": "CJS: require/module.exports — load động, đồng bộ",
+          "sentence": 0
+        },
+        {
+          "icon": "📏",
+          "text": ".mjs = ESM · .cjs = CJS · .js theo \"type\"",
+          "sentence": 1
+        },
+        {
+          "icon": "🔍",
+          "text": "Khác thật sự: __dirname · JSON · top-level await",
+          "sentence": 2
+        },
+        {
+          "icon": "🔀",
+          "text": "Gọi chéo được — CÓ ĐIỀU KIỆN (twist mục 4)",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Trong b6.mjs — file ESM: mục một in thử __dirname trong try catch; nhánh catch in tên lỗi, message, rồi in bản thay thế import.meta.dirname.",
+      "Mục hai load JSON: dynamic import b6-data.json cố tình KHÔNG khai gì — catch sẽ in mã lỗi thật.",
+      "Rồi cũng file JSON đó nhưng thêm with type json — qua được thì in OK, data đọc qua mod.default.",
+      "Chạy sao in vậy; mục ba top-level await và mục bốn load chéo nằm ngay dưới — kết quả gặp nhau ở terminal."
+    ],
+    "visual": {
+      "filename": "b6.mjs",
+      "language": "javascript",
+      "code": "// [1] __dirname — ESM không có biến wrapper CJS\ntry {\n  console.log(`[1] __dirname: ${__dirname}`);\n} catch (err) {\n  console.log(`[1] __dirname: FAIL ${err.name}`);\n  console.log(`  ${err.message}`);\n  console.log('  thay thế import.meta.dirname:');\n  console.log(` ${tilde(import.meta.dirname)}`); // indent 1 — dòng 49 ký tự\n}\n\n// [2] import JSON — thử THIẾU `with` trước, rồi có `with { type: 'json' }`\nconsole.log('[2] import JSON:');\ntry {\n  await import('./b6-data.json');\n  console.log(\"  thiếu with: OK (?)\");\n} catch (err) {\n  console.log(`  thiếu with: FAIL ${err.code ?? err.name}`);\n}\ntry {\n  const mod = await import('./b6-data.json', { with: { type: 'json' } });\n  console.log(\"  with { type: 'json' }: OK\");\n  console.log(`  app=${mod.default.app} version=${mod.default.version}`);",
+      "steps": [
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 0
+        },
+        {
+          "from": 11,
+          "to": 18,
+          "sentence": 1
+        },
+        {
+          "from": 19,
+          "to": 22,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy node b6-cjs.cjs: __dirname OK, require JSON OK ngay; nhưng top-level await là SyntaxError ngay từ lúc parse.",
+      "Mục bốn mới là twist: require b6.mjs — file ESM có top-level await — nổ ERR_REQUIRE_ASYNC_MODULE.",
+      "Nhưng require b6-sync.mjs — file ESM ĐỒNG BỘ — chạy luôn: hello xin chào từ ESM, trên Node hai mươi hai — không cờ, không warning.",
+      "Đổi chiều, node b6.mjs: __dirname nổ ReferenceError — import.meta.dirname in đúng đường dẫn; JSON thiếu with là nổ, thêm with type json là OK.",
+      "Mục ba và bốn ESM ăn trọn: top-level await chạy luôn, ESM import CJS xưa nay vẫn OK."
+    ],
+    "visual": {
+      "title": "node b6-cjs.cjs · node b6.mjs",
+      "commands": [
+        {
+          "cmd": "node b6-cjs.cjs",
+          "output": "[1] __dirname: OK\n[3] top-level await: FAIL SyntaxError\n[4] require('./b6.mjs'): FAIL\n  ERR_REQUIRE_ASYNC_MODULE\n  b6-sync.mjs — ESM KHÔNG có await: OK",
+          "sentence": 0
+        },
+        {
+          "cmd": "node b6.mjs",
+          "output": "[1] __dirname: FAIL ReferenceError\n[2] import JSON:\n  thiếu with: FAIL ERR_IMPORT_ATTRIBUTE_MISSING\n  with { type: 'json' }: OK\n[3] top-level await: OK\n[4] ESM import CJS: OK",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — câu một: dự án mới chọn ESM — chuẩn chung, có top-level await, giờ hết bị cô lập khỏi thế giới require.",
+      "Câu hai: viết thư viện phục vụ cả hai thì phải hiểu require(esm) — từ Node hai mươi hai chấm mười hai, require load được ES module đồng bộ, chỉ nổ khi dính top-level await.",
+      "Câu ba: sang ESM mất __dirname thì thay bằng import.meta.dirname.",
+      "Bẫy: bật type module là mọi file chấm js thành ESM hết — require cũ chết ngay; file nào cần CommonJS thì đổi đuôi chấm cjs.",
+      "Và ESM đổi cả thứ tự microtask — promise.then lên trước nextTick — cú twist mình đã đo ở câu hai mươi lăm."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Dự án mới → ESM (chuẩn chung + top-level await)",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "require(esm): OK từ Node 22.12 — module đồng bộ",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Mất __dirname → import.meta.dirname",
+          "sentence": 2
+        },
+        {
+          "icon": "🪤",
+          "text": "\"type\":\"module\" → .js thành ESM HẾT (.cjs thoát)",
+          "sentence": 3
+        },
+        {
+          "icon": "🔁",
+          "text": "ESM đổi cả microtask — xem lại câu #25",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu ba mươi — trọn sáu câu Node.js core: event loop, non-blocking I/O, worker, stream, Promise.all, CommonJS vs ESM.",
+      "Mai sang khối NestJS: Dependency Injection và IoC — vì sao NestJS xây cả framework quanh nó?",
+      "Video này có bản Shorts sáu mươi giây để bạn ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số ba mươi mốt!"
+    ],
+    "visual": {
+      "title": "Câu 30/36 hoàn tất — khối Node 6/6 xong!",
+      "summary": [
+        {
+          "text": "CJS vs ESM: __dirname · JSON · top-level await",
+          "sentence": 0
+        },
+        {
+          "text": "require(esm): OK từ 22.12 — module đồng bộ",
+          "sentence": 0
+        },
+        {
+          "text": "Khối Node 6/6 xong — mai sang NestJS",
+          "sentence": 1
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 31/36: DI/IoC — trái tim của NestJS 🎤"
+    }
+  }
+]
