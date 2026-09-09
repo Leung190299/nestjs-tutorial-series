@@ -1,0 +1,4 @@
+node_modules
+# Sandbox của p4.mjs: schema 4 trạng thái + migration SINH LẠI mỗi lần chạy.
+# Bản chính thức (khớp ảnh dbqa/p4-migration.png) nằm ở prisma/migrations/ và ĐƯỢC commit.
+.p4-run

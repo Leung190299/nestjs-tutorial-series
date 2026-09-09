@@ -1,0 +1,19 @@
+// Schema demo P4 (ep90) — migration an toàn khi thêm cột NOT NULL trên bảng CÓ DATA.
+// Chạy trên DB RIÊNG `dbqa_mig` (xem .env) để `migrate dev` không bao giờ chạm `dbqa`.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Note {
+  id      Int    @id @default(autoincrement())
+  body    String
+  channel String
+
+  @@map("notes")
+}
