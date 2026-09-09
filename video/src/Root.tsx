@@ -78,6 +78,7 @@ import ep72 from './data/ep72.timing.json';
 import ep73 from './data/ep73.timing.json';
 import ep74 from './data/ep74.timing.json';
 import ep75 from './data/ep75.timing.json';
+import ep76 from './data/ep76.timing.json';
 import sb1 from './data/sb1.timing.json';
 import sb2 from './data/sb2.timing.json';
 import sb3 from './data/sb3.timing.json';
@@ -98,6 +99,7 @@ import sn5 from './data/sn5.timing.json';
 import sn6 from './data/sn6.timing.json';
 import sr1 from './data/sr1.timing.json';
 import ss1 from './data/ss1.timing.json';
+import ss2 from './data/ss2.timing.json';
 import sr2 from './data/sr2.timing.json';
 import sr3 from './data/sr3.timing.json';
 import sr4 from './data/sr4.timing.json';
@@ -187,6 +189,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode73', timing: ep73 as unknown as EpisodeTiming},
   {id: 'Episode74', timing: ep74 as unknown as EpisodeTiming},
   {id: 'Episode75', timing: ep75 as unknown as EpisodeTiming},
+  {id: 'Episode76', timing: ep76 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -225,6 +228,7 @@ const shorts: {id: string; timing: EpisodeTiming}[] = [
   {id: 'ShortB5', timing: sb5 as unknown as EpisodeTiming},
   {id: 'ShortB6', timing: sb6 as unknown as EpisodeTiming},
   {id: 'ShortS1', timing: ss1 as unknown as EpisodeTiming},
+  {id: 'ShortS2', timing: ss2 as unknown as EpisodeTiming},
 ];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
@@ -1162,6 +1166,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/beqa/s1-di.png',
       badgeEmoji: '💉',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb76',
+    props: {
+      badge: 'PV FE #32',
+      line1: 'REQUEST ĐI QUA',
+      line2: 'MẤY LỚP?',
+      subtitle: 'Phỏng vấn Frontend · Câu 32/36',
+      variant: 'shot',
+      image: 'screens/beqa/s2-lifecycle.png',
+      badgeEmoji: '🚦',
       seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },

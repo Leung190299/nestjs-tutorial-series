@@ -1,0 +1,119 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "NestJS: request đi qua mấy lớp — thứ tự nào?",
+        "framework": "nestjs"
+      },
+      "sentences": [
+        {
+          "file": "audio/ss2/s1-0-9d992bfe.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ss2/s1-1-3a531405.wav",
+          "startFrame": 172,
+          "durationInFrames": 142
+        }
+      ],
+      "durationInFrames": 332
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "s2.interceptor.ts (rút gọn)",
+        "language": "tsx",
+        "code": "// lớp DUY NHẤT chạy CẢ 2 chiều\n@Injectable()\nexport class S2Interceptor {\n  intercept(_ctx, next: CallHandler) {\n    // chiều ĐI — trước handler\n    console.log('[3] trước handler');\n    return next\n      .handle()\n      // chiều VỀ — sau handler\n      .pipe(tap(() =>\n        console.log('[5] sau handler'),\n      ));\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 14,
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ss2/s2-0-fd1072f8.wav",
+          "startFrame": 0,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/ss2/s2-1-f19f6858.wav",
+          "startFrame": 256,
+          "durationInFrames": 173
+        }
+      ],
+      "durationInFrames": 447
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/beqa/s2-lifecycle.png",
+        "caption": "lỗi → [5] biến mất, rơi xuống filter"
+      },
+      "sentences": [
+        {
+          "file": "audio/ss2/s3-0-60bb58b0.wav",
+          "startFrame": 0,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ss2/s3-1-fb28b1a2.wav",
+          "startFrame": 212,
+          "durationInFrames": 142
+        }
+      ],
+      "durationInFrames": 372
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "🛤️",
+            "text": "MW → Guard → Interceptor → Pipe → Handler",
+            "sentence": 0
+          },
+          {
+            "icon": "🎯",
+            "text": "Pipe SÁT handler nhất · Interceptor 2 chiều",
+            "sentence": 1
+          }
+        ],
+        "trap": "Lỗi: [5] không chạy — rơi thẳng xuống filter"
+      },
+      "sentences": [
+        {
+          "file": "audio/ss2/s4-0-4cf2aee5.wav",
+          "startFrame": 0,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ss2/s4-1-d13a6580.wav",
+          "startFrame": 215,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ss2/s4-2-8841782e.wav",
+          "startFrame": 348,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 518
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #32: Request lifecycle NestJS — 6 lớp theo thứ tự",
+        "subtitle": "Phỏng vấn Frontend — NestJS · Câu 32/36",
+        "badge": "NestJS backend"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep76/scene-01-0-abc9ba69.wav",
+          "startFrame": 0,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep76/scene-01-1-8e077461.wav",
+          "startFrame": 236,
+          "durationInFrames": 200
+        }
+      ],
+      "durationInFrames": 454
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Request lifecycle — chuỗi chuẩn của docs",
+        "bullets": [
+          {
+            "icon": "🛤️",
+            "text": "Middleware → Guard → Interceptor → Pipe → Handler",
+            "sentence": 0
+          },
+          {
+            "icon": "🧰",
+            "text": "Mỗi lớp 1 việc: sơ chế · gác cổng · validate",
+            "sentence": 1
+          },
+          {
+            "icon": "🎯",
+            "text": "Pipe NGAY TRƯỚC handler — sau guard!",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "Interceptor 2 chiều · Filter = chốt chặn cuối",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep76/scene-02-0-b1d1b06c.wav",
+          "startFrame": 0,
+          "durationInFrames": 365
+        },
+        {
+          "file": "audio/ep76/scene-02-1-63115d6d.wav",
+          "startFrame": 373,
+          "durationInFrames": 305
+        },
+        {
+          "file": "audio/ep76/scene-02-2-e7f75119.wav",
+          "startFrame": 686,
+          "durationInFrames": 161
+        },
+        {
+          "file": "audio/ep76/scene-02-3-7138933f.wav",
+          "startFrame": 855,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 1063
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "s2.interceptor.ts — TOÀN BỘ FILE",
+        "language": "tsx",
+        "code": "import { Injectable } from '@nestjs/common';\nimport type { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common';\nimport { tap } from 'rxjs';\nimport type { Observable } from 'rxjs';\n\n// Interceptor — lớp DUY NHẤT chạy cả hai chiều: log trước khi gọi\n// next.handle(), rồi tap() log tiếp khi Observable resolve trên đường VỀ\n// (sau handler). Nếu handler ném lỗi, nhánh \"sau handler\" KHÔNG chạy —\n// lỗi rơi thẳng xuống exception filter.\n@Injectable()\nexport class S2Interceptor implements NestInterceptor {\n  intercept(_context: ExecutionContext, next: CallHandler): Observable<unknown> {\n    console.log('[3] Interceptor (trước handler)');\n    return next\n      .handle()\n      .pipe(tap(() => console.log('[5] Interceptor (sau handler)')));\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 9,
+            "sentence": 1
+          },
+          {
+            "from": 12,
+            "to": 13,
+            "sentence": 2
+          },
+          {
+            "from": 14,
+            "to": 18,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep76/scene-03-0-bc67c0b0.wav",
+          "startFrame": 0,
+          "durationInFrames": 288
+        },
+        {
+          "file": "audio/ep76/scene-03-1-fe1b2fb3.wav",
+          "startFrame": 296,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep76/scene-03-2-873afb7f.wav",
+          "startFrame": 508,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep76/scene-03-3-1e98e349.wav",
+          "startFrame": 653,
+          "durationInFrames": 300
+        }
+      ],
+      "durationInFrames": 971
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "curl /s2?msg=hello — chuỗi đủ [1]→[5]",
+        "commands": [
+          {
+            "cmd": "curl -s 'http://localhost:3998/s2?msg=hello'",
+            "output": "{\"ok\":true,\"msg\":\"hello\"}\n-- log server:\n[1] Middleware\n[2] Guard\n[3] Interceptor (trước handler)\n[4] Pipe\n[H] Handler chạy\n[5] Interceptor (sau handler)",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep76/scene-04-0-3553fc33.wav",
+          "startFrame": 0,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep76/scene-04-1-771c698a.wav",
+          "startFrame": 203,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 459
+    },
+    {
+      "id": "scene-04b",
+      "type": "terminal",
+      "visual": {
+        "title": "curl /s2/boom — [5] biến mất, rơi xuống [F]",
+        "commands": [
+          {
+            "cmd": "curl -s http://localhost:3998/s2/boom",
+            "output": "{\"ok\":false,\"error\":\"boom giữa handler\"}\n-- log server:\n[1] Middleware\n[2] Guard\n[3] Interceptor (trước handler)\n[4] Pipe\n[H] Handler chạy — ném Error\n[F] Filter bắt lỗi\n=> KHÔNG có [5] — lỗi bỏ qua chiều về",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep76/scene-04b-0-2609c022.wav",
+          "startFrame": 0,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep76/scene-04b-1-2ba28ab3.wav",
+          "startFrame": 138,
+          "durationInFrames": 255
+        }
+      ],
+      "durationInFrames": 411
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Thuộc chuỗi: MW → G → I → P → H → I → F",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Guard gác cổng · Pipe validate · Filter hứng lỗi",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Interceptor 2 chiều — về first-in-last-out",
+            "sentence": 2
+          },
+          {
+            "icon": "🪤",
+            "text": "Pipe SAU guard — đừng 'validate rồi mới auth'",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep76/scene-05-0-aca75873.wav",
+          "startFrame": 0,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep76/scene-05-1-eec8148c.wav",
+          "startFrame": 248,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep76/scene-05-2-75a29f66.wav",
+          "startFrame": 499,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep76/scene-05-3-b9949bb4.wav",
+          "startFrame": 699,
+          "durationInFrames": 269
+        }
+      ],
+      "durationInFrames": 986
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 32/36 hoàn tất — thuộc chuỗi 6 lớp!",
+        "summary": [
+          {
+            "text": "Chuỗi: MW → Guard → Interceptor → Pipe → Handler",
+            "sentence": 0
+          },
+          {
+            "text": "Lỗi: [5] biến mất — rơi thẳng xuống filter",
+            "sentence": 0
+          },
+          {
+            "text": "Đào sâu từng lớp: series NestJS nâng cao",
+            "sentence": 0
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 33/36: Guard vs Middleware — auth đặt ở đâu 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep76/scene-06-0-a9602c47.wav",
+          "startFrame": 0,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep76/scene-06-1-ca51363d.wav",
+          "startFrame": 232,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/ep76/scene-06-2-81324e93.wav",
+          "startFrame": 488,
+          "durationInFrames": 104
+        },
+        {
+          "file": "audio/ep76/scene-06-3-5f2352ce.wav",
+          "startFrame": 600,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 712
+    }
+  ]
+}
