@@ -86,20 +86,20 @@
       "visual": {
         "filename": "d4.mjs",
         "language": "javascript",
-        "code": "// hai pg.Client RIÊNG cho 2 phiên — KHÔNG dùng pool\nconst a = new pg.Client({ connectionString: CONN });\nconst b = new pg.Client({ connectionString: CONN });\n\nasync function round(no, a, b, beginSql, isoLabel) {\n  await a.query(beginSql);           // A mở transaction\n  const { rows: iso } =\n    await a.query('SHOW transaction_isolation');\n  const first = await readTotal(a);  // A đọc lần 1\n\n  await b.query(SQL_BUMP, [ORDER_ID, BUMP]);\n  await b.query('COMMIT');           // B ghi + COMMIT\n\n  const second = await readTotal(a); // A đọc lần 2\n  await a.query('COMMIT');\n  return { first, second, changed: first !== second };\n}\n\n// giữa 2 vòng CHỈ đổi đúng câu BEGIN của phiên A:\nr1 = await round(1, a, b, 'BEGIN', 'READ COMMITTED');\nr2 = await round(2, a, b,\n  'BEGIN ISOLATION LEVEL REPEATABLE READ', 'REPEATABLE READ');",
+        "code": "const a = new pg.Client({ connectionString: CONNECTION_STRING });\nconst b = new pg.Client({ connectionString: CONNECTION_STRING });\n\nasync function round(no, a, b, beginSql, isoLabel) {\n\n  await a.query(beginSql);\n\n  const { rows: iso } = await a.query('SHOW transaction_isolation');\n\n  const first = await readTotal(a);\n\n  const { rows: upd } = await b.query(SQL_BUMP, [ORDER_ID, BUMP]);\n  const bValue = Number(upd[0].total);\n  console.log(`[phiên B] UPDATE total = total+${BUMP}`);\n  await b.query('COMMIT');\n  console.log(`[phiên B] COMMIT xong -> ${bValue}`);\n\n  const second = await readTotal(a);\n\n  r1 = await round(1, a, b, 'BEGIN', 'READ COMMITTED (mặc định)');\n\n  r2 = await round(2, a, b, 'BEGIN ISOLATION LEVEL REPEATABLE READ', 'REPEATABLE READ');",
         "steps": [
           {
             "from": 1,
-            "to": 3,
+            "to": 2,
             "sentence": 0
           },
           {
-            "from": 5,
-            "to": 16,
+            "from": 4,
+            "to": 18,
             "sentence": 1
           },
           {
-            "from": 18,
+            "from": 20,
             "to": 22,
             "sentence": 2
           }

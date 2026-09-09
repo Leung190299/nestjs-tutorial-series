@@ -62,7 +62,7 @@
       "Nếu sắp theo cột trùng nhau như created_at thì phải ghép thêm id để phá hòa."
     ],
     "visual": {
-      "filename": "d6.sql",
+      "filename": "sql-qa/d6.mjs — câu SQL trong script",
       "language": "sql",
       "code": "-- [A] OFFSET: lấy trang cuối của bảng 500.000 dòng\nSELECT id, total, status\n  FROM orders\n ORDER BY id\n LIMIT 20 OFFSET 499980;\n-- docs (queries-limit): \"The rows skipped by an OFFSET\n-- clause still have to be computed inside the server;\n-- therefore a large OFFSET might be inefficient.\"\n\n-- [B] cursor/keyset: thay OFFSET bằng ĐIỀU KIỆN\n-- $1 = id CUỐI CÙNG của trang trước (app tự nhớ)\nSELECT id, total, status\n  FROM orders\n WHERE id > $1          -- 499980\n ORDER BY id\n LIMIT 20;\n\n-- cột sắp xếp phải ỔN ĐỊNH & UNIQUE; created_at trùng\n-- nhau thì ghép thêm khóa phụ để phá hòa:\nSELECT id, total, status FROM orders\n WHERE (created_at, id) > ($1, $2)\n ORDER BY created_at, id LIMIT 20;",
       "steps": [

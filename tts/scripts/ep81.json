@@ -57,7 +57,7 @@
       "Bước B: chạy lại ĐÚNG câu đó, không sửa một chữ. Query không đổi, chỉ bảng có thêm index — khác biệt đến từ CÁCH QUÉT."
     ],
     "visual": {
-      "filename": "d1.sql",
+      "filename": "sql-qa/d1.mjs — câu SQL trong script",
       "language": "sql",
       "code": "-- orders: 500.000 dòng, chỉ có PRIMARY KEY trên id\n-- khách #1 có 61 đơn = 0.012% số dòng cả bảng\n\n-- [A] chưa có index cho cột customer_id\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT * FROM orders WHERE customer_id = 1;\n\n-- [+] tạo index trên đúng cột đang lọc\nCREATE INDEX idx_orders_customer ON orders(customer_id);\nANALYZE orders;\n\n-- [B] chạy lại ĐÚNG câu đó, không sửa một chữ\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT * FROM orders WHERE customer_id = 1;",
       "steps": [

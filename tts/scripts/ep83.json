@@ -57,7 +57,7 @@
       "Và để phép đo công bằng: index idx_orders_customer phục vụ CẢ HAI nhánh."
     ],
     "visual": {
-      "filename": "d3.sql",
+      "filename": "sql-qa/d3.mjs — câu SQL trong script",
       "language": "sql",
       "code": "-- orders 500.000 dòng · customers 5.000 dòng\n-- cần: 50 khách đầu KÈM đơn hàng của họ\n\n-- [A] N+1: 1 câu lấy danh sách...\nSELECT id, name, city FROM customers\nORDER BY id LIMIT 50;\n\n-- ...rồi 50 câu chi tiết trong vòng for\nSELECT id, customer_id, total, status, created_at\nFROM orders WHERE customer_id = $1;   -- x50\n\n-- [B] JOIN: đúng 1 câu, DB tự ghép\nSELECT c.id AS cust_id, c.name, c.city,\n       o.id, o.customer_id, o.total,\n       o.status, o.created_at\nFROM (SELECT id, name, city FROM customers\n      ORDER BY id LIMIT 50) c\nJOIN orders o ON o.customer_id = c.id;\n\n-- index idx_orders_customer phục vụ CẢ HAI\n-- nhánh — so N+1 vs JOIN, chứ không phải\n-- so index vs không-index",
       "steps": [

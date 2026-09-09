@@ -57,7 +57,7 @@
       "Nhớ: ANALYZE là CHẠY THẬT — với UPDATE hay DELETE phải bọc BEGIN rồi ROLLBACK."
     ],
     "visual": {
-      "filename": "d2.sql",
+      "filename": "sql-qa/d2.mjs — câu SQL trong script",
       "language": "sql",
       "code": "-- orders 500.000 dòng · customers 5.000 dòng\n-- status='paid'   → 166.097/500.000 đơn\n-- city='Da Nang'  → 1.208/5.000 khách\n\n-- câu \"trang danh sách đơn\" hay gặp nhất\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT o.id, o.total, o.status, o.created_at,\n       c.name, c.city\nFROM orders o\nJOIN customers c ON c.id = o.customer_id\nWHERE o.status = $1 AND c.city = $2\nORDER BY o.created_at DESC\nLIMIT 20;\n\n-- ANALYZE = CHẠY THẬT câu query rồi in số thật\n-- → UPDATE/DELETE phải bọc BEGIN ... ROLLBACK",
       "steps": [
