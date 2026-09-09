@@ -8,9 +8,10 @@ import { S3Module } from './s3/s3.module.js';
 import { s3Middleware } from './s3/s3.middleware.js';
 import { S4Module } from './s4/s4.module.js';
 import { S5Module } from './s5/s5.module.js';
+import { S6Module } from './s6/s6.module.js';
 
 @Module({
-  imports: [S1Module, S1MockModule, S2Module, S3Module, S4Module, S5Module],
+  imports: [S1Module, S1MockModule, S2Module, S3Module, S4Module, S5Module, S6Module],
   controllers: [],
   providers: [],
 })
