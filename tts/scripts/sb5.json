@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Trang cần gọi ba API — code của bạn mất chín trăm hay ba trăm mili giây? Và khi một API hỏng thì sao?",
+      "Câu phỏng vấn JavaScript kinh điển — trả lời trong sáu mươi giây, bằng số đo thật trên Node."
+    ],
+    "visual": {
+      "question": "3 API — code bạn mất 900ms hay 300ms? Một cái hỏng thì sao?",
+      "framework": "node"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Await tuần tự trong vòng for: mỗi cái đợi xong mới bắn cái sau — ba lần ba trăm cộng dồn, tổng chín trăm lẻ bảy mili giây trên máy tôi.",
+      "Promise.all bắn cả ba cùng lúc rồi đợi chung một chỗ — tổng ba trăm lẻ ba, bằng đúng cái chậm nhất."
+    ],
+    "visual": {
+      "filename": "b5.mjs",
+      "language": "javascript",
+      "code": "// tuần tự: đợi xong mới bắn cái sau\nfor (const name of names) {\n  await fakeApi(name, 300);\n}\n// tổng: 907ms — 3×300 CỘNG DỒN\n\n// Promise.all: bắn cả 3 CÙNG LÚC\nconst results = await Promise.all([\n  fakeApi('user', 300),\n  fakeApi('orders', 300),\n  fakeApi('promos', 300),\n]);\n// tổng: 303ms — bằng cái CHẬM NHẤT",
+      "steps": [
+        {
+          "from": 1,
+          "to": 5,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 13,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Cùng ba API: tuần tự chín trăm lẻ bảy — Promise.all ba trăm lẻ ba, chênh đúng ba lần, bằng số promise.",
+      "Còn khối bẫy: orders hỏng sau một trăm mili giây là Promise.all nổ ngay ở một trăm lẻ ba — nhưng user và promos vẫn âm thầm chạy xong ở ba trăm lẻ hai, không ai nhận kết quả."
+    ],
+    "visual": {
+      "src": "screens/beqa/b5-timing.png",
+      "caption": "907ms → 303ms — cùng 3 API"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: task độc lập thì Promise.all — tổng bằng cái chậm nhất; phụ thuộc nhau mới await tuần tự.",
+      "Một cái reject là all nổ ngay với lỗi đầu tiên — cần đủ kết quả kể cả lỗi thì dùng allSettled.",
+      "Bẫy: fail-fast không hủy các promise kia — chúng vẫn chạy ngầm; muốn hủy thật phải AbortController."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "⚡",
+          "text": "Độc lập → Promise.all: 907 → 303ms",
+          "sentence": 0
+        },
+        {
+          "icon": "📋",
+          "text": "1 reject → nổ NGAY · cần đủ → allSettled",
+          "sentence": 1
+        }
+      ],
+      "trap": "fail-fast KHÔNG hủy — muốn hủy: AbortController"
+    }
+  }
+]
