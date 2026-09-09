@@ -1,0 +1,335 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #42: Phân trang OFFSET vs cursor — vì sao trang cuối chậm",
+        "subtitle": "Phỏng vấn Frontend — Database · Câu 42/48",
+        "badge": "Database & SQL · PostgreSQL 17"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep86/scene-01-0-5a094c22.wav",
+          "startFrame": 0,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep86/scene-01-1-035fad27.wav",
+          "startFrame": 172,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep86/scene-01-2-ced15a8e.wav",
+          "startFrame": 351,
+          "durationInFrames": 118
+        }
+      ],
+      "durationInFrames": 487
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "OFFSET không hề nhảy tới dòng thứ N",
+        "bullets": [
+          {
+            "icon": "🧭",
+            "text": "OFFSET N không phải \"nhảy\" — đó là ĐẾM rồi vứt N dòng đầu",
+            "sentence": 0
+          },
+          {
+            "icon": "📖",
+            "text": "docs: rows skipped by OFFSET \"still have to be computed inside the server\"",
+            "sentence": 1
+          },
+          {
+            "icon": "🎯",
+            "text": "cursor/keyset: WHERE id > lastId ORDER BY id LIMIT 20",
+            "sentence": 2
+          },
+          {
+            "icon": "⚡",
+            "text": "Index cấp sẵn thứ tự → nhảy thẳng vào đúng vị trí, không đi bộ",
+            "sentence": 2
+          },
+          {
+            "icon": "⚖️",
+            "text": "Đánh đổi: cursor chỉ tiến/lùi, KHÔNG nhảy tới \"trang số 500\"",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep86/scene-02-0-be6d6457.wav",
+          "startFrame": 0,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep86/scene-02-1-1627bd81.wav",
+          "startFrame": 133,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep86/scene-02-2-67804404.wav",
+          "startFrame": 321,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep86/scene-02-3-df1e52e6.wav",
+          "startFrame": 517,
+          "durationInFrames": 125
+        }
+      ],
+      "durationInFrames": 660
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "d6.sql",
+        "language": "sql",
+        "code": "-- [A] OFFSET: lấy trang cuối của bảng 500.000 dòng\nSELECT id, total, status\n  FROM orders\n ORDER BY id\n LIMIT 20 OFFSET 499980;\n-- docs (queries-limit): \"The rows skipped by an OFFSET\n-- clause still have to be computed inside the server;\n-- therefore a large OFFSET might be inefficient.\"\n\n-- [B] cursor/keyset: thay OFFSET bằng ĐIỀU KIỆN\n-- $1 = id CUỐI CÙNG của trang trước (app tự nhớ)\nSELECT id, total, status\n  FROM orders\n WHERE id > $1          -- 499980\n ORDER BY id\n LIMIT 20;\n\n-- cột sắp xếp phải ỔN ĐỊNH & UNIQUE; created_at trùng\n-- nhau thì ghép thêm khóa phụ để phá hòa:\nSELECT id, total, status FROM orders\n WHERE (created_at, id) > ($1, $2)\n ORDER BY created_at, id LIMIT 20;",
+        "steps": [
+          {
+            "from": 1,
+            "to": 8,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 16,
+            "sentence": 1
+          },
+          {
+            "from": 18,
+            "to": 22,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep86/scene-03-0-0eed7365.wav",
+          "startFrame": 0,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep86/scene-03-1-bb5466c6.wav",
+          "startFrame": 157,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep86/scene-03-2-25955bc8.wav",
+          "startFrame": 338,
+          "durationInFrames": 125
+        }
+      ],
+      "durationInFrames": 481
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node d6.mjs — [A] OFFSET 499980",
+        "commands": [
+          {
+            "cmd": "node d6.mjs",
+            "output": "== D6: OFFSET 499980 vs cursor ==\n500000 dòng · trang cuối 20 dòng · ORDER BY id\n\n[A] LIMIT 20 OFFSET 499980\n  Limit (actual time=39.408..39.410 rows=20)\n  -> Index Scan using orders_pkey on orders\n     (actual time=0.012..29.938 rows=500000)\n  quét 500000 dòng · VỨT BỎ 499980 · hit=4974\n  Exec 39.42 ms · query x3 21.72/21.90/21.99 ms",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep86/scene-04-0-856a3eaf.wav",
+          "startFrame": 0,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep86/scene-04-1-a0901079.wav",
+          "startFrame": 212,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep86/scene-04-2-bf1e0271.wav",
+          "startFrame": 422,
+          "durationInFrames": 233
+        }
+      ],
+      "durationInFrames": 673
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "node d6.mjs — [B] cursor + checksum",
+        "commands": [
+          {
+            "cmd": "node d6.mjs",
+            "output": "[B] cursor WHERE id > 499980 LIMIT 20\n  Limit (actual time=0.004..0.006 rows=20)\n  -> Index Scan using orders_pkey on orders\n     Index Cond: (id > 499980)\n     (actual time=0.003..0.004 rows=20)\n  quét 20 dòng · VỨT BỎ 0 · hit=4\n  Exec 0.01 ms · query x3 0.38/0.35/0.40 ms\n\n           |         OFFSET |        cursor\nsố dòng    |             20 |            20\nmin/max id |  499981/500000 | 499981/500000\nSUM(total) |       44248475 |      44248475",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep86/scene-05-0-f37b13b5.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep86/scene-05-1-33a5f6e4.wav",
+          "startFrame": 200,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep86/scene-05-2-af6c9d50.wav",
+          "startFrame": 412,
+          "durationInFrames": 183
+        }
+      ],
+      "durationInFrames": 613
+    },
+    {
+      "id": "scene-06",
+      "type": "terminal",
+      "visual": {
+        "title": "node d6.mjs — càng sâu càng chậm",
+        "commands": [
+          {
+            "cmd": "node d6.mjs",
+            "output": "== càng về sau OFFSET càng chậm ==\nOFFSET   |  A offset |  B cursor\n0        |   0.37 ms |   0.34 ms\n1000     |   0.38 ms |   0.35 ms\n100000   |   4.49 ms |   0.36 ms\n499980   |  21.52 ms |   0.37 ms\n=> OFFSET N vẫn phải QUÉT rồi VỨT BỎ đủ N dòng:\n   0.37 ms -> 21.52 ms (trang đầu -> trang cuối)\n=> cursor nhảy thẳng bằng index orders_pkey:\n   0.34 ms -> 0.37 ms: PHẲNG, trang nào cũng vậy",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep86/scene-06-0-6a72b67e.wav",
+          "startFrame": 0,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep86/scene-06-1-2c76e653.wav",
+          "startFrame": 203,
+          "durationInFrames": 171
+        },
+        {
+          "file": "audio/ep86/scene-06-2-e36a8605.wav",
+          "startFrame": 382,
+          "durationInFrames": 173
+        }
+      ],
+      "durationInFrames": 573
+    },
+    {
+      "id": "scene-07",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "OFFSET N vẫn TÍNH rồi VỨT N dòng → chi phí tuyến tính theo trang",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "cursor: WHERE id > lastId → index nhảy thẳng, trang nào cũng như nhau",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Bẫy: cột sắp xếp phải ỔN ĐỊNH & UNIQUE — created_at trùng → (created_at, id)",
+            "sentence": 2
+          },
+          {
+            "icon": "📜",
+            "text": "Không nhảy trang tùy ý → UI phải là \"tải thêm\"/infinite scroll",
+            "sentence": 3
+          },
+          {
+            "icon": "🏆",
+            "text": "Cùng node Index Scan orders_pkey — khác đúng 1 dòng Index Cond",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep86/scene-07-0-cf02f527.wav",
+          "startFrame": 0,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep86/scene-07-1-1b6fecb9.wav",
+          "startFrame": 196,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep86/scene-07-2-6af07374.wav",
+          "startFrame": 389,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep86/scene-07-3-b45bf21e.wav",
+          "startFrame": 582,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep86/scene-07-4-3fe6e909.wav",
+          "startFrame": 763,
+          "durationInFrames": 111
+        }
+      ],
+      "durationInFrames": 892
+    },
+    {
+      "id": "scene-08",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 42/48 hoàn tất — hết khối SQL!",
+        "summary": [
+          {
+            "text": "OFFSET 499980: quét 500000 dòng, VỨT BỎ 499980 · 21.6 ms",
+            "sentence": 0
+          },
+          {
+            "text": "cursor WHERE id > lastId: 20 dòng, hit=4 · 0.35 ms (~52–68x)",
+            "sentence": 0
+          },
+          {
+            "text": "Cùng Index Scan orders_pkey — khác mỗi dòng Index Cond",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: Prisma N+1 — vòng for findMany vs include",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 43/48: Prisma N+1 — 21 query hay 2 query? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep86/scene-08-0-454cd1fc.wav",
+          "startFrame": 0,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep86/scene-08-1-003b512d.wav",
+          "startFrame": 236,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/ep86/scene-08-2-0fc35540.wav",
+          "startFrame": 398,
+          "durationInFrames": 104
+        }
+      ],
+      "durationInFrames": 520
+    }
+  ]
+}

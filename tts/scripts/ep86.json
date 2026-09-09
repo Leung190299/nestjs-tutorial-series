@@ -1,0 +1,216 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Phòng phỏng vấn, câu bốn mươi hai: phân trang tới trang thứ hai lăm nghìn thì API chậm hẳn — vì sao, và sửa thế nào?",
+      "Câu trả lời KHÔNG phải thiếu index. Hai cách hôm nay dùng chung một index mà lệch nhau năm mươi tới sáu tám lần.",
+      "Đo thật trên PostgreSQL mười bảy, bảng orders năm trăm nghìn dòng."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #42: Phân trang OFFSET vs cursor — vì sao trang cuối chậm",
+      "subtitle": "Phỏng vấn Frontend — Database · Câu 42/48",
+      "badge": "Database & SQL · PostgreSQL 17"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Nhiều người tưởng OFFSET là bảo database nhảy thẳng tới dòng thứ N. Không phải.",
+      "Docs nói thẳng: dòng bị OFFSET bỏ qua VẪN phải được tính bên trong server; OFFSET lớn có thể rất kém hiệu quả.",
+      "Cursor, hay keyset, thay OFFSET bằng điều kiện WHERE id lớn hơn id cuối trang trước — có index thì nhảy thẳng vào đúng chỗ.",
+      "Đánh đổi: cursor chỉ tiến hoặc lùi, không nhảy tùy ý tới trang số năm trăm."
+    ],
+    "visual": {
+      "title": "OFFSET không hề nhảy tới dòng thứ N",
+      "bullets": [
+        {
+          "icon": "🧭",
+          "text": "OFFSET N không phải \"nhảy\" — đó là ĐẾM rồi vứt N dòng đầu",
+          "sentence": 0
+        },
+        {
+          "icon": "📖",
+          "text": "docs: rows skipped by OFFSET \"still have to be computed inside the server\"",
+          "sentence": 1
+        },
+        {
+          "icon": "🎯",
+          "text": "cursor/keyset: WHERE id > lastId ORDER BY id LIMIT 20",
+          "sentence": 2
+        },
+        {
+          "icon": "⚡",
+          "text": "Index cấp sẵn thứ tự → nhảy thẳng vào đúng vị trí, không đi bộ",
+          "sentence": 2
+        },
+        {
+          "icon": "⚖️",
+          "text": "Đánh đổi: cursor chỉ tiến/lùi, KHÔNG nhảy tới \"trang số 500\"",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Hai câu SQL trả về đúng cùng hai mươi dòng. Câu A dùng OFFSET, quote docs ngay dưới.",
+      "Câu B là cursor: bỏ OFFSET, thêm WHERE id lớn hơn tham số một — id cuối trang trước, do app nhớ chứ không gõ tay.",
+      "Nếu sắp theo cột trùng nhau như created_at thì phải ghép thêm id để phá hòa."
+    ],
+    "visual": {
+      "filename": "d6.sql",
+      "language": "sql",
+      "code": "-- [A] OFFSET: lấy trang cuối của bảng 500.000 dòng\nSELECT id, total, status\n  FROM orders\n ORDER BY id\n LIMIT 20 OFFSET 499980;\n-- docs (queries-limit): \"The rows skipped by an OFFSET\n-- clause still have to be computed inside the server;\n-- therefore a large OFFSET might be inefficient.\"\n\n-- [B] cursor/keyset: thay OFFSET bằng ĐIỀU KIỆN\n-- $1 = id CUỐI CÙNG của trang trước (app tự nhớ)\nSELECT id, total, status\n  FROM orders\n WHERE id > $1          -- 499980\n ORDER BY id\n LIMIT 20;\n\n-- cột sắp xếp phải ỔN ĐỊNH & UNIQUE; created_at trùng\n-- nhau thì ghép thêm khóa phụ để phá hòa:\nSELECT id, total, status FROM orders\n WHERE (created_at, id) > ($1, $2)\n ORDER BY created_at, id LIMIT 20;",
+      "steps": [
+        {
+          "from": 1,
+          "to": 8,
+          "sentence": 0
+        },
+        {
+          "from": 10,
+          "to": 16,
+          "sentence": 1
+        },
+        {
+          "from": 18,
+          "to": 22,
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy thật. Nhánh A: node ngoài là Limit, rows hai mươi. Nhưng node con Index Scan using orders_pkey báo rows NĂM TRĂM NGHÌN.",
+      "Postgres sinh đủ năm trăm nghìn dòng rồi vứt bốn trăm chín chín nghìn chín trăm tám mươi. Buffers hit bốn nghìn chín trăm bảy tư.",
+      "Query thường hai mươi mốt phẩy bảy mili giây. Ba mươi chín là Execution Time của EXPLAIN — gắn đồng hồ từng dòng, đừng lấy làm ms thật."
+    ],
+    "visual": {
+      "title": "node d6.mjs — [A] OFFSET 499980",
+      "commands": [
+        {
+          "cmd": "node d6.mjs",
+          "output": "== D6: OFFSET 499980 vs cursor ==\n500000 dòng · trang cuối 20 dòng · ORDER BY id\n\n[A] LIMIT 20 OFFSET 499980\n  Limit (actual time=39.408..39.410 rows=20)\n  -> Index Scan using orders_pkey on orders\n     (actual time=0.012..29.938 rows=500000)\n  quét 500000 dòng · VỨT BỎ 499980 · hit=4974\n  Exec 39.42 ms · query x3 21.72/21.90/21.99 ms",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "terminal",
+    "narration": [
+      "Nhánh B, cursor. Beat vàng đây: CÙNG một node Index Scan using orders_pkey. Khác đúng MỘT dòng: Index Cond.",
+      "Có điều kiện thì NHẢY thẳng; không thì đi bộ qua năm trăm nghìn mục rồi vứt. Quét hai mươi dòng, hit bằng bốn — ít hơn một nghìn hai trăm lần.",
+      "Không phẩy ba lăm mili giây — nhanh hơn năm hai tới sáu tám lần. Checksum JavaScript: hai nhánh cùng hai mươi dòng, cùng tổng."
+    ],
+    "visual": {
+      "title": "node d6.mjs — [B] cursor + checksum",
+      "commands": [
+        {
+          "cmd": "node d6.mjs",
+          "output": "[B] cursor WHERE id > 499980 LIMIT 20\n  Limit (actual time=0.004..0.006 rows=20)\n  -> Index Scan using orders_pkey on orders\n     Index Cond: (id > 499980)\n     (actual time=0.003..0.004 rows=20)\n  quét 20 dòng · VỨT BỎ 0 · hit=4\n  Exec 0.01 ms · query x3 0.38/0.35/0.40 ms\n\n           |         OFFSET |        cursor\nsố dòng    |             20 |            20\nmin/max id |  499981/500000 | 499981/500000\nSUM(total) |       44248475 |      44248475",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "terminal",
+    "narration": [
+      "Đường cong mới khiến bug này khó thấy. OFFSET không và một nghìn đều khoảng không phẩy ba tám mili giây — trang đầu nhanh, test thấy ổn.",
+      "Một trăm nghìn: bốn phẩy năm. Bốn trăm chín chín nghìn chín trăm tám mươi: hai mươi mốt phẩy năm — tuyến tính theo N.",
+      "Cột cursor phẳng lì, không phẩy ba tư tới ba bảy ở MỌI mốc. Trang một và trang hai lăm nghìn tốn như nhau."
+    ],
+    "visual": {
+      "title": "node d6.mjs — càng sâu càng chậm",
+      "commands": [
+        {
+          "cmd": "node d6.mjs",
+          "output": "== càng về sau OFFSET càng chậm ==\nOFFSET   |  A offset |  B cursor\n0        |   0.37 ms |   0.34 ms\n1000     |   0.38 ms |   0.35 ms\n100000   |   4.49 ms |   0.36 ms\n499980   |  21.52 ms |   0.37 ms\n=> OFFSET N vẫn phải QUÉT rồi VỨT BỎ đủ N dòng:\n   0.37 ms -> 21.52 ms (trang đầu -> trang cuối)\n=> cursor nhảy thẳng bằng index orders_pkey:\n   0.34 ms -> 0.37 ms: PHẲNG, trang nào cũng vậy",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-07",
+    "type": "concept",
+    "narration": [
+      "Trả lời ba câu. Một: OFFSET N không nhảy — server vẫn tính rồi bỏ đủ N dòng, chi phí tăng tuyến tính theo trang.",
+      "Hai: cursor thay bằng WHERE id lớn hơn id cuối trang trước; index cấp sẵn thứ tự nên nhảy thẳng, trang nào cũng như nhau.",
+      "Ba: bẫy là cột sắp xếp phải ỔN ĐỊNH và UNIQUE — created_at trùng nhau là lệch trang, phải ghép thêm id.",
+      "Không nhảy trang tùy ý được nên UI phải là tải thêm hoặc cuộn vô tận; OFFSET nhỏ vẫn ổn, đừng tối ưu sớm.",
+      "Nhớ: cả hai nhánh đều dùng index — cứu tinh là dòng Index Cond."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "OFFSET N vẫn TÍNH rồi VỨT N dòng → chi phí tuyến tính theo trang",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "cursor: WHERE id > lastId → index nhảy thẳng, trang nào cũng như nhau",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Bẫy: cột sắp xếp phải ỔN ĐỊNH & UNIQUE — created_at trùng → (created_at, id)",
+          "sentence": 2
+        },
+        {
+          "icon": "📜",
+          "text": "Không nhảy trang tùy ý → UI phải là \"tải thêm\"/infinite scroll",
+          "sentence": 3
+        },
+        {
+          "icon": "🏆",
+          "text": "Cùng node Index Scan orders_pkey — khác đúng 1 dòng Index Cond",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-08",
+    "type": "outro",
+    "narration": [
+      "Xong câu bốn mươi hai — và xong trọn khối SQL sáu câu: index, EXPLAIN, N cộng một, isolation, deadlock, phân trang.",
+      "Câu tiếp sang Prisma: lấy hai mươi khách kèm đơn hàng, vì sao vòng for gọi findMany là sai?",
+      "Có bản Shorts sáu mươi giây để ôn nhanh — hẹn gặp ở câu bốn mươi ba!"
+    ],
+    "visual": {
+      "title": "Câu 42/48 hoàn tất — hết khối SQL!",
+      "summary": [
+        {
+          "text": "OFFSET 499980: quét 500000 dòng, VỨT BỎ 499980 · 21.6 ms",
+          "sentence": 0
+        },
+        {
+          "text": "cursor WHERE id > lastId: 20 dòng, hit=4 · 0.35 ms (~52–68x)",
+          "sentence": 0
+        },
+        {
+          "text": "Cùng Index Scan orders_pkey — khác mỗi dòng Index Cond",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: Prisma N+1 — vòng for findMany vs include",
+          "sentence": 1
+        }
+      ],
+      "next": "Câu 43/48: Prisma N+1 — 21 query hay 2 query? 🎤"
+    }
+  }
+]

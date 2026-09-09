@@ -1,0 +1,75 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Trang cuối của danh sách năm trăm nghìn dòng: cùng một index mà chậm gấp sáu mươi lần.",
+      "Sáu mươi giây: OFFSET và cursor, đo thật trên Postgres."
+    ],
+    "visual": {
+      "question": "OFFSET 499980: vì sao trang cuối chậm 60x?",
+      "framework": "postgres"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "OFFSET không nhảy: Postgres vẫn quét đủ năm trăm nghìn dòng rồi vứt bỏ bốn trăm chín chín nghìn chín trăm tám mươi.",
+      "Cursor thay bằng WHERE id lớn hơn id cuối trang trước — index nhảy thẳng, chỉ đọc đúng hai mươi dòng."
+    ],
+    "visual": {
+      "filename": "d6.sql",
+      "language": "sql",
+      "code": "-- [A] trang cuối bằng OFFSET\nSELECT id, total FROM orders\n ORDER BY id\n LIMIT 20 OFFSET 499980;\n-- server VẪN tính rồi VỨT BỎ\n-- đủ 499.980 dòng trước đó\n\n-- [B] cursor: nhớ id trang trước\nSELECT id, total FROM orders\n WHERE id > 499980\n ORDER BY id\n LIMIT 20;\n-- Index Cond -> NHẢY thẳng\n-- 21.6 ms  ->  0.35 ms",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Đo thật: hai mươi mốt phẩy sáu mili giây so với không phẩy ba lăm. Cùng một node Index Scan on orders_pkey.",
+      "Khác đúng một dòng Index Cond. Buffers bốn nghìn chín trăm bảy tư so với bốn."
+    ],
+    "visual": {
+      "src": "screens/dbqa/d6-pagination.png",
+      "caption": "21.6ms vs 0.35ms — cùng 20 dòng"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "OFFSET tăng tuyến tính theo độ sâu trang; cursor phẳng lì, trang nào cũng như nhau.",
+      "Bẫy: cột sắp xếp phải ổn định và unique, và cursor không nhảy tới trang số năm trăm tùy ý."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🧭",
+          "text": "OFFSET N: server VẪN tính rồi vứt N dòng",
+          "sentence": 0
+        },
+        {
+          "icon": "⚡",
+          "text": "cursor WHERE id > lastId → PHẲNG mọi trang",
+          "sentence": 0
+        }
+      ],
+      "trap": "Cột sắp xếp phải ỔN ĐỊNH & UNIQUE — không nhảy trang tùy ý"
+    }
+  }
+]
