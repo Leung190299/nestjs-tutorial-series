@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Dự án Node của bạn dùng CommonJS hay ESM — khác nhau thật sự ở đâu?",
+      "Trả lời trong sáu mươi giây — bằng phép thử chạy thật trên Node hai mươi hai."
+    ],
+    "visual": {
+      "question": "CommonJS hay ESM — khác nhau thật sự ở đâu?",
+      "framework": "node"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "File ESM không có __dirname — in thử là nổ; bản thay thế: import.meta.dirname.",
+      "Import JSON phải khai with type json; đổi lại ESM có top-level await — await ngay thân module."
+    ],
+    "visual": {
+      "filename": "b6.mjs",
+      "language": "javascript",
+      "code": "// ESM (b6.mjs): 3 phép thử\ntry {\n  console.log(__dirname);\n} catch {\n  // FAIL — ESM không có __dirname\n  console.log(import.meta.dirname);\n}\n\n// JSON phải khai with\nawait import('./b6-data.json',\n  { with: { type: 'json' } });\n\n// top-level await: chạy luôn\nawait Promise.resolve('OK');",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "CJS đủ __dirname với JSON nhưng thua top-level await; ESM ngược lại — và mục bốn: require một file ESM đồng bộ giờ CHẠY LUÔN.",
+      "Không cờ, không warning trên Node hai mươi hai — chỉ nổ ERR_REQUIRE_ASYNC_MODULE khi file dính top-level await."
+    ],
+    "visual": {
+      "src": "screens/beqa/b6-compare.png",
+      "caption": "require(esm): OK — Node 22"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: chấm mjs là ESM, chấm cjs là CommonJS, chấm js theo trường type.",
+      "Dự án mới chọn ESM; và require(esm) chạy được từ Node hai mươi hai chấm mười hai — với module đồng bộ.",
+      "Bẫy: bật type module là mọi file chấm js thành ESM hết — file cần CommonJS thì đổi đuôi chấm cjs."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "📏",
+          "text": ".mjs=ESM · .cjs=CJS · .js theo \"type\"",
+          "sentence": 0
+        },
+        {
+          "icon": "⚡",
+          "text": "require(esm): OK từ 22.12 (đồng bộ)",
+          "sentence": 1
+        }
+      ],
+      "trap": "\"type\":\"module\" → .js thành ESM HẾT — .cjs thoát"
+    }
+  }
+]

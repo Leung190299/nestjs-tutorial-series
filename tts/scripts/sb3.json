@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Hash password trên Node làm cả server đơ gần hai giây — bạn xử thế nào?",
+      "Câu phỏng vấn backend kinh điển — trả lời trong sáu mươi giây, bằng số đo thật từ đồng hồ tick một trăm mili giây."
+    ],
+    "visual": {
+      "question": "CPU nặng làm Node đơ cả server — worker_threads cứu thế nào?",
+      "framework": "node"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Main mở một Worker — thread chạy JavaScript song song cùng process — gửi khối lượng qua workerData, rồi await message kết quả.",
+      "Worker chạy đúng vòng hash nặng đó rồi postMessage tám hex đầu về — main không bị chặn một mili giây nào."
+    ],
+    "visual": {
+      "filename": "b3.mjs + b3-worker.mjs",
+      "language": "javascript",
+      "code": "// main — b3.mjs\nconst worker = new Worker(\n  new URL('./b3-worker.mjs',\n          import.meta.url),\n  { workerData });\nconst result = await new Promise(\n  (res) => worker.once('message', res));\n\n// worker — b3-worker.mjs\nlet key = Buffer.from('mat-khau');\nfor (let i = 0; i < rounds; i++)\n  key = pbkdf2Sync(key, 'muoi',\n    iterations, 64, 'sha512');\nparentPort.postMessage({ hex });",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Cùng một khối hash một phẩy tám giây: trên main, đồng hồ đứng hình một nghìn chín trăm hai mươi mốt mili giây — qua worker chỉ hở đúng một tick, một trăm linh hai.",
+      "Mà tổng thời gian hai nhánh ngang nhau, hash khớp từng ký tự — việc chạy chỗ khác chứ không ai làm ít đi."
+    ],
+    "visual": {
+      "src": "screens/beqa/b3-worker.png",
+      "caption": "gap 1921ms → 102ms — tổng không đổi"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: CPU-bound trên main thread là chiếm event loop — mọi client chờ; bê nó sang worker_threads, main vẫn rảnh phục vụ.",
+      "Còn cluster là nhân cả process share port — scale ngang cả app, chuyện khác.",
+      "Bẫy: async await không cứu được CPU-bound — await không tạo thread nào cả."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "⚙️",
+          "text": "CPU nặng → worker_threads: main vẫn rảnh",
+          "sentence": 0
+        },
+        {
+          "icon": "🔀",
+          "text": "cluster = nhân PROCESS share port — chuyện scale",
+          "sentence": 1
+        }
+      ],
+      "trap": "async/await KHÔNG cứu CPU-bound — không tạo thread"
+    }
+  }
+]

@@ -1,0 +1,276 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #29: Promise.all — 3 API trong 300ms và bẫy fail-fast",
+        "subtitle": "Phỏng vấn Frontend — Node.js core · Câu 29/36",
+        "badge": "Node.js backend"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep73/scene-01-0-80635168.wav",
+          "startFrame": 0,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep73/scene-01-1-3950bbc1.wav",
+          "startFrame": 246,
+          "durationInFrames": 245
+        }
+      ],
+      "durationInFrames": 509
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Tuần tự cộng dồn — Promise.all bằng cái chậm nhất",
+        "bullets": [
+          {
+            "icon": "⛓️",
+            "text": "await tuần tự = CỘNG DỒN: 3 × 300ms ≈ 900ms",
+            "sentence": 0
+          },
+          {
+            "icon": "⚡",
+            "text": "Promise.all = song song — tổng bằng cái CHẬM NHẤT",
+            "sentence": 1
+          },
+          {
+            "icon": "💥",
+            "text": "fail-fast: 1 reject → all reject NGAY (lỗi đầu tiên)",
+            "sentence": 2
+          },
+          {
+            "icon": "📋",
+            "text": "allSettled: đợi đủ — mảng {status, value/reason}",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep73/scene-02-0-4b3af73e.wav",
+          "startFrame": 0,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep73/scene-02-1-e8abdcfd.wav",
+          "startFrame": 205,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep73/scene-02-2-9207ec2f.wav",
+          "startFrame": 451,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep73/scene-02-3-905e6450.wav",
+          "startFrame": 697,
+          "durationInFrames": 240
+        }
+      ],
+      "durationInFrames": 955
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "b5.mjs",
+        "language": "javascript",
+        "code": "{\n  const t0 = Date.now();\n  for (const name of ['user', 'orders', 'promos']) {\n    const tStep = Date.now();\n    await fakeApi(name, 300);\n    console.log(`${name.padEnd(6)} xong ${Date.now() - tStep}ms (cộng dồn ${Date.now() - t0}ms)`);\n  }\n  console.log(`tổng: ${Date.now() - t0}ms — 3 × 300ms CỘNG DỒN`);\n}\n\nconsole.log('');\nconsole.log('== B5b: Promise.all ==');\n{\n  console.log('bắn cả 3 CÙNG LÚC, đợi chung một chỗ...');\n  const t0 = Date.now();\n  const results = await Promise.all([\n    fakeApi('user', 300),\n    fakeApi('orders', 300),\n    fakeApi('promos', 300),\n  ]);\n  console.log(`đủ 3 kết quả: ${results.map((r) => r.name).join(' · ')}`);\n  console.log(`tổng: ${Date.now() - t0}ms — bằng cái CHẬM NHẤT (300ms)`);",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 20,
+            "sentence": 1
+          },
+          {
+            "from": 21,
+            "to": 22,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep73/scene-03-0-b5c49baa.wav",
+          "startFrame": 0,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep73/scene-03-1-6f315193.wav",
+          "startFrame": 224,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep73/scene-03-2-04ab5e2c.wav",
+          "startFrame": 420,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ep73/scene-03-3-1dbc244d.wav",
+          "startFrame": 608,
+          "durationInFrames": 276
+        }
+      ],
+      "durationInFrames": 902
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node b5.mjs",
+        "commands": [
+          {
+            "cmd": "node b5.mjs",
+            "output": "user   xong 302ms (cộng dồn 302ms)\norders xong 302ms (cộng dồn 604ms)\npromos xong 302ms (cộng dồn 906ms)\ntổng: 907ms — 3 × 300ms CỘNG DỒN\n== B5b: Promise.all ==\ntổng: 303ms — bằng cái CHẬM NHẤT (300ms)",
+            "sentence": 0
+          },
+          {
+            "cmd": "node b5.mjs",
+            "output": "Promise.all nổ sau 103ms: orders hỏng\n→ 2 kết quả kia bị BỎ (vẫn chạy ngầm:\n  user vẫn xong 302ms, promos 302ms)\nPromise.allSettled cùng bộ:\ntổng: 302ms — KHÔNG nổ, đủ 3 trạng thái",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep73/scene-04-0-30f15bce.wav",
+          "startFrame": 0,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep73/scene-04-1-be245e59.wav",
+          "startFrame": 229,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep73/scene-04-2-dbde9a8a.wav",
+          "startFrame": 473,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep73/scene-04-3-75be6135.wav",
+          "startFrame": 657,
+          "durationInFrames": 267
+        }
+      ],
+      "durationInFrames": 942
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Độc lập → all · phụ thuộc → tuần tự",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "1 reject → nổ NGAY · cần đủ → allSettled",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "race = theo cái settle ĐẦU TIÊN (timeout)",
+            "sentence": 2
+          },
+          {
+            "icon": "🪤",
+            "text": "fail-fast KHÔNG hủy — muốn hủy: AbortController",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep73/scene-05-0-a7e23765.wav",
+          "startFrame": 0,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep73/scene-05-1-e7a110b4.wav",
+          "startFrame": 258,
+          "durationInFrames": 279
+        },
+        {
+          "file": "audio/ep73/scene-05-2-fc26be8a.wav",
+          "startFrame": 545,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep73/scene-05-3-31bdec8c.wav",
+          "startFrame": 678,
+          "durationInFrames": 192
+        }
+      ],
+      "durationInFrames": 888
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 29/36 hoàn tất — hẹn gặp câu 30!",
+        "summary": [
+          {
+            "text": "3 API độc lập: Promise.all — 907ms → 303ms",
+            "sentence": 0
+          },
+          {
+            "text": "fail-fast nổ 103ms — nhưng KHÔNG hủy promise kia",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: CommonJS vs ESM trong Node",
+            "sentence": 1
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 30/36: CommonJS vs ESM khác gì? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep73/scene-06-0-e84eb299.wav",
+          "startFrame": 0,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep73/scene-06-1-d9bbc862.wav",
+          "startFrame": 222,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep73/scene-06-2-81324e93.wav",
+          "startFrame": 466,
+          "durationInFrames": 116
+        },
+        {
+          "file": "audio/ep73/scene-06-3-154812b8.wav",
+          "startFrame": 590,
+          "durationInFrames": 96
+        }
+      ],
+      "durationInFrames": 704
+    }
+  ]
+}

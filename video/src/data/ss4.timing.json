@@ -1,0 +1,119 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "NestJS: ValidationPipe + DTO — body sai thì sao?",
+        "framework": "nestjs"
+      },
+      "sentences": [
+        {
+          "file": "audio/ss4/s1-0-0f64fd6e.wav",
+          "startFrame": 0,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ss4/s1-1-2018c6e1.wav",
+          "startFrame": 186,
+          "durationInFrames": 72
+        }
+      ],
+      "durationInFrames": 276
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "create-order.dto.ts (rút gọn)",
+        "language": "tsx",
+        "code": "// DTO = hợp đồng dữ liệu vào\nclass CreateOrderDto {\n  @IsString() ten: string;\n  @IsInt() @Min(1) soLuong: number;\n  @IsEmail() email: string;\n}\n\n// pipe chạy NGAY TRƯỚC handler\n// sai → 400, handler KHÔNG chạy\n@UsePipes(new ValidationPipe({\n  whitelist: true,  // gọt field lạ\n  transform: true,\n}))",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 13,
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ss4/s2-0-9fd9568b.wav",
+          "startFrame": 0,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ss4/s2-1-0be2ad5f.wav",
+          "startFrame": 229,
+          "durationInFrames": 168
+        }
+      ],
+      "durationInFrames": 415
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/beqa/s4-validate.png",
+        "caption": "3 lỗi chi tiết · field lạ bị strip"
+      },
+      "sentences": [
+        {
+          "file": "audio/ss4/s3-0-16869efd.wav",
+          "startFrame": 0,
+          "durationInFrames": 159
+        },
+        {
+          "file": "audio/ss4/s3-1-01925f0d.wav",
+          "startFrame": 167,
+          "durationInFrames": 173
+        }
+      ],
+      "durationInFrames": 358
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "📜",
+            "text": "DTO + decorator = hợp đồng — chặn ở BIÊN",
+            "sentence": 0
+          },
+          {
+            "icon": "❌",
+            "text": "Sai → 400 mảng lỗi — handler KHÔNG chạy",
+            "sentence": 1
+          }
+        ],
+        "trap": "whitelist KHÔNG bật mặc định — phải TỰ bật"
+      },
+      "sentences": [
+        {
+          "file": "audio/ss4/s4-0-233a0b86.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ss4/s4-1-b38e0800.wav",
+          "startFrame": 200,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ss4/s4-2-0494b59a.wav",
+          "startFrame": 316,
+          "durationInFrames": 147
+        }
+      ],
+      "durationInFrames": 481
+    }
+  ]
+}

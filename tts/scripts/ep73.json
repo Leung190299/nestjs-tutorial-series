@@ -1,0 +1,179 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu số hai mươi chín — câu hỏi từ nhà tuyển dụng: trang cần gọi ba API — code của bạn mất chín trăm hay ba trăm mili giây? Và khi một API hỏng thì sao?",
+      "Mình trả lời bằng demo đo thật: cùng ba API giả lập ba trăm mili giây mỗi cái, chạy đủ bốn kiểu — await tuần tự, Promise.all, bẫy fail-fast và allSettled."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #29: Promise.all — 3 API trong 300ms và bẫy fail-fast",
+      "subtitle": "Phỏng vấn Frontend — Node.js core · Câu 29/36",
+      "badge": "Node.js backend"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Await tuần tự là cộng dồn: mỗi await đợi API trước xong mới bắn cái sau — ba lần ba trăm là gần chín trăm mili giây.",
+      "Promise.all bắn cả ba cùng lúc rồi đợi chung — tổng bằng cái CHẬM NHẤT; MDN nói nó fulfill khi TẤT CẢ promise đầu vào fulfill, trả về mảng kết quả.",
+      "Nhưng nó fail-fast: chỉ MỘT cái reject là cả cụm reject NGAY với lỗi đầu tiên — và các promise kia KHÔNG bị hủy, vẫn chạy ngầm, chỉ là kết quả không ai nhận.",
+      "Muốn nhận đủ kết quả từng cái kể cả lỗi thì Promise.allSettled — đợi tất cả settle, trả mảng status kèm value hoặc reason, và không bao giờ reject."
+    ],
+    "visual": {
+      "title": "Tuần tự cộng dồn — Promise.all bằng cái chậm nhất",
+      "bullets": [
+        {
+          "icon": "⛓️",
+          "text": "await tuần tự = CỘNG DỒN: 3 × 300ms ≈ 900ms",
+          "sentence": 0
+        },
+        {
+          "icon": "⚡",
+          "text": "Promise.all = song song — tổng bằng cái CHẬM NHẤT",
+          "sentence": 1
+        },
+        {
+          "icon": "💥",
+          "text": "fail-fast: 1 reject → all reject NGAY (lỗi đầu tiên)",
+          "sentence": 2
+        },
+        {
+          "icon": "📋",
+          "text": "allSettled: đợi đủ — mảng {status, value/reason}",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Khối một trong b5.mjs: vòng for await từng API — fakeApi ba trăm mili giây — mỗi bước in thời gian riêng và thời gian cộng dồn.",
+      "Khối hai: cũng đúng ba API đó nhưng bắn cả ba CÙNG LÚC — mảng ba fakeApi đưa thẳng vào Promise.all, đợi chung một chỗ.",
+      "results là mảng đủ ba kết quả theo đúng thứ tự đầu vào — và dòng tổng sẽ cho thấy con số bằng cái chậm nhất.",
+      "Phía dưới file còn khối B5c: bộ mới cho orders reject sau một trăm mili giây để bẫy fail-fast lộ mặt, rồi allSettled cùng bộ — số đo nằm ở terminal ngay sau đây."
+    ],
+    "visual": {
+      "filename": "b5.mjs",
+      "language": "javascript",
+      "code": "{\n  const t0 = Date.now();\n  for (const name of ['user', 'orders', 'promos']) {\n    const tStep = Date.now();\n    await fakeApi(name, 300);\n    console.log(`${name.padEnd(6)} xong ${Date.now() - tStep}ms (cộng dồn ${Date.now() - t0}ms)`);\n  }\n  console.log(`tổng: ${Date.now() - t0}ms — 3 × 300ms CỘNG DỒN`);\n}\n\nconsole.log('');\nconsole.log('== B5b: Promise.all ==');\n{\n  console.log('bắn cả 3 CÙNG LÚC, đợi chung một chỗ...');\n  const t0 = Date.now();\n  const results = await Promise.all([\n    fakeApi('user', 300),\n    fakeApi('orders', 300),\n    fakeApi('promos', 300),\n  ]);\n  console.log(`đủ 3 kết quả: ${results.map((r) => r.name).join(' · ')}`);\n  console.log(`tổng: ${Date.now() - t0}ms — bằng cái CHẬM NHẤT (300ms)`);",
+      "steps": [
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 0
+        },
+        {
+          "from": 10,
+          "to": 20,
+          "sentence": 1
+        },
+        {
+          "from": 21,
+          "to": 22,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy node b5.mjs: tuần tự — từng bước ba trăm lẻ hai, cộng dồn thành chín trăm lẻ sáu, tổng chín trăm lẻ bảy mili giây trên máy tôi.",
+      "Còn Promise.all cùng ba API ấy: ba trăm lẻ ba — chênh đúng ba lần, bằng số promise; ba trăm lẻ ba nghĩa là bằng đúng cái chậm nhất, không phải phép màu.",
+      "Khối bẫy: orders reject sau một trăm mili giây — Promise.all nổ NGAY ở một trăm lẻ ba, không đợi hai cái ba trăm.",
+      "Nhưng nhìn dòng bằng chứng: user và promos vẫn âm thầm chạy xong ở ba trăm lẻ hai — không ai nhận kết quả; còn allSettled đợi đủ cả ba, tổng ba trăm lẻ hai, không nổ."
+    ],
+    "visual": {
+      "title": "node b5.mjs",
+      "commands": [
+        {
+          "cmd": "node b5.mjs",
+          "output": "user   xong 302ms (cộng dồn 302ms)\norders xong 302ms (cộng dồn 604ms)\npromos xong 302ms (cộng dồn 906ms)\ntổng: 907ms — 3 × 300ms CỘNG DỒN\n== B5b: Promise.all ==\ntổng: 303ms — bằng cái CHẬM NHẤT (300ms)",
+          "sentence": 0
+        },
+        {
+          "cmd": "node b5.mjs",
+          "output": "Promise.all nổ sau 103ms: orders hỏng\n→ 2 kết quả kia bị BỎ (vẫn chạy ngầm:\n  user vẫn xong 302ms, promos 302ms)\nPromise.allSettled cùng bộ:\ntổng: 302ms — KHÔNG nổ, đủ 3 trạng thái",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — câu một: task ĐỘC LẬP thì Promise.all chạy song song, tổng bằng cái chậm nhất; chỉ await tuần tự khi cái sau PHỤ THUỘC kết quả cái trước.",
+      "Câu hai: Promise.all fail-fast — một cái reject là cả cụm reject ngay với lỗi đầu tiên; cần đủ báo cáo từng cái kể cả lỗi thì allSettled, nhớ kiểm status từng phần tử.",
+      "Câu ba: còn Promise.race chốt theo cái settle ĐẦU TIÊN — hay dùng làm timeout.",
+      "Bẫy: fail-fast KHÔNG hủy các promise còn lại — chúng vẫn chạy tốn tài nguyên; muốn hủy thật phải truyền tín hiệu, kiểu AbortController."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Độc lập → all · phụ thuộc → tuần tự",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "1 reject → nổ NGAY · cần đủ → allSettled",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "race = theo cái settle ĐẦU TIÊN (timeout)",
+          "sentence": 2
+        },
+        {
+          "icon": "🪤",
+          "text": "fail-fast KHÔNG hủy — muốn hủy: AbortController",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu hai mươi chín — ba API độc lập thì đừng bắt chúng xếp hàng: Promise.all đưa chín trăm lẻ bảy về ba trăm lẻ ba mili giây.",
+      "Câu tiếp theo: CommonJS và ESM khác nhau gì trong Node bây giờ — __dirname, require JSON, top-level await, bên nào có bên nào không?",
+      "Video này có bản Shorts sáu mươi giây để bạn ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số ba mươi!"
+    ],
+    "visual": {
+      "title": "Câu 29/36 hoàn tất — hẹn gặp câu 30!",
+      "summary": [
+        {
+          "text": "3 API độc lập: Promise.all — 907ms → 303ms",
+          "sentence": 0
+        },
+        {
+          "text": "fail-fast nổ 103ms — nhưng KHÔNG hủy promise kia",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: CommonJS vs ESM trong Node",
+          "sentence": 1
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 30/36: CommonJS vs ESM khác gì? 🎤"
+    }
+  }
+]

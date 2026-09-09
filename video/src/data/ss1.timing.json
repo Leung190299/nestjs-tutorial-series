@@ -1,0 +1,119 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "NestJS: vì sao KHÔNG tự new service?",
+        "framework": "nestjs"
+      },
+      "sentences": [
+        {
+          "file": "audio/ss1/s1-0-21f3ae31.wav",
+          "startFrame": 0,
+          "durationInFrames": 180
+        },
+        {
+          "file": "audio/ss1/s1-1-c8521f3e.wav",
+          "startFrame": 188,
+          "durationInFrames": 147
+        }
+      ],
+      "durationInFrames": 353
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "s1-mock.module.ts (rút gọn)",
+        "language": "tsx",
+        "code": "// consumer: KHÔNG new — khai type\nconstructor(\n  private readonly\n    priceService: PriceService,\n) {}\n\n// mock: thay ruột qua provider\n@Module({\n  providers: [{\n    provide: PriceService,\n    useValue: { getPrice: () => 1 },\n  }],\n})",
+        "steps": [
+          {
+            "from": 1,
+            "to": 5,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 13,
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ss1/s2-0-431c8717.wav",
+          "startFrame": 0,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ss1/s2-1-7bdc4e27.wav",
+          "startFrame": 212,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 468
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/beqa/s1-di.png",
+        "caption": "đổi provider: 100 → 1, không sửa controller"
+      },
+      "sentences": [
+        {
+          "file": "audio/ss1/s3-0-26e5100f.wav",
+          "startFrame": 0,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ss1/s3-1-3aabb5fb.wav",
+          "startFrame": 155,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 363
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "🔄",
+            "text": "DI: container new & inject theo TYPE",
+            "sentence": 0
+          },
+          {
+            "icon": "1️⃣",
+            "text": "Mặc định SINGLETON — 1 instance cả app",
+            "sentence": 1
+          }
+        ],
+        "trap": "ĐỪNG giữ state per-request trong service"
+      },
+      "sentences": [
+        {
+          "file": "audio/ss1/s4-0-e12ffd6a.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ss1/s4-1-c72df387.wav",
+          "startFrame": 200,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ss1/s4-2-b2168ae2.wav",
+          "startFrame": 374,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 589
+    }
+  ]
+}

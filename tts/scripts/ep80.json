@@ -1,0 +1,199 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu số ba mươi sáu — câu cuối cùng của lô: nhà tuyển dụng hỏi: service ném lỗi thô ra tận client — bạn chuẩn hóa error toàn app NestJS thế nào?",
+      "Mình trả lời bằng demo chạy thật: cùng một lỗi db exploded — mặc định năm trăm vô hồn, qua filter thành vỏ thống nhất, an toàn."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #36: Exception filter — chuẩn hóa lỗi toàn app",
+      "subtitle": "Phỏng vấn Frontend — NestJS · Câu 36/36",
+      "badge": "NestJS backend"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Không bắt lỗi thì sao? Nest có sẵn exceptions layer: lỗi lạ — không phải HttpException — thành năm trăm Internal server error; an toàn nhưng vô hồn, mất sạch ngữ cảnh.",
+      "Exception filter là công cụ giành lại quyền đó — docs nói thẳng: filter cho bạn kiểm soát chính xác cả LUỒNG xử lý lẫn NỘI DUNG response trả về client.",
+      "Cách bắt trọn: @Catch() để TRỐNG là bắt mọi exception chưa xử lý — rồi trả vỏ thống nhất bốn trường code, message, path, timestamp; stack chỉ log ở server, không lộ nội tình.",
+      "Còn HttpException chủ động — bốn lẻ bốn, bốn trăm — filter giữ nguyên status và message, chỉ chuẩn hóa cái vỏ."
+    ],
+    "visual": {
+      "title": "Exception filter — giành quyền kiểm soát lỗi",
+      "bullets": [
+        {
+          "icon": "🕳️",
+          "text": "Không bắt: lỗi lạ → 500 chung chung, vô hồn",
+          "sentence": 0
+        },
+        {
+          "icon": "🎛️",
+          "text": "Docs: control cả FLOW lẫn CONTENT của response",
+          "sentence": 1
+        },
+        {
+          "icon": "🧾",
+          "text": "@Catch() TRỐNG → vỏ {code, message, path, timestamp}",
+          "sentence": 2
+        },
+        {
+          "icon": "🛡️",
+          "text": "HttpException giữ status — stack chỉ log server",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là all-exceptions.filter.ts, @Catch() để trống phía trên kể miệng — bắt mọi exception; nhánh phân loại hỏi: có phải HttpException không — phải thì giữ status của nó, lỗi thô thì về năm trăm.",
+      "Code và message phân nhánh y vậy: bốn lẻ bốn giữ message gốc; lỗi thô nhận code INTERNAL và câu chữ AN TOÀN — tuyệt không lộ err.message.",
+      "Stack thì sao? Chỉ log SERVER-SIDE — console.error cắt gọn hai dòng đầu; client không bao giờ thấy nội tình, còn mình vẫn đủ dấu vết để debug.",
+      "Chốt bằng res.status chấm json — vỏ thống nhất bốn trường: code, message, path, timestamp; mọi lỗi trong app, một format duy nhất."
+    ],
+    "visual": {
+      "filename": "all-exceptions.filter.ts — dòng 21–42 (@Catch() + cờ demo x-raw kể miệng)",
+      "language": "tsx",
+      "code": "    const isHttp = exception instanceof HttpException;\n    const status = isHttp ? exception.getStatus() : 500;\n    // HttpException chủ động ném (404, 400…) giữ nguyên status + message của nó;\n    // lỗi thô (Error thường) → code 'INTERNAL' + message AN TOÀN, KHÔNG lộ err.message/stack.\n    const code: number | string = isHttp ? status : 'INTERNAL';\n    const message = isHttp\n      ? exception.message\n      : 'Có lỗi phía server, thử lại sau';\n\n    // Stack chỉ log SERVER-SIDE (1 dòng cắt gọn) — client không bao giờ thấy.\n    const stack =\n      exception instanceof Error ? (exception.stack ?? exception.message) : String(exception);\n    console.error('[S6] stack:', stack.split('\\n').slice(0, 2).join(' <- ').trim());\n\n    res.status(status).json({\n      code,\n      message,\n      path: req.url,\n      timestamp: new Date().toISOString(),\n    });\n  }\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 2,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 10,
+          "to": 13,
+          "sentence": 2
+        },
+        {
+          "from": 15,
+          "to": 22,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy thật — curl s6 boom kèm x-raw: khai rõ, x-raw là cờ demo tự chế để thấy hành vi GỐC — lỗi thô bị nuốt thành năm trăm Internal server error, vô hồn.",
+      "Bỏ cờ demo đi, filter vào việc: vẫn năm trăm nhưng vỏ thống nhất — code INTERNAL, message an toàn, kèm path và timestamp; chữ db exploded KHÔNG lộ ra bất kỳ response nào."
+    ],
+    "visual": {
+      "title": "curl /s6/boom — mặc định vs qua filter",
+      "commands": [
+        {
+          "cmd": "curl -s -i -H 'x-raw: 1' http://localhost:3998/s6/boom",
+          "output": "HTTP/1.1 500 Internal Server Error\n{\"statusCode\":500,\"message\":\"Internal server error\"}\n=> mặc định Nest — x-raw là CỜ DEMO tự chế",
+          "sentence": 0
+        },
+        {
+          "cmd": "curl -s -i http://localhost:3998/s6/boom",
+          "output": "HTTP/1.1 500 Internal Server Error\n{\"code\":\"INTERNAL\",\n \"message\":\"Có lỗi phía server, thử lại sau\",\n \"path\":\"/s6/boom\",\"timestamp\":\"2026-09-09T03:39:33.466Z\"}\n=> vỏ thống nhất — 'db exploded' KHÔNG lộ ra",
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04b",
+    "type": "terminal",
+    "narration": [
+      "Nhìn sang log server: S6 stack Error db exploded kèm vị trí ném lỗi — đường dẫn stack lược cho gọn; db exploded chỉ nằm ở log, client nhận message an toàn.",
+      "Còn s6 known ném NotFoundException chủ động: filter bắt mọi lỗi, nhưng bốn lẻ bốn vẫn là bốn lẻ bốn — giữ nguyên message không thấy đơn hàng, KHÔNG bị nuốt thành năm trăm."
+    ],
+    "visual": {
+      "title": "Log server + curl /s6/known — 404 giữ nguyên",
+      "commands": [
+        {
+          "cmd": "curl -s http://localhost:3998/s6/boom",
+          "output": "-- log server (đường dẫn stack lược cho gọn):\n[S6] stack: Error: db exploded\n  <- at S6Controller.boom (s6.controller.js)\n=> stack chỉ nằm server-side — đủ để debug",
+          "sentence": 0
+        },
+        {
+          "cmd": "curl -s -i http://localhost:3998/s6/known",
+          "output": "HTTP/1.1 404 Not Found\n{\"code\":404,\n \"message\":\"Không thấy đơn hàng #42\",\n \"path\":\"/s6/known\",\"timestamp\":\"2026-09-09T03:39:33.487Z\"}\n=> 404 chủ động GIỮ NGUYÊN — không bị nuốt thành 500",
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời phỏng vấn, câu một: Nest sẵn có exceptions layer đổi lỗi lạ thành năm trăm chung chung; muốn format thống nhất thì viết filter @Catch() để trống, trả vỏ code, message, path, timestamp.",
+      "Câu hai: nhớ phân nhánh HttpException — đừng nuốt bốn lẻ bốn thành năm trăm; stack chỉ log server-side.",
+      "Câu ba: muốn cả app một format thì gắn global — khai provider APP_FILTER trong AppModule, một chỗ khai, mọi route chung một vỏ lỗi.",
+      "Bẫy cộng điểm: filter là chốt chặn CUỐI — đúng cảnh lỗi rơi xuống F ở câu ba mươi hai — không thay cho try catch nghiệp vụ."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Mặc định 500 chung chung → filter @Catch() trống",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "HttpException giữ status — stack chỉ log server",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Global: APP_FILTER — 1 chỗ khai, cả app 1 vỏ",
+          "sentence": 2
+        },
+        {
+          "icon": "🪤",
+          "text": "Filter = chốt chặn CUỐI — không thay try/catch",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu ba mươi sáu — exception filter là chốt chặn cuối: một @Catch() để trống, cả app một format lỗi, stack ở server, client nhận vỏ sạch.",
+      "Và đó cũng là lời chốt cho cả lô: sáu câu Node cộng sáu câu NestJS — đủ bộ backend cho dân frontend tự tin đi phỏng vấn.",
+      "Video này có bản Shorts sáu mươi giây — playlist giờ tròn ba mươi sáu câu, luyện từ câu số một; hẹn gặp lại ở lô kế tiếp!"
+    ],
+    "visual": {
+      "title": "Câu 36/36 hoàn tất — trọn bộ 36 câu!",
+      "summary": [
+        {
+          "text": "Filter @Catch() trống — cả app 1 format lỗi",
+          "sentence": 0
+        },
+        {
+          "text": "Stack ở server — client nhận vỏ sạch",
+          "sentence": 0
+        },
+        {
+          "text": "6 câu Node + 6 câu NestJS — đủ bộ backend",
+          "sentence": 1
+        },
+        {
+          "text": "Playlist 36 câu — luyện từ câu #1",
+          "sentence": 2
+        }
+      ],
+      "next": "Trọn bộ 36 câu phỏng vấn trên playlist 🎤"
+    }
+  }
+]

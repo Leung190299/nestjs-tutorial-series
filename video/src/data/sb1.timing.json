@@ -1,0 +1,119 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "nextTick, promise, timer, immediate — cái nào chạy trước?",
+        "framework": "node"
+      },
+      "sentences": [
+        {
+          "file": "audio/sb1/s1-0-59bba82e.wav",
+          "startFrame": 0,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/sb1/s1-1-1b45513b.wav",
+          "startFrame": 162,
+          "durationInFrames": 123
+        }
+      ],
+      "durationInFrames": 303
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "b1.mjs",
+        "language": "javascript",
+        "code": "console.log('[A] sync đầu');\nsetTimeout(\n  () => hit('timer'), 0);\nsetImmediate(\n  () => hit('immediate'));\nprocess.nextTick(\n  () => hit('nextTick'));\nPromise.resolve().then(\n  () => hit('promise'));\nconsole.log('[B] sync cuối');",
+        "steps": [
+          {
+            "from": 1,
+            "to": 10,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 10,
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sb1/s2-0-87090047.wav",
+          "startFrame": 0,
+          "durationInFrames": 140
+        },
+        {
+          "file": "audio/sb1/s2-1-099fa8cc.wav",
+          "startFrame": 148,
+          "durationInFrames": 130
+        }
+      ],
+      "durationInFrames": 296
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/beqa/b1-order.png",
+        "caption": ".mjs: promise TRƯỚC nextTick — đặc thù ESM"
+      },
+      "sentences": [
+        {
+          "file": "audio/sb1/s3-0-84d48592.wav",
+          "startFrame": 0,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/sb1/s3-1-32596441.wav",
+          "startFrame": 215,
+          "durationInFrames": 185
+        }
+      ],
+      "durationInFrames": 418
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "📖",
+            "text": "Sync → nextTick → promise → timer/immediate",
+            "sentence": 0
+          },
+          {
+            "icon": "🏆",
+            "text": ".mjs là microtask: promise TRƯỚC nextTick",
+            "sentence": 1
+          }
+        ],
+        "trap": "setTimeout 0 không chạy ngay — timers vòng sau"
+      },
+      "sentences": [
+        {
+          "file": "audio/sb1/s4-0-ad9623d2.wav",
+          "startFrame": 0,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/sb1/s4-1-0c17e315.wav",
+          "startFrame": 184,
+          "durationInFrames": 154
+        },
+        {
+          "file": "audio/sb1/s4-2-1ad81ac4.wav",
+          "startFrame": 346,
+          "durationInFrames": 161
+        }
+      ],
+      "durationInFrames": 525
+    }
+  ]
+}

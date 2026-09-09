@@ -1,0 +1,303 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #33: Guard vs Middleware — auth đặt ở đâu?",
+        "subtitle": "Phỏng vấn Frontend — NestJS · Câu 33/36",
+        "badge": "NestJS backend"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep77/scene-01-0-578651ad.wav",
+          "startFrame": 0,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep77/scene-01-1-2a055ab9.wav",
+          "startFrame": 164,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 389
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Middleware mù ngữ cảnh — Guard biết handler",
+        "bullets": [
+          {
+            "icon": "🕶️",
+            "text": "Middleware chạy đầu — 'context-blind'",
+            "sentence": 0
+          },
+          {
+            "icon": "🧰",
+            "text": "Việc của MW: parse token · log · gắn req.user",
+            "sentence": 1
+          },
+          {
+            "icon": "🛡️",
+            "text": "Guard: ExecutionContext + Reflector đọc @Roles",
+            "sentence": 2
+          },
+          {
+            "icon": "📜",
+            "text": "Sau MỌI middleware — trước interceptor/pipe",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep77/scene-02-0-4a68d767.wav",
+          "startFrame": 0,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep77/scene-02-1-19059930.wav",
+          "startFrame": 241,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep77/scene-02-2-48c079fe.wav",
+          "startFrame": 446,
+          "durationInFrames": 272
+        },
+        {
+          "file": "audio/ep77/scene-02-3-321c24d0.wav",
+          "startFrame": 726,
+          "durationInFrames": 190
+        }
+      ],
+      "durationInFrames": 934
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "role.guard.ts — canActivate (dòng 15–36)",
+        "language": "tsx",
+        "code": "  canActivate(context: ExecutionContext): boolean {\n    // Route không gắn @Roles → không yêu cầu quyền, cho qua.\n    const required = this.reflector.get<string[] | undefined>(\n      ROLES_KEY,\n      context.getHandler(),\n    );\n    if (!required || required.length === 0) return true;\n\n    const req = context\n      .switchToHttp()\n      .getRequest<Request & { user?: { name: string; role: string } }>();\n\n    // BẪY: guard trả false → Nest ném ForbiddenException (403), KHÔNG phải\n    // 401. Muốn 401 \"chưa đăng nhập\" phải TỰ ném UnauthorizedException.\n    if (!req.user) throw new UnauthorizedException('Chưa đăng nhập');\n\n    // Sai quyền → return false: GIỮ hành vi mặc định của Nest\n    // (\"when a guard returns false, the framework throws a\n    // ForbiddenException\") để thấy body 403 mặc định.\n    return required.includes(req.user.role);\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 9,
+            "to": 11,
+            "sentence": 1
+          },
+          {
+            "from": 13,
+            "to": 15,
+            "sentence": 2
+          },
+          {
+            "from": 17,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep77/scene-03-0-1a071bb9.wav",
+          "startFrame": 0,
+          "durationInFrames": 320
+        },
+        {
+          "file": "audio/ep77/scene-03-1-fc88d1ad.wav",
+          "startFrame": 328,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep77/scene-03-2-49e0a045.wav",
+          "startFrame": 540,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep77/scene-03-3-bfadf6f1.wav",
+          "startFrame": 752,
+          "durationInFrames": 291
+        }
+      ],
+      "durationInFrames": 1061
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "Chặn cửa: 401 tự ném · 403 Nest mặc định",
+        "commands": [
+          {
+            "cmd": "curl -s -i http://localhost:3998/s3/admin",
+            "output": "HTTP/1.1 401 Unauthorized\n{\"message\":\"Chưa đăng nhập\",\"error\":\"Unauthorized\",\"statusCode\":401}\n=> 401: guard TỰ ném — message của MÌNH",
+            "sentence": 0
+          },
+          {
+            "cmd": "curl -s -i -H \"x-token: lee:user\" http://localhost:3998/s3/admin",
+            "output": "HTTP/1.1 403 Forbidden\n{\"message\":\"Forbidden resource\",\"error\":\"Forbidden\",\"statusCode\":403}\n=> 403: guard trả false — body MẶC ĐỊNH của Nest",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep77/scene-04-0-5883afae.wav",
+          "startFrame": 0,
+          "durationInFrames": 190
+        },
+        {
+          "file": "audio/ep77/scene-04-1-d5c35e46.wav",
+          "startFrame": 198,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep77/scene-04-2-d6fd65f0.wav",
+          "startFrame": 437,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 693
+    },
+    {
+      "id": "scene-04b",
+      "type": "terminal",
+      "visual": {
+        "title": "Cho qua: 200 · log MW — middleware không chặn ai",
+        "commands": [
+          {
+            "cmd": "curl -s -i -H \"x-token: lee:admin\" http://localhost:3998/s3/admin",
+            "output": "HTTP/1.1 200 OK\n{\"secret\":\"doanh thu Q3\",\"user\":{\"name\":\"lee\",\"role\":\"admin\"}}",
+            "sentence": 0
+          },
+          {
+            "cmd": "curl -s -i http://localhost:3998/s3/public",
+            "output": "HTTP/1.1 200 OK\n{\"ok\":true}\n-- log middleware (KHÔNG chặn ai, kể cả request 401):\n[S3-MW] không có x-token → req.user = undefined\n[S3-MW] user=lee role=user\n[S3-MW] user=lee role=admin",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep77/scene-04b-0-67e3c77c.wav",
+          "startFrame": 0,
+          "durationInFrames": 128
+        },
+        {
+          "file": "audio/ep77/scene-04b-1-7593ea23.wav",
+          "startFrame": 136,
+          "durationInFrames": 336
+        }
+      ],
+      "durationInFrames": 490
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "401 = chưa biết là ai · 403 = biết, thiếu quyền",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "MW gắn req.user · Guard quyết theo @Roles",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Không @Roles → cho qua: mặc định MỞ hay ĐÓNG?",
+            "sentence": 2
+          },
+          {
+            "icon": "🪤",
+            "text": "return false → 403, KHÔNG phải 401",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep77/scene-05-0-f020f0a5.wav",
+          "startFrame": 0,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep77/scene-05-1-3ee9af7a.wav",
+          "startFrame": 244,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep77/scene-05-2-8fd792f7.wav",
+          "startFrame": 526,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep77/scene-05-3-a6e19aeb.wav",
+          "startFrame": 760,
+          "durationInFrames": 250
+        }
+      ],
+      "durationInFrames": 1028
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 33/36 hoàn tất — 401 hay 403, rõ rồi!",
+        "summary": [
+          {
+            "text": "MW context-blind — chỉ parse & gắn req.user",
+            "sentence": 0
+          },
+          {
+            "text": "Guard: ExecutionContext + @Roles → cho/chặn",
+            "sentence": 0
+          },
+          {
+            "text": "401 TỰ ném · 403 Nest mặc định khi false",
+            "sentence": 0
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 34/36: ValidationPipe + DTO — chặn body sai 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep77/scene-06-0-5c4816b0.wav",
+          "startFrame": 0,
+          "durationInFrames": 264
+        },
+        {
+          "file": "audio/ep77/scene-06-1-e4f8329c.wav",
+          "startFrame": 272,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep77/scene-06-2-81324e93.wav",
+          "startFrame": 480,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep77/scene-06-3-70dabd38.wav",
+          "startFrame": 596,
+          "durationInFrames": 92
+        }
+      ],
+      "durationInFrames": 706
+    }
+  ]
+}

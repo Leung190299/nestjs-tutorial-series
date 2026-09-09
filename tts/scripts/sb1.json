@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "console.log, setTimeout 0, setImmediate, nextTick, promise — đố bạn thứ tự chạy trong Node?",
+      "Câu phỏng vấn backend kinh điển — trả lời trong 60 giây, kèm một cú twist."
+    ],
+    "visual": {
+      "question": "nextTick, promise, timer, immediate — cái nào chạy trước?",
+      "framework": "node"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Đăng ký đủ năm loại: hai dòng sync, một timer, một immediate, một nextTick, một promise.",
+      "Chuẩn sách: sync chạy hết → nextTick → promise → rồi mới tới timer và immediate."
+    ],
+    "visual": {
+      "filename": "b1.mjs",
+      "language": "javascript",
+      "code": "console.log('[A] sync đầu');\nsetTimeout(\n  () => hit('timer'), 0);\nsetImmediate(\n  () => hit('immediate'));\nprocess.nextTick(\n  () => hit('nextTick'));\nPromise.resolve().then(\n  () => hit('promise'));\nconsole.log('[B] sync cuối');",
+      "steps": [
+        {
+          "from": 1,
+          "to": 10,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 10,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Chạy thật: promise lại lên TRƯỚC nextTick — vì file .mjs là ESM, module được evaluate như một microtask.",
+      "Còn timer với immediate ngoài I/O cycle: thứ tự KHÔNG đảm bảo — trong fs.readFile thì immediate luôn thắng."
+    ],
+    "visual": {
+      "src": "screens/beqa/b1-order.png",
+      "caption": ".mjs: promise TRƯỚC nextTick — đặc thù ESM"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: sync hết trước, rồi microtask — nextTick trước promise — rồi vòng loop timers, poll, check.",
+      "Ghi điểm: khai twist ESM — file .mjs cho promise chạy trước nextTick, ngược với CommonJS.",
+      "Bẫy: setTimeout 0 không hề chạy ngay — sớm nhất là phase timers vòng sau, sau toàn bộ microtask."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "📖",
+          "text": "Sync → nextTick → promise → timer/immediate",
+          "sentence": 0
+        },
+        {
+          "icon": "🏆",
+          "text": ".mjs là microtask: promise TRƯỚC nextTick",
+          "sentence": 1
+        }
+      ],
+      "trap": "setTimeout 0 không chạy ngay — timers vòng sau"
+    }
+  }
+]

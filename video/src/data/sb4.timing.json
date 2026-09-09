@@ -1,0 +1,119 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "API tải file 1GB — server bạn có phình 1GB RAM không?",
+        "framework": "node"
+      },
+      "sentences": [
+        {
+          "file": "audio/sb4/s1-0-05387f2c.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/sb4/s1-1-27686a84.wav",
+          "startFrame": 145,
+          "durationInFrames": 168
+        }
+      ],
+      "durationInFrames": 331
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "b4.mjs",
+        "language": "javascript",
+        "code": "// đo RSS đỉnh: poll mỗi 50ms\nlet peak = process.memoryUsage().rss;\nsetInterval(() => {\n  const rss =\n    process.memoryUsage().rss;\n  if (rss > peak) peak = rss;\n}, 50);\n\n// 1GB → chunk 64 KiB nối nhau\nconst rs = createReadStream(BIG);\nconst ws =\n  createWriteStream('/dev/null');\nrs.pipe(ws);\nawait once(ws, 'finish');",
+        "steps": [
+          {
+            "from": 1,
+            "to": 7,
+            "sentence": 0
+          },
+          {
+            "from": 8,
+            "to": 14,
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sb4/s2-0-385dcc67.wav",
+          "startFrame": 0,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/sb4/s2-1-db8be311.wav",
+          "startFrame": 229,
+          "durationInFrames": 188
+        }
+      ],
+      "durationInFrames": 435
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/beqa/b4-rss.png",
+        "caption": "RSS 1071MB vs 97MB — nhờ pipe"
+      },
+      "sentences": [
+        {
+          "file": "audio/sb4/s3-0-ce3c65d5.wav",
+          "startFrame": 0,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/sb4/s3-1-d8c11e98.wav",
+          "startFrame": 191,
+          "durationInFrames": 154
+        }
+      ],
+      "durationInFrames": 363
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "💧",
+            "text": "File lớn → stream: RSS cố định ~97MB",
+            "sentence": 0
+          },
+          {
+            "icon": "🚦",
+            "text": "write() false → 'drain' — pipe TỰ LO",
+            "sentence": 1
+          }
+        ],
+        "trap": "Trả file: pipe thẳng res — đừng await hết rồi send"
+      },
+      "sentences": [
+        {
+          "file": "audio/sb4/s4-0-41f5a350.wav",
+          "startFrame": 0,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/sb4/s4-1-8111dbd2.wav",
+          "startFrame": 174,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/sb4/s4-2-c182b66a.wav",
+          "startFrame": 319,
+          "durationInFrames": 137
+        }
+      ],
+      "durationInFrames": 474
+    }
+  ]
+}

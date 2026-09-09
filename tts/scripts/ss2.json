@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Một request vào NestJS đi qua những lớp nào — theo thứ tự nào? Câu kinh điển số một của NestJS.",
+      "Trả lời trong sáu mươi giây — kèm chuỗi log chạy thật, và một request lỗi để lộ beat ít ai biết."
+    ],
+    "visual": {
+      "question": "NestJS: request đi qua mấy lớp — thứ tự nào?",
+      "framework": "nestjs"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Chuỗi chuẩn: middleware, guard, interceptor, pipe, rồi mới tới handler — và bằng chứng nằm trong interceptor: chiều đi, nó log bước ba TRƯỚC khi gọi handler.",
+      "Nó là lớp DUY NHẤT hai chiều: next.handle trả Observable, tap log bước năm trên đường về — SAU handler."
+    ],
+    "visual": {
+      "filename": "s2.interceptor.ts (rút gọn)",
+      "language": "tsx",
+      "code": "// lớp DUY NHẤT chạy CẢ 2 chiều\n@Injectable()\nexport class S2Interceptor {\n  intercept(_ctx, next: CallHandler) {\n    // chiều ĐI — trước handler\n    console.log('[3] trước handler');\n    return next\n      .handle()\n      // chiều VỀ — sau handler\n      .pipe(tap(() =>\n        console.log('[5] sau handler'),\n      ));\n  }\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 7,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Chạy thật: request thường — log đủ một tới năm: middleware, guard, interceptor, pipe, handler, rồi interceptor chiều về.",
+      "Request lỗi: bước năm BIẾN MẤT — lỗi bỏ qua chiều về, rơi thẳng xuống F — exception filter."
+    ],
+    "visual": {
+      "src": "screens/beqa/s2-lifecycle.png",
+      "caption": "lỗi → [5] biến mất, rơi xuống filter"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: middleware, guard, interceptor trước, pipe, handler, interceptor sau — filter hứng khi có lỗi; thuộc thành một hơi.",
+      "Ghi điểm: pipe đứng NGAY TRƯỚC handler — sau guard; interceptor là lớp duy nhất hai chiều.",
+      "Bẫy: request lỗi thì interceptor chiều về KHÔNG chạy — đừng đặt logic luôn phải chạy ở đó."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🛤️",
+          "text": "MW → Guard → Interceptor → Pipe → Handler",
+          "sentence": 0
+        },
+        {
+          "icon": "🎯",
+          "text": "Pipe SÁT handler nhất · Interceptor 2 chiều",
+          "sentence": 1
+        }
+      ],
+      "trap": "Lỗi: [5] không chạy — rơi thẳng xuống filter"
+    }
+  }
+]

@@ -1,0 +1,185 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu số hai mươi bảy, hệ quả trực tiếp của câu trước — câu hỏi từ nhà tuyển dụng: hash password hay nén ảnh trên Node làm cả server đơ, bạn xử lý thế nào?",
+      "Mình trả lời bằng demo chạy CÙNG một khối hash theo hai cách — trên main thread và qua worker_threads — để đồng hồ tick một trăm mili giây làm trọng tài."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #27: CPU-bound trên Node — worker_threads cứu server",
+      "subtitle": "Phỏng vấn Frontend — Node.js core · Câu 27/36",
+      "badge": "Node.js backend"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Nền tảng: JavaScript của Node chạy trên MỘT thread — khối CPU dài chiếm event loop là không timer, không I/O, không request nào được phục vụ.",
+      "Lời giải chính danh trong docs: worker_threads — nguyên văn 'threads that execute JavaScript in parallel' — thread chạy JavaScript song song trong cùng process.",
+      "Docs khoanh vùng rõ: worker hợp cho tính toán CPU nặng — còn I/O thì KHÔNG giúp mấy, vì I/O bất đồng bộ của Node vốn đã hiệu quả hơn Worker.",
+      "Giao việc qua workerData, worker tính xong postMessage kết quả về — main chỉ việc await, event loop vẫn rảnh phục vụ client."
+    ],
+    "visual": {
+      "title": "worker_threads — JS song song trong cùng process",
+      "bullets": [
+        {
+          "icon": "🧵",
+          "text": "1 thread: khối CPU dài = MỌI client chờ",
+          "sentence": 0
+        },
+        {
+          "icon": "⚡",
+          "text": "Docs: “threads that execute JavaScript in parallel”",
+          "sentence": 1
+        },
+        {
+          "icon": "🎯",
+          "text": "Cho CPU-intensive — I/O thì KHÔNG giúp mấy",
+          "sentence": 2
+        },
+        {
+          "icon": "📬",
+          "text": "workerData vào → postMessage kết quả về, main chỉ await",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Nhánh một trong b3.mjs: pbkdf2Sync bốn mươi nghìn vòng, lặp hai trăm lần NGAY trên main — chuỗi NỐI, key vòng trước làm input vòng sau, không chia song song được.",
+      "Đồng hồ setInterval một trăm mili giây chạy nền ghi maxGap, và in hash tám ký tự hex đầu để lát nữa đối chiếu.",
+      "Nhánh hai — CÙNG khối lượng nhưng qua new Worker: b3-worker.mjs nhận rounds và iterations qua workerData, spawn đo bằng event online.",
+      "Main không chặn: chỉ await một Promise sẽ resolve khi worker postMessage kết quả — hai dòng listener message và error nằm ngay dưới khung hình."
+    ],
+    "visual": {
+      "filename": "b3.mjs",
+      "language": "javascript",
+      "code": "    key = pbkdf2Sync(key, 'muoi', ITERATIONS, 64, 'sha512');\n  }\n  const totalMs = Date.now() - t0;\n  const maxGap = await stop();\n  mainHex = key.toString('hex').slice(0, 8);\n  console.log(`maxGap ${maxGap}ms — đồng hồ ĐỨNG suốt khối hash`);\n  console.log(`tổng ${totalMs}ms · hash ${mainHex}`);\n}\n\n// ---- Nhánh 2: cùng khối lượng qua worker_threads --------------------------\nconsole.log('');\nconsole.log('== B3b: cùng khối lượng qua worker_threads ==');\n{\n  const stop = startClock();\n  await sleep(250);\n  const t0 = Date.now();\n  const worker = new Worker(new URL('./b3-worker.mjs', import.meta.url), {\n    workerData: { rounds: ROUNDS, iterations: ITERATIONS },\n  });\n  let spawnMs = -1;\n  worker.once('online', () => { spawnMs = Date.now() - t0; });\n  const result = await new Promise((resolve, reject) => {",
+      "steps": [
+        {
+          "from": 1,
+          "to": 2,
+          "sentence": 0
+        },
+        {
+          "from": 3,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 10,
+          "to": 21,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy node b3.mjs, số trên máy tôi: nhánh main maxGap một nghìn chín trăm hai mươi mốt mili giây — đồng hồ ĐỨNG HÌNH trọn một phẩy chín giây, bằng cả khối hash.",
+      "Với server thật, đó là một phẩy chín giây KHÔNG một request nào được phục vụ — cùng cơ chế đứng hình bên mobile, nhưng hậu quả nhân lên nghìn kết nối.",
+      "Nhánh worker: spawn bốn mươi lăm mili giây, maxGap chỉ một trăm linh hai — đúng một tick cộng hai mili jitter — main mượt tuyệt đối dù hash vẫn chạy.",
+      "Hai dòng tổng một tám bảy mốt với một tám bảy tư mili giây — NGANG NHAU, và hai nhánh in cùng hash khớp từng ký tự: việc chạy chỗ khác chứ không xếp hàng lại, không ai ăn gian."
+    ],
+    "visual": {
+      "title": "node b3.mjs",
+      "commands": [
+        {
+          "cmd": "node b3.mjs",
+          "output": "== B3: hash trên main thread ==\npbkdf2Sync 40k vòng ×200 (chuỗi nối key)\nmaxGap 1921ms — đồng hồ ĐỨNG suốt khối hash\ntổng 1871ms · hash e33ff464",
+          "sentence": 0
+        },
+        {
+          "cmd": "node b3.mjs",
+          "output": "== B3b: cùng khối lượng qua worker_threads ==\nspawn: 45ms\nmaxGap 102ms — main rảnh, đồng hồ vẫn chạy\ntổng 1874ms (kể cả spawn) · hash e33ff464\nOK hash 2 nhánh KHỚP — đúng cùng khối lượng",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — ba câu chốt, kèm một cái bẫy và một màn so găng ba nền tảng.",
+      "Câu một: CPU nặng trên main là chiếm event loop — mọi client chờ; bẫy đi kèm: async await KHÔNG cứu, vì await không tạo thread nào cả.",
+      "Câu hai: worker_threads chạy JavaScript song song trong CÙNG process — đúng thuốc cho task CPU nặng lẻ, trả kết quả qua postMessage; I/O thì đừng đem worker ra tăng tốc.",
+      "Câu ba: cluster là chuyện khác — nhân cả PROCESS, các worker chia sẻ cổng server, scale ngang cả app; task nặng lẻ thì worker_threads.",
+      "So găng: RN câu mười tám chia lô trả giá tổng gấp đôi gấp ba; Flutter câu hai mươi tư có Isolate — worker_threads cùng họ đó, và ở demo này tổng chênh gần như không phần trăm."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "CPU-bound trên main = chiếm event loop — mọi client chờ",
+          "sentence": 1
+        },
+        {
+          "icon": "🪤",
+          "text": "Bẫy: async/await KHÔNG cứu — await không tạo thread",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "worker_threads: JS song song cùng process, postMessage",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "cluster = nhân PROCESS share port — scale ngang cả app",
+          "sentence": 3
+        },
+        {
+          "icon": "🥊",
+          "text": "RN chia lô ×2–3 · Flutter Isolate +30–50% · Node worker ≈0%",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu hai mươi bảy — việc nặng đừng để main gánh: bê sang worker_threads, tổng không đổi mà server vẫn thở.",
+      "Câu tiếp theo: đọc file một gigabyte gửi đi — vì sao không readFile cả cục, và backpressure là gì?",
+      "Video này có bản Shorts sáu mươi giây để bạn ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số hai mươi tám!"
+    ],
+    "visual": {
+      "title": "Câu 27/36 hoàn tất — hẹn gặp câu 28!",
+      "summary": [
+        {
+          "text": "CPU-bound: bê sang worker_threads — main vẫn tick",
+          "sentence": 0
+        },
+        {
+          "text": "Tổng thời gian không đổi, server không đơ",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: stream & backpressure — file 1GB",
+          "sentence": 1
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 28/36: Đọc file 1GB — stream & backpressure? 🎤"
+    }
+  }
+]

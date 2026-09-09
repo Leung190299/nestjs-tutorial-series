@@ -1,0 +1,189 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Chào mừng trở lại phòng phỏng vấn — từ câu hai mươi lăm, series rẽ sang Node.js: mười hai câu backend mà Frontend đi phỏng vấn Fullstack chắc chắn gặp.",
+      "Câu hỏi từ nhà tuyển dụng: console.log, setTimeout 0, setImmediate, nextTick, promise — đố bạn thứ tự chạy?",
+      "Câu kinh điển số một của mọi buổi phỏng vấn backend Node — và demo hôm nay sẽ cho bạn một cú twist mà rất nhiều sách viết sai."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #25: Event loop Node — thứ tự chạy thật",
+      "subtitle": "Phỏng vấn Frontend — Node.js core · Câu 25/36",
+      "badge": "Lô mới · Node.js backend"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Mô hình chuẩn trong sách — và trong docs Node — như sau.",
+      "Code đồng bộ chạy hết trước: call stack phải xả sạch, không callback nào được chen ngang.",
+      "Rồi Node xả hàng microtask: process.nextTick trước — docs nói thẳng nextTick KHÔNG thuộc event loop, nó xả ngay sau operation hiện tại — xong mới tới Promise callback.",
+      "Hết microtask, event loop mới quay vòng qua các phase: timers chạy setTimeout, poll nhận I/O, check chạy setImmediate.",
+      "Vậy thứ tự chuẩn một script CommonJS: sync, rồi nextTick, rồi Promise.then, rồi mới tới timer và immediate — ghi nhớ mô hình này, lát nữa màn hình sẽ thử thách nó."
+    ],
+    "visual": {
+      "title": "Mô hình chuẩn: stack → microtask → phase",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Call stack xả hết code sync trước — không ai chen ngang",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Microtask: nextTick trước, Promise sau — nextTick KHÔNG thuộc event loop",
+          "sentence": 2
+        },
+        {
+          "icon": "🔁",
+          "text": "Vòng loop: timers (setTimeout) → poll (I/O) → check (setImmediate)",
+          "sentence": 3
+        },
+        {
+          "icon": "📖",
+          "text": "Chuẩn CJS: sync → nextTick → promise → timer/immediate",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là demo thật — b1.mjs: mình không đoán mò, hàm hit gắn số thứ tự ĐỘNG — callback nào chạy trước nhận số nhỏ hơn, thứ tự trên màn hình là thứ tự thật.",
+      "Năm ứng viên xếp hàng đúng thứ tự viết: sync đầu, setTimeout không, setImmediate, process.nextTick, rồi Promise.then.",
+      "Dòng sync cuối chốt sổ phần đồng bộ — mọi callback phía trên chỉ được chạy sau dòng này.",
+      "Hai mươi dòng, đủ năm loại hàng đợi — giờ để Node tự khai thứ tự thật."
+    ],
+    "visual": {
+      "filename": "b1.mjs",
+      "language": "javascript",
+      "code": "console.log('== B1: thứ tự event loop ==');\n\nlet n = 0;                 // số thứ tự async quan sát được\nconst order = [];          // tên callback theo thứ tự chạy thật\nlet pending = 4;           // nextTick + promise + timer + immediate\n\nconst hit = (name, note) => {\n  n += 1;\n  order.push(name);\n  console.log(`[${n}] ${name.padEnd(13)}— ${note}`);\n  pending -= 1;\n  if (pending === 0) footerThenPart2();\n};\n\nconsole.log('[A] sync đầu      — code đồng bộ chạy ngay');\nsetTimeout(() => hit('setTimeout 0', 'macrotask, phase timers'), 0);\nsetImmediate(() => hit('setImmediate', 'macrotask, phase check'));\nprocess.nextTick(() => hit('nextTick', 'chờ microtask cạn mới xả'));\nPromise.resolve().then(() => hit('promise.then', 'microtask, nối hàng đang xả'));\nconsole.log('[B] sync cuối     — sync xong mới tới hàng đợi');",
+      "steps": [
+        {
+          "from": 3,
+          "to": 13,
+          "sentence": 0
+        },
+        {
+          "from": 15,
+          "to": 19,
+          "sentence": 1
+        },
+        {
+          "from": 20,
+          "to": 20,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 20,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy thật trên Node hai mươi hai — nhìn kỹ hai dòng đầu tiên của hàng đợi.",
+      "Khoan — promise.then chạy TRƯỚC nextTick?! Vì file này là ESM: module được evaluate như một microtask, .then nối thẳng vào hàng đang xả — đối chứng file .cjs thì nextTick lên trước, đúng sách.",
+      "Còn timer với immediate: trên máy tôi lần này timer lên trước, nhưng năm lần chạy thì bốn lần đảo lại — thứ tự hai anh này ngoài I/O cycle KHÔNG được đảm bảo.",
+      "Chạy lại và nhìn khối thứ hai — vẫn hai callback đó nhưng đặt TRONG callback fs.readFile.",
+      "Trong I/O cycle, immediate luôn thắng — năm trên năm lần, dòng OK xác nhận, và docs đảm bảo điều này."
+    ],
+    "visual": {
+      "title": "node b1.mjs",
+      "commands": [
+        {
+          "cmd": "node b1.mjs",
+          "output": "[1] promise.then — microtask, nối hàng đang xả\n[2] nextTick     — chờ microtask cạn mới xả\n[3] setTimeout 0 — macrotask, phase timers\n[4] setImmediate — macrotask, phase check\n=> sync → promise → nextTick → timer → immediate\n   (.mjs: promise trước nextTick — đặc thù ESM)",
+          "sentence": 0
+        },
+        {
+          "cmd": "node b1.mjs",
+          "output": "== B1b: trong I/O cycle (fs.readFile) ==\n[1] setImmediate — phase check ngay sau poll\n[2] setTimeout 0 — chờ vòng sau, phase timers\nOK immediate luôn thắng trong I/O — docs đảm bảo",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — chốt gọn ba câu theo mô hình chuẩn, rồi ghi điểm bằng twist.",
+      "Câu một: code sync chạy hết trước, rồi tới microtask — nextTick trước, Promise sau — xong mới vào vòng event loop timers, poll, check.",
+      "Câu hai: setTimeout không và setImmediate ngoài I/O cycle thứ tự không đảm bảo; trong callback I/O thì setImmediate luôn thắng.",
+      "Câu ba: đừng lạm dụng nextTick — nó xả ngay sau operation hiện tại, chặn event loop không cho sang phase tiếp.",
+      "Điểm ăn điểm: khai luôn twist ESM — file .mjs được evaluate như microtask nên Promise.then lên trước nextTick, ngược với CommonJS — nói được câu này interviewer biết bạn đã tự chạy code.",
+      "Chuyện CommonJS với ESM còn một cú twist lớn nữa — require một file ESM được không? Xem câu số ba mươi của series."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Sync hết → microtask (nextTick → promise) → vòng loop timers/poll/check",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Timer vs immediate: ngoài I/O không đảm bảo — trong I/O immediate thắng",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "nextTick xả ngay sau operation — lạm dụng là chặn event loop",
+          "sentence": 3
+        },
+        {
+          "icon": "🏆",
+          "text": "Twist ăn điểm: .mjs là microtask → promise TRƯỚC nextTick, ngược CJS",
+          "sentence": 4
+        },
+        {
+          "icon": "🧭",
+          "text": "require(esm) được không? — xem câu #30 của series",
+          "sentence": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu hai mươi lăm — mở màn lô Node.js bằng chính câu hỏi mà nhà tuyển dụng backend nào cũng thủ sẵn.",
+      "Câu tiếp theo: vì sao Node một thread mà phục vụ được nghìn request — non-blocking I/O có gì bên trong?",
+      "Video này có bản Shorts sáu mươi giây — cùng cú twist, rút gọn để ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số hai mươi sáu!"
+    ],
+    "visual": {
+      "title": "Câu 25/36 hoàn tất — hẹn gặp câu 26!",
+      "summary": [
+        {
+          "text": "Chuẩn sách: sync → nextTick → promise → timer/immediate",
+          "sentence": 0
+        },
+        {
+          "text": "Twist: .mjs cho promise chạy TRƯỚC nextTick — đặc thù ESM",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: non-blocking I/O — 1 thread, nghìn request",
+          "sentence": 1
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 26/36: Node 1 thread sao phục vụ nghìn request? 🎤"
+    }
+  }
+]

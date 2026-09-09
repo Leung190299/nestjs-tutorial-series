@@ -3,13 +3,18 @@ import {AbsoluteFill} from 'remotion';
 import {theme} from '../components/theme';
 import type {SceneProps} from '../data/types';
 
-export type VTitleVisual = {question: string; framework: 'react' | 'vue' | 'rn' | 'flutter'};
+export type VTitleVisual = {
+  question: string;
+  framework: 'react' | 'vue' | 'rn' | 'flutter' | 'node' | 'nestjs';
+};
 
 const FW = {
   react: {label: 'React', emoji: '⚛️', color: '#61dafb', text: '#0f172a'},
   vue: {label: 'Vue', emoji: '💚', color: '#42b883', text: '#0f172a'},
   rn: {label: 'React Native', emoji: '⚛️', color: '#61dafb', text: '#0f172a'},
   flutter: {label: 'Flutter', emoji: '🐦', color: '#027DFD', text: '#ffffff'},
+  node: {label: 'Node.js', emoji: '🟢', color: '#339933', text: '#ffffff'},
+  nestjs: {label: 'NestJS', emoji: '🐈', color: '#E0234E', text: '#ffffff'},
 };
 
 export const VTitleScene: React.FC<SceneProps> = ({visual}) => {

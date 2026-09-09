@@ -82,7 +82,7 @@ Series web ĐẦU TIÊN của kênh (vertical), sau 3 series mobile Flutter/Reac
 
 Demo: [`demo-stylex/`](demo-stylex/) (`vietsuper-web/` viết bằng StyleX + `compare-tailwind/` đối chứng Tailwind CSS v4, dùng ở Tập 6). Mỗi tập đóng băng bằng một git tag riêng — `git checkout stylex-tap-N` để xem đúng code xuất hiện trong tập tương ứng.
 
-## Series "Phỏng vấn Frontend" (lô 1: React & Vue ep45–ep56 · lô 2: hiệu năng RN & Flutter ep57–ep68, mỗi lô kèm 12 Shorts)
+## Series "Phỏng vấn Frontend" (lô 1: React & Vue ep45–ep56 · lô 2: hiệu năng RN & Flutter ep57–ep68 · lô 3: backend Node.js & NestJS ep69–ep80, mỗi lô kèm 12 Shorts)
 
 Series đổi hẳn định dạng: mỗi tập ngang là ĐÚNG MỘT câu hỏi phỏng vấn Frontend thật (6 câu React R1–R6, 6 câu Vue V1–V6) — nghe câu hỏi, xem demo code chạy thật minh họa đúng bẫy/hành vi, rồi chốt lại cách trả lời như đang ngồi trước nhà tuyển dụng. Mỗi câu ngang có kèm 1 bản Shorts 60 giây song song (sr1–sr6 phía React, sv1–sv6 phía Vue).
 
@@ -123,6 +123,27 @@ Lô 2 nối tiếp cùng format: 12 câu hỏi HIỆU NĂNG khi load nhiều d�
 | F6 | Isolate.run — parse data lớn không chặn UI | ep68 | sf6 |
 
 Demo: [`demo-perf-interview/`](demo-perf-interview/) (`rn-perf/` + `flutter_perf/`, mỗi app 6 trang đo số thật cho đúng câu hỏi ở trên). `git checkout perf-qa-batch-2` để xem đúng code lô 2 (12 câu).
+
+### Lô 3 — Backend Node.js & NestJS (ep69–ep80 + 12 Shorts)
+
+Lô 3 nối tiếp cùng format, rẽ sang BACKEND — 12 câu hỏi mà dân Frontend đi phỏng vấn Fullstack chắc chắn gặp: 6 câu Node.js core (B1–B6) + 6 câu NestJS (S1–S6), mỗi câu có demo chạy số thật trên Node 22 (event loop, non-blocking I/O, worker_threads, stream/backpressure, Promise.all, CommonJS vs ESM; DI/IoC, request lifecycle, guard, ValidationPipe, interceptor, exception filter). Mỗi câu ngang kèm 1 bản Shorts 60 giây (sb1–sb6 phía Node.js, ss1–ss6 phía NestJS).
+
+| # | Câu hỏi | Tập ngang | Short |
+|---|---------|-----------|-------|
+| B1 | Event loop Node — thứ tự chạy thật (+ twist ESM: promise trước nextTick) | ep69 | sb1 |
+| B2 | Node 1 thread — vì sao vẫn cân nghìn request? Non-blocking I/O | ep70 | sb2 |
+| B3 | CPU-bound làm server đơ — worker_threads vs cluster | ep71 | sb3 |
+| B4 | Stream và backpressure — file 1GB, RAM dưới 100MB | ep72 | sb4 |
+| B5 | Promise.all — 3 API trong 300ms và bẫy fail-fast | ep73 | sb5 |
+| B6 | CommonJS vs ESM — require(esm) đã chạy được (Node 22.12) | ep74 | sb6 |
+| S1 | DI trong NestJS — IoC container, vì sao không tự new service? | ep75 | ss1 |
+| S2 | Request lifecycle NestJS — 6 lớp theo thứ tự | ep76 | ss2 |
+| S3 | Guard vs Middleware — auth đặt ở đâu, bẫy 401/403 | ep77 | ss3 |
+| S4 | ValidationPipe + DTO — chặn body bẩn, whitelist | ep78 | ss4 |
+| S5 | Interceptor — bọc response chung khuôn, đo giờ mọi API | ep79 | ss5 |
+| S6 | Exception filter — chuẩn hóa lỗi toàn app | ep80 | ss6 |
+
+Demo: [`demo-be-interview/`](demo-be-interview/) (`node-qa/` 6 script đo số thật + `nest-qa/` app NestJS 6 route minh họa đúng câu hỏi ở trên). `git checkout be-qa-batch-3` để xem đúng code lô 3 (12 câu).
 
 ## Cấu trúc repo
 

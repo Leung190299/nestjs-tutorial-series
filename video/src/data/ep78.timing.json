@@ -1,0 +1,307 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #34: ValidationPipe — DTO là hợp đồng chặn body bẩn",
+        "subtitle": "Phỏng vấn Frontend — NestJS · Câu 34/36",
+        "badge": "NestJS backend"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep78/scene-01-0-2ab5dd6c.wav",
+          "startFrame": 0,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep78/scene-01-1-8172c669.wav",
+          "startFrame": 210,
+          "durationInFrames": 214
+        }
+      ],
+      "durationInFrames": 442
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "DTO là hợp đồng — pipe gác ngay trước handler",
+        "bullets": [
+          {
+            "icon": "📜",
+            "text": "DTO + decorator = hợp đồng dữ liệu vào",
+            "sentence": 0
+          },
+          {
+            "icon": "🚪",
+            "text": "Pipe chèn NGAY TRƯỚC khi method được gọi",
+            "sentence": 1
+          },
+          {
+            "icon": "❌",
+            "text": "Sai → 400 mảng lỗi — handler KHÔNG chạy",
+            "sentence": 2
+          },
+          {
+            "icon": "✂️",
+            "text": "whitelist gọt field lạ — chặn mass assignment",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep78/scene-02-0-2b0c790b.wav",
+          "startFrame": 0,
+          "durationInFrames": 324
+        },
+        {
+          "file": "audio/ep78/scene-02-1-6a78ed06.wav",
+          "startFrame": 332,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep78/scene-02-2-5dcb5308.wav",
+          "startFrame": 537,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep78/scene-02-3-46592455.wav",
+          "startFrame": 800,
+          "durationInFrames": 221
+        }
+      ],
+      "durationInFrames": 1039
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "create-order.dto.ts — TOÀN BỘ FILE",
+        "language": "tsx",
+        "code": "import { IsEmail, IsInt, IsString, Min } from 'class-validator';\n\n// DTO = hợp đồng dữ liệu vào. Type TypeScript bị xóa lúc runtime —\n// chính các decorator class-validator dưới đây mới là thứ ValidationPipe đọc.\nexport class CreateOrderDto {\n  @IsString()\n  ten: string;\n\n  @IsInt()\n  @Min(1)\n  soLuong: number;\n\n  @IsEmail()\n  email: string;\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 15,
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep78/scene-03-0-a16bd02d.wav",
+          "startFrame": 0,
+          "durationInFrames": 336
+        },
+        {
+          "file": "audio/ep78/scene-03-1-4d80c6ea.wav",
+          "startFrame": 344,
+          "durationInFrames": 228
+        }
+      ],
+      "durationInFrames": 590
+    },
+    {
+      "id": "scene-03b",
+      "type": "code",
+      "visual": {
+        "filename": "s4.controller.ts — TOÀN BỘ FILE",
+        "language": "tsx",
+        "code": "import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';\nimport { CreateOrderDto } from './create-order.dto.js';\n\n// ValidationPipe scope controller: Nest chèn pipe NGAY TRƯỚC khi method được\n// gọi — body sai là pipe ném exception → 400, handler KHÔNG BAO GIỜ chạy.\n// whitelist: true → gọt sạch mọi property không có decorator (field lạ không lọt).\n// transform: true → body thành instance CreateOrderDto thật.\n@Controller('s4')\n@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))\nexport class S4Controller {\n  // POST /s4 — vào được đến đây nghĩa là body ĐÃ hợp lệ và ĐÃ được gọt sạch.\n  @Post()\n  create(@Body() body: CreateOrderDto) {\n    return { ok: true, order: body };\n  }\n}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 16,
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep78/scene-03b-0-42693a20.wav",
+          "startFrame": 0,
+          "durationInFrames": 339
+        },
+        {
+          "file": "audio/ep78/scene-03b-1-8ebe5b0e.wav",
+          "startFrame": 347,
+          "durationInFrames": 219
+        }
+      ],
+      "durationInFrames": 584
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "curl body sai → 400: mảng 3 lỗi chi tiết",
+        "commands": [
+          {
+            "cmd": "curl -s -i -X POST http://localhost:3998/s4 -H \"Content-Type: application/json\" -d '{\"ten\":123,\"soLuong\":0,\"email\":\"abc\"}'",
+            "output": "HTTP/1.1 400 Bad Request\n{\"message\":[\"ten must be a string\",\n \"soLuong must not be less than 1\",\n \"email must be an email\"],\n \"error\":\"Bad Request\",\"statusCode\":400}\n=> pipe ném 400 — handler CHƯA HỀ chạy",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep78/scene-04-0-ea796aaa.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep78/scene-04-1-6f5db6df.wav",
+          "startFrame": 200,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep78/scene-04-2-dcab5ca7.wav",
+          "startFrame": 468,
+          "durationInFrames": 180
+        }
+      ],
+      "durationInFrames": 666
+    },
+    {
+      "id": "scene-04b",
+      "type": "terminal",
+      "visual": {
+        "title": "whitelist: field \"hack\" biến mất",
+        "commands": [
+          {
+            "cmd": "curl -s -i -X POST http://localhost:3998/s4 -H \"Content-Type: application/json\" -d '{\"ten\":\"Lee\",\"soLuong\":2,\"email\":\"lee@shop.vn\",\"hack\":\"x\"}'",
+            "output": "HTTP/1.1 201 Created\n{\"ok\":true,\"order\":{\"ten\":\"Lee\",\"soLuong\":2,\"email\":\"lee@shop.vn\"}}\n=> order KHÔNG có \"hack\" — whitelist đã gọt",
+            "sentence": 0
+          },
+          {
+            "cmd": "curl -s -i -X POST http://localhost:3998/s4 -H \"Content-Type: application/json\" -d '{\"ten\":\"Lee\",\"soLuong\":2,\"email\":\"lee@shop.vn\"}'",
+            "output": "HTTP/1.1 201 Created\n{\"ok\":true,\"order\":{\"ten\":\"Lee\",\"soLuong\":2,\"email\":\"lee@shop.vn\"}}\n=> giống case \"hack\" từng byte — diff 0",
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep78/scene-04b-0-2e8c2e7d.wav",
+          "startFrame": 0,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep78/scene-04b-1-59fa3ec2.wav",
+          "startFrame": 241,
+          "durationInFrames": 209
+        }
+      ],
+      "durationInFrames": 468
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Validate ở BIÊN — không rải if trong service",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "whitelist KHÔNG bật mặc định — phải tự bật",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "transform: true — query string → number",
+            "sentence": 2
+          },
+          {
+            "icon": "🪤",
+            "text": "forbidNonWhitelisted → 400 thay vì lặng lẽ strip",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep78/scene-05-0-510bd43d.wav",
+          "startFrame": 0,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep78/scene-05-1-a1226bd4.wav",
+          "startFrame": 248,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep78/scene-05-2-aca470bd.wav",
+          "startFrame": 465,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep78/scene-05-3-6916e349.wav",
+          "startFrame": 661,
+          "durationInFrames": 200
+        }
+      ],
+      "durationInFrames": 879
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 34/36 hoàn tất — body bẩn, chặn từ cửa!",
+        "summary": [
+          {
+            "text": "DTO + decorator = hợp đồng dữ liệu vào",
+            "sentence": 0
+          },
+          {
+            "text": "Sai → 400 mảng lỗi — handler KHÔNG chạy",
+            "sentence": 0
+          },
+          {
+            "text": "whitelist gọt field lạ — tự bật mới có",
+            "sentence": 0
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 35/36: Interceptor — bọc response + đo thời gian 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep78/scene-06-0-0a900384.wav",
+          "startFrame": 0,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep78/scene-06-1-6ffbb6d9.wav",
+          "startFrame": 251,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep78/scene-06-2-aff60923.wav",
+          "startFrame": 480,
+          "durationInFrames": 159
+        }
+      ],
+      "durationInFrames": 657
+    }
+  ]
+}

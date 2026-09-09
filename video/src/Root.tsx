@@ -71,6 +71,24 @@ import ep65 from './data/ep65.timing.json';
 import ep66 from './data/ep66.timing.json';
 import ep67 from './data/ep67.timing.json';
 import ep68 from './data/ep68.timing.json';
+import ep69 from './data/ep69.timing.json';
+import ep70 from './data/ep70.timing.json';
+import ep71 from './data/ep71.timing.json';
+import ep72 from './data/ep72.timing.json';
+import ep73 from './data/ep73.timing.json';
+import ep74 from './data/ep74.timing.json';
+import ep75 from './data/ep75.timing.json';
+import ep76 from './data/ep76.timing.json';
+import ep77 from './data/ep77.timing.json';
+import ep78 from './data/ep78.timing.json';
+import ep79 from './data/ep79.timing.json';
+import ep80 from './data/ep80.timing.json';
+import sb1 from './data/sb1.timing.json';
+import sb2 from './data/sb2.timing.json';
+import sb3 from './data/sb3.timing.json';
+import sb4 from './data/sb4.timing.json';
+import sb5 from './data/sb5.timing.json';
+import sb6 from './data/sb6.timing.json';
 import sf1 from './data/sf1.timing.json';
 import sf2 from './data/sf2.timing.json';
 import sf3 from './data/sf3.timing.json';
@@ -84,6 +102,12 @@ import sn4 from './data/sn4.timing.json';
 import sn5 from './data/sn5.timing.json';
 import sn6 from './data/sn6.timing.json';
 import sr1 from './data/sr1.timing.json';
+import ss1 from './data/ss1.timing.json';
+import ss2 from './data/ss2.timing.json';
+import ss3 from './data/ss3.timing.json';
+import ss4 from './data/ss4.timing.json';
+import ss5 from './data/ss5.timing.json';
+import ss6 from './data/ss6.timing.json';
 import sr2 from './data/sr2.timing.json';
 import sr3 from './data/sr3.timing.json';
 import sr4 from './data/sr4.timing.json';
@@ -166,6 +190,18 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode66', timing: ep66 as unknown as EpisodeTiming},
   {id: 'Episode67', timing: ep67 as unknown as EpisodeTiming},
   {id: 'Episode68', timing: ep68 as unknown as EpisodeTiming},
+  {id: 'Episode69', timing: ep69 as unknown as EpisodeTiming},
+  {id: 'Episode70', timing: ep70 as unknown as EpisodeTiming},
+  {id: 'Episode71', timing: ep71 as unknown as EpisodeTiming},
+  {id: 'Episode72', timing: ep72 as unknown as EpisodeTiming},
+  {id: 'Episode73', timing: ep73 as unknown as EpisodeTiming},
+  {id: 'Episode74', timing: ep74 as unknown as EpisodeTiming},
+  {id: 'Episode75', timing: ep75 as unknown as EpisodeTiming},
+  {id: 'Episode76', timing: ep76 as unknown as EpisodeTiming},
+  {id: 'Episode77', timing: ep77 as unknown as EpisodeTiming},
+  {id: 'Episode78', timing: ep78 as unknown as EpisodeTiming},
+  {id: 'Episode79', timing: ep79 as unknown as EpisodeTiming},
+  {id: 'Episode80', timing: ep80 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -197,6 +233,18 @@ const shorts: {id: string; timing: EpisodeTiming}[] = [
   {id: 'ShortF4', timing: sf4 as unknown as EpisodeTiming},
   {id: 'ShortF5', timing: sf5 as unknown as EpisodeTiming},
   {id: 'ShortF6', timing: sf6 as unknown as EpisodeTiming},
+  {id: 'ShortB1', timing: sb1 as unknown as EpisodeTiming},
+  {id: 'ShortB2', timing: sb2 as unknown as EpisodeTiming},
+  {id: 'ShortB3', timing: sb3 as unknown as EpisodeTiming},
+  {id: 'ShortB4', timing: sb4 as unknown as EpisodeTiming},
+  {id: 'ShortB5', timing: sb5 as unknown as EpisodeTiming},
+  {id: 'ShortB6', timing: sb6 as unknown as EpisodeTiming},
+  {id: 'ShortS1', timing: ss1 as unknown as EpisodeTiming},
+  {id: 'ShortS2', timing: ss2 as unknown as EpisodeTiming},
+  {id: 'ShortS3', timing: ss3 as unknown as EpisodeTiming},
+  {id: 'ShortS4', timing: ss4 as unknown as EpisodeTiming},
+  {id: 'ShortS5', timing: ss5 as unknown as EpisodeTiming},
+  {id: 'ShortS6', timing: ss6 as unknown as EpisodeTiming},
 ];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
@@ -1043,6 +1091,162 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/perfqa/f6-blocked.png',
       badgeEmoji: '🚀',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb69',
+    props: {
+      badge: 'PV FE #25',
+      line1: 'PROMISE TRƯỚC',
+      line2: 'NEXTTICK?!',
+      subtitle: 'Phỏng vấn Frontend · Câu 25/36',
+      variant: 'shot',
+      image: 'screens/beqa/b1-order.png',
+      badgeEmoji: '🔁',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb70',
+    props: {
+      badge: 'PV FE #26',
+      line1: '1 THREAD',
+      line2: '322 REQ/S?',
+      subtitle: 'Phỏng vấn Frontend · Câu 26/36',
+      variant: 'shot',
+      image: 'screens/beqa/b2-bench.png',
+      badgeEmoji: '🧵',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb71',
+    props: {
+      badge: 'PV FE #27',
+      line1: 'SERVER ĐƠ 1.9S',
+      line2: 'VÌ 1 CÚ HASH?',
+      subtitle: 'Phỏng vấn Frontend · Câu 27/36',
+      variant: 'shot',
+      image: 'screens/beqa/b3-worker.png',
+      badgeEmoji: '👷',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb72',
+    props: {
+      badge: 'PV FE #28',
+      line1: '1GB FILE',
+      line2: '97MB RAM?',
+      subtitle: 'Phỏng vấn Frontend · Câu 28/36',
+      variant: 'shot',
+      image: 'screens/beqa/b4-rss.png',
+      badgeEmoji: '🌊',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb73',
+    props: {
+      badge: 'PV FE #29',
+      line1: '3 API',
+      line2: '907 HAY 303MS?',
+      subtitle: 'Phỏng vấn Frontend · Câu 29/36',
+      variant: 'shot',
+      image: 'screens/beqa/b5-timing.png',
+      badgeEmoji: '⚡',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb74',
+    props: {
+      badge: 'PV FE #30',
+      line1: 'REQUIRE(ESM)',
+      line2: 'CHẠY ĐƯỢC RỒI?',
+      subtitle: 'Phỏng vấn Frontend · Câu 30/36',
+      variant: 'shot',
+      image: 'screens/beqa/b6-compare.png',
+      badgeEmoji: '📦',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb75',
+    props: {
+      badge: 'PV FE #31',
+      line1: 'KHÔNG NEW',
+      line2: 'VẪN CÓ SERVICE?',
+      subtitle: 'Phỏng vấn Frontend · Câu 31/36',
+      variant: 'shot',
+      image: 'screens/beqa/s1-di.png',
+      badgeEmoji: '💉',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb76',
+    props: {
+      badge: 'PV FE #32',
+      line1: 'REQUEST ĐI QUA',
+      line2: 'MẤY LỚP?',
+      subtitle: 'Phỏng vấn Frontend · Câu 32/36',
+      variant: 'shot',
+      image: 'screens/beqa/s2-lifecycle.png',
+      badgeEmoji: '🚦',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb77',
+    props: {
+      badge: 'PV FE #33',
+      line1: '401 HAY 403',
+      line2: 'BẠN NHẦM CHỖ NÀO?',
+      subtitle: 'Phỏng vấn Frontend · Câu 33/36',
+      variant: 'shot',
+      image: 'screens/beqa/s3-auth.png',
+      badgeEmoji: '🛡️',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb78',
+    props: {
+      badge: 'PV FE #34',
+      line1: 'BODY BẨN',
+      line2: 'CHẶN Ở ĐÂU?',
+      subtitle: 'Phỏng vấn Frontend · Câu 34/36',
+      variant: 'shot',
+      image: 'screens/beqa/s4-validate.png',
+      badgeEmoji: '✂️',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb79',
+    props: {
+      badge: 'PV FE #35',
+      line1: 'MỌI API',
+      line2: 'CHUNG 1 KHUÔN?',
+      subtitle: 'Phỏng vấn Frontend · Câu 35/36',
+      variant: 'shot',
+      image: 'screens/beqa/s5-intercept.png',
+      badgeEmoji: '🎁',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb80',
+    props: {
+      badge: 'PV FE #36',
+      line1: 'LỖI THÔ 500',
+      line2: 'LỘ GÌ RA NGOÀI?',
+      subtitle: 'Phỏng vấn Frontend · Câu 36/36',
+      variant: 'shot',
+      image: 'screens/beqa/s6-filter.png',
+      badgeEmoji: '🧯',
       seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },

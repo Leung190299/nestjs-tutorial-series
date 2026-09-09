@@ -1,0 +1,10 @@
+{
+  "name": "node-qa",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Demo Node.js cho lô 3 phỏng vấn Backend (B1–B6) — chạy thật, in output có nhãn",
+  "devDependencies": {
+    "autocannon": "^8.0.0"
+  }
+}

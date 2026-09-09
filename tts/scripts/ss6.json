@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Exception filter trong NestJS — không bắt lỗi thì Nest trả gì, và chuẩn hóa error format toàn app thế nào?",
+      "Trả lời trong sáu mươi giây — kèm curl chạy thật."
+    ],
+    "visual": {
+      "question": "NestJS: lỗi thô 500 — chuẩn hóa error toàn app thế nào?",
+      "framework": "nestjs"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "@Catch() để trống là bắt mọi exception: HttpException giữ status của nó, lỗi thô về năm trăm với message an toàn — không lộ err.message.",
+      "Stack chỉ log server-side; response là vỏ thống nhất code, message, path, timestamp — cả app một format lỗi."
+    ],
+    "visual": {
+      "filename": "all-exceptions.filter.ts (rút gọn)",
+      "language": "tsx",
+      "code": "@Catch() // TRỐNG = bắt MỌI exception\ncatch(err, host) {\n  const isHttp =\n    err instanceof HttpException;\n  // 404 chủ động giữ status của nó\n  const status =\n    isHttp ? err.getStatus() : 500;\n  const message = isHttp ? err.message\n    : 'Có lỗi phía server, thử lại sau';\n  // stack chỉ log SERVER-side\n  console.error('[S6]', err.stack);\n  res.status(status).json({\n    code: isHttp ? status : 'INTERNAL',\n    message, path, timestamp });",
+      "steps": [
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 0
+        },
+        {
+          "from": 10,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Chạy thật, cùng một lỗi db exploded: mặc định Nest trả năm trăm vô hồn; qua filter thành code INTERNAL, message an toàn, kèm path và timestamp.",
+      "db exploded chỉ nằm trong log server; còn bốn lẻ bốn chủ động vẫn là bốn lẻ bốn — không bị nuốt thành năm trăm."
+    ],
+    "visual": {
+      "src": "screens/beqa/s6-filter.png",
+      "caption": "stack ở server · client nhận code sạch"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: exception filter @Catch() để trống bắt mọi lỗi — client luôn nhận vỏ thống nhất, không lộ nội bộ.",
+      "Ghi điểm: gắn APP_FILTER là cả app một format lỗi.",
+      "Bẫy: nhớ phân nhánh HttpException — đừng nuốt bốn lẻ bốn thành năm trăm."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🧾",
+          "text": "@Catch() trống → vỏ {code, message, path, ts}",
+          "sentence": 0
+        },
+        {
+          "icon": "🌍",
+          "text": "APP_FILTER → cả app 1 format lỗi",
+          "sentence": 1
+        }
+      ],
+      "trap": "Quên phân nhánh HttpException — 404 thành 500"
+    }
+  }
+]

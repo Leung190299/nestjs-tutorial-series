@@ -1,0 +1,190 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu số ba mươi hai — nhà tuyển dụng hỏi câu kinh điển số một của NestJS: một request vào NestJS đi qua những lớp nào, theo thứ tự nào?",
+      "Mình trả lời bằng demo in log đánh số từng lớp — và một request lỗi, để lộ chỗ mà interceptor chiều về biến mất."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #32: Request lifecycle NestJS — 6 lớp theo thứ tự",
+      "subtitle": "Phỏng vấn Frontend — NestJS · Câu 32/36",
+      "badge": "NestJS backend"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Docs NestJS có hẳn trang FAQ request lifecycle — quote: a request flows through middleware to guards, then to interceptors, then to pipes, and finally back to interceptors on the return path.",
+      "Diễn nôm theo danh sách mười bước của docs: middleware sơ chế kiểu Express, guard quyết cho vào hay không, interceptor bọc trước và sau, pipe validate transform tham số, rồi mới tới handler.",
+      "Chỗ hay trả lời sai nhất: pipe KHÔNG chạy sớm — nó đứng NGAY TRƯỚC handler, sau cả guard lẫn interceptor chiều đi.",
+      "Còn khi có lỗi: exception filter đứng cuối hứng tất — và interceptor là lớp duy nhất có mặt ở cả hai chiều của request."
+    ],
+    "visual": {
+      "title": "Request lifecycle — chuỗi chuẩn của docs",
+      "bullets": [
+        {
+          "icon": "🛤️",
+          "text": "Middleware → Guard → Interceptor → Pipe → Handler",
+          "sentence": 0
+        },
+        {
+          "icon": "🧰",
+          "text": "Mỗi lớp 1 việc: sơ chế · gác cổng · validate",
+          "sentence": 1
+        },
+        {
+          "icon": "🎯",
+          "text": "Pipe NGAY TRƯỚC handler — sau guard!",
+          "sentence": 2
+        },
+        {
+          "icon": "🔁",
+          "text": "Interceptor 2 chiều · Filter = chốt chặn cuối",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là s2.interceptor.ts — trọn file mười tám dòng; ngoài đồ nghề của Nest, nó import thêm tap từ RxJS — vì interceptor làm việc với Observable.",
+      "Comment nói đúng trọng tâm: interceptor là lớp DUY NHẤT chạy cả hai chiều — và nếu handler ném lỗi, nhánh sau handler KHÔNG chạy.",
+      "Chiều đi: log bước ba — interceptor trước handler — in ra TRƯỚC khi gọi next.handle.",
+      "Chiều về: next.handle trả về Observable, tap gắn log bước năm — chỉ khi handler xong êm đẹp dòng này mới chạy; năm lớp còn lại của demo, mỗi lớp cũng chỉ log đúng một dòng đánh số như vậy."
+    ],
+    "visual": {
+      "filename": "s2.interceptor.ts — TOÀN BỘ FILE",
+      "language": "tsx",
+      "code": "import { Injectable } from '@nestjs/common';\nimport type { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common';\nimport { tap } from 'rxjs';\nimport type { Observable } from 'rxjs';\n\n// Interceptor — lớp DUY NHẤT chạy cả hai chiều: log trước khi gọi\n// next.handle(), rồi tap() log tiếp khi Observable resolve trên đường VỀ\n// (sau handler). Nếu handler ném lỗi, nhánh \"sau handler\" KHÔNG chạy —\n// lỗi rơi thẳng xuống exception filter.\n@Injectable()\nexport class S2Interceptor implements NestInterceptor {\n  intercept(_context: ExecutionContext, next: CallHandler): Observable<unknown> {\n    console.log('[3] Interceptor (trước handler)');\n    return next\n      .handle()\n      .pipe(tap(() => console.log('[5] Interceptor (sau handler)')));\n  }\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 9,
+          "sentence": 1
+        },
+        {
+          "from": 12,
+          "to": 13,
+          "sentence": 2
+        },
+        {
+          "from": 14,
+          "to": 18,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy thật: curl s2 với msg hello — nhìn log server đếm từng bước: một middleware, hai guard, ba interceptor trước handler.",
+      "Rồi bốn — Pipe, sát handler nhất; H — handler chạy; và năm — interceptor sau handler, chiều về; response ok true msg hello trả ra ngoài."
+    ],
+    "visual": {
+      "title": "curl /s2?msg=hello — chuỗi đủ [1]→[5]",
+      "commands": [
+        {
+          "cmd": "curl -s 'http://localhost:3998/s2?msg=hello'",
+          "output": "{\"ok\":true,\"msg\":\"hello\"}\n-- log server:\n[1] Middleware\n[2] Guard\n[3] Interceptor (trước handler)\n[4] Pipe\n[H] Handler chạy\n[5] Interceptor (sau handler)",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04b",
+    "type": "terminal",
+    "narration": [
+      "Giờ curl s2 boom — bốn bước đầu y hệt, handler chạy rồi ném Error giữa chừng.",
+      "Beat đắt nhất đây: dòng năm BIẾN MẤT — lỗi bỏ qua toàn bộ chiều về của interceptor, rơi thẳng xuống F — filter bắt lỗi, tự format response năm trăm."
+    ],
+    "visual": {
+      "title": "curl /s2/boom — [5] biến mất, rơi xuống [F]",
+      "commands": [
+        {
+          "cmd": "curl -s http://localhost:3998/s2/boom",
+          "output": "{\"ok\":false,\"error\":\"boom giữa handler\"}\n-- log server:\n[1] Middleware\n[2] Guard\n[3] Interceptor (trước handler)\n[4] Pipe\n[H] Handler chạy — ném Error\n[F] Filter bắt lỗi\n=> KHÔNG có [5] — lỗi bỏ qua chiều về",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — câu một: thuộc chuỗi đọc liền một hơi: middleware, guard, interceptor trước, pipe, handler, interceptor sau — filter khi có lỗi.",
+      "Câu hai: mỗi lớp một việc — guard quyết CÓ chạy handler hay không, pipe validate transform tham số, filter là chốt chặn cuối, lỗi ở lớp nào cũng rơi về nó.",
+      "Câu ba: interceptor là lớp duy nhất chạy cả hai chiều — nhiều interceptor lồng nhau thì chiều về resolve kiểu first-in-last-out.",
+      "Bẫy: pipe chạy NGAY TRƯỚC handler, sau guard — đừng nói validate rồi mới auth; còn muốn đào sâu từng lớp, kênh có nguyên series NestJS nâng cao — mỗi lớp một tập, link dưới mô tả."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Thuộc chuỗi: MW → G → I → P → H → I → F",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Guard gác cổng · Pipe validate · Filter hứng lỗi",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Interceptor 2 chiều — về first-in-last-out",
+          "sentence": 2
+        },
+        {
+          "icon": "🪤",
+          "text": "Pipe SAU guard — đừng 'validate rồi mới auth'",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu ba mươi hai — request lifecycle: sáu lớp, một chuỗi log đánh số, và một request lỗi để lộ chỗ interceptor chiều về biến mất.",
+      "Mai sang câu ba mươi ba: middleware cũng chặn được request, sao Nest bảo authorization phải dùng guard — và bốn lẻ một với bốn lẻ ba trả từ đâu?",
+      "Video này có bản Shorts sáu mươi giây để bạn ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số ba mươi ba!"
+    ],
+    "visual": {
+      "title": "Câu 32/36 hoàn tất — thuộc chuỗi 6 lớp!",
+      "summary": [
+        {
+          "text": "Chuỗi: MW → Guard → Interceptor → Pipe → Handler",
+          "sentence": 0
+        },
+        {
+          "text": "Lỗi: [5] biến mất — rơi thẳng xuống filter",
+          "sentence": 0
+        },
+        {
+          "text": "Đào sâu từng lớp: series NestJS nâng cao",
+          "sentence": 0
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 33/36: Guard vs Middleware — auth đặt ở đâu 🎤"
+    }
+  }
+]

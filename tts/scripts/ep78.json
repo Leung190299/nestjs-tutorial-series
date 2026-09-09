@@ -1,0 +1,208 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu số ba mươi tư — nhà tuyển dụng hỏi: API của bạn tin body client gửi lên đến mức nào? Validate ở đâu cho chuẩn NestJS?",
+      "Mình trả lời bằng demo chạy thật: DTO ba field cộng một dòng ValidationPipe — body sai dính bốn trăm kèm ba lỗi, field lạ thì biến mất."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #34: ValidationPipe — DTO là hợp đồng chặn body bẩn",
+      "subtitle": "Phỏng vấn Frontend — NestJS · Câu 34/36",
+      "badge": "NestJS backend"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "NestJS giải bằng HỢP ĐỒNG: một class DTO gắn decorator class-validator — IsString, IsInt, IsEmail; type TypeScript bị xóa lúc runtime, chính decorator mới là thứ pipe đọc.",
+      "ValidationPipe được chèn NGAY TRƯỚC handler — docs viết: Nest interposes a pipe just before a method is invoked.",
+      "Body sai là pipe ném exception — tự trả bốn trăm kèm mảng message chi tiết; docs chốt: no controller method is subsequently executed — handler không bao giờ chạy.",
+      "Còn bật whitelist thì pipe gọt sạch mọi property không có decorator — field lạ client nhét thêm không lọt vào app: chặn mass assignment từ ngoài cửa."
+    ],
+    "visual": {
+      "title": "DTO là hợp đồng — pipe gác ngay trước handler",
+      "bullets": [
+        {
+          "icon": "📜",
+          "text": "DTO + decorator = hợp đồng dữ liệu vào",
+          "sentence": 0
+        },
+        {
+          "icon": "🚪",
+          "text": "Pipe chèn NGAY TRƯỚC khi method được gọi",
+          "sentence": 1
+        },
+        {
+          "icon": "❌",
+          "text": "Sai → 400 mảng lỗi — handler KHÔNG chạy",
+          "sentence": 2
+        },
+        {
+          "icon": "✂️",
+          "text": "whitelist gọt field lạ — chặn mass assignment",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là create-order.dto.ts — trọn file; dòng comment nói điều nhiều người quên: type TypeScript bị xóa lúc runtime, chính decorator class-validator mới là thứ ValidationPipe đọc.",
+      "Hợp đồng ba field: ten phải là chuỗi; soLuong số nguyên, tối thiểu một; email đúng định dạng — sai điều khoản nào là dính bốn trăm điều khoản đó."
+    ],
+    "visual": {
+      "filename": "create-order.dto.ts — TOÀN BỘ FILE",
+      "language": "tsx",
+      "code": "import { IsEmail, IsInt, IsString, Min } from 'class-validator';\n\n// DTO = hợp đồng dữ liệu vào. Type TypeScript bị xóa lúc runtime —\n// chính các decorator class-validator dưới đây mới là thứ ValidationPipe đọc.\nexport class CreateOrderDto {\n  @IsString()\n  ten: string;\n\n  @IsInt()\n  @Min(1)\n  soLuong: number;\n\n  @IsEmail()\n  email: string;\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 4,
+          "sentence": 0
+        },
+        {
+          "from": 5,
+          "to": 15,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03b",
+    "type": "code",
+    "narration": [
+      "Sang s4.controller.ts — một dòng UsePipes gắn ValidationPipe cho cả controller: whitelist true để gọt field lạ, transform true để body thành instance CreateOrderDto thật.",
+      "Handler chỉ việc nhận Body kiểu CreateOrderDto rồi echo lại order — vào được đến đây nghĩa là body ĐÃ hợp lệ và ĐÃ được gọt sạch."
+    ],
+    "visual": {
+      "filename": "s4.controller.ts — TOÀN BỘ FILE",
+      "language": "tsx",
+      "code": "import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';\nimport { CreateOrderDto } from './create-order.dto.js';\n\n// ValidationPipe scope controller: Nest chèn pipe NGAY TRƯỚC khi method được\n// gọi — body sai là pipe ném exception → 400, handler KHÔNG BAO GIỜ chạy.\n// whitelist: true → gọt sạch mọi property không có decorator (field lạ không lọt).\n// transform: true → body thành instance CreateOrderDto thật.\n@Controller('s4')\n@UsePipes(new ValidationPipe({ whitelist: true, transform: true }))\nexport class S4Controller {\n  // POST /s4 — vào được đến đây nghĩa là body ĐÃ hợp lệ và ĐÃ được gọt sạch.\n  @Post()\n  create(@Body() body: CreateOrderDto) {\n    return { ok: true, order: body };\n  }\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 9,
+          "sentence": 0
+        },
+        {
+          "from": 10,
+          "to": 16,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy thật — gửi body sai cả ba field: ten là số một trăm hai mươi ba, soLuong bằng không, email chỉ là chuỗi abc.",
+      "Bốn trăm Bad Request kèm mảng ba message: ten must be a string; soLuong must not be less than one; email must be an email — mỗi field sai một câu, tự động.",
+      "Và quan trọng nhất: bốn trăm này do pipe ném — handler chưa hề chạy, log server không có một dòng nào từ handler."
+    ],
+    "visual": {
+      "title": "curl body sai → 400: mảng 3 lỗi chi tiết",
+      "commands": [
+        {
+          "cmd": "curl -s -i -X POST http://localhost:3998/s4 -H \"Content-Type: application/json\" -d '{\"ten\":123,\"soLuong\":0,\"email\":\"abc\"}'",
+          "output": "HTTP/1.1 400 Bad Request\n{\"message\":[\"ten must be a string\",\n \"soLuong must not be less than 1\",\n \"email must be an email\"],\n \"error\":\"Bad Request\",\"statusCode\":400}\n=> pipe ném 400 — handler CHƯA HỀ chạy",
+          "sentence": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04b",
+    "type": "terminal",
+    "narration": [
+      "Giờ body đúng nhưng nhét thêm hack bằng x — hai trăm lẻ một Created, và nhìn kỹ order: KHÔNG có hack; whitelist đã gọt field lạ trước khi body vào handler.",
+      "Gửi lại body sạch để đối chứng — response giống case trên từng byte: field hack biến mất không dấu vết — client không nhét được cột lạ vào DB."
+    ],
+    "visual": {
+      "title": "whitelist: field \"hack\" biến mất",
+      "commands": [
+        {
+          "cmd": "curl -s -i -X POST http://localhost:3998/s4 -H \"Content-Type: application/json\" -d '{\"ten\":\"Lee\",\"soLuong\":2,\"email\":\"lee@shop.vn\",\"hack\":\"x\"}'",
+          "output": "HTTP/1.1 201 Created\n{\"ok\":true,\"order\":{\"ten\":\"Lee\",\"soLuong\":2,\"email\":\"lee@shop.vn\"}}\n=> order KHÔNG có \"hack\" — whitelist đã gọt",
+          "sentence": 0
+        },
+        {
+          "cmd": "curl -s -i -X POST http://localhost:3998/s4 -H \"Content-Type: application/json\" -d '{\"ten\":\"Lee\",\"soLuong\":2,\"email\":\"lee@shop.vn\"}'",
+          "output": "HTTP/1.1 201 Created\n{\"ok\":true,\"order\":{\"ten\":\"Lee\",\"soLuong\":2,\"email\":\"lee@shop.vn\"}}\n=> giống case \"hack\" từng byte — diff 0",
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Câu một: validate ở BIÊN — DTO cộng ValidationPipe chặn ngay trước handler; đừng rải if trong service — vừa lặp code vừa chạy sau khi dữ liệu đã vào.",
+      "Câu hai: whitelist mặc định KHÔNG bật — phải tự bật; quên nó là body hợp lệ vẫn mang theo field thừa kiểu isAdmin true đi thẳng vào object.",
+      "Câu ba: transform true — body thành instance DTO thật, và param từ query string được đổi sang number đúng kiểu.",
+      "Bẫy cộng điểm: muốn trả bốn trăm thay vì lặng lẽ gọt field lạ thì bật thêm forbidNonWhitelisted — nói được một câu này là ăn điểm."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Validate ở BIÊN — không rải if trong service",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "whitelist KHÔNG bật mặc định — phải tự bật",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "transform: true — query string → number",
+          "sentence": 2
+        },
+        {
+          "icon": "🪤",
+          "text": "forbidNonWhitelisted → 400 thay vì lặng lẽ strip",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu ba mươi tư — DTO là hợp đồng, ValidationPipe gác ngay trước handler: sai là bốn trăm kèm mảng lỗi chi tiết, whitelist gọt sạch field lạ.",
+      "Mai sang câu ba mươi lăm: Interceptor làm được gì mà middleware với pipe không làm được — bọc response chuẩn và đo thời gian xử lý thế nào?",
+      "Video này có bản Shorts sáu mươi giây để ôn nhanh — xem tiếp và luyện tiếp, hẹn gặp lại ở câu số ba mươi lăm!"
+    ],
+    "visual": {
+      "title": "Câu 34/36 hoàn tất — body bẩn, chặn từ cửa!",
+      "summary": [
+        {
+          "text": "DTO + decorator = hợp đồng dữ liệu vào",
+          "sentence": 0
+        },
+        {
+          "text": "Sai → 400 mảng lỗi — handler KHÔNG chạy",
+          "sentence": 0
+        },
+        {
+          "text": "whitelist gọt field lạ — tự bật mới có",
+          "sentence": 0
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 35/36: Interceptor — bọc response + đo thời gian 🎤"
+    }
+  }
+]

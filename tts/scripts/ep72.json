@@ -1,0 +1,179 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu số hai mươi tám — câu hỏi từ nhà tuyển dụng: API cho tải file một gigabyte — code của bạn có làm server phình một gigabyte RAM không?",
+      "Mình trả lời bằng demo đo RSS thật trên CÙNG một file một gigabyte, đọc theo hai cách: readFile cả cục và stream chảy từng chunk."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #28: Stream và backpressure — 1GB file, 100MB RAM",
+      "subtitle": "Phỏng vấn Frontend — Node.js core · Câu 28/36",
+      "badge": "Node.js backend"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "readFile tải NGUYÊN file vào RAM rồi mới xử lý — file một gigabyte là RSS phồng đúng cỡ đó, mười gigabyte là server gục.",
+      "Stream đọc từng chunk theo highWaterMark — read stream của fs mặc định sáu mươi tư kibibyte — nên bộ nhớ giữ cố định dù file bao lớn.",
+      "Backpressure: bên ghi chậm hơn bên đọc thì write trả false — tín hiệu dừng nguồn — chờ event drain rồi mới bơm tiếp.",
+      "Và pipe tự lo trọn gói — docs nói dòng chảy được 'automatically managed' để Writable đích không bao giờ bị nguồn nhanh hơn đè bẹp."
+    ],
+    "visual": {
+      "title": "readFile nuốt cả file — stream chảy từng chunk",
+      "bullets": [
+        {
+          "icon": "🐘",
+          "text": "readFile = nuốt NGUYÊN file vào RAM — RSS ăn theo cỡ file",
+          "sentence": 0
+        },
+        {
+          "icon": "💧",
+          "text": "stream = chảy từng chunk 64 KiB (highWaterMark fs)",
+          "sentence": 1
+        },
+        {
+          "icon": "🚦",
+          "text": "write() false → nguồn pause → 'drain' → bơm tiếp",
+          "sentence": 2
+        },
+        {
+          "icon": "🔗",
+          "text": "pipe: “automatically managed… not overwhelmed”",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Nhánh readfile trong b4.mjs: await readFile nuốt NGUYÊN một gigabyte thành MỘT Buffer trong heap — sample ghi lại RSS ngay sau đó.",
+      "Ghi buffer ra /dev/null, sample lần nữa, rồi in RSS trước, RSS đỉnh và thời gian — poll năm mươi mili giây chạy nền suốt từ đầu.",
+      "Nhánh stream: createReadStream với highWaterMark MẶC ĐỊNH — không chỉnh gì — và in readableHighWaterMark THẬT đọc từ stream để đối chứng docs.",
+      "Rồi chỉ một cú rs.pipe(ws) — pipe tự quản pause resume — và await finish phía GHI: flush hết mới bấm giờ, không ăn gian."
+    ],
+    "visual": {
+      "filename": "b4.mjs",
+      "language": "javascript",
+      "code": "if (mode === 'readfile') {\n  console.log('== B4: readFile cả 1GB ==');\n  console.log(`big.bin ${mb(info.size)} MB → RAM một cục → /dev/null`);\n  const t0 = Date.now();\n  const buf = await readFile(BIG); // NGUYÊN 1GB thành 1 Buffer trong heap\n  sample();\n  await writeFile('/dev/null', buf);\n  sample();\n  const tookMs = Date.now() - t0;\n  console.log(`RSS trước: ${mb(before)} MB`);\n  console.log(`RSS đỉnh: ${mb(peak)} MB — phồng nguyên cỡ file`);\n  console.log(`xong ${tookMs}ms`);\n} else {\n  console.log('== B4b: stream.pipe ==');\n  console.log(`big.bin ${mb(info.size)} MB → chunk nối chunk → /dev/null`);\n  const t0 = Date.now();\n  const rs = createReadStream(BIG); // highWaterMark mặc định — không chỉnh gì\n  const hwm = rs.readableHighWaterMark;\n  console.log(`highWaterMark thật: ${hwm} bytes = ${hwm / 1024} KiB/chunk`);\n  const ws = createWriteStream('/dev/null');\n  rs.pipe(ws); // pipe tự quản pause/resume + end() phía ghi\n  await once(ws, 'finish'); // xong = phía GHI đã flush hết",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 7,
+          "to": 12,
+          "sentence": 1
+        },
+        {
+          "from": 13,
+          "to": 19,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 22,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy node b4.mjs readfile: RSS từ bốn mươi megabyte phồng lên đỉnh một nghìn không trăm bảy mươi mốt — đúng nguyên cỡ file một gigabyte.",
+      "Có lần đo thấy năm trăm bốn mươi lăm — macOS nén bộ nhớ vì file test toàn byte lặp — số sạch nhất vẫn là cả gigabyte.",
+      "Đổi sang node b4.mjs stream: đỉnh chỉ chín mươi bảy megabyte — dưới một trăm, chênh mười một lần — và highWaterMark thật in đúng sáu mươi lăm nghìn năm trăm ba mươi sáu byte, tức sáu mươi tư kibibyte.",
+      "Trung thực: thời gian hai cách ngang nhau — hai trăm linh ba với ba trăm mười lăm mili giây trên máy tôi — stream mua RAM phẳng, KHÔNG mua tốc độ."
+    ],
+    "visual": {
+      "title": "node b4.mjs",
+      "commands": [
+        {
+          "cmd": "node b4.mjs readfile",
+          "output": "== B4: readFile cả 1GB ==\nbig.bin 1024 MB → RAM một cục → /dev/null\nRSS trước: 40 MB\nRSS đỉnh: 1071 MB — phồng nguyên cỡ file\nxong 203ms",
+          "sentence": 0
+        },
+        {
+          "cmd": "node b4.mjs stream",
+          "output": "== B4b: stream.pipe ==\nbig.bin 1024 MB → chunk nối chunk → /dev/null\nhighWaterMark thật: 65536 bytes = 64 KiB/chunk\nRSS trước: 40 MB\nRSS đỉnh: 97 MB — phẳng, cỡ vài buffer\nxong 315ms",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — câu một: readFile tải nguyên file vào RAM, RSS ăn theo cỡ file; stream đọc từng chunk, bộ nhớ cố định dù file bao lớn.",
+      "Câu hai: backpressure là dữ liệu dồn ứ khi bên ghi chậm hơn bên đọc — write trả false là tín hiệu dừng, chờ event drain mới bơm tiếp.",
+      "Câu ba: pipe và pipeline tự quản toàn bộ chuyện đó theo highWaterMark — docs nói thẳng: Node làm tự động cho bạn, không phải tự cài.",
+      "Bẫy: đọc file để TRẢ response thì pipe thẳng vào res — đừng await đọc hết rồi res.send, cũng đừng tự viết vòng write thủ công mà bỏ qua giá trị false."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "readFile = RSS ăn theo cỡ file · stream = cố định",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Backpressure: write() false → chờ 'drain' → bơm tiếp",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "pipe/pipeline TỰ LO — Node làm tự động",
+          "sentence": 2
+        },
+        {
+          "icon": "🪤",
+          "text": "Trả file: pipe thẳng res — đừng await hết rồi send",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu hai mươi tám — file lớn thì để nó CHẢY: stream cộng pipe, RAM đứng yên dưới một trăm megabyte dù file cả gigabyte.",
+      "Câu tiếp theo: ba API độc lập mỗi cái ba trăm mili giây — await tuần tự với Promise.all khác gì, một cái reject thì sao?",
+      "Video này có bản Shorts sáu mươi giây để bạn ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số hai mươi chín!"
+    ],
+    "visual": {
+      "title": "Câu 28/36 hoàn tất — hẹn gặp câu 29!",
+      "summary": [
+        {
+          "text": "File lớn: stream + pipe — RSS phẳng ~100MB",
+          "sentence": 0
+        },
+        {
+          "text": "readFile 1071MB vs stream 97MB — chênh 11×",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: Promise.all vs await tuần tự",
+          "sentence": 1
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 29/36: Promise.all vs await tuần tự? 🎤"
+    }
+  }
+]

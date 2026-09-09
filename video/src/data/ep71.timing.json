@@ -1,0 +1,286 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #27: CPU-bound trên Node — worker_threads cứu server",
+        "subtitle": "Phỏng vấn Frontend — Node.js core · Câu 27/36",
+        "badge": "Node.js backend"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep71/scene-01-0-7937d5e5.wav",
+          "startFrame": 0,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep71/scene-01-1-039cd131.wav",
+          "startFrame": 246,
+          "durationInFrames": 224
+        }
+      ],
+      "durationInFrames": 488
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "worker_threads — JS song song trong cùng process",
+        "bullets": [
+          {
+            "icon": "🧵",
+            "text": "1 thread: khối CPU dài = MỌI client chờ",
+            "sentence": 0
+          },
+          {
+            "icon": "⚡",
+            "text": "Docs: “threads that execute JavaScript in parallel”",
+            "sentence": 1
+          },
+          {
+            "icon": "🎯",
+            "text": "Cho CPU-intensive — I/O thì KHÔNG giúp mấy",
+            "sentence": 2
+          },
+          {
+            "icon": "📬",
+            "text": "workerData vào → postMessage kết quả về, main chỉ await",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep71/scene-02-0-986594b7.wav",
+          "startFrame": 0,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep71/scene-02-1-3fdeabf2.wav",
+          "startFrame": 246,
+          "durationInFrames": 257
+        },
+        {
+          "file": "audio/ep71/scene-02-2-90aec956.wav",
+          "startFrame": 511,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep71/scene-02-3-edc42f6b.wav",
+          "startFrame": 769,
+          "durationInFrames": 212
+        }
+      ],
+      "durationInFrames": 999
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "b3.mjs",
+        "language": "javascript",
+        "code": "    key = pbkdf2Sync(key, 'muoi', ITERATIONS, 64, 'sha512');\n  }\n  const totalMs = Date.now() - t0;\n  const maxGap = await stop();\n  mainHex = key.toString('hex').slice(0, 8);\n  console.log(`maxGap ${maxGap}ms — đồng hồ ĐỨNG suốt khối hash`);\n  console.log(`tổng ${totalMs}ms · hash ${mainHex}`);\n}\n\n// ---- Nhánh 2: cùng khối lượng qua worker_threads --------------------------\nconsole.log('');\nconsole.log('== B3b: cùng khối lượng qua worker_threads ==');\n{\n  const stop = startClock();\n  await sleep(250);\n  const t0 = Date.now();\n  const worker = new Worker(new URL('./b3-worker.mjs', import.meta.url), {\n    workerData: { rounds: ROUNDS, iterations: ITERATIONS },\n  });\n  let spawnMs = -1;\n  worker.once('online', () => { spawnMs = Date.now() - t0; });\n  const result = await new Promise((resolve, reject) => {",
+        "steps": [
+          {
+            "from": 1,
+            "to": 2,
+            "sentence": 0
+          },
+          {
+            "from": 3,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 10,
+            "to": 21,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep71/scene-03-0-a3cdba5d.wav",
+          "startFrame": 0,
+          "durationInFrames": 240
+        },
+        {
+          "file": "audio/ep71/scene-03-1-fdd0cabc.wav",
+          "startFrame": 248,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep71/scene-03-2-e44e4a12.wav",
+          "startFrame": 456,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep71/scene-03-3-2e2b9927.wav",
+          "startFrame": 724,
+          "durationInFrames": 204
+        }
+      ],
+      "durationInFrames": 946
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node b3.mjs",
+        "commands": [
+          {
+            "cmd": "node b3.mjs",
+            "output": "== B3: hash trên main thread ==\npbkdf2Sync 40k vòng ×200 (chuỗi nối key)\nmaxGap 1921ms — đồng hồ ĐỨNG suốt khối hash\ntổng 1871ms · hash e33ff464",
+            "sentence": 0
+          },
+          {
+            "cmd": "node b3.mjs",
+            "output": "== B3b: cùng khối lượng qua worker_threads ==\nspawn: 45ms\nmaxGap 102ms — main rảnh, đồng hồ vẫn chạy\ntổng 1874ms (kể cả spawn) · hash e33ff464\nOK hash 2 nhánh KHỚP — đúng cùng khối lượng",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep71/scene-04-0-9f3ef2fb.wav",
+          "startFrame": 0,
+          "durationInFrames": 274
+        },
+        {
+          "file": "audio/ep71/scene-04-1-2758cc31.wav",
+          "startFrame": 282,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep71/scene-04-2-480ffc25.wav",
+          "startFrame": 509,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep71/scene-04-3-e17bf339.wav",
+          "startFrame": 750,
+          "durationInFrames": 255
+        }
+      ],
+      "durationInFrames": 1023
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "CPU-bound trên main = chiếm event loop — mọi client chờ",
+            "sentence": 1
+          },
+          {
+            "icon": "🪤",
+            "text": "Bẫy: async/await KHÔNG cứu — await không tạo thread",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "worker_threads: JS song song cùng process, postMessage",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "cluster = nhân PROCESS share port — scale ngang cả app",
+            "sentence": 3
+          },
+          {
+            "icon": "🥊",
+            "text": "RN chia lô ×2–3 · Flutter Isolate +30–50% · Node worker ≈0%",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep71/scene-05-0-339e7ef7.wav",
+          "startFrame": 0,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep71/scene-05-1-082a4217.wav",
+          "startFrame": 145,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep71/scene-05-2-2a1154cc.wav",
+          "startFrame": 362,
+          "durationInFrames": 276
+        },
+        {
+          "file": "audio/ep71/scene-05-3-0d981192.wav",
+          "startFrame": 646,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep71/scene-05-4-e4d3f1de.wav",
+          "startFrame": 887,
+          "durationInFrames": 291
+        }
+      ],
+      "durationInFrames": 1196
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 27/36 hoàn tất — hẹn gặp câu 28!",
+        "summary": [
+          {
+            "text": "CPU-bound: bê sang worker_threads — main vẫn tick",
+            "sentence": 0
+          },
+          {
+            "text": "Tổng thời gian không đổi, server không đơ",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: stream & backpressure — file 1GB",
+            "sentence": 1
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 28/36: Đọc file 1GB — stream & backpressure? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep71/scene-06-0-3c953238.wav",
+          "startFrame": 0,
+          "durationInFrames": 166
+        },
+        {
+          "file": "audio/ep71/scene-06-1-82f3d6c6.wav",
+          "startFrame": 174,
+          "durationInFrames": 156
+        },
+        {
+          "file": "audio/ep71/scene-06-2-81324e93.wav",
+          "startFrame": 338,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep71/scene-06-3-d0f17d51.wav",
+          "startFrame": 454,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 566
+    }
+  ]
+}

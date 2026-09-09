@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Node chạy một thread — sao phục vụ được nghìn request cùng lúc?",
+      "Câu phỏng vấn backend kinh điển — trả lời trong sáu mươi giây, bằng số đo thật từ autocannon."
+    ],
+    "visual": {
+      "question": "Node 1 thread — sao cân được nghìn request cùng lúc?",
+      "framework": "node"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Server demo: hai route cùng MỘT khối lượng hash tám, chín mili giây — route sync chạy ngay trên event loop, mọi client xếp hàng.",
+      "Route async giao việc nặng cho libuv threadpool — event loop rảnh đi nhận request khác."
+    ],
+    "visual": {
+      "filename": "b2-server.mjs",
+      "language": "javascript",
+      "code": "if (req.url === '/sync') {\n  // CHẶN event loop ~9ms/request\n  reply(pbkdf2Sync('mat-khau',\n    'muoi', ITER, KEYLEN, DIGEST));\n}\nif (req.url === '/async') {\n  // threadpool lo, loop rảnh\n  pbkdf2('mat-khau', 'muoi',\n    ITER, KEYLEN, DIGEST,\n    (e, hash) => reply(hash));\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 5,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 11,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Bắn mười kết nối trong năm giây: sync một trăm linh tư request mỗi giây — async ba trăm hai mươi hai, hơn gấp ba lần.",
+      "Gấp ba chứ không vô hạn: việc nặng RỜI sang threadpool bốn thread — đó là cái trần."
+    ],
+    "visual": {
+      "src": "screens/beqa/b2-bench.png",
+      "caption": "104.2 vs 322.6 req/s — cùng 1 thread"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: Node dùng ít thread vì thread không ngồi chờ I/O — event loop giao việc chờ đi, rồi quay sang phục vụ client khác.",
+      "Nhưng chặn event loop bằng API sync là chặn TẤT CẢ client — luật số một của Node.",
+      "Bẫy: async không nhanh hơn cho một request đơn lẻ — nó chỉ DỜI việc nặng khỏi event loop."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🧵",
+          "text": "1 thread cân nghìn request: không NGỒI CHỜ I/O",
+          "sentence": 0
+        },
+        {
+          "icon": "🚫",
+          "text": "Chặn event loop = chặn TẤT CẢ client",
+          "sentence": 1
+        }
+      ],
+      "trap": "Async không nhanh hơn — nó DỜI việc nặng đi"
+    }
+  }
+]

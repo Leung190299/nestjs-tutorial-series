@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Controller trong NestJS không bao giờ tự new service — vì sao framework bắt bạn đi đường vòng qua container?",
+      "Câu phỏng vấn mở màn khối NestJS — trả lời trong sáu mươi giây, kèm bằng chứng chạy thật."
+    ],
+    "visual": {
+      "question": "NestJS: vì sao KHÔNG tự new service?",
+      "framework": "nestjs"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Consumer không tự new — chỉ khai type PriceService ở constructor, container của Nest resolve theo type rồi đưa instance vào.",
+      "Muốn thay ruột: module đăng ký provider — provide token PriceService, useValue một object thường có getPrice trả về một — consumer không sửa dòng nào."
+    ],
+    "visual": {
+      "filename": "s1-mock.module.ts (rút gọn)",
+      "language": "tsx",
+      "code": "// consumer: KHÔNG new — khai type\nconstructor(\n  private readonly\n    priceService: PriceService,\n) {}\n\n// mock: thay ruột qua provider\n@Module({\n  providers: [{\n    provide: PriceService,\n    useValue: { getPrice: () => 1 },\n  }],\n})",
+      "steps": [
+        {
+          "from": 1,
+          "to": 5,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 13,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Chạy thật: service thật trả một trăm — bản mock trả một — chỉ khác nhau ở provider mà module đăng ký.",
+      "Và log server: dòng constructor in đúng MỘT lần cho cả bảy request — provider mặc định là singleton."
+    ],
+    "visual": {
+      "src": "screens/beqa/s1-di.png",
+      "caption": "đổi provider: 100 → 1, không sửa controller"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: DI là container new giùm bạn — class chỉ khai type ở constructor, muốn mock hay test chỉ việc đổi provider.",
+      "Ghi điểm: provider mặc định singleton — container tạo một lần, ai inject cũng nhận đúng instance đó.",
+      "Bẫy: đừng giữ state theo từng request trong service singleton — muốn per-request phải khai Scope.REQUEST."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🔄",
+          "text": "DI: container new & inject theo TYPE",
+          "sentence": 0
+        },
+        {
+          "icon": "1️⃣",
+          "text": "Mặc định SINGLETON — 1 instance cả app",
+          "sentence": 1
+        }
+      ],
+      "trap": "ĐỪNG giữ state per-request trong service"
+    }
+  }
+]

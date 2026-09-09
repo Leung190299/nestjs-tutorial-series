@@ -1,0 +1,276 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #31: DI trong NestJS — vì sao không tự new service?",
+        "subtitle": "Phỏng vấn Frontend — NestJS · Câu 31/36",
+        "badge": "NestJS backend"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep75/scene-01-0-627924f5.wav",
+          "startFrame": 0,
+          "durationInFrames": 260
+        },
+        {
+          "file": "audio/ep75/scene-01-1-9f4460a5.wav",
+          "startFrame": 268,
+          "durationInFrames": 200
+        }
+      ],
+      "durationInFrames": 486
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "IoC container — trái tim của NestJS",
+        "bullets": [
+          {
+            "icon": "🔄",
+            "text": "IoC: KHÔNG tự new — container tạo & đưa vào constructor",
+            "sentence": 0
+          },
+          {
+            "icon": "🏷️",
+            "text": "Resolve theo TYPE annotation ở constructor",
+            "sentence": 1
+          },
+          {
+            "icon": "1️⃣",
+            "text": "Mặc định SINGLETON — 1 instance cho cả app",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "Thay ruột không sửa consumer → test/mock dễ",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep75/scene-02-0-38b65d8a.wav",
+          "startFrame": 0,
+          "durationInFrames": 233
+        },
+        {
+          "file": "audio/ep75/scene-02-1-e23e90f5.wav",
+          "startFrame": 241,
+          "durationInFrames": 305
+        },
+        {
+          "file": "audio/ep75/scene-02-2-867a4a63.wav",
+          "startFrame": 554,
+          "durationInFrames": 267
+        },
+        {
+          "file": "audio/ep75/scene-02-3-51cc9d8b.wav",
+          "startFrame": 829,
+          "durationInFrames": 209
+        }
+      ],
+      "durationInFrames": 1056
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "s1-mock.module.ts — TOÀN BỘ FILE",
+        "language": "tsx",
+        "code": "import { Module } from '@nestjs/common';\nimport { PriceService } from './price.service.js';\nimport { S1MockController } from './s1-mock.controller.js';\n\n// Swap implementation KHÔNG sửa consumer: cùng token PriceService,\n// nhưng module này đưa object thường qua useValue → constructor class thật\n// KHÔNG BAO GIỜ chạy cho nhánh mock.\n@Module({\n  controllers: [S1MockController],\n  providers: [{ provide: PriceService, useValue: { getPrice: () => 1 } }],\n})\nexport class S1MockModule {}",
+        "steps": [
+          {
+            "from": 1,
+            "to": 3,
+            "sentence": 0
+          },
+          {
+            "from": 5,
+            "to": 7,
+            "sentence": 1
+          },
+          {
+            "from": 8,
+            "to": 11,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 12,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep75/scene-03-0-74b4134d.wav",
+          "startFrame": 0,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep75/scene-03-1-021a683c.wav",
+          "startFrame": 263,
+          "durationInFrames": 236
+        },
+        {
+          "file": "audio/ep75/scene-03-2-71a4bdca.wav",
+          "startFrame": 507,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep75/scene-03-3-bacc8275.wav",
+          "startFrame": 765,
+          "durationInFrames": 329
+        }
+      ],
+      "durationInFrames": 1112
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "curl /s1 · curl /s1-mock",
+        "commands": [
+          {
+            "cmd": "curl -s http://localhost:3998/s1",
+            "output": "{\"price\":100,\"from\":\"service thật\"}\n-- log server (boot, 1 LẦN duy nhất):\n[S1] PriceService constructor chạy\n=> qua 7 request: KHÔNG thêm dòng nào — singleton",
+            "sentence": 0
+          },
+          {
+            "cmd": "curl -s http://localhost:3998/s1-mock",
+            "output": "{\"price\":1,\"from\":\"useValue mock\"}\n=> 100 → 1: chỉ đổi provider ở module\n=> consumer y hệt, constructor thật KHÔNG chạy",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep75/scene-04-0-3ff98b6a.wav",
+          "startFrame": 0,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep75/scene-04-1-8601fc3a.wav",
+          "startFrame": 234,
+          "durationInFrames": 262
+        },
+        {
+          "file": "audio/ep75/scene-04-2-e331eb37.wav",
+          "startFrame": 504,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep75/scene-04-3-03dfb443.wav",
+          "startFrame": 676,
+          "durationInFrames": 171
+        }
+      ],
+      "durationInFrames": 865
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "IoC: container tạo — class chỉ KHAI, không new",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Singleton → ĐỪNG giữ state per-request",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "useValue / useClass / useFactory = thay ruột",
+            "sentence": 2
+          },
+          {
+            "icon": "🪤",
+            "text": "DI không phải phép màu — container quản vòng đời",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep75/scene-05-0-f54504e1.wav",
+          "startFrame": 0,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep75/scene-05-1-f3b094fe.wav",
+          "startFrame": 251,
+          "durationInFrames": 286
+        },
+        {
+          "file": "audio/ep75/scene-05-2-dab355aa.wav",
+          "startFrame": 545,
+          "durationInFrames": 219
+        },
+        {
+          "file": "audio/ep75/scene-05-3-80773050.wav",
+          "startFrame": 772,
+          "durationInFrames": 284
+        }
+      ],
+      "durationInFrames": 1074
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 31/36 hoàn tất — khối NestJS mở màn!",
+        "summary": [
+          {
+            "text": "DI/IoC: container new & inject theo type",
+            "sentence": 0
+          },
+          {
+            "text": "Singleton: log constructor 1 lần / 7 request",
+            "sentence": 0
+          },
+          {
+            "text": "useValue: 100 → 1 không sửa consumer",
+            "sentence": 0
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 32/36: request lifecycle trong NestJS 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep75/scene-06-0-f7b9b9cf.wav",
+          "startFrame": 0,
+          "durationInFrames": 197
+        },
+        {
+          "file": "audio/ep75/scene-06-1-2a1d5f66.wav",
+          "startFrame": 205,
+          "durationInFrames": 262
+        },
+        {
+          "file": "audio/ep75/scene-06-2-81324e93.wav",
+          "startFrame": 475,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep75/scene-06-3-8dd4be0e.wav",
+          "startFrame": 591,
+          "durationInFrames": 89
+        }
+      ],
+      "durationInFrames": 698
+    }
+  ]
+}
