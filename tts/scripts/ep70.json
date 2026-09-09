@@ -1,0 +1,182 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Tiếp tục lô Node.js — câu số hai mươi sáu, câu mà interviewer backend nào cũng dùng để đo độ hiểu Node của bạn.",
+      "Câu hỏi từ nhà tuyển dụng: Node một thread — sao phục vụ được nghìn request cùng lúc? Và khi nào thì KHÔNG?",
+      "Mình sẽ trả lời bằng một server thật với hai route cùng MỘT khối lượng — chỉ khác một chữ Sync — rồi để autocannon in số ra màn hình."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #26: Node 1 thread — vì sao vẫn cân nghìn request?",
+      "subtitle": "Phỏng vấn Frontend — Node.js core · Câu 26/36",
+      "badge": "Node.js backend"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Bí mật scalability của Node nằm ngay trong docs: Node dùng một số lượng NHỎ thread để phục vụ rất nhiều client.",
+      "Làm được vậy vì thread chính không bao giờ NGỒI CHỜ I/O: gặp việc chờ mạng, chờ đĩa — event loop giao cho hệ thống làm nền, quay sang phục vụ client khác — đó là non-blocking I/O.",
+      "Còn việc nặng như crypto, nén, file I/O? API async của Node đẩy chúng sang Worker Pool của libuv — mặc định bốn thread — chứ không chiếm event loop.",
+      "Nhưng docs cũng cảnh báo mặt trái: event loop bị giữ quá lâu ở bất kỳ điểm nào thì MỌI client hiện tại lẫn mới đều không tới lượt — đó là vế 'khi nào thì không'."
+    ],
+    "visual": {
+      "title": "Non-blocking I/O — ít thread, nhiều client",
+      "bullets": [
+        {
+          "icon": "🧵",
+          "text": "Docs: “small number of threads to handle many clients”",
+          "sentence": 0
+        },
+        {
+          "icon": "⏩",
+          "text": "Thread không NGỒI CHỜ I/O — giao nền, quay sang client khác",
+          "sentence": 1
+        },
+        {
+          "icon": "🏭",
+          "text": "Việc nặng (crypto, fs) → libuv threadpool, mặc định 4 thread",
+          "sentence": 2
+        },
+        {
+          "icon": "⚠️",
+          "text": "Chặn loop: “all current and new clients will not get a turn”",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Server demo thật — b2-server.mjs: hàm reply trả JSON, còn khối lượng là pbkdf2 bốn mươi nghìn vòng — đo tay khoảng tám tới chín mili giây mỗi hash trên máy tôi.",
+      "Route sync dùng pbkdf2Sync: hash chạy NGAY TRÊN event loop — suốt tám, chín mili giây đó server điếc hoàn toàn, mọi client xếp hàng.",
+      "Route async cũng đúng khối lượng đó nhưng dùng pbkdf2 callback: việc nặng giao libuv threadpool, event loop rảnh đi nhận request khác, callback trả kết quả sau.",
+      "Hai route, cùng một khối lượng hash, chỉ khác chữ Sync — giờ bắn tải thật xem con số nói gì."
+    ],
+    "visual": {
+      "filename": "b2-server.mjs",
+      "language": "javascript",
+      "code": "const server = createServer((req, res) => {\n  const reply = (hash) => {\n    res.writeHead(200, { 'content-type': 'application/json' });\n    res.end(JSON.stringify({ route: req.url, hash: hash.toString('hex').slice(0, 16) }));\n  };\n  if (req.url === '/sync') {\n    // CHẶN: event loop đứng ~8–9ms cho MỖI request — mọi client xếp hàng\n    reply(pbkdf2Sync('mat-khau', 'muoi', ITER, KEYLEN, DIGEST));\n  } else if (req.url === '/async') {\n    // KHÔNG chặn: hash chạy trên libuv threadpool (mặc định 4 thread),\n    // event loop rảnh đi nhận request khác; callback trả kết quả sau\n    pbkdf2('mat-khau', 'muoi', ITER, KEYLEN, DIGEST, (err, hash) => {\n      if (err) { res.writeHead(500); res.end(); return; }\n      reply(hash);\n    });\n  } else {\n    res.writeHead(404);\n    res.end();\n  }\n});",
+      "steps": [
+        {
+          "from": 1,
+          "to": 5,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 9,
+          "to": 15,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 20,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy node b2.mjs — autocannon bắn mười kết nối đồng thời trong năm giây vào từng route.",
+      "Kết quả trên máy tôi: route sync khoảng một trăm linh tư request mỗi giây, còn async ba trăm hai mươi hai — hơn gấp ba lần, cùng một thread JavaScript.",
+      "Cột latency: sync trung bình chín mươi lăm mili giây — đúng bằng mười request xếp hàng nhân chín mili giây mỗi hash; async chỉ ba mươi — hàng mười request chia cho bốn thread.",
+      "Và để ý dòng kết luận: gấp BA chứ không vô hạn — việc nặng không biến mất, nó RỜI event loop sang threadpool bốn thread của libuv, trần song song nằm ở đó.",
+      "Còn lat max của sync lên tới gần nửa giây — một cú chặn là cả hàng client phía sau lãnh đủ."
+    ],
+    "visual": {
+      "title": "node b2.mjs",
+      "commands": [
+        {
+          "cmd": "node b2.mjs",
+          "output": "== B2: 1 thread — chặn vs không chặn ==\ncùng khối lượng pbkdf2 40k vòng (~8–9ms),\nautocannon 10 kết nối × 5s vào từng route\nroute      req/s   lat.avg   lat.max\n/sync      104.2    94.8ms   492.0ms\n/async     322.6    30.3ms   120.0ms",
+          "sentence": 0
+        },
+        {
+          "cmd": "node b2.mjs",
+          "output": "=> /async gấp ~3.1× req/s: việc nặng RỜI\n   event loop sang libuv threadpool (4 thread)\n   — không phải \"async tự nhiên nhanh hơn\"",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — ba câu chốt, rồi cài thêm một ý ghi điểm.",
+      "Câu một: Node phục vụ nghìn request bằng ít thread vì thread không ngồi chờ I/O — event loop giao việc chờ cho hệ thống và worker pool, rồi quay sang client khác.",
+      "Câu hai: điều đó sụp đổ khi bạn chặn event loop — một đoạn sync như hash sync hay readFileSync là chặn TẤT CẢ client hiện tại lẫn mới; luật số một của Node: đừng chặn event loop.",
+      "Câu ba: async không làm phép tính nhanh hơn — một request đơn lẻ hai route ngang nhau; nó DỜI việc nặng sang threadpool, khác biệt chỉ lộ khi nhiều kết nối đồng thời.",
+      "Điểm cộng: khai cái trần bốn thread và nấc chỉnh tiếp theo — biến UV_THREADPOOL_SIZE — interviewer hiểu ngay bạn đã tự đo chứ không học vẹt."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Ít thread + không ngồi chờ I/O → ghép nghìn kết nối",
+          "sentence": 1
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Chặn event loop = chặn TẤT CẢ client — luật số 1 của Node",
+          "sentence": 2
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Async không nhanh hơn — nó DỜI việc nặng khỏi event loop",
+          "sentence": 3
+        },
+        {
+          "icon": "🏆",
+          "text": "Trần threadpool 4 thread — nấc tiếp: UV_THREADPOOL_SIZE",
+          "sentence": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Vậy là xong câu hai mươi sáu — một thread vẫn cân nghìn request, miễn là bạn đừng bắt nó ngồi chờ.",
+      "Câu tiếp theo: task CPU nặng thật sự thì sao — worker threads với cluster khác gì nhau, chọn cái nào?",
+      "Video này có bản Shorts sáu mươi giây để bạn ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số hai mươi bảy!"
+    ],
+    "visual": {
+      "title": "Câu 26/36 hoàn tất — hẹn gặp câu 27!",
+      "summary": [
+        {
+          "text": "1 thread cân nghìn request: không NGỒI CHỜ I/O",
+          "sentence": 0
+        },
+        {
+          "text": "Chặn event loop = mọi client xếp hàng",
+          "sentence": 0
+        },
+        {
+          "text": "Câu sau: CPU nặng — worker_threads vs cluster",
+          "sentence": 1
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 27/36: CPU nặng chặn event loop — worker_threads? 🎤"
+    }
+  }
+]

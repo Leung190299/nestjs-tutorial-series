@@ -1,0 +1,291 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #26: Node 1 thread — vì sao vẫn cân nghìn request?",
+        "subtitle": "Phỏng vấn Frontend — Node.js core · Câu 26/36",
+        "badge": "Node.js backend"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep70/scene-01-0-c2030d19.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep70/scene-01-1-f99b3459.wav",
+          "startFrame": 181,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep70/scene-01-2-be2f95bd.wav",
+          "startFrame": 357,
+          "durationInFrames": 192
+        }
+      ],
+      "durationInFrames": 567
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Non-blocking I/O — ít thread, nhiều client",
+        "bullets": [
+          {
+            "icon": "🧵",
+            "text": "Docs: “small number of threads to handle many clients”",
+            "sentence": 0
+          },
+          {
+            "icon": "⏩",
+            "text": "Thread không NGỒI CHỜ I/O — giao nền, quay sang client khác",
+            "sentence": 1
+          },
+          {
+            "icon": "🏭",
+            "text": "Việc nặng (crypto, fs) → libuv threadpool, mặc định 4 thread",
+            "sentence": 2
+          },
+          {
+            "icon": "⚠️",
+            "text": "Chặn loop: “all current and new clients will not get a turn”",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep70/scene-02-0-531ef87f.wav",
+          "startFrame": 0,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep70/scene-02-1-db7b8160.wav",
+          "startFrame": 181,
+          "durationInFrames": 293
+        },
+        {
+          "file": "audio/ep70/scene-02-2-bd3f8b00.wav",
+          "startFrame": 482,
+          "durationInFrames": 267
+        },
+        {
+          "file": "audio/ep70/scene-02-3-a0affaa5.wav",
+          "startFrame": 757,
+          "durationInFrames": 226
+        }
+      ],
+      "durationInFrames": 1001
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "b2-server.mjs",
+        "language": "javascript",
+        "code": "const server = createServer((req, res) => {\n  const reply = (hash) => {\n    res.writeHead(200, { 'content-type': 'application/json' });\n    res.end(JSON.stringify({ route: req.url, hash: hash.toString('hex').slice(0, 16) }));\n  };\n  if (req.url === '/sync') {\n    // CHẶN: event loop đứng ~8–9ms cho MỖI request — mọi client xếp hàng\n    reply(pbkdf2Sync('mat-khau', 'muoi', ITER, KEYLEN, DIGEST));\n  } else if (req.url === '/async') {\n    // KHÔNG chặn: hash chạy trên libuv threadpool (mặc định 4 thread),\n    // event loop rảnh đi nhận request khác; callback trả kết quả sau\n    pbkdf2('mat-khau', 'muoi', ITER, KEYLEN, DIGEST, (err, hash) => {\n      if (err) { res.writeHead(500); res.end(); return; }\n      reply(hash);\n    });\n  } else {\n    res.writeHead(404);\n    res.end();\n  }\n});",
+        "steps": [
+          {
+            "from": 1,
+            "to": 5,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 8,
+            "sentence": 1
+          },
+          {
+            "from": 9,
+            "to": 15,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 20,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep70/scene-03-0-2ea30b4a.wav",
+          "startFrame": 0,
+          "durationInFrames": 291
+        },
+        {
+          "file": "audio/ep70/scene-03-1-68670c7a.wav",
+          "startFrame": 299,
+          "durationInFrames": 221
+        },
+        {
+          "file": "audio/ep70/scene-03-2-1f41a7fa.wav",
+          "startFrame": 528,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep70/scene-03-3-dae122ed.wav",
+          "startFrame": 791,
+          "durationInFrames": 152
+        }
+      ],
+      "durationInFrames": 961
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node b2.mjs",
+        "commands": [
+          {
+            "cmd": "node b2.mjs",
+            "output": "== B2: 1 thread — chặn vs không chặn ==\ncùng khối lượng pbkdf2 40k vòng (~8–9ms),\nautocannon 10 kết nối × 5s vào từng route\nroute      req/s   lat.avg   lat.max\n/sync      104.2    94.8ms   492.0ms\n/async     322.6    30.3ms   120.0ms",
+            "sentence": 0
+          },
+          {
+            "cmd": "node b2.mjs",
+            "output": "=> /async gấp ~3.1× req/s: việc nặng RỜI\n   event loop sang libuv threadpool (4 thread)\n   — không phải \"async tự nhiên nhanh hơn\"",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep70/scene-04-0-3ddf1563.wav",
+          "startFrame": 0,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep70/scene-04-1-36e6642b.wav",
+          "startFrame": 155,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep70/scene-04-2-35d4da02.wav",
+          "startFrame": 375,
+          "durationInFrames": 281
+        },
+        {
+          "file": "audio/ep70/scene-04-3-9c971b9d.wav",
+          "startFrame": 664,
+          "durationInFrames": 248
+        },
+        {
+          "file": "audio/ep70/scene-04-4-c465ae28.wav",
+          "startFrame": 920,
+          "durationInFrames": 144
+        }
+      ],
+      "durationInFrames": 1082
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Ít thread + không ngồi chờ I/O → ghép nghìn kết nối",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Chặn event loop = chặn TẤT CẢ client — luật số 1 của Node",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "Async không nhanh hơn — nó DỜI việc nặng khỏi event loop",
+            "sentence": 3
+          },
+          {
+            "icon": "🏆",
+            "text": "Trần threadpool 4 thread — nấc tiếp: UV_THREADPOOL_SIZE",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep70/scene-05-0-03c533ea.wav",
+          "startFrame": 0,
+          "durationInFrames": 106
+        },
+        {
+          "file": "audio/ep70/scene-05-1-43748986.wav",
+          "startFrame": 114,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep70/scene-05-2-51861e51.wav",
+          "startFrame": 377,
+          "durationInFrames": 267
+        },
+        {
+          "file": "audio/ep70/scene-05-3-7b07038d.wav",
+          "startFrame": 652,
+          "durationInFrames": 243
+        },
+        {
+          "file": "audio/ep70/scene-05-4-75b8a93c.wav",
+          "startFrame": 903,
+          "durationInFrames": 269
+        }
+      ],
+      "durationInFrames": 1190
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 26/36 hoàn tất — hẹn gặp câu 27!",
+        "summary": [
+          {
+            "text": "1 thread cân nghìn request: không NGỒI CHỜ I/O",
+            "sentence": 0
+          },
+          {
+            "text": "Chặn event loop = mọi client xếp hàng",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: CPU nặng — worker_threads vs cluster",
+            "sentence": 1
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 27/36: CPU nặng chặn event loop — worker_threads? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep70/scene-06-0-55e69351.wav",
+          "startFrame": 0,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep70/scene-06-1-b5ac8b98.wav",
+          "startFrame": 157,
+          "durationInFrames": 149
+        },
+        {
+          "file": "audio/ep70/scene-06-2-81324e93.wav",
+          "startFrame": 314,
+          "durationInFrames": 113
+        },
+        {
+          "file": "audio/ep70/scene-06-3-12fb3214.wav",
+          "startFrame": 435,
+          "durationInFrames": 94
+        }
+      ],
+      "durationInFrames": 547
+    }
+  ]
+}
