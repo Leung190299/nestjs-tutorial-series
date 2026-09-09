@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "ValidationPipe với DTO trong NestJS — body sai thì chuyện gì xảy ra, và whitelist để làm gì?",
+      "Trả lời trong sáu mươi giây — kèm curl chạy thật."
+    ],
+    "visual": {
+      "question": "NestJS: ValidationPipe + DTO — body sai thì sao?",
+      "framework": "nestjs"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "DTO là hợp đồng: decorator class-validator trên từng field — type TypeScript bị xóa lúc runtime, pipe chỉ đọc decorator.",
+      "ValidationPipe chạy NGAY TRƯỚC handler — sai là bốn trăm, handler KHÔNG chạy; whitelist true gọt sạch field lạ."
+    ],
+    "visual": {
+      "filename": "create-order.dto.ts (rút gọn)",
+      "language": "tsx",
+      "code": "// DTO = hợp đồng dữ liệu vào\nclass CreateOrderDto {\n  @IsString() ten: string;\n  @IsInt() @Min(1) soLuong: number;\n  @IsEmail() email: string;\n}\n\n// pipe chạy NGAY TRƯỚC handler\n// sai → 400, handler KHÔNG chạy\n@UsePipes(new ValidationPipe({\n  whitelist: true,  // gọt field lạ\n  transform: true,\n}))",
+      "steps": [
+        {
+          "from": 1,
+          "to": 6,
+          "sentence": 0
+        },
+        {
+          "from": 8,
+          "to": 13,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Chạy thật: body sai cả ba field — bốn trăm với mảng ba lỗi, mỗi field một câu; handler chưa hề chạy.",
+      "Body đúng kèm field hack — hai trăm lẻ một, nhưng order KHÔNG có hack: whitelist gọt field lạ trước khi vào handler."
+    ],
+    "visual": {
+      "src": "screens/beqa/s4-validate.png",
+      "caption": "3 lỗi chi tiết · field lạ bị strip"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: validate ở BIÊN — DTO cộng ValidationPipe chặn ngay trước handler, đừng rải if trong service.",
+      "Ghi điểm: bốn trăm tự kèm mảng message chi tiết — mỗi field sai một câu.",
+      "Bẫy: whitelist mặc định KHÔNG bật — quên bật là field thừa kiểu isAdmin true vẫn lọt vào object."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "📜",
+          "text": "DTO + decorator = hợp đồng — chặn ở BIÊN",
+          "sentence": 0
+        },
+        {
+          "icon": "❌",
+          "text": "Sai → 400 mảng lỗi — handler KHÔNG chạy",
+          "sentence": 1
+        }
+      ],
+      "trap": "whitelist KHÔNG bật mặc định — phải TỰ bật"
+    }
+  }
+]
