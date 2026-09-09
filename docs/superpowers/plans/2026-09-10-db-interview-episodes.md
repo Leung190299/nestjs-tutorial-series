@@ -10,7 +10,7 @@
 - Mapping: D1→ep81/sd1 … D6→ep86/sd6, P1→ep87/sp1 … P6→ep92/sp6. Kịch bản `tts/scripts/ep81.json` + `sd1.json`...
 - Bản ngang 6–8 scene: title → concept → code (byte-match `git show db-qa-batch-4:demo-db-interview/...`; SQL dùng language `"sql"`, script `.mjs` dùng `"javascript"`, schema.prisma dùng `"javascript"` — kiểm ở Task 0) → **terminal** (schema `{title, commands:[{cmd, output, sentence}]}`, output NGUYÊN VĂN từ report, TRẦN ~13 dòng/scene ~70 ký tự/dòng → tách 2 scene terminal thay vì nhồi) → concept trả lời phỏng vấn → outro. 150–180s, ≤200 ký tự/câu. Title public "Phỏng vấn FE #N: <câu hỏi>" (N=37..48).
 - Shorts: vtitle framework MỚI `postgres`/`prisma` (Task 0) → vcode (≤40 ký tự/dòng ≤14 dòng, step đầu sentence:0, step cuối chạm dòng cuối) → vshot (ảnh `screens/dbqa/*.png` đã dọc 620×1281) → vanswer. ≤1800 frames.
-- Cặp chéo 2 chiều: ep81↔ep92 (D1↔P6 index), ep83↔ep87 (D3↔P1 N+1); ep87 nhắc thêm câu #43 (ep83) đúng như ảnh p1 đã in.
+- Cặp chéo 2 chiều: ep81↔ep92 (D1↔P6 index), ep83↔ep87 (D3↔P1 N+1). ⚠️ SỐ CÂU CÔNG KHAI: ep81=#37 … ep92=#48, nên ep83 = **câu #39** và ep87 = **câu #43**. Bản đầu của ảnh p1 in nhầm "#43/D3" (tự trỏ về chính nó) — đã sửa thành #39 ở commit 060abb9; mọi kịch bản/SEO phải dùng ep83=#39.
 - Thumbnail: variant shot ảnh dbqa dọc trực tiếp, badge "PV FE #37".."#48", seriesTag "Phỏng vấn Frontend 🇻🇳", subtitle "Phỏng vấn Frontend · Câu N/48".
 - ⚠️ RENDER: chạy remotion với **cwd=video/** — mp4 phải ở `video/out/epXX.mp4` + `video/out/sdX.mp4|spX.mp4`, thumb `video/out/thumbs/epXX-thumb.png`. Verify vị trí sau render.
 - generate.py có thể exit 134 SAU khi ghi timing — kiểm file timing là được; chạy 2 lệnh generate riêng.
