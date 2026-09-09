@@ -92,6 +92,7 @@ import ep86 from './data/ep86.timing.json';
 import ep87 from './data/ep87.timing.json';
 import ep88 from './data/ep88.timing.json';
 import ep89 from './data/ep89.timing.json';
+import ep90 from './data/ep90.timing.json';
 import sb1 from './data/sb1.timing.json';
 import sb2 from './data/sb2.timing.json';
 import sb3 from './data/sb3.timing.json';
@@ -126,6 +127,7 @@ import sd6 from './data/sd6.timing.json';
 import sp1 from './data/sp1.timing.json';
 import sp2 from './data/sp2.timing.json';
 import sp3 from './data/sp3.timing.json';
+import sp4 from './data/sp4.timing.json';
 import sr2 from './data/sr2.timing.json';
 import sr3 from './data/sr3.timing.json';
 import sr4 from './data/sr4.timing.json';
@@ -229,6 +231,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode87', timing: ep87 as unknown as EpisodeTiming},
   {id: 'Episode88', timing: ep88 as unknown as EpisodeTiming},
   {id: 'Episode89', timing: ep89 as unknown as EpisodeTiming},
+  {id: 'Episode90', timing: ep90 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -281,6 +284,7 @@ const shorts: {id: string; timing: EpisodeTiming}[] = [
   {id: 'ShortP1', timing: sp1 as unknown as EpisodeTiming},
   {id: 'ShortP2', timing: sp2 as unknown as EpisodeTiming},
   {id: 'ShortP3', timing: sp3 as unknown as EpisodeTiming},
+  {id: 'ShortP4', timing: sp4 as unknown as EpisodeTiming},
 ];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
@@ -1400,6 +1404,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/dbqa/p3-transaction.png',
       badgeEmoji: '⚛️',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb90',
+    props: {
+      badge: 'PV FE #46',
+      line1: 'CỘT NOT NULL',
+      line2: '1000 DÒNG CŨ?',
+      subtitle: 'Phỏng vấn Frontend · Câu 46/48',
+      variant: 'shot',
+      image: 'screens/dbqa/p4-migration.png',
+      badgeEmoji: '🚧',
       seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },
