@@ -64,20 +64,20 @@
     "visual": {
       "filename": "d5.mjs",
       "language": "javascript",
-      "code": "// hai pg.Client RIÊNG cho 2 phiên — KHÔNG dùng pool chung\nconst a = new pg.Client({ connectionString: CONNECTION_STRING });\nconst b = new pg.Client({ connectionString: CONNECTION_STRING });\n\nawait a.query('BEGIN');\nawait a.query(SQL_BUMP, [ROW_A]);  // A giữ khóa dòng 1\nawait b.query('BEGIN');\nawait b.query(SQL_BUMP, [ROW_B]);  // B giữ khóa dòng 2\n\n// hai câu BỊ CHẶN: gửi đi rồi mới in mốc — KHÔNG await ngay\nconst t0 = now();\nconst waitA = settle(a.query(SQL_BUMP, [ROW_B])); // chờ dòng 2\n\nawait new Promise((r) => setTimeout(r, SETTLE_MS)); // 200ms\n\nconst waitB = settle(b.query(SQL_BUMP, [ROW_A])); // chờ dòng 1\n\n// chỗ dừng DUY NHẤT — vòng chờ đã khép kín\nconst [resA, resB] = await Promise.all([waitA, waitB]);\n\nif (!resA.ok && resB.ok) [victim, survivor] = ['A', 'B'];\nelse if (resA.ok && !resB.ok) [victim, survivor] = ['B', 'A'];",
+      "code": "const a = new pg.Client({ connectionString: CONNECTION_STRING });\nconst b = new pg.Client({ connectionString: CONNECTION_STRING });\n\n  await a.query('BEGIN');\n  await a.query(SQL_BUMP, [ROW_A]);\n  console.log(`[A] BEGIN; UPDATE id=${ROW_A} (+1) · giữ khóa dòng ${ROW_A}`);\n\n  await b.query('BEGIN');\n  await b.query(SQL_BUMP, [ROW_B]);\n  console.log(`[B] BEGIN; UPDATE id=${ROW_B} (+1) · giữ khóa dòng ${ROW_B}`);\n\n  // Từ đây là hai câu BỊ CHẶN — gửi đi rồi mới in mốc, không await ngay.\n  const t0 = now();\n  const waitA = settle(a.query(SQL_BUMP, [ROW_B]));\n\n  const waitB = settle(b.query(SQL_BUMP, [ROW_A]));\n  console.log(`[B] UPDATE id=${ROW_A} gửi đi (t=${fmt(now() - t0)}) -> chờ chéo`);\n\n  const [resA, resB] = await Promise.all([waitA, waitB]);\n\n  if (!resA.ok && resB.ok) [victim, survivor] = ['A', 'B'];\n  else if (resA.ok && !resB.ok) [victim, survivor] = ['B', 'A'];",
       "steps": [
         {
           "from": 1,
-          "to": 8,
+          "to": 10,
           "sentence": 0
         },
         {
-          "from": 10,
-          "to": 16,
+          "from": 12,
+          "to": 17,
           "sentence": 1
         },
         {
-          "from": 18,
+          "from": 19,
           "to": 22,
           "sentence": 2
         }
