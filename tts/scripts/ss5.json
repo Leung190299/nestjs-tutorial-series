@@ -1,0 +1,76 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Interceptor trong NestJS — bọc mọi response chung một khuôn và tự đo thời gian xử lý, làm thế nào?",
+      "Trả lời trong sáu mươi giây — kèm curl chạy thật."
+    ],
+    "visual": {
+      "question": "NestJS: bọc response + đo giờ mọi API — lớp nào?",
+      "framework": "nestjs"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Interceptor ghi t0 trước, rồi return next.handle chấm pipe — Observable lazy, quên return là response không về.",
+      "Trong map, handler đã xong: tính tookMs, set header X-Response-Time — convention tự đặt — và bọc data thành ok, data, tookMs."
+    ],
+    "visual": {
+      "filename": "wrap.interceptor.ts (rút gọn)",
+      "language": "tsx",
+      "code": "// interceptor ôm CẢ 2 CHIỀU handler\nintercept(ctx, next) {\n  const t0 = Date.now(); // trước\n  // next.handle() = Observable LAZY\n  return next.handle().pipe(\n    map((data) => {\n      const tookMs = Date.now() - t0;\n      ctx.switchToHttp().getResponse()\n        .setHeader('X-Response-Time',\n          `${tookMs}ms`);\n      return { ok: true, data, tookMs };\n    }),\n  );\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 5,
+          "sentence": 0
+        },
+        {
+          "from": 6,
+          "to": 14,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Chạy thật: /s5 — body bọc ok, data, tookMs; header X-Response-Time một trăm hai mươi mốt mili giây, delay một trăm hai mươi — đo ôm trọn handler.",
+      "Route /s5/raw đối chứng không interceptor: body trần, không header — chỉ khác đúng một decorator."
+    ],
+    "visual": {
+      "src": "screens/beqa/s5-intercept.png",
+      "caption": "X-Response-Time: 121ms — tự động"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Trả lời chuẩn: interceptor là lớp duy nhất ôm cả hai chiều quanh handler — nhờ next.handle trả Observable, transform chỉ là một phép map.",
+      "Ghi điểm: gắn APP_INTERCEPTOR là cả app cùng một khuôn response.",
+      "Bẫy: map chỉ chạy khi handler thành công — lỗi bỏ qua chiều về, rơi thẳng xuống exception filter."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🤝",
+          "text": "Ôm CẢ 2 CHIỀU — transform = map()",
+          "sentence": 0
+        },
+        {
+          "icon": "🌍",
+          "text": "APP_INTERCEPTOR → cả app 1 khuôn",
+          "sentence": 1
+        }
+      ],
+      "trap": "Lỗi → map KHÔNG chạy — rơi xuống filter"
+    }
+  }
+]

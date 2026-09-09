@@ -81,6 +81,7 @@ import ep75 from './data/ep75.timing.json';
 import ep76 from './data/ep76.timing.json';
 import ep77 from './data/ep77.timing.json';
 import ep78 from './data/ep78.timing.json';
+import ep79 from './data/ep79.timing.json';
 import sb1 from './data/sb1.timing.json';
 import sb2 from './data/sb2.timing.json';
 import sb3 from './data/sb3.timing.json';
@@ -104,6 +105,7 @@ import ss1 from './data/ss1.timing.json';
 import ss2 from './data/ss2.timing.json';
 import ss3 from './data/ss3.timing.json';
 import ss4 from './data/ss4.timing.json';
+import ss5 from './data/ss5.timing.json';
 import sr2 from './data/sr2.timing.json';
 import sr3 from './data/sr3.timing.json';
 import sr4 from './data/sr4.timing.json';
@@ -196,6 +198,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode76', timing: ep76 as unknown as EpisodeTiming},
   {id: 'Episode77', timing: ep77 as unknown as EpisodeTiming},
   {id: 'Episode78', timing: ep78 as unknown as EpisodeTiming},
+  {id: 'Episode79', timing: ep79 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -237,6 +240,7 @@ const shorts: {id: string; timing: EpisodeTiming}[] = [
   {id: 'ShortS2', timing: ss2 as unknown as EpisodeTiming},
   {id: 'ShortS3', timing: ss3 as unknown as EpisodeTiming},
   {id: 'ShortS4', timing: ss4 as unknown as EpisodeTiming},
+  {id: 'ShortS5', timing: ss5 as unknown as EpisodeTiming},
 ];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
@@ -1213,6 +1217,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/beqa/s4-validate.png',
       badgeEmoji: '✂️',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb79',
+    props: {
+      badge: 'PV FE #35',
+      line1: 'MỌI API',
+      line2: 'CHUNG 1 KHUÔN?',
+      subtitle: 'Phỏng vấn Frontend · Câu 35/36',
+      variant: 'shot',
+      image: 'screens/beqa/s5-intercept.png',
+      badgeEmoji: '🎁',
       seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },

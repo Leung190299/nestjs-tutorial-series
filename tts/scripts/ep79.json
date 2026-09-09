@@ -1,0 +1,177 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu số ba mươi lăm — nhà tuyển dụng hỏi: muốn mọi response của app tự bọc chung một khuôn và tự đo thời gian xử lý — bạn làm ở lớp nào?",
+      "Mình trả lời bằng demo chạy thật: một interceptor duy nhất — mọi API cùng vỏ ok, data, tookMs kèm header đo giờ; route đối chứng bên cạnh vẫn trần trụi."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #35: Interceptor — bọc response, đo giờ mọi API",
+      "subtitle": "Phỏng vấn Frontend — NestJS · Câu 35/36",
+      "badge": "NestJS backend"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "Interceptor là lớp lấy cảm hứng từ AOP — chỗ DUY NHẤT trong lifecycle ôm trọn CẢ HAI CHIỀU quanh handler: chạy logic trước, rồi xử lý tiếp trên chính kết quả trả về.",
+      "Bí mật nằm ở next.handle: nó trả về Observable của response — cầm được stream này thì biến đổi data chỉ còn là một phép RxJS map, đúng cách docs dạy.",
+      "Docs kể đủ năm khả năng: gắn logic trước và sau handler, biến đổi kết quả trả về, biến đổi cả exception, mở rộng hành vi, thậm chí override hoàn toàn theo điều kiện.",
+      "Demo hôm nay đo giờ rồi set header X-Response-Time — khai luôn cho rõ: header này là convention mình TỰ ĐẶT, không phải header chuẩn của Nest."
+    ],
+    "visual": {
+      "title": "Interceptor — lớp AOP ôm cả 2 chiều handler",
+      "bullets": [
+        {
+          "icon": "🤝",
+          "text": "Ôm CẢ 2 CHIỀU quanh handler — trước VÀ sau",
+          "sentence": 0
+        },
+        {
+          "icon": "🔭",
+          "text": "next.handle() trả Observable — map() là xong",
+          "sentence": 1
+        },
+        {
+          "icon": "🖐️",
+          "text": "Docs: 5 khả năng — trước/sau, transform, override",
+          "sentence": 2
+        },
+        {
+          "icon": "🏷️",
+          "text": "X-Response-Time — convention TỰ ĐẶT",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là wrap.interceptor.ts — class gắn Injectable, implements NestInterceptor với đúng một method intercept; phần import phía trên chỉ có một cái đáng nhớ: map lấy thẳng từ rxjs.",
+      "Dòng đầu ghi t0 bằng Date.now TRƯỚC khi handler chạy — và nhớ kỹ: next.handle trả Observable LAZY, phải return chuỗi pipe này, không thì response không bao giờ về.",
+      "Vào tới map là handler đã trả kết quả: tính tookMs, rồi qua switchToHttp lấy response mà set header X-Response-Time.",
+      "Chốt bằng return ok true, data, tookMs — transform response đúng nghĩa chỉ là một phép map: bọc data thành vỏ thống nhất cho mọi route gắn nó."
+    ],
+    "visual": {
+      "filename": "wrap.interceptor.ts — dòng 9–29 (import kể miệng)",
+      "language": "tsx",
+      "code": "@Injectable()\nexport class WrapInterceptor implements NestInterceptor {\n  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {\n    const t0 = Date.now(); // trước khi handler chạy\n\n    // next.handle() trả Observable LAZY — phải return chuỗi pipe này,\n    // không thì handler không chạy / response không về.\n    return next.handle().pipe(\n      map((data) => {\n        const tookMs = Date.now() - t0; // sau khi handler trả kết quả\n        // X-Response-Time là convention TỰ ĐẶT (không phải header chuẩn Nest).\n        context\n          .switchToHttp()\n          .getResponse()\n          .setHeader('X-Response-Time', `${tookMs}ms`);\n        // Transform response = chỉ là map(): bọc data thành vỏ thống nhất.\n        return { ok: true, data, tookMs };\n      }),\n    );\n  }\n}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 3,
+          "sentence": 0
+        },
+        {
+          "from": 4,
+          "to": 8,
+          "sentence": 1
+        },
+        {
+          "from": 9,
+          "to": 15,
+          "sentence": 2
+        },
+        {
+          "from": 16,
+          "to": 21,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy thật — curl vào /s5: hai trăm OK, header X-Response-Time một trăm hai mươi mốt mili giây, body bọc đúng khuôn ok true, data items, tookMs một trăm hai mươi mốt.",
+      "Con số đắt ở chỗ: handler delay một trăm hai mươi, đo ra một trăm hai mươi mốt trên máy tôi — phép đo ôm TRỌN handler cả hai đầu; middleware chỉ có phía vào, chịu.",
+      "Còn /s5/raw đối chứng — cùng handler logic, chỉ thiếu đúng decorator UseInterceptors: body trần trụi, không header nào; một interceptor là mọi API cùng khuôn, đo giờ tự động."
+    ],
+    "visual": {
+      "title": "curl -i: /s5 bọc + đo giờ · /s5/raw trần",
+      "commands": [
+        {
+          "cmd": "curl -s -i http://localhost:3998/s5",
+          "output": "HTTP/1.1 200 OK\nX-Response-Time: 121ms\nContent-Type: application/json; charset=utf-8\n{\"ok\":true,\"data\":{\"items\":[1,2,3]},\"tookMs\":121}\n=> body bọc + header — map() set, tự động",
+          "sentence": 0
+        },
+        {
+          "cmd": "curl -s -i http://localhost:3998/s5/raw",
+          "output": "HTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\n{\"items\":[1,2,3]}\n=> KHÔNG interceptor — body trần, không header",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời phỏng vấn, câu một: interceptor dành cho logic cross-cutting — bọc response, logging, cache, timeout; đừng nhét business logic vào đây, nghiệp vụ nằm ở service.",
+      "Câu hai: map chỉ chạy khi handler THÀNH CÔNG — handler ném lỗi là toàn bộ chiều về của interceptor bị bỏ qua, lỗi rơi thẳng xuống exception filter; đúng cảnh dòng số năm biến mất ở câu ba mươi hai.",
+      "Câu ba: muốn cả app cùng khuôn thì gắn global — khai provider APP_INTERCEPTOR trong AppModule, một chỗ khai, mọi route được bọc.",
+      "Bẫy cộng điểm: next.handle trả Observable lazy — quên return là handler chạy mà response treo, hoặc không chạy nổi; nhớ luôn return chuỗi pipe."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "Cross-cutting: wrap/log/cache/timeout — KHÔNG business",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Lỗi → map KHÔNG chạy — rơi thẳng xuống filter",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "Global: APP_INTERCEPTOR — 1 chỗ khai, cả app",
+          "sentence": 2
+        },
+        {
+          "icon": "🪤",
+          "text": "Quên return next.handle().pipe() — response treo",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu ba mươi lăm — interceptor là lớp duy nhất ôm cả hai chiều quanh handler: một phép map là mọi API cùng khuôn ok, data, tookMs, kèm giờ đo tự động.",
+      "Mai là câu cuối cùng của lô — câu ba mươi sáu: không bắt lỗi thì Nest trả gì, và exception filter chuẩn hóa error format toàn app thế nào?",
+      "Video này có bản Shorts sáu mươi giây để ôn nhanh — xem tiếp và luyện tiếp, hẹn gặp lại ở câu số ba mươi sáu!"
+    ],
+    "visual": {
+      "title": "Câu 35/36 hoàn tất — mọi API, chung 1 khuôn!",
+      "summary": [
+        {
+          "text": "Interceptor ôm CẢ 2 CHIỀU quanh handler",
+          "sentence": 0
+        },
+        {
+          "text": "next.handle() → Observable — transform = map()",
+          "sentence": 0
+        },
+        {
+          "text": "Lỗi → map KHÔNG chạy — rơi xuống filter",
+          "sentence": 1
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 36/36: Exception filter — chuẩn hóa lỗi toàn app 🎤"
+    }
+  }
+]
