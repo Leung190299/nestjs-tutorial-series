@@ -118,7 +118,13 @@
 
 ### Task 12 (P4/ep90): Migration an toàn
 
-`prisma-qa/p4.md` (kịch bản lệnh) + thao tác thật trên bảng phụ `notes` (KHÔNG đụng orders/customers để các câu khác không hỏng):
+⚠️ **CÁCH LY BẮT BUỘC (chốt sau fact sheet Task 0):** `customers`/`orders` được tạo bằng SQL thuần, KHÔNG có trong lịch sử migration → `prisma migrate dev` sẽ coi là drift và ĐÒI RESET DB, xóa sạch 505k dòng seed và phá D1–D6, P1–P3, P5, P6. Vì vậy P4 chạy trên **database riêng `dbqa_mig` trong cùng container**, KHÔNG bao giờ trỏ migrate vào `dbqa`:
+- `docker exec dbqa-pg psql -U dbqa -d dbqa -c "CREATE DATABASE dbqa_mig;"` (nếu chưa có).
+- Thư mục riêng `demo-db-interview/prisma-mig/` (package.json + prisma/schema.prisma + .env với `DATABASE_URL="postgres://dbqa:dbqa@localhost:5433/dbqa_mig"`), dùng prisma@6.19.3 pin như prisma-qa (KHÔNG `npm i prisma` trơn — latest là RC 8 gây crash npm).
+- Reset thoải mái trên `dbqa_mig`; TUYỆT ĐỐI không chạy lệnh prisma migrate nào với DATABASE_URL trỏ `dbqa`.
+- Sau khi xong, verify lại `SELECT count(*) FROM orders` trên `dbqa` vẫn = 500000 (in vào output làm bằng chứng an toàn).
+
+Kịch bản trên bảng `notes` (trong `dbqa_mig`):
 - Tạo bảng `notes` có sẵn 1.000 dòng; sửa schema thêm cột `channel String` (NOT NULL, không default) → `npx prisma migrate dev` FAIL → in NGUYÊN VĂN lỗi.
 - Cách 3 bước: thêm cột nullable → backfill `UPDATE notes SET channel='web'` → set NOT NULL (migration thứ 2) → thành công, in kết quả.
 - In `== P4: cột NOT NULL trên bảng có data ==` (script `p4.mjs` gói lệnh + in output, hoặc chạy tay và lưu output nguyên văn — ưu tiên script cho lặp lại được).
@@ -128,7 +134,8 @@
 
 `prisma-qa/p5.mjs`: URL với `?connection_limit=2&pool_timeout=10` vs `?connection_limit=20`; bắn 20 query song song mỗi query `SELECT pg_sleep(0.3)` (qua `$queryRaw`).
 - In tổng thời gian 2 cấu hình (pool 2 ≈ 10 lượt × 0.3s ≈ 3s; pool 20 ≈ 0.3s) + số kết nối thực tế `SELECT count(*) FROM pg_stat_activity WHERE datname='dbqa'` lúc cao điểm.
-- In `== P5: pool 2 vs pool 20 ==`. Nếu ép pool cạn tới mức timeout thì in nguyên văn lỗi P2024 (tùy hành vi thật — ghi report).
+- In `== P5: pool 2 vs pool 20 ==`.
+- **Nhánh 3 bắt lỗi P2024 (chốt sau Task 0):** `pool_timeout=10` KHÔNG bao giờ hết hạn với tải ~3s, nên thêm nhánh `?connection_limit=1&pool_timeout=1` + 20 query song song → phải ra `P2024 Timed out fetching a new connection from the connection pool` — in NGUYÊN VĂN message. Lưu ý `pool_timeout=0` là TẮT timeout, đừng dùng nhầm. Nếu hành vi thật khác, ghi đúng thực tế vào report.
 - [ ] 3 lần, report, render `dbqa/p5-pool.png`, Read, commit `feat: câu P5 — connection pool`.
 
 ### Task 14 (P6/ep92): Query chậm → tối ưu (case tổng hợp)
