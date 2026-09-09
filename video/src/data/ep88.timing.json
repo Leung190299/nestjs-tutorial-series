@@ -1,0 +1,345 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #44: select đúng cột — payload 98KB xuống 26KB",
+        "subtitle": "Phỏng vấn Frontend — Database · Câu 44/48",
+        "badge": "Prisma 6.19.3 · select & payload"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep88/scene-01-0-1e0d1e94.wav",
+          "startFrame": 0,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep88/scene-01-1-5604151d.wav",
+          "startFrame": 155,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep88/scene-01-2-0060f128.wav",
+          "startFrame": 331,
+          "durationInFrames": 147
+        }
+      ],
+      "durationInFrames": 496
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Mặc định của ORM là hào phóng — và không miễn phí",
+        "bullets": [
+          {
+            "icon": "📖",
+            "text": "docs v6: kết quả gồm \"All scalar fields\" · \"No relations\"",
+            "sentence": 0
+          },
+          {
+            "icon": "💸",
+            "text": "Payload trả tiền 3 tầng: DB gửi → mạng chở → RAM Node + JSON",
+            "sentence": 1
+          },
+          {
+            "icon": "✂️",
+            "text": "select = \"return a subset of fields instead of all fields\"",
+            "sentence": 2
+          },
+          {
+            "icon": "🧠",
+            "text": "Kiểu TypeScript thu hẹp theo đúng những cột đã chọn",
+            "sentence": 2
+          },
+          {
+            "icon": "🙈",
+            "text": "omit = mặt kia của select: giữ mặc định, bỏ cột nhạy cảm",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep88/scene-02-0-97689390.wav",
+          "startFrame": 0,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep88/scene-02-1-e39eaf18.wav",
+          "startFrame": 191,
+          "durationInFrames": 164
+        },
+        {
+          "file": "audio/ep88/scene-02-2-315afad6.wav",
+          "startFrame": 363,
+          "durationInFrames": 238
+        }
+      ],
+      "durationInFrames": 619
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "p2.mjs",
+        "language": "javascript",
+        "code": "// --- hai nhánh -------------------------------------------------------------\nconst allColumns = () => p.order.findMany({ take: TAKE, orderBy: { id: 'asc' } });\nconst twoColumns = () =>\n  p.order.findMany({ take: TAKE, orderBy: { id: 'asc' }, select: { id: true, total: true } });\n\n/** Chạy `fn` RUNS lượt, trả ms TRUNG BÌNH + mảng rows của lượt cuối. */\nasync function measure(fn) {\n  let total = 0;\n  let rows;\n  for (let i = 0; i < RUNS; i++) {\n    const t0 = performance.now();\n    rows = await fn();\n    total += performance.now() - t0;\n  }\n  return { ms: total / RUNS, rows };\n}\n\n/** Số CỘT thật trên object đã về tới Node — đếm, không đọc schema. */\nconst colsOf = (rows) => Object.keys(rows[0]);\n/** Payload đúng thứ một JSON API đẩy ra dây. */\nconst kbOf = (rows) => Buffer.byteLength(JSON.stringify(rows)) / 1024;",
+        "steps": [
+          {
+            "from": 1,
+            "to": 4,
+            "sentence": 0
+          },
+          {
+            "from": 6,
+            "to": 16,
+            "sentence": 1
+          },
+          {
+            "from": 18,
+            "to": 21,
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep88/scene-03-0-0e288f68.wav",
+          "startFrame": 0,
+          "durationInFrames": 204
+        },
+        {
+          "file": "audio/ep88/scene-03-1-f4e33415.wav",
+          "startFrame": 212,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep88/scene-03-2-1c5c0381.wav",
+          "startFrame": 393,
+          "durationInFrames": 248
+        }
+      ],
+      "durationInFrames": 659
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node p2.mjs — đếm CỘT + đo KB payload",
+        "commands": [
+          {
+            "cmd": "node p2.mjs",
+            "output": "== P2: payload lấy cả bảng vs select đúng cột ==\n1000 đơn đầu (orderBy id asc) · Prisma 6.19.3\n=> ms = TRUNG BÌNH 3 lượt (bỏ 1 lượt làm nóng)\n\n[A] findMany({take:1000}) — mặc định MỌI cột\n  SỐ CỘT THẬT: 5 · 97.9 KB · 4.29 ms\n  cột: id, customerId, total, status, createdAt\n\n[B] thêm select: { id: true, total: true }\n  SỐ CỘT THẬT: 2 (id, total) · 26.1 KB · 3.83 ms",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep88/scene-04-0-433c7a54.wav",
+          "startFrame": 0,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep88/scene-04-1-dc925564.wav",
+          "startFrame": 246,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep88/scene-04-2-4d611658.wav",
+          "startFrame": 389,
+          "durationInFrames": 185
+        },
+        {
+          "file": "audio/ep88/scene-04-3-1302ab27.wav",
+          "startFrame": 582,
+          "durationInFrames": 171
+        }
+      ],
+      "durationInFrames": 771
+    },
+    {
+      "id": "scene-05",
+      "type": "terminal",
+      "visual": {
+        "title": "checksum JS + bảng so sánh",
+        "commands": [
+          {
+            "cmd": "node p2.mjs",
+            "output": "== cùng dữ liệu? checksum trong JS ==\n           |    cả bảng |   select 2\ndòng       |       1000 |       1000\ntổng total | 2513527232 | 2513527232\n=> KHỚP TỪNG SỐ: cùng dữ liệu, khác lượng cột\n\n== bảng so sánh ==\n           |    cả bảng |   select 2 |   giảm\nsố cột     |          5 |          2 | -60.0%\npayload KB |       97.9 |       26.1 | -73.4%\nms (tb 3)  |       4.29 |       3.83 | -10.9%",
+            "sentence": 0
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep88/scene-05-0-edc9fc94.wav",
+          "startFrame": 0,
+          "durationInFrames": 178
+        },
+        {
+          "file": "audio/ep88/scene-05-1-0588a6f0.wav",
+          "startFrame": 186,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/ep88/scene-05-2-80e0c74b.wav",
+          "startFrame": 329,
+          "durationInFrames": 147
+        },
+        {
+          "file": "audio/ep88/scene-05-3-8a446e59.wav",
+          "startFrame": 484,
+          "durationInFrames": 195
+        }
+      ],
+      "durationInFrames": 697
+    },
+    {
+      "id": "scene-06",
+      "type": "concept",
+      "visual": {
+        "title": "BEAT VÀNG: select không đổi PLAN",
+        "bullets": [
+          {
+            "icon": "🔬",
+            "text": "EXPLAIN 2 nhánh: CÙNG Index Scan using orders_pkey",
+            "sentence": 0
+          },
+          {
+            "icon": "🟰",
+            "text": "CÙNG cost 0.42..33.63 · CÙNG Buffers: shared hit=14",
+            "sentence": 1
+          },
+          {
+            "icon": "📏",
+            "text": "Khác đúng 1 thứ: width 25 → 8",
+            "sentence": 1
+          },
+          {
+            "icon": "🧱",
+            "text": "Postgres row-store: 1 trang chứa cả dòng → đọc y nguyên",
+            "sentence": 2
+          },
+          {
+            "icon": "✂️",
+            "text": "select cắt BYTE chở về + RAM Node + JSON, KHÔNG cắt trang đọc",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep88/scene-06-0-5f9a09a9.wav",
+          "startFrame": 0,
+          "durationInFrames": 228
+        },
+        {
+          "file": "audio/ep88/scene-06-1-e139f373.wav",
+          "startFrame": 236,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep88/scene-06-2-67dd0b6a.wav",
+          "startFrame": 460,
+          "durationInFrames": 288
+        }
+      ],
+      "durationInFrames": 766
+    },
+    {
+      "id": "scene-07",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn + bẫy",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Mặc định = mọi scalar field, kể cả cột bạn không hiển thị",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "select = đúng cột cần → payload nhỏ + kiểu TS thu hẹp theo",
+            "sentence": 0
+          },
+          {
+            "icon": "3️⃣",
+            "text": "omit giấu passwordHash mà không liệt kê tay — cũng cắt ở tầng SQL",
+            "sentence": 1
+          },
+          {
+            "icon": "⚠️",
+            "text": "Đừng hứa select làm DB nhanh — trừ cột TEXT/JSONB lớn hoặc covering index",
+            "sentence": 2
+          },
+          {
+            "icon": "🕳️",
+            "text": "select + include CÙNG CẤP → lỗi · select ẩn rủi ro thiếu field khi refactor",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep88/scene-07-0-b2b19ffa.wav",
+          "startFrame": 0,
+          "durationInFrames": 231
+        },
+        {
+          "file": "audio/ep88/scene-07-1-97337290.wav",
+          "startFrame": 239,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep88/scene-07-2-ab6153f5.wav",
+          "startFrame": 461,
+          "durationInFrames": 262
+        }
+      ],
+      "durationInFrames": 741
+    },
+    {
+      "id": "scene-08",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 44/48 hoàn tất — cắt cột, không cắt sự thật",
+        "summary": [
+          {
+            "text": "5 cột 97.9 KB → 2 cột 26.1 KB (-73.4%), bất biến 3/3 lần chạy",
+            "sentence": 0
+          },
+          {
+            "text": "-73% chứ không -60%: createdAt ISO string ~40 byte mỗi dòng",
+            "sentence": 0
+          },
+          {
+            "text": "EXPLAIN y hệt nhau, chỉ width 25 → 8 — select KHÔNG đổi PLAN",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: bước 2 lỗi giữa chừng — $transaction cứu gì?",
+            "sentence": 1
+          }
+        ],
+        "next": "Câu 45/48: $transaction — nửa vời hay được ăn cả ngã về không? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep88/scene-08-0-e790ff09.wav",
+          "startFrame": 0,
+          "durationInFrames": 192
+        },
+        {
+          "file": "audio/ep88/scene-08-1-1891d5da.wav",
+          "startFrame": 200,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 425
+    }
+  ]
+}

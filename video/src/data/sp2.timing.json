@@ -1,0 +1,114 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "type": "vtitle",
+      "visual": {
+        "question": "findMany trả về gì? 98KB hay 26KB?",
+        "framework": "prisma"
+      },
+      "sentences": [
+        {
+          "file": "audio/sp2/s1-0-83823dfa.wav",
+          "startFrame": 0,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/sp2/s1-1-28009988.wav",
+          "startFrame": 152,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 276
+    },
+    {
+      "id": "s2",
+      "type": "vcode",
+      "visual": {
+        "filename": "p2.mjs",
+        "language": "javascript",
+        "code": "// [A] mặc định: MỌI cột vô hướng\nconst a = await p.order.findMany({\n  take: 1000,\n});                  // 5 cột · 97.9 KB\n// [B] select đúng thứ UI cần\nconst b = await p.order.findMany({\n  take: 1000,\n  select: { id: true, total: true },\n});                  // 2 cột · 26.1 KB\n// -73.4% payload · cùng 1000 dòng\n// checksum SUM(total) khớp từng số\n// EXPLAIN 2 nhánh Y HỆT nhau:\n// cùng Index Scan, chỉ width 25 -> 8\n// select cắt BYTE, không cắt trang",
+        "steps": [
+          {
+            "from": 1,
+            "to": 9,
+            "sentence": 0
+          },
+          {
+            "from": 10,
+            "to": 14,
+            "sentence": 1
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/sp2/s2-0-be1279e8.wav",
+          "startFrame": 0,
+          "durationInFrames": 142
+        },
+        {
+          "file": "audio/sp2/s2-1-fc16dc01.wav",
+          "startFrame": 150,
+          "durationInFrames": 168
+        }
+      ],
+      "durationInFrames": 336
+    },
+    {
+      "id": "s3",
+      "type": "vshot",
+      "visual": {
+        "src": "screens/dbqa/p2-select.png",
+        "caption": "97.9KB → 26.1KB · cùng 1000 dòng"
+      },
+      "sentences": [
+        {
+          "file": "audio/sp2/s3-0-3f02701a.wav",
+          "startFrame": 0,
+          "durationInFrames": 135
+        },
+        {
+          "file": "audio/sp2/s3-1-1b5e660e.wav",
+          "startFrame": 143,
+          "durationInFrames": 168
+        }
+      ],
+      "durationInFrames": 329
+    },
+    {
+      "id": "s4",
+      "type": "vanswer",
+      "visual": {
+        "title": "Trả lời chuẩn",
+        "bullets": [
+          {
+            "icon": "✂️",
+            "text": "select đúng cột: 97.9KB → 26.1KB (-73.4%)",
+            "sentence": 0
+          },
+          {
+            "icon": "🙈",
+            "text": "omit = mặt kia của select, cũng cắt ở tầng SQL",
+            "sentence": 0
+          }
+        ],
+        "trap": "select KHÔNG đổi PLAN · cùng Index Scan, chỉ width 25 → 8"
+      },
+      "sentences": [
+        {
+          "file": "audio/sp2/s4-0-6323884b.wav",
+          "startFrame": 0,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/sp2/s4-1-6c12eaa7.wav",
+          "startFrame": 208,
+          "durationInFrames": 135
+        }
+      ],
+      "durationInFrames": 361
+    }
+  ]
+}
