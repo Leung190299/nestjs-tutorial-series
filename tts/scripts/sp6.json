@@ -1,0 +1,74 @@
+[
+  {
+    "id": "s1",
+    "type": "vtitle",
+    "narration": [
+      "Tạo index xong mà query vẫn chậm y như cũ — vì sao?",
+      "Đo thật trên năm trăm nghìn đơn: một trong hai index này planner không thèm dùng."
+    ],
+    "visual": {
+      "question": "Tạo index rồi mà vẫn chậm?",
+      "framework": "prisma"
+    }
+  },
+  {
+    "id": "s2",
+    "type": "vcode",
+    "narration": [
+      "Index đơn trên status: plan không đổi một chữ, vẫn mười lăm mili giây — vì paid chiếm ba mươi ba phần trăm bảng.",
+      "Index ghép status với created_at DESC: không phẩy bảy tư mili giây, Sort biến mất, nhanh hơn hai mươi mốt lần."
+    ],
+    "visual": {
+      "filename": "p6.mjs",
+      "language": "sql",
+      "code": "-- [B] đoán theo cột WHERE: KHÔNG ĂN\nCREATE INDEX idx_orders_status\n  ON orders(status);\n-- plan không đổi 1 chữ · 15.96ms\n-- paid = 166097/500000 = 33% bảng\n\n-- [C] khớp WHERE + ORDER BY: ĂN\nCREATE INDEX idx_orders_status_created\n  ON orders(status, created_at DESC);\n-- 0.74ms · 93 dòng · Sort BIẾN MẤT\n-- 21x nhanh · chạm 1786x ít dòng",
+      "steps": [
+        {
+          "from": 1,
+          "to": 5,
+          "sentence": 0
+        },
+        {
+          "from": 7,
+          "to": 11,
+          "sentence": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "s3",
+    "type": "vshot",
+    "narration": [
+      "Bốn trạng thái index đo trên cùng một câu: dòng chạm từ một trăm sáu sáu nghìn xuống chín mươi ba.",
+      "Index sai cột thì plan không đổi một chữ — tốn thêm chi phí ghi mà không thu lại gì."
+    ],
+    "visual": {
+      "src": "screens/dbqa/p6-optimize.png",
+      "caption": "index sai cột: plan không đổi một chữ"
+    }
+  },
+  {
+    "id": "s4",
+    "type": "vanswer",
+    "narration": [
+      "Đừng đoán index: bật log lấy SQL thật, EXPLAIN chính câu đó, rồi index khớp cả lọc lẫn sắp xếp."
+    ],
+    "visual": {
+      "title": "Trả lời chuẩn",
+      "bullets": [
+        {
+          "icon": "🔍",
+          "text": "Bật log Prisma → EXPLAIN CHÍNH câu SQL đó → đọc plan",
+          "sentence": 0
+        },
+        {
+          "icon": "🎯",
+          "text": "Index khớp CẢ lọc lẫn sắp xếp: (status, created_at DESC)",
+          "sentence": 0
+        }
+      ],
+      "trap": "Index sai cột: plan KHÔNG ĐỔI một chữ · paid = 33% bảng"
+    }
+  }
+]

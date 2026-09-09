@@ -94,6 +94,7 @@ import ep88 from './data/ep88.timing.json';
 import ep89 from './data/ep89.timing.json';
 import ep90 from './data/ep90.timing.json';
 import ep91 from './data/ep91.timing.json';
+import ep92 from './data/ep92.timing.json';
 import sb1 from './data/sb1.timing.json';
 import sb2 from './data/sb2.timing.json';
 import sb3 from './data/sb3.timing.json';
@@ -130,6 +131,7 @@ import sp2 from './data/sp2.timing.json';
 import sp3 from './data/sp3.timing.json';
 import sp4 from './data/sp4.timing.json';
 import sp5 from './data/sp5.timing.json';
+import sp6 from './data/sp6.timing.json';
 import sr2 from './data/sr2.timing.json';
 import sr3 from './data/sr3.timing.json';
 import sr4 from './data/sr4.timing.json';
@@ -235,6 +237,7 @@ const episodes: {id: string; timing: EpisodeTiming}[] = [
   {id: 'Episode89', timing: ep89 as unknown as EpisodeTiming},
   {id: 'Episode90', timing: ep90 as unknown as EpisodeTiming},
   {id: 'Episode91', timing: ep91 as unknown as EpisodeTiming},
+  {id: 'Episode92', timing: ep92 as unknown as EpisodeTiming},
   {id: 'Preview', timing: ep00 as unknown as EpisodeTiming},
 ];
 
@@ -289,6 +292,7 @@ const shorts: {id: string; timing: EpisodeTiming}[] = [
   {id: 'ShortP3', timing: sp3 as unknown as EpisodeTiming},
   {id: 'ShortP4', timing: sp4 as unknown as EpisodeTiming},
   {id: 'ShortP5', timing: sp5 as unknown as EpisodeTiming},
+  {id: 'ShortP6', timing: sp6 as unknown as EpisodeTiming},
 ];
 
 const thumbnails: {id: string; props: ThumbnailProps}[] = [
@@ -1434,6 +1438,19 @@ const thumbnails: {id: string; props: ThumbnailProps}[] = [
       variant: 'shot',
       image: 'screens/dbqa/p5-pool.png',
       badgeEmoji: '🏊',
+      seriesTag: 'Phỏng vấn Frontend 🇻🇳',
+    },
+  },
+  {
+    id: 'Thumb92',
+    props: {
+      badge: 'PV FE #48',
+      line1: 'INDEX ĐÚNG',
+      line2: '16MS → 0.7MS',
+      subtitle: 'Phỏng vấn Frontend · Câu 48/48',
+      variant: 'shot',
+      image: 'screens/dbqa/p6-optimize.png',
+      badgeEmoji: '🎯',
       seriesTag: 'Phỏng vấn Frontend 🇻🇳',
     },
   },
