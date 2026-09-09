@@ -2745,7 +2745,7 @@ Demo thật bằng f6_isolate.dart, chuỗi JSON 18.9MB: chạy trên main — f
 
 ## LÔ 3 SERIES PHỎNG VẤN FRONTEND — Backend Node.js & NestJS (câu #25–#36 + 12 Shorts)
 
-> Lô 3 nối tiếp cùng playlist **"Phỏng vấn Frontend 🇻🇳"** — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE (KHÔNG tạo playlist mới — khi đăng chỉ nối 24 video lô 3 vào playlist sẵn có). CHƯA ĐĂNG — mọi link video là placeholder `[LINK-EP69]`..`[LINK-EP80]` (bản ngang) và `[LINK-SHORT-25]`..`[LINK-SHORT-36]` (Shorts), điền link thật khi đăng. Chủ đề lô 3: BACKEND cho dân Frontend đi phỏng vấn Fullstack — 6 câu Node.js core (B1–B6 → ep69–ep74) + 6 câu NestJS (S1–S6 → ep75–ep80), mỗi câu có demo chạy SỐ THẬT trên Node 22 (kịch bản luôn nói rõ "trên máy tôi"). Code: `demo-be-interview/` (`node-qa/` + `nest-qa/`), đóng băng ở tag `be-qa-batch-3`. Cặp chéo: câu 25↔30 (twist microtask ESM ↔ require(esm)), câu 27 nhắc sang câu 18 RN + 24 Flutter (một chiều — video cũ không sửa), câu 32 trỏ playlist series NestJS cũ.
+> Lô 3 nối tiếp cùng playlist **"Phỏng vấn Frontend 🇻🇳"** — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE (KHÔNG tạo playlist mới — khi đăng chỉ nối 24 video lô 3 vào playlist sẵn có). CHƯA ĐĂNG — mọi link video là placeholder `https://youtu.be/xn7t2HvIE_A`..`https://youtu.be/Qmm-UDqc49Q` (bản ngang) và `https://youtu.be/B2SO5WuX76o`..`https://youtu.be/KsX-lapue8s` (Shorts), điền link thật khi đăng. Chủ đề lô 3: BACKEND cho dân Frontend đi phỏng vấn Fullstack — 6 câu Node.js core (B1–B6 → ep69–ep74) + 6 câu NestJS (S1–S6 → ep75–ep80), mỗi câu có demo chạy SỐ THẬT trên Node 22 (kịch bản luôn nói rõ "trên máy tôi"). Code: `demo-be-interview/` (`node-qa/` + `nest-qa/`), đóng băng ở tag `be-qa-batch-3`. Cặp chéo: câu 25↔30 (twist microtask ESM ↔ require(esm)), câu 27 nhắc sang câu 18 RN + 24 Flutter (một chiều — video cũ không sửa), câu 32 trỏ playlist series NestJS cũ.
 
 Từ khóa chủ lực lô 3: `phỏng vấn nodejs`, `phỏng vấn nestjs`, `phỏng vấn backend`, `event loop nodejs`, `worker threads`, `stream backpressure`, `promise.all`, `dependency injection nestjs`, `câu hỏi phỏng vấn backend`, `học nodejs`, `học nestjs`.
 
@@ -2774,9 +2774,9 @@ Demo thật bằng b1.mjs trên Node 22, hàm hit gắn số thứ tự ĐỘNG 
 📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
 ⏮️ Câu chốt lô 2: https://youtu.be/Jzn5ELGPewk
-⏭️ Câu tiếp theo: [LINK-EP70]
-📱 Bản Shorts 60 giây: [LINK-SHORT-25]
-🔁 CommonJS vs ESM còn cú twist lớn hơn: câu 30 — require(esm): [LINK-EP74]
+⏭️ Câu tiếp theo: https://youtu.be/ju4JxEMByNU
+📱 Bản Shorts 60 giây: https://youtu.be/B2SO5WuX76o
+🔁 CommonJS vs ESM còn cú twist lớn hơn: câu 30 — require(esm): https://youtu.be/iRWCw8BTdEM
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2816,9 +2816,9 @@ Demo thật bằng b2-server.mjs: khối lượng là pbkdf2 40.000 vòng — kh
 
 📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP69]
-⏭️ Câu tiếp theo: [LINK-EP71]
-📱 Bản Shorts 60 giây: [LINK-SHORT-26]
+⏮️ Câu trước: https://youtu.be/xn7t2HvIE_A
+⏭️ Câu tiếp theo: https://youtu.be/0nJBSuRLzm4
+📱 Bản Shorts 60 giây: https://youtu.be/ny2he0miIG4
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2858,9 +2858,9 @@ Demo thật bằng b3.mjs: pbkdf2Sync 40.000 vòng lặp 200 lần chuỗi NỐI
 
 📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP70]
-⏭️ Câu tiếp theo: [LINK-EP72]
-📱 Bản Shorts 60 giây: [LINK-SHORT-27]
+⏮️ Câu trước: https://youtu.be/ju4JxEMByNU
+⏭️ Câu tiếp theo: https://youtu.be/u4xQFMtrBN8
+📱 Bản Shorts 60 giây: https://youtu.be/XzjvYPN2-bU
 🔁 Cùng bài trên mobile: câu 18 (RN chia lô trên JS thread) — https://youtu.be/zlzQHCex90o · câu 24 (Flutter Isolate.run) — https://youtu.be/Jzn5ELGPewk
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
@@ -2901,9 +2901,9 @@ Demo thật bằng b4.mjs: nhánh readfile — RSS từ 40MB phồng lên đỉn
 
 📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP71]
-⏭️ Câu tiếp theo: [LINK-EP73]
-📱 Bản Shorts 60 giây: [LINK-SHORT-28]
+⏮️ Câu trước: https://youtu.be/0nJBSuRLzm4
+⏭️ Câu tiếp theo: https://youtu.be/u9SUvpcqQGA
+📱 Bản Shorts 60 giây: https://youtu.be/2zvXeqm7Ckk
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2943,9 +2943,9 @@ Số thật từ b5.mjs trên máy tôi: tuần tự — từng bước 302ms, t
 
 📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP72]
-⏭️ Câu tiếp theo: [LINK-EP74]
-📱 Bản Shorts 60 giây: [LINK-SHORT-29]
+⏮️ Câu trước: https://youtu.be/u4xQFMtrBN8
+⏭️ Câu tiếp theo: https://youtu.be/iRWCw8BTdEM
+📱 Bản Shorts 60 giây: https://youtu.be/wTxmINjhbJE
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -2985,10 +2985,10 @@ Demo thật b6.mjs + b6-cjs.cjs trên Node 22: CJS — __dirname OK, require JSO
 
 📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP73]
-⏭️ Câu tiếp theo: [LINK-EP75]
-📱 Bản Shorts 60 giây: [LINK-SHORT-30]
-🔁 Cú twist microtask của ESM đã đo ở câu 25: [LINK-EP69]
+⏮️ Câu trước: https://youtu.be/u9SUvpcqQGA
+⏭️ Câu tiếp theo: https://youtu.be/Dh2IDDTcJBk
+📱 Bản Shorts 60 giây: https://youtu.be/wtTN8GntYoM
+🔁 Cú twist microtask của ESM đã đo ở câu 25: https://youtu.be/xn7t2HvIE_A
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3028,9 +3028,9 @@ Demo thật bằng S1MockModule — 12 dòng: providers đăng ký provide Price
 
 📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP74]
-⏭️ Câu tiếp theo: [LINK-EP76]
-📱 Bản Shorts 60 giây: [LINK-SHORT-31]
+⏮️ Câu trước: https://youtu.be/iRWCw8BTdEM
+⏭️ Câu tiếp theo: https://youtu.be/LwI2XHhMCOk
+📱 Bản Shorts 60 giây: https://youtu.be/M-yfzpkcReo
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3071,9 +3071,9 @@ Demo thật bằng s2.interceptor.ts (18 dòng, dùng tap của RxJS — vì int
 
 📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP75]
-⏭️ Câu tiếp theo: [LINK-EP77]
-📱 Bản Shorts 60 giây: [LINK-SHORT-32]
+⏮️ Câu trước: https://youtu.be/Dh2IDDTcJBk
+⏭️ Câu tiếp theo: https://youtu.be/VCzEj22CAU4
+📱 Bản Shorts 60 giây: https://youtu.be/DIH58X1lIJs
 🔁 Đào sâu từng lớp — series NestJS trên kênh (mỗi lớp một tập): https://www.youtube.com/playlist?list=PLOTM2LWBjkI0
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
@@ -3115,9 +3115,9 @@ Demo thật bằng role.guard.ts: curl route admin không token — guard TỰ n
 
 📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP76]
-⏭️ Câu tiếp theo: [LINK-EP78]
-📱 Bản Shorts 60 giây: [LINK-SHORT-33]
+⏮️ Câu trước: https://youtu.be/LwI2XHhMCOk
+⏭️ Câu tiếp theo: https://youtu.be/zewSDau0iN8
+📱 Bản Shorts 60 giây: https://youtu.be/3rBhT72FPtw
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3159,9 +3159,9 @@ Demo thật bằng create-order.dto.ts + s4.controller.ts: gửi body sai cả 3
 
 📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP77]
-⏭️ Câu tiếp theo: [LINK-EP79]
-📱 Bản Shorts 60 giây: [LINK-SHORT-34]
+⏮️ Câu trước: https://youtu.be/VCzEj22CAU4
+⏭️ Câu tiếp theo: https://youtu.be/g8hW8u7FKrk
+📱 Bản Shorts 60 giây: https://youtu.be/eCrJF4OKrlQ
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3201,9 +3201,9 @@ Demo thật bằng wrap.interceptor.ts: ghi t0 trước khi handler chạy, tron
 
 📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout be-qa-batch-3 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP78]
-⏭️ Câu tiếp theo: [LINK-EP80]
-📱 Bản Shorts 60 giây: [LINK-SHORT-35]
+⏮️ Câu trước: https://youtu.be/zewSDau0iN8
+⏭️ Câu tiếp theo: https://youtu.be/Qmm-UDqc49Q
+📱 Bản Shorts 60 giây: https://youtu.be/DvZs7tR43lU
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3244,9 +3244,9 @@ Demo thật bằng all-exceptions.filter.ts: curl /s6/boom kèm cờ demo x-raw 
 
 📦 Source code (demo-be-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout be-qa-batch-3 để xem đúng 12 câu code của lô 3 (6 Node.js + 6 NestJS).
-⏮️ Câu trước: [LINK-EP79]
-▶️ Xem lại từ đầu lô 3: [LINK-EP69]
-📱 Bản Shorts 60 giây: [LINK-SHORT-36]
+⏮️ Câu trước: https://youtu.be/g8hW8u7FKrk
+▶️ Xem lại từ đầu lô 3: https://youtu.be/xn7t2HvIE_A
+📱 Bản Shorts 60 giây: https://youtu.be/KsX-lapue8s
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 💬 Đủ 36 câu trên playlist — comment câu hỏi phỏng vấn khó nhất bạn từng gặp để lô sau càng sát thực tế!
@@ -3271,15 +3271,15 @@ Demo thật bằng all-exceptions.filter.ts: curl /s6/boom kèm cờ demo x-raw 
 
 | id | Tiêu đề Shorts | Caption |
 |---|---|---|
-| sb1 | Node event loop: promise chạy TRƯỚC nextTick?! #shorts | Twist ESM: file .mjs được evaluate như microtask — promise.then lên trước nextTick, ngược với CommonJS.<br>Bẫy: setTimeout 0 không hề chạy ngay — sớm nhất là phase timers vòng sau, sau toàn bộ microtask.<br>Video đầy đủ: [LINK-EP69]<br>#shorts #nodejs #phongvan |
-| sb2 | Node 1 thread — sao cân nghìn request? 60 giây #shorts | Thread không ngồi chờ I/O: event loop giao việc chờ đi — sync 104 req/s vs async 322, gấp 3 lần.<br>Bẫy: async không nhanh hơn cho 1 request đơn lẻ — nó chỉ DỜI việc nặng sang threadpool 4 thread.<br>Video đầy đủ: [LINK-EP70]<br>#shorts #nodejs #phongvan |
-| sb3 | Hash làm Node đơ 1,9 giây — worker_threads cứu #shorts | Worker chạy JS song song cùng process: maxGap từ 1921ms về 102ms, tổng ngang nhau, hash khớp từng ký tự.<br>Bẫy: async/await KHÔNG cứu CPU-bound — await không tạo thread nào cả.<br>Video đầy đủ: [LINK-EP71]<br>#shorts #nodejs #phongvan |
-| sb4 | File 1GB — server phình 1GB RAM? Stream cứu #shorts | readFile nuốt cả file: RSS đỉnh 1071MB; stream + pipe chảy chunk 64KiB — đỉnh 97MB, chênh 11 lần.<br>Bẫy: stream mua RAM phẳng, KHÔNG mua tốc độ — và trả file cho client thì pipe thẳng vào res.<br>Video đầy đủ: [LINK-EP72]<br>#shorts #nodejs #phongvan |
-| sb5 | 3 API — mất 900ms hay 300ms? Promise.all #shorts | Task độc lập thì Promise.all: 907ms về 303ms — tổng bằng cái chậm nhất, chênh đúng 3 lần.<br>Bẫy: fail-fast không hủy promise còn lại — vẫn chạy ngầm; muốn hủy thật phải AbortController.<br>Video đầy đủ: [LINK-EP73]<br>#shorts #nodejs #phongvan |
-| sb6 | require(esm) đã chạy được — CJS vs ESM 60 giây #shorts | .mjs là ESM, .cjs là CJS, .js theo trường type; từ Node 22.12 require load được ESM đồng bộ — không cờ.<br>Bẫy: bật type module là mọi file .js thành ESM hết — file cần CommonJS đổi đuôi .cjs.<br>Video đầy đủ: [LINK-EP74]<br>#shorts #nodejs #phongvan |
-| ss1 | NestJS: vì sao KHÔNG tự new service? #shorts | DI = container new giùm bạn: khai type ở constructor, thay ruột chỉ đổi provider — giá 100 vs 1, không sửa consumer.<br>Bẫy: provider mặc định singleton — đừng giữ state theo request; per-request phải Scope.REQUEST.<br>Video đầy đủ: [LINK-EP75]<br>#shorts #nestjs #phongvan |
-| ss2 | Request vào NestJS đi qua mấy lớp? #shorts | Thuộc một hơi: middleware → guard → interceptor → pipe → handler → interceptor chiều về — filter khi lỗi.<br>Bẫy: handler ném lỗi là interceptor chiều về KHÔNG chạy — dòng [5] biến mất, rơi xuống [F].<br>Video đầy đủ: [LINK-EP76]<br>#shorts #nestjs #phongvan |
-| ss3 | Auth NestJS: middleware hay guard? 401 vs 403 #shorts | Middleware mù ngữ cảnh chỉ gắn req.user; guard đọc @Roles của đúng handler — phân quyền đặt ở guard.<br>Bẫy: guard trả false là Nest trả 403 — muốn 401 đúng nghĩa phải TỰ ném UnauthorizedException.<br>Video đầy đủ: [LINK-EP77]<br>#shorts #nestjs #phongvan |
-| ss4 | Body bẩn — ValidationPipe + DTO chặn từ cửa #shorts | DTO + decorator là hợp đồng: body sai dính 400 kèm mảng lỗi chi tiết — handler không hề chạy.<br>Bẫy: whitelist mặc định KHÔNG bật — quên là field lạ kiểu isAdmin true vẫn lọt vào object.<br>Video đầy đủ: [LINK-EP78]<br>#shorts #nestjs #phongvan |
-| ss5 | Bọc mọi response + đo giờ — 1 interceptor #shorts | next.handle() trả Observable — transform chỉ là một phép map: vỏ ok/data/tookMs + header X-Response-Time.<br>Bẫy: map chỉ chạy khi handler thành công — lỗi bỏ qua chiều về, rơi thẳng xuống filter.<br>Video đầy đủ: [LINK-EP79]<br>#shorts #nestjs #phongvan |
-| ss6 | Lỗi thô 500 — exception filter chuẩn hóa #shorts | @Catch() để trống bắt mọi lỗi: client nhận vỏ code/message/path/timestamp, stack chỉ log server.<br>Bẫy: nhớ phân nhánh HttpException — đừng nuốt 404 chủ động thành 500.<br>Video đầy đủ: [LINK-EP80]<br>#shorts #nestjs #phongvan |
+| sb1 | Node event loop: promise chạy TRƯỚC nextTick?! #shorts | Twist ESM: file .mjs được evaluate như microtask — promise.then lên trước nextTick, ngược với CommonJS.<br>Bẫy: setTimeout 0 không hề chạy ngay — sớm nhất là phase timers vòng sau, sau toàn bộ microtask.<br>Video đầy đủ: https://youtu.be/xn7t2HvIE_A<br>#shorts #nodejs #phongvan |
+| sb2 | Node 1 thread — sao cân nghìn request? 60 giây #shorts | Thread không ngồi chờ I/O: event loop giao việc chờ đi — sync 104 req/s vs async 322, gấp 3 lần.<br>Bẫy: async không nhanh hơn cho 1 request đơn lẻ — nó chỉ DỜI việc nặng sang threadpool 4 thread.<br>Video đầy đủ: https://youtu.be/ju4JxEMByNU<br>#shorts #nodejs #phongvan |
+| sb3 | Hash làm Node đơ 1,9 giây — worker_threads cứu #shorts | Worker chạy JS song song cùng process: maxGap từ 1921ms về 102ms, tổng ngang nhau, hash khớp từng ký tự.<br>Bẫy: async/await KHÔNG cứu CPU-bound — await không tạo thread nào cả.<br>Video đầy đủ: https://youtu.be/0nJBSuRLzm4<br>#shorts #nodejs #phongvan |
+| sb4 | File 1GB — server phình 1GB RAM? Stream cứu #shorts | readFile nuốt cả file: RSS đỉnh 1071MB; stream + pipe chảy chunk 64KiB — đỉnh 97MB, chênh 11 lần.<br>Bẫy: stream mua RAM phẳng, KHÔNG mua tốc độ — và trả file cho client thì pipe thẳng vào res.<br>Video đầy đủ: https://youtu.be/u4xQFMtrBN8<br>#shorts #nodejs #phongvan |
+| sb5 | 3 API — mất 900ms hay 300ms? Promise.all #shorts | Task độc lập thì Promise.all: 907ms về 303ms — tổng bằng cái chậm nhất, chênh đúng 3 lần.<br>Bẫy: fail-fast không hủy promise còn lại — vẫn chạy ngầm; muốn hủy thật phải AbortController.<br>Video đầy đủ: https://youtu.be/u9SUvpcqQGA<br>#shorts #nodejs #phongvan |
+| sb6 | require(esm) đã chạy được — CJS vs ESM 60 giây #shorts | .mjs là ESM, .cjs là CJS, .js theo trường type; từ Node 22.12 require load được ESM đồng bộ — không cờ.<br>Bẫy: bật type module là mọi file .js thành ESM hết — file cần CommonJS đổi đuôi .cjs.<br>Video đầy đủ: https://youtu.be/iRWCw8BTdEM<br>#shorts #nodejs #phongvan |
+| ss1 | NestJS: vì sao KHÔNG tự new service? #shorts | DI = container new giùm bạn: khai type ở constructor, thay ruột chỉ đổi provider — giá 100 vs 1, không sửa consumer.<br>Bẫy: provider mặc định singleton — đừng giữ state theo request; per-request phải Scope.REQUEST.<br>Video đầy đủ: https://youtu.be/Dh2IDDTcJBk<br>#shorts #nestjs #phongvan |
+| ss2 | Request vào NestJS đi qua mấy lớp? #shorts | Thuộc một hơi: middleware → guard → interceptor → pipe → handler → interceptor chiều về — filter khi lỗi.<br>Bẫy: handler ném lỗi là interceptor chiều về KHÔNG chạy — dòng [5] biến mất, rơi xuống [F].<br>Video đầy đủ: https://youtu.be/LwI2XHhMCOk<br>#shorts #nestjs #phongvan |
+| ss3 | Auth NestJS: middleware hay guard? 401 vs 403 #shorts | Middleware mù ngữ cảnh chỉ gắn req.user; guard đọc @Roles của đúng handler — phân quyền đặt ở guard.<br>Bẫy: guard trả false là Nest trả 403 — muốn 401 đúng nghĩa phải TỰ ném UnauthorizedException.<br>Video đầy đủ: https://youtu.be/VCzEj22CAU4<br>#shorts #nestjs #phongvan |
+| ss4 | Body bẩn — ValidationPipe + DTO chặn từ cửa #shorts | DTO + decorator là hợp đồng: body sai dính 400 kèm mảng lỗi chi tiết — handler không hề chạy.<br>Bẫy: whitelist mặc định KHÔNG bật — quên là field lạ kiểu isAdmin true vẫn lọt vào object.<br>Video đầy đủ: https://youtu.be/zewSDau0iN8<br>#shorts #nestjs #phongvan |
+| ss5 | Bọc mọi response + đo giờ — 1 interceptor #shorts | next.handle() trả Observable — transform chỉ là một phép map: vỏ ok/data/tookMs + header X-Response-Time.<br>Bẫy: map chỉ chạy khi handler thành công — lỗi bỏ qua chiều về, rơi thẳng xuống filter.<br>Video đầy đủ: https://youtu.be/g8hW8u7FKrk<br>#shorts #nestjs #phongvan |
+| ss6 | Lỗi thô 500 — exception filter chuẩn hóa #shorts | @Catch() để trống bắt mọi lỗi: client nhận vỏ code/message/path/timestamp, stack chỉ log server.<br>Bẫy: nhớ phân nhánh HttpException — đừng nuốt 404 chủ động thành 500.<br>Video đầy đủ: https://youtu.be/Qmm-UDqc49Q<br>#shorts #nestjs #phongvan |
