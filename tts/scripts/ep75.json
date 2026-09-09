@@ -1,0 +1,179 @@
+[
+  {
+    "id": "scene-01",
+    "type": "title",
+    "narration": [
+      "Câu số ba mươi mốt — mở màn khối NestJS — nhà tuyển dụng hỏi: Dependency Injection là gì, và vì sao NestJS bắt bạn dùng nó ngay từ dòng đầu tiên?",
+      "Mình trả lời bằng demo chạy thật: một service giá một trăm, một bản mock giá một — thay ruột mà không sửa một dòng nào ở chỗ dùng."
+    ],
+    "visual": {
+      "title": "Phỏng vấn FE #31: DI trong NestJS — vì sao không tự new service?",
+      "subtitle": "Phỏng vấn Frontend — NestJS · Câu 31/36",
+      "badge": "NestJS backend"
+    }
+  },
+  {
+    "id": "scene-02",
+    "type": "concept",
+    "narration": [
+      "IoC — đảo quyền khởi tạo: class KHÔNG tự new dependency, chỉ khai báo mình cần gì ở constructor — container của Nest lo tạo và đưa instance vào.",
+      "Docs nói thẳng: Nest có built-in IoC container quản quan hệ giữa các provider — và đó là foundation of dependency injection; container resolve theo đúng type annotation bạn khai.",
+      "Provider mặc định là SINGLETON: container tạo đúng một lần, ai inject cũng nhận lại chính instance đó — không phải mỗi request một bản mới.",
+      "Lợi ích thật: chỗ dùng chỉ biết token, nên thay ruột không cần sửa consumer — test hay mock chỉ là đổi provider ở module."
+    ],
+    "visual": {
+      "title": "IoC container — trái tim của NestJS",
+      "bullets": [
+        {
+          "icon": "🔄",
+          "text": "IoC: KHÔNG tự new — container tạo & đưa vào constructor",
+          "sentence": 0
+        },
+        {
+          "icon": "🏷️",
+          "text": "Resolve theo TYPE annotation ở constructor",
+          "sentence": 1
+        },
+        {
+          "icon": "1️⃣",
+          "text": "Mặc định SINGLETON — 1 instance cho cả app",
+          "sentence": 2
+        },
+        {
+          "icon": "🔁",
+          "text": "Thay ruột không sửa consumer → test/mock dễ",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-03",
+    "type": "code",
+    "narration": [
+      "Đây là toàn bộ S1MockModule — mười hai dòng: import PriceService để làm token, và import S1MockController — consumer viết y hệt controller thật.",
+      "Comment nói hết tinh thần: swap implementation KHÔNG sửa consumer — cùng token PriceService, nhưng module này đưa vào một object thường.",
+      "Dòng đắt nhất: providers đăng ký provide PriceService, useValue là object chỉ có getPrice trả về một — class thật không bao giờ được khởi tạo cho module này.",
+      "Còn phía controller — kể miệng: cả bản thật lẫn bản mock đều đúng một dòng constructor private readonly priceService kiểu PriceService — Nest đọc type đó rồi tự đưa instance vào."
+    ],
+    "visual": {
+      "filename": "s1-mock.module.ts — TOÀN BỘ FILE",
+      "language": "tsx",
+      "code": "import { Module } from '@nestjs/common';\nimport { PriceService } from './price.service.js';\nimport { S1MockController } from './s1-mock.controller.js';\n\n// Swap implementation KHÔNG sửa consumer: cùng token PriceService,\n// nhưng module này đưa object thường qua useValue → constructor class thật\n// KHÔNG BAO GIỜ chạy cho nhánh mock.\n@Module({\n  controllers: [S1MockController],\n  providers: [{ provide: PriceService, useValue: { getPrice: () => 1 } }],\n})\nexport class S1MockModule {}",
+      "steps": [
+        {
+          "from": 1,
+          "to": 3,
+          "sentence": 0
+        },
+        {
+          "from": 5,
+          "to": 7,
+          "sentence": 1
+        },
+        {
+          "from": 8,
+          "to": 11,
+          "sentence": 2
+        },
+        {
+          "from": 1,
+          "to": 12,
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-04",
+    "type": "terminal",
+    "narration": [
+      "Chạy thật: curl s1 — service thật trả price một trăm; và trong log server, dòng PriceService constructor chạy in ra ĐÚNG MỘT LẦN, ngay lúc boot.",
+      "Mình bắn tổng cộng bảy request, kể cả route s1 again — log vẫn đúng một dòng: container tạo một lần rồi ai inject cũng nhận lại instance cũ — singleton.",
+      "Giờ curl s1 mock: consumer inject y hệt theo type — nhưng price còn một, from là useValue mock.",
+      "Một trăm với một — chỉ khác nhau ở provider mà module đăng ký; và constructor class thật không hề chạy ở nhánh mock."
+    ],
+    "visual": {
+      "title": "curl /s1 · curl /s1-mock",
+      "commands": [
+        {
+          "cmd": "curl -s http://localhost:3998/s1",
+          "output": "{\"price\":100,\"from\":\"service thật\"}\n-- log server (boot, 1 LẦN duy nhất):\n[S1] PriceService constructor chạy\n=> qua 7 request: KHÔNG thêm dòng nào — singleton",
+          "sentence": 0
+        },
+        {
+          "cmd": "curl -s http://localhost:3998/s1-mock",
+          "output": "{\"price\":1,\"from\":\"useValue mock\"}\n=> 100 → 1: chỉ đổi provider ở module\n=> consumer y hệt, constructor thật KHÔNG chạy",
+          "sentence": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-05",
+    "type": "concept",
+    "narration": [
+      "Trả lời như đi phỏng vấn — câu một: DI là hệ quả của IoC — class khai dependency ở constructor, container tạo, giữ và đưa vào; mình không bao giờ tự new.",
+      "Câu hai: provider mặc định singleton — nên ĐỪNG giữ state theo từng request trong service; muốn per-request phải khai Scope.REQUEST và chấp nhận trả giá hiệu năng.",
+      "Câu ba: useValue, useClass, useFactory là bộ công cụ thay ruột — test, mock, đổi cấu hình đều chỉ là đổi provider ở module.",
+      "Bẫy: DI không phải phép màu — bản chất là container đọc type ở constructor rồi resolve, và quản luôn vòng đời; tự new service là mất sạch: singleton, swap, lifecycle."
+    ],
+    "visual": {
+      "title": "Trả lời như đi phỏng vấn",
+      "bullets": [
+        {
+          "icon": "1️⃣",
+          "text": "IoC: container tạo — class chỉ KHAI, không new",
+          "sentence": 0
+        },
+        {
+          "icon": "2️⃣",
+          "text": "Singleton → ĐỪNG giữ state per-request",
+          "sentence": 1
+        },
+        {
+          "icon": "3️⃣",
+          "text": "useValue / useClass / useFactory = thay ruột",
+          "sentence": 2
+        },
+        {
+          "icon": "🪤",
+          "text": "DI không phải phép màu — container quản vòng đời",
+          "sentence": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "scene-06",
+    "type": "outro",
+    "narration": [
+      "Xong câu ba mươi mốt — mở màn khối NestJS bằng đúng trái tim của nó: IoC container và dependency injection.",
+      "Mai sang câu ba mươi hai: một request vào app NestJS đi qua những lớp nào — middleware, guard, interceptor, pipe — theo thứ tự nào, và lỗi ném ra thì ai xử?",
+      "Video này có bản Shorts sáu mươi giây để bạn ôn nhanh trước giờ phỏng vấn.",
+      "Xem tiếp và luyện tiếp — hẹn gặp lại ở câu số ba mươi hai!"
+    ],
+    "visual": {
+      "title": "Câu 31/36 hoàn tất — khối NestJS mở màn!",
+      "summary": [
+        {
+          "text": "DI/IoC: container new & inject theo type",
+          "sentence": 0
+        },
+        {
+          "text": "Singleton: log constructor 1 lần / 7 request",
+          "sentence": 0
+        },
+        {
+          "text": "useValue: 100 → 1 không sửa consumer",
+          "sentence": 0
+        },
+        {
+          "text": "Có bản Shorts 60 giây để ôn nhanh",
+          "sentence": 2
+        }
+      ],
+      "next": "Câu 32/36: request lifecycle trong NestJS 🎤"
+    }
+  }
+]
