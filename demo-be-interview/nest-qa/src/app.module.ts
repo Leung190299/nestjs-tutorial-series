@@ -6,9 +6,10 @@ import { S2Module } from './s2/s2.module.js';
 import { s2Middleware } from './s2/s2.middleware.js';
 import { S3Module } from './s3/s3.module.js';
 import { s3Middleware } from './s3/s3.middleware.js';
+import { S4Module } from './s4/s4.module.js';
 
 @Module({
-  imports: [S1Module, S1MockModule, S2Module, S3Module],
+  imports: [S1Module, S1MockModule, S2Module, S3Module, S4Module],
   controllers: [],
   providers: [],
 })
