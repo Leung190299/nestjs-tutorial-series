@@ -1,0 +1,276 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #28: Stream và backpressure — 1GB file, 100MB RAM",
+        "subtitle": "Phỏng vấn Frontend — Node.js core · Câu 28/36",
+        "badge": "Node.js backend"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep72/scene-01-0-a9e911b9.wav",
+          "startFrame": 0,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep72/scene-01-1-880eb512.wav",
+          "startFrame": 208,
+          "durationInFrames": 197
+        }
+      ],
+      "durationInFrames": 423
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "readFile nuốt cả file — stream chảy từng chunk",
+        "bullets": [
+          {
+            "icon": "🐘",
+            "text": "readFile = nuốt NGUYÊN file vào RAM — RSS ăn theo cỡ file",
+            "sentence": 0
+          },
+          {
+            "icon": "💧",
+            "text": "stream = chảy từng chunk 64 KiB (highWaterMark fs)",
+            "sentence": 1
+          },
+          {
+            "icon": "🚦",
+            "text": "write() false → nguồn pause → 'drain' → bơm tiếp",
+            "sentence": 2
+          },
+          {
+            "icon": "🔗",
+            "text": "pipe: “automatically managed… not overwhelmed”",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep72/scene-02-0-7f04cada.wav",
+          "startFrame": 0,
+          "durationInFrames": 207
+        },
+        {
+          "file": "audio/ep72/scene-02-1-06b3529d.wav",
+          "startFrame": 215,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep72/scene-02-2-9b4a4b3e.wav",
+          "startFrame": 439,
+          "durationInFrames": 173
+        },
+        {
+          "file": "audio/ep72/scene-02-3-b659b298.wav",
+          "startFrame": 620,
+          "durationInFrames": 207
+        }
+      ],
+      "durationInFrames": 845
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "b4.mjs",
+        "language": "javascript",
+        "code": "if (mode === 'readfile') {\n  console.log('== B4: readFile cả 1GB ==');\n  console.log(`big.bin ${mb(info.size)} MB → RAM một cục → /dev/null`);\n  const t0 = Date.now();\n  const buf = await readFile(BIG); // NGUYÊN 1GB thành 1 Buffer trong heap\n  sample();\n  await writeFile('/dev/null', buf);\n  sample();\n  const tookMs = Date.now() - t0;\n  console.log(`RSS trước: ${mb(before)} MB`);\n  console.log(`RSS đỉnh: ${mb(peak)} MB — phồng nguyên cỡ file`);\n  console.log(`xong ${tookMs}ms`);\n} else {\n  console.log('== B4b: stream.pipe ==');\n  console.log(`big.bin ${mb(info.size)} MB → chunk nối chunk → /dev/null`);\n  const t0 = Date.now();\n  const rs = createReadStream(BIG); // highWaterMark mặc định — không chỉnh gì\n  const hwm = rs.readableHighWaterMark;\n  console.log(`highWaterMark thật: ${hwm} bytes = ${hwm / 1024} KiB/chunk`);\n  const ws = createWriteStream('/dev/null');\n  rs.pipe(ws); // pipe tự quản pause/resume + end() phía ghi\n  await once(ws, 'finish'); // xong = phía GHI đã flush hết",
+        "steps": [
+          {
+            "from": 1,
+            "to": 6,
+            "sentence": 0
+          },
+          {
+            "from": 7,
+            "to": 12,
+            "sentence": 1
+          },
+          {
+            "from": 13,
+            "to": 19,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 22,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep72/scene-03-0-bc1c38ca.wav",
+          "startFrame": 0,
+          "durationInFrames": 216
+        },
+        {
+          "file": "audio/ep72/scene-03-1-0a0bb30f.wav",
+          "startFrame": 224,
+          "durationInFrames": 252
+        },
+        {
+          "file": "audio/ep72/scene-03-2-b2002199.wav",
+          "startFrame": 484,
+          "durationInFrames": 212
+        },
+        {
+          "file": "audio/ep72/scene-03-3-cd927d48.wav",
+          "startFrame": 704,
+          "durationInFrames": 209
+        }
+      ],
+      "durationInFrames": 931
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node b4.mjs",
+        "commands": [
+          {
+            "cmd": "node b4.mjs readfile",
+            "output": "== B4: readFile cả 1GB ==\nbig.bin 1024 MB → RAM một cục → /dev/null\nRSS trước: 40 MB\nRSS đỉnh: 1071 MB — phồng nguyên cỡ file\nxong 203ms",
+            "sentence": 0
+          },
+          {
+            "cmd": "node b4.mjs stream",
+            "output": "== B4b: stream.pipe ==\nbig.bin 1024 MB → chunk nối chunk → /dev/null\nhighWaterMark thật: 65536 bytes = 64 KiB/chunk\nRSS trước: 40 MB\nRSS đỉnh: 97 MB — phẳng, cỡ vài buffer\nxong 315ms",
+            "sentence": 2
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep72/scene-04-0-0925fe42.wav",
+          "startFrame": 0,
+          "durationInFrames": 238
+        },
+        {
+          "file": "audio/ep72/scene-04-1-7622e937.wav",
+          "startFrame": 246,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep72/scene-04-2-707f7843.wav",
+          "startFrame": 456,
+          "durationInFrames": 310
+        },
+        {
+          "file": "audio/ep72/scene-04-3-0b08e7d9.wav",
+          "startFrame": 774,
+          "durationInFrames": 185
+        }
+      ],
+      "durationInFrames": 977
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "readFile = RSS ăn theo cỡ file · stream = cố định",
+            "sentence": 0
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Backpressure: write() false → chờ 'drain' → bơm tiếp",
+            "sentence": 1
+          },
+          {
+            "icon": "3️⃣",
+            "text": "pipe/pipeline TỰ LO — Node làm tự động",
+            "sentence": 2
+          },
+          {
+            "icon": "🪤",
+            "text": "Trả file: pipe thẳng res — đừng await hết rồi send",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep72/scene-05-0-a6660ce5.wav",
+          "startFrame": 0,
+          "durationInFrames": 224
+        },
+        {
+          "file": "audio/ep72/scene-05-1-f58282d6.wav",
+          "startFrame": 232,
+          "durationInFrames": 195
+        },
+        {
+          "file": "audio/ep72/scene-05-2-b358771e.wav",
+          "startFrame": 435,
+          "durationInFrames": 202
+        },
+        {
+          "file": "audio/ep72/scene-05-3-0aeecddd.wav",
+          "startFrame": 645,
+          "durationInFrames": 233
+        }
+      ],
+      "durationInFrames": 896
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 28/36 hoàn tất — hẹn gặp câu 29!",
+        "summary": [
+          {
+            "text": "File lớn: stream + pipe — RSS phẳng ~100MB",
+            "sentence": 0
+          },
+          {
+            "text": "readFile 1071MB vs stream 97MB — chênh 11×",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: Promise.all vs await tuần tự",
+            "sentence": 1
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 29/36: Promise.all vs await tuần tự? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep72/scene-06-0-be818093.wav",
+          "startFrame": 0,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep72/scene-06-1-8fb3a000.wav",
+          "startFrame": 196,
+          "durationInFrames": 209
+        },
+        {
+          "file": "audio/ep72/scene-06-2-81324e93.wav",
+          "startFrame": 413,
+          "durationInFrames": 118
+        },
+        {
+          "file": "audio/ep72/scene-06-3-853c55a9.wav",
+          "startFrame": 539,
+          "durationInFrames": 106
+        }
+      ],
+      "durationInFrames": 663
+    }
+  ]
+}
