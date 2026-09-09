@@ -1,0 +1,306 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "scene-01",
+      "type": "title",
+      "visual": {
+        "title": "Phỏng vấn FE #25: Event loop Node — thứ tự chạy thật",
+        "subtitle": "Phỏng vấn Frontend — Node.js core · Câu 25/36",
+        "badge": "Lô mới · Node.js backend"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep69/scene-01-0-2a15b735.wav",
+          "startFrame": 0,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep69/scene-01-1-0b4ba7b1.wav",
+          "startFrame": 234,
+          "durationInFrames": 176
+        },
+        {
+          "file": "audio/ep69/scene-01-2-35fb4c69.wav",
+          "startFrame": 418,
+          "durationInFrames": 192
+        }
+      ],
+      "durationInFrames": 628
+    },
+    {
+      "id": "scene-02",
+      "type": "concept",
+      "visual": {
+        "title": "Mô hình chuẩn: stack → microtask → phase",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Call stack xả hết code sync trước — không ai chen ngang",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Microtask: nextTick trước, Promise sau — nextTick KHÔNG thuộc event loop",
+            "sentence": 2
+          },
+          {
+            "icon": "🔁",
+            "text": "Vòng loop: timers (setTimeout) → poll (I/O) → check (setImmediate)",
+            "sentence": 3
+          },
+          {
+            "icon": "📖",
+            "text": "Chuẩn CJS: sync → nextTick → promise → timer/immediate",
+            "sentence": 4
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep69/scene-02-0-c3d54ff5.wav",
+          "startFrame": 0,
+          "durationInFrames": 84
+        },
+        {
+          "file": "audio/ep69/scene-02-1-854a6ff2.wav",
+          "startFrame": 92,
+          "durationInFrames": 137
+        },
+        {
+          "file": "audio/ep69/scene-02-2-830d0769.wav",
+          "startFrame": 237,
+          "durationInFrames": 269
+        },
+        {
+          "file": "audio/ep69/scene-02-3-621600e5.wav",
+          "startFrame": 514,
+          "durationInFrames": 226
+        },
+        {
+          "file": "audio/ep69/scene-02-4-130d4c66.wav",
+          "startFrame": 748,
+          "durationInFrames": 264
+        }
+      ],
+      "durationInFrames": 1030
+    },
+    {
+      "id": "scene-03",
+      "type": "code",
+      "visual": {
+        "filename": "b1.mjs",
+        "language": "javascript",
+        "code": "console.log('== B1: thứ tự event loop ==');\n\nlet n = 0;                 // số thứ tự async quan sát được\nconst order = [];          // tên callback theo thứ tự chạy thật\nlet pending = 4;           // nextTick + promise + timer + immediate\n\nconst hit = (name, note) => {\n  n += 1;\n  order.push(name);\n  console.log(`[${n}] ${name.padEnd(13)}— ${note}`);\n  pending -= 1;\n  if (pending === 0) footerThenPart2();\n};\n\nconsole.log('[A] sync đầu      — code đồng bộ chạy ngay');\nsetTimeout(() => hit('setTimeout 0', 'macrotask, phase timers'), 0);\nsetImmediate(() => hit('setImmediate', 'macrotask, phase check'));\nprocess.nextTick(() => hit('nextTick', 'chờ microtask cạn mới xả'));\nPromise.resolve().then(() => hit('promise.then', 'microtask, nối hàng đang xả'));\nconsole.log('[B] sync cuối     — sync xong mới tới hàng đợi');",
+        "steps": [
+          {
+            "from": 3,
+            "to": 13,
+            "sentence": 0
+          },
+          {
+            "from": 15,
+            "to": 19,
+            "sentence": 1
+          },
+          {
+            "from": 20,
+            "to": 20,
+            "sentence": 2
+          },
+          {
+            "from": 1,
+            "to": 20,
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep69/scene-03-0-44e21ab2.wav",
+          "startFrame": 0,
+          "durationInFrames": 255
+        },
+        {
+          "file": "audio/ep69/scene-03-1-f85da650.wav",
+          "startFrame": 263,
+          "durationInFrames": 200
+        },
+        {
+          "file": "audio/ep69/scene-03-2-89a150f4.wav",
+          "startFrame": 471,
+          "durationInFrames": 132
+        },
+        {
+          "file": "audio/ep69/scene-03-3-f437720f.wav",
+          "startFrame": 611,
+          "durationInFrames": 99
+        }
+      ],
+      "durationInFrames": 728
+    },
+    {
+      "id": "scene-04",
+      "type": "terminal",
+      "visual": {
+        "title": "node b1.mjs",
+        "commands": [
+          {
+            "cmd": "node b1.mjs",
+            "output": "[1] promise.then — microtask, nối hàng đang xả\n[2] nextTick     — chờ microtask cạn mới xả\n[3] setTimeout 0 — macrotask, phase timers\n[4] setImmediate — macrotask, phase check\n=> sync → promise → nextTick → timer → immediate\n   (.mjs: promise trước nextTick — đặc thù ESM)",
+            "sentence": 0
+          },
+          {
+            "cmd": "node b1.mjs",
+            "output": "== B1b: trong I/O cycle (fs.readFile) ==\n[1] setImmediate — phase check ngay sau poll\n[2] setTimeout 0 — chờ vòng sau, phase timers\nOK immediate luôn thắng trong I/O — docs đảm bảo",
+            "sentence": 3
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep69/scene-04-0-af9c0477.wav",
+          "startFrame": 0,
+          "durationInFrames": 108
+        },
+        {
+          "file": "audio/ep69/scene-04-1-350f3416.wav",
+          "startFrame": 116,
+          "durationInFrames": 339
+        },
+        {
+          "file": "audio/ep69/scene-04-2-f240b0cc.wav",
+          "startFrame": 463,
+          "durationInFrames": 250
+        },
+        {
+          "file": "audio/ep69/scene-04-3-dad2a880.wav",
+          "startFrame": 721,
+          "durationInFrames": 130
+        },
+        {
+          "file": "audio/ep69/scene-04-4-a3304fe7.wav",
+          "startFrame": 859,
+          "durationInFrames": 183
+        }
+      ],
+      "durationInFrames": 1060
+    },
+    {
+      "id": "scene-05",
+      "type": "concept",
+      "visual": {
+        "title": "Trả lời như đi phỏng vấn",
+        "bullets": [
+          {
+            "icon": "1️⃣",
+            "text": "Sync hết → microtask (nextTick → promise) → vòng loop timers/poll/check",
+            "sentence": 1
+          },
+          {
+            "icon": "2️⃣",
+            "text": "Timer vs immediate: ngoài I/O không đảm bảo — trong I/O immediate thắng",
+            "sentence": 2
+          },
+          {
+            "icon": "3️⃣",
+            "text": "nextTick xả ngay sau operation — lạm dụng là chặn event loop",
+            "sentence": 3
+          },
+          {
+            "icon": "🏆",
+            "text": "Twist ăn điểm: .mjs là microtask → promise TRƯỚC nextTick, ngược CJS",
+            "sentence": 4
+          },
+          {
+            "icon": "🧭",
+            "text": "require(esm) được không? — xem câu #30 của series",
+            "sentence": 5
+          }
+        ]
+      },
+      "sentences": [
+        {
+          "file": "audio/ep69/scene-05-0-eb7b8afb.wav",
+          "startFrame": 0,
+          "durationInFrames": 125
+        },
+        {
+          "file": "audio/ep69/scene-05-1-48705390.wav",
+          "startFrame": 133,
+          "durationInFrames": 188
+        },
+        {
+          "file": "audio/ep69/scene-05-2-5b10a25e.wav",
+          "startFrame": 329,
+          "durationInFrames": 214
+        },
+        {
+          "file": "audio/ep69/scene-05-3-cd2b923b.wav",
+          "startFrame": 551,
+          "durationInFrames": 168
+        },
+        {
+          "file": "audio/ep69/scene-05-4-f3107ab4.wav",
+          "startFrame": 727,
+          "durationInFrames": 327
+        },
+        {
+          "file": "audio/ep69/scene-05-5-b103169f.wav",
+          "startFrame": 1062,
+          "durationInFrames": 192
+        }
+      ],
+      "durationInFrames": 1272
+    },
+    {
+      "id": "scene-06",
+      "type": "outro",
+      "visual": {
+        "title": "Câu 25/36 hoàn tất — hẹn gặp câu 26!",
+        "summary": [
+          {
+            "text": "Chuẩn sách: sync → nextTick → promise → timer/immediate",
+            "sentence": 0
+          },
+          {
+            "text": "Twist: .mjs cho promise chạy TRƯỚC nextTick — đặc thù ESM",
+            "sentence": 0
+          },
+          {
+            "text": "Câu sau: non-blocking I/O — 1 thread, nghìn request",
+            "sentence": 1
+          },
+          {
+            "text": "Có bản Shorts 60 giây để ôn nhanh",
+            "sentence": 2
+          }
+        ],
+        "next": "Câu 26/36: Node 1 thread sao phục vụ nghìn request? 🎤"
+      },
+      "sentences": [
+        {
+          "file": "audio/ep69/scene-06-0-124258f4.wav",
+          "startFrame": 0,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep69/scene-06-1-ad48e21b.wav",
+          "startFrame": 191,
+          "durationInFrames": 183
+        },
+        {
+          "file": "audio/ep69/scene-06-2-b391ef37.wav",
+          "startFrame": 382,
+          "durationInFrames": 144
+        },
+        {
+          "file": "audio/ep69/scene-06-3-e5dec995.wav",
+          "startFrame": 534,
+          "durationInFrames": 89
+        }
+      ],
+      "durationInFrames": 641
+    }
+  ]
+}
