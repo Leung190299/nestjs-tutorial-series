@@ -3286,7 +3286,7 @@ Demo thật bằng all-exceptions.filter.ts: curl /s6/boom kèm cờ demo x-raw 
 
 ## LÔ 4 SERIES PHỎNG VẤN FRONTEND — Database & SQL (câu #37–#48 + 12 Shorts)
 
-> Lô 4 nối tiếp cùng playlist **"Phỏng vấn Frontend 🇻🇳"** — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE (KHÔNG tạo playlist mới — khi đăng chỉ nối 24 video lô 4 vào playlist sẵn có). CHƯA ĐĂNG — mọi link video lô 4 là placeholder `[LINK-EP81]`..`[LINK-EP92]` (bản ngang) và `[LINK-SHORT-37]`..`[LINK-SHORT-48]` (Shorts), điền link thật khi đăng. Chủ đề lô 4: DATABASE cho dân Frontend đi phỏng vấn Fullstack — 6 câu SQL/PostgreSQL (D1–D6 → ep81–ep86) + 6 câu Prisma (P1–P6 → ep87–ep92), mỗi câu có demo chạy SỐ THẬT trên **PostgreSQL 17.11** + **Prisma 6.19.3** (kịch bản luôn nói rõ "trên máy tôi"). Code: `demo-db-interview/` (`sql-qa/` + `prisma-qa/`), đóng băng ở tag `db-qa-batch-4`. Cặp chéo 2 chiều: câu 37↔48 (index bị planner bỏ qua) và câu 39↔43 (N+1 ở tầng SQL ↔ tầng ORM).
+> Lô 4 nối tiếp cùng playlist **"Phỏng vấn Frontend 🇻🇳"** — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE (KHÔNG tạo playlist mới — khi đăng chỉ nối 24 video lô 4 vào playlist sẵn có). CHƯA ĐĂNG — mọi link video lô 4 là placeholder `https://youtu.be/VuqlwliTDeA`..`https://youtu.be/b1Y9Yi2O3e0` (bản ngang) và `https://youtu.be/4jSPtKXXPtA`..`https://youtu.be/NAMJXcYnqjU` (Shorts), điền link thật khi đăng. Chủ đề lô 4: DATABASE cho dân Frontend đi phỏng vấn Fullstack — 6 câu SQL/PostgreSQL (D1–D6 → ep81–ep86) + 6 câu Prisma (P1–P6 → ep87–ep92), mỗi câu có demo chạy SỐ THẬT trên **PostgreSQL 17.11** + **Prisma 6.19.3** (kịch bản luôn nói rõ "trên máy tôi"). Code: `demo-db-interview/` (`sql-qa/` + `prisma-qa/`), đóng băng ở tag `db-qa-batch-4`. Cặp chéo 2 chiều: câu 37↔48 (index bị planner bỏ qua) và câu 39↔43 (N+1 ở tầng SQL ↔ tầng ORM).
 
 Từ khóa chủ lực lô 4: `phỏng vấn database`, `phỏng vấn sql`, `phỏng vấn postgresql`, `phỏng vấn prisma`, `explain analyze`, `index postgresql`, `n+1 query`, `isolation level`, `deadlock postgres`, `connection pool prisma`, `câu hỏi phỏng vấn database`, `học sql`, `học prisma`.
 
@@ -3316,9 +3316,9 @@ Demo thật trên PostgreSQL 17.11, bảng orders 500.000 dòng, cùng một câ
 📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
 ⏮️ Câu chốt lô 3: https://youtu.be/Qmm-UDqc49Q
-⏭️ Câu tiếp theo: [LINK-EP82]
-📱 Bản Shorts 60 giây: [LINK-SHORT-37]
-🔁 Cùng bài học ở tầng ORM — câu #48: index sai cột thì planner không thèm dùng: [LINK-EP92]
+⏭️ Câu tiếp theo: https://youtu.be/TUJtkU6mWQc
+📱 Bản Shorts 60 giây: https://youtu.be/4jSPtKXXPtA
+🔁 Cùng bài học ở tầng ORM — câu #48: index sai cột thì planner không thèm dùng: https://youtu.be/b1Y9Yi2O3e0
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3362,9 +3362,9 @@ Và mục làm rớt nhiều người nhất: Gather Merge ước 33538 dòng m�
 
 📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP81]
-⏭️ Câu tiếp theo: [LINK-EP83]
-📱 Bản Shorts 60 giây: [LINK-SHORT-38]
+⏮️ Câu trước: https://youtu.be/VuqlwliTDeA
+⏭️ Câu tiếp theo: https://youtu.be/iwKKqupLWdg
+📱 Bản Shorts 60 giây: https://youtu.be/8Dh0JrhenV4
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3406,10 +3406,10 @@ Nói thẳng con số: chỉ chênh 1.6 lần vì đo trên localhost, round-tri
 
 📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP82]
-⏭️ Câu tiếp theo: [LINK-EP84]
-📱 Bản Shorts 60 giây: [LINK-SHORT-39]
-🔁 Cùng bệnh ở tầng ORM — câu #43: N+1 trong Prisma, nhưng vô hình: [LINK-EP87]
+⏮️ Câu trước: https://youtu.be/TUJtkU6mWQc
+⏭️ Câu tiếp theo: https://youtu.be/gCL6V8t3QgE
+📱 Bản Shorts 60 giây: https://youtu.be/N4au_wZsW7Y
+🔁 Cùng bệnh ở tầng ORM — câu #43: N+1 trong Prisma, nhưng vô hình: https://youtu.be/x0eo-tic-fE
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3452,9 +3452,9 @@ Giá phải trả: A mà tự UPDATE đúng dòng B vừa đổi thì Postgres n
 
 📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP83]
-⏭️ Câu tiếp theo: [LINK-EP85]
-📱 Bản Shorts 60 giây: [LINK-SHORT-40]
+⏮️ Câu trước: https://youtu.be/iwKKqupLWdg
+⏭️ Câu tiếp theo: https://youtu.be/KZuN9inSumE
+📱 Bản Shorts 60 giây: https://youtu.be/pHNkeaLmAkM
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3495,9 +3495,9 @@ Message chép nguyên văn: code 40P01, message vỏn vẹn "deadlock detected" 
 
 📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP84]
-⏭️ Câu tiếp theo: [LINK-EP86]
-📱 Bản Shorts 60 giây: [LINK-SHORT-41]
+⏮️ Câu trước: https://youtu.be/gCL6V8t3QgE
+⏭️ Câu tiếp theo: https://youtu.be/U4dD5kwJyYY
+📱 Bản Shorts 60 giây: https://youtu.be/l1k1Nmssvt0
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3539,9 +3539,9 @@ Demo thật trên PostgreSQL 17.11, orders 500.000 dòng. Nhánh OFFSET 499980: 
 
 📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP85]
-⏭️ Câu tiếp theo: [LINK-EP87]
-📱 Bản Shorts 60 giây: [LINK-SHORT-42]
+⏮️ Câu trước: https://youtu.be/KZuN9inSumE
+⏭️ Câu tiếp theo: https://youtu.be/x0eo-tic-fE
+📱 Bản Shorts 60 giây: https://youtu.be/n5VI8770wKc
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3583,10 +3583,10 @@ Beat vàng nằm ở SQL thật: câu con của include là WHERE customer_id IN
 
 📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP86]
-⏭️ Câu tiếp theo: [LINK-EP88]
-📱 Bản Shorts 60 giây: [LINK-SHORT-43]
-🔁 Cùng bệnh ở tầng SQL — câu #39: 51 query vs 1 câu JOIN: [LINK-EP83]
+⏮️ Câu trước: https://youtu.be/U4dD5kwJyYY
+⏭️ Câu tiếp theo: https://youtu.be/jcKVYdXE5tw
+📱 Bản Shorts 60 giây: https://youtu.be/YAV7HREFuf4
+🔁 Cùng bệnh ở tầng SQL — câu #39: 51 query vs 1 câu JOIN: https://youtu.be/iwKKqupLWdg
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3628,9 +3628,9 @@ BEAT VÀNG ít kênh chịu nói: chạy EXPLAIN trên chính hai câu SQL Prism
 
 📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP87]
-⏭️ Câu tiếp theo: [LINK-EP89]
-📱 Bản Shorts 60 giây: [LINK-SHORT-44]
+⏮️ Câu trước: https://youtu.be/x0eo-tic-fE
+⏭️ Câu tiếp theo: https://youtu.be/2e35Hdkslkk
+📱 Bản Shorts 60 giây: https://youtu.be/NFsv-LdE2eI
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3672,9 +3672,9 @@ Chi tiết tinh tế nhất: rollback KHÔNG trả lại sequence — sau 3 lầ
 
 📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP88]
-⏭️ Câu tiếp theo: [LINK-EP90]
-📱 Bản Shorts 60 giây: [LINK-SHORT-45]
+⏮️ Câu trước: https://youtu.be/jcKVYdXE5tw
+⏭️ Câu tiếp theo: https://youtu.be/Jyz-uHawyzU
+📱 Bản Shorts 60 giây: https://youtu.be/gQz8_ajwFL4
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3716,9 +3716,9 @@ Cách đúng là 3 bước theo mẫu expand–migrate–contract: (1) schema đ
 
 📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP89]
-⏭️ Câu tiếp theo: [LINK-EP91]
-📱 Bản Shorts 60 giây: [LINK-SHORT-46]
+⏮️ Câu trước: https://youtu.be/2e35Hdkslkk
+⏭️ Câu tiếp theo: https://youtu.be/t16QnQDJ1fA
+📱 Bản Shorts 60 giây: https://youtu.be/qmGiyPQmNtM
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3760,9 +3760,9 @@ Nhánh connection_limit=1 pool_timeout=1: OK 4 query, 16 query ăn P2024 — ngu
 
 📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout db-qa-batch-4 để xem đúng code câu hỏi này.
-⏮️ Câu trước: [LINK-EP90]
-⏭️ Câu tiếp theo: [LINK-EP92]
-📱 Bản Shorts 60 giây: [LINK-SHORT-47]
+⏮️ Câu trước: https://youtu.be/Jyz-uHawyzU
+⏭️ Câu tiếp theo: https://youtu.be/b1Y9Yi2O3e0
+📱 Bản Shorts 60 giây: https://youtu.be/9vBmTjHtfLE
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 
@@ -3804,10 +3804,10 @@ Bốn trạng thái index, không phải hai: chưa index 15.58 ms / 166.098 dò
 
 📦 Source code (demo-db-interview/): https://github.com/Leung190299/nestjs-tutorial-series
 💡 git checkout db-qa-batch-4 để xem đúng 12 câu code của lô 4 (6 SQL + 6 Prisma).
-⏮️ Câu trước: [LINK-EP91]
-▶️ Xem lại từ đầu lô 4: [LINK-EP81]
-📱 Bản Shorts 60 giây: [LINK-SHORT-48]
-🔁 Cùng bài học ở tầng SQL — câu #37: lọc 80% bảng thì PG bỏ index: [LINK-EP81]
+⏮️ Câu trước: https://youtu.be/t16QnQDJ1fA
+▶️ Xem lại từ đầu lô 4: https://youtu.be/VuqlwliTDeA
+📱 Bản Shorts 60 giây: https://youtu.be/NAMJXcYnqjU
+🔁 Cùng bài học ở tầng SQL — câu #37: lọc 80% bảng thì PG bỏ index: https://youtu.be/VuqlwliTDeA
 ▶️ Playlist series: "Phỏng vấn Frontend 🇻🇳" — https://www.youtube.com/playlist?list=PLYvXt5cUP0yE
 ▶️ 6 series khác trên kênh: "NestJS cho người mới bắt đầu" · "Super App với React Native" · "Mini-App từ A đến Z" (https://www.youtube.com/playlist?list=PLY-i2_1YbKi4) · "Mini-App với Flutter 🇻🇳" (https://www.youtube.com/playlist?list=PLL5FgtEBrD6g) · "Mini-App Flutter thuần 🇻🇳" (https://www.youtube.com/playlist?list=PLOjCSg9O8bRM) · "StyleX từ A đến Z 🇻🇳" (https://www.youtube.com/playlist?list=PLONwK58GbR_M)
 💬 Đủ 48 câu trên playlist — comment câu hỏi phỏng vấn khó nhất bạn từng gặp để lô sau càng sát thực tế!
@@ -3832,16 +3832,16 @@ Bốn trạng thái index, không phải hai: chưa index 15.58 ms / 166.098 dò
 
 | id | Tiêu đề Shorts | Caption |
 |---|---|---|
-| sd1 | Cứ tạo index là query nhanh hơn? 60 giây #shorts | Chưa index: Gather → Parallel Seq Scan, vứt ~500k dòng để lấy 61 dòng; có index: 8.5ms → 0.65ms, buffers 3604 → 63.<br>Bẫy: lọc 80% bảng thì PG BỎ index, quay lại Seq Scan — và thế là đúng.<br>Video đầy đủ: [LINK-EP81]<br>#shorts #postgresql #phongvan |
-| sd2 | Đọc EXPLAIN ANALYZE: nhìn con số nào trước? #shorts | cost là ước lượng của planner, actual time mới là ms thật; loops=3 nghĩa là 55366 × 3 = 166.098 dòng đi qua.<br>Bẫy: lệch 1677x KHÔNG phải thống kê cũ — đó là LIMIT dừng sớm, node quét chỉ lệch 1.3x.<br>Video đầy đủ: [LINK-EP82]<br>#shorts #postgresql #phongvan |
-| sd3 | 50 khách + đơn: 51 query hay 1 JOIN? #shorts | 51 query 25.82 ms vs 1 câu JOIN 16.38 ms — checksum JS khớp từng số, cùng 4881 dòng đơn.<br>Bẫy: mỗi query nhỏ chỉ 0.51 ms — phải NHÂN với 51 lượt đi–về; ép index thì loops=50 nằm BÊN TRONG DB.<br>Video đầy đủ: [LINK-EP83]<br>#shorts #postgresql #phongvan |
-| sd4 | 1 câu SELECT, 2 kết quả trong 1 transaction?! #shorts | READ COMMITTED chụp ảnh MỖI CÂU LỆNH nên đọc lại thấy 4519520; REPEATABLE READ chốt 1 ảnh từ câu đầu.<br>Bẫy: A đọc giá trị KHÔNG CÒN TỒN TẠI là đúng snapshot — nhưng 40001 could not serialize thì phải RETRY.<br>Video đầy đủ: [LINK-EP84]<br>#shorts #postgresql #phongvan |
-| sd5 | 2 transaction khóa chéo — ai bị hủy? #shorts | UPDATE tự khóa dòng tới hết transaction; sau 1008ms ≈ deadlock_timeout 1s, PG hủy 1 nạn nhân với 40P01.<br>Bẫy: sau deadlock CẢ HAI dòng đều +1 — và câu SQL thủ phạm chỉ nằm ở log server.<br>Video đầy đủ: [LINK-EP85]<br>#shorts #postgresql #phongvan |
-| sd6 | OFFSET 499980: vì sao trang cuối chậm 60x? #shorts | OFFSET không "nhảy": quét 500.000 dòng rồi VỨT 499.980 · 21.6 ms; cursor WHERE id > lastId chỉ 20 dòng · 0.35 ms.<br>Bẫy: cùng node Index Scan orders_pkey, khác đúng 1 dòng Index Cond — cột sắp xếp phải ỔN ĐỊNH & UNIQUE.<br>Video đầy đủ: [LINK-EP86]<br>#shorts #postgresql #phongvan |
-| sp1 | Prisma: vòng for findMany = 21 query?! #shorts | Bật log rồi ĐẾM: vòng for 21 query, include 2 query — bất biến, 200 khách vẫn 2.<br>Bẫy: include KHÔNG phải JOIN (WHERE customer_id IN $1..$20) · Promise.all vẫn 20 query.<br>Video đầy đủ: [LINK-EP87]<br>#shorts #prisma #phongvan |
-| sp2 | findMany trả 98KB — select còn 26KB #shorts | 5 cột 97.9 KB → 2 cột 26.1 KB (-73.4%), đo bằng JSON.stringify, bất biến 3/3 lần chạy.<br>Bẫy: select KHÔNG đổi PLAN — cùng Index Scan, cùng buffers hit=14, chỉ width 25 → 8.<br>Video đầy đủ: [LINK-EP88]<br>#shorts #prisma #phongvan |
-| sp3 | Bước 2 lỗi — khách vừa tạo có ở lại? #shorts | 2 lệnh rời: customers 5000 → 5001, khách mồ côi; bọc $transaction: 5001 → 5001, log có BEGIN … ROLLBACK.<br>Bẫy: 2 lệnh trong 1 hàm KHÔNG phải transaction · rollback không trả lại sequence.<br>Video đầy đủ: [LINK-EP89]<br>#shorts #prisma #phongvan |
-| sp4 | Thêm cột NOT NULL vào bảng 1000 dòng? #shorts | migrate dev từ chối SINH cả file: "There are 1000 rows in this table"; cách đúng là 3 bước nullable → backfill → SET NOT NULL.<br>Bẫy: backfill PHẢI là migration — production dùng migrate deploy sẽ nhảy bước 1 → 3 rồi chết.<br>Video đầy đủ: [LINK-EP90]<br>#shorts #prisma #phongvan |
-| sp5 | 20 query song song, pool 2 kết nối thì sao? #shorts | pool 2: 3048ms · pool 20: 357ms — cao điểm kết nối ĐÚNG BẰNG connection_limit; pool 1 + timeout 1s: OK 4 / 16 lỗi P2024.<br>Bẫy: pool_timeout là timeout XIN kết nối, không phải timeout query — trần thật là max_connections=100.<br>Video đầy đủ: [LINK-EP91]<br>#shorts #prisma #phongvan |
-| sp6 | Tạo index rồi mà query vẫn chậm y cũ? #shorts | orders(status) 15.96ms — plan KHÔNG ĐỔI một chữ vì paid = 33% bảng; orders(status, created_at DESC) 0.74ms, Sort biến mất.<br>Bẫy: đừng ĐOÁN index — lấy SQL thật từ log, EXPLAIN chính câu đó rồi mới tạo.<br>Video đầy đủ: [LINK-EP92]<br>#shorts #prisma #phongvan |
+| sd1 | Cứ tạo index là query nhanh hơn? 60 giây #shorts | Chưa index: Gather → Parallel Seq Scan, vứt ~500k dòng để lấy 61 dòng; có index: 8.5ms → 0.65ms, buffers 3604 → 63.<br>Bẫy: lọc 80% bảng thì PG BỎ index, quay lại Seq Scan — và thế là đúng.<br>Video đầy đủ: https://youtu.be/VuqlwliTDeA<br>#shorts #postgresql #phongvan |
+| sd2 | Đọc EXPLAIN ANALYZE: nhìn con số nào trước? #shorts | cost là ước lượng của planner, actual time mới là ms thật; loops=3 nghĩa là 55366 × 3 = 166.098 dòng đi qua.<br>Bẫy: lệch 1677x KHÔNG phải thống kê cũ — đó là LIMIT dừng sớm, node quét chỉ lệch 1.3x.<br>Video đầy đủ: https://youtu.be/TUJtkU6mWQc<br>#shorts #postgresql #phongvan |
+| sd3 | 50 khách + đơn: 51 query hay 1 JOIN? #shorts | 51 query 25.82 ms vs 1 câu JOIN 16.38 ms — checksum JS khớp từng số, cùng 4881 dòng đơn.<br>Bẫy: mỗi query nhỏ chỉ 0.51 ms — phải NHÂN với 51 lượt đi–về; ép index thì loops=50 nằm BÊN TRONG DB.<br>Video đầy đủ: https://youtu.be/iwKKqupLWdg<br>#shorts #postgresql #phongvan |
+| sd4 | 1 câu SELECT, 2 kết quả trong 1 transaction?! #shorts | READ COMMITTED chụp ảnh MỖI CÂU LỆNH nên đọc lại thấy 4519520; REPEATABLE READ chốt 1 ảnh từ câu đầu.<br>Bẫy: A đọc giá trị KHÔNG CÒN TỒN TẠI là đúng snapshot — nhưng 40001 could not serialize thì phải RETRY.<br>Video đầy đủ: https://youtu.be/gCL6V8t3QgE<br>#shorts #postgresql #phongvan |
+| sd5 | 2 transaction khóa chéo — ai bị hủy? #shorts | UPDATE tự khóa dòng tới hết transaction; sau 1008ms ≈ deadlock_timeout 1s, PG hủy 1 nạn nhân với 40P01.<br>Bẫy: sau deadlock CẢ HAI dòng đều +1 — và câu SQL thủ phạm chỉ nằm ở log server.<br>Video đầy đủ: https://youtu.be/KZuN9inSumE<br>#shorts #postgresql #phongvan |
+| sd6 | OFFSET 499980: vì sao trang cuối chậm 60x? #shorts | OFFSET không "nhảy": quét 500.000 dòng rồi VỨT 499.980 · 21.6 ms; cursor WHERE id > lastId chỉ 20 dòng · 0.35 ms.<br>Bẫy: cùng node Index Scan orders_pkey, khác đúng 1 dòng Index Cond — cột sắp xếp phải ỔN ĐỊNH & UNIQUE.<br>Video đầy đủ: https://youtu.be/U4dD5kwJyYY<br>#shorts #postgresql #phongvan |
+| sp1 | Prisma: vòng for findMany = 21 query?! #shorts | Bật log rồi ĐẾM: vòng for 21 query, include 2 query — bất biến, 200 khách vẫn 2.<br>Bẫy: include KHÔNG phải JOIN (WHERE customer_id IN $1..$20) · Promise.all vẫn 20 query.<br>Video đầy đủ: https://youtu.be/x0eo-tic-fE<br>#shorts #prisma #phongvan |
+| sp2 | findMany trả 98KB — select còn 26KB #shorts | 5 cột 97.9 KB → 2 cột 26.1 KB (-73.4%), đo bằng JSON.stringify, bất biến 3/3 lần chạy.<br>Bẫy: select KHÔNG đổi PLAN — cùng Index Scan, cùng buffers hit=14, chỉ width 25 → 8.<br>Video đầy đủ: https://youtu.be/jcKVYdXE5tw<br>#shorts #prisma #phongvan |
+| sp3 | Bước 2 lỗi — khách vừa tạo có ở lại? #shorts | 2 lệnh rời: customers 5000 → 5001, khách mồ côi; bọc $transaction: 5001 → 5001, log có BEGIN … ROLLBACK.<br>Bẫy: 2 lệnh trong 1 hàm KHÔNG phải transaction · rollback không trả lại sequence.<br>Video đầy đủ: https://youtu.be/2e35Hdkslkk<br>#shorts #prisma #phongvan |
+| sp4 | Thêm cột NOT NULL vào bảng 1000 dòng? #shorts | migrate dev từ chối SINH cả file: "There are 1000 rows in this table"; cách đúng là 3 bước nullable → backfill → SET NOT NULL.<br>Bẫy: backfill PHẢI là migration — production dùng migrate deploy sẽ nhảy bước 1 → 3 rồi chết.<br>Video đầy đủ: https://youtu.be/Jyz-uHawyzU<br>#shorts #prisma #phongvan |
+| sp5 | 20 query song song, pool 2 kết nối thì sao? #shorts | pool 2: 3048ms · pool 20: 357ms — cao điểm kết nối ĐÚNG BẰNG connection_limit; pool 1 + timeout 1s: OK 4 / 16 lỗi P2024.<br>Bẫy: pool_timeout là timeout XIN kết nối, không phải timeout query — trần thật là max_connections=100.<br>Video đầy đủ: https://youtu.be/t16QnQDJ1fA<br>#shorts #prisma #phongvan |
+| sp6 | Tạo index rồi mà query vẫn chậm y cũ? #shorts | orders(status) 15.96ms — plan KHÔNG ĐỔI một chữ vì paid = 33% bảng; orders(status, created_at DESC) 0.74ms, Sort biến mất.<br>Bẫy: đừng ĐOÁN index — lấy SQL thật từ log, EXPLAIN chính câu đó rồi mới tạo.<br>Video đầy đủ: https://youtu.be/b1Y9Yi2O3e0<br>#shorts #prisma #phongvan |
 
